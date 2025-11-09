@@ -1,0 +1,10 @@
+# model: qwen3-next-80b-a3b-instruct
+# model: qwen3-30b-a3b-instruct-2507
+parallel: 32
+# model: /data/workspace/yanmy/models/Qwen2.5-7B-Instruct
+# api_key: api-key-test-qwen-2.5-7B
+# api_key: sk-19531d7a62ff447a930a32169571a98b
+# base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+model: qwen3-4b
+api_key: api-key-qwen3
+base_url: http://0.0.0.0:8000/v1
