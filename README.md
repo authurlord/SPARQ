@@ -1,86 +1,49 @@
-# H-STAR: LLM-driven Hybrid SQL-Text Adaptive Reasoning on Tables
+# HybridRAG
 
-[NAACL 2025] Official Implementation of [H-STAR: LLM-driven Hybrid SQL-Text Adaptive Reasoning on Tables.](https://arxiv.org/abs/2407.05952)
+## Tutorial
+Pleace check `Tutorials` folder for basic RAG tutorials and operators. 
 
-## Overview
+## Baselines
 
-In this paper, we introduce a novel algorithm H-STAR that integrates both symbolic and semantic approaches to perform tabular reasoning tasks. H-STAR decomposes the table reasoning task into two stages: 1) Table Extraction and 2) Adaptive Reasoning. 
+Curretly we are working on [H-STAR](https://github.com/nikhilsab/H-STAR). Modified code is in H-STAR folder
 
-![](illustration.png)
+### How-To-Run
+0. run `pip install -U openai` to update openai to latest. The default `openai==0.28.0` in `H-STAR` is imcapable with vllm and qwen. 
 
-## Dependencies
+1. Check `src/path.pth`, modify it to your own `HybridRAG` path, and copy it to your conda site-packages path, e.g. `/home/wys/anaconda3/envs/hstar/lib/python3.9/site-packages/path.pth`. Then enter `H-STAR` folder
 
-Activate the environment by running
+2. Change LLM: modify `llm_config.yaml` to your own LLM parameters. Note that you need to change `llm_config.yaml` in both `run_gpt.py` and `generation/generator_gpt.py`
 
+3. Run `python run_gpt.py` to generate the results.
+
+4. To run 50 test cases(TabFact contains a total of 11k), it consume 630k tokens. Times per quest is approx. 36s.
+
+### How-To-Run Locally
+
+1. init vLLM server: run 
 ```
-conda create -n hstar python=3.9
-conda activate hstar
-pip install -r requirements.txt
-pip install records==0.5.3
+CUDA_VISIBLE_DEVICES=3 vllm serve /home/wys/model/qwen-2.5-7B --api-key api-key-test-qwen-2.5-7B --dtype auto --port 8888 
 ```
-
-### Change Path
-
-Create a file named ```<file_name>.pth``` in the ``` /[PATH to Conda]/envs/hstar/lib/python3.9/site-packages/ ``` directory, and paste the Project root path ```[PATH to H-STAR ]```.
-
-## Datasets
-
-Benchmark datasets studied in the paper have been provided in the ```datasets/``` directory.
-
-### Add key
-
-Apply and get API keys from [OpenAI API](https://openai.com/api/), save the key in ```key.txt```
-
-For running the Gemini model generate the API key from [Vertex AI](https://cloud.google.com/vertex-ai) and store it as a ```.json``` file in the directory.
-
-### Run
-
-Run the H-STAR pipeline for different Large Language Models (LLMs) using:
-
-For Open AI models: 
-``` 
-python run_gpt.py 
+or on 51.10 sever:
 ```
-
-For Gemini/PaLM models: 
-``` 
-run_gemini.py 
+CUDA_VISIBLE_DEVICES=3 vllm serve /public/qwen-2.5-7B --api-key api-key-test-qwen-2.5-7B --dtype auto --port 8888
 ```
+to init local LLM server. Check [vllm_openai_api](https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#supported-apis) for more details.
 
-The outputs for every intermediate step in the pipeline are saved in the ```results/``` directory.
-
-### Evaluation
-
-Evaluate the results for TabFact/ WikiTQ using the notebook
+2. modify `llm_config.yaml` to your own LLM parameters. e.g. the following:
 ```
-evaluate.ipynb
+model: /home/wys/model/qwen-2.5-7B
+api_key: api-key-test-qwen-2.5-7B
+base_url: http://0.0.0.0:8888/v1
 ```
+3. run `run_gpt.py`. For offline loading , in single A100 GPU with 7B model, we have an average of `1432 tokens/s` prompt input throughput, and `118.5 tokens/s` prompt output throughput. The average time per case is `100.7s`.
 
-Evaluate FetaQA using command line instuction 
-```
-python fetaqa_score.py --model_name [MODEL_NAME]
-```
+4. add `parallel` num, e.g. 8-32,  can significantly improve the throughput to `4317/150`. However, denote it is still slower than offline batch inference. Maybe we can gather all quest together and run offline batch inference with vllm. (TBD)
 
-Set ```model_name``` to the desired LLM
+### How-To-Evaluate
 
+0. run `evaluate.ipynb`
 
-## Citation
+1. You should also pay attention to `results` folder for the model input and output prompt. We can start with `model_gpt_qwen2.5_7B` for an case study. (TBD)
 
-If you find our paper or the repository helpful, please cite us with
-
-```
-@article{abhyankar2024h,
-  title={H-STAR: LLM-driven Hybrid SQL-Text Adaptive Reasoning on Tables},
-  author={Abhyankar, Nikhil and Gupta, Vivek and Roth, Dan and Reddy, Chandan K},
-  journal={arXiv preprint arXiv:2407.05952},
-  year={2024}
-}
-```
-
-## Acknowledgement
-
-This implementation is based on [Binding Language Models in Symbolic Languages](https://arxiv.org/abs/2210.02875). The work has also benefitted from [TabSQLify: Enhancing Reasoning Capabilities of LLMs Through Table Decomposition](https://arxiv.org/abs/2404.10150). Thanks to the author for releasing the code.
-
-## Contact Us
-
-For any questions or issues, you are welcome to open an issue in this repo, or contact us at [nikhilsa@vt.edu](nikhilsa@vt.edu),  [keviv9@gmail.com](keviv9@gmail.com).
+2. TabFact test is run in the default of small test set, in total of 2k. Check `H-STAR/scripts/model_gpt/col_sql.py` line 145 for detail. 
