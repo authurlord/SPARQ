@@ -1,11 +1,9 @@
-# HybridRAG
+# SPARQ: A Cost-Efficient Framework for Offline Table Question Answering via Adaptive Routing
 
-## Tutorial
-Pleace check `Tutorials` folder for basic RAG tutorials and operators. 
+## Full Version
 
-## Baselines
+This is the official implementation of our paper SPARQ: A Cost-Efficient Framework for Offline Table Question Answering via Adaptive Routing. Full version of our paper is in [link](sparq_full_ver.pdf).
 
-Curretly we are working on [H-STAR](https://github.com/nikhilsab/H-STAR). Modified code is in H-STAR folder
 
 ### How-To-Run
 0. run `pip install -U openai` to update openai to latest. The default `openai==0.28.0` in `H-STAR` is imcapable with vllm and qwen. 
