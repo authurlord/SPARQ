@@ -4,44 +4,22 @@
 
 This is the official implementation of our paper SPARQ: A Cost-Efficient Framework for Offline Table Question Answering via Adaptive Routing. Full version of our paper is in [link](sparq_full_ver.pdf).
 
+## Model Checkpoint
+
+To guarantee the reproducibility of our code, please download our fine-tuned checkpoint for router E/verifier Q from [link](). Then unzip it. E.g. in `model/router/wikitq` stored the router model for dataset `wikitq`, and `model/router/tab_fact` for dataset `tab_fact`.
+
 
 ### How-To-Run
-0. run `pip install -U openai` to update openai to latest. The default `openai==0.28.0` in `H-STAR` is imcapable with vllm and qwen. 
+1. run `pip install -r requirements.txt` to update openai to latest. It is suggested to create a dependent `sparq` environment.
 
-1. Check `src/path.pth`, modify it to your own `HybridRAG` path, and copy it to your conda site-packages path, e.g. `/home/wys/anaconda3/envs/hstar/lib/python3.9/site-packages/path.pth`. Then enter `H-STAR` folder
+2. Check `src/path.pth`, modify it to your own `SPARQ` path, and copy it to your conda site-packages path, e.g. `/home/wys/anaconda3/envs/sparq/lib/python3.9/site-packages/path.pth`. Then enter the path of your own `SPARQ` folder.
 
-2. Change LLM: modify `llm_config.yaml` to your own LLM parameters. Note that you need to change `llm_config.yaml` in both `run_gpt.py` and `generation/generator_gpt.py`
+3. Enter conda environment `sparq`, then initialize the local vllm server with command `sh llm_server.sh`. We initialize the server with 2 RTX 4090 GPUs, with `flashinfer` backend. Default we use 4B model from [ModelScope](https://modelscope.cn/models/Qwen/Qwen3-4B-Instruct-2507)/[HuggingFace](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507), and 30B model from [ModelScope](https://modelscope.cn/models/Qwen/Qwen3-VL-30B-A3B-Instruct-FP8)/[HuggingFace](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507-FP8). Download model, and replace `MODEL_PATH` to your model path. If you want to initialize 30B model, please consider to modify `llm_server.sh` with additional args `--enable-expert-parallel`. The embedding model we use is bge-m3, which can be downloaded from [ModelScope](https://modelscope.cn/models/BAAI/bge-m3)/[HuggingFace](https://huggingface.co/BAAI/bge-m3).
 
-3. Run `python run_gpt.py` to generate the results.
+4. Enter folder `schedule_pipeline`, and run `sh test_pipeline_api.sh` to start the pipeline, which conduct the framework automatically, including data-preprocess/route/check/conduct/evaluate. Replace `model_name` with your downloaded LLM above, `embedding_model_path` with the embedding model, `router_model_path` with `model/router/dataset_name`, and `check_model_path` with `model/check/dataset_name`.(dataset_name in 'wikitq','tab_fact'). All intermediate result is stored in `tmp_save_path`.
 
-4. To run 50 test cases(TabFact contains a total of 11k), it consume 630k tokens. Times per quest is approx. 36s.
+### Acknowledge
 
-### How-To-Run Locally
+This implementation is based on [H-STAR: LLM-driven Hybrid SQL-Text Adaptive Reasoning on Tables](https://arxiv.org/abs/2407.05952). The work has also benefitted from [TabSQLify: Enhancing Reasoning Capabilities of LLMs Through Table Decomposition](https://arxiv.org/abs/2404.10150). Thanks to the author for releasing the code.
 
-1. init vLLM server: run 
-```
-CUDA_VISIBLE_DEVICES=3 vllm serve /home/wys/model/qwen-2.5-7B --api-key api-key-test-qwen-2.5-7B --dtype auto --port 8888 
-```
-or on 51.10 sever:
-```
-CUDA_VISIBLE_DEVICES=3 vllm serve /public/qwen-2.5-7B --api-key api-key-test-qwen-2.5-7B --dtype auto --port 8888
-```
-to init local LLM server. Check [vllm_openai_api](https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#supported-apis) for more details.
 
-2. modify `llm_config.yaml` to your own LLM parameters. e.g. the following:
-```
-model: /home/wys/model/qwen-2.5-7B
-api_key: api-key-test-qwen-2.5-7B
-base_url: http://0.0.0.0:8888/v1
-```
-3. run `run_gpt.py`. For offline loading , in single A100 GPU with 7B model, we have an average of `1432 tokens/s` prompt input throughput, and `118.5 tokens/s` prompt output throughput. The average time per case is `100.7s`.
-
-4. add `parallel` num, e.g. 8-32,  can significantly improve the throughput to `4317/150`. However, denote it is still slower than offline batch inference. Maybe we can gather all quest together and run offline batch inference with vllm. (TBD)
-
-### How-To-Evaluate
-
-0. run `evaluate.ipynb`
-
-1. You should also pay attention to `results` folder for the model input and output prompt. We can start with `model_gpt_qwen2.5_7B` for an case study. (TBD)
-
-2. TabFact test is run in the default of small test set, in total of 2k. Check `H-STAR/scripts/model_gpt/col_sql.py` line 145 for detail. 
