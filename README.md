@@ -1,25 +1,72 @@
-# SPARQ: A Cost-Efficient Framework for Offline Table Question Answering via Adaptive Routing
-
-## Full Version
-
-This is the official implementation of our paper SPARQ: A Cost-Efficient Framework for Offline Table Question Answering via Adaptive Routing. Full version of our paper is in [link](sparq_full_ver.pdf).
-
-## Model Checkpoint
-
-To guarantee the reproducibility of our code, please download our fine-tuned checkpoint for router E/verifier Q from [link](https://drive.google.com/file/d/1AMlhBFiaQsu3i_yJrLyMmOIpZoYYfepf/view?usp=drive_link). Then unzip it. E.g. in `model/router/wikitq` stored the router model for dataset `wikitq`, and `model/router/tab_fact` for dataset `tab_fact`.
+# ✨SPARQ: A Cost-Efficient Framework for Offline Table Question Answering via Adaptive Routing
+SPARQ is an advanced framework that significantly reduces the cost of Offline Table Question Answering (TQA) tasks while maintaining high performance, achieved through an Adaptive Routing mechanism.
 
 
-### How-To-Run
-1. run `pip install -r requirements.txt` to update openai to latest. It is suggested to create a dependent `sparq` environment.
+## 📄Paper and Full Version
 
-2. Check `src/path.pth`, modify it to your own `SPARQ` path, and copy it to your conda site-packages path, e.g. `/home/wys/anaconda3/envs/sparq/lib/python3.9/site-packages/path.pth`. Then enter the path of your own `SPARQ` folder.
+This repository contains the official implementation of our paper, SPARQ: A Cost-Efficient Framework for Offline Table Question Answering via Adaptive Routing.
+Full paper link: [SPARQ_full_version](sparq_full_ver.pdf).
 
-3. Enter conda environment `sparq`, then initialize the local vllm server with command `sh llm_server.sh`. We initialize the server with 2 RTX 4090 GPUs, with `flashinfer` backend. Default we use 4B model from [ModelScope](https://modelscope.cn/models/Qwen/Qwen3-4B-Instruct-2507)/[HuggingFace](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507), and 30B model from [ModelScope](https://modelscope.cn/models/Qwen/Qwen3-VL-30B-A3B-Instruct-FP8)/[HuggingFace](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507-FP8). Download model, and replace `MODEL_PATH` to your model path. If you want to initialize 30B model, please consider to modify `llm_server.sh` with additional args `--enable-expert-parallel`. The embedding model we use is bge-m3, which can be downloaded from [ModelScope](https://modelscope.cn/models/BAAI/bge-m3)/[HuggingFace](https://huggingface.co/BAAI/bge-m3).
 
-4. Enter folder `schedule_pipeline`, and run `sh test_pipeline_api.sh` to start the pipeline, which conduct the framework automatically, including data-preprocess/route/check/conduct/evaluate. Replace `model_name` with your downloaded LLM above, `embedding_model_path` with the embedding model, `router_model_path` with `model/router/dataset_name`, and `check_model_path` with `model/check/dataset_name`.(dataset_name in 'wikitq','tab_fact'). All intermediate result is stored in `tmp_save_path`.
+## Setup
 
-### Acknowledge
+We recommend using Python 3.10 or higher to run SPARQ.
 
-This implementation is based on [H-STAR: LLM-driven Hybrid SQL-Text Adaptive Reasoning on Tables](https://arxiv.org/abs/2407.05952). The work has also benefitted from [TabSQLify: Enhancing Reasoning Capabilities of LLMs Through Table Decomposition](https://arxiv.org/abs/2404.10150). Thanks to the author for releasing the code.
+1. Create Environment: You can use `uv` or `conda` to create an isolated Python environment:
+```Bash
+# Conda example
+conda create -n sparq_env python=3.10
+conda activate sparq_env
+```
+
+2. Install dependencies:
+```Bash
+pip install -r requirements.txt
+```
+
+## Model Checkpoint & Datasets.
+
+### Model checkpoints
+To run the pipeline, you need four models: an LLM (Qwen series), an embedding model, and two fine-tuned components: Router E and Verifier Q.
+
+<!-- ### Model Checkpoint
+To guarantee the reproducibility of our code, please download our fine-tuned checkpoint for router E/verifier Q from [link](https://drive.google.com/file/d/1AMlhBFiaQsu3i_yJrLyMmOIpZoYYfepf/view?usp=drive_link). Then unzip it. E.g. in `model/router/wikitq` stored the router model for dataset `wikitq`, and `model/router/tab_fact` for dataset `tab_fact`. -->
+
+The LLM model and embedding model can be download from Huggingface or ModelScope.
+- [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507), [Qwen3-30B-A3B-Instruct-2507-FP8](https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507-FP8) or [Qwen2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct)
+- [bge-m3](https://huggingface.co/BAAI/bge-m3)
+
+As for the fine-tuned models, please download checkpoints from [model_link](https://drive.google.com/file/d/1AMlhBFiaQsu3i_yJrLyMmOIpZoYYfepf/view?usp=drive_link).
+
+After downloading the required models, place them in the `model/` directory or any location you prefer.
+
+### Datasets Download
+The required datasets will typically be downloaded automatically by the code execution.
+
+We have preprocessed the results of the Query Rewriting step, which can be found in:
+- Rewritten queries path: `schedule_pipeline/datasets/schedule_test/`
+
+Note: The offline rewriting script will be uploaded later.
+
+
+## Execution pipeline
+
+We provide an execution script to run the end-to-end SPARQ routing inference pipeline.
+
+Run the following command to start testing:
+
+```Bash
+./test_pipeline.sh
+```
+Parameter notes:
+- Use the `first_n` parameter to limit the number of samples; `-1` processes the entire dataset.
+- Update the model path variables in the script to match your local locations.
+
+
+## 🙏Acknowledgements
+
+This implementation is based on and has greatly benefited from the following excellent works. Thank you to the authors for releasing their code and research.
+- H-STAR: LLM-driven Hybrid SQL-Text Adaptive Reasoning on Tables. [paper_link](https://arxiv.org/abs/2407.05952)
+- TabSQLify: Enhancing Reasoning Capabilities of LLMs Through Table Decompositio. [paper_link](https://arxiv.org/abs/2404.10150)
 
 
