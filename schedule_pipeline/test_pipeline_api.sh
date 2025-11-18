@@ -3,7 +3,7 @@
 
 # Set environment
 export PYTHONPATH="$(pwd)/..:$(pwd):$PYTHONPATH"
-export CUDA_VISIBLE_DEVICES=0,1
+export CUDA_VISIBLE_DEVICES=0
 
 # Create output directory
 mkdir -p datasets/schedule_test/wikitq_api
@@ -37,7 +37,7 @@ python run_full_pipeline_wikitq_api.py \
     --temperature 0.7 \
     --top_p 0.8 \
     --max_tokens 2048 \
-    --first_n -1 \
+    --first_n 100 \
     --save_intermediate \
     2>&1 | tee datasets/schedule_test/wikitq_api/test_run.log
 

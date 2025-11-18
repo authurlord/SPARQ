@@ -1,10 +1,11 @@
 #!/bin/bash
 
-export CUDA_VISIBLE_DEVICES=0,1
+export CUDA_VISIBLE_DEVICES=0
+N_GPU=1
+
 export VLLM_ATTENTION_BACKEND=FLASHINFER
 MODEL_PATH="/data/workspace/yanmy/models/Qwen3-4B-Instruct-2507"
 MODEL_NAME="qwen3-4b"
-N_GPU=2
 HOST="0.0.0.0"
 PORT=8000
 VLLM_API_KEY="api-key-qwen3"

@@ -5,7 +5,6 @@ import os
 import json
 from utils.utils import load_data_split
 from utils.evaluator import Evaluator
-from utils.prompt_generate import build_wikitq_prompt_from_df,evaluate_predictions,filter_dataframe_from_responses,fix_sql_query,match_subtables,retrieve_rows_by_subtables,build_tab_fact_prompt_from_df
 ROOT_DIR = os.path.join(os.path.dirname(__file__), "../")
 from FlagEmbedding import FlagReranker
 from typing import Dict, List, Any

@@ -3,10 +3,8 @@ from utils.evaluator import Evaluator
 import numpy as np
 import pandas as pd
 import re
-from nsql.database import NeuralDB
 import regex as re
 import copy
-from nsql.sql_exec import Executor,extract_rows
 from utils.normalizer import post_process_sql
 from utils.utils import load_data_split
 import os
