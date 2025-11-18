@@ -19,7 +19,7 @@ ROUTER_MODEL_PATH="/data/workspace/yanmy/HybridRAG/H-STAR/router/bge-m3-finetune
 CHECK_MODEL_PATH="/data/workspace/yanmy/HybridRAG/H-STAR/check/output/bge-reranker-v2-m3-finetuned/"
 
 # Create output directory
-TMP_SAVE_PATH="datasets/schedule_test/wikitq_test"
+TMP_SAVE_PATH="tmp/wikitq_test"
 mkdir -p ${TMP_SAVE_PATH}
 
 # Run optimized pipeline

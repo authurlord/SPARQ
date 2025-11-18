@@ -1,0 +1,12 @@
+# downloaded data
+datasets/data
+
+schedule_pipeline/__pycache__/
+utils/__pycache__/
+utils/sql/__pycache__/
+utils/wtq/__pycache__/
+utils/tab_fact/__pycache__/
+utils/gpt2/__pycache__/
+utils/fetaqa/__pycache__/
+
+schedule_pipeline/tmp/
