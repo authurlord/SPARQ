@@ -6,7 +6,7 @@ This is the official implementation of our paper SPARQ: A Cost-Efficient Framewo
 
 ## Model Checkpoint
 
-To guarantee the reproducibility of our code, please download our fine-tuned checkpoint for router E/verifier Q from [link](). Then unzip it. E.g. in `model/router/wikitq` stored the router model for dataset `wikitq`, and `model/router/tab_fact` for dataset `tab_fact`.
+To guarantee the reproducibility of our code, please download our fine-tuned checkpoint for router E/verifier Q from [link](https://drive.google.com/file/d/1AMlhBFiaQsu3i_yJrLyMmOIpZoYYfepf/view?usp=drive_link). Then unzip it. E.g. in `model/router/wikitq` stored the router model for dataset `wikitq`, and `model/router/tab_fact` for dataset `tab_fact`.
 
 
 ### How-To-Run
