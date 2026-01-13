@@ -298,7 +298,6 @@ def Prepare_Data_for_Operator_Sequence_NIAT(index: int, sequence: List[str],
     
     return data_entry
 
-
 # ============================================================================
 # Main Pipeline - Aligned with WikiTQ
 # ============================================================================
@@ -321,49 +320,60 @@ def main():
     
     # ========================================================================
     # Step 1: Data Preprocessing (NIAT-specific)
+    # KEY FIX: Use table_id as key, not sequential index
     # ========================================================================
     print("\n[Step 1] Data Preprocessing...")
     _t1 = time.perf_counter()
     
     preprocess_file = f'{args.tmp_save_path}/niat_df_processed.npy'
     
-    # Load NIAT data
+    # Load NIAT data (list of QA samples)
     niat_data = load_niat_dataset(args.niat_json_path, args.first_n)
     
     if not args.skip_preprocess or not os.path.exists(preprocess_file):
-        # Process tables with flattening
-        print("Processing nested tables with flattening...")
-        niat_df_processed = {}
-        for idx, item in enumerate(tqdm(niat_data, desc="Flattening tables")):
-            table_rows = item.get('table_rows', [])
-            table_structure = item.get('table_structure', 'vertical')
-            df = flatten_hierarchical_table(table_rows, table_structure)
-            niat_df_processed[idx] = df
+        # Process tables with flattening - KEY: use table_id as key
+        print("Processing nested tables with flattening (table_id indexed)...")
+        niat_df_processed = {}  # {table_id: DataFrame}
         
+        # Only process each unique table once
+        for item in tqdm(niat_data, desc="Flattening tables"):
+            table_id = item['table_id']
+            if table_id not in niat_df_processed:
+                table_rows = item.get('table_rows', [])
+                table_structure = item.get('table_structure', 'vertical')
+                df = flatten_hierarchical_table(table_rows, table_structure)
+                niat_df_processed[table_id] = df
+        
+        print(f"Processed {len(niat_df_processed)} unique tables from {len(niat_data)} QA samples")
         np.save(preprocess_file, niat_df_processed)
         print(f"Saved preprocessed data to {preprocess_file}")
     else:
         niat_df_processed = np.load(preprocess_file, allow_pickle=True).item()
         print(f"Loaded preprocessed data from {preprocess_file}")
     
-    print(f"Loaded {len(niat_data)} samples")
+    print(f"QA samples: {len(niat_data)}, Unique tables: {len(niat_df_processed)}")
     
     timeline['Step 1 - Data Preprocessing'] = time.perf_counter() - _t1
     print(f"  [Timing] Step 1: {timeline['Step 1 - Data Preprocessing']:.2f}s")
     
     # ========================================================================
-    # Step 2: Build Router Query File - same structure as wikitq
+    # Step 2: Build Router Query File
+    # KEY FIX: Use qa_idx for QA samples, table_id for table lookup
     # ========================================================================
     print("\n[Step 2] Building Router Query File...")
     _t2 = time.perf_counter()
     
     semantic_router = {}
-    for index in range(len(niat_data)):
-        semantic_router[index] = {}
-        semantic_router[index]['query'] = niat_data[index].get('question', '')
-        semantic_router[index]['title'] = niat_data[index].get('table_title', f'Table_{index}') or f'Table_{index}'
-        semantic_router[index]['table'] = niat_df_processed[index]
-        semantic_router[index]['label'] = []
+    for qa_idx in range(len(niat_data)):
+        item = niat_data[qa_idx]
+        table_id = item['table_id']
+        
+        semantic_router[qa_idx] = {}
+        semantic_router[qa_idx]['query'] = item.get('question', '')
+        semantic_router[qa_idx]['title'] = item.get('table_title', table_id) or table_id
+        semantic_router[qa_idx]['table'] = niat_df_processed[table_id]  # Use table_id lookup
+        semantic_router[qa_idx]['table_id'] = table_id  # Store table_id for reference
+        semantic_router[qa_idx]['label'] = []
     
     router_query_file = f'{args.tmp_save_path}/router_query.pkl'
     with open(router_query_file, 'wb') as f:
@@ -375,20 +385,32 @@ def main():
     
     # ========================================================================
     # Step 3: Construct Database
+    # KEY FIX: Build database with table_id keys
     # ========================================================================
     print("\n[Step 3] Constructing Database...")
     _t3 = time.perf_counter()
     
-    table_titles = [niat_data[i].get('table_title', f'Table_{i}') or f'Table_{i}' 
-                   for i in range(len(niat_data))]
-    tables_for_db = [niat_df_processed[i] for i in range(len(niat_data))]
+    # Build table_id list in consistent order
+    table_id_list = list(niat_df_processed.keys())
+    table_id_to_db_idx = {tid: i for i, tid in enumerate(table_id_list)}
+    
+    table_titles = [niat_data[0].get('table_title', tid) or tid 
+                   for tid in table_id_list]  # Use first item's title or table_id
+    tables_for_db = [niat_df_processed[tid] for tid in table_id_list]
     
     db = NeuralDB(tables=tables_for_db, table_titles=table_titles)
     executor = Executor()
-    print(f"Database initialized with {len(tables_for_db)} tables")
+    print(f"Database initialized with {len(tables_for_db)} unique tables")
+    
+    # Store mapping for later use
+    table_id_mapping = {
+        'table_id_list': table_id_list,
+        'table_id_to_db_idx': table_id_to_db_idx,
+    }
     
     timeline['Step 3 - Construct Database'] = time.perf_counter() - _t3
     print(f"  [Timing] Step 3: {timeline['Step 3 - Construct Database']:.2f}s")
+
     
     # ========================================================================
     # Step 4: Router Model Inference
@@ -423,6 +445,7 @@ def main():
     
     # ========================================================================
     # Step 5: Parse Router Results & Organize LLM Query List
+    # KEY FIX: Use table_id for table lookup
     # ========================================================================
     print("\n[Step 5] Parsing Router Results...")
     _t5 = time.perf_counter()
@@ -440,30 +463,35 @@ def main():
         LLM_query_list[method] = {
             'index': [],
             'query': [],
-            'qa': []
+            'qa': [],
+            'table_id': []  # Add table_id tracking
         }
     
-    for index in range(len(niat_data)):
+    for qa_idx in range(len(niat_data)):
+        table_id = niat_data[qa_idx]['table_id']  # KEY FIX: get table_id from item
+        
         for method in ALL_LABELS:
-            if method in ranked_result[index]:
-                LLM_query_list[method]['index'].append(index)
+            if method in ranked_result[qa_idx]:
+                LLM_query_list[method]['index'].append(qa_idx)
+                LLM_query_list[method]['table_id'].append(table_id)
+                
                 if method == 'Select_Column':
                     prompt = build_niat_prompt_from_df(
-                        niat_data, niat_df_processed[index], index,
+                        niat_data, niat_df_processed[table_id], qa_idx,  # Use table_id
                         template_path='../prompts/col_select_niat.txt',
                         processed=True
                     )
                     LLM_query_list[method]['query'].append(prompt)
                 elif method == 'Select_Row':
                     prompt = build_niat_prompt_from_df(
-                        niat_data, niat_df_processed[index], index,
+                        niat_data, niat_df_processed[table_id], qa_idx,  # Use table_id
                         template_path='../prompts/row_select_niat.txt',
                         processed=True
                     )
                     LLM_query_list[method]['query'].append(prompt)
                 elif method == 'Execute_SQL':
                     prompt = build_niat_prompt_from_df(
-                        niat_data, niat_df_processed[index], index,
+                        niat_data, niat_df_processed[table_id], qa_idx,  # Use table_id
                         template_path='../prompts/sql_reason_niat.txt',
                         processed=True
                     )
@@ -510,7 +538,9 @@ def main():
         RAG_20_5 = np.load(rag_output_file, allow_pickle=True).item()
     else:
         print("Warning: RAG output not found, using original tables")
-        RAG_20_5 = {i: niat_df_processed[i] for i in LLM_query_list['RAG_20_5']['index']}
+        # KEY FIX: Use table_id for lookup
+        RAG_20_5 = {qa_idx: niat_df_processed[niat_data[qa_idx]['table_id']] 
+                   for qa_idx in LLM_query_list['RAG_20_5']['index']}
     
     timeline['Step 6 - RAG'] = time.perf_counter() - _t6
     print(f"  [Timing] Step 6: {timeline['Step 6 - RAG']:.2f}s")
@@ -564,6 +594,7 @@ def main():
     
     # ========================================================================
     # Step 9: SQL Parse and Execute
+    # KEY FIX: Use table_id from LLM_query_list for correct table lookup
     # ========================================================================
     print("\n[Step 9] Parsing and Executing SQL...")
     _t9 = time.perf_counter()
@@ -573,25 +604,32 @@ def main():
     sub_table_list_all = {}
     filtered_tables_row = {}
     row_sql_index_list = LLM_query_list['Select_Row'].get('index', [])
+    row_sql_table_ids = LLM_query_list['Select_Row'].get('table_id', [])
     row_sql_response_list = LLM_query_list['Select_Row'].get('response', [])
     
     for i in range(len(row_sql_index_list)):
         sample_num = [0, 1]
         sub_table_list = []
+        qa_idx = row_sql_index_list[i]
+        table_id = row_sql_table_ids[i] if row_sql_table_ids else niat_data[qa_idx]['table_id']
+        
         for sample_index in sample_num:
             if sample_index >= len(row_sql_response_list[i]):
                 continue
-            index = row_sql_index_list[i]
             original_text = row_sql_response_list[i][sample_index]
+            table_df = niat_df_processed[table_id]  # KEY FIX: use table_id
+            table_title = niat_data[qa_idx].get('table_title', table_id) or table_id
             sql = fix_sql_query(
                 response_text=original_text,
-                table_df=niat_df_processed[index],
-                table_title=table_titles[index]
+                table_df=table_df,
+                table_title=table_title
             )
             try:
+                # Get db index for this table_id
+                db_idx = table_id_mapping['table_id_to_db_idx'].get(table_id, 0)
                 result = executor.sql_exec(
                     sql.replace('``', '`').replace("COUNT(*)", "*"),
-                    db, table_id=index
+                    db, table_id=db_idx
                 )
                 sub_table_list.append(
                     pd.DataFrame(result['rows'], columns=result['header'])
@@ -599,31 +637,33 @@ def main():
             except:
                 continue
         
-        sub_table_list_all[index] = sub_table_list
+        sub_table_list_all[qa_idx] = sub_table_list
         filtered_df = retrieve_rows_by_subtables(
-            niat_df_processed[index], sub_table_list
+            niat_df_processed[table_id], sub_table_list  # KEY FIX
         )
         if len(filtered_df) == 0:
-            filtered_df = niat_df_processed[index]
-        filtered_tables_row[index] = filtered_df
+            filtered_df = niat_df_processed[table_id]  # KEY FIX
+        filtered_tables_row[qa_idx] = filtered_df
     
     # Parse Select_Column
     print("  Parsing Select_Column SQL...")
     filtered_tables = {}
     filtered_headers = {}
     col_sql_index_list = LLM_query_list['Select_Column'].get('index', [])
+    col_sql_table_ids = LLM_query_list['Select_Column'].get('table_id', [])
     col_sql_response_list = LLM_query_list['Select_Column'].get('response', [])
     
     for i in range(len(col_sql_index_list)):
-        ind = col_sql_index_list[i]
-        input_df = niat_df_processed[ind]
+        qa_idx = col_sql_index_list[i]
+        table_id = col_sql_table_ids[i] if col_sql_table_ids else niat_data[qa_idx]['table_id']
+        input_df = niat_df_processed[table_id]  # KEY FIX: use table_id
         response_list = col_sql_response_list[i]
         assert isinstance(response_list, list)
         filtered_table, final_headers = filter_dataframe_from_responses(
             response_list, input_df, add_row_id=True
         )
-        filtered_tables[ind] = filtered_table
-        filtered_headers[ind] = final_headers
+        filtered_tables[qa_idx] = filtered_table
+        filtered_headers[qa_idx] = final_headers
     
     # Parse Execute_SQL
     print("  Parsing Execute_SQL...")
@@ -632,34 +672,41 @@ def main():
     valid_parse = 0
     sql_executable_count = []
     exec_sql_index_list = LLM_query_list['Execute_SQL'].get('index', [])
+    exec_sql_table_ids = LLM_query_list['Execute_SQL'].get('table_id', [])
     exec_sql_response_list = LLM_query_list['Execute_SQL'].get('response', [])
     
     for i in range(len(exec_sql_index_list)):
-        index = exec_sql_index_list[i]
-        sql_exec_df[index] = []
+        qa_idx = exec_sql_index_list[i]
+        table_id = exec_sql_table_ids[i] if exec_sql_table_ids else niat_data[qa_idx]['table_id']
+        table_df = niat_df_processed[table_id]  # KEY FIX: use table_id
+        table_title = niat_data[qa_idx].get('table_title', table_id) or table_id
+        
+        sql_exec_df[qa_idx] = []
         for sample_ind in range(min(sample_num, len(exec_sql_response_list[i]) if exec_sql_response_list else 0)):
             original_text = exec_sql_response_list[i][sample_ind]
             sql = fix_sql_query(
                 response_text=original_text,
-                table_df=niat_df_processed[index],
-                table_title=table_titles[index]
+                table_df=table_df,
+                table_title=table_title
             )
             if sql != '':
                 try:
+                    db_idx = table_id_mapping['table_id_to_db_idx'].get(table_id, 0)
                     result = executor.sql_exec(
                         sql.replace('``', '`'), db,
-                        table_id=index, add_row_id=True
+                        table_id=db_idx, add_row_id=True
                     )
                     df = pd.DataFrame(result['rows'], columns=result['header'])
                 except:
                     df = pd.DataFrame()
             else:
                 df = pd.DataFrame()
-            sql_exec_df[index].append(df)
+            sql_exec_df[qa_idx].append(df)
             if len(df) > 0:
                 valid_parse += 1
                 sql_executable_count.append({
-                    'id': index,
+                    'id': qa_idx,
+                    'table_id': table_id,  # Add table_id tracking
                     'sample_ind': sample_ind,
                     'sql': sql,
                     'table': df
@@ -667,9 +714,10 @@ def main():
     
     sql_exec_df_output = merge_clean_and_format_df_dict(sql_exec_df)
     
-    # Aggregate processed tables
+    # Aggregate processed tables (using qa_idx as key for downstream compatibility)
     processed_table = {}
-    processed_table['Base'] = niat_df_processed
+    processed_table['Base'] = {qa_idx: niat_df_processed[niat_data[qa_idx]['table_id']] 
+                               for qa_idx in range(len(niat_data))}
     processed_table['Select_Row'] = filtered_tables_row
     processed_table['Select_Column'] = filtered_tables
     processed_table['RAG_20_5'] = RAG_20_5
