@@ -1,0 +1,162 @@
+{
+  "0": {
+    "table_id": "WTQ_transpose_38",
+    "table_structure": "horizontal",
+    "question": "What is the peak chart position for 'Cadillac Walk: The Mink DeVille Collection'?",
+    "answer": "—",
+    "original_rows": 5,
+    "processed_rows": 4
+  },
+  "3": {
+    "table_id": "WTQ_transpose_94",
+    "table_structure": "horizontal",
+    "question": "What was the CAN Country chart position for 'I'll Be Your Fool Tonight'?",
+    "answer": "—",
+    "original_rows": 5,
+    "processed_rows": 4
+  },
+  "5": {
+    "table_id": "WTQ_transpose_90",
+    "table_structure": "horizontal",
+    "question": "What was the result point for Amplistan during the World Cup finals against Conesto where the result was 0-0 and Amplistan won on penalties?",
+    "answer": "2",
+    "original_rows": 7,
+    "processed_rows": 6
+  },
+  "1": {
+    "table_id": "AIT-QA_tab-37",
+    "table_structure": "hierarchical",
+    "question": "How many Ground School Instructors are represented by TWU?",
+    "answer": "10",
+    "original_rows": 31,
+    "processed_rows": 30
+  },
+  "4": {
+    "table_id": "WTQ_203-csv_121",
+    "table_structure": "vertical",
+    "question": "Which club does Rune 'Killing' Emanuelsson play for?",
+    "answer": "IFK Göteborg",
+    "original_rows": 26,
+    "processed_rows": 25
+  },
+  "2": {
+    "table_id": "WTQ_transpose_161",
+    "table_structure": "horizontal",
+    "question": "How much capacity does Sakhalin II have?",
+    "answer": "9.6",
+    "original_rows": 6,
+    "processed_rows": 5
+  },
+  "7": {
+    "table_id": "WTQ_transpose_160",
+    "table_structure": "horizontal",
+    "question": "What was the attendance for the game on Sunday, April 28?",
+    "answer": "17,503",
+    "original_rows": 8,
+    "processed_rows": 7
+  },
+  "9": {
+    "table_id": "WTQ_204-csv_568",
+    "table_structure": "vertical",
+    "question": "What was the launched date for HMS Antelope?",
+    "answer": "16 March 1972",
+    "original_rows": 9,
+    "processed_rows": 8
+  },
+  "6": {
+    "table_id": "HiTab_1176",
+    "table_structure": "hierarchical",
+    "question": "How much total custody is reported for total-provinces and territories?",
+    "answer": "2,080,915",
+    "original_rows": 17,
+    "processed_rows": 16
+  },
+  "11": {
+    "table_id": "AIT-QA_tab-72",
+    "table_structure": "hierarchical",
+    "question": "What is the value at Level 2 for Repurchase agreements?",
+    "answer": "375",
+    "original_rows": 10,
+    "processed_rows": 9
+  },
+  "12": {
+    "table_id": "WTQ_transpose_167",
+    "table_structure": "horizontal",
+    "question": "Who published 'SWAT 3: Close Quarters Battle'?",
+    "answer": "Sierra Entertainment",
+    "original_rows": 5,
+    "processed_rows": 4
+  },
+  "8": {
+    "table_id": "WTQ_transpose_161",
+    "table_structure": "horizontal",
+    "question": "What is the capacity of Arzew GL1Z started in 1997?",
+    "answer": "7.9",
+    "original_rows": 6,
+    "processed_rows": 5
+  },
+  "10": {
+    "table_id": "WTQ_204-csv_295",
+    "table_structure": "vertical",
+    "question": "What type of vehicle is the M151 model?",
+    "answer": "1/4-ton Light Utility Vehicle and Weapons Carrier",
+    "original_rows": 13,
+    "processed_rows": 12
+  },
+  "16": {
+    "table_id": "AIT-QA_tab-57",
+    "table_structure": "hierarchical",
+    "question": "What is the seating capacity in standard configuration for the 767-400ER?",
+    "answer": "242",
+    "original_rows": 17,
+    "processed_rows": 16
+  },
+  "13": {
+    "table_id": "WTQ_203-csv_803",
+    "table_structure": "vertical",
+    "question": "In what position did Denmark finish in the Eurovision Song Contest 1992?",
+    "answer": "12",
+    "original_rows": 24,
+    "processed_rows": 23
+  },
+  "15": {
+    "table_id": "AIT-QA_tab-37",
+    "table_structure": "hierarchical",
+    "question": "Who is the representative for Flight Attendants at PSA?",
+    "answer": "AFA",
+    "original_rows": 31,
+    "processed_rows": 30
+  },
+  "17": {
+    "table_id": "WTQ_203-csv_324",
+    "table_structure": "vertical",
+    "question": "What is the Minor Seventh of C♯<sup>7</sup>?",
+    "answer": "B",
+    "original_rows": 18,
+    "processed_rows": 17
+  },
+  "14": {
+    "table_id": "WTQ_204-csv_525",
+    "table_structure": "vertical",
+    "question": "Who scored 3-2 for Laois?",
+    "answer": "Ger Cuddy",
+    "original_rows": 40,
+    "processed_rows": 39
+  },
+  "18": {
+    "table_id": "WTQ_204-csv_668",
+    "table_structure": "vertical",
+    "question": "Who was the Menteri Besar during the transition from colonial rule to independence in 1957?",
+    "answer": "Wan Idris Ibrahim",
+    "original_rows": 10,
+    "processed_rows": 9
+  },
+  "19": {
+    "table_id": "WTQ_203-csv_324",
+    "table_structure": "vertical",
+    "question": "What is the Root of G♭<sup>7</sup>?",
+    "answer": "G♭",
+    "original_rows": 18,
+    "processed_rows": 17
+  }
+}

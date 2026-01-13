@@ -1,0 +1,3117 @@
+{
+  "total_tables": 15,
+  "total_queries": 102,
+  "total_success": 102,
+  "total_failed": 0,
+  "per_table": [
+    {
+      "table_id": 0,
+      "structure": "horizontal",
+      "shape": [
+        4,
+        18
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `year` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "year"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "title"
+              ],
+              [
+                1,
+                "peak chart positions"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `year`, `year_2`, `1981` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "year",
+              "year_2",
+              "1981"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "title",
+                "title",
+                "savoir faire"
+              ],
+              [
+                1,
+                "peak chart positions",
+                "label",
+                "—"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `year` = 'title'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "year",
+              "year_2",
+              "1981",
+              "1993",
+              "1995",
+              "1996",
+              "1996_2",
+              "1996_3",
+              "1996_4",
+              "1997",
+              "1997_2",
+              "1997_3",
+              "1999",
+              "2001",
+              "2003",
+              "2005",
+              "2009",
+              "\"—\" denotes releases that did not chart."
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "title",
+                "title",
+                "savoir faire",
+                "spanish stroll 1977-1987",
+                "les inoubliables de willy deville",
+                "love & emotion: the atlantic years",
+                "mink/willy deville greatest hits",
+                "spanish stroll",
+                "best of willy deville",
+                "his greatest hits",
+                "premium gold collection",
+                "the best of mink deville",
+                "collection légende",
+                "cadillac walk: the mink deville collection",
+                "greatest hits",
+                "mink deville",
+                "introducing willy deville",
+                "\"—\" denotes releases that did not chart."
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "year",
+              "year_2",
+              "1981",
+              "1993",
+              "1995",
+              "1996",
+              "1996_2",
+              "1996_3",
+              "1996_4",
+              "1997",
+              "1997_2",
+              "1997_3",
+              "1999",
+              "2001",
+              "2003",
+              "2005",
+              "2009",
+              "\"—\" denotes releases that did not chart."
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "title",
+                "title",
+                "savoir faire",
+                "spanish stroll 1977-1987",
+                "les inoubliables de willy deville",
+                "love & emotion: the atlantic years",
+                "mink/willy deville greatest hits",
+                "spanish stroll",
+                "best of willy deville",
+                "his greatest hits",
+                "premium gold collection",
+                "the best of mink deville",
+                "collection légende",
+                "cadillac walk: the mink deville collection",
+                "greatest hits",
+                "mink deville",
+                "introducing willy deville",
+                "\"—\" denotes releases that did not chart."
+              ],
+              [
+                1,
+                "peak chart positions",
+                "label",
+                "—",
+                "—",
+                "—",
+                "54",
+                "—",
+                "—",
+                "—",
+                "—",
+                "—",
+                "—",
+                "—",
+                "—",
+                "—",
+                "—",
+                "—",
+                "\"—\" denotes releases that did not chart."
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`1996`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`1996`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                3,
+                "mink deville[c 1]"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `year` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "year"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                "title"
+              ],
+              [
+                "peak chart positions"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 3,
+      "structure": "horizontal",
+      "shape": [
+        4,
+        24
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `year` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "year"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "song"
+              ],
+              [
+                1,
+                "chart positions"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `year`, `year_2`, `1968` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "year",
+              "year_2",
+              "1968"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "song",
+                "song",
+                "\"god help you woman\""
+              ],
+              [
+                1,
+                "chart positions",
+                "album",
+                "32"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `year` = 'song'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "year",
+              "year_2",
+              "1968",
+              "singles only",
+              "singles only_2",
+              "singles only_3",
+              "singles only_4",
+              "singles only_5",
+              "singles only_6",
+              "singles only_7",
+              "singles only_8",
+              "singles only_9",
+              "singles only_10",
+              "singles only_11",
+              "1983",
+              "1983_2",
+              "1983_3",
+              "the man in the mirror",
+              "the man in the mirror_2",
+              "the man in the mirror_3",
+              "1985",
+              "1985_2",
+              "past the point of no return",
+              "1986"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "song",
+                "song",
+                "\"god help you woman\"",
+                "1969",
+                "1969",
+                "1969",
+                "1973",
+                "1974",
+                "1974",
+                "1975",
+                "1975",
+                "1976",
+                "1977",
+                "1977",
+                "\"when you're not a lady\"",
+                "the man in the mirror",
+                "the man in the mirror",
+                "1984",
+                "1984",
+                "1984",
+                "\"i'll be your fool 2026-1-13tni\"",
+                "past the point of no return",
+                "1986",
+                "\"the lights of albuquerque\""
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "year",
+              "year_2",
+              "1968",
+              "singles only",
+              "singles only_2",
+              "singles only_3",
+              "singles only_4",
+              "singles only_5",
+              "singles only_6",
+              "singles only_7",
+              "singles only_8",
+              "singles only_9",
+              "singles only_10",
+              "singles only_11",
+              "1983",
+              "1983_2",
+              "1983_3",
+              "the man in the mirror",
+              "the man in the mirror_2",
+              "the man in the mirror_3",
+              "1985",
+              "1985_2",
+              "past the point of no return",
+              "1986"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "song",
+                "song",
+                "\"god help you woman\"",
+                "1969",
+                "1969",
+                "1969",
+                "1973",
+                "1974",
+                "1974",
+                "1975",
+                "1975",
+                "1976",
+                "1977",
+                "1977",
+                "\"when you're not a lady\"",
+                "the man in the mirror",
+                "the man in the mirror",
+                "1984",
+                "1984",
+                "1984",
+                "\"i'll be your fool 2026-1-13tni\"",
+                "past the point of no return",
+                "1986",
+                "\"the lights of albuquerque\""
+              ],
+              [
+                1,
+                "chart positions",
+                "album",
+                "32",
+                "\"please take me back\"",
+                "\"i'm not through loving you\"",
+                "\"molly\"",
+                "\"i see his love all over you\"",
+                "\"fool passin' through\"",
+                "\"forgettin' 'bout you\"",
+                "\"1, 2, 3 (never gonna fa in love again)\"",
+                "\"woman, woman\"",
+                "\"she's free but she's not easy\"",
+                "\"chasin' my tail\"",
+                "\"don't let my love stand in your way\"",
+                "16",
+                "\"you got me running\"",
+                "\"the man in the mirror\"",
+                "\"if i could only dance with you\"",
+                "\"you're gettin' to me again\"",
+                "\"let me down easy\"",
+                "54",
+                "\"2026-1-13t03:29:59\"",
+                "\"if i don't love you\"",
+                "40"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`1968`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`1968`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                3,
+                "singles only"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `year` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "year"
+            ],
+            "rows_count": 3,
+            "sample_rows": [
+              [
+                "song"
+              ],
+              [
+                "chart positions"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 5,
+      "structure": "horizontal",
+      "shape": [
+        6,
+        9
+      ],
+      "results": {
+        "total": 6,
+        "success": 6,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `match` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "match"
+            ],
+            "rows_count": 6,
+            "sample_rows": [
+              [
+                0,
+                "team"
+              ],
+              [
+                1,
+                "result points"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `match`, `amplistan vs. bestrudia (friendly)\nresult: 1–2`, `amplistan vs. bestrudia (friendly)\nresult: 1–1` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "match",
+              "amplistan vs. bestrudia (friendly)\nresult: 1–2",
+              "amplistan vs. bestrudia (friendly)\nresult: 1–1"
+            ],
+            "rows_count": 6,
+            "sample_rows": [
+              [
+                0,
+                "team",
+                "amplistan\nbestrudia",
+                "amplistan\nbestrudia"
+              ],
+              [
+                1,
+                "result points",
+                "0\n3",
+                "1\n1"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `match` = 'team'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "match",
+              "amplistan vs. bestrudia (friendly)\nresult: 1–2",
+              "amplistan vs. bestrudia (friendly)\nresult: 1–1",
+              "amplistan vs. bestrudia (world cup finals)\nresult: 2–1",
+              "amplistan vs. bestrudia (world cup finals)\nresult: 1–1 (bestrudia wins on penalties)",
+              "amplistan vs. conesto (friendly)\nresult: 1–2",
+              "conesto vs. delphiz (continental cup qualifiers)\nresult: 4–0",
+              "conesto vs. delphiz (continental cup qualifiers)\nresult: 0–1",
+              "conesto vs. amplistan (world cup finals)\nresult: 0–0 (amplistan wins on penalties)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "team",
+                "amplistan\nbestrudia",
+                "amplistan\nbestrudia",
+                "amplistan\nbestrudia",
+                "amplistan\nbestrudia",
+                "amplistan\nconesto",
+                "conesto\ndelphiz",
+                "conesto\ndelphiz",
+                "conesto\namplistan"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "match",
+              "amplistan vs. bestrudia (friendly)\nresult: 1–2",
+              "amplistan vs. bestrudia (friendly)\nresult: 1–1",
+              "amplistan vs. bestrudia (world cup finals)\nresult: 2–1",
+              "amplistan vs. bestrudia (world cup finals)\nresult: 1–1 (bestrudia wins on penalties)",
+              "amplistan vs. conesto (friendly)\nresult: 1–2",
+              "conesto vs. delphiz (continental cup qualifiers)\nresult: 4–0",
+              "conesto vs. delphiz (continental cup qualifiers)\nresult: 0–1",
+              "conesto vs. amplistan (world cup finals)\nresult: 0–0 (amplistan wins on penalties)"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "team",
+                "amplistan\nbestrudia",
+                "amplistan\nbestrudia",
+                "amplistan\nbestrudia",
+                "amplistan\nbestrudia",
+                "amplistan\nconesto",
+                "conesto\ndelphiz",
+                "conesto\ndelphiz",
+                "conesto\namplistan"
+              ],
+              [
+                1,
+                "result points",
+                "0\n3",
+                "1\n1",
+                "3\n0",
+                "1\n2",
+                "0\n3",
+                "3\n0",
+                "0\n3",
+                "1\n2"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                6
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `match` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "match"
+            ],
+            "rows_count": 6,
+            "sample_rows": [
+              [
+                "team"
+              ],
+              [
+                "result points"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 1,
+      "structure": "hierarchical",
+      "shape": [
+        30,
+        6
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `filledcolumnname` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname"
+            ],
+            "rows_count": 30,
+            "sample_rows": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `filledcolumnname`, ` `, ` _2` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              " _2"
+            ],
+            "rows_count": 30,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "mainline: (2)",
+                "allied pilots association (apa)"
+              ],
+              [
+                1,
+                1,
+                "none",
+                "association of professional flight attendants (apfa)"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `filledcolumnname` = '0'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              " _2",
+              "class or craft",
+              "employees  (1)",
+              "contract amendable date"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "mainline: (2)",
+                "allied pilots association (apa)",
+                "pilots",
+                13200,
+                "2020"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              " _2",
+              "class or craft",
+              "employees  (1)",
+              "contract amendable date"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "mainline: (2)",
+                "allied pilots association (apa)",
+                "pilots",
+                13200,
+                "2020"
+              ],
+              [
+                1,
+                1,
+                "none",
+                "association of professional flight attendants (apfa)",
+                "flight attendants",
+                24900,
+                "2019"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                30
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`filledcolumnname`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`filledcolumnname`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                29,
+                29
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `filledcolumnname` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "filledcolumnname"
+            ],
+            "rows_count": 30,
+            "sample_rows": [
+              [
+                0
+              ],
+              [
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 4,
+      "structure": "vertical",
+      "shape": [
+        25,
+        5
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `name` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "name"
+            ],
+            "rows_count": 25,
+            "sample_rows": [
+              [
+                0,
+                "olle åhlund"
+              ],
+              [
+                1,
+                "sune \"mona-lisa\" andersson"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `name`, `pos.`, `caps` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "name",
+              "pos.",
+              "caps"
+            ],
+            "rows_count": 25,
+            "sample_rows": [
+              [
+                0,
+                "olle åhlund",
+                "mf",
+                1
+              ],
+              [
+                1,
+                "sune \"mona-lisa\" andersson",
+                "mf",
+                5
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `name` = 'olle åhlund'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "name",
+              "pos.",
+              "caps",
+              "goals",
+              "club"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "olle åhlund",
+                "mf",
+                1,
+                0,
+                "degerfors if"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "name",
+              "pos.",
+              "caps",
+              "goals",
+              "club"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "olle åhlund",
+                "mf",
+                1,
+                0,
+                "degerfors if"
+              ],
+              [
+                1,
+                "sune \"mona-lisa\" andersson",
+                "mf",
+                5,
+                0,
+                "aik solna"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`caps`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`caps`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                9,
+                6
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `name` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "name"
+            ],
+            "rows_count": 25,
+            "sample_rows": [
+              [
+                "olle åhlund"
+              ],
+              [
+                "sune \"mona-lisa\" andersson"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 2,
+      "structure": "horizontal",
+      "shape": [
+        5,
+        38
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `plant name` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "plant name"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "location"
+              ],
+              [
+                1,
+                "country"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `plant name`, `qatargas ii`, `arzew gl4z` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "plant name",
+              "qatargas ii",
+              "arzew gl4z"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "location",
+                "ras laffan",
+                "none"
+              ],
+              [
+                1,
+                "country",
+                "qatar",
+                "algeria"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `plant name` = 'location'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "plant name",
+              "qatargas ii",
+              "arzew gl4z",
+              "arzew gl1z",
+              "arzew gl1z_2",
+              "skikda gl1k",
+              "skikda gl1k_2",
+              "skikda gl1k_3",
+              "angola lng",
+              "lumut 1",
+              "badak a-b",
+              "badak a-d",
+              "badak a-e",
+              "badak a-f",
+              "badak a-g",
+              "badak ngl a-h",
+              "atlantic lng",
+              "[atlantic lng]",
+              "filledcolumnname",
+              "filledcolumnname_2",
+              "bintulu mlng 1",
+              "bintulu mlng 2",
+              "bintulu mlng 3",
+              "nigeria lng",
+              "northwest shelf venture",
+              "withnell bay",
+              "withnell bay_2",
+              "sakhalin ii",
+              "yemen lng",
+              "tangguh lng project",
+              "qatargas i",
+              "qatargas i_2",
+              "qatargas iii",
+              "rasgas i, ii and iii",
+              "qalhat",
+              "das island i",
+              "das island i and ii",
+              "melkøya"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "location",
+                "ras laffan",
+                "none",
+                "none",
+                "none",
+                "none",
+                "none",
+                "none",
+                "soyo",
+                "none",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "point fortin",
+                "[point fortin]",
+                "damietta",
+                "idku",
+                "none",
+                "none",
+                "none",
+                "none",
+                "karratha",
+                "karratha",
+                "karratha",
+                "none",
+                "balhaf",
+                "papua barat",
+                "ras laffan",
+                "ras laffan",
+                "none",
+                "ras laffan",
+                "none",
+                "none",
+                "none",
+                "hammerfest"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "plant name",
+              "qatargas ii",
+              "arzew gl4z",
+              "arzew gl1z",
+              "arzew gl1z_2",
+              "skikda gl1k",
+              "skikda gl1k_2",
+              "skikda gl1k_3",
+              "angola lng",
+              "lumut 1",
+              "badak a-b",
+              "badak a-d",
+              "badak a-e",
+              "badak a-f",
+              "badak a-g",
+              "badak ngl a-h",
+              "atlantic lng",
+              "[atlantic lng]",
+              "filledcolumnname",
+              "filledcolumnname_2",
+              "bintulu mlng 1",
+              "bintulu mlng 2",
+              "bintulu mlng 3",
+              "nigeria lng",
+              "northwest shelf venture",
+              "withnell bay",
+              "withnell bay_2",
+              "sakhalin ii",
+              "yemen lng",
+              "tangguh lng project",
+              "qatargas i",
+              "qatargas i_2",
+              "qatargas iii",
+              "rasgas i, ii and iii",
+              "qalhat",
+              "das island i",
+              "das island i and ii",
+              "melkøya"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "location",
+                "ras laffan",
+                "none",
+                "none",
+                "none",
+                "none",
+                "none",
+                "none",
+                "soyo",
+                "none",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "point fortin",
+                "[point fortin]",
+                "damietta",
+                "idku",
+                "none",
+                "none",
+                "none",
+                "none",
+                "karratha",
+                "karratha",
+                "karratha",
+                "none",
+                "balhaf",
+                "papua barat",
+                "ras laffan",
+                "ras laffan",
+                "none",
+                "ras laffan",
+                "none",
+                "none",
+                "none",
+                "hammerfest"
+              ],
+              [
+                1,
+                "country",
+                "qatar",
+                "algeria",
+                "algeria",
+                "algeria",
+                "algeria",
+                "algeria",
+                "algeria",
+                "angola",
+                "brunei",
+                "indonesia",
+                "indonesia",
+                "indonesia",
+                "indonesia",
+                "indonesia",
+                "indonesia",
+                "trinidad and tobago",
+                "trinidad and tobago",
+                "egypt",
+                "egypt",
+                "malaysia",
+                "malaysia",
+                "malaysia",
+                "nigeria",
+                "australia",
+                "australia",
+                "australia",
+                "russia",
+                "yemen",
+                "indonesia",
+                "qatar",
+                "qatar",
+                "qatar",
+                "qatar",
+                "oman",
+                "united arab emirates",
+                "united arab emirates",
+                "norway"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`qatargas ii`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`qatargas ii`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "ras laffan"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `plant name` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "plant name"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                "location"
+              ],
+              [
+                "country"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 7,
+      "structure": "horizontal",
+      "shape": [
+        7,
+        14
+      ],
+      "results": {
+        "total": 6,
+        "success": 6,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `week` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "week"
+            ],
+            "rows_count": 7,
+            "sample_rows": [
+              [
+                0,
+                "date"
+              ],
+              [
+                1,
+                "kickoff [n 1]"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `week`, `week_2`, `1` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "week",
+              "week_2",
+              "1"
+            ],
+            "rows_count": 7,
+            "sample_rows": [
+              [
+                0,
+                "date",
+                "date",
+                "saturday, april 13"
+              ],
+              [
+                1,
+                "kickoff [n 1]",
+                "kickoff [n 1]",
+                "t19:0"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `week` = 'date'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "week",
+              "week_2",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "world bowl '96",
+              "11"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "date",
+                "date",
+                "saturday, april 13",
+                "saturday, april 20",
+                "sunday, april 28",
+                "sunday, may 5",
+                "saturday, may 11",
+                "sunday, may 19",
+                "sunday, may 26",
+                "saturday, june 1",
+                "saturday, june 8",
+                "saturday, june 15",
+                "world bowl '96",
+                "sunday, june 23"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "week",
+              "week_2",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "world bowl '96",
+              "11"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "date",
+                "date",
+                "saturday, april 13",
+                "saturday, april 20",
+                "sunday, april 28",
+                "sunday, may 5",
+                "saturday, may 11",
+                "sunday, may 19",
+                "sunday, may 26",
+                "saturday, june 1",
+                "saturday, june 8",
+                "saturday, june 15",
+                "world bowl '96",
+                "sunday, june 23"
+              ],
+              [
+                1,
+                "kickoff [n 1]",
+                "kickoff [n 1]",
+                "t19:0",
+                "t19:0",
+                "t18:0",
+                "t19:0",
+                "t19:0",
+                "t15:0",
+                "t15:0",
+                "t19:0",
+                "t19:0",
+                "t18:30",
+                "world bowl '96",
+                "t18:0"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                7
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `week` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "week"
+            ],
+            "rows_count": 6,
+            "sample_rows": [
+              [
+                "date"
+              ],
+              [
+                "kickoff [n 1]"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 9,
+      "structure": "vertical",
+      "shape": [
+        8,
+        10
+      ],
+      "results": {
+        "total": 6,
+        "success": 6,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `pennant` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "pennant"
+            ],
+            "rows_count": 8,
+            "sample_rows": [
+              [
+                0,
+                "f169"
+              ],
+              [
+                1,
+                "f170"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `pennant`, `name`, `hull builder` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "pennant",
+              "name",
+              "hull builder"
+            ],
+            "rows_count": 8,
+            "sample_rows": [
+              [
+                0,
+                "f169",
+                "amazon",
+                "vosper thornycroft, woolston"
+              ],
+              [
+                1,
+                "f170",
+                "antelope",
+                "vosper thornycroft"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `pennant` = 'f169'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "pennant",
+              "name",
+              "hull builder",
+              "ordered",
+              "laid down",
+              "launched",
+              "accepted into service[9]",
+              "commissioned",
+              "est. building cost[10]",
+              "fate"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "f169",
+                "amazon",
+                "vosper thornycroft, woolston",
+                "1969-3-26 [11]",
+                "1969-11-6 [11]",
+                "1971-4-26 [11]",
+                "1974-7-19 [12]",
+                "1974-5-11 [11]",
+                "£16800000 [12]",
+                "to pakistan as babur"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "pennant",
+              "name",
+              "hull builder",
+              "ordered",
+              "laid down",
+              "launched",
+              "accepted into service[9]",
+              "commissioned",
+              "est. building cost[10]",
+              "fate"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "f169",
+                "amazon",
+                "vosper thornycroft, woolston",
+                "1969-3-26 [11]",
+                "1969-11-6 [11]",
+                "1971-4-26 [11]",
+                "1974-7-19 [12]",
+                "1974-5-11 [11]",
+                "£16800000 [12]",
+                "to pakistan as babur"
+              ],
+              [
+                1,
+                "f170",
+                "antelope",
+                "vosper thornycroft",
+                "1970-5-11 [11]",
+                "1971-3-23 [11]",
+                "1972-3-16 [11]",
+                "1975-6-30 [12]",
+                "1975-7-16 [11]",
+                "£14400000 [13]",
+                "bombed by argentine a-4 skyhawks on 1982-5-23 and sank 2026-1-14 in san carlos water"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                8
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `pennant` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "pennant"
+            ],
+            "rows_count": 8,
+            "sample_rows": [
+              [
+                "f169"
+              ],
+              [
+                "f170"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 6,
+      "structure": "hierarchical",
+      "shape": [
+        16,
+        10
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT ` jurisdiction ` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              " jurisdiction "
+            ],
+            "rows_count": 16,
+            "sample_rows": [
+              [
+                0,
+                "jurisdiction"
+              ],
+              [
+                1,
+                "newfoundland and labrador"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT ` jurisdiction `, ` `, ` custody ` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              " jurisdiction ",
+              " ",
+              " custody "
+            ],
+            "rows_count": 16,
+            "sample_rows": [
+              [
+                0,
+                "jurisdiction",
+                "thousands of dollars",
+                "thousands of dollars"
+              ],
+              [
+                1,
+                "newfoundland and labrador",
+                "161",
+                "33374"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE ` jurisdiction ` = 'jurisdiction'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              " jurisdiction ",
+              " ",
+              " custody ",
+              " _2",
+              " _3",
+              " _4",
+              " total ",
+              " _5",
+              " _6",
+              " per capita cost in 2017/2018 "
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "jurisdiction",
+                "thousands of dollars",
+                "thousands of dollars",
+                "thousands of dollars",
+                "thousands of dollars",
+                "thousands of dollars",
+                "thousands of dollars",
+                "percent",
+                "dollars",
+                "dollars"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              " jurisdiction ",
+              " ",
+              " custody ",
+              " _2",
+              " _3",
+              " _4",
+              " total ",
+              " _5",
+              " _6",
+              " per capita cost in 2017/2018 "
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "jurisdiction",
+                "thousands of dollars",
+                "thousands of dollars",
+                "thousands of dollars",
+                "thousands of dollars",
+                "thousands of dollars",
+                "thousands of dollars",
+                "percent",
+                "dollars",
+                "dollars"
+              ],
+              [
+                1,
+                "newfoundland and labrador",
+                "161",
+                "33374",
+                "4185",
+                "..",
+                "..",
+                "37719",
+                "1",
+                "267",
+                "71"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                16
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(` `) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(` `)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "thousands of dollars"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT ` jurisdiction ` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              " jurisdiction "
+            ],
+            "rows_count": 16,
+            "sample_rows": [
+              [
+                "jurisdiction"
+              ],
+              [
+                "newfoundland and labrador"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 11,
+      "structure": "hierarchical",
+      "shape": [
+        9,
+        7
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `filledcolumnname` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname"
+            ],
+            "rows_count": 9,
+            "sample_rows": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `filledcolumnname`, ` `, ` _2` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              " _2"
+            ],
+            "rows_count": 9,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "none",
+                "none"
+              ],
+              [
+                1,
+                1,
+                "short-term investments (1) :",
+                "money market funds"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `filledcolumnname` = '0'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              " _2",
+              "fair value measurements as of december 31, 2018",
+              " _3",
+              " _4",
+              " _5"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "none",
+                "none",
+                "total",
+                "level 1",
+                "level 2",
+                "level 3"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              " _2",
+              "fair value measurements as of december 31, 2018",
+              " _3",
+              " _4",
+              " _5"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "none",
+                "none",
+                "total",
+                "level 1",
+                "level 2",
+                "level 3"
+              ],
+              [
+                1,
+                1,
+                "short-term investments (1) :",
+                "money market funds",
+                "$14",
+                "$14",
+                "$—",
+                "$—"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                9
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`filledcolumnname`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`filledcolumnname`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                8,
+                8
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `filledcolumnname` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "filledcolumnname"
+            ],
+            "rows_count": 9,
+            "sample_rows": [
+              [
+                0
+              ],
+              [
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 12,
+      "structure": "horizontal",
+      "shape": [
+        4,
+        8
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `title` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "title"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "year"
+              ],
+              [
+                1,
+                "platform"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `title`, `swat 3: close quarters battle`, `swat: global strike team` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "title",
+              "swat 3: close quarters battle",
+              "swat: global strike team"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "year",
+                "1999",
+                "2003"
+              ],
+              [
+                1,
+                "platform",
+                "microsoft windows",
+                "playstation 2, xbox"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `title` = 'year'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "title",
+              "swat 3: close quarters battle",
+              "swat: global strike team",
+              "swat 4",
+              "swat 4: the stetchkov syndicate",
+              "swat force",
+              "swat: target liberty",
+              "swat elite troops"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "year",
+                "1999",
+                "2003",
+                "2005",
+                "2006",
+                "2006",
+                "2007",
+                "2008"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "title",
+              "swat 3: close quarters battle",
+              "swat: global strike team",
+              "swat 4",
+              "swat 4: the stetchkov syndicate",
+              "swat force",
+              "swat: target liberty",
+              "swat elite troops"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                0,
+                "year",
+                "1999",
+                "2003",
+                "2005",
+                "2006",
+                "2006",
+                "2007",
+                "2008"
+              ],
+              [
+                1,
+                "platform",
+                "microsoft windows",
+                "playstation 2, xbox",
+                "microsoft windows",
+                "microsoft windows",
+                "mobile phones",
+                "playstation portable",
+                "mobile phones"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`swat 3: close quarters battle`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`swat 3: close quarters battle`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                2,
+                "sierra northwest"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `title` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "title"
+            ],
+            "rows_count": 4,
+            "sample_rows": [
+              [
+                "year"
+              ],
+              [
+                "platform"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 8,
+      "structure": "horizontal",
+      "shape": [
+        5,
+        38
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `plant name` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "plant name"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "location"
+              ],
+              [
+                1,
+                "country"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `plant name`, `qatargas ii`, `arzew gl4z` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "plant name",
+              "qatargas ii",
+              "arzew gl4z"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "location",
+                "ras laffan",
+                "none"
+              ],
+              [
+                1,
+                "country",
+                "qatar",
+                "algeria"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `plant name` = 'location'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "plant name",
+              "qatargas ii",
+              "arzew gl4z",
+              "arzew gl1z",
+              "arzew gl1z_2",
+              "skikda gl1k",
+              "skikda gl1k_2",
+              "skikda gl1k_3",
+              "angola lng",
+              "lumut 1",
+              "badak a-b",
+              "badak a-d",
+              "badak a-e",
+              "badak a-f",
+              "badak a-g",
+              "badak ngl a-h",
+              "atlantic lng",
+              "[atlantic lng]",
+              "filledcolumnname",
+              "filledcolumnname_2",
+              "bintulu mlng 1",
+              "bintulu mlng 2",
+              "bintulu mlng 3",
+              "nigeria lng",
+              "northwest shelf venture",
+              "withnell bay",
+              "withnell bay_2",
+              "sakhalin ii",
+              "yemen lng",
+              "tangguh lng project",
+              "qatargas i",
+              "qatargas i_2",
+              "qatargas iii",
+              "rasgas i, ii and iii",
+              "qalhat",
+              "das island i",
+              "das island i and ii",
+              "melkøya"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "location",
+                "ras laffan",
+                "none",
+                "none",
+                "none",
+                "none",
+                "none",
+                "none",
+                "soyo",
+                "none",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "point fortin",
+                "[point fortin]",
+                "damietta",
+                "idku",
+                "none",
+                "none",
+                "none",
+                "none",
+                "karratha",
+                "karratha",
+                "karratha",
+                "none",
+                "balhaf",
+                "papua barat",
+                "ras laffan",
+                "ras laffan",
+                "none",
+                "ras laffan",
+                "none",
+                "none",
+                "none",
+                "hammerfest"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "plant name",
+              "qatargas ii",
+              "arzew gl4z",
+              "arzew gl1z",
+              "arzew gl1z_2",
+              "skikda gl1k",
+              "skikda gl1k_2",
+              "skikda gl1k_3",
+              "angola lng",
+              "lumut 1",
+              "badak a-b",
+              "badak a-d",
+              "badak a-e",
+              "badak a-f",
+              "badak a-g",
+              "badak ngl a-h",
+              "atlantic lng",
+              "[atlantic lng]",
+              "filledcolumnname",
+              "filledcolumnname_2",
+              "bintulu mlng 1",
+              "bintulu mlng 2",
+              "bintulu mlng 3",
+              "nigeria lng",
+              "northwest shelf venture",
+              "withnell bay",
+              "withnell bay_2",
+              "sakhalin ii",
+              "yemen lng",
+              "tangguh lng project",
+              "qatargas i",
+              "qatargas i_2",
+              "qatargas iii",
+              "rasgas i, ii and iii",
+              "qalhat",
+              "das island i",
+              "das island i and ii",
+              "melkøya"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                "location",
+                "ras laffan",
+                "none",
+                "none",
+                "none",
+                "none",
+                "none",
+                "none",
+                "soyo",
+                "none",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "bontang",
+                "point fortin",
+                "[point fortin]",
+                "damietta",
+                "idku",
+                "none",
+                "none",
+                "none",
+                "none",
+                "karratha",
+                "karratha",
+                "karratha",
+                "none",
+                "balhaf",
+                "papua barat",
+                "ras laffan",
+                "ras laffan",
+                "none",
+                "ras laffan",
+                "none",
+                "none",
+                "none",
+                "hammerfest"
+              ],
+              [
+                1,
+                "country",
+                "qatar",
+                "algeria",
+                "algeria",
+                "algeria",
+                "algeria",
+                "algeria",
+                "algeria",
+                "angola",
+                "brunei",
+                "indonesia",
+                "indonesia",
+                "indonesia",
+                "indonesia",
+                "indonesia",
+                "indonesia",
+                "trinidad and tobago",
+                "trinidad and tobago",
+                "egypt",
+                "egypt",
+                "malaysia",
+                "malaysia",
+                "malaysia",
+                "nigeria",
+                "australia",
+                "australia",
+                "australia",
+                "russia",
+                "yemen",
+                "indonesia",
+                "qatar",
+                "qatar",
+                "qatar",
+                "qatar",
+                "oman",
+                "united arab emirates",
+                "united arab emirates",
+                "norway"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`qatargas ii`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`qatargas ii`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                "ras laffan"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `plant name` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "plant name"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                "location"
+              ],
+              [
+                "country"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 10,
+      "structure": "vertical",
+      "shape": [
+        12,
+        7
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `picture` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "picture"
+            ],
+            "rows_count": 12,
+            "sample_rows": [
+              [
+                0,
+                null
+              ],
+              [
+                1,
+                null
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `picture`, `model`, `origin` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "picture",
+              "model",
+              "origin"
+            ],
+            "rows_count": 12,
+            "sample_rows": [
+              [
+                0,
+                null,
+                "larc-v",
+                "united states"
+              ],
+              [
+                1,
+                null,
+                "gkn aquatrack",
+                "united kingdom"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `model` = 'larc-v'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "picture",
+              "model",
+              "origin",
+              "type",
+              "version",
+              "in service",
+              "notes"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                null,
+                "larc-v",
+                "united states",
+                "amphibious support vehicle",
+                "larc-v",
+                "5",
+                "most refurbished in 2006."
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "picture",
+              "model",
+              "origin",
+              "type",
+              "version",
+              "in service",
+              "notes"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                null,
+                "larc-v",
+                "united states",
+                "amphibious support vehicle",
+                "larc-v",
+                "5",
+                "most refurbished in 2006."
+              ],
+              [
+                1,
+                null,
+                "gkn aquatrack",
+                "united kingdom",
+                "amphibious support vehicle",
+                "aquatrack",
+                "2",
+                "introduced in mid 1990s. originally owned by the office of civil defense but under pmc stewardship."
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                12
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`in service`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`in service`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                2,
+                "none"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `picture` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "picture"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                null
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 16,
+      "structure": "hierarchical",
+      "shape": [
+        16,
+        7
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `filledcolumnname` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname"
+            ],
+            "rows_count": 16,
+            "sample_rows": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `filledcolumnname`, ` `, `total` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              "total"
+            ],
+            "rows_count": 16,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "777-300er",
+                14
+              ],
+              [
+                1,
+                1,
+                "777-200er",
+                55
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `filledcolumnname` = '0'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              "total",
+              "owned",
+              "leased",
+              "seats in standard configuration",
+              "average age (in years)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "777-300er",
+                14,
+                14,
+                "—",
+                "366",
+                0.7
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "filledcolumnname",
+              " ",
+              "total",
+              "owned",
+              "leased",
+              "seats in standard configuration",
+              "average age (in years)"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                0,
+                "777-300er",
+                14,
+                14,
+                "—",
+                "366",
+                0.7
+              ],
+              [
+                1,
+                1,
+                "777-200er",
+                55,
+                40,
+                "15",
+                "267-269",
+                17.8
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                16
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`filledcolumnname`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`filledcolumnname`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                15,
+                15
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `filledcolumnname` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "filledcolumnname"
+            ],
+            "rows_count": 16,
+            "sample_rows": [
+              [
+                0
+              ],
+              [
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "table_id": 13,
+      "structure": "vertical",
+      "shape": [
+        23,
+        8
+      ],
+      "results": {
+        "total": 7,
+        "success": 7,
+        "failed": 0,
+        "details": [
+          {
+            "sql": "SELECT `draw` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "draw"
+            ],
+            "rows_count": 23,
+            "sample_rows": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                2
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT `draw`, `country`, `language[1]` FROM w",
+            "type": "SELECT_COLUMN",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "draw",
+              "country",
+              "language[1]"
+            ],
+            "rows_count": 23,
+            "sample_rows": [
+              [
+                0,
+                1,
+                "spain",
+                "spanish"
+              ],
+              [
+                1,
+                2,
+                "belgium",
+                "french"
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w WHERE `draw` = '1'",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "draw",
+              "country",
+              "language[1]",
+              "artist",
+              "song",
+              "english translation",
+              "place",
+              "points"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                1,
+                "spain",
+                "spanish",
+                "serafín zubiri",
+                "\"todo esto es la música\"",
+                "all this is music",
+                14,
+                37
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT * FROM w LIMIT 5",
+            "type": "SELECT_ROW",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "draw",
+              "country",
+              "language[1]",
+              "artist",
+              "song",
+              "english translation",
+              "place",
+              "points"
+            ],
+            "rows_count": 5,
+            "sample_rows": [
+              [
+                0,
+                1,
+                "spain",
+                "spanish",
+                "serafín zubiri",
+                "\"todo esto es la música\"",
+                "all this is music",
+                14,
+                37
+              ],
+              [
+                1,
+                2,
+                "belgium",
+                "french",
+                "morgane",
+                "\"nous, on veut des violons\"",
+                "we want violins",
+                20,
+                11
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT COUNT(*) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "COUNT(*)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                0,
+                23
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT MAX(`draw`) FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "row_id",
+              "MAX(`draw`)"
+            ],
+            "rows_count": 1,
+            "sample_rows": [
+              [
+                22,
+                23
+              ]
+            ]
+          },
+          {
+            "sql": "SELECT DISTINCT `draw` FROM w",
+            "type": "EXECUTE_SQL",
+            "status": "SUCCESS",
+            "header": [
+              "draw"
+            ],
+            "rows_count": 23,
+            "sample_rows": [
+              [
+                1
+              ],
+              [
+                2
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

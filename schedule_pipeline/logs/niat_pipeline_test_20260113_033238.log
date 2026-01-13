@@ -1,0 +1,461 @@
+2026-01-13 03:32:38,704 - INFO - ======================================================================
+2026-01-13 03:32:38,705 - INFO - NIAT End-to-End Pipeline Test
+2026-01-13 03:32:38,705 - INFO - ======================================================================
+2026-01-13 03:32:38,705 - INFO - Log file: /Users/authurlord/Downloads/github/SPARQ/schedule_pipeline/logs/niat_pipeline_test_20260113_033238.log
+2026-01-13 03:32:38,705 - INFO - 
+[Step 1] Checking preprocessed data...
+2026-01-13 03:32:38,705 - INFO -   Found existing preprocessed file: /Users/authurlord/Downloads/github/SPARQ/datasets/schedule_test/niat/niat_df_processed.npy
+2026-01-13 03:32:38,705 - INFO - 
+[Step 2] Loading preprocessed NIAT data...
+2026-01-13 03:32:38,710 - INFO -   Loaded 20 tables
+2026-01-13 03:32:38,710 - INFO - 
+[Step 3] Initializing NeuralDB...
+2026-01-13 03:32:38,780 - INFO -   NeuralDB initialized with 15 tables
+2026-01-13 03:32:38,780 - INFO - 
+[Step 4] Testing SQL execution on each table...
+2026-01-13 03:32:38,780 - INFO - 
+--- Table 0 (ID: 0) ---
+2026-01-13 03:32:38,780 - INFO -   Structure: horizontal
+2026-01-13 03:32:38,780 - INFO -   Shape: (4, 18)
+2026-01-13 03:32:38,780 - INFO -   Question: What is the peak chart position for 'Cadillac Walk: The Mink DeVille Collection'...
+2026-01-13 03:32:38,780 - INFO -   Answer: —
+2026-01-13 03:32:38,780 - INFO -   Columns: ['year', 'year_2', '1981', '1993', '1995']...
+2026-01-13 03:32:38,813 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,814 - INFO -   ✅ SELECT_COLUMN: Select column 'year'
+2026-01-13 03:32:38,814 - INFO -      SQL: SELECT `year` FROM w...
+2026-01-13 03:32:38,814 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,814 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,814 - INFO -      SQL: SELECT `year`, `year_2`, `1981` FROM w...
+2026-01-13 03:32:38,814 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,814 - INFO -   ✅ SELECT_ROW: Select rows where year = 'title...'
+2026-01-13 03:32:38,814 - INFO -      SQL: SELECT * FROM w WHERE `year` = 'title'...
+2026-01-13 03:32:38,815 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,815 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,815 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,815 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,815 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,815 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,815 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,815 - INFO -   ✅ EXECUTE_SQL: Get MAX of 1996
+2026-01-13 03:32:38,815 - INFO -      SQL: SELECT MAX(`1996`) FROM w...
+2026-01-13 03:32:38,815 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,816 - INFO -   ✅ EXECUTE_SQL: Get distinct values of year
+2026-01-13 03:32:38,816 - INFO -      SQL: SELECT DISTINCT `year` FROM w...
+2026-01-13 03:32:38,816 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,816 - INFO - 
+--- Table 1 (ID: 3) ---
+2026-01-13 03:32:38,816 - INFO -   Structure: horizontal
+2026-01-13 03:32:38,816 - INFO -   Shape: (4, 24)
+2026-01-13 03:32:38,816 - INFO -   Question: What was the CAN Country chart position for 'I'll Be Your Fool Tonight'?...
+2026-01-13 03:32:38,816 - INFO -   Answer: —
+2026-01-13 03:32:38,816 - INFO -   Columns: ['year', 'year_2', '1968', 'singles only', 'singles only_2']...
+2026-01-13 03:32:38,818 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,818 - INFO -   ✅ SELECT_COLUMN: Select column 'year'
+2026-01-13 03:32:38,818 - INFO -      SQL: SELECT `year` FROM w...
+2026-01-13 03:32:38,818 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,818 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,818 - INFO -      SQL: SELECT `year`, `year_2`, `1968` FROM w...
+2026-01-13 03:32:38,818 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,818 - INFO -   ✅ SELECT_ROW: Select rows where year = 'song...'
+2026-01-13 03:32:38,818 - INFO -      SQL: SELECT * FROM w WHERE `year` = 'song'...
+2026-01-13 03:32:38,818 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,819 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,819 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,819 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,819 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,819 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,819 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,819 - INFO -   ✅ EXECUTE_SQL: Get MAX of 1968
+2026-01-13 03:32:38,819 - INFO -      SQL: SELECT MAX(`1968`) FROM w...
+2026-01-13 03:32:38,819 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,819 - INFO -   ✅ EXECUTE_SQL: Get distinct values of year
+2026-01-13 03:32:38,819 - INFO -      SQL: SELECT DISTINCT `year` FROM w...
+2026-01-13 03:32:38,819 - INFO -      Result: 3 rows
+2026-01-13 03:32:38,819 - INFO - 
+--- Table 2 (ID: 5) ---
+2026-01-13 03:32:38,819 - INFO -   Structure: horizontal
+2026-01-13 03:32:38,819 - INFO -   Shape: (6, 9)
+2026-01-13 03:32:38,819 - INFO -   Question: What was the result point for Amplistan during the World Cup finals against Cone...
+2026-01-13 03:32:38,819 - INFO -   Answer: 2
+2026-01-13 03:32:38,819 - INFO -   Columns: ['match', 'amplistan vs. bestrudia (friendly)\nresult: 1–2', 'amplistan vs. bestrudia (friendly)\nresult: 1–1', 'amplistan vs. bestrudia (world cup finals)\nresult: 2–1', 'amplistan vs. bestrudia (world cup finals)\nresult: 1–1 (bestrudia wins on penalties)']...
+2026-01-13 03:32:38,824 - INFO -   Generated 6 test queries:
+2026-01-13 03:32:38,824 - INFO -   ✅ SELECT_COLUMN: Select column 'match'
+2026-01-13 03:32:38,824 - INFO -      SQL: SELECT `match` FROM w...
+2026-01-13 03:32:38,824 - INFO -      Result: 6 rows
+2026-01-13 03:32:38,824 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,824 - INFO -      SQL: SELECT `match`, `amplistan vs. bestrudia (friendly)
+result: 1–2`, `amplistan vs....
+2026-01-13 03:32:38,824 - INFO -      Result: 6 rows
+2026-01-13 03:32:38,825 - INFO -   ✅ SELECT_ROW: Select rows where match = 'team...'
+2026-01-13 03:32:38,825 - INFO -      SQL: SELECT * FROM w WHERE `match` = 'team'...
+2026-01-13 03:32:38,825 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,825 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,825 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,825 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,825 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,825 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,825 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,825 - INFO -   ✅ EXECUTE_SQL: Get distinct values of match
+2026-01-13 03:32:38,825 - INFO -      SQL: SELECT DISTINCT `match` FROM w...
+2026-01-13 03:32:38,825 - INFO -      Result: 6 rows
+2026-01-13 03:32:38,825 - INFO - 
+--- Table 3 (ID: 1) ---
+2026-01-13 03:32:38,825 - INFO -   Structure: hierarchical
+2026-01-13 03:32:38,825 - INFO -   Shape: (30, 6)
+2026-01-13 03:32:38,825 - INFO -   Question: How many Ground School Instructors are represented by TWU?...
+2026-01-13 03:32:38,826 - INFO -   Answer: 10
+2026-01-13 03:32:38,826 - INFO -   Columns: ['filledcolumnname', ' ', ' _2', 'class or craft', 'employees  (1)']...
+2026-01-13 03:32:38,827 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,827 - INFO -   ✅ SELECT_COLUMN: Select column 'filledcolumnname'
+2026-01-13 03:32:38,827 - INFO -      SQL: SELECT `filledcolumnname` FROM w...
+2026-01-13 03:32:38,827 - INFO -      Result: 30 rows
+2026-01-13 03:32:38,828 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,828 - INFO -      SQL: SELECT `filledcolumnname`, ` `, ` _2` FROM w...
+2026-01-13 03:32:38,828 - INFO -      Result: 30 rows
+2026-01-13 03:32:38,828 - INFO -   ✅ SELECT_ROW: Select rows where filledcolumnname = '0...'
+2026-01-13 03:32:38,828 - INFO -      SQL: SELECT * FROM w WHERE `filledcolumnname` = '0'...
+2026-01-13 03:32:38,828 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,828 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,828 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,828 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,828 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,828 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,828 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,828 - INFO -   ✅ EXECUTE_SQL: Get MAX of filledcolumnname
+2026-01-13 03:32:38,829 - INFO -      SQL: SELECT MAX(`filledcolumnname`) FROM w...
+2026-01-13 03:32:38,829 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,829 - INFO -   ✅ EXECUTE_SQL: Get distinct values of filledcolumnname
+2026-01-13 03:32:38,829 - INFO -      SQL: SELECT DISTINCT `filledcolumnname` FROM w...
+2026-01-13 03:32:38,829 - INFO -      Result: 30 rows
+2026-01-13 03:32:38,829 - INFO - 
+--- Table 4 (ID: 4) ---
+2026-01-13 03:32:38,829 - INFO -   Structure: vertical
+2026-01-13 03:32:38,829 - INFO -   Shape: (25, 5)
+2026-01-13 03:32:38,829 - INFO -   Question: Which club does Rune 'Killing' Emanuelsson play for?...
+2026-01-13 03:32:38,829 - INFO -   Answer: IFK Göteborg
+2026-01-13 03:32:38,829 - INFO -   Columns: ['name', 'pos.', 'caps', 'goals', 'club']...
+2026-01-13 03:32:38,831 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,832 - INFO -   ✅ SELECT_COLUMN: Select column 'name'
+2026-01-13 03:32:38,832 - INFO -      SQL: SELECT `name` FROM w...
+2026-01-13 03:32:38,832 - INFO -      Result: 25 rows
+2026-01-13 03:32:38,832 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,833 - INFO -      SQL: SELECT `name`, `pos.`, `caps` FROM w...
+2026-01-13 03:32:38,833 - INFO -      Result: 25 rows
+2026-01-13 03:32:38,833 - INFO -   ✅ SELECT_ROW: Select rows where name = 'olle åhlund...'
+2026-01-13 03:32:38,833 - INFO -      SQL: SELECT * FROM w WHERE `name` = 'olle åhlund'...
+2026-01-13 03:32:38,833 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,833 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,833 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,833 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,833 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,833 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,833 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,833 - INFO -   ✅ EXECUTE_SQL: Get MAX of caps
+2026-01-13 03:32:38,833 - INFO -      SQL: SELECT MAX(`caps`) FROM w...
+2026-01-13 03:32:38,833 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,834 - INFO -   ✅ EXECUTE_SQL: Get distinct values of name
+2026-01-13 03:32:38,834 - INFO -      SQL: SELECT DISTINCT `name` FROM w...
+2026-01-13 03:32:38,834 - INFO -      Result: 25 rows
+2026-01-13 03:32:38,834 - INFO - 
+--- Table 5 (ID: 2) ---
+2026-01-13 03:32:38,834 - INFO -   Structure: horizontal
+2026-01-13 03:32:38,834 - INFO -   Shape: (5, 38)
+2026-01-13 03:32:38,834 - INFO -   Question: How much capacity does Sakhalin II have?...
+2026-01-13 03:32:38,834 - INFO -   Answer: 9.6
+2026-01-13 03:32:38,834 - INFO -   Columns: ['plant name', 'qatargas ii', 'arzew gl4z', 'arzew gl1z', 'arzew gl1z_2']...
+2026-01-13 03:32:38,835 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,835 - INFO -   ✅ SELECT_COLUMN: Select column 'plant name'
+2026-01-13 03:32:38,835 - INFO -      SQL: SELECT `plant name` FROM w...
+2026-01-13 03:32:38,835 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,836 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,836 - INFO -      SQL: SELECT `plant name`, `qatargas ii`, `arzew gl4z` FROM w...
+2026-01-13 03:32:38,836 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,836 - INFO -   ✅ SELECT_ROW: Select rows where plant name = 'location...'
+2026-01-13 03:32:38,836 - INFO -      SQL: SELECT * FROM w WHERE `plant name` = 'location'...
+2026-01-13 03:32:38,836 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,837 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,837 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,837 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,837 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,837 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,837 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,837 - INFO -   ✅ EXECUTE_SQL: Get MAX of qatargas ii
+2026-01-13 03:32:38,837 - INFO -      SQL: SELECT MAX(`qatargas ii`) FROM w...
+2026-01-13 03:32:38,837 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,838 - INFO -   ✅ EXECUTE_SQL: Get distinct values of plant name
+2026-01-13 03:32:38,838 - INFO -      SQL: SELECT DISTINCT `plant name` FROM w...
+2026-01-13 03:32:38,838 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,838 - INFO - 
+--- Table 6 (ID: 7) ---
+2026-01-13 03:32:38,838 - INFO -   Structure: horizontal
+2026-01-13 03:32:38,838 - INFO -   Shape: (7, 14)
+2026-01-13 03:32:38,838 - INFO -   Question: What was the attendance for the game on Sunday, April 28?...
+2026-01-13 03:32:38,838 - INFO -   Answer: 17,503
+2026-01-13 03:32:38,838 - INFO -   Columns: ['week', 'week_2', '1', '2', '3']...
+2026-01-13 03:32:38,844 - INFO -   Generated 6 test queries:
+2026-01-13 03:32:38,844 - INFO -   ✅ SELECT_COLUMN: Select column 'week'
+2026-01-13 03:32:38,844 - INFO -      SQL: SELECT `week` FROM w...
+2026-01-13 03:32:38,844 - INFO -      Result: 7 rows
+2026-01-13 03:32:38,844 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,844 - INFO -      SQL: SELECT `week`, `week_2`, `1` FROM w...
+2026-01-13 03:32:38,844 - INFO -      Result: 7 rows
+2026-01-13 03:32:38,844 - INFO -   ✅ SELECT_ROW: Select rows where week = 'date...'
+2026-01-13 03:32:38,844 - INFO -      SQL: SELECT * FROM w WHERE `week` = 'date'...
+2026-01-13 03:32:38,844 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,845 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,845 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,845 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,845 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,845 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,845 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,845 - INFO -   ✅ EXECUTE_SQL: Get distinct values of week
+2026-01-13 03:32:38,845 - INFO -      SQL: SELECT DISTINCT `week` FROM w...
+2026-01-13 03:32:38,845 - INFO -      Result: 6 rows
+2026-01-13 03:32:38,845 - INFO - 
+--- Table 7 (ID: 9) ---
+2026-01-13 03:32:38,845 - INFO -   Structure: vertical
+2026-01-13 03:32:38,846 - INFO -   Shape: (8, 10)
+2026-01-13 03:32:38,846 - INFO -   Question: What was the launched date for HMS Antelope?...
+2026-01-13 03:32:38,846 - INFO -   Answer: 16 March 1972
+2026-01-13 03:32:38,846 - INFO -   Columns: ['pennant', 'name', 'hull builder', 'ordered', 'laid down']...
+2026-01-13 03:32:38,849 - INFO -   Generated 6 test queries:
+2026-01-13 03:32:38,849 - INFO -   ✅ SELECT_COLUMN: Select column 'pennant'
+2026-01-13 03:32:38,849 - INFO -      SQL: SELECT `pennant` FROM w...
+2026-01-13 03:32:38,850 - INFO -      Result: 8 rows
+2026-01-13 03:32:38,850 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,850 - INFO -      SQL: SELECT `pennant`, `name`, `hull builder` FROM w...
+2026-01-13 03:32:38,850 - INFO -      Result: 8 rows
+2026-01-13 03:32:38,850 - INFO -   ✅ SELECT_ROW: Select rows where pennant = 'f169...'
+2026-01-13 03:32:38,850 - INFO -      SQL: SELECT * FROM w WHERE `pennant` = 'f169'...
+2026-01-13 03:32:38,850 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,850 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,850 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,850 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,850 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,850 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,850 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,851 - INFO -   ✅ EXECUTE_SQL: Get distinct values of pennant
+2026-01-13 03:32:38,851 - INFO -      SQL: SELECT DISTINCT `pennant` FROM w...
+2026-01-13 03:32:38,851 - INFO -      Result: 8 rows
+2026-01-13 03:32:38,851 - INFO - 
+--- Table 8 (ID: 6) ---
+2026-01-13 03:32:38,851 - INFO -   Structure: hierarchical
+2026-01-13 03:32:38,851 - INFO -   Shape: (16, 10)
+2026-01-13 03:32:38,851 - INFO -   Question: How much total custody is reported for total-provinces and territories?...
+2026-01-13 03:32:38,851 - INFO -   Answer: 2,080,915
+2026-01-13 03:32:38,851 - INFO -   Columns: [' jurisdiction ', ' ', ' custody ', ' _2', ' _3']...
+2026-01-13 03:32:38,852 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,852 - INFO -   ✅ SELECT_COLUMN: Select column ' jurisdiction '
+2026-01-13 03:32:38,852 - INFO -      SQL: SELECT ` jurisdiction ` FROM w...
+2026-01-13 03:32:38,852 - INFO -      Result: 16 rows
+2026-01-13 03:32:38,853 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,853 - INFO -      SQL: SELECT ` jurisdiction `, ` `, ` custody ` FROM w...
+2026-01-13 03:32:38,853 - INFO -      Result: 16 rows
+2026-01-13 03:32:38,853 - INFO -   ✅ SELECT_ROW: Select rows where  jurisdiction  = 'jurisdiction...'
+2026-01-13 03:32:38,853 - INFO -      SQL: SELECT * FROM w WHERE ` jurisdiction ` = 'jurisdiction'...
+2026-01-13 03:32:38,853 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,853 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,853 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,853 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,854 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,854 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,854 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,854 - INFO -   ✅ EXECUTE_SQL: Get MAX of  
+2026-01-13 03:32:38,854 - INFO -      SQL: SELECT MAX(` `) FROM w...
+2026-01-13 03:32:38,854 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,854 - INFO -   ✅ EXECUTE_SQL: Get distinct values of  jurisdiction 
+2026-01-13 03:32:38,854 - INFO -      SQL: SELECT DISTINCT ` jurisdiction ` FROM w...
+2026-01-13 03:32:38,854 - INFO -      Result: 16 rows
+2026-01-13 03:32:38,854 - INFO - 
+--- Table 9 (ID: 11) ---
+2026-01-13 03:32:38,854 - INFO -   Structure: hierarchical
+2026-01-13 03:32:38,854 - INFO -   Shape: (9, 7)
+2026-01-13 03:32:38,854 - INFO -   Question: What is the value at Level 2 for Repurchase agreements?...
+2026-01-13 03:32:38,855 - INFO -   Answer: 375
+2026-01-13 03:32:38,855 - INFO -   Columns: ['filledcolumnname', ' ', ' _2', 'fair value measurements as of december 31, 2018', ' _3']...
+2026-01-13 03:32:38,855 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,856 - INFO -   ✅ SELECT_COLUMN: Select column 'filledcolumnname'
+2026-01-13 03:32:38,856 - INFO -      SQL: SELECT `filledcolumnname` FROM w...
+2026-01-13 03:32:38,856 - INFO -      Result: 9 rows
+2026-01-13 03:32:38,856 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,856 - INFO -      SQL: SELECT `filledcolumnname`, ` `, ` _2` FROM w...
+2026-01-13 03:32:38,856 - INFO -      Result: 9 rows
+2026-01-13 03:32:38,856 - INFO -   ✅ SELECT_ROW: Select rows where filledcolumnname = '0...'
+2026-01-13 03:32:38,856 - INFO -      SQL: SELECT * FROM w WHERE `filledcolumnname` = '0'...
+2026-01-13 03:32:38,856 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,856 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,856 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,856 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,856 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,857 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,857 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,857 - INFO -   ✅ EXECUTE_SQL: Get MAX of filledcolumnname
+2026-01-13 03:32:38,857 - INFO -      SQL: SELECT MAX(`filledcolumnname`) FROM w...
+2026-01-13 03:32:38,857 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,857 - INFO -   ✅ EXECUTE_SQL: Get distinct values of filledcolumnname
+2026-01-13 03:32:38,857 - INFO -      SQL: SELECT DISTINCT `filledcolumnname` FROM w...
+2026-01-13 03:32:38,857 - INFO -      Result: 9 rows
+2026-01-13 03:32:38,857 - INFO - 
+--- Table 10 (ID: 12) ---
+2026-01-13 03:32:38,857 - INFO -   Structure: horizontal
+2026-01-13 03:32:38,857 - INFO -   Shape: (4, 8)
+2026-01-13 03:32:38,857 - INFO -   Question: Who published 'SWAT 3: Close Quarters Battle'?...
+2026-01-13 03:32:38,857 - INFO -   Answer: Sierra Entertainment
+2026-01-13 03:32:38,857 - INFO -   Columns: ['title', 'swat 3: close quarters battle', 'swat: global strike team', 'swat 4', 'swat 4: the stetchkov syndicate']...
+2026-01-13 03:32:38,858 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,859 - INFO -   ✅ SELECT_COLUMN: Select column 'title'
+2026-01-13 03:32:38,859 - INFO -      SQL: SELECT `title` FROM w...
+2026-01-13 03:32:38,859 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,859 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,859 - INFO -      SQL: SELECT `title`, `swat 3: close quarters battle`, `swat: global strike team` FROM...
+2026-01-13 03:32:38,859 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,859 - INFO -   ✅ SELECT_ROW: Select rows where title = 'year...'
+2026-01-13 03:32:38,859 - INFO -      SQL: SELECT * FROM w WHERE `title` = 'year'...
+2026-01-13 03:32:38,859 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,859 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,859 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,859 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,859 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,859 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,859 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,860 - INFO -   ✅ EXECUTE_SQL: Get MAX of swat 3: close quarters battle
+2026-01-13 03:32:38,860 - INFO -      SQL: SELECT MAX(`swat 3: close quarters battle`) FROM w...
+2026-01-13 03:32:38,860 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,860 - INFO -   ✅ EXECUTE_SQL: Get distinct values of title
+2026-01-13 03:32:38,860 - INFO -      SQL: SELECT DISTINCT `title` FROM w...
+2026-01-13 03:32:38,860 - INFO -      Result: 4 rows
+2026-01-13 03:32:38,860 - INFO - 
+--- Table 11 (ID: 8) ---
+2026-01-13 03:32:38,860 - INFO -   Structure: horizontal
+2026-01-13 03:32:38,860 - INFO -   Shape: (5, 38)
+2026-01-13 03:32:38,860 - INFO -   Question: What is the capacity of Arzew GL1Z started in 1997?...
+2026-01-13 03:32:38,860 - INFO -   Answer: 7.9
+2026-01-13 03:32:38,860 - INFO -   Columns: ['plant name', 'qatargas ii', 'arzew gl4z', 'arzew gl1z', 'arzew gl1z_2']...
+2026-01-13 03:32:38,861 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,862 - INFO -   ✅ SELECT_COLUMN: Select column 'plant name'
+2026-01-13 03:32:38,862 - INFO -      SQL: SELECT `plant name` FROM w...
+2026-01-13 03:32:38,862 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,862 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,862 - INFO -      SQL: SELECT `plant name`, `qatargas ii`, `arzew gl4z` FROM w...
+2026-01-13 03:32:38,862 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,862 - INFO -   ✅ SELECT_ROW: Select rows where plant name = 'location...'
+2026-01-13 03:32:38,862 - INFO -      SQL: SELECT * FROM w WHERE `plant name` = 'location'...
+2026-01-13 03:32:38,862 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,863 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,863 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,863 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,863 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,863 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,863 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,863 - INFO -   ✅ EXECUTE_SQL: Get MAX of qatargas ii
+2026-01-13 03:32:38,863 - INFO -      SQL: SELECT MAX(`qatargas ii`) FROM w...
+2026-01-13 03:32:38,863 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,863 - INFO -   ✅ EXECUTE_SQL: Get distinct values of plant name
+2026-01-13 03:32:38,863 - INFO -      SQL: SELECT DISTINCT `plant name` FROM w...
+2026-01-13 03:32:38,863 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,863 - INFO - 
+--- Table 12 (ID: 10) ---
+2026-01-13 03:32:38,863 - INFO -   Structure: vertical
+2026-01-13 03:32:38,863 - INFO -   Shape: (12, 7)
+2026-01-13 03:32:38,863 - INFO -   Question: What type of vehicle is the M151 model?...
+2026-01-13 03:32:38,863 - INFO -   Answer: 1/4-ton Light Utility Vehicle and Weapons Carrier
+2026-01-13 03:32:38,863 - INFO -   Columns: ['picture', 'model', 'origin', 'type', 'version']...
+2026-01-13 03:32:38,866 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,866 - INFO -   ✅ SELECT_COLUMN: Select column 'picture'
+2026-01-13 03:32:38,867 - INFO -      SQL: SELECT `picture` FROM w...
+2026-01-13 03:32:38,867 - INFO -      Result: 12 rows
+2026-01-13 03:32:38,867 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,867 - INFO -      SQL: SELECT `picture`, `model`, `origin` FROM w...
+2026-01-13 03:32:38,867 - INFO -      Result: 12 rows
+2026-01-13 03:32:38,867 - INFO -   ✅ SELECT_ROW: Select rows where model = 'larc-v...'
+2026-01-13 03:32:38,867 - INFO -      SQL: SELECT * FROM w WHERE `model` = 'larc-v'...
+2026-01-13 03:32:38,867 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,867 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,867 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,867 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,867 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,867 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,867 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,867 - INFO -   ✅ EXECUTE_SQL: Get MAX of in service
+2026-01-13 03:32:38,867 - INFO -      SQL: SELECT MAX(`in service`) FROM w...
+2026-01-13 03:32:38,867 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,868 - INFO -   ✅ EXECUTE_SQL: Get distinct values of picture
+2026-01-13 03:32:38,868 - INFO -      SQL: SELECT DISTINCT `picture` FROM w...
+2026-01-13 03:32:38,868 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,868 - INFO - 
+--- Table 13 (ID: 16) ---
+2026-01-13 03:32:38,868 - INFO -   Structure: hierarchical
+2026-01-13 03:32:38,868 - INFO -   Shape: (16, 7)
+2026-01-13 03:32:38,868 - INFO -   Question: What is the seating capacity in standard configuration for the 767-400ER?...
+2026-01-13 03:32:38,868 - INFO -   Answer: 242
+2026-01-13 03:32:38,868 - INFO -   Columns: ['filledcolumnname', ' ', 'total', 'owned', 'leased']...
+2026-01-13 03:32:38,869 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,870 - INFO -   ✅ SELECT_COLUMN: Select column 'filledcolumnname'
+2026-01-13 03:32:38,870 - INFO -      SQL: SELECT `filledcolumnname` FROM w...
+2026-01-13 03:32:38,870 - INFO -      Result: 16 rows
+2026-01-13 03:32:38,870 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,870 - INFO -      SQL: SELECT `filledcolumnname`, ` `, `total` FROM w...
+2026-01-13 03:32:38,870 - INFO -      Result: 16 rows
+2026-01-13 03:32:38,870 - INFO -   ✅ SELECT_ROW: Select rows where filledcolumnname = '0...'
+2026-01-13 03:32:38,870 - INFO -      SQL: SELECT * FROM w WHERE `filledcolumnname` = '0'...
+2026-01-13 03:32:38,870 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,870 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,870 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,870 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,871 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,871 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,871 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,871 - INFO -   ✅ EXECUTE_SQL: Get MAX of filledcolumnname
+2026-01-13 03:32:38,871 - INFO -      SQL: SELECT MAX(`filledcolumnname`) FROM w...
+2026-01-13 03:32:38,871 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,871 - INFO -   ✅ EXECUTE_SQL: Get distinct values of filledcolumnname
+2026-01-13 03:32:38,871 - INFO -      SQL: SELECT DISTINCT `filledcolumnname` FROM w...
+2026-01-13 03:32:38,871 - INFO -      Result: 16 rows
+2026-01-13 03:32:38,871 - INFO - 
+--- Table 14 (ID: 13) ---
+2026-01-13 03:32:38,871 - INFO -   Structure: vertical
+2026-01-13 03:32:38,871 - INFO -   Shape: (23, 8)
+2026-01-13 03:32:38,871 - INFO -   Question: In what position did Denmark finish in the Eurovision Song Contest 1992?...
+2026-01-13 03:32:38,871 - INFO -   Answer: 12
+2026-01-13 03:32:38,871 - INFO -   Columns: ['draw', 'country', 'language[1]', 'artist', 'song']...
+2026-01-13 03:32:38,872 - INFO -   Generated 7 test queries:
+2026-01-13 03:32:38,873 - INFO -   ✅ SELECT_COLUMN: Select column 'draw'
+2026-01-13 03:32:38,873 - INFO -      SQL: SELECT `draw` FROM w...
+2026-01-13 03:32:38,873 - INFO -      Result: 23 rows
+2026-01-13 03:32:38,873 - INFO -   ✅ SELECT_COLUMN: Select first 3 columns
+2026-01-13 03:32:38,873 - INFO -      SQL: SELECT `draw`, `country`, `language[1]` FROM w...
+2026-01-13 03:32:38,873 - INFO -      Result: 23 rows
+2026-01-13 03:32:38,873 - INFO -   ✅ SELECT_ROW: Select rows where draw = '1...'
+2026-01-13 03:32:38,873 - INFO -      SQL: SELECT * FROM w WHERE `draw` = '1'...
+2026-01-13 03:32:38,873 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,873 - INFO -   ✅ SELECT_ROW: Select first 5 rows
+2026-01-13 03:32:38,873 - INFO -      SQL: SELECT * FROM w LIMIT 5...
+2026-01-13 03:32:38,874 - INFO -      Result: 5 rows
+2026-01-13 03:32:38,874 - INFO -   ✅ EXECUTE_SQL: Count all rows
+2026-01-13 03:32:38,874 - INFO -      SQL: SELECT COUNT(*) FROM w...
+2026-01-13 03:32:38,874 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,874 - INFO -   ✅ EXECUTE_SQL: Get MAX of draw
+2026-01-13 03:32:38,874 - INFO -      SQL: SELECT MAX(`draw`) FROM w...
+2026-01-13 03:32:38,874 - INFO -      Result: 1 rows
+2026-01-13 03:32:38,875 - INFO -   ✅ EXECUTE_SQL: Get distinct values of draw
+2026-01-13 03:32:38,875 - INFO -      SQL: SELECT DISTINCT `draw` FROM w...
+2026-01-13 03:32:38,875 - INFO -      Result: 23 rows
+2026-01-13 03:32:38,875 - INFO - 
+======================================================================
+2026-01-13 03:32:38,875 - INFO - TEST SUMMARY
+2026-01-13 03:32:38,875 - INFO - ======================================================================
+2026-01-13 03:32:38,875 - INFO - Total tables tested: 15
+2026-01-13 03:32:38,875 - INFO - Total queries executed: 102
+2026-01-13 03:32:38,875 - INFO - Successful: 102 (100.0%)
+2026-01-13 03:32:38,875 - INFO - Failed: 0 (0.0%)
+2026-01-13 03:32:38,875 - INFO - 
+By Query Type:
+2026-01-13 03:32:38,875 - INFO -   SELECT_COLUMN: 30/30 (100.0%)
+2026-01-13 03:32:38,875 - INFO -   SELECT_ROW: 30/30 (100.0%)
+2026-01-13 03:32:38,875 - INFO -   EXECUTE_SQL: 42/42 (100.0%)
+2026-01-13 03:32:38,877 - INFO - 
+Detailed results saved to: /Users/authurlord/Downloads/github/SPARQ/schedule_pipeline/logs/niat_test_results_20260113_033238.json
+2026-01-13 03:32:38,877 - INFO - 
+======================================================================
+2026-01-13 03:32:38,877 - INFO - Test Complete!
+2026-01-13 03:32:38,877 - INFO - ======================================================================
