@@ -10,7 +10,7 @@ HOST="0.0.0.0"
 PORT=8000
 VLLM_API_KEY="api-key-qwen3"
 # 24 * 0.85 = 20.4GB
-GPU_RAM=0.75
+GPU_RAM=0.65
 # GPU_RAM=0.70 ## for pipeline
 
 python -m vllm.entrypoints.openai.api_server \
@@ -26,4 +26,6 @@ python -m vllm.entrypoints.openai.api_server \
   --enable-prefix-caching \
   --enable-chunked-prefill \
   --max_num_seqs 256 \
-  --kv-cache-dtype fp8 # delete this when GPUs support no fp8
+  --kv-cache-dtype fp8 \
+  --kv_offloading_backend native \
+  --kv_offloading_size 20

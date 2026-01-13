@@ -240,16 +240,33 @@ def main():
     retriever = HybridTableRetriever(embedding_model=bge_model)
 
     print("\nLoading dataset...")
-    dataset = load_data_split(args.dataset_name, args.split)
     
     processed_df_path = args.processed_df_path
-    print(f"Loading pre-processed tables from: {processed_df_path}")
-    try:
-        wikitq_df_processed = np.load(processed_df_path, allow_pickle=True).item()
-    except FileNotFoundError:
-        print(f"Error: Pre-processed table file not found at {processed_df_path}")
-        print("Please ensure the pre-processed tables exist before running.")
+    
+    # Load pre-processed tables first (always needed)
+    if processed_df_path:
+        print(f"Loading pre-processed tables from: {processed_df_path}")
+        try:
+            wikitq_df_processed = np.load(processed_df_path, allow_pickle=True).item()
+        except FileNotFoundError:
+            print(f"Error: Pre-processed table file not found at {processed_df_path}")
+            print("Please ensure the pre-processed tables exist before running.")
+            exit()
+    else:
+        print("Error: --processed_df_path is required")
         exit()
+    
+    # For NIAT dataset, skip load_data_split (not a HuggingFace dataset)
+    # Use the pre-processed tables directly
+    if args.dataset_name == 'niat':
+        print(f"NIAT mode: Using pre-processed tables directly (no HuggingFace dataset)")
+        # Create a minimal dataset structure from pre-processed tables
+        dataset = None  # Will get questions from rewrite_query_path or skip
+        dataset_len = len(wikitq_df_processed)
+    else:
+        # Standard HuggingFace dataset loading for wikitq, tab_fact, etc.
+        dataset = load_data_split(args.dataset_name, args.split)
+        dataset_len = len(dataset)
 
     if args.index_path:
         print(f"Loading specific indices from: {args.index_path}")
@@ -258,13 +275,11 @@ def main():
             indices_to_process = [int(i) for i in indices_to_process]
             print(f"Found {len(indices_to_process)} indices to process.")
         except FileNotFoundError:
-            # print(f"Error: Index file not found at {args.index_path}")
-            # exit()
-            indices_to_process = list(range(len(dataset)))
-            print('All value')
+            indices_to_process = list(range(dataset_len))
+            print('Index file not found, processing all values')
     else:
         print("No index file provided. Processing all items in the dataset split.")
-        indices_to_process = list(range(len(dataset)))
+        indices_to_process = list(range(dataset_len))
 
     print("\nPreparing batch data for retrieval...")
     
@@ -280,9 +295,12 @@ def main():
             for i in indices_to_process:
                 if i in rewritten_queries_dict:
                     batch_queries.append(rewritten_queries_dict[i])
-                else:
+                elif dataset is not None:
                     print(f"Warning: Index {i} not found in rewrite query dictionary. Using original question.")
                     batch_queries.append(dataset[i]['question'])
+                else:
+                    # NIAT mode without rewrite query - use empty or placeholder
+                    batch_queries.append(f"Query for table {i}")
             print("Successfully replaced original questions with rewritten queries where available.")
 
         except FileNotFoundError:
@@ -292,11 +310,21 @@ def main():
             print(f"An error occurred while loading rewritten queries: {e}. Exiting.")
             exit()
     else:
-        print("Using original questions from the dataset.")
-        batch_queries = [dataset[i]['question'] for i in indices_to_process]
+        if dataset is not None:
+            print("Using original questions from the dataset.")
+            batch_queries = [dataset[i]['question'] for i in indices_to_process]
+        else:
+            print("Warning: No rewrite_query_path provided for NIAT. Using placeholder queries.")
+            batch_queries = [f"Query for table {i}" for i in indices_to_process]
 
     batch_tables = [wikitq_df_processed[i] for i in indices_to_process]
-    batch_titles = [dataset[i]['table']['page_title'] for i in indices_to_process]
+    
+    # Get table titles
+    if dataset is not None:
+        batch_titles = [dataset[i]['table']['page_title'] for i in indices_to_process]
+    else:
+        # NIAT mode: use table index as title or extract from processed df
+        batch_titles = [f"Table_{i}" for i in indices_to_process]
 
     print(f"\nRunning BATCH HYBRID retrieval on {len(batch_queries)} items...")
     start_time = time.time()

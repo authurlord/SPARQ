@@ -249,6 +249,56 @@ def build_niat_prompt_from_df(niat_data: List[Dict], table_df: pd.DataFrame,
     return prompt
 
 
+def Prepare_Data_for_Operator_Sequence_NIAT(index: int, sequence: List[str], 
+                                            niat_data: List[Dict], processed_table: Dict) -> Dict:
+    """
+    NIAT-specific version of Prepare_Data_for_Operator_Sequence.
+    Handles NIAT data structure which differs from WikiTQ HuggingFace dataset.
+    """
+    item = niat_data[index]
+    
+    data_entry = {
+        'id': item.get('id', str(index)),
+        'query': item.get('question', ''),
+        'title': item.get('table_title', f'Table_{index}') or f'Table_{index}',
+    }
+    
+    # Handle Execute_SQL
+    if 'Execute_SQL' in sequence:
+        sql_list = [sql_count for sql_count in processed_table.get('Execute_SQL_count', []) 
+                   if sql_count['id'] == index]
+        if len(sql_list) == 0:
+            SQL = ''
+        else:
+            sql_command = sql_list[0]
+            SQL = sql_command['sql'] + table_to_str(sql_command['table'])
+        data_entry['SQL'] = SQL
+    else:
+        data_entry['SQL'] = ''
+    
+    # Get table based on extraction sequence
+    extraction_sequence = [s for s in sequence if s != 'Execute_SQL']
+    
+    if len(extraction_sequence) == 1:
+        method = extraction_sequence[0]
+        if method in processed_table and index in processed_table[method]:
+            data_entry['table'] = processed_table[method][index]
+        else:
+            data_entry['table'] = processed_table['Base'].get(index, pd.DataFrame())
+    elif len(extraction_sequence) == 2:
+        table_1 = processed_table.get(extraction_sequence[0], {}).get(index, pd.DataFrame())
+        table_2 = processed_table.get(extraction_sequence[1], {}).get(index, pd.DataFrame())
+        if len(table_1) > 0 and len(table_2) > 0:
+            table_intersection = find_intersection_and_add_row_id(table_1, table_2)
+            data_entry['table'] = table_intersection
+        else:
+            data_entry['table'] = table_1 if len(table_1) > 0 else table_2
+    else:
+        data_entry['table'] = processed_table['Base'].get(index, pd.DataFrame())
+    
+    return data_entry
+
+
 # ============================================================================
 # Main Pipeline - Aligned with WikiTQ
 # ============================================================================
@@ -439,12 +489,20 @@ def main():
     _t6 = time.perf_counter()
     
     if not args.skip_rag and rag_count > 0:
+        # Save NIAT queries for RAG (Hybrid_Retrieve_Update_dict.py needs them)
+        niat_queries = {}
+        for idx in range(len(niat_data)):
+            niat_queries[idx] = niat_data[idx].get('question', f'Query for table {idx}')
+        rewrite_query_file = f'{args.tmp_save_path}/rewrite_query.npy'
+        np.save(rewrite_query_file, niat_queries)
+        
         cmd = f"python Hybrid_Retrieve_Update_dict.py --model_path {args.embedding_model_path} " \
               f"--dataset_name {args.dataset_name} --split {args.split} " \
               f"--index_path {args.tmp_save_path}/RAG_index.npy " \
               f"--output_path {rag_output_file} " \
               f"--max_rows 50 --max_cols 10 " \
-              f"--processed_df_path {preprocess_file}"
+              f"--processed_df_path {preprocess_file} " \
+              f"--rewrite_query_path {rewrite_query_file}"
         print(f"Running: {cmd}")
         os.system(cmd)
     
@@ -643,9 +701,9 @@ def main():
         }
     
     for key in Check_Model_Data_Sequence.keys():
-        data_entry = Prepare_Data_for_Operator_Sequence(
+        data_entry = Prepare_Data_for_Operator_Sequence_NIAT(
             key, Check_Model_Data_Sequence[key]['Sequence'],
-            niat_data, processed_table, dataset_type='niat'
+            niat_data, processed_table
         )
         Check_Model_Data_Sequence[key]['data_entry'] = data_entry
     
@@ -682,8 +740,8 @@ def main():
                     Check_Model_Data_Sequence[key]['Sequence'] = ROLLBACK_seq
                     Check_Model_Data_Sequence[key]['Terminated'] = terminated_flag
                     if not terminated_flag:
-                        data_entry = Prepare_Data_for_Operator_Sequence(
-                            key, ROLLBACK_seq, niat_data, processed_table, dataset_type='niat'
+                        data_entry = Prepare_Data_for_Operator_Sequence_NIAT(
+                            key, ROLLBACK_seq, niat_data, processed_table
                         )
                         Check_Model_Data_Sequence[key]['data_entry'] = data_entry
     
