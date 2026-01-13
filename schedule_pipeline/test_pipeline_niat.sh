@@ -19,7 +19,11 @@ python run_full_pipeline_niat.py \
   --dataset_name niat \
   --tmp_save_path ${TMP_SAVE_PATH} \
   --niat_json_path ../datasets/NIAT/sampled_qa_pairs_4000_fixed.json \
+<<<<<<< HEAD
   --n_parallel 4 
+=======
+  --n_parallel 32 
+>>>>>>> 60f57b2 (add change)
   2>&1 | tee "${TMP_SAVE_PATH}/test_run.log"
 
 echo ""
