@@ -244,6 +244,7 @@ def flatten_hierarchical_table(table_rows: List[List[str]],
     """
     Flatten a hierarchical/nested table by forward-filling empty cells.
     Also handles duplicate column names by adding suffixes.
+    Normalizes rows with inconsistent column counts.
     """
     if not table_rows or len(table_rows) < 2:
         if len(table_rows) == 1:
@@ -252,8 +253,20 @@ def flatten_hierarchical_table(table_rows: List[List[str]],
         return pd.DataFrame()
     
     header = make_unique_columns(table_rows[0])
-    data_rows = table_rows[1:]
-    df = pd.DataFrame(data_rows, columns=header)
+    num_cols = len(header)
+    
+    # Normalize data rows to match header column count
+    normalized_rows = []
+    for row in table_rows[1:]:
+        if len(row) < num_cols:
+            # Pad with empty strings if row is too short
+            row = list(row) + [''] * (num_cols - len(row))
+        elif len(row) > num_cols:
+            # Truncate if row is too long
+            row = row[:num_cols]
+        normalized_rows.append(row)
+    
+    df = pd.DataFrame(normalized_rows, columns=header)
     
     # For hierarchical tables, forward-fill left-most grouping columns
     if table_structure == "hierarchical":
