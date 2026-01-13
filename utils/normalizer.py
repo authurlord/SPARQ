@@ -40,7 +40,7 @@ def str_normalize(user_input, recognition_types=None):
                              ]
 
     for recognition_type in recognition_types:
-        if re.match("\d+/\d+", user_input):
+        if re.match(r"\d+/\d+", user_input):
             # avoid calculating str as 1991/92
             continue
         recognized_list = getattr(recognizers_suite, "recognize_{}".format(recognition_type))(user_input,
@@ -252,9 +252,9 @@ def normalize(x):
     while True:
         old_x = x
         # Remove citations
-        x = re.sub("((?<!^)\[[^\]]*\]|\[\d+\]|[•♦†‡*#+])*$", "", x.strip())
+        x = re.sub(r"((?<!^)\[[^\]]*\]|\[\d+\]|[•♦†‡*#+])*$", "", x.strip())
         # Remove details in parenthesis
-        x = re.sub("(?<!^)( \([^)]*\))*$", "", x.strip())
+        x = re.sub(r"(?<!^)( \([^)]*\))*$", "", x.strip())
         # Remove outermost quotation mark
         x = re.sub('^"([^"]*)"$', r'\1', x.strip())
         if x == old_x:
@@ -263,7 +263,7 @@ def normalize(x):
     if x and x[-1] == '.':
         x = x[:-1]
     # Collapse whitespaces and convert to lower case
-    x = re.sub('\s+', ' ', x, flags=re.U).lower().strip()
+    x = re.sub(r'\s+', ' ', x, flags=re.U).lower().strip()
     return x
 
 
@@ -376,7 +376,7 @@ def post_process_sql(sql_str, df, table_title=None, process_program_with_fuzzy_m
             Check if the fuzzy match is valid, now considering:
             1. The number/date should not be disturbed, but adding new number or deleting number is valid.
             """
-            number_pattern = "[+]?[.]?[\d]+(?:,\d\d\d)*[\.]?\d*(?:[eE][-+]?\d+)?"
+            number_pattern = r"[+]?[.]?[\d]+(?:,\d\d\d)*[\.]?\d*(?:[eE][-+]?\d+)?"
             numbers_in_value = re.findall(number_pattern, value_str)
             numbers_in_matched_cell = re.findall(number_pattern, matched_cell)
             try:
@@ -400,7 +400,7 @@ def post_process_sql(sql_str, df, table_title=None, process_program_with_fuzzy_m
         sql_str = sql_str.rstrip('```').rstrip('\n')
 
         # Replace QA module with placeholder
-        qa_pattern = "QA\(.+?;.*?`.+?`.*?\)"
+        qa_pattern = r"QA\(.+?;.*?`.+?`.*?\)"
         qas = re.findall(qa_pattern, sql_str)
         for idx, qa in enumerate(qas):
             sql_str = sql_str.replace(qa, f"placeholder{idx}")
@@ -464,7 +464,7 @@ def post_process_sql(sql_str, df, table_title=None, process_program_with_fuzzy_m
         # Compose new sql string
         # Clean column name in SQL since columns may have been tokenized in the postprocessing, e.g., (ppp) -> ( ppp )
         new_sql_str = ' '.join(sql_tokens)
-        sql_columns = re.findall('`\s(.*?)\s`', new_sql_str)
+        sql_columns = re.findall(r'`\s(.*?)\s`', new_sql_str)
         for sql_col in sql_columns:
             matched_columns = []
             for col in df.columns:

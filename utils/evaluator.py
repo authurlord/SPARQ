@@ -81,6 +81,8 @@ class Evaluator:
             # For more metrics on MMQA,
             # please use the utils/mmqa/eval_mmqa.py to call official on all prediction data
             return self.eval_mmqa_match(pred_answer, gold_answer)
+        elif dataset == 'niat':
+            return self.eval_niat_match(pred_answer, gold_answer)
         else:
             raise ValueError(f'{dataset} evaluator is not supported.')
 
@@ -101,7 +103,7 @@ class Evaluator:
             return check_denotation(pred, gold)
         else:
             assert isinstance(question, str)
-            question = re.sub('\s+', ' ', question).strip().lower()
+            question = re.sub(r'\s+', ' ', question).strip().lower()
             pred = [str_normalize(span) for span in pred]
             gold = [str_normalize(span) for span in gold]
             pred = sorted(list(set(pred)))
@@ -122,9 +124,9 @@ class Evaluator:
                     pass
             # (2) Number value (allow units) and Date substring match
             if len(pred) == 1 and len(gold) == 1:
-                NUMBER_UNITS_PATTERN = re.compile('^\$*[+-]?([0-9]*[.])?[0-9]+(\s*%*|\s+\w+)$')
-                DATE_PATTERN = re.compile('[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}\s*([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})?')
-                DURATION_PATTERN = re.compile('(P|PT)(\d+)(Y|M|D|H|S)')
+                NUMBER_UNITS_PATTERN = re.compile(r'^\$*[+-]?([0-9]*[.])?[0-9]+(\s*%*|\s+\w+)$')
+                DATE_PATTERN = re.compile(r'[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}\s*([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})?')
+                DURATION_PATTERN = re.compile(r'(P|PT)(\d+)(Y|M|D|H|S)')
                 p, g = pred[0], gold[0]
                 # Restore `duration` type, e.g., from 'P3Y' -> '3'
                 if re.match(DURATION_PATTERN, p):
@@ -160,3 +162,75 @@ class Evaluator:
             pred = pred[0]
         pred, gold = str(pred), str(gold)
         return pred == gold
+
+    def eval_mmqa_match(self, pred, gold):
+        """MMQA match evaluation."""
+        if isinstance(pred, list):
+            pred = pred[0] if pred else ""
+        pred_norm = str(pred).strip().lower()
+        gold_norm = str(gold).strip().lower()
+        return pred_norm == gold_norm
+
+    def eval_niat_match(self, pred, gold):
+        """NIAT match evaluation - simple exact match after normalization."""
+        if isinstance(pred, list):
+            pred = pred[0] if pred else ""
+        # Extract "The answer is: " pattern
+        pred_str = str(pred)
+        match = re.search(r'The answer is:\s*(.+)', pred_str, re.IGNORECASE)
+        if match:
+            pred_str = match.group(1)
+        pred_norm = pred_str.strip().lower()
+        gold_norm = str(gold).strip().lower()
+        return pred_norm == gold_norm
+
+
+def niat_match_func(sample, strategy="top"):
+    """
+    Compare final chain answer string with gold answer for NIAT dataset.
+
+    Expected sample fields:
+      - sample["chain"][-1]["parameter_and_conf"] -> list[(answer_str, conf)]
+      - sample["answer"] -> gold answer string
+    """
+    results = sample["chain"][-1]["parameter_and_conf"]
+
+    if strategy == "top":
+        pred_answer = results[0][0]
+        # extract "The answer is: "
+        match = re.search(r'The answer is:\s*(.+)', pred_answer)
+        if match:
+            pred = match.group(1)
+        else:
+            pred = pred_answer
+    elif strategy == "weighted":
+        res_conf_dict = {}
+        for res, conf in results:
+            if res not in res_conf_dict:
+                res_conf_dict[res] = 0
+            res_conf_dict[res] += conf
+        res_conf_rank = sorted(res_conf_dict.items(), key=lambda x: x[1], reverse=True)
+        pred = res_conf_rank[0][0]
+    else:
+        raise NotImplementedError(f"Strategy '{strategy}' not implemented")
+
+    pred_norm = str(pred).strip().lower()
+    gold_norm = str(sample.get("answer", "")).strip().lower()
+    return pred_norm == gold_norm
+
+
+def niat_match_func_for_samples(all_samples, strategy="top"):
+    """Calculate NIAT accuracy for a list of samples."""
+    correct_list = []
+    for sample in all_samples:
+        try:
+            if niat_match_func(sample, strategy):
+                correct_list.append(1)
+            else:
+                correct_list.append(0)
+        except Exception as e:
+            # Skip samples with errors
+            continue
+    if not correct_list:
+        return 0.0
+    return sum(correct_list) / len(correct_list)
