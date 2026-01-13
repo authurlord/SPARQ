@@ -26,6 +26,5 @@ python -m vllm.entrypoints.openai.api_server \
   --enable-prefix-caching \
   --enable-chunked-prefill \
   --max_num_seqs 256 \
-  --kv-cache-dtype fp8 \
   --kv_offloading_backend native \
   --kv_offloading_size 20
