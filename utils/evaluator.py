@@ -82,7 +82,8 @@ class Evaluator:
             # please use the utils/mmqa/eval_mmqa.py to call official on all prediction data
             return self.eval_mmqa_match(pred_answer, gold_answer)
         elif dataset == 'niat':
-            return self.eval_niat_match(pred_answer, gold_answer)
+            # Use WikiTQ's robust evaluation logic for NIAT as well
+            return self.eval_ex_match(pred_answer, gold_answer, allow_semantic, question)
         else:
             raise ValueError(f'{dataset} evaluator is not supported.')
 

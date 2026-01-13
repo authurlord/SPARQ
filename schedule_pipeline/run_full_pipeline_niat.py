@@ -221,10 +221,42 @@ def flatten_hierarchical_table(table_rows: List[List[str]],
     return df
 
 
+
+def table_to_str_niat(df: pd.DataFrame) -> str:
+    """
+    Format DataFrame as a tab-separated string, matching NIAT prompt demonstrations.
+    Includes row_id (index) as the first column.
+    """
+    # Create a copy to avoid modifying original
+    temp_df = df.copy()
+    
+    # Insert row_id as first column if not present
+    if 'row_id' not in temp_df.columns:
+        temp_df.insert(0, 'row_id', temp_df.index)
+        
+    # Convert to tab-separated string
+    # align columns for readability if possible, or just simple tab sep
+    # The prompt examples look like they use tabs or fixed spacing. 
+    # to_markdown(index=False, tablefmt="plain") might be close but to_string is safer
+    
+    # Using to_string with header and index=False (since we added row_id column)
+    # This aligns columns nicely which matches 'tab-separated' look in prompts
+    return temp_df.to_string(index=False)
+
+
 def build_niat_prompt_from_df(niat_data: List[Dict], table_df: pd.DataFrame, 
                                index: int, template_path: str = '../prompts/col_select_niat.txt',
                                processed: bool = True) -> str:
-    """Build prompt for NIAT item - similar to build_wikitq_prompt_from_df."""
+    """
+    Build prompt for NIAT item.
+    
+    Template structure:
+    - Instructions + demonstrations (from template file)
+    - Current input: <input> + table schema + table data + question
+    
+    The template contains demonstrations, and we APPEND the current query's
+    table and question at the end.
+    """
     item = niat_data[index]
     
     template_full_path = os.path.join(os.path.dirname(__file__), template_path)
@@ -237,14 +269,51 @@ def build_niat_prompt_from_df(niat_data: List[Dict], table_df: pd.DataFrame,
     table_title = item.get('table_title', 'Table') or item.get('table_id', 'Table')
     question = item.get('question', '')
     
-    # Format table as string
-    table_str = table_to_str(table_df)
+    # Format table as string using NIAT-specific format
+    table_str = table_to_str_niat(table_df)
     
-    # Build prompt
-    prompt = f"Table Title: {table_title}\n\n{table_str}\n\nQuestion: {question}"
+    # Build CREATE TABLE schema from DataFrame columns
+    # Note: row_id is usually implicit in schema in examples or explicit.
+    # Examples have "row_id int" in schema.
+    columns = table_df.columns.tolist()
     
+    # If row_id is not in columns, we add it to schema definition as in examples
+    schema_cols = []
+    if 'row_id' not in columns:
+        schema_cols.append("row_id int")
+        
+    for col in columns:
+        # Simple type inference or default to text
+        # Examples use 'text' or 'int'. We'll stick to text for robustness
+        # unless we want to be fancy. 'text' is safe.
+        schema_cols.append(f"`{col}` text")
+        
+    col_defs = ",\n\t".join(schema_cols)
+    schema = f"CREATE TABLE {table_title.replace(' ', '_').replace('-', '_')}(\n\t{col_defs})"
+    
+    # List of columns for "columns: [...]" line
+    # Examples include row_id in this list
+    all_cols = ['row_id'] + columns if 'row_id' not in columns else columns
+    
+    # Build the input section with current query data
+    # Format like the demonstrations: schema + table data + columns list + question
+    input_section = f"""
+<input>
+{schema}
+/*
+SELECT * FROM w;
+{table_str}
+*/
+columns: {all_cols}
+Q: {question}
+<output>"""
+    
+    # Append input section to template (after demonstrations)
     if template:
-        prompt = template.replace("{table}", table_str).replace("{question}", question).replace("{title}", table_title)
+        prompt = template.strip() + "\n" + input_section
+    else:
+        # Fallback if no template
+        prompt = f"Table Title: {table_title}\n\n{table_str}\n\nQuestion: {question}"
     
     return prompt
 
@@ -271,7 +340,8 @@ def Prepare_Data_for_Operator_Sequence_NIAT(index: int, sequence: List[str],
             SQL = ''
         else:
             sql_command = sql_list[0]
-            SQL = sql_command['sql'] + table_to_str(sql_command['table'])
+            # Use NIAT-specific table formatting
+            SQL = sql_command['sql'] + table_to_str_niat(sql_command['table'])
         data_entry['SQL'] = SQL
     else:
         data_entry['SQL'] = ''

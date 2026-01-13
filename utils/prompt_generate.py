@@ -286,7 +286,7 @@ def evaluate_predictions(dataset_name, df, dataset):
         pred_answer_all = None
 
         # --- Prediction Parsing Logic ---
-        if dataset_name == 'wikitq':
+        if dataset_name == 'wikitq' or dataset_name == 'niat':
             try:
                 # Attempt to parse different possible output formats
                 raw_output = eval(output['predict'])[0]
@@ -328,7 +328,7 @@ def evaluate_predictions(dataset_name, df, dataset):
         dataset=dataset_name,
         question=output['question']
         )
-        if dataset_name=='wikitq':
+        if dataset_name == 'wikitq' or dataset_name == 'niat':
             if score == False and isinstance(pred_answer_all, str):
                 score = Evaluator().evaluate(
                     pred_answer_all.split(','),
