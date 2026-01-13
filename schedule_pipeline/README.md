@@ -11,115 +11,165 @@ This directory contains the main pipeline scripts for running H-STAR on differen
 
 ---
 
+## 🚀 Quick Start: vLLM API-Based Full Dataset Run
+
+The recommended way to run the full pipeline is using vLLM as an API server for maximum efficiency.
+
+### Step 1: Start vLLM Server
+
+```bash
+# Terminal 1: Start vLLM OpenAI-compatible server
+python -m vllm.entrypoints.openai.api_server \
+  --model /data/workspace/yanmy/models/Qwen2.5-7B-Instruct \
+  --tensor-parallel-size 2 \
+  --max-model-len 23000 \
+  --gpu-memory-utilization 0.85 \
+  --enable-chunked-prefill \
+  --enable-prefix-caching \
+  --port 8000
+
+# Or for Qwen3-4B with single GPU
+python -m vllm.entrypoints.openai.api_server \
+  --model /data/workspace/yanmy/models/Qwen3-4B-Instruct-2507 \
+  --max-model-len 16000 \
+  --gpu-memory-utilization 0.90 \
+  --port 8000
+```
+
+### Step 2: Run Full Pipeline
+
+#### WikiTQ Full Dataset
+
+```bash
+# Terminal 2: Run WikiTQ pipeline (full dataset)
+cd schedule_pipeline
+
+python run_full_pipeline_wikitq.py \
+  --llm_path /data/workspace/yanmy/models/Qwen2.5-7B-Instruct \
+  --dataset_name wikitq \
+  --split test \
+  --tmp_save_path tmp/wikitq_full \
+  --llm_concurrency 32 \
+  --tensor_parallel_size 2
+```
+
+#### NIAT Full Dataset
+
+```bash
+# Terminal 2: Run NIAT pipeline (full dataset)
+cd schedule_pipeline
+
+python run_full_pipeline_niat.py \
+  --llm_path /data/workspace/yanmy/models/Qwen2.5-7B-Instruct \
+  --niat_json_path ../datasets/NIAT/sampled_qa_pairs_4000_fixed.json \
+  --tmp_save_path tmp/niat_full \
+  --llm_concurrency 32 \
+  --tensor_parallel_size 2
+```
+
+### Key Parameters for Full Dataset
+
+| Parameter | Recommended | Description |
+|-----------|-------------|-------------|
+| `--llm_concurrency` | `32-64` | Concurrent API requests (higher = faster) |
+| `--tensor_parallel_size` | `2` | Multi-GPU for vLLM server |
+| `--first_n` | `-1` | `-1` = all data, or set number for subset |
+| `--temperature` | `0.7` | Sampling temperature |
+| `--top_p` | `0.8` | Nucleus sampling |
+
+---
+
+## Pipeline Steps (13 Steps)
+
+Both WikiTQ and NIAT pipelines follow the same 13-step structure:
+
+| Step | Description | Notes |
+|------|-------------|-------|
+| 1 | Data Preprocessing | NIAT: table flattening |
+| 2 | Build Router Query File | Query + table pairs |
+| 3 | Construct Database | SQLite-compatible DB |
+| 4 | Router Model Inference | Route to methods |
+| 5 | Parse Router Results | Organize LLM queries |
+| 6 | Execute RAG Task | Hybrid retrieval |
+| 7 | Select_Row/Column LLM | Table filtering |
+| 8 | Execute_SQL LLM | SQL generation |
+| 9 | SQL Parse and Execute | Run generated SQL |
+| 10 | Check Model Iteration | Quality check loop |
+| 11 | Add Missing SQL | Gap filling |
+| 12 | Final QA Prompts | Build final prompts |
+| 13 | Final QA & Evaluate | Answer + accuracy |
+
+---
+
 ## NIAT Pipeline
 
-The NIAT (Nested Information Answering on Tables) pipeline handles tables with complex nested/hierarchical structures, such as:
-- Multi-level headers
-- Merged cells represented as empty values
-- Row grouping with forward-fill patterns
+The NIAT pipeline handles tables with complex nested/hierarchical structures.
 
 ### Key Features
 
-1. **Table Flattening**: Automatically detects and forward-fills hierarchical empty cells
-2. **Duplicate Column Handling**: Renames duplicate column names with suffixes
-3. **SQL-Compatible Output**: Produces clean DataFrames that work with SQLite
+1. **Table Flattening**: Automatically forward-fills hierarchical empty cells
+2. **Duplicate Column Handling**: Renames duplicate columns with suffixes
+3. **NIAT-Specific Evaluation**: Uses exact match after normalization
 
-### Quick Start
-
-#### Demo Mode (No LLM Required)
+### Demo Mode (No LLM)
 
 ```bash
 cd schedule_pipeline
-
-# Run demo test (no model needed)
 bash test_pipeline_niat.sh
 ```
 
-#### Full Pipeline with vLLM
-
-```bash
-cd schedule_pipeline
-
-# Set model paths
-LLM_PATH="/path/to/your/Qwen2.5-7B-Instruct"
-EMBEDDING_MODEL="/path/to/bge-m3"
-
-# Run full pipeline
-python run_full_pipeline_niat.py \
-  --llm_path ${LLM_PATH} \
-  --niat_json_path ../datasets/NIAT/sampled_qa_pairs_4000_fixed.json \
-  --tmp_save_path tmp/niat_full \
-  --first_n 100 \
-  --tensor_parallel_size 1
-```
-
-#### API Mode (Async LLM)
+### API Mode with Specific Model
 
 ```bash
 python run_full_pipeline_niat.py \
-  --use_api \
-  --llm_path ${LLM_PATH} \
+  --llm_path /data/workspace/yanmy/models/Qwen3-4B-Instruct-2507 \
   --niat_json_path ../datasets/NIAT/sampled_qa_pairs_4000_fixed.json \
   --tmp_save_path tmp/niat_api \
-  --first_n 50 \
-  --llm_concurrency 16
+  --llm_concurrency 16 \
+  --first_n 100
 ```
 
 ### Command Line Options
 
 | Argument | Default | Description |
 |----------|---------|-------------|
-| `--niat_json_path` | `datasets/NIAT/sampled_qa_pairs_4000_fixed.json` | Path to NIAT JSON file |
+| `--niat_json_path` | `datasets/NIAT/...` | Path to NIAT JSON file |
 | `--tmp_save_path` | `datasets/schedule_test/niat` | Output directory |
 | `--first_n` | `-1` | Process first N samples (-1 for all) |
-| `--demo_mode` | `False` | Skip LLM inference, test data flow only |
-| `--use_api` | `False` | Use async API instead of local vLLM |
-| `--skip_llm` | `False` | Skip LLM inference step |
-| `--tensor_parallel_size` | `1` | GPU parallelism for vLLM |
-| `--temperature` | `0.7` | Sampling temperature |
-| `--top_p` | `0.8` | Sampling top_p |
+| `--skip_router` | `False` | Skip router inference step |
+| `--skip_rag` | `False` | Skip RAG retrieval step |
+| `--tensor_parallel_size` | `2` | GPU parallelism for vLLM |
+| `--llm_concurrency` | `32` | Concurrent API requests |
+| `--tau` | `0.82` | Router threshold |
+| `--check_tau` | `0.8` | Check model threshold |
 
 ### Output Files
 
-After running the pipeline, the following files are created in `tmp_save_path`:
-
 | File | Description |
 |------|-------------|
-| `niat_df_processed.npy` | Processed and flattened DataFrames |
-| `llm_query_list.pkl` | All prompts and responses |
-| `prompts_sample.json` | Sample prompts for each operation type |
-| `sql_test_results.json` | SQL execution test results |
-| `timeline.json` | Timing breakdown |
-
-### NIAT Prompts
-
-Custom prompts for NIAT are located in `../prompts/`:
-
-| Prompt | Purpose |
-|--------|---------|
-| `col_select_niat.txt` | Column selection with 3 demonstrations |
-| `row_select_niat.txt` | Row selection with 3 demonstrations |
-| `sql_reason_niat.txt` | SQL generation with 3 demonstrations |
-| `text_reason_niat.txt` | Final QA with 3 demonstrations |
+| `niat_df_processed.npy` | Processed DataFrames |
+| `router_query.pkl` | Router query data |
+| `inference_result.pkl` | Router inference results |
+| `processed_table.npy` | All processed tables |
+| `Check_Model_Data_Sequence.npy` | Check model results |
+| `final_results.csv` | Final predictions |
+| `evaluation_results.json` | Accuracy metrics |
+| `timing_summary_*.json` | Timing breakdown |
 
 ---
 
 ## WikiTQ Pipeline
 
-For WikiTable Questions dataset, use:
-
 ```bash
+# Quick test
 bash test_pipeline.sh
-```
 
-Or customize:
-
-```bash
+# Full run
 python run_full_pipeline_wikitq.py \
-  --llm_path /path/to/model \
+  --llm_path /data/workspace/yanmy/models/Qwen2.5-7B-Instruct \
   --dataset_name wikitq \
   --split test \
-  --first_n 50
+  --llm_concurrency 32
 ```
 
 ---
@@ -128,15 +178,12 @@ python run_full_pipeline_wikitq.py \
 
 ### NIAT Table Flattening
 
-The NIAT dataset contains nested tables where empty cells indicate hierarchical relationships. For example:
-
 **Original (nested):**
 ```
 | Group    | Union | Craft   | Employees |
 |----------|-------|---------|-----------|
 | Mainline | APA   | Pilots  | 13200     |
-|          | APFA  | FA      | 24900     |  <- Group is empty, inherits "Mainline"
-| Envoy    | ALPA  | Pilots  | 2200      |
+|          | APFA  | FA      | 24900     |  <- Group empty, inherits "Mainline"
 ```
 
 **Flattened:**
@@ -144,33 +191,31 @@ The NIAT dataset contains nested tables where empty cells indicate hierarchical 
 | Group    | Union | Craft   | Employees |
 |----------|-------|---------|-----------|
 | Mainline | APA   | Pilots  | 13200     |
-| Mainline | APFA  | FA      | 24900     |  <- Group filled as "Mainline"
-| Envoy    | ALPA  | Pilots  | 2200      |
-```
-
-To preprocess NIAT data separately:
-
-```bash
-python convert_niat_parallel.py \
-  --input_path ../datasets/NIAT/sampled_qa_pairs_4000_fixed.json \
-  --output_path ../datasets/schedule_test/niat/niat_df_processed.npy \
-  --num_workers 8
+| Mainline | APFA  | FA      | 24900     |  <- Group filled
 ```
 
 ---
 
 ## Troubleshooting
 
-### JSON Decode Error
-If you encounter `JSONDecodeError: Unterminated string`, the original JSON file is truncated. Use the fixed version: `sampled_qa_pairs_4000_fixed.json`
+### vLLM Server Connection
 
-### Duplicate Column Name Error
-The pipeline automatically handles duplicate columns by adding suffixes (`_1`, `_2`, etc.)
+If API calls fail, check:
+1. vLLM server is running on port 8000
+2. URL matches: `http://localhost:8000/v1`
 
-### vLLM Not Available
-Run with `--demo_mode` to test the data pipeline without LLM:
+### Out of Memory
+
+Reduce `--llm_concurrency` or `--gpu_memory_utilization`:
 ```bash
-python run_full_pipeline_niat.py --demo_mode --first_n 20
+python run_full_pipeline_niat.py --llm_concurrency 8 --gpu_memory_utilization 0.7
+```
+
+### Router/Check Model Not Found
+
+Skip these steps while testing:
+```bash
+python run_full_pipeline_niat.py --skip_router --first_n 50
 ```
 
 ---
@@ -179,13 +224,13 @@ python run_full_pipeline_niat.py --demo_mode --first_n 20
 
 ```
 schedule_pipeline/
-├── run_full_pipeline_wikitq.py   # WikiTQ main pipeline
-├── run_full_pipeline_niat.py     # NIAT main pipeline
-├── convert_niat_parallel.py      # NIAT preprocessing script
+├── run_full_pipeline_wikitq.py   # WikiTQ 13-step pipeline
+├── run_full_pipeline_niat.py     # NIAT 13-step pipeline
+├── inference_router.py           # Router model inference
+├── Hybrid_Retrieve_Update_dict.py # RAG retrieval
 ├── test_pipeline.sh              # WikiTQ test script
 ├── test_pipeline_niat.sh         # NIAT test script
-├── test_niat_pipeline.py         # NIAT unit test
 ├── README.md                     # This file
 └── tmp/                          # Output directory
-    └── niat_test/                # NIAT test outputs
 ```
+
