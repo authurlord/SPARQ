@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export CUDA_VISIBLE_DEVICES=0,1
-N_GPU=2
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+N_GPU=4
 export VLLM_ATTENTION_BACKEND=FLASHINFER
 # 必须添加这一行，否则 /sleep 和 /wake_up 接口会报 404
 export VLLM_SERVER_DEV_MODE=1 

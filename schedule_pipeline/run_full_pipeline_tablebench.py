@@ -114,7 +114,7 @@ def parse_args():
                        help='Number of samples for Select_Row/Select_Column')
     parser.add_argument('--sql_sample_num', type=int, default=3,
                        help='Number of samples for Execute_SQL')
-    parser.add_argument('--llm_concurrency', type=int, default=32,
+    parser.add_argument('--llm_concurrency', type=int, default=256,
                        help='Max concurrent requests to vLLM API')
     parser.add_argument('--temperature', type=float, default=0.7,
                        help='Sampling temperature')
