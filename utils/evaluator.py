@@ -269,6 +269,7 @@ def niat_match_func_for_samples(all_samples, strategy="top"):
 def tablebench_rouge_l_score(pred: str, gold: str) -> float:
     """
     Calculate ROUGE-L F1 score between prediction and gold answer.
+    Uses rouge-score package instead of evaluate.
     
     Args:
         pred: Predicted answer string
@@ -278,8 +279,7 @@ def tablebench_rouge_l_score(pred: str, gold: str) -> float:
         ROUGE-L F1 score (0.0 to 1.0)
     """
     try:
-        # Load ROUGE metric
-        rouge = evaluate.load("rouge")
+        from rouge_score import rouge_scorer
         
         # Preprocess: extract "The answer is:" if present
         pred_str = str(pred) if pred else ""
@@ -298,14 +298,11 @@ def tablebench_rouge_l_score(pred: str, gold: str) -> float:
         if not pred_str or not gold_str:
             return 0.0
         
-        # Compute ROUGE-L
-        results = rouge.compute(
-            predictions=[pred_str],
-            references=[gold_str],
-            rouge_types=["rougeL"]
-        )
+        # Compute ROUGE-L using rouge-score
+        scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
+        scores = scorer.score(gold_str, pred_str)
         
-        return results.get("rougeL", 0.0)
+        return scores['rougeL'].fmeasure
     except Exception as e:
         # Fallback: simple exact match
         return 1.0 if str(pred).strip().lower() == str(gold).strip().lower() else 0.0
