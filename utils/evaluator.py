@@ -186,9 +186,31 @@ class Evaluator:
         return pred_norm == gold_norm
 
 
+def niat_normalize(text):
+    """
+    Normalize text for NIAT matching without external dependencies.
+    Handles: quotes, brackets/citations, whitespace, case.
+    """
+    if text is None:
+        return ""
+    text = str(text)
+    # Remove ALL quotes (both single and double) - important for list answers
+    text = text.replace('"', '').replace("'", '')
+    # Remove citations like [1], [11], [note], etc.
+    text = re.sub(r'\s*\[[^\]]*\]', '', text)
+    # Remove trailing punctuation that might be artifacts
+    text = text.rstrip('.')
+    # Normalize whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+    # Lowercase for comparison
+    text = text.lower()
+    return text
+
+
 def niat_match_func(sample, strategy="top"):
     """
     Compare final chain answer string with gold answer for NIAT dataset.
+    Uses Evaluator.eval_ex_match() for robust matching with normalization.
 
     Expected sample fields:
       - sample["chain"][-1]["parameter_and_conf"] -> list[(answer_str, conf)]
@@ -198,12 +220,14 @@ def niat_match_func(sample, strategy="top"):
 
     if strategy == "top":
         pred_answer = results[0][0]
-        # extract "The answer is: "
-        match = re.search(r'The answer is:\s*(.+)', pred_answer)
+        # extract "The answer is: " (case insensitive)
+        match = re.search(r'The answer is:\s*(.+)', pred_answer, re.IGNORECASE)
         if match:
             pred = match.group(1)
         else:
             pred = pred_answer
+        # Additional cleanup: remove surrounding quotes (matches user's .replace('"',''))
+        pred = pred.strip().replace('"', '')
     elif strategy == "weighted":
         res_conf_dict = {}
         for res, conf in results:
@@ -215,9 +239,10 @@ def niat_match_func(sample, strategy="top"):
     else:
         raise NotImplementedError(f"Strategy '{strategy}' not implemented")
 
-    pred_norm = str(pred).strip().lower()
-    gold_norm = str(sample.get("answer", "")).strip().lower()
-    return pred_norm == gold_norm
+    gold = sample.get("answer", "")
+    # Use Evaluator.eval_ex_match for robust matching with normalization
+    # Pass question="" to bypass assertion and skip boolean/choice special logic
+    return Evaluator().eval_ex_match(pred, gold, allow_semantic=True, question="")
 
 
 def niat_match_func_for_samples(all_samples, strategy="top"):
