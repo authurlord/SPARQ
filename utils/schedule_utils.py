@@ -276,11 +276,18 @@ def merge_clean_and_format_df_dict(data_dict: Dict[str, List[pd.DataFrame]]) -> 
             if numeric_series.isna().all():
                 continue
             
-            is_all_integer = (numeric_series == numeric_series.round()).all()
+            # Check if all non-NaN values are integers (no decimal parts)
+            is_all_integer = (numeric_series.dropna() == numeric_series.dropna().round()).all()
 
             if is_all_integer:
                 # Use nullable integer type 'Int64' to handle potential NaNs during conversion
-                unique_df[col] = pd.to_numeric(unique_df[col], errors='coerce').astype('Int64')
+                # First convert to float, then round, then cast to Int64 to avoid casting errors
+                try:
+                    float_col = pd.to_numeric(unique_df[col], errors='coerce')
+                    unique_df[col] = float_col.round().astype('Int64')
+                except (TypeError, ValueError):
+                    # If Int64 conversion fails, fall back to float
+                    unique_df[col] = pd.to_numeric(unique_df[col], errors='coerce').astype(float)
             else:
                 unique_df[col] = pd.to_numeric(unique_df[col], errors='coerce').astype(float)
         
