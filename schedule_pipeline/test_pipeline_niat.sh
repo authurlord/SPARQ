@@ -3,9 +3,9 @@
 
 # Set Python path
 export PYTHONPATH="$(pwd)/..:$(pwd):$PYTHONPATH"
-LLM_PATH="/data/workspace/yanmy/models/Qwen3-4B-Instruct-2507"
+LLM_PATH="../models/Qwen3-30B-A3B-Instruct-2507-FP8"
 # Create output directory
-TMP_SAVE_PATH="tmp/niat_test"
+TMP_SAVE_PATH="tmp/niat_test_30B"
 mkdir -p ${TMP_SAVE_PATH}
 
 echo "=============================================="
