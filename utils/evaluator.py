@@ -260,3 +260,164 @@ def niat_match_func_for_samples(all_samples, strategy="top"):
     if not correct_list:
         return 0.0
     return sum(correct_list) / len(correct_list)
+
+
+# ============================================================================
+# TableBench ROUGE-L Evaluation Functions
+# ============================================================================
+
+def tablebench_rouge_l_score(pred: str, gold: str) -> float:
+    """
+    Calculate ROUGE-L F1 score between prediction and gold answer.
+    
+    Args:
+        pred: Predicted answer string
+        gold: Gold answer string
+        
+    Returns:
+        ROUGE-L F1 score (0.0 to 1.0)
+    """
+    try:
+        # Load ROUGE metric
+        rouge = evaluate.load("rouge")
+        
+        # Preprocess: extract "The answer is:" if present
+        pred_str = str(pred) if pred else ""
+        gold_str = str(gold) if gold else ""
+        
+        # Extract answer from common patterns
+        match = re.search(r'(?:the answer is|therefore|answer):\s*(.+)', pred_str, re.IGNORECASE)
+        if match:
+            pred_str = match.group(1).strip()
+        
+        # Remove surrounding quotes
+        pred_str = pred_str.strip().strip('"\'')
+        gold_str = gold_str.strip().strip('"\'')
+        
+        # Handle empty strings
+        if not pred_str or not gold_str:
+            return 0.0
+        
+        # Compute ROUGE-L
+        results = rouge.compute(
+            predictions=[pred_str],
+            references=[gold_str],
+            rouge_types=["rougeL"]
+        )
+        
+        return results.get("rougeL", 0.0)
+    except Exception as e:
+        # Fallback: simple exact match
+        return 1.0 if str(pred).strip().lower() == str(gold).strip().lower() else 0.0
+
+
+def tablebench_match_func(sample, threshold=0.5) -> bool:
+    """
+    Match function using ROUGE-L for TableBench.
+    Returns True if ROUGE-L score >= threshold.
+    
+    Args:
+        sample: dict with 'chain' and 'answer' fields
+        threshold: ROUGE-L threshold for matching (default 0.5)
+        
+    Returns:
+        True if ROUGE-L score >= threshold
+    """
+    results = sample["chain"][-1]["parameter_and_conf"]
+    pred_answer = results[0][0]
+    
+    # Extract "The answer is:" pattern
+    match = re.search(r'(?:the answer is|therefore|answer):\s*(.+)', pred_answer, re.IGNORECASE)
+    if match:
+        pred = match.group(1).strip()
+    else:
+        pred = pred_answer
+    
+    # Remove surrounding quotes
+    pred = pred.strip().strip('"\'')
+    gold = str(sample.get("answer", "")).strip()
+    
+    score = tablebench_rouge_l_score(pred, gold)
+    return score >= threshold
+
+
+def tablebench_match_func_for_samples(all_samples, threshold=0.5) -> dict:
+    """
+    Calculate ROUGE-L metrics for all TableBench samples.
+    
+    Args:
+        all_samples: List of sample dicts with 'chain' and 'answer' fields
+        threshold: ROUGE-L threshold for "correct" classification
+        
+    Returns:
+        dict with 'accuracy', 'avg_rouge_l', 'scores' keys
+    """
+    scores = []
+    correct_count = 0
+    
+    for sample in all_samples:
+        try:
+            results = sample["chain"][-1]["parameter_and_conf"]
+            pred_answer = results[0][0]
+            
+            # Extract "The answer is:" pattern
+            match = re.search(r'(?:the answer is|therefore|answer):\s*(.+)', pred_answer, re.IGNORECASE)
+            if match:
+                pred = match.group(1).strip()
+            else:
+                pred = pred_answer
+            
+            pred = pred.strip().strip('"\'')
+            gold = str(sample.get("answer", "")).strip()
+            
+            score = tablebench_rouge_l_score(pred, gold)
+            scores.append(score)
+            
+            if score >= threshold:
+                correct_count += 1
+        except Exception as e:
+            scores.append(0.0)
+            continue
+    
+    if not scores:
+        return {'accuracy': 0.0, 'avg_rouge_l': 0.0, 'scores': []}
+    
+    return {
+        'accuracy': correct_count / len(scores),
+        'avg_rouge_l': sum(scores) / len(scores),
+        'scores': scores
+    }
+
+
+def evaluate_tablebench_predictions(preds: list, golds: list) -> dict:
+    """
+    Evaluate TableBench predictions using ROUGE-L.
+    
+    Args:
+        preds: List of prediction strings
+        golds: List of gold answer strings
+        
+    Returns:
+        dict with evaluation metrics
+    """
+    assert len(preds) == len(golds), f"Length mismatch: {len(preds)} preds vs {len(golds)} golds"
+    
+    scores = []
+    for pred, gold in zip(preds, golds):
+        score = tablebench_rouge_l_score(pred, gold)
+        scores.append(score)
+    
+    if not scores:
+        return {'avg_rouge_l': 0.0, 'accuracy_at_0.5': 0.0, 'accuracy_at_0.8': 0.0}
+    
+    avg_score = sum(scores) / len(scores)
+    acc_05 = sum(1 for s in scores if s >= 0.5) / len(scores)
+    acc_08 = sum(1 for s in scores if s >= 0.8) / len(scores)
+    
+    return {
+        'avg_rouge_l': avg_score,
+        'accuracy_at_0.5': acc_05,
+        'accuracy_at_0.8': acc_08,
+        'total_samples': len(scores)
+    }
+
