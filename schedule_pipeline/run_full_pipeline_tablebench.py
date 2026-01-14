@@ -156,11 +156,46 @@ def load_tablebench_dataset(jsonl_path: str, first_n: int = -1) -> List[Dict]:
     return data
 
 
+def make_unique_columns(columns: List[str]) -> List[str]:
+    """Make column names unique by adding suffixes to duplicates.
+    
+    Handles:
+    - Duplicate column names (e.g., 'League', 'League' -> 'League', 'League_1')
+    - Empty or None column names -> 'unnamed'
+    - Whitespace normalization
+    """
+    seen = {}
+    result = []
+    for col in columns:
+        col_str = str(col).strip() if col else "unnamed"
+        if not col_str:
+            col_str = "unnamed"
+        # Normalize whitespace and newlines
+        col_str = col_str.replace('\n', ' ').replace('\r', ' ')
+        col_str = re.sub(r'\s+', ' ', col_str).strip()
+        
+        if col_str in seen:
+            seen[col_str] += 1
+            result.append(f"{col_str}_{seen[col_str]}")
+        else:
+            seen[col_str] = 0
+            result.append(col_str)
+    
+    return result
+
+
 def tablebench_table_to_df(item: Dict) -> pd.DataFrame:
-    """Convert TableBench table format to pandas DataFrame."""
+    """Convert TableBench table format to pandas DataFrame.
+    
+    Handles duplicate column names by making them unique.
+    """
     columns = item['table']['columns']
     data = item['table']['data']
-    return pd.DataFrame(data, columns=columns)
+    
+    # Make column names unique to avoid SQLite errors
+    unique_columns = make_unique_columns(columns)
+    
+    return pd.DataFrame(data, columns=unique_columns)
 
 
 def table_to_str_tablebench(df: pd.DataFrame) -> str:
