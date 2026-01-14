@@ -1,4 +1,5 @@
 import os
+import json
 import argparse
 import time
 import pandas as pd
@@ -317,13 +318,43 @@ def main():
             print("Warning: No rewrite_query_path provided for NIAT. Using placeholder queries.")
             batch_queries = [f"Query for table {i}" for i in indices_to_process]
 
-    batch_tables = [wikitq_df_processed[i] for i in indices_to_process]
+    # For NIAT: need to map qa_idx -> table_id to access the correct table
+    if args.dataset_name == 'niat':
+        # Load NIAT dataset to get table_id mapping
+        niat_dataset_path = os.path.join(os.path.dirname(args.processed_df_path), '..', '..', 'datasets', 'NIAT', 'niat_4000_filtered.json')
+        if os.path.exists(niat_dataset_path):
+            with open(niat_dataset_path, 'r', encoding='utf-8') as f:
+                niat_data_full = json.load(f)
+        else:
+            # Try relative path from tmp folder
+            niat_alt_path = '../datasets/NIAT/niat_4000_filtered.json'
+            if os.path.exists(niat_alt_path):
+                with open(niat_alt_path, 'r', encoding='utf-8') as f:
+                    niat_data_full = json.load(f)
+            else:
+                print(f"Error: Cannot find NIAT dataset. Tried: {niat_dataset_path} and {niat_alt_path}")
+                exit()
+        
+        # Map qa_idx to table using table_id
+        batch_tables = []
+        for qa_idx in indices_to_process:
+            table_id = niat_data_full[qa_idx]['table_id']
+            if table_id in wikitq_df_processed:
+                batch_tables.append(wikitq_df_processed[table_id])
+            else:
+                print(f"Warning: table_id {table_id} not found for qa_idx {qa_idx}")
+                batch_tables.append(pd.DataFrame())  # Empty fallback
+    else:
+        batch_tables = [wikitq_df_processed[i] for i in indices_to_process]
     
     # Get table titles
     if dataset is not None:
         batch_titles = [dataset[i]['table']['page_title'] for i in indices_to_process]
+    elif args.dataset_name == 'niat':
+        # NIAT mode: use table_id as title
+        batch_titles = [niat_data_full[qa_idx].get('table_id', f"Table_{qa_idx}") for qa_idx in indices_to_process]
     else:
-        # NIAT mode: use table index as title or extract from processed df
+        # Fallback: use table index as title
         batch_titles = [f"Table_{i}" for i in indices_to_process]
 
     print(f"\nRunning BATCH HYBRID retrieval on {len(batch_queries)} items...")
