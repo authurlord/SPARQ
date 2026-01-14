@@ -5,10 +5,10 @@
 # ============================================
 # Default Model Paths - Override via CLI args
 # ============================================
-LLM_PATH="../models/Qwen3-30B-A3B-Instruct-2507-FP8"
+LLM_PATH="../../models/Qwen3-30B-A3B-Instruct-2507-FP8"
 EMBEDDING_MODEL_PATH="/data/workspace/yanmy/models/bge-m3"
-ROUTER_MODEL_PATH="/data/workspace/yanmy/HybridRAG/H-STAR/router/bge-m3-finetuned/"
-CHECK_MODEL_PATH="/data/workspace/yanmy/HybridRAG/H-STAR/check/output/bge-reranker-v2-m3-finetuned/"
+ROUTER_MODEL_PATH="../../HybridRAG/H-STAR/router/wikitq"
+CHECK_MODEL_PATH="../../HybridRAG/H-STAR/check/wikitq"
 TMP_SAVE_PATH="tmp/tablebench_test"
 TABLEBENCH_JSONL_PATH="../datasets/TableBench/TableBench.jsonl"
 
