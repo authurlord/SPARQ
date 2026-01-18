@@ -3,9 +3,11 @@
 # Usage: ./test_pipeline_tablebench_pot.sh [--llm_path PATH] [--first_n N]
 
 # Default Paths
+# Default Paths
 LLM_PATH="/data/workspace/yanmy/models/Qwen2.5-7B-Instruct/"
 TABLEBENCH_JSONL_PATH="../datasets/TableBench/TableBench_PoT.jsonl"
 TMP_SAVE_PATH="datasets/schedule_test/tablebench_pot"
+API_BASE="http://localhost:8000/v1"
 
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
@@ -14,6 +16,7 @@ while [[ "$#" -gt 0 ]]; do
         --tablebench_jsonl_path) TABLEBENCH_JSONL_PATH="$2"; shift ;;
         --tmp_save_path) TMP_SAVE_PATH="$2"; shift ;;
         --first_n) FIRST_N="$2"; shift ;;
+        --api_base) API_BASE="$2"; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -23,6 +26,7 @@ mkdir -p "${TMP_SAVE_PATH}"
 
 CMD="python run_pipeline_tablebench_pot.py \
   --use_api \
+  --api_base \"${API_BASE}\" \
   --llm_path \"${LLM_PATH}\" \
   --dataset_name tablebench \
   --tmp_save_path \"${TMP_SAVE_PATH}\" \
