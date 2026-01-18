@@ -266,33 +266,44 @@ def main():
     _t2 = time.perf_counter()
     
     execution_results = {} # idx -> best_result_string
+    error_log_path = os.path.join(args.tmp_save_path, "execution_errors.log")
     
-    for idx in tqdm(range(len(raw_data)), desc="Executing"):
-        responses = code_responses[idx]
-        df = processed_dfs[idx]
-        
-        results = []
-        for r in responses:
-            code = extract_python_code(r)
-            output = execute_python_code(code, df)
+    with open(error_log_path, 'w', encoding='utf-8') as error_log:
+        for idx in tqdm(range(len(raw_data)), desc="Executing"):
+            responses = code_responses[idx]
+            df = processed_dfs[idx]
             
-            # Simple heuristic: filter out errors or empty outputs if possible
-            if output and "Execution Error" not in output:
-                results.append(output.strip())
-        
-        # Selection Strategy: Majority Voting or First Valid
-        final_output = ""
-        if results:
-            # Majority vote
-            counter = Counter(results)
-            most_common = counter.most_common(1)[0]
-            final_output = most_common[0]
-        else:
-            # If all failed, take the first error message to inform the model?
-            # Or just empty.
-            pass
+            results = []
+            for i, r in enumerate(responses):
+                code = extract_python_code(r)
+                output = execute_python_code(code, df)
+                
+                # Simple heuristic: filter out errors or empty outputs if possible
+                if output and "Execution Error" not in output:
+                    results.append(output.strip())
+                else:
+                     # Log failure
+                    error_log.write(f"=== Error Sample {idx} (Code {i}) ===\n")
+                    error_log.write(f"Question: {raw_data[idx].get('question', '')}\n")
+                    error_log.write(f"Attempt: {i}\n")
+                    error_log.write("Code:\n")
+                    error_log.write(code + "\n")
+                    error_log.write("Output/Error:\n")
+                    error_log.write(str(output) + "\n\n")
             
-        execution_results[idx] = final_output
+            # Selection Strategy: Majority Voting or First Valid
+            final_output = ""
+            if results:
+                # Majority vote
+                counter = Counter(results)
+                most_common = counter.most_common(1)[0]
+                final_output = most_common[0]
+            else:
+                # If all failed, take the first error message to inform the model?
+                # Or just empty.
+                pass
+                
+            execution_results[idx] = final_output
         
     timeline['Execute Python'] = time.perf_counter() - _t2
     
