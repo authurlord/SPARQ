@@ -106,7 +106,7 @@ def parse_args():
                        help='Maximum model length')
     parser.add_argument('--gpu_memory_utilization', type=float, default=0.85,
                        help='GPU memory utilization')
-    parser.add_argument('--max_num_seqs', type=int, default=256,
+    parser.add_argument('--max_num_seqs', type=int, default=64,
                        help='Maximum number of sequences')
     
     # Sampling parameters - same as wikitq
@@ -114,7 +114,7 @@ def parse_args():
                        help='Number of samples for Select_Row/Select_Column')
     parser.add_argument('--sql_sample_num', type=int, default=3,
                        help='Number of samples for Execute_SQL')
-    parser.add_argument('--llm_concurrency', type=int, default=256,
+    parser.add_argument('--llm_concurrency', type=int, default=2,
                        help='Max concurrent requests to vLLM API')
     parser.add_argument('--temperature', type=float, default=0.7,
                        help='Sampling temperature')

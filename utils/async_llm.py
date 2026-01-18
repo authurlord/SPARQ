@@ -14,7 +14,7 @@ from tqdm import tqdm
 
 # OpenAI-compatible async client (works with vLLM api_server)
 try:
-    from openai import AsyncOpenAI, APIConnectionError, RateLimitError
+    from openai import AsyncOpenAI, APIConnectionError, RateLimitError, BadRequestError, APIError
 except Exception:  # fallback for older openai package name
     from openai import AsyncOpenAI  # type: ignore
     APIConnectionError = Exception  # type: ignore
@@ -87,7 +87,7 @@ async def infer_one(client: "AsyncOpenAI", model: str, prompt: str, sem: "asynci
                     "completion_tokens": completion_tokens,
                     "latency_s": latency_s,
                 }
-            except (APIConnectionError, RateLimitError, asyncio.TimeoutError) as e:
+            except (APIConnectionError, RateLimitError, BadRequestError, asyncio.TimeoutError) as e:
                 if attempt == max_retries:
                     return {
                         "texts": [f"[ERROR after {attempt} tries]: {type(e).__name__}: {e}"],
@@ -169,9 +169,12 @@ def infer_prompts(
     prompts: List[str],
     *,
     llm_path: str = "/data/workspace/yanmy/models/Qwen3-4B-Instruct-2507",
-    llm_name: str = 'qwen3-4b',
-    api_base: str = "http://127.0.0.1:8000/v1",
-    api_key: str = "api-key-qwen3",
+    # llm_name: str = 'qwen3-4b',
+    # api_base: str = "http://127.0.0.1:8000/v1",
+    # api_key: str = "api-key-qwen3",
+    llm_name: str = 'qwen3-max-2025-09-23',
+    api_base: str = "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    api_key: str = "sk-5b5731e43b0445d58b1a63c3db814994",
     concurrency: int = 128,
     request_timeout: int = 120,
     max_retries: int = 5,

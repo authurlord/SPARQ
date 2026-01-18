@@ -3,8 +3,7 @@
 # Usage: ./test_pipeline_tablebench_pot.sh [--llm_path PATH] [--first_n N]
 
 # Default Paths
-# Default Paths
-LLM_PATH="/data/workspace/yanmy/models/Qwen2.5-7B-Instruct/"
+LLM_PATH="../../models/Qwen3-4B-Instruct-2507"
 TABLEBENCH_JSONL_PATH="../datasets/TableBench/TableBench_PoT.jsonl"
 TMP_SAVE_PATH="datasets/schedule_test/tablebench_pot"
 API_BASE="http://localhost:8000/v1"

@@ -61,13 +61,13 @@ def parse_args():
                        default='/data/workspace/yanmy/models/Qwen2.5-7B-Instruct/',
                        help='Path to LLM model')
     parser.add_argument('--embedding_model_path', type=str,
-                       default='/data/workspace/yanmy/models/bge-m3',
+                       default='/home/yanmy/models/bge-m3',
                        help='Path to embedding model')
     parser.add_argument('--router_model_path', type=str,
-                       default='/data/workspace/yanmy/HybridRAG/H-STAR/router/bge-m3-finetuned/',
+                       default='/home/yanmy/HybridRAG/H-STAR/router/wikitq/',
                        help='Path to router model')
     parser.add_argument('--check_model_path', type=str,
-                       default='/data/workspace/yanmy/HybridRAG/H-STAR/check/output/bge-reranker-v2-m3-finetuned/',
+                       default='/home/yanmy/HybridRAG/H-STAR/check/wikitq',
                        help='Path to check model')
     
     # Dataset parameters

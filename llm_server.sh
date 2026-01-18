@@ -8,13 +8,13 @@ export VLLM_ATTENTION_BACKEND=FLASHINFER
 # export RUNAI_STREAMER_DIST=1
 # export RUNAI_STREAMER_CHUNK_BYTESIZE=4194304
 # export VLLM_USE_FLASHINFER_MOE_FP16=1
-MODEL_PATH="/ssd_data/models/Qwen3-4B-Instruct-2507-FP8"
+MODEL_PATH="../models/Qwen3-4B-Instruct-2507"
 MODEL_NAME="qwen3-4b"
 HOST="0.0.0.0"
 PORT=8000
 VLLM_API_KEY="api-key-qwen3"
 # 24 * 0.85 = 20.4GB
-GPU_RAM=0.65
+GPU_RAM=0.75
 # GPU_RAM=0.70 ## for pipeline
 
 python -m vllm.entrypoints.openai.api_server \
@@ -29,6 +29,5 @@ python -m vllm.entrypoints.openai.api_server \
   --api-key "$VLLM_API_KEY" \
   --enable-prefix-caching \
   --enable-chunked-prefill \
-  --max_num_seqs 256 \
-  --kv_offloading_backend native \
-  --kv_offloading_size 20
+  --max_num_seqs 256 
+  
