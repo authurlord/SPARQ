@@ -58,31 +58,18 @@ def execute_python_code(code: str, df: pd.DataFrame, timeout: int = 5) -> str:
         'print': print, # Will be redirected
     }
     
-    # Inject our mocked read_csv into the pandas object in the exec scope? 
-    # That's hard because `import pandas as pd` inside the code will reload/use the real module.
-    # A better way is to actually write the file to a temp path and change CWD, or just expect execution in a thread-safe way.
-    # But for "minimal modification" and "local test", actual file writing is easiest if concurrency is low or handled.
-    # "concurrency=32" is used in the pipeline. Writing 'table.csv' in current dir is BAD.
-    
-    # Strategy: The code usually looks like:
-    # import pandas as pd
-    # df = pd.read_csv('table.csv')
-    # ...
-    
-    # We can prepend setup code that defines `pd` and `read_csv`.
-    # Or, we can do a string replacement in the code: `pd.read_csv('table.csv')` -> `df_input.copy()`
-    # and provide `df_input` in locals. This is robust enough for generated code.
+    # Use a single context to ensure scoping works correctly for lambdas/functions
+    exec_context = exec_globals.copy()
+    exec_context['df_input'] = df
     
     # Replace simple variations of read_csv('table.csv')
     code_mod = code.replace("pd.read_csv('table.csv')", "df_input.copy()")
     code_mod = code_mod.replace('pd.read_csv("table.csv")', 'df_input.copy()')
     
-    exec_locals = {'df_input': df}
-    
     # Capture stdout
     try:
         with contextlib.redirect_stdout(output_capture):
-            exec(code_mod, exec_globals, exec_locals)
+            exec(code_mod, exec_context)
         return output_capture.getvalue()
     except Exception as e:
         # traceback.print_exc(file=output_capture)
