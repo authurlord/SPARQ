@@ -1,0 +1,173 @@
+We are asked to analyze how a significant increase in natural change impacts the average population growth rate over time.
+
+Step-by-step approach:
+1. Understand the data: The table contains yearly data with columns including "Natural change" and "Average population (x 1000)". 
+2. "Natural change" is the difference between live births and deaths, which reflects the population growth (or decline) due to natural factors (excluding migration).
+3. The "Average population" is the total population in thousands.
+4. The question asks about the impact of a significant increase in natural change on the average population growth rate over time.
+   - However, note that "natural change" is already the growth rate (in people), and it's directly tied to population growth.
+   - But we need to interpret what "average population growth rate" means — it is likely the rate per 1000 people, which is given in "Crude birth rate (per 1000)" and "Crude death rate (per 1000)", and their difference is "Natural change (per 1000)".
+5. Therefore, a significant increase in natural change (positive or negative) directly impacts the population growth rate.
+6. To answer the question, we can:
+   - Identify years where natural change is significantly positive (growth) or negative (decline).
+   - Observe trends in natural change over time.
+   - Correlate with changes in average population (though population is not directly growing at the same rate as natural change unless migration is zero).
+
+But note: the question is asking for an interpretation of how a significant increase in natural change affects the average population growth rate.
+
+Since natural change is already the net growth rate (in per 1000), a significant increase in natural change (positive) leads to a higher population growth rate.
+
+So the answer is: A significant increase in natural change leads to a higher population growth rate.
+
+However, if we are to provide a quantitative analysis, we can:
+- Compute the average of the "Natural change (per 1000)" over time.
+- Identify when natural change increases significantly (e.g., from negative to positive or large positive values).
+
+But the question is more interpretive than numerical.
+
+Still, to fulfill the requirement of providing executable code and a final answer, we will:
+1. Extract the "Natural change (per 1000)" column.
+2. Calculate its mean and identify years with high positive or negative values.
+3. Provide a concise analysis.
+
+Final Answer: A significant increase in natural change leads to a higher population growth rate.
+
+But since the question asks "how", and we are to output a short answer, we can summarize it numerically or conceptually.
+
+Let’s go with a clear, concise observation based on the data:
+
+We observe that natural change (per 1000) varies over time. For example:
+- In 1985: +13.6
+- In 1993: -0.8
+- In 1995: -3.2
+- In 2003: -8.0
+- In 2004: -5.3
+- In 2005: -7.6
+
+The highest positive natural change was in 1985 (+13.6), and the lowest was in 1994 (-27). So a significant increase in natural change (like in 1985) corresponds to a period of strong population growth.
+
+Thus, a significant increase in natural change correlates with a higher population growth rate.
+
+Final Answer: 1985, 1993
+
+Wait — no. The question is not asking for years. It's asking how it impacts the growth rate.
+
+Therefore, we should not list years. Instead, give a simple statement.
+
+But the format requires: Final Answer: AnswerName1, AnswerName2...
+
+So perhaps the expected answer is a trend or a year with a significant increase?
+
+Looking back: “How does a significant increase in natural change impact...” → we need to describe the impact.
+
+But the format only allows a list of names/numbers.
+
+Possibility: Maybe they want the years when natural change increased significantly (e.g., from negative to positive or high positive).
+
+Let’s find years when natural change increased significantly.
+
+For example:
+- 1985: 13.6 → previous year (1980): 10.0 → increase
+- 1990: 293 → from 1991: 273 → decrease
+- 1998: 41 → increase from 1997: -27 → big jump
+
+But natural change is not strictly increasing.
+
+Alternatively, we can just state the maximum value and the year it occurred.
+
+Best approach: Identify the year with the highest natural change (positive) and the year with the most significant increase (from negative to positive).
+
+From data:
+- 1985: 13.6 (highest positive)
+- 1993: -0.8 (turns positive? No)
+- 1980: 10.0 → 1985: 13.6 → increase
+
+So 1985 is the peak.
+
+Also, 1998: 1.5 → from 1997: -0.9 → jump from negative to positive.
+
+So two key years: 1985 (peak positive), 1998 (turnaround)
+
+But the question is about "impact" — so perhaps just state that a significant increase leads to higher growth.
+
+But format requires a list.
+
+Alternative: The question may be interpreted as asking for the average natural change over time — but that doesn’t relate to "impact".
+
+After careful thought, the most plausible interpretation is that the user wants to know when a significant increase in natural change occurred — i.e., years when natural change was notably high.
+
+So we will:
+- Find the year(s) where natural change is highest (positive) or shows a sharp increase.
+
+Let’s compute the year with maximum natural change (per 1000):
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Natural change (per 1000)' to numeric (some entries have '- 27' etc.)
+df['Natural change (per 1000)'] = df['Natural change (per 1000)'].str.replace(' - ', '-').astype(float)
+
+# Find the year with the highest natural change
+max_change_row = df.loc[df['Natural change (per 1000)'].idxmax()]
+max_year = max_change_row['Unnamed: 0']
+
+# Also check for a significant jump (e.g., from negative to positive)
+df['Natural change (per 1000)'] = pd.to_numeric(df['Natural change (per 1000)'], errors='coerce')
+df['change_diff'] = df['Natural change (per 1000)'].diff()
+
+# Find years where change_diff is large positive (jump up)
+jump_years = df[(df['change_diff'] > 2) & (df['Natural change (per 1000)'] > 0)]['Unnamed: 0']
+jump_years_list = jump_years.tolist()
+
+# Also include the peak year
+peak_year = df.loc[df['Natural change (per 1000)'].idxmax()]['Unnamed: 0']
+
+# If jump years exist, combine; otherwise, just peak
+if len(jump_years_list) > 0:
+    significant_years = jump_years_list + [peak_year]
+else:
+    significant_years = [peak_year]
+
+# Remove duplicates and sort
+significant_years = sorted(list(set(significant_years)))
+
+print(f"Final Answer: {significant_years[0]}, {significant_years[1]}")
+```
+
+But wait — the data has some negative values like "-27", which we already handled by replacing " - " with "-" and converting.
+
+However, the original data has:
+- "Natural change" in row 1994: "- 27" → becomes -27
+- Others are numbers.
+
+So the conversion should work.
+
+But the question is not asking for years — it's asking "how does it impact".
+
+So maybe the answer is not a list of years.
+
+Alternative interpretation: The "average population growth rate" is the natural change (per 1000). So a significant increase in natural change directly increases the average population growth rate.
+
+So the impact is a direct increase.
+
+But we must output in the required format.
+
+Given the constraints, and that the only data available is the years and values, the most reasonable output is the year with the highest natural change (positive), and possibly one with a significant jump.
+
+Final decision:
+- The highest natural change (positive) is in 1985: 13.6
+- A significant jump occurs in 1998: from -0.9 to 1.5
+
+So we pick 1985 and 1998.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean the 'Natural change (per 1000)' column to handle strings with spaces
+df['Natural change (per 1000)'] = df['Natural change (per 1000)'].str.replace(' - ', '-').str.replace(' -', '-').astype(float)
+
+# Find the year with the highest natural change (positive)
+max_idx = df['Natural change (per 1000)'].idxmax()
+peak_year = df.loc[max_idx,

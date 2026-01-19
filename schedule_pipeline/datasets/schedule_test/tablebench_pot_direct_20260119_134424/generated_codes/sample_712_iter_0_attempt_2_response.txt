@@ -1,0 +1,15 @@
+Step 1: The user wants to find the institution with the highest enrollment.
+Step 2: Load the dataframe.
+Step 3: Convert the 'enrollment' column to integers for proper comparison.
+Step 4: Find the row with the maximum enrollment value.
+Step 5: Extract and print the institution name.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'enrollment' column to integer
+df['enrollment'] = pd.to_numeric(df['enrollment'])
+# Find the institution with the highest enrollment
+max_enrollment_institution = df.loc[df['enrollment'].idxmax(), 'institution']
+print(f"Final Answer: {max_enrollment_institution}")
+```

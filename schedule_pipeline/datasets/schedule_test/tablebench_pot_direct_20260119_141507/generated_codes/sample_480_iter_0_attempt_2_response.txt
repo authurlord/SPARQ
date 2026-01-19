@@ -1,0 +1,49 @@
+Step 1: The question asks for anomalies in language distribution across municipalities. Anomalies could include extreme values (e.g., very high or very low percentages), inconsistencies (e.g., a municipality with zero speakers of a language but high numbers for others), or unexpected patterns (e.g., a language dominating in one area but being negligible elsewhere).
+
+Step 2: We need to analyze the data by examining each row (language) and column (municipality) to detect outliers or unusual patterns.
+
+Step 3: Identify extreme values — for instance, values that are significantly higher or lower than others. For example, Guaranã in Sorata municipality has 7000.0, which is unusually high compared to other values.
+
+Step 4: Look for zeros or near-zero values — e.g., Guaranã in Quiabaya municipality has 0.0, which might indicate no speakers, but Guaranã is otherwise dominant in other places.
+
+Step 5: Check for consistency — if a language is dominant in one place but absent in others, it may indicate regional specificity.
+
+Step 6: Use simple threshold checks (e.g., values > 1000 or < 1) to flag anomalies.
+
+Step 7: Output the anomalies as descriptive findings.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert all values to numeric (some entries like '363.0' are strings)
+df = df.apply(pd.to_numeric, errors='coerce')
+
+# Identify anomalies:
+# 1. Values greater than 1000 (very high)
+# 2. Values less than 1 (very low or zero)
+# 3. Zeros in languages that are otherwise dominant
+
+anomalies = []
+
+# Check for extremely high values (>1000)
+high_values = df[df > 1000]
+if not high_values.empty:
+    anomalies.append("Extremely high values detected: e.g., Guaranã in Sorata municipality (7000.0)")
+
+# Check for very low or zero values
+low_values = df[df < 1]
+if not low_values.empty:
+    anomalies.append("Very low or zero values detected: e.g., Guaranã in Quiabaya and Combaya (0.0)")
+
+# Check for inconsistency: a language dominant in one place but absent elsewhere
+for lang in df.columns[1:]:
+    # If a language has a very high value in one municipality but zero elsewhere
+    lang_data = df[lang].dropna()
+    if lang_data.max() > 100 and lang_data[lang_data == 0].count() > 0:
+        anomalies.append(f"Inconsistent pattern: {lang} is dominant in one area but zero in others.")
+
+# Print anomalies
+print(f"Final Answer: {', '.join(anomalies)}")
+```

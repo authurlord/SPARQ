@@ -1,0 +1,50 @@
+Step 1: The question asks for economies that deviate significantly from the norm. Since "deviate significantly" is vague, we interpret it as economies with unusually high or low values in key metrics such as GDP per capita or gap from Thailand (especially when compared to others). 
+
+Step 2: We consider the "gap from Thailand as of 2012 (times)" column, as it directly measures deviation from Thailand. Economies with a gap much higher than the average (e.g., >2x average) or much lower (e.g., <0.5x average) are outliers.
+
+Step 3: Calculate the average gap from Thailand as of 2012. Then identify economies where the gap is significantly above or below this average.
+
+Step 4: Also consider GDP per capita — extremely high or low values may indicate deviation.
+
+Step 5: Filter and list such economies.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Drop duplicate rows (e.g., 'korea' appears twice)
+df = df.drop_duplicates(subset=['economy'])
+
+# Calculate average gap from Thailand as of 2012
+avg_gap_2012 = df['gap from thailand as of 2012 (times)'].mean()
+
+# Define threshold for significant deviation (e.g., more than 1.5 times average)
+threshold = avg_gap_2012 * 1.5
+
+# Identify economies with gap significantly above or below average
+high_deviation = df[df['gap from thailand as of 2012 (times)'] > threshold]
+low_deviation = df[df['gap from thailand as of 2012 (times)'] < avg_gap_2012 * 0.5]
+
+# Combine and get economy names
+deviant_economies = high_deviation['economy'].tolist() + low_deviation['economy'].tolist()
+
+# Remove duplicates
+deviant_economies = list(set(deviant_economies))
+
+# Also check GDP per capita for extreme values (outliers)
+gdp_per_capita = df['gdp per capita as of 2012 (ppp)']
+gdp_max = gdp_per_capita.max()
+gdp_min = gdp_per_capita.min()
+gdp_threshold = (gdp_max - gdp_min) * 0.5
+
+# Add economies with GDP per capita far from average
+gdp_outliers = df[(gdp_per_capita > gdp_max - gdp_threshold) | (gdp_per_capita < gdp_min + gdp_threshold)]
+gdp_outlier_economies = gdp_outliers['economy'].tolist()
+
+# Final list of deviant economies (union of gap and GDP outliers)
+final_deviant = list(set(deviant_economies + gdp_outlier_economies))
+
+# Print result
+print(f"Final Answer: {', '.join(final_deviant)}")
+```

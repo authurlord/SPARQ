@@ -1,0 +1,36 @@
+Step 1: The user wants a pie chart showing the racial composition of the region in the year 1948.  
+Step 2: Extract the data for the year 1948 from the table.  
+Step 3: Identify the relevant ethnic groups: Serbs, Hungarians, Germans, Romanians, Slovaks.  
+Step 4: Convert the percentage strings (e.g., '59.6%') into actual numbers (as proportions of the total).  
+Step 5: Use matplotlib to create a pie chart of these proportions.  
+
+Note: The "Total" column is not needed for composition; we only need the percentages (already given in parentheses) and convert them to decimal form.  
+
+Corrected code avoids invalid syntax by properly parsing the percentage values and ensuring clean data extraction.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter data for year 1948
+year_1948 = df[df['Year'] == '1948']
+
+# Extract the ethnic group percentages (remove the % sign and convert to float)
+groups = ['Serbs', 'Hungarians', 'Germans', 'Romanians', 'Slovaks']
+percentages = []
+
+for group in groups:
+    value_str = year_1948[group].str.strip().str.extract(r'\((\d+(\.\d+)?)%\)$')[0].fillna(0)
+    percentages.append(float(value_str))
+
+# Create pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(percentages, labels=groups, autopct='%1.1f%%', startangle=90)
+plt.title('Racial Composition in 1948')
+plt.show()
+```
+
+Final Answer: None

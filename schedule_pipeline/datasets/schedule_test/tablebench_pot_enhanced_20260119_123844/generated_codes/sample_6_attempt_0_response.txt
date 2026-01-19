@@ -1,0 +1,29 @@
+Step 1: The user wants the total number of years served by all mayors.  
+Step 2: Load the dataframe.  
+Step 3: Convert 'Taking Office' and 'Leaving' columns to integers (years).  
+Step 4: Calculate the difference between 'Leaving' and 'Taking Office' for each mayor.  
+Step 5: Sum all the years served.  
+Step 6: Print the total.
+
+Note: For the current mayor (leaving is "Current"), we assume they are still serving, so we use the year 2024 as a placeholder for calculation (since no end year is given). However, since the data is static and the question asks for total years served, we treat "Current" as not yet ended, but since it's part of the dataset, we can't include an infinite value. Thus, we assume the data is up to a certain point, and "Current" means they are still in office, but we can't calculate exact years without a future date. Since this is a historical table, we assume the data ends at 2024. But the question is about total years served by all mayors listed, including the current one, so we must treat "Current" as not having left yet. However, since the problem is asking for total years served based on the data, we will use the last known year as 2024 for the current mayor.
+
+But note: the data shows "Current" in the 'Leaving' column, so we need to handle it carefully. We'll assume that any row with "Current" in 'Leaving' should be excluded from the sum because the term is not complete. However, since the question asks for "all mayors listed", and the current mayor is included, we must account for their service from 'Taking Office' to the present. As the dataset is static, we’ll assume the analysis is done as of 2024.
+
+So, for "Michel Angers", taking office in 2009, leaving in "Current", we compute 2024 - 2009 = 15 years.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Taking Office' and 'Leaving' to integers; handle 'Current' as 2024
+df['Taking Office'] = pd.to_numeric(df['Taking Office'], errors='coerce')
+df['Leaving'] = df['Leaving'].replace('Current', 2024)
+df['Leaving'] = pd.to_numeric(df['Leaving'], errors='coerce')
+
+# Calculate years served
+df['Years Served'] = df['Leaving'] - df['Taking Office']
+
+# Sum total years served
+total_years = df['Years Served'].sum()
+print(f"Final Answer: {int(total_years)}")
+```

@@ -1,0 +1,61 @@
+The error occurred because the data contains percentage strings with commas (e.g., '59,6%'), which cannot be directly converted to float. We need to extract only the numerical values for the ethnic groups (Serbs, Hungarians, Germans, Romanians, Slovaks) from the "Total" and group columns, and properly parse them.
+
+However, in the year 1948, the "Total" is given as '601,626' — this is a number with a comma as a thousands separator. Similarly, the percentages like '59,6%' contain a comma and need to be cleaned.
+
+Step-by-step approach:
+1. Load the data.
+2. For the year 1948, extract the row where Year == '1948'.
+3. Clean the "Serbs", "Hungarians", "Germans", "Romanians", "Slovaks" columns by removing the percentage sign and converting the string with comma to float.
+4. Remove any NaN or invalid entries.
+5. Use matplotlib to create a pie chart of the ethnic composition.
+
+Note: The "Total" column is not needed for composition — we are interested in the actual counts (not percentages). So we will use the raw numbers from the columns like "Serbs", etc., which are already in the format "X,XXX (Y%)". We need to extract the numeric part before the parentheses.
+
+But looking at the data:
+- 'Serbs': '358,067 (59,6%)' → we want 358067
+- 'Hungarians': '110,446 (18,4%)' → 110446
+- 'Germans': '17,522 (2,9%)' → 17522
+- 'Romanians': None → skip
+- 'Slovaks': '20,685 (2,4%)' → 20685
+
+So we need to parse each value by:
+- Removing the text after the parenthesis (e.g., "(59,6%)")
+- Converting the remaining string (with comma) to float/int
+
+We'll do this carefully using string manipulation.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter the row for year 1948
+year_1948 = df[df['Year'] == '1948'].iloc[0]
+
+# Extract the ethnic groups and clean the values
+ethnic_groups = ['Serbs', 'Hungarians', 'Germans', 'Romanians', 'Slovaks']
+values = []
+
+for group in ethnic_groups:
+    val_str = year_1948[group]
+    if pd.isna(val_str):
+        values.append(0)
+        continue
+    # Remove the percentage part and keep only the number
+    # Split by '(' and take the first part
+    num_part = val_str.split('(')[0].strip()
+    # Replace comma with empty string and convert to int
+    clean_val = num_part.replace(',', '')
+    values.append(int(clean_val))
+
+# Create a pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(values, labels=ethnic_groups, autopct='%1.1f%%', startangle=90)
+plt.title('Racial Composition of the Region in 1948')
+plt.show()
+
+# Final Answer: The pie chart has been generated showing the racial composition.
+Final Answer: pie_chart
+```

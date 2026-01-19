@@ -1,0 +1,15 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Telugu movie released in 1955
+telugu_1955 = df[(df['Language'] == 'Telugu') & (df['Year'] == '1955')]
+if not telugu_1955.empty:
+    director_1955 = telugu_1955.iloc[0]['Director']
+    # Check if this director directed a Tamil movie in 1956
+    tamil_1956 = df[(df['Language'] == 'Tamil') & (df['Year'] == '1956') & (df['Director'] == director_1955)]
+    if not tamil_1956.empty:
+        print(f"Final Answer: {telugu_1955.iloc[0]['Title']}")
+    else:
+        print("Final Answer: None")
+else:
+    print("Final Answer: None")

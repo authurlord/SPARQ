@@ -1,0 +1,23 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Function to extract player name and value from string like 'player (value)'
+def extract_player_and_value(cell):
+    if '(' in cell:
+        player = cell.split('(')[0].strip()
+        value = int(cell.split('(')[1].split(')')[0])
+        return player, value
+    return None, None
+
+# Create new columns for points and rebounds with parsed values
+df['points_player'], df['points_value'] = zip(*df['points'].apply(extract_player_and_value))
+df['rebounds_player'], df['rebounds_value'] = zip(*df['rebounds'].apply(extract_player_and_value))
+
+# Find the year with the highest points
+max_points_year = df.loc[df['points_value'].idxmax()]
+
+# Get the player with the highest rebounds in that year
+top_rebounds_player = max_points_year['rebounds_player']
+
+print(f"Final Answer: {top_rebounds_player}")

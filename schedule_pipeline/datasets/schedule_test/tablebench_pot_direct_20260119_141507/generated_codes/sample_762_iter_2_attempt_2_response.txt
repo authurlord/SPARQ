@@ -1,0 +1,9 @@
+The question asks to forecast the trend in the number of tropical storms and hurricanes for the next 5 years based on historical data from 1850 to 1858. However, the dataset provided contains only a small number of observations (9 years), and there is no clear or statistically significant pattern or trend that can be reliably extrapolated—especially with limited data and missing values (e.g., "not known", "none", "100 +").
+
+Moreover, forecasting trends with such limited and noisy data (especially with categorical values like "not known" or "none") is not feasible using simple statistical methods without assumptions, which would go beyond the scope of a reliable analytical approach.
+
+Additionally, the data lacks sufficient temporal resolution and variability to establish a meaningful correlation between tropical storms, hurricanes, and major hurricanes. Without additional context (e.g., climate variables, external factors), any forecast would be speculative.
+
+Therefore, a valid and responsible response is to state that a reliable forecast cannot be made with the given data.
+
+Final Answer: none

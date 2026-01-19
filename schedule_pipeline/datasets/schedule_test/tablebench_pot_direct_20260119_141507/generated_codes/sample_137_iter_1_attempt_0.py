@@ -1,0 +1,38 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Select relevant columns
+votes = df[['obama', 'mccain', 'county']]
+
+# Create a grouped bar chart
+plt.figure(figsize=(12, 6))
+bar_width = 0.35
+index = range(len(votes))
+
+# Plot bars for Obama and McCain
+bars1 = plt.bar([i - bar_width/2 for i in index], votes['obama'], bar_width, label='Obama', color='skyblue')
+bars2 = plt.bar([i + bar_width/2 for i in index], votes['mccain'], bar_width, label='McCain', color='salmon')
+
+# Labels and title
+plt.xlabel('County')
+plt.ylabel('Total Votes')
+plt.title('Total Votes Received by Obama and McCain in Each County')
+plt.xticks([i for i in index], votes['county'], rotation=45)
+
+# Add value labels on top of bars
+def add_value_labels(bars):
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2., height + 0.1,
+                 f'{int(height)}', ha='center', va='bottom', fontsize=9)
+
+add_value_labels(bars1)
+add_value_labels(bars2)
+
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+Final Answer: chart_created

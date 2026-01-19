@@ -1,0 +1,40 @@
+Step 1: Understand the question — we need to calculate the average seat density for each aircraft type, defined as (total seats) / (total aircraft).  
+Step 2: The "Total" column represents the total number of aircraft for each type.  
+Step 3: The "Seats in Standard Configuration" column gives the range of seats per aircraft. We need to compute the average number of seats per aircraft.  
+Step 4: For ranges like "267-269", take the average (e.g., (267+269)/2 = 268). For single values like "366", use that value directly.  
+Step 5: Compute total seats = average seats per aircraft × number of aircraft.  
+Step 6: Then compute seat density = total seats / total aircraft → this simplifies to just the average seats per aircraft.  
+Step 7: Find the aircraft type with the highest average seat density (i.e., highest average seats per aircraft).  
+
+Note: Since the formula simplifies, we only need to compute the average seats per aircraft for each row (excluding "Total mainline" and rows with "—" in "Owned" or "Leased" — these are not relevant for fleet size).  
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Remove rows with "—" in Seats in Standard Configuration or where Total is not a number
+df = df[df['Seats in Standard Configuration'] != '—']
+
+# Convert "Seats in Standard Configuration" to numeric, handling ranges
+def parse_seats(seats):
+    if isinstance(seats, str):
+        if '-' in seats:
+            parts = seats.split('-')
+            return (int(parts[0]) + int(parts[1])) / 2
+        else:
+            return int(seats)
+    return float(seats)
+
+df['avg_seats'] = df['Seats in Standard Configuration'].apply(parse_seats)
+
+# Calculate total seats per type: avg_seats * Total
+df['total_seats'] = df['avg_seats'] * df['Total'].astype(int)
+
+# Seat density = total_seats / total_aircraft = avg_seats (since total_aircraft = Total)
+# So we just need to find the row with max avg_seats
+
+max_density_type = df.loc[df['avg_seats'].idxmax(), 'Row Header']
+print(f"Final Answer: {max_density_type}")
+```

@@ -1,0 +1,15 @@
+Step 1: Filter the data to include only rows where the 'Competition' is 'Olympic Games'.
+Step 2: Among these rows, find the one with the highest 'Position' (i.e., the best ranking).
+Step 3: Extract the 'Year' corresponding to that row.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where competition is Olympic Games
+olympic_games = df[df['Competition'] == 'Olympic Games']
+# Find the row with the best (lowest) position
+best_olympic_year = olympic_games.loc[olympic_games['Position'].astype(int).idxmin()]['Year']
+print(f"Final Answer: {best_olympic_year}")
+```

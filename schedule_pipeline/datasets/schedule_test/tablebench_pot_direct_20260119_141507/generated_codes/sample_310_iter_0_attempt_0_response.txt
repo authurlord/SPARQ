@@ -1,0 +1,9 @@
+Step 1: The user is asking for the year when Barbara Stanwyck won an Emmy Award for a TV series.  
+Step 2: Look at the "Work" column to find entries related to "The Barbara Stanwyck Show".  
+Step 3: Check the corresponding "Year" when "Result" is "Won" and the category matches "Outstanding Performance by an Actress in a Series".  
+Step 4: Identify the correct row and extract the year.
+
+From the data:
+- Row with "The Barbara Stanwyck Show" and "Outstanding Performance by an Actress in a Series" has "Result": "Won" and "Year": "1961".
+
+Final Answer: 1961

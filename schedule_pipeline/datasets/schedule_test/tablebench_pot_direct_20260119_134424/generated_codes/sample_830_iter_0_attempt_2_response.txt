@@ -1,0 +1,15 @@
+Step 1: The user wants the standard deviation of the build dates. Since the build date is in string format (e.g., '1961'), we need to convert it to integer type.
+Step 2: Load the dataframe.
+Step 3: Convert the 'Build date' column to integers.
+Step 4: Calculate the standard deviation of the 'Build date' column.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Build date' to integer
+df['Build date'] = pd.to_numeric(df['Build date'])
+# Calculate standard deviation
+std_dev = df['Build date'].std()
+print(f"Final Answer: {std_dev:.2f}")
+```

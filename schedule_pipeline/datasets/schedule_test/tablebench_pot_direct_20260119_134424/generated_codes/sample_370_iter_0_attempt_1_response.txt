@@ -1,0 +1,16 @@
+Step 1: The user wants to count the number of mountains in Tanzania that have an elevation above 3000 meters and a prominence less than 3000 meters.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'country' is 'tanzania', 'elevation (m)' > 3000, and 'prominence (m)' < 3000.
+Step 4: Count the number of such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for mountains in Tanzania with elevation > 3000 and prominence < 3000
+filtered_mountains = df[(df['country'] == 'tanzania') & 
+                        (df['elevation (m)'].astype(int) > 3000) & 
+                        (df['prominence (m)'].astype(int) < 3000)]
+count = len(filtered_mountains)
+print(f"Final Answer: {count}")
+```

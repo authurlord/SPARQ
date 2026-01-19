@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains data on dance competition results, with columns representing rank by average, competition finish, couple names, total score, number of dances performed, and average score per dance. The highest-ranked couple is Darren & Lana with a total of 374 points across 11 dances, achieving an average of 34.0. The lowest average score is 22.5 by Rob & Dawn, who only performed 2 dances. The data shows a strong correlation between the number of dances and total scores, with couples performing more dances generally scoring higher.

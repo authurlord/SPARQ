@@ -1,0 +1,17 @@
+Step 1: The user wants to identify the place with the highest number of people killed.
+Step 2: Load the dataframe.
+Step 3: Exclude the 'total' row as it is a summary.
+Step 4: Find the row with the maximum value in the 'killed' column.
+Step 5: Extract and print the corresponding 'place'.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the total row
+df = df[df['incident no'] != 'total']
+# Convert 'killed' to integer for comparison
+df['killed'] = pd.to_numeric(df['killed'])
+# Find the place with maximum killed
+max_killed_place = df.loc[df['killed'].idxmax(), 'place']
+print(f"Final Answer: {max_killed_place}")
+```

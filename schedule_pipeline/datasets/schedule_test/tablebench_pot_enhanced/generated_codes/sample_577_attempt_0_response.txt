@@ -1,0 +1,19 @@
+Step 1: The user wants the average mintage (proof) for coins issued in the first 5 years of the 2000s, i.e., from 2000 to 2004.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'year' is between 2000 and 2004 inclusive.
+Step 4: Convert 'mintage (proof)' column to numeric, handling 'n/a' as NaN.
+Step 5: Calculate the mean of the filtered mintage (proof) values.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years 2000 to 2004
+filtered_df = df[df['year'].astype(int).between(2000, 2004)]
+# Convert 'mintage (proof)' to numeric, coercing errors to NaN
+filtered_df['mintage (proof)'] = pd.to_numeric(filtered_df['mintage (proof)'], errors='coerce')
+# Calculate average mintage (proof)
+avg_mintage = filtered_df['mintage (proof)'].mean()
+print(f"Final Answer: {avg_mintage:.1f}")
+```

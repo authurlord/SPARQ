@@ -1,0 +1,30 @@
+The question asks for an expected number of candidates fielded and the percentage of the popular vote in the next election cycle, based on observed trends from 1983 to 2009.
+
+Step 1: Analyze the trend in "candidates fielded" and "% of popular vote" over time.
+- "Candidates fielded" increases from 4 (1983) to 85 (2009), showing a clear upward trend.
+- "% of popular vote" increases from 0.19% (1983) to 12.39% (2001), then slightly drops to 9.17% (2005) and 8.21% (2009), suggesting a peak around 2001.
+
+Step 2: Since the data shows a steady increase in the number of candidates and a peak in popular vote share around 2001, we can reasonably assume that:
+- The number of candidates fielded will continue to grow, possibly following a linear trend.
+- The percentage of popular vote may stabilize or slightly decrease after 2001 due to diminishing returns or increased competition.
+
+Step 3: Use linear interpolation to estimate the next value (post-2009).
+
+We will:
+- Fit a linear regression model to "candidates fielded" and "% of popular vote" over years.
+- Predict values for the next election (2015 or 2020) — we'll use 2015 as a reasonable next cycle.
+
+However, since the question is about "expected" values and no specific year is given, we can simply project the trend using the last few points.
+
+Let’s calculate:
+- The number of candidates fielded increases from 4 to 85 over 26 years → average increase of ~3.27 per year.
+- From 2009 onward, the number of candidates could be projected as 85 + 3.27 = 88.27 (~88).
+- For popular vote, the peak was in 2001 (12.39%), then declined. A reasonable expectation might be a slight decrease or stabilization around 8–9%.
+
+But since the question does not specify a future year, and we lack data to confirm a clear trend in the percentage, we will base our answer on the most recent data and the trend.
+
+Final estimation:
+- Candidates fielded: around 90 (slight increase beyond 2009)
+- % of popular vote: around 8.5% (slightly below peak, stabilizing)
+
+Final Answer: 90, 8.5%

@@ -1,0 +1,20 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Initialize variables to store result
+result_player = None
+result_year = None
+
+# Loop through each row to find a player who won both men's singles and men's doubles
+for index, row in df.iterrows():
+    men_singles_winner = row["men 's singles"]
+    men_doubles_winners = row["men 's doubles"].split(" ")
+    
+    # Check if the men's singles winner is in the men's doubles winners
+    if men_singles_winner in men_doubles_winners:
+        result_player = men_singles_winner
+        result_year = row['year']
+        break
+
+print(f"Final Answer: {result_player}, {result_year}")

@@ -1,0 +1,15 @@
+Step 1: The user wants to find the election year with the highest percentage of party list votes.  
+Step 2: Load the dataframe.  
+Step 3: Extract the '% of party list votes' column.  
+Step 4: Identify the row with the maximum value in that column and retrieve the corresponding 'Election year'.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the election year with the highest percentage of party list votes
+max_party_list_votes = df['% of party list votes'].max()
+year_with_max_votes = df[df['% of party list votes'] == max_party_list_votes]['Election year'].values[0]
+print(f"Final Answer: {year_with_max_votes}")
+```

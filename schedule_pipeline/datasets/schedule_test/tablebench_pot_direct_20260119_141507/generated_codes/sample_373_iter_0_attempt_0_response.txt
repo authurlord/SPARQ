@@ -1,0 +1,19 @@
+Step 1: Identify the seasons in which Liverpool played in the Premier League.  
+From the table, the "League" column indicates the league name. We are interested in rows where "League" is "Premier League".  
+
+Step 2: Filter the rows where "League" equals "Premier League".  
+The "Season" column will then list the corresponding seasons.  
+
+Step 3: Count the number of such seasons.  
+
+Python code to perform the analysis:
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'League' is 'Premier League' and the club is 'Liverpool'
+premier_league_liverpool = df[(df['Club'] == 'Liverpool') & (df['League'] == 'Premier League')]
+# Count the number of such seasons
+season_count = len(premier_league_liverpool)
+print(f"Final Answer: {season_count}")
+```

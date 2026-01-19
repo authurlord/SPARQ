@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Model, Launch, Code name, Fab (nm), Bus interface, Memory (MiB), Core clock (MHz), Memory clock (MHz), Config core1, Fillrate MOperations/s, Fillrate MPixels/s, Fillrate MTextels/s, Fillrate MVertices/s, Memory Bandwidth (GB/s), Memory Bus type, Memory Bus width (bit), DirectX support

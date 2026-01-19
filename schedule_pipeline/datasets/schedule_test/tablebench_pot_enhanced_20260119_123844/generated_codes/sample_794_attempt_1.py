@@ -1,0 +1,17 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Sort by 'troops per one million population' in descending order
+df_sorted = df.sort_values('troops per one million population', ascending=False)
+
+# Get the top two countries
+top_country = df_sorted.iloc[0]['country']
+second_country = df_sorted.iloc[1]['country']
+top_value = df_sorted.iloc[0]['troops per one million population']
+second_value = df_sorted.iloc[1]['troops per one million population']
+
+# Calculate percentage difference
+percentage_difference = ((top_value - second_value) / second_value) * 100
+
+print(f"Final Answer: {top_country}, {percentage_difference:.2f}")

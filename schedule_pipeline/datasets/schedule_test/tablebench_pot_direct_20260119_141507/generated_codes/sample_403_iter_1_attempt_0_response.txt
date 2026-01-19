@@ -1,0 +1,3 @@
+The question asks for a description of the table's contents, explanation of column significance, and identification of notable trends or patterns — this is a qualitative analysis, not a numerical computation. Therefore, I will provide a clear, concise written analysis instead of executing Python code for statistical output.
+
+Final Answer: tourist arrivals, tourism receipts, per arrival and per capita revenue, GDP and export share, competitiveness index

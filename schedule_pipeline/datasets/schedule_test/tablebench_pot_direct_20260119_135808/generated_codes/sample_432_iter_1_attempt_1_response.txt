@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains data on marriages in various years, including marriages between men, marriages between women, same-sex marriages, total marriages, and the percentage of same-sex marriages. The main columns are: 'year', 'marriages between men', 'marriages between women', 'same-sex marriages', 'total marriages', and '% same-sex marriages'. Over the years, there is an increasing trend in same-sex marriages, both in absolute numbers and as a percentage of total marriages, indicating growing acceptance and participation in same-sex marriages.

@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The human development index (2000) shows a positive correlation with population density (/ km²) across municipalities, particularly in areas with larger land areas. Municipalities with higher HDI values tend to have higher population densities, suggesting that improved human development is associated with more concentrated populations, especially in larger regions. This pattern is evident in the data where municipalities like Querétaro (HDI: 0.856, density: 966.1) and Corregidora (HDI: 0.8535, density: 424.0) have both high HDI and relatively high population densities despite differences in area. Conversely, smaller municipalities with lower HDI values (e.g., Arroyo Seco, HDI: 0.7029, density: 17.1) show low population densities. Thus, HDI appears to influence population density, especially in larger municipalities.
+
+Final Answer: Positive correlation observed

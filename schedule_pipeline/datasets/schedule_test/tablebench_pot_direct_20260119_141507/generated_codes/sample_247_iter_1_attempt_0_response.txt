@@ -1,0 +1,24 @@
+The error occurred because the "percentage lost" column contains values with percentage signs (e.g., "43.68%"), which cannot be directly converted to numeric. We need to extract only the numeric part (remove the % sign) and convert it to a float.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter the top 3 contestants who lost the most weight in kilograms (i.e., highest "weight lost").
+3. Extract the "percentage lost" value by removing the '%' symbol and converting to float.
+4. Compute the average of these percentages.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Sort by 'weight lost' in descending order and take top 3
+top_3 = df.sort_values(by='weight lost', ascending=False).head(3)
+
+# Extract percentage lost (remove '%' and convert to float)
+percentage_lost = top_3['percentage lost'].str.replace('%', '', regex=False).astype(float)
+
+# Calculate average
+average_percentage = percentage_lost.mean()
+
+print(f"Final Answer: {average_percentage:.2f}")
+```

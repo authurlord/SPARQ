@@ -1,0 +1,19 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Clean the 'Earnings (US$)' column by removing commas and converting to float
+df['Earnings (US$)'] = df['Earnings (US$)'].str.replace(',', '').astype(float)
+
+# Plot the line chart
+plt.figure(figsize=(10, 6))
+plt.plot(df['Year'], df['Earnings (US$)'], marker='o', linestyle='-', color='b')
+plt.title('Earnings (US$) from 2002 to 2010')
+plt.xlabel('Year')
+plt.ylabel('Earnings (US$)')
+plt.grid(True)
+plt.xticks(df['Year'])
+plt.tight_layout()
+plt.show()
+
+# Final Answer is not required since the task is to draw a chart

@@ -1,0 +1,34 @@
+[Answer Format]
+Final Answer: 50.8, 38.2
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('table.csv')
+
+# Filter data by fuel type
+diesel_mpg = df[df['Fuel Type'] == 'diesel']['mpg (US gallons)'].astype(float)
+petrol_mpg = df[df['Fuel Type'] == 'petrol']['mpg (US gallons)'].astype(float)
+
+# Calculate average mpg for each fuel type
+avg_diesel_mpg = diesel_mpg.mean()
+avg_petrol_mpg = petrol_mpg.mean()
+
+# Create a bar chart
+plt.figure(figsize=(8, 6))
+fuel_types = ['Diesel', 'Petrol']
+mpg_values = [avg_diesel_mpg, avg_petrol_mpg]
+plt.bar(fuel_types, mpg_values, color=['skyblue', 'lightcoral'])
+plt.title('Average MPG by Fuel Type')
+plt.xlabel('Fuel Type')
+plt.ylabel('Average MPG (US gallons)')
+plt.ylim(0, 60)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Show the chart
+plt.show()
+
+# Print the final answer
+print(f"Final Answer: {avg_diesel_mpg:.1f}, {avg_petrol_mpg:.1f}")
+```

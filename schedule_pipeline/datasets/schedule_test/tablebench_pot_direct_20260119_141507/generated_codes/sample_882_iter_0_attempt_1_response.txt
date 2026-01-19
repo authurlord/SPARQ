@@ -1,0 +1,32 @@
+Step 1: The user wants to find the season in which Liverpool scored the highest total number of goals in the Premier League.  
+Step 2: Identify the relevant columns: "Season" and "Total" (which includes goals from all competitions), but we need only the "Goals" column under "Premier League" or specifically labeled as such.  
+Step 3: Filter rows where the "League" is "Premier League" and the club is "Liverpool".  
+Step 4: Extract the "Goals" value for each season and find the season with the maximum goals.  
+Step 5: Return that season.
+
+Note: Looking at the table, the "Goals" for Premier League matches are in the "Goals" column under "League_2" or "League Cup", but actually, the structure shows "Goals" under "League_2" (e.g., "League_2" column) for the Premier League. However, in the data, the "Goals" column for Premier League appears in "League_2" and "League Cup" etc. But looking closely, the "Goals" for Premier League is listed under "League_2" (e.g., "Goals" in "League_2" column). However, the row headers suggest that "League_2" corresponds to the "Premier League" when the "League" is "Premier League".
+
+But actually, the "Goals" for Premier League is in the "League_2" column (i.e., the 6th column: "League_2" has "Goals"). So we extract the "Goals" from "League_2" for Liverpool in Premier League seasons.
+
+Step-by-step:
+- Filter rows where Club == 'Liverpool' and League == 'Premier League'
+- Take the "Goals" from "League_2" column (which is the 6th column, index 5)
+- Find the season with maximum "Goals"
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter Liverpool's Premier League seasons
+liverpool_premier = df[(df['Club'] == 'Liverpool') & (df['League'] == 'Premier League')]
+
+# Extract the season and goals (from League_2 column, which has Goals)
+goals = liverpool_premier['League_2'].astype(float)
+seasons = liverpool_premier['Season']
+
+# Find the season with maximum goals
+max_goals_idx = goals.idxmax()
+max_season = seasons.iloc[goals.idxmax()]
+
+print(f"Final Answer: {max_season}")
+```

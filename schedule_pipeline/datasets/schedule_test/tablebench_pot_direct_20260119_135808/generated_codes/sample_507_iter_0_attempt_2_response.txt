@@ -1,0 +1,30 @@
+Step 1: Filter the data for the "olympic trials" competition in 2008.
+Step 2: For each event, calculate the average of the final score and qualifying score.
+Step 3: Identify the event with the highest average.
+Step 4: Print the result.
+
+Note: Since scores are strings, they need to be converted to float. Also, handle 'dnq' (did not qualify) by skipping it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for 2008 Olympic Trials
+trials_data = df[df['competition'] == 'olympic trials']
+
+# Convert final and qualifying scores to float, handling 'dnq' and 'n/a'
+trials_data['final_score'] = pd.to_numeric(trials_data['final - score'], errors='coerce')
+trials_data['qualifying_score'] = pd.to_numeric(trials_data['qualifying score'], errors='coerce')
+
+# Drop rows where scores are invalid (e.g., dnq)
+valid_data = trials_data.dropna(subset=['final_score', 'qualifying_score'])
+
+# Calculate Event Score Average
+valid_data['event_score_avg'] = (valid_data['final_score'] + valid_data['qualifying_score']) / 2
+
+# Find the event with the highest average
+highest_avg_event = valid_data.loc[valid_data['event_score_avg'].idxmax()]['event']
+
+print(f"Final Answer: {highest_avg_event}")
+```

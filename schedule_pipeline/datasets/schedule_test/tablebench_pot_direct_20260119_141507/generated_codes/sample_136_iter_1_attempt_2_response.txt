@@ -1,0 +1,48 @@
+The error occurred because the column names in the DataFrame were not properly recognized — specifically, "Operating revenue" and "2018 Operating revenue" are not directly available as columns due to how the data is structured. The table has rows with headers like "Operating revenue", "Income from operations", etc., and then a separate row labeled "2018 Operating revenue". This means we need to extract the values for "Operating revenue" and "2018 Operating revenue" from their respective rows.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Identify the relevant rows: 
+   - "Operating revenue" row (for the 2018 non-year values)
+   - "2018 Operating revenue" row (for the 2018 year values)
+3. Extract the quarterly values for both.
+4. Create a DataFrame with quarters as index and two columns: one for the operating revenue (non-2018), one for 2018.
+5. Plot a line chart using matplotlib to visualize the trend.
+
+Note: The quarters are listed in the first row under "Quarter Ended March 31", etc.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the quarters (as index)
+quarters = ['Quarter Ended March 31', 'Quarter Ended June 30', 'Quarter Ended September 30', 'Quarter Ended December 31']
+
+# Extract the operating revenue values
+operating_revenue = df[df['Row Header'] == 'Operating revenue'][quarters].iloc[0].astype(float)
+twenty_eight_operating_revenue = df[df['Row Header'] == '2018 Operating revenue'][quarters].iloc[0].astype(float)
+
+# Create a DataFrame for plotting
+data = pd.DataFrame({
+    'Operating Revenue': operating_revenue,
+    '2018 Operating Revenue': twenty_eight_operating_revenue
+}, index=quarters)
+
+# Plot the line chart
+plt.figure(figsize=(10, 6))
+plt.plot(data.index, data['Operating Revenue'], marker='o', label='Operating Revenue (Non-2018)', color='blue')
+plt.plot(data.index, data['2018 Operating Revenue'], marker='s', label='2018 Operating Revenue', color='red')
+plt.title('Company Operating Revenue Over Quarters')
+plt.xlabel('Quarter')
+plt.ylabel('Operating Revenue ($)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+# Final Answer: The chart is generated and displayed.
+Final Answer: chart_generated
+```

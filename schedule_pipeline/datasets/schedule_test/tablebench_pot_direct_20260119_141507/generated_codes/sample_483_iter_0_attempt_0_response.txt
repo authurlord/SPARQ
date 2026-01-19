@@ -1,0 +1,50 @@
+Step 1: The user wants to identify data points in the 'whenbuilt' column that deviate significantly from the norm.  
+Step 2: "Deviate significantly" suggests outliers — values that are far from the majority of the data.  
+Step 3: We will convert the 'whenbuilt' column to a consistent format (e.g., extract year, handle non-standard entries like 'abc', 'march 1950', 'april 1950').  
+Step 4: Convert all entries to numeric years where possible.  
+Step 5: Identify values that are either very early (e.g., 1234) or inconsistent (e.g., 'abc') or missing.  
+Step 6: Print any such anomalies.
+
+Note: 'abc' is clearly invalid and not a year. '1234' is an outlier as it's far earlier than the rest (which are mostly 1948–1951). Other entries like 'march 1950' can be parsed into 1950.
+
+We'll parse 'whenbuilt' to extract year, and flag any that are not valid or extreme.
+
+```python
+import pandas as pd
+import re
+
+df = pd.read_csv('table.csv')
+
+# Function to extract year from whenbuilt
+def extract_year(whenbuilt):
+    if pd.isna(whenbuilt):
+        return None
+    if isinstance(whenbuilt, str):
+        # Match patterns like '1948', 'march 1950', 'april 1950', etc.
+        match = re.search(r'(\d{4})', whenbuilt)
+        if match:
+            return int(match.group(1))
+        # Check for known non-year strings
+        if whenbuilt == 'abc':
+            return None
+        if whenbuilt == '1234':
+            return 1234
+    return None
+
+# Apply the function
+df['year'] = df['whenbuilt'].apply(extract_year)
+
+# Identify outliers: values that are extremely early or invalid
+outliers = df[(df['year'] == 1234) | (df['year'].isna()) | (df['year'] < 1940)]
+
+# Extract the original name and whenbuilt for these rows
+anomalous_entries = []
+for _, row in outliers.iterrows():
+    anomalous_entries.append({
+        'name': row['name'],
+        'whenbuilt': row['whenbuilt'],
+        'year': row['year']
+    })
+
+print(f"Final Answer: {anomalous_entries}")
+```

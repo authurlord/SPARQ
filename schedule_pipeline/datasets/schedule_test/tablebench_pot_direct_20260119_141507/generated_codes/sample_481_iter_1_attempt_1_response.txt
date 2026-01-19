@@ -1,0 +1,59 @@
+We are tasked with identifying which breeds have unusually high or low registrations in specific years.  
+
+Step-by-step approach:
+1. The data includes registrations for different breeds across three years: 2002, 2005, and 2011.
+2. "Unusually high or low" can be interpreted as outliers — values that are significantly above or below the mean or median of the respective year's registrations.
+3. We will calculate the mean and standard deviation for each year per breed, then identify values that are more than 2 standard deviations away from the mean (common outlier detection method).
+4. For clarity, we'll check for outliers in each year separately and report the breed names where such anomalies occur.
+
+Note: Since the dataset has multiple years, we will analyze each year independently to detect outliers.
+
+We will:
+- Load the data into a DataFrame.
+- Convert the registration columns (2002, 2005, 2011) to numeric.
+- For each year, compute the mean and standard deviation of registrations.
+- Identify breeds where any registration is more than 2 standard deviations from the mean (absolute z-score > 2).
+- Report the breed and year when an outlier occurs.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert registration columns to numeric
+df['2002 registrations'] = pd.to_numeric(df['2002 registrations'], errors='coerce')
+df['2005 registrations'] = pd.to_numeric(df['2005 registrations'], errors='coerce')
+df['2011 registrations'] = pd.to_numeric(df['2011 registrations'], errors='coerce')
+
+# List to store outlier findings
+outliers = []
+
+# Define function to detect outliers in a given year
+def detect_outliers(year_col, year_name):
+    # Extract the column for this year
+    year_data = df[year_col]
+    if year_data.isnull().all():
+        return []
+    
+    mean_val = year_data.mean()
+    std_val = year_data.std()
+    if std_val == 0:
+        return []
+    
+    # Find values more than 2 standard deviations from the mean
+    z_scores = np.abs((year_data - mean_val) / std_val)
+    outliers_in_year = year_data[z_scores > 2].index
+    outlier_breeds = df.loc[outliers_in_year, 'breed'].tolist()
+    return [(breed, year_name) for breed in outlier_breeds]
+
+# Detect outliers for each year
+outlier_results = []
+outlier_results.extend(detect_outliers('2002 registrations', '2002'))
+outlier_results.extend(detect_outliers('2005 registrations', '2005'))
+outlier_results.extend(detect_outliers('2011 registrations', '2011'))
+
+# Final answer: list of (breed, year) pairs with outliers
+print(f"Final Answer: {', '.join([f'{breed} in {year}' for breed, year in outlier_results])}")
+```

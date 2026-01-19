@@ -1,0 +1,7 @@
+Step 1: The user wants to determine which factor — live births per year or deaths per year — is the primary driver of the natural change per year.  
+Step 2: Natural change per year is calculated as: live births per year − deaths per year.  
+Step 3: Therefore, the natural change is directly derived from both live births and deaths. To identify which is the primary driver, we can examine the contribution of each to the natural change.  
+Step 4: Since natural change = live births − deaths, the live births contribute positively and deaths negatively. Thus, the live births are the primary driver in increasing natural change, while deaths reduce it.  
+Step 5: We can confirm this by observing that when live births increase, natural change increases, and when deaths increase, natural change decreases. Hence, live births are the primary driver.  
+
+Final Answer: live births per year

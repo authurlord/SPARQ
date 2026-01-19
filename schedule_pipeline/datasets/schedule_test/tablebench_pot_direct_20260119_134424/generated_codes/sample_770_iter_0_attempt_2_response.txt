@@ -1,0 +1,12 @@
+Step 1: The user is asking about the trend in issue price over time. We need to analyze the 'issue price' column across the 'year' column.
+Step 2: Load the dataframe.
+Step 3: Convert 'issue price' to float for numerical analysis.
+Step 4: Check if there's a consistent increase, decrease, or stability in the issue price over the years.
+Step 5: Based on the pattern, infer the expected trend for the next 5 years.
+
+From the data:
+- Issue prices start at $39.95 (2002), remain constant until 2006 ($44.95), then increase gradually to $49.95 by 2012.
+- The price increases by $5.00 over 10 years (from 2002 to 2012), which is approximately $0.50 per year.
+- Assuming the trend continues, we expect a further increase of about $2.50 in the next 5 years.
+
+Final Answer: increasing

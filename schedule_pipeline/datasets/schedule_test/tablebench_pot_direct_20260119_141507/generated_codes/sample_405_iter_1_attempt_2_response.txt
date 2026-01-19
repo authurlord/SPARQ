@@ -1,0 +1,20 @@
+Step 1: Understand the table structure and content.  
+The table contains information about power plants, including their name, location (state), commissioned capacity in megawatts (MW), and the year they were commissioned.
+
+Step 2: Identify the main columns:  
+- sno: Serial number of the power plant  
+- power plant: Name of the power plant  
+- state: State where the power plant is located  
+- commissioned capacity (MW): Total power generation capacity in megawatts  
+- year of commission: Year when the plant was commissioned  
+
+Step 3: Provide basic insights:  
+- The data spans from 1981 to 2012, showing a long-term development of power infrastructure.  
+- The highest capacity plant is Indira Sagar (1000 MW), located in Madhya Pradesh.  
+- Himachal Pradesh has the most plants (4), followed by Jammu & Kashmir (5), and Madhya Pradesh (2).  
+- The capacity ranges from 60 MW (Rangit) to 1000 MW (Indira Sagar), indicating significant variation.  
+- Most plants were commissioned between 1980 and 2010, with a concentration in the 1990s and early 2000s.  
+
+Step 4: Since the question asks for a descriptive explanation, no calculation or statistical output is required — just a clear summary.
+
+Final Answer: sno, power plant, state, commissioned capacity (mw), year of commission

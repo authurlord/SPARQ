@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: epoch (utc): january 1 , 2005 , 00:00:00.0, eccentricity: 0.99999, inclination (deg) (to moon equator): 150.0, periselene (km): 10000.0, aposelene (km): 100000.0

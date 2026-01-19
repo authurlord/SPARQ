@@ -1,0 +1,26 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the Power output (hp) row and corresponding models
+power_row = df[df['Model'] == 'Power output (hp)'].iloc[0]
+models = df['Model'].tolist()[0]  # First row is the header
+power_values = power_row.values[1:]  # Exclude the first column (Model)
+
+# Function to extract max power from strings like '200/235'
+def extract_max_power(power_str):
+    if '/' in power_str:
+        return max(map(int, power_str.split('/')))
+    return int(power_str)
+
+# Convert power values to numeric
+power_numeric = [extract_max_power(p) for p in power_values]
+
+# Create a dictionary of model and power
+model_power = dict(zip(df.columns[1:], power_numeric))
+
+# Sort by power output in descending order
+sorted_models = sorted(model_power.items(), key=lambda x: x[1], reverse=True)
+
+# Print the ranked models
+ranked_models = [f"{model}" for model, _ in sorted_models]
+print(f"Final Answer: {', '.join(ranked_models)}")

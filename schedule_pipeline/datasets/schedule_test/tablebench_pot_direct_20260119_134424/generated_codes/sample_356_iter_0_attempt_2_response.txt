@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of diesel cars listed in the table.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Fuel Type' is 'diesel'.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'Fuel Type' is 'diesel'
+diesel_cars = df[df['Fuel Type'] == 'diesel']
+# Count the number of diesel cars
+num_diesel_cars = len(diesel_cars)
+print(f"Final Answer: {num_diesel_cars}")
+```

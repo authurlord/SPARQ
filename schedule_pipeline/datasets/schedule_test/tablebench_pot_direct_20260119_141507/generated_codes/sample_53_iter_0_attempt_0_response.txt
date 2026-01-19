@@ -1,0 +1,6 @@
+Step 1: The user is asking which nation has a total of 13 medals.  
+Step 2: Look at the 'total' column in the table. The row with 'total' as the nation has a total of 64 medals, which is not relevant.  
+Step 3: Check each nation's 'total' value. The first row shows South Korea with a total of 13 medals.  
+Step 4: Confirm that no other nation has 13 medals.  
+
+Final Answer: south korea

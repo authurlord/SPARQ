@@ -1,0 +1,26 @@
+Step 1: Calculate the lock density for each canal using the formula: Locks / Length (miles).
+Step 2: Handle missing values by dropping rows where either 'Length (miles)' or 'Locks' is missing.
+Step 3: Compute the lock density for each canal.
+Step 4: Identify the canal with the highest lock density.
+Step 5: Output the name of the canal with the highest lock density.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Drop rows with missing values in 'Length (miles)' or 'Locks'
+df.dropna(subset=['Length (miles)', 'Locks'], inplace=True)
+
+# Convert columns to numeric
+df['Length (miles)'] = pd.to_numeric(df['Length (miles)'])
+df['Locks'] = pd.to_numeric(df['Locks'])
+
+# Calculate lock density
+df['Lock Density'] = df['Locks'] / df['Length (miles)']
+
+# Find the canal with the highest lock density
+max_density_canal = df.loc[df['Lock Density'].idxmax()]['Canal']
+
+print(f"Final Answer: {max_density_canal}")
+```

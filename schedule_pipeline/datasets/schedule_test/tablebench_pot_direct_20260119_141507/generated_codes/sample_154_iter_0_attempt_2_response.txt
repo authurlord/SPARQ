@@ -1,0 +1,27 @@
+Step 1: The user wants to determine which factors (preliminaries, interview, swimsuit, evening gown) significantly influence the 'average' score.  
+Step 2: We will check the correlation between each factor and the 'average' column.  
+Step 3: If any factor has a strong correlation (e.g., absolute correlation > 0.7), it is considered to significantly influence the average.  
+Step 4: Otherwise, if no factor shows strong correlation, return "no clear impact".
+
+We calculate the Pearson correlation coefficient between each factor and the 'average' column.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select the relevant columns
+columns_to_check = ['preliminaries', 'interview', 'swimsuit', 'evening gown']
+average_col = 'average'
+
+# Calculate correlation with average for each factor
+correlations = df[columns_to_check].corrwith(df[average_col])
+
+# Find which factors have correlation absolute value > 0.7
+significant_factors = [col for col in columns_to_check if abs(correlations[col]) > 0.7]
+
+if significant_factors:
+    print(f"Final Answer: {', '.join(significant_factors)}")
+else:
+    print("Final Answer: no clear impact")
+```

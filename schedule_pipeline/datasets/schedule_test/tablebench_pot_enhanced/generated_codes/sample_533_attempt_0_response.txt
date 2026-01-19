@@ -1,0 +1,99 @@
+Step 1: The population dependency ratio is defined as (population aged 0-10 + population aged 60+) / (population aged 11-59).
+
+Step 2: From the table, extract the population values:
+- Population aged 0-9: 41
+- Population aged 10-19: 45 → so 0-10 includes 0-9 and part of 10-19. Since we don't have exact 0-10, assume 0-10 ≈ 0-9 + 10 (approximate half of 10-19). But since the data is in whole numbers and no finer breakdown, use 0-9 (41) and 10-19 (45) to estimate 0-10 as 41 + (45/2) = 41 + 22.5 = 63.5.
+- However, the standard approach is to take 0-9 and 10-19 together as 0-19, but the question specifies 0-10 and 60+.
+
+But note: the data has "0-9" and "10-19". Since "0-10" isn't directly given, we can interpret "0-10" as "0-9" plus the first year of "10-19", which is roughly half of "10-19". So 0-10 ≈ 41 + 45/2 = 41 + 22.5 = 63.5.
+
+- Population aged 60-69: 20
+- Population aged 70-79: 24
+- Population aged 80+: 14
+→ Total aged 60+ = 20 + 24 + 14 = 58
+
+- Population aged 11-59:
+  - 10-19: 45 → subtract the first year (approx 22.5) → 22.5 left for 11-19
+  - 20-29: 47
+  - 30-39: 27
+  - 40-49: 38
+  - 50-59: 31
+→ Total 11-59 = 22.5 + 47 + 27 + 38 + 31 = 165.5
+
+Step 3: Compute dependency ratio = (63.5 + 58) / 165.5 = 121.5 / 165.5 ≈ 0.734
+
+Step 4: Round to approximate value.
+
+Alternatively, if we assume "0-10" means 0-9 and 10-10 (i.e., 0-9 + 10-19 up to age 10), it's ambiguous. But in demographic studies, "0-10" is often approximated by summing 0-9 and a portion of 10-19. Since no finer data, use 0-9 + 10-19 * (1/10) → 41 + 45*(1/10) = 41 + 4.5 = 45.5? That seems too low.
+
+Better interpretation: "0-10" likely refers to ages 0–10 inclusive. Since 10-19 is a group of 10 years, we can assume 10-year-olds are evenly distributed. So 10-year-olds = 45 / 10 = 4.5 per year. Then 0-10 = 0-9 (41) + 10-year-olds (4.5) = 45.5.
+
+Similarly, 60+ = 60-69 (20) + 70-79 (24) + 80+ (14) = 58.
+
+11-59:
+- 11-19: 45 total, minus 10-year-olds (4.5) = 40.5
+- 20-29: 47
+- 30-39: 27
+- 40-49: 38
+- 50-59: 31
+Total = 40.5 + 47 + 27 + 38 + 31 = 183.5
+
+Then dependency ratio = (45.5 + 58) / 183.5 = 103.5 / 183.5 ≈ 0.564
+
+But this contradicts the earlier assumption.
+
+Wait — the data is in whole numbers and the "POPULATION (by age group in 2002)" columns are already given as totals per group. The groups are:
+- 0-9: 41
+- 10-19: 45
+- 20-29: 47
+- 30-39: 27
+- 40-49: 38
+- 50-59: 31
+- 60-69: 20
+- 70-79: 24
+- 80+: 14
+
+So:
+- Population aged 0-10: 0-9 (41) + 10-year-olds (assume 1/10 of 10-19) → 41 + 4.5 = 45.5
+- Population aged 60+: 60-69 (20) + 70-79 (24) + 80+ (14) = 58
+→ Total dependent = 45.5 + 58 = 103.5
+
+Population aged 11-59:
+- 11-19: 45 - 4.5 = 40.5
+- 20-29: 47
+- 30-39: 27
+- 40-49: 38
+- 50-59: 31
+→ Total = 40.5 + 47 + 27 + 38 + 31 = 183.5
+
+Dependency ratio = 103.5 / 183.5 ≈ 0.564 → approximately 0.56
+
+But let’s reconsider: the question says "0-10", which may mean 0–10 inclusive. Since the group is 10-19, and we don’t have individual ages, the best approximation is to take 0-9 and assume 10-year-olds are 1/10 of the 10-19 group.
+
+Thus:
+- 0-10 = 41 + (45 / 10) = 41 + 4.5 = 45.5
+- 60+ = 20 + 24 + 14 = 58
+- 11-59 = (45 - 4.5) + 47 + 27 + 38 + 31 = 40.5 + 47 + 27 + 38 + 31 = 183.5
+
+Ratio = (45.5 + 58) / 183.5 = 103.5 / 183.5 ≈ 0.564 → round to two decimals: 0.56
+
+But let's double-check with another method: sometimes "0-10" is interpreted as 0-9 and 10-10, so only 0-9 and the first year of 10-19. So 41 + 4.5 = 45.5.
+
+Alternatively, if the data is discrete and "0-10" is not a group, we must use the available data.
+
+Final decision: Use 0-10 = 41 + 4.5 = 45.5, 60+ = 58, 11-59 = 183.5, ratio ≈ 0.56.
+
+However, note that the total population is 287. Let’s verify:
+0-9: 41
+10-19: 45
+20-29: 47
+30-39: 27
+40-49: 38
+50-59: 31
+60-69: 20
+70-79: 24
+80+: 14
+Sum = 41+45=86; +47=133; +27=160; +38=198; +31=229; +20=249; +24=273; +14=287 → correct.
+
+Now compute:
+- 0-1

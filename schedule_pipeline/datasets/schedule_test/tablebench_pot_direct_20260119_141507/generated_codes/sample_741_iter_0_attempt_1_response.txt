@@ -1,0 +1,29 @@
+Step 1: The user wants to forecast the number of Indians and Bangladeshis admitted in 2013 based on trends from 2000 to 2012.  
+Step 2: We will calculate the annual trend (growth rate) for Indians and Bangladeshis separately.  
+Step 3: Use linear regression or simple average growth to project the value for 2013. Since the data is not clearly linear, we will use a simple average growth rate over the period.  
+Step 4: Compute the average yearly increase in admissions for Indians and Bangladeshis from 2000 to 2012.  
+Step 5: Add this growth to the 2012 value to predict 2013.  
+
+We'll use the last year (2012) as the base and apply the average annual change.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns
+indians = df['indians admitted']
+bangladeshis = df['bangladeshis admitted']
+
+# Calculate the average annual change from 2000 to 2012
+years = df['year'].astype(int)
+annual_change_indians = (indians.iloc[-1] - indians.iloc[0]) / (2012 - 2000)
+annual_change_bangladeshis = (bangladeshis.iloc[-1] - bangladeshis.iloc[0]) / (2012 - 2000)
+
+# Forecast 2013 values
+forecast_indians = indians.iloc[-1] + annual_change_indians
+forecast_bangladeshis = bangladeshis.iloc[-1] + annual_change_bangladeshis
+
+print(f"Final Answer: {forecast_indians:.0f}, {forecast_bangladeshis:.0f}")
+```

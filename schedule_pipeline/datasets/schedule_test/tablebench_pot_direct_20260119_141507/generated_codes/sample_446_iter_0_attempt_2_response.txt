@@ -1,0 +1,46 @@
+Step 1: The question asks for member countries whose population or GDP per capita deviates significantly from the norm. "Significantly deviate" implies outliers — values that are far from the mean or median.
+
+Step 2: We will calculate the mean and standard deviation of population and GDP per capita. Then, identify countries where population or GDP per capita is more than 2 standard deviations away from the mean (common outlier rule).
+
+Step 3: Since there are duplicate entries (e.g., Luxembourg and Netherlands), we first deduplicate by member country and ensure we're analyzing unique entries.
+
+Step 4: Use the z-score method to detect outliers in both population and GDP per capita.
+
+Step 5: Print the list of such countries.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Remove duplicates based on 'member countries'
+df = df.drop_duplicates(subset='member countries')
+
+# Convert population and GDP per capita to numeric
+df['population'] = pd.to_numeric(df['population'], errors='coerce')
+df['gdp per capita (us)'] = pd.to_numeric(df['gdp per capita (us)'], errors='coerce')
+
+# Drop rows with NaN after conversion
+df = df.dropna(subset=['population', 'gdp per capita (us)'])
+
+# Calculate mean and std for population and GDP per capita
+mean_pop = df['population'].mean()
+std_pop = df['population'].std()
+mean_gdp_per_capita = df['gdp per capita (us)'].mean()
+std_gdp_per_capita = df['gdp per capita (us)'].std()
+
+# Identify outliers using z-score: |z| > 2
+outliers_pop = df[(np.abs((df['population'] - mean_pop) / std_pop) > 2)]
+outliers_gdp = df[(np.abs((df['gdp per capita (us)'] - mean_gdp_per_capita) / std_gdp_per_capita) > 2)]
+
+# Combine unique countries that are outliers in either metric
+outlier_countries = set()
+for country in outliers_pop['member countries']:
+    outlier_countries.add(country)
+for country in outliers_gdp['member countries']:
+    outlier_countries.add(country)
+
+# Convert to list and print
+print(f"Final Answer: {', '.join(outlier_countries)}")
+```

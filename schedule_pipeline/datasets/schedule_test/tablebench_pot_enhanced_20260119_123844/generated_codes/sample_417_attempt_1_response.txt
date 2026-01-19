@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Model, Launch, Code name, Fab (nm), Bus interface, Memory (MiB), Core clock (MHz), Memory clock (MHz), Config core1, Fillrate MOperations/s, Fillrate MPixels/s, Fillrate MTextels/s, Fillrate MVertices/s, Memory Bandwidth (GB/s), Memory Bus type, Memory Bus width (bit), DirectX support, Voodoo Graphics, Voodoo2, Voodoo Banshee, Velocity 100, Velocity 200, Voodoo3 1000, Voodoo3 2000, Voodoo3 3000, Voodoo3 3500 TV, Voodoo4 4200, Voodoo4 4500, Voodoo4 4800, Voodoo5 5000, Voodoo5 5500, Voodoo5 6000, Spectre 1000, Spectre 2000, Spectre 3000

@@ -1,0 +1,16 @@
+Step 1: The user wants to find the municipality with the highest population of Spanish speakers.
+Step 2: Load the dataframe.
+Step 3: Identify the column for 'spanish' and sum the values across all municipalities.
+Step 4: Find the municipality with the maximum value in the 'spanish' column.
+Step 5: Output the name of that municipality.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sum the 'spanish' column across all municipalities
+spanish_population = df['spanish'].astype(int).sum()
+# Find the municipality with the highest Spanish-speaking population
+max_spanish_municipality = df.loc[df['spanish'].idxmax(), 'language']
+print(f"Final Answer: {max_spanish_municipality}")
+```

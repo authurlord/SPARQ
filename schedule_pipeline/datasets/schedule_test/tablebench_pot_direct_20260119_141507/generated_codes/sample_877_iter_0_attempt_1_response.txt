@@ -1,0 +1,22 @@
+Step 1: The user wants to find the difference between the average July high temperature and the average January high temperature across all cities.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'January (avg high degree)' and 'July (avg high degree)' columns.  
+Step 4: Compute the mean of each column and find the difference.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert the temperature columns to numeric
+df['january (avg high degree)'] = pd.to_numeric(df['january (avg high degree)'], errors='coerce')
+df['july (avg high degree)'] = pd.to_numeric(df['july (avg high degree)'], errors='coerce')
+
+# Calculate mean high temperatures for January and July
+mean_jan_high = df['january (avg high degree)'].mean()
+mean_jul_high = df['july (avg high degree)'].mean()
+
+# Compute the difference
+temp_difference = mean_jul_high - mean_jan_high
+print(f"Final Answer: {temp_difference:.1f}")
+```

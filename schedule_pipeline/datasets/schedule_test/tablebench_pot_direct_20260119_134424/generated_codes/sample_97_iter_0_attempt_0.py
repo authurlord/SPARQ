@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Filter top 8 teams
+top_8_teams = df.iloc[:8]
+
+# Set up the bar chart
+plt.figure(figsize=(10, 6))
+bar_width = 0.8
+
+# Define positions for bars
+positions = range(len(top_8_teams))
+
+# Create stacked bars
+plt.bar(positions, top_8_teams['Won'], label='Wins', width=bar_width, color='green')
+plt.bar(positions, top_8_teams['Drawn'], label='Draws', width=bar_width, color='yellow', bottom=top_8_teams['Won'])
+plt.bar(positions, top_8_teams['Lost'], label='Losses', width=bar_width, color='red', bottom=top_8_teams['Won'] + top_8_teams['Drawn'])
+
+# Customize the chart
+plt.xlabel('Teams')
+plt.ylabel('Number of Games')
+plt.title('Wins, Draws, and Losses for Top 8 Ranked Teams')
+plt.xticks(positions, top_8_teams['Club'], rotation=45)
+plt.legend()
+
+# Show the chart
+plt.tight_layout()
+plt.show()

@@ -1,0 +1,23 @@
+The question asks for a description of the table's contents, the significance of each column, and notable trends or patterns — not a numerical computation. Therefore, a direct Python code execution to compute a value is unnecessary. Instead, we provide a clear, analytical explanation in natural language, as required by the question.
+
+Since the task is descriptive and not quantitative, there is no need to run code to extract a single value. We analyze the data manually and present the findings.
+
+### Analytical Approach:
+1. **Table Content**: The table contains data on 21 countries' tourism performance in 2011, including tourist arrivals, tourism receipts, per-arrival and per-capita income from tourism, tourism's share of GDP and exports, and a competitiveness index (TTCI).
+2. **Column Significance**:
+   - *Tourist arrivals (2011) (millions)*: Total number of tourists visiting the country.
+   - *Tourism receipts (2011) (millions of US)*: Total revenue generated from tourism.
+   - *Tourism receipts (2011) (US per arrival)*: Average revenue per tourist.
+   - *Tourism receipts (2011) (US per capita)*: Average revenue per person in the country.
+   - *Tourism receipts (2003) (as % of GDP)*: Proportion of national GDP contributed by tourism.
+   - *Tourism receipts (2003) (as % of exports)*: Proportion of national exports contributed by tourism.
+   - *Tourism competitiveness (2011) (TTCI)*: A measure of how competitive a country’s tourism sector is.
+3. **Notable Trends**:
+   - **High per-capita tourism income**: Costa Rica has the highest per-capita tourism income at $459, indicating high-value tourism despite relatively low arrivals.
+   - **Dominican Republic and Mexico** have high tourism receipts and significant per-capita income, with Mexico having the highest total arrivals (23.4 million), suggesting a large-scale tourism industry.
+   - **Per-capita tourism income correlates with competitiveness**: Countries like Uruguay and Chile show high per-capita tourism income and strong competitiveness (TTCI).
+   - **Low arrivals but high per-capita income**: Countries like Cuba and Haiti have small tourist numbers but still generate substantial per-capita income, though with missing data (N/A) for key metrics.
+   - **GDP share of tourism**: Costa Rica and the Dominican Republic have high shares (17.5% and 36.2%), indicating tourism is a major economic driver.
+   - **Mexico stands out** with the highest number of tourist arrivals, but lower per-arrival revenue ($507), suggesting a large volume-driven market.
+
+Final Answer: tourist arrivals, tourism receipts, per-arrival income, per-capita income, GDP share, export share, competitiveness

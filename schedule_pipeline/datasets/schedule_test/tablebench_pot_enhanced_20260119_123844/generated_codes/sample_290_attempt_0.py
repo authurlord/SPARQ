@@ -1,0 +1,14 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'a external (cm 2 )' to float for comparison
+df['a external (cm 2 )'] = pd.to_numeric(df['a external (cm 2 )'])
+# Find max and min external area
+max_area_row = df.loc[df['a external (cm 2 )'].idxmax()]
+min_area_row = df.loc[df['a external (cm 2 )'].idxmin()]
+# Get their p max values
+max_pressure = float(max_area_row['p max ( bar )'])
+min_pressure = float(min_area_row['p max ( bar )'])
+# Calculate difference
+pressure_diff = max_pressure - min_pressure
+print(f"Final Answer: {pressure_diff}")

@@ -1,0 +1,22 @@
+Step 1: The user wants to identify the university with the highest research funding and calculate the difference between the highest and lowest research funding (in thousands).
+Step 2: Load the dataframe.
+Step 3: Convert the 'research funding (000)' column to numeric to allow arithmetic operations.
+Step 4: Find the maximum and minimum values in this column.
+Step 5: Compute the difference and print the result in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'research funding (000)' to numeric, handling any potential non-numeric entries
+df['research funding (000)'] = pd.to_numeric(df['research funding (000)'], errors='coerce')
+
+# Find the university with the highest research funding
+max_funding_uni = df.loc[df['research funding (000)'].idxmax(), 'institution']
+min_funding_uni = df.loc[df['research funding (000)'].idxmin(), 'institution']
+
+# Calculate the difference
+difference = df['research funding (000)'].max() - df['research funding (000)'].min()
+
+print(f"Final Answer: {max_funding_uni}, {difference}")
+```

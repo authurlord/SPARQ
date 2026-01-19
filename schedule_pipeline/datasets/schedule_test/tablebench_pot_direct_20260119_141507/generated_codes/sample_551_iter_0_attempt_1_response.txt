@@ -1,0 +1,29 @@
+Step 1: The user wants to find the year with the largest increase in wins compared to the previous year.  
+Step 2: The "wins" column contains the number of wins per year, and we need to calculate the difference in wins from one year to the next.  
+Step 3: Exclude the "total" row since it is not a year.  
+Step 4: Compute the year-over-year increase in wins and identify the maximum increase.  
+Step 5: Return the corresponding year.
+
+Note: The data is given in chronological order (2008 to 2013), so we can compute differences between consecutive years.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out the 'total' row
+df_filtered = df[df['year'] != 'total']
+
+# Convert 'wins' to integer for numerical computation
+df_filtered['wins'] = df_filtered['wins'].astype(int)
+
+# Calculate the year-over-year increase in wins
+df_filtered['win_increase'] = df_filtered['wins'].diff()
+
+# Find the year with the largest increase (excluding the first year which has no prior)
+max_increase_row = df_filtered[df_filtered['win_increase'] == df_filtered['win_increase'].max()]
+
+# Get the year with the largest increase
+year_with_max_increase = max_increase_row.iloc[0]['year']
+
+print(f"Final Answer: {year_with_max_increase}")
+```

@@ -1,0 +1,37 @@
+Step 1: The user wants to identify demographic categories that significantly deviate from expected patterns. We will analyze the data for inconsistencies or implausible values.
+
+Step 2: Load the dataframe and examine the 'Male' and 'Female' columns, particularly focusing on values that seem illogical (e.g., literacy rate exceeding 100%, or worker numbers higher than total population).
+
+Step 3: Identify anomalies:
+- Literacy rate for males is 150%, which is impossible (cannot exceed 100%).
+- Total workers (194) are listed, but female workers are 1000, which exceeds both total population (524) and total workers.
+- Female workers (1000) cannot be more than total population (524), so this is a clear anomaly.
+
+Step 4: Print the identified anomalies.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check for anomalies
+anomalies = []
+
+# Literacy rate > 100%
+if df.loc[df['Particulars'] == 'Literacy', 'Male'].values[0] > '100 %':
+    anomalies.append('Literacy rate for males exceeds 100%')
+
+# Female workers > total population
+female_workers = int(df.loc[df['Particulars'] == 'Total Workers', 'Female'].values[0])
+total_population = int(df.loc[df['Particulars'] == 'Population', 'Total'].values[0])
+if female_workers > total_population:
+    anomalies.append('Female workers exceed total population')
+
+# Female workers > total workers
+total_workers = int(df.loc[df['Particulars'] == 'Total Workers', 'Total'].values[0])
+if female_workers > total_workers:
+    anomalies.append('Female workers exceed total workers')
+
+# Print anomalies
+print(f"Final Answer: {', '.join(anomalies)}")
+```

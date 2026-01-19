@@ -1,0 +1,25 @@
+The error occurred because the "change" and "rating" columns contain string values (e.g., '7', '12'), not numeric types. We need to convert them to integers before performing division.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert "change" and "rating" columns to numeric (integers).
+3. Calculate the rating growth as (change / rating) * 100.
+4. Find the centre with the highest rating growth.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'change' and 'rating' to numeric, coercing errors to NaN if any
+df['change'] = pd.to_numeric(df['change'], errors='coerce')
+df['rating'] = pd.to_numeric(df['rating'], errors='coerce')
+
+# Calculate rating growth as percentage
+df['rating_growth'] = (df['change'] / df['rating']) * 100
+
+# Find the centre with the highest rating growth
+max_growth_centre = df.loc[df['rating_growth'].idxmax(), 'centre']
+
+print(f"Final Answer: {max_growth_centre}")
+```

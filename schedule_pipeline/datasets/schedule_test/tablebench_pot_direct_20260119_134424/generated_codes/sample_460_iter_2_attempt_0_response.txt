@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 12.35, 7.69, 9.42

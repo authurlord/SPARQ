@@ -1,0 +1,22 @@
+Step 1: The question asks which factors significantly influence the 'total votes' for each election year. This implies a correlation analysis between 'total votes' and the listed factors: candidates, average votes per candidate, % of total vote, average % of vote per candidate, and saved deposits.
+
+Step 2: We will compute the correlation matrix between 'total votes' and the specified columns to identify which factor has the strongest linear relationship.
+
+Step 3: Select only the relevant columns and calculate the correlation with 'total votes'.
+
+Step 4: Identify the factor with the highest absolute correlation value.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select relevant columns
+columns_to_analyze = ['candidates', 'average votes per candidate', '% of total vote', 'average % of vote per candidate', 'saved deposits']
+correlation_with_total_votes = df[columns_to_analyze].corrwith(df['total votes'])
+
+# Find the factor with the highest absolute correlation
+main_factor = correlation_with_total_votes.abs().idxmax()
+
+print(f"Final Answer: {main_factor}")
+```

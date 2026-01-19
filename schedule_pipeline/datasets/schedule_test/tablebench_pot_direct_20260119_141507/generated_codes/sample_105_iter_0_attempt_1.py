@@ -1,0 +1,24 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Total number of students' and 'Research funding (£,000)' to numeric
+df['Total number of students'] = pd.to_numeric(df['Total number of students'], errors='coerce')
+df['Research funding (£,000)'] = pd.to_numeric(df['Research funding (£,000)'], errors='coerce')
+
+# Calculate average funding per student
+df['avg_funding_per_student'] = df['Research funding (£,000)'] / df['Total number of students']
+
+# Create bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(df['Institution'], df['avg_funding_per_student'], color='skyblue')
+plt.xlabel('Institution')
+plt.ylabel('Average Funding per Student (£)')
+plt.title('Average Funding per Student by Institution')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Print the values for reference (optional, if needed)
+print(f"Final Answer: Bar chart generated showing average funding per student")

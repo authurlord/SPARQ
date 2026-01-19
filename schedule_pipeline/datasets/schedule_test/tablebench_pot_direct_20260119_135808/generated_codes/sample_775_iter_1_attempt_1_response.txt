@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The team's performance trend shows fluctuating success rates, with a peak in 2011 (68.75%) and a decline in 2012 (52.63%), followed by recovery in 2013 (66.67%). The overall success rate over the period is 60.2%. Without clear linear or exponential patterns, a reliable forecast cannot be made from this limited data.

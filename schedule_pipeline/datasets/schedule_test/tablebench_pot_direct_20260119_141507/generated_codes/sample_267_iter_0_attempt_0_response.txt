@@ -1,0 +1,19 @@
+Step 1: Identify the relevant peaks in Morocco with elevation ≥ 3000 meters and col elevation > 1500 meters.  
+Step 2: Filter the data based on country = 'morocco', elevation ≥ 3000, and col > 1500.  
+Step 3: Extract the 'prominence (m)' values for the filtered rows.  
+Step 4: Compute the average of these prominence values.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter peaks in Morocco with elevation >= 3000 and col > 1500
+filtered_peaks = df[
+    (df['country'] == 'morocco') &
+    (df['elevation (m)'] >= 3000) &
+    (df['col (m)'] > 1500)
+]
+# Calculate average prominence
+average_prominence = filtered_peaks['prominence (m)'].mean()
+print(f"Final Answer: {average_prominence:.1f}")
+```

@@ -1,0 +1,30 @@
+Step 1: The user wants the average percentage change from 1996 (column '1996 general') to 2004 (column '2004 european') for each region.
+Step 2: Load the dataframe.
+Step 3: Extract the values from '1996 general' and '2004 european' columns, converting them to float (handling cases like '19.0 (1996)' by extracting the number).
+Step 4: Calculate the percentage change for each region using the formula: ((new - old) / old) * 100.
+Step 5: Compute the average of these percentage changes.
+Step 6: Print the final average.
+
+```python
+import pandas as pd
+import re
+
+df = pd.read_csv('table.csv')
+
+# Function to extract numeric value from string (e.g., '19.0 (1996)' -> 19.0)
+def extract_value(x):
+    match = re.search(r'(\d+\.?\d*)', str(x))
+    return float(match.group(1)) if match else None
+
+# Extract values from '1996 general' and '2004 european'
+df['1996'] = df['1996 general'].apply(extract_value)
+df['2004'] = df['2004 european'].apply(extract_value)
+
+# Calculate percentage change from 1996 to 2004
+df['pct_change'] = ((df['2004'] - df['1996']) / df['1996']) * 100
+
+# Calculate average percentage change
+avg_pct_change = df['pct_change'].mean()
+
+print(f"Final Answer: {avg_pct_change:.1f}")
+```

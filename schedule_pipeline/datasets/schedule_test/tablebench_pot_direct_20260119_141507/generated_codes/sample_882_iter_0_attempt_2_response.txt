@@ -1,0 +1,28 @@
+Step 1: Identify the relevant columns for analysis — specifically, the "Premier League" goals (column "Goals" under "League_2" or "League Cup_1" etc.). However, looking at the table, the "Total" column seems to represent overall goals, and we need to isolate the Premier League season data.
+
+Step 2: Filter rows where the "League" is "Premier League" and the "Club" is "Liverpool".
+
+Step 3: Extract the "Total" column (last column) which represents total goals across all competitions, but we are interested in only the Premier League goals. However, from the structure, the "Goals" column in "League_2" (which corresponds to Premier League) appears to be the correct one. In fact, looking at the data, "League_2" has "Goals" values that represent Premier League goals.
+
+Step 4: Find the season with the highest value in the "Goals" column under "League_2" for Liverpool in Premier League seasons.
+
+Step 5: Since the data includes a row labeled "Liverpool Total", we ignore that. We focus on individual seasons.
+
+Step 6: Sort by the "Goals" in "League_2" and find the maximum.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for Liverpool in Premier League
+liverpool_premier = df[(df['Club'] == 'Liverpool') & (df['League'] == 'Premier League')]
+
+# Extract the 'Goals' column from 'League_2' (Premier League goals)
+liverpool_goals = liverpool_premier['Goals']  # This is the "Goals" under "League_2"
+
+# Find the season with the highest goals
+max_goals_row = liverpool_premier.loc[liverpool_goals.idxmax()]
+season_with_max_goals = max_goals_row['Season']
+
+print(f"Final Answer: {season_with_max_goals}")
+```

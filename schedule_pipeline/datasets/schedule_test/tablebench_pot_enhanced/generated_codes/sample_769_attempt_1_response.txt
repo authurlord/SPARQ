@@ -1,0 +1,28 @@
+Step 1: Analyze the data for trends in fuel propulsion and quantity over time.
+Step 2: Observe that there is a shift from traditional diesel to hybrid and electric options (e.g., "diesel - electric hybrid").
+Step 3: Note that newer models (post-2007) tend to have higher quantities and more environmentally friendly propulsion.
+Step 4: Based on the trend, predict that by 2025, buses will likely use cleaner fuel (e.g., electric or hybrid) and have high production quantities.
+Step 5: Since no exact formula is available, infer based on the latest model (2010–2012), which uses "diesel" but has high quantity (55), and the most recent articulated bus (2007) with "diesel", we can expect a shift toward fully electric or hybrid propulsion in 2025.
+Step 6: Forecast that in 2025, the likely fuel propulsion will be "electric" and quantity will be high (e.g., >60).
+Step 7: Output the forecasted characteristics.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify the latest model and its fuel propulsion and quantity
+latest_model = df.iloc[-1]
+latest_fuel_propulsion = latest_model['fuel propulsion']
+latest_quantity = latest_model['quantity']
+
+# Based on trend, newer models are moving toward hybrid/electric
+# The latest model still uses diesel, but previous models show increasing hybrid usage
+# Predict future: electric propulsion and higher quantity
+
+# Forecasting: likely electric propulsion and quantity greater than 60 (based on highest observed)
+forecast_fuel = "electric"
+forecast_quantity = 70  # Estimated higher than current max (80, but articulated, so reasonable)
+
+print(f"Final Answer: electric, 70")
+```

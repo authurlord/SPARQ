@@ -1,0 +1,12 @@
+Step 1: The user wants to find the player with an average of 11.4 yards per reception.
+Step 2: Load the dataframe.
+Step 3: Filter the row where the 'Avg.' column is equal to '11.4'.
+Step 4: Extract and print the 'Player' name.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the player with average of 11.4 yards per reception
+player = df[df['Avg.'] == '11.4']['Player'].iloc[0]
+print(f"Final Answer: {player}")
+```

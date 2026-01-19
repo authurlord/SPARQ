@@ -1,0 +1,20 @@
+Step 1: The user wants to calculate the correlation coefficient between the 'magnitude' and 'death toll' columns.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'magnitude' and 'death toll' columns. Note that 'death toll' contains string values with commas (e.g., "60,000"), so we need to convert them to numeric.  
+Step 4: Compute the Pearson correlation coefficient between the two columns.  
+Step 5: Print the correlation coefficient.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'death toll' from string to numeric (remove commas)
+df['Death toll'] = df['Death toll'].str.replace(',', '').astype(float)
+
+# Calculate correlation between 'Magnitude' and 'Death toll'
+correlation = df['Magnitude'].corr(df['Death toll'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

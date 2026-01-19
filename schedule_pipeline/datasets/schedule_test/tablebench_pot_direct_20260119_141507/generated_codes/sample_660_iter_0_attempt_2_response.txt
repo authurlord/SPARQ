@@ -1,0 +1,16 @@
+Step 1: The user wants the correlation between "official itv rating (millions)" and "share (%)" across different episode types.  
+Step 2: We need to check if there are distinct episode types (e.g., auditions, semi-finals, final).  
+Step 3: Extract the two columns: "official itv rating (millions)" and "share (%)".  
+Step 4: Compute the Pearson correlation coefficient between these two variables.  
+Step 5: Since the question asks for correlation across episode types, we do not need to group by type — the overall correlation is sufficient unless specified otherwise.  
+
+Note: The data shows that all episodes have values for both variables, so we can compute the overall correlation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'official itv rating (millions)' and 'share (%)'
+correlation = df['official itv rating (millions)'].corr(df['share (%)'])
+print(f"Final Answer: {correlation:.3f}")
+```

@@ -1,0 +1,22 @@
+Step 1: The user wants to calculate the mean and standard deviation of the 'bello' column.
+Step 2: Load the dataframe from the provided JSON table.
+Step 3: Extract the 'bello' column, convert its values to integers (since they are stored as strings).
+Step 4: Compute the mean and standard deviation using pandas methods.
+Step 5: Print both results in the required format.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'bello' column to numeric (integer)
+df['bello'] = pd.to_numeric(df['bello'])
+
+# Calculate mean and standard deviation
+mean_bello = df['bello'].mean()
+std_bello = df['bello'].std()
+
+# Output the results
+print(f"Final Answer: {mean_bello:.2f}, {std_bello:.2f}")
+```

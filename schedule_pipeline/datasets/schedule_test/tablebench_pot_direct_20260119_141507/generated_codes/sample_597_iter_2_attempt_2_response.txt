@@ -1,0 +1,18 @@
+The error occurred because the code attempted to concatenate string values from the "viewers (millions)" column without properly handling them as numeric. The correct approach is to extract only the numerical values from the "viewers (millions)" column and compute the average for the first 5 episodes.
+
+Step-by-step:
+1. Load the DataFrame.
+2. Extract the "viewers (millions)" column, ensuring it's converted to numeric (to avoid parsing errors).
+3. Select the first 5 rows (first 5 episodes).
+4. Compute the mean of the viewers for those rows.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'viewers (millions)' to numeric, handling any parsing issues
+df['viewers (millions)'] = pd.to_numeric(df['viewers (millions)'], errors='coerce')
+# Select first 5 episodes and calculate average viewers
+average_viewers = df['viewers (millions)'].head(5).mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

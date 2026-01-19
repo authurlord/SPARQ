@@ -1,0 +1,19 @@
+Step 1: The user wants the total number of medals (sum of M36, M36B1, and M36B2) from May 1944 to August 1944.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'Month' is between 'May 1944' and 'August 1944' (inclusive).
+Step 4: Convert the medal columns to integers.
+Step 5: Sum the three columns for the filtered rows.
+Step 6: Print the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data from May 1944 to August 1944
+filtered_df = df[(df['Month'] >= 'May 1944') & (df['Month'] <= 'August 1944')]
+# Convert medal columns to integers
+filtered_df[['M36', 'M36B1', 'M36B2']] = filtered_df[['M36', 'M36B1', 'M36B2']].astype(int)
+# Calculate total medals
+total_medals = filtered_df['M36'].sum() + filtered_df['M36B1'].sum() + filtered_df['M36B2'].sum()
+print(f"Final Answer: {total_medals}")
+```

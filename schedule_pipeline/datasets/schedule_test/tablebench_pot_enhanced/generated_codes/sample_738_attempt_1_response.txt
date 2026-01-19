@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 5024, 3295, 2670

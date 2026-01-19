@@ -1,0 +1,15 @@
+Step 1: Filter the data to include only buildings constructed between 1895 and 1980 (inclusive).  
+Step 2: Extract the 'floors' column for these buildings.  
+Step 3: Convert the 'floors' values to integers and calculate the average.  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where year is between 1895 and 1980 (inclusive)
+filtered_df = df[(df['year'].astype(int) >= 1895) & (df['year'].astype(int) <= 1980)]
+# Convert 'floors' to integer and calculate average
+avg_floors = filtered_df['floors'].astype(int).mean()
+print(f"Final Answer: {avg_floors:.1f}")
+```

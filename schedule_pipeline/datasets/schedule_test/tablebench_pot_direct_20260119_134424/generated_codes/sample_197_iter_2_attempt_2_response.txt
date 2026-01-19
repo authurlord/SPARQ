@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The international tourism receipts generally increase with increasing international tourist arrivals, as seen in the positive correlation between the two variables across most countries.

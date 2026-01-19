@@ -1,0 +1,12 @@
+Step 1: The user wants the percentage of Black voters who voted in 1960.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'Unnamed: 0' is 'Black' and extract the value for the '1960' column.
+Step 4: Convert the value to a float and print it as the final answer.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for 'Black' voters and get the value for '1960'
+black_voters_1960 = df[df['Unnamed: 0'] == 'Black']['1960'].values[0]
+print(f"Final Answer: {black_voters_1960}")
+```

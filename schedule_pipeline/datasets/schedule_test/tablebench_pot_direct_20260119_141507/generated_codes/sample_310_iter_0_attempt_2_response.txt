@@ -1,0 +1,17 @@
+Step 1: The user is asking for the year when Barbara Stanwyck won an Emmy Award for a TV series.  
+Step 2: Look through the table for a row where "Work" is "The Barbara Stanwyck Show" and "Category" is "Outstanding Performance by an Actress in a Series" or similar, and "Result" is "Won".  
+Step 3: Extract the "Year" from that row.  
+
+From the data:
+- The row with "The Barbara Stanwyck Show" under "Work" and "Outstanding Performance by an Actress in a Series" has the year 1961.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Work is 'The Barbara Stanwyck Show' and Result is 'Won'
+barbara_stanwyck_emmy = df[(df['Work'] == 'The Barbara Stanwyck Show') & (df['Result'] == 'Won')]
+# Extract the year
+year = barbara_stanwyck_emmy['Year'].values[0]
+print(f"Final Answer: {year}")
+```

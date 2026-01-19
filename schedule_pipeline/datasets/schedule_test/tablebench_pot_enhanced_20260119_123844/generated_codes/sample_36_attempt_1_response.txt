@@ -1,0 +1,16 @@
+Step 1: The user wants the average score in the 'tumbling' category across all teams.
+Step 2: Load the dataframe.
+Step 3: Select the 'tumbling' column and convert it to numeric (since it's stored as strings).
+Step 4: Calculate the mean of the 'tumbling' column.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'tumbling' column to numeric
+df['tumbling'] = pd.to_numeric(df['tumbling'])
+# Calculate the average score in the 'tumbling' category
+avg_tumbling = df['tumbling'].mean()
+print(f"Final Answer: {avg_tumbling:.1f}")
+```

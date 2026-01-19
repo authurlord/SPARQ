@@ -1,0 +1,23 @@
+Step 1: The user wants to calculate the standard deviation of scores given by each judge to determine which judge's scores have the most variation.
+Step 2: Load the dataframe.
+Step 3: Select columns corresponding to each judge (excluding 'artist', 'total', and 'points').
+Step 4: Calculate the standard deviation for each judge's scores.
+Step 5: Identify the judge with the highest standard deviation.
+Step 6: Print the judge with the most variation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select only the score columns for judges
+judge_columns = ['jaanu någisto', 'iiris vesik', 'erik morna', 'veronika portsmuth', 'chalice', 'kristo rajasaare', 'hannaliisa uusmaa', 'siim nestor', 'peeter vã¤hi', 'helen sildna', 'ott lepland']
+judge_scores = df[judge_columns]
+
+# Calculate standard deviation for each judge
+std_devs = judge_scores.std()
+
+# Find the judge with the highest standard deviation
+most_varied_judge = std_devs.idxmax()
+
+print(f"Final Answer: {most_varied_judge}")
+```

@@ -1,0 +1,15 @@
+Step 1: Identify the total freshwater withdrawal for Kyrgyzstan from the table, which is 10.08 billion cubic meters.
+Step 2: Calculate 39% of the total freshwater withdrawal to find the domestic use.
+Step 3: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for Kyrgyzstan
+kyrgyzstan_data = df[df['Unnamed: 0'] == 'kyrgyzstan']
+total_withdrawal = float(kyrgyzstan_data['total freshwater withdrawal'].values[0])
+domestic_use_percentage = 39 / 100
+domestic_use = total_withdrawal * domestic_use_percentage
+print(f"Final Answer: {domestic_use:.2f}")
+```

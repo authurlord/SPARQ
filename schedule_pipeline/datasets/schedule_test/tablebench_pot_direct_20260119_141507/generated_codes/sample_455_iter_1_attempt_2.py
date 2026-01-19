@@ -1,0 +1,39 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify anomalies in 'whenbuilt' column
+# Filter rows where 'whenbuilt' is not a valid year (not numeric or not in 1948–1951 range)
+anomalies = []
+
+for idx, row in df.iterrows():
+    whenbuilt = row['whenbuilt']
+    # Check if it's a string with a year (e.g., "1948") or a non-standard format
+    if isinstance(whenbuilt, str):
+        # Remove any month/day info (e.g., "march 1950" -> "1950")
+        import re
+        match = re.search(r'\b(\d{4})\b', whenbuilt)
+        if match:
+            year = int(match.group(1))
+            # If year is not between 1948 and 1951, or is 1234 (out of range), it's an anomaly
+            if year < 1948 or year > 1951 or year == 1234:
+                anomalies.append({
+                    'name': row['name'],
+                    'whenbuilt': whenbuilt
+                })
+        else:
+            # No valid year found — anomaly
+            anomalies.append({
+                'name': row['name'],
+                'whenbuilt': whenbuilt
+            })
+
+# Print anomalies
+if anomalies:
+    print("Anomalies found:")
+    for anomaly in anomalies:
+        print(f"Name: {anomaly['name']}, When Built: {anomaly['whenbuilt']}")
+else:
+    print("No anomalies found.")
+
+Final Answer: 601 squadron, 257 squadron, 249 squadron, 46 squadron, 264 squadron, 41 squadron, 603 squadron, 222 squadron, 141 squadron, 92 squadron, 615 squadron, 605 squadron, 253 squadron, 501 squadron, 145 squadron, 219 squadron, 143 squadron, 602 squadron, weymouth, city of wells, saunton, mortehoe, brentor, trevone, holsworthy, templecombe, lynmouth, appledore, hartland, lapford, calstock, bere alston, swanage, lydford, blandford forum, wincanton, sir trafford leigh - mallory, 66 squadron

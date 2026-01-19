@@ -1,0 +1,26 @@
+Step 1: The user wants the total cost for systems that meet two conditions:
+- Produce at least 2000 kWh/kwp/year (i.e., columns with values ≥ 2000 in the 'kwh / kwp y' column headers)
+- Have a cost per kwp of at most $1400 (i.e., rows where 'cost' ≤ 1400)
+
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'cost' is ≤ 1400.
+Step 4: For these filtered rows, select only the columns corresponding to '2000 kwh / kwp y' and higher.
+Step 5: Sum all the values in these selected cells.
+Step 6: Print the total cost.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where cost <= 1400
+filtered_df = df[df['cost'] <= '1400 / kwp']
+# Define the minimum kwh/kwp threshold
+min_kwh = 2000
+# Get columns with kwh/kwp >= 2000
+cols_to_sum = [col for col in df.columns if col.replace(' ', '').replace('kwh', '').replace('/kwp', '').replace('y', '').isdigit() and int(col.replace(' ', '').replace('kwh', '').replace('/kwp', '').replace('y', '')) >= min_kwh]
+# Convert filtered_df to numeric for summing
+filtered_df[cols_to_sum] = filtered_df[cols_to_sum].astype(float)
+# Calculate total cost
+total_cost = filtered_df[cols_to_sum].sum().sum()
+print(f"Final Answer: {total_cost}")
+```

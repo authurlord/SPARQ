@@ -1,0 +1,17 @@
+Step 1: Identify the payout for a "natural royal flush" with a 3-credit bet. From the table, this is 900.
+Step 2: Identify the payout for a "four of a kind" with a 3-credit bet. From the table, this is 15.
+Step 3: Add the two payouts together to get the total winnings.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract payout for natural royal flush with 3 credits
+natural_royal_flush_payout = int(df[df['hand'] == 'natural royal flush']['3 credits'].values[0])
+# Extract payout for four of a kind with 3 credits
+four_of_a_kind_payout = int(df[df['hand'] == 'four of a kind']['3 credits'].values[0])
+# Calculate total winnings
+total_winnings = natural_royal_flush_payout + four_of_a_kind_payout
+print(f"Final Answer: {total_winnings}")
+```

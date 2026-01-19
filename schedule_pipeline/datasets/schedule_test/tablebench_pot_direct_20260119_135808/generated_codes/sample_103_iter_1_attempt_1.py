@@ -1,0 +1,35 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean the data: remove percentage signs and convert to numeric
+# We'll focus on the ethnicities excluding 'All' for the chart
+ethnicities = df[df['Ethnicity'] != 'All']
+# Extract years (columns after 'Ethnicity')
+years = df.columns[1:]
+
+# Prepare data for plotting
+data = []
+for _, row in ethnicities.iterrows():
+    values = [float(val.split()[0].replace(',', '')) for val in row[1:]]
+    data.append(values)
+
+# Convert to DataFrame for easier handling
+data_df = pd.DataFrame(data, index=ethnicities['Ethnicity'], columns=years)
+
+# Plot stacked bar chart
+plt.figure(figsize=(12, 8))
+data_df.T.plot(kind='bar', stacked=True, figsize=(12, 8), width=0.8)
+
+# Customize the plot
+plt.title('Proportion of Ethnic Populations Over Time (Percentage Stacked Bar Chart)')
+plt.xlabel('Year')
+plt.ylabel('Population (in thousands)')
+plt.xticks(rotation=45)
+plt.legend(title='Ethnicity', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
+
+# Show the plot
+plt.show()

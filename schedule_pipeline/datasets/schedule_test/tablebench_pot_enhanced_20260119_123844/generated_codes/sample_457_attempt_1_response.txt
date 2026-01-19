@@ -1,0 +1,13 @@
+Step 1: The user wants to identify the country with unusually data points compared to others. This suggests looking for outliers in numerical columns such as area, population, population density, or HDI.
+
+Step 2: Load the dataframe and examine the numerical columns: 'area km square', 'population', 'population density per km square', and 'hdi (2011)'.
+
+Step 3: Identify potential outliers by analyzing the scale and distribution of values:
+- Population: China has a very large population compared to others.
+- Area: China and Mongolia have significantly larger areas.
+- Population density: Macau has an extremely high population density (18,662), which is much higher than others.
+- HDI: Macau and Hong Kong have very high HDI values (0.898 and 0.897), while North Korea and Mongolia have lower values.
+
+Step 4: Among these, Macau stands out due to its extremely high population density (18,662 per km²), which is drastically higher than any other country in the list.
+
+Final Answer: macau (prc)

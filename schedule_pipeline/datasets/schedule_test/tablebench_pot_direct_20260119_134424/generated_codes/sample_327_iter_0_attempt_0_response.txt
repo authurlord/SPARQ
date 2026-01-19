@@ -1,0 +1,17 @@
+Step 1: Identify the books narrated by Katherine Kellgren.
+Step 2: Among those books, find the one that won the award in 2013 (citation = 'winner').
+Step 3: Extract the author of that book.
+Step 4: Print the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where narrator is 'katherine kellgren'
+kellgren_books = df[df['narrator'] == 'katherine kellgren']
+# Among those, find the one with citation 'winner' and year 2013
+winner_2013 = kellgren_books[(kellgren_books['citation'] == 'winner') & (kellgren_books['year'] == '2013')]
+# Extract the author
+author = winner_2013['author'].iloc[0]
+print(f"Final Answer: {author}")
+```

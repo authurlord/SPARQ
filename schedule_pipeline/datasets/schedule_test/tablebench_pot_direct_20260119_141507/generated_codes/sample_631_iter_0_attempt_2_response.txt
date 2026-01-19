@@ -1,0 +1,15 @@
+Step 1: The user wants the difference in enrollment between the institution with the highest enrollment and the one with the lowest enrollment.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'enrollment' column.  
+Step 4: Find the maximum and minimum enrollment values.  
+Step 5: Compute the difference and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+max_enrollment = df['enrollment'].max()
+min_enrollment = df['enrollment'].min()
+difference = max_enrollment - min_enrollment
+print(f"Final Answer: {difference}")
+```

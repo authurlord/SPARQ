@@ -1,0 +1,13 @@
+Step 1: The user is asking for the year when the athlete achieved their personal best (PB) in the 200m event at the Asian Games.  
+Step 2: Look through the data for entries where:  
+- "Event" is "200 m"  
+- "Notes" contains "PB" (personal best)  
+- "Competition" is "Asian Games"  
+Step 3: Extract the "Year" from such a row.  
+
+From the data:  
+In the row: ['2018', 'Asian Games', 'Jakarta, Indonesia', 'SF1–1st PB', '200 m', '23.00 s']  
+- "SF1–1st PB" indicates a personal best (PB) in the 200m event at the Asian Games.  
+- The year is 2018.  
+
+Final Answer: 2018

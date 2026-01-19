@@ -1,0 +1,11 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'typhus' and 'smallpox' columns to numeric, handling 'avg' in smallpox
+df['typhus'] = pd.to_numeric(df['typhus'], errors='coerce')
+df['smallpox'] = pd.to_numeric(df['smallpox'].str.replace(' (avg)', ''), errors='coerce')
+
+# Calculate correlation coefficient
+correlation = df['typhus'].corr(df['smallpox'])
+
+print(f"Final Answer: {correlation:.3f}")

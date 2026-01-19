@@ -1,0 +1,12 @@
+Step 1: The user wants the total elevation of all mountains listed in the table.
+Step 2: Load the dataframe.
+Step 3: Select the 'elevation (m)' column, convert it to integers, and sum the values.
+Step 4: Print the total elevation.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'elevation (m)' to integer and calculate total
+total_elevation = df['elevation (m)'].astype(int).sum()
+print(f"Final Answer: {total_elevation}")
+```

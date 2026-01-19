@@ -1,0 +1,12 @@
+Step 1: The user is asking for the points scored by "llanhilleth rfc" in the league season.  
+Step 2: The column "points" in the table contains the total points for each club.  
+Step 3: We need to locate the row where the club is "llanhilleth rfc" and extract the corresponding value from the "points" column.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where club is 'llanhilleth rfc' and get the 'points' value
+points_llanhilleth = df[df['club'] == 'llanhilleth rfc']['points'].values[0]
+print(f"Final Answer: {points_llanhilleth}")
+```

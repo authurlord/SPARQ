@@ -1,0 +1,31 @@
+Step 1: Identify the companies in the 'banking' industry from the table.
+Step 2: Filter the rows where the 'industry' column is 'banking'.
+Step 3: Select only the top 3 companies by sales (billion).
+Step 4: Sum their sales to get the total.
+
+Note: The data shows that the 'banking' industry includes:
+- Citigroup (rank 1)
+- General Electric (rank 2) — but industry is "conglomerates", not banking
+- American International Group (rank 3) — insurance
+- Bank of America (rank 4) — banking
+- HSBC (rank 5) — banking
+
+So, the banking companies are:
+- Citigroup
+- Bank of America
+- HSBC
+
+These are the only ones in the 'banking' industry. Since there are only 3, they are the top 3.
+
+Step 5: Extract their sales and sum them.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for banking industry
+banking_df = df[df['industry'] == 'banking']
+# Extract sales values and sum them
+total_sales = banking_df['sales (billion )'].sum()
+print(f"Final Answer: {total_sales}")
+```

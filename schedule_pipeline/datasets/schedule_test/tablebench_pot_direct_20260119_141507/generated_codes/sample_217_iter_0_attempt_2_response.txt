@@ -1,0 +1,81 @@
+Step 1: The user is asking which macronutrient — carbohydrates, fat, or protein — most significantly contributes to the energy content of staple foods.  
+Step 2: Energy (in kJ) is provided per 100g portion for each staple food. We need to analyze how much of this energy comes from carbohydrates, fat, and protein.  
+Step 3: Use the known energy contributions per gram:  
+- Carbohydrates: ~17 kJ/g  
+- Protein: ~17 kJ/g  
+- Fat: ~37 kJ/g  
+
+We will calculate the total energy contribution from each macronutrient (carbs, fat, protein) for each food and compare the total energy derived from each.  
+Step 4: Compute the energy from each macronutrient (using conversion factors), sum them up, and compare with the actual energy value. Then determine which macronutrient has the largest contribution.  
+Step 5: Since the question asks which causes a significant increase in energy content, we focus on which macronutrient dominates the energy contribution across the foods.
+
+Note: Some values like "Sugar" and "Carbohydrates" are separate, so we use:
+- Total Carbohydrates = Carbohydrates (g)
+- Fat = Fat (g)
+- Protein = Protein (g)
+
+We will compute the estimated energy from each:
+- Energy from carbs = Carbohydrates × 17
+- Energy from fat = Fat × 37
+- Energy from protein = Protein × 17
+
+Then compare the total energy contribution from each.
+
+Let’s implement this in code:
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Select relevant columns: 'Maize / Corn', 'Rice', 'Wheat', 'Potato', 'Cassava', 'Soybean (Green)', 'Sweet potato', 'Sorghum', 'Yam', 'Plantain'
+# Extract the energy and macronutrient columns
+energy_col = 'Energy (kJ)'
+carbs_col = 'Carbohydrates (g)'
+fat_col = 'Fat (g)'
+protein_col = 'Protein (g)'
+
+# Drop the first row (header row) which contains 'Component (per 100g portion)'
+# The data starts from row 1, so we slice from index 1
+data = df.iloc[1:].copy()
+
+# Convert to numeric, handling missing values (e.g., '-', '0')
+data[carbs_col] = pd.to_numeric(data[carbs_col], errors='coerce')
+data[fat_col] = pd.to_numeric(data[fat_col], errors='coerce')
+data[protein_col] = pd.to_numeric(data[protein_col], errors='coerce')
+data[energy_col] = pd.to_numeric(data[energy_col], errors='coerce')
+
+# Calculate energy contribution from each macronutrient
+data['energy_from_carbs'] = data[carbs_col] * 17
+data['energy_from_fat'] = data[fat_col] * 37
+data['energy_from_protein'] = data[protein_col] * 17
+
+# Total calculated energy from macronutrients
+data['total_macronutrient_energy'] = (
+    data['energy_from_carbs'] + 
+    data['energy_from_fat'] + 
+    data['energy_from_protein']
+)
+
+# Compare with actual energy
+data['energy_difference'] = data[energy_col] - data['total_macronutrient_energy']
+
+# Find which macronutrient contributes most to energy (by summing contribution across all foods)
+total_carb_energy = data['energy_from_carbs'].sum()
+total_fat_energy = data['energy_from_fat'].sum()
+total_prot_energy = data['energy_from_protein'].sum()
+
+# Determine which one contributes the most
+if total_fat_energy > total_carb_energy and total_fat_energy > total_prot_energy:
+    answer = "fat"
+elif total_carb_energy > total_fat_energy and total_carb_energy > total_prot_energy:
+    answer = "carbohydrates"
+elif total_prot_energy > total_carb_energy and total_prot_energy > total_fat_energy:
+    answer = "protein"
+else:
+    answer = "carbohydrates"  # fallback
+
+print(f"Final Answer: {answer}")
+```

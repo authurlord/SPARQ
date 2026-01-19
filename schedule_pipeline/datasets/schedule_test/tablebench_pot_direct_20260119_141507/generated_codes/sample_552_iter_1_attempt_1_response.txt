@@ -1,0 +1,23 @@
+The error occurred because the data includes a row labeled "total" at the end, which contains aggregated values and should not be included in the average calculation for years 2000 to 2010. Additionally, the string values in the columns (like '26122279012883824595255732214130746260472454826117') were incorrectly interpreted due to a misalignment — actually, the data is correctly structured per year, with one row per year from 2000 to 2012.
+
+We need to:
+1. Filter out the "total" row.
+2. Extract only the years from 2000 to 2010.
+3. Calculate the average of the "indians admitted" column for those years.
+
+Step-by-step:
+- Load the DataFrame.
+- Remove the row where 'year' is 'total'.
+- Select rows where 'year' is between 2000 and 2010 inclusive.
+- Compute the mean of 'indians admitted' for those years.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for years 2000 to 2010, excluding the total row
+df_filtered = df[df['year'].between(2000, 2010)]
+# Calculate the average number of Indians admitted
+average_indians = df_filtered['indians admitted'].mean()
+print(f"Final Answer: {average_indians:.0f}")
+```

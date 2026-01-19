@@ -1,0 +1,13 @@
+Step 1: The user wants to find the nation that has a total of 13 medals.  
+Step 2: Look at the 'total' column in the table. The row with 'total' in the 'nation' column shows the overall total, but we are looking for a specific nation with exactly 13 medals.  
+Step 3: Check each row where the 'total' value is 13. From the data, the first row has 'south korea' with a total of 13.  
+Step 4: Confirm that no other nation has a total of 13.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the nation where total is 13
+nation_with_13_medals = df[df['total'] == 13]['nation'].values[0]
+print(f"Final Answer: {nation_with_13_medals}")
+```

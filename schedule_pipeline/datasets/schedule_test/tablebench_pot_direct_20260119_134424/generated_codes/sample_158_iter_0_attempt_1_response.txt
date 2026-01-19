@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: High annual change in total passengers is associated with higher capacity in use, indicating increased utilization of airport capacity.

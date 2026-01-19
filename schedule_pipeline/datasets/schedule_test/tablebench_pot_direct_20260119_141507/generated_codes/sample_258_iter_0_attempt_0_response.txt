@@ -1,0 +1,19 @@
+Step 1: The user wants to identify the country with the highest percentage of total freshwater withdrawal used for agricultural purposes. This is given in the "agricultural use" column, which represents the percentage (in %) of total freshwater withdrawal used for agriculture.
+
+Step 2: The data is already in a tabular format with each row representing a country and its corresponding agricultural use percentage.
+
+Step 3: We need to find the country where the "agricultural use" value is the highest.
+
+Step 4: Since the "agricultural use" column contains percentages, we simply find the row with the maximum value and extract the corresponding country name from the first column ("Unnamed: 0").
+
+Step 5: Return that country name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the country with the highest agricultural use percentage
+max_agricultural_use = df['agricultural use'].idxmax()
+country_with_max_agricultural_use = df.loc[max_agricultural_use, 'Unnamed: 0']
+print(f"Final Answer: {country_with_max_agricultural_use}")
+```

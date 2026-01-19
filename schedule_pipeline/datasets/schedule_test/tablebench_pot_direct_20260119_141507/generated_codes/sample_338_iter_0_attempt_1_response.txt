@@ -1,0 +1,7 @@
+Step 1: Identify the Telugu movie released in 1955. From the table, the movie "Ardhangi" (1955) is in Telugu and directed by P. Pullaiah.
+
+Step 2: Check if P. Pullaiah directed a Tamil movie in 1956. The row for 1956 shows "Pennin Perumai" in Tamil, also directed by P. Pullaiah.
+
+Step 3: Since P. Pullaiah directed both "Ardhangi" (1955, Telugu) and "Pennin Perumai" (1956, Tamil), the condition is satisfied.
+
+Final Answer: Ardhangi

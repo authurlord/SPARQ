@@ -1,0 +1,34 @@
+Step 1: The question asks for the total estimated exposure (mrem/hr) when combining two specimens, assuming that the calculated activity (Bq) is directly proportional to the specimen weight. This means we can scale the exposure based on the weight ratio.
+
+Step 2: Identify the relevant rows:
+- Specimen 1: 0.1 g / 4.08 mm → exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → exposure = 0.03 mrem/hr
+
+Step 3: Since the exposure is proportional to the activity (Bq), and activity is proportional to weight, we can compute the expected exposure of the 0.1 g specimen by scaling from the 10 g specimen.
+
+The weight ratio is 0.1 / 10 = 0.01. So the exposure of the 0.1 g specimen should be 0.01 × 0.03 = 0.0003 mrem/hr.
+
+Step 4: Total exposure = exposure from 0.1 g + exposure from 10 g = 0.0003 + 0.03 = 0.0303 mrem/hr.
+
+Step 5: Round to a reasonable precision and print.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Find the exposure for 0.1 g specimen (row 5)
+exposure_0_1g = df.loc[4, 'estimated exposure ( mrem ) / hr']  # 0.0
+
+# Find the exposure for 10 g specimen (row 2)
+exposure_10g = df.loc[2, 'estimated exposure ( mrem ) / hr']  # 0.03
+
+# Since activity is proportional to weight, scale exposure of 0.1g specimen
+weight_ratio = 0.1 / 10
+scaled_exposure_0_1g = weight_ratio * exposure_10g
+
+# Total exposure
+total_exposure = scaled_exposure_0_1g + exposure_10g
+
+print(f"Final Answer: {total_exposure:.4f}")
+```

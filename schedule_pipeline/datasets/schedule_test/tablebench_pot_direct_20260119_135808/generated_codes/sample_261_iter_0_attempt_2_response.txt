@@ -1,0 +1,18 @@
+Step 1: Identify the top 5 companies in the oil and gas industry based on their rank.
+Step 2: Filter the data to include only rows where the 'industry' is 'oil and gas'.
+Step 3: Sort the filtered data by 'rank' to get the top 5.
+Step 4: Extract the 'market value (billion )' column for these top 5 companies.
+Step 5: Calculate the average of these values and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for oil and gas industry
+oil_gas_companies = df[df['industry'] == 'oil and gas']
+# Sort by rank to get the top 5
+top_5_oil_gas = oil_gas_companies.sort_values('rank').head(5)
+# Calculate average market value
+avg_market_value = top_5_oil_gas['market value (billion )'].astype(float).mean()
+print(f"Final Answer: {avg_market_value:.1f}")
+```

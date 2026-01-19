@@ -1,6 +1,6 @@
 {
-  "avg_rouge_l": 0.23333333333333334,
-  "accuracy_at_0.5": 0.3,
-  "accuracy_at_0.8": 0.0,
-  "total_samples": 10
+  "avg_rouge_l": 0.23099078263885045,
+  "accuracy_at_0.5": 0.1636568848758465,
+  "accuracy_at_0.8": 0.010158013544018058,
+  "total_samples": 886
 }

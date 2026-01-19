@@ -1,0 +1,30 @@
+Step 1: The user wants to find the bishop with the longest tenure and compare it to the average tenure.
+Step 2: Load the dataframe.
+Step 3: Extract the 'Office started' and 'Office ended' columns, convert them to integers, and calculate the tenure (difference between end and start).
+Step 4: Find the maximum tenure and the average tenure.
+Step 5: Identify the bishop with the longest tenure and compute the difference between the longest and average tenure.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Office started' and 'Office ended' to integers
+df['Office started'] = pd.to_numeric(df['Office started'], errors='coerce')
+df['Office ended'] = pd.to_numeric(df['Office ended'], errors='coerce')
+
+# Calculate tenure
+df['tenure'] = df['Office ended'] - df['Office started']
+
+# Find the bishop with the longest tenure
+max_tenure = df['tenure'].max()
+avg_tenure = df['tenure'].mean()
+
+# Find the name of the bishop with the longest tenure
+longest_serving_bishop = df.loc[df['tenure'] == max_tenure, 'Name'].iloc[0]
+
+# Calculate the difference between longest and average tenure
+difference = max_tenure - avg_tenure
+
+print(f"Final Answer: {longest_serving_bishop}, {difference:.1f}")
+```

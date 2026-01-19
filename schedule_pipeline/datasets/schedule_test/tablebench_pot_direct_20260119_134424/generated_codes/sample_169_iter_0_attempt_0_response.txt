@@ -1,0 +1,24 @@
+Step 1: The user wants to identify which factor (e.g., 'year ended', 'revenue (million)', etc.) significantly influences 'earnings per share (p)'.
+Step 2: Load the dataframe and convert numerical columns to float for analysis.
+Step 3: Calculate correlation between 'earnings per share (p)' and other numeric columns.
+Step 4: Identify the factor with the highest absolute correlation coefficient.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert numeric columns to float
+numeric_columns = ['revenue (million)', 'profit / (loss) before tax (m)', 'net profit (m)', 'earnings per share (p)']
+df[numeric_columns] = df[numeric_columns].astype(float)
+
+# Calculate correlation with 'earnings per share (p)'
+correlations = df[numeric_columns].corr()['earnings per share (p)'].abs().sort_values(ascending=False)
+
+# Exclude 'earnings per share (p)' itself
+correlations = correlations.drop('earnings per share (p)')
+
+# Get the factor with the highest correlation
+main_factor = correlations.idxmax()
+print(f"Final Answer: {main_factor}")
+```

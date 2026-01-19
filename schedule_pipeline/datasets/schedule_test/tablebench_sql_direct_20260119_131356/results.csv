@@ -1,0 +1,51 @@
+id,question,gold_answer,prediction,answer_source,sql_success,total_attempts,successful_attempts,timeout_count,iterations_used
+29ba53ce7ca43a979263ed36798f62a3,What is the average number of tropical cyclones per season?,10.6,10.6,direct_sql,True,3,3,0,1
+1aba704991b72a8107475d7fea800b42,What is the total average daily flights of all routes combined?,115.7,1157,direct_sql,True,3,3,0,1
+39c3b24be6bcb3e279ecccea6b641efc,What is the total GDP (nominal) of all countries with a UN budget greater than 2%?,7700143,7700143.0,direct_sql,True,3,3,0,1
+e067a40ab6736ac5a004d9dc69f2d5c0,What is the average age of the executives listed in the table?,51.44,51.44444444444444,direct_sql,True,3,3,0,1
+b71bb2ae2d5e19e17c816355f55ec3d8,What is the total number of goals scored by Liverpool in the Premier League?,55,240,direct_sql,True,3,3,0,1
+f19e3c32d88171eb59e66dc31967bf2d,What is the average value of the 2001 general election across all regions in Italy?,6.16,6.16,direct_sql,True,3,1,0,1
+06cf0ed5987ea6984c584de1d8eda280,What is the total number of years served by all mayors listed in the table?,108,108,direct_sql,True,3,3,0,1
+9a6f45b58f3230e8a11f4f7cd5afa465,"What is the total length of all rivers that flow into the left side of the main river, in kilometers?",468.3,468.3,direct_sql,True,3,3,0,1
+463ca07b585e49a35a8e1e657c4b9cf2,What is the average percentage of national votes won by all leaders in the table?,37.64%,37.635000000000005,direct_sql,True,3,3,0,1
+1feeafc0b774633c4b7070d7295d0b2a,What is the average number of podiums achieved by a team in a single season?,1.57,1.5714285714285714,direct_sql,True,3,3,0,1
+d4089b01cb0b1550e4df597512eb8eea,What is the total number of students who took SAT subject tests in mathematics (both Level 1 and Level 2)?,259299,259299,direct_sql,True,3,3,0,1
+b6ce5ae3244350599a7403a76a1f1c69,What is the average height (in meters) of the top 5 tallest buildings in the table?,182,182.0,direct_sql,True,3,2,0,1
+8e11fccdc147a157e7d7e9471759e877,What is the average number of viewers (in millions) for all episodes that had a rating of 6.0 or higher?,11.52,11.516,direct_sql,True,3,3,0,1
+767d183aa02457793092c2e983eeb612,What is the average population density of all municipalities in the table?,150.55,150.54705882352943,direct_sql,True,3,3,0,1
+2438086f1b3d0cb3f63d46f4c9eb8dbf,What is the total elevation of all mountains in the table?,34513,34513,direct_sql,True,3,3,0,1
+1e0891ff9db2d97d00d2b1f5d12142cd,"What is the average value of the ""Pin (Tip)"" column?",38,38.0,direct_sql,True,3,3,0,1
+60effd85ac81cca8bbca69134e0b73a5,What is the average US chart position of all songs in the table?,11.71,11.714285714285714,direct_sql,True,3,2,0,1
+d36f751dac69318f27f101ed13b4710a,What is the total number of medals won by all nations listed in the table?,42,42,direct_sql,True,3,3,0,1
+3ba617b11797d522d5c51bdb6d6cd313,What is the total population of all regions in China where the percentage of Manchu population is greater than 5%?,3123625869,3123625869,direct_sql,True,3,3,0,1
+e64c2ddce62c76ba41e5c576b72b1ac4,What is the total revenue of all companies in the oil industry?,838478.3,258195.1,direct_sql,True,3,3,0,1
+521d1b7034109e2055b6a1c236319eb3,What is the average total points of all couples who have performed more than 10 dances?,353.2,353.2,direct_sql,True,3,3,0,1
+1274eebbc02e9c74547f94c43fbd5cdb,What is the total population of the top 5 cities in the table?,206713,206713,direct_sql,True,3,3,0,1
+dd391b7413df643849f40644296aab34,What is the total number of people deported from all regions listed in the table?,18533.76,93779,direct_sql,True,3,3,0,1
+9f6acb3e258123c6d0841b052d95505f,What is the average rank of the indices published by Transparency International?,28,28.0,direct_sql,True,3,3,0,1
+651dfed1dce61e46914adf0a239b0c9a,What is the total number of people from all nationalities admitted over the 8-year period from 2000 to 2008?,423174,423174,direct_sql,True,6,3,0,2
+b6219d257925aa2abc3e4511e5a2ac16,What is the average percentage of males across all states in India?,12.82,12.828571428571427,direct_sql,True,3,3,0,1
+b24100d2cb5ed9ab25a7fdadf8258089,What is the total number of individuals in the age groups between 10 and 35?,15153,15153,direct_sql,True,3,1,0,1
+1307e6264752997dde75a6bd237b9e28,"What is the total amount of winnings for all drivers who drove a Chevrolet car, and which driver among them has the highest winnings?","2880210, tony stewart","286386.0, tony stewart",direct_sql,True,3,2,0,1
+c5e88a53c5cf14366e0d42de7eb6ab13,What is the average number of days served by the top 5 ranked governors?,3618.4,3420.5714285714284,direct_sql,True,3,2,0,1
+4ee382645d542fe6e3f05e71925c5cb8,What is the total number of films that participated in the festival across all years from 2012 to 2014?,1062,1062,direct_sql,True,3,3,0,1
+f05eecdcb6b316d67cfcdee33a48b838,What is the total mintage of all coins from 2002 to 2012?,418918,418918,direct_sql,True,3,3,0,1
+c2d0e0b5e2f5835d65687912d1ad3d7c,What is the total number of seats won by the party across all elections listed in the table?,1702,1702,direct_sql,True,3,3,0,1
+e3cdc02ff933ead57a5ddd0f4dc189c2,What is the total GDP of all South American countries listed in the table according to the 2011 IMF estimates?,124339,124339,direct_sql,True,3,3,0,1
+fd3ba4c9889705553735f6144bc72739,What is the total area (in km square) of all countries/regions listed in the table?,11803923,11803923,direct_sql,True,3,3,0,1
+c195eb7689321829b33cdc40c5931ad3,What is the average time of all athletes in the table?,48.98,48.983125,direct_sql,True,3,3,0,1
+68abb88ce95a7853db80f4df14284e88,"What is the total number of locomotives introduced between 1867 and 1873, considering only the '2 - 4 - 0' and '0 - 6 - 0' types?",149,149,direct_sql,True,3,3,0,1
+accf35669852e1aaaf42099aaeb188bb,What is the average score in the 'tumbling' category across all teams?,52.08,52.083333333333336,direct_sql,True,3,3,0,1
+552dcdcf1bd1de6d19d74f2ecab53af8,What is the total average rating of all TV dramas in the table?,321,321,direct_sql,True,3,3,0,1
+a4f6d7cb86e12d536c41b2a9a6bab3d2,What is the average number of US viewers (in millions) for the episodes in Season 1?,8.45,8.45,direct_sql,True,3,3,0,1
+c83997f5fbd697a85059649fdfb3293d,What is the total number of camp mates across all series of the TV show?,137,137,direct_sql,True,3,3,0,1
+be0223bd4b1d4dcfcb9bf7d3351329b3,What is the total population of all districts in the city?,1652171,1652171,direct_sql,True,3,3,0,1
+ffe5d38c4973ddc4bd3ca6d9c2d34406,What is the total number of Outright Titles won by all schools in Belfast?,91,91,direct_sql,True,3,3,0,1
+8b7282ee8b62b7081c34cb52912ccc40,What is the average value of wheat production from 2002-03 to 2005-06?,4638.25,4638.25,direct_sql,True,3,1,0,1
+ac4ea376af826244678bb8ef6a0e024b,What is the total commissioned capacity (in MW) of all power plants in Himachal Pradesh?,1251,1251,direct_sql,True,3,3,0,1
+0150c6f2c5f3a2b3ea7326b41446cbf3,What is the average value of `c_x (metre)` across all regions?,444.73,444.7327142857143,direct_sql,True,3,3,0,1
+70d9755a3802ad91ea099532f8465915,What is the total number of years that all ambassadors served?,80,75,direct_sql,True,3,3,0,1
+e7b71d1c7427df2a8dd74f7b599ff66e,What is the total number of PR seats won by all parties combined?,48,96,direct_sql,True,3,3,0,1
+7341c70da411447ef71639df09d1b994,What is the average weight (kg/m) of all the ismb beams in the table?,70.63,70.62857142857142,direct_sql,True,3,3,0,1
+3ca51f974a30120a84a22b6e72b818ba,What is the average number of points received by the singers in this competition?,23.47,23.470588235294116,direct_sql,True,3,3,0,1
+3e1a5d8854ccc78754eb3badc950a684,What is the average percentage of votes for the Progressive Conservative party across all polling firms and dates?,69.75%,69.75,direct_sql,True,3,3,0,1

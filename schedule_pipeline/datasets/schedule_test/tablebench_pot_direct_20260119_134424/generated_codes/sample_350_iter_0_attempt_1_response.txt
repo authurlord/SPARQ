@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of players who have scored more than 3 goals in total.
+Step 2: Load the dataframe.
+Step 3: Select the 'total goals' column.
+Step 4: Filter rows where 'total goals' > 3.
+Step 5: Count the number of such players and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter players with total goals > 3
+players_with_more_than_3_goals = df[df['total goals'] > 3]
+count = len(players_with_more_than_3_goals)
+print(f"Final Answer: {count}")
+```

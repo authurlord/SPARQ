@@ -1,0 +1,17 @@
+Step 1: The user wants to calculate the new GDP per capita of Flevoland after a 37% decrease.  
+Step 2: Locate the GDP per capita value for Flevoland in the table.  
+Step 3: Apply a 37% reduction to this value.  
+Step 4: Output the result.
+
+Note: The GDP per capita for Flevoland is given as 19,439 (in INR). A 37% decrease means we multiply by (1 - 0.37) = 0.63.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract GDP per capita for Flevoland
+gdp_per_capita_flevoland = df[df['province'] == 'flevoland']['gdp per cap (2003 , in)'].values[0]
+# Calculate new GDP per capita after 37% decrease
+new_gdp_per_capita = gdp_per_capita_flevoland * (1 - 0.37)
+print(f"Final Answer: {new_gdp_per_capita:.0f}")
+```

@@ -1,0 +1,13 @@
+Step 1: Identify the relevant columns and rows for the year 2001. We are interested in the "aids orphans as % of orphans" column for each country in 2001.
+Step 2: Find the country with the highest percentage of AIDS-related orphans among all countries in 2001.
+Step 3: Retrieve the corresponding value for Uganda in 2001 and compare it.
+
+From the data:
+- Botswana (2001): 70.5%
+- Lesotho (2001): 53.5%
+- Malawi (2001): 49.9%
+- Uganda (2001): 51.1%
+
+So, Botswana has the highest percentage (70.5%), and Uganda's percentage is 51.1%.
+
+Final Answer: botswana, 51.1

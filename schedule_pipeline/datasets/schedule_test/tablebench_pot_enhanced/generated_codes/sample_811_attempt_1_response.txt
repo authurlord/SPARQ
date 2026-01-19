@@ -1,0 +1,12 @@
+Step 1: The user wants to calculate the standard deviation of the 'size (cents)' column.
+Step 2: Load the dataframe.
+Step 3: Select the 'size (cents)' column and convert it to numeric.
+Step 4: Calculate the standard deviation and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'size (cents)' to numeric and calculate standard deviation
+std_cents = df['size (cents)'].astype(float).std()
+print(f"Final Answer: {std_cents:.2f}")
+```

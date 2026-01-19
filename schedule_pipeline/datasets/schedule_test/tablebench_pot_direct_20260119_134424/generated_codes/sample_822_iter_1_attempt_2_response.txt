@@ -1,0 +1,17 @@
+Step 1: The user wants to calculate the average and standard deviation of 'us viewers (millions)' across all episodes.
+Step 2: Load the dataframe.
+Step 3: Convert the 'us viewers (millions)' column to numeric, handling any potential formatting issues.
+Step 4: Calculate the mean and standard deviation.
+Step 5: Print both values.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'us viewers (millions)' to numeric, ensuring proper parsing
+df['us viewers (millions)'] = pd.to_numeric(df['us viewers (millions)'], errors='coerce')
+# Calculate mean and standard deviation
+mean_viewers = df['us viewers (millions)'].mean()
+std_dev_viewers = df['us viewers (millions)'].std()
+print(f"Final Answer: {mean_viewers:.2f}, {std_dev_viewers:.2f}")
+```

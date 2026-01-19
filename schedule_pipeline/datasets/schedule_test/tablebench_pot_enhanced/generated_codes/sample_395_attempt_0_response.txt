@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: city, comprehension of danish, comprehension of swedish, comprehension of norwegian, average

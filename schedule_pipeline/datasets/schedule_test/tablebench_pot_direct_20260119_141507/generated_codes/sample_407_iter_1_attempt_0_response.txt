@@ -1,0 +1,39 @@
+The task requires a detailed description of the table, including explanations of each column and notable trends or insights. This is not a numerical computation or direct query about a single value, but rather an interpretative analysis. Therefore, I will provide a clear, structured explanation in natural language, followed by concise Python code to extract and present the data for analysis.
+
+Step 1: Understand the structure of the table.
+- The table has rows representing different metrics (Applications, Offer Rate, Enrols, Yield, Applicant/Enrolled Ratio, Average Entry Tariff) and columns representing years from 2017 to 2013.
+- The first row is labeled "Applications", showing the number of applicants each year.
+- "Offer Rate (%)" is the percentage of applicants who received an offer.
+- "Enrols" is the number of students who enrolled.
+- "Yield (%)" is the percentage of offers that resulted in enrolments.
+- "Applicant/Enrolled Ratio" reflects how many applicants are needed to enroll one student.
+- "Average Entry Tariff" is the average tariff (likely fee) for entry, with "n/a" in 2017.
+
+Step 2: Identify trends:
+- Applications peaked in 2016 (42,335) and declined slightly in 2017 (41,000).
+- Offer rate decreased from 2015 (90.8%) to 2017 (89.7%), suggesting a slight drop in offer acceptance.
+- Enrolment numbers are stable, with a slight decline from 2016 to 2017.
+- Yield increased from 2013 (18.7%) to 2014 (17.6%), then dropped — this may indicate a shift in student selection or demand.
+- Applicant/Enrolled Ratio improved from 2013 (6.14) to 2017 (6.76), meaning more applicants per enrolment — possibly due to declining enrolment rates despite higher applications.
+- Average Entry Tariff remained relatively stable, except for a sharp drop in 2017 (missing data), which may imply a policy change or no fee in that year.
+
+Step 3: Write Python code to load and display the data clearly for interpretation.
+
+```python
+import pandas as pd
+
+# Load the table
+df = pd.read_csv('table.csv', index_col=0)
+
+# Display the dataframe for clarity
+print(df)
+
+# Optional: Summary statistics for key columns
+print("\nSummary of Key Metrics:")
+print(f"Applications trend: {df['2017'].iloc[0]} (2017) → {df['2016'].iloc[0]} (2016)")
+print(f"Offer Rate trend: {df['Offer Rate (%)'].iloc[0]:.1f} (2017) → {df['Offer Rate (%)'].iloc[1]:.1f} (2016)")
+print(f"Yield trend: {df['Yield (%)'].iloc[0]:.1f} (2017) → {df['Yield (%)'].iloc[1]:.1f} (2016)")
+print(f"Applicant/Enrolled Ratio: {df['Applicant/Enrolled Ratio'].iloc[0]:.2f} (2017) → {df['Applicant/Enrolled Ratio'].iloc[1]:.2f} (2016)")
+```
+
+Final Answer: Applications declined slightly from 2016 to 2017; Offer Rate dropped; Yield decreased; Applicant/Enrolled Ratio increased; Tariff missing in 2017.

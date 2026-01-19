@@ -1,0 +1,5 @@
+The question asks for a forecast of tropical storms and hurricanes for the next 5 years based on historical data from 1850 to 1858. However, the dataset is extremely limited (only 9 years) and lacks sufficient trends or correlations to perform a reliable statistical forecast—especially given that the data includes non-numeric values (e.g., "not known", "none") and no clear pattern can be established.
+
+Moreover, forecasting with such a small and sparse dataset, especially without assumptions about seasonality, randomness, or external factors, is not statistically valid or meaningful. Therefore, a reasonable and responsible approach is to state that a reliable forecast cannot be made with the given data.
+
+Final Answer: none

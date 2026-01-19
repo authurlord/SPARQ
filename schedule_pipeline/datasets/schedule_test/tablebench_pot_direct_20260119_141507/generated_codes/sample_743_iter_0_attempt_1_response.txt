@@ -1,0 +1,37 @@
+Step 1: The user is asking for an estimation of viewership and 18-49 average ratings for season 9 based on the trend from season 1 to season 8.  
+Step 2: We observe that both "viewers (in millions)" and "18 - 49 average" are decreasing over time, suggesting a clear downward trend.  
+Step 3: We will fit a linear regression model to the data from season 1 to season 8 to predict values for season 9.  
+Step 4: Use the model to estimate viewership and 18-49 average rating for season 9.  
+
+Note: Since the data is small and linear trends are apparent, simple linear regression is sufficient.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns: season (as index) and viewers, 18-49 average
+seasons = df['rank'].astype(int)
+viewers = df['viewers (in millions)'].astype(float)
+avg_18_49 = df['18 - 49 average'].astype(float)
+
+# Prepare data for regression: season rank as feature, viewers and 18-49 as targets
+X = seasons.values.reshape(-1, 1)
+y_viewers = viewers.values
+y_avg = avg_18_49.values
+
+# Fit linear regression models
+model_viewers = LinearRegression()
+model_avg = LinearRegression()
+
+model_viewers.fit(X, y_viewers)
+model_avg.fit(X, y_avg)
+
+# Predict for season 9 (rank = 9)
+predicted_viewers = model_viewers.predict([[9]])[0]
+predicted_avg = model_avg.predict([[9]])[0]
+
+print(f"Final Answer: {predicted_viewers:.2f}, {predicted_avg:.2f}")
+```

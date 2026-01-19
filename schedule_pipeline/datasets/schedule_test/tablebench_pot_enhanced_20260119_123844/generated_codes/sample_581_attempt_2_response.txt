@@ -1,0 +1,18 @@
+Step 1: The user wants the percentage change in the 'civil liberties' score from 1972 to 1980.
+Step 2: Load the dataframe.
+Step 3: Filter the data for the years 1972 and 1980.
+Step 4: Extract the 'civil liberties' values for these years.
+Step 5: Calculate the percentage change using the formula: ((new - old) / old) * 100.
+Step 6: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for 1972 and 1980
+civil_liberties_1972 = df[df['year'] == '1972']['civil liberties'].values[0]
+civil_liberties_1980 = df[df['year'] == '1980']['civil liberties'].values[0]
+
+# Calculate percentage change
+percentage_change = ((civil_liberties_1980 - civil_liberties_1972) / civil_liberties_1972) * 100
+print(f"Final Answer: {percentage_change:.1f}")
+```

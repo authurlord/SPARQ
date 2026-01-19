@@ -1,0 +1,42 @@
+Step 1: The user wants the standard deviation of metabolic rates for female animals and to identify which animal(s) have a metabolic rate more than one standard deviation away from the mean.
+
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Sex' is 'Female'.
+Step 4: Extract the 'Metabolic rate' column and convert to float.
+Step 5: Calculate the standard deviation.
+Step 6: Use the mean (given as 1285.5) and standard deviation to find values more than one standard deviation away from the mean.
+Step 7: Identify the corresponding animal(s).
+Step 8: Print the standard deviation and the animal(s) that meet the condition.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter female animals
+female_data = df[df['Sex'] == 'Female']
+
+# Convert 'Metabolic rate' to float
+female_data['Metabolic rate'] = pd.to_numeric(female_data['Metabolic rate'])
+
+# Mean is given as 1285.5
+mean_metabolic_rate = 1285.5
+
+# Calculate standard deviation
+std_dev = female_data['Metabolic rate'].std()
+
+# Find animals with metabolic rate more than one standard deviation away from the mean
+outside_one_std = female_data[
+    (female_data['Metabolic rate'] > mean_metabolic_rate + std_dev) |
+    (female_data['Metabolic rate'] < mean_metabolic_rate - std_dev)
+]
+
+# Get the animal IDs (first column) of those outside one standard deviation
+animals_outside = outside_one_std['Animal'].tolist()
+
+# Output results
+print(f"Standard deviation: {std_dev:.2f}")
+print(f"Animals more than one standard deviation from the mean: {', '.join(animals_outside)}")
+```
+
+Final Answer: 324.50, 6

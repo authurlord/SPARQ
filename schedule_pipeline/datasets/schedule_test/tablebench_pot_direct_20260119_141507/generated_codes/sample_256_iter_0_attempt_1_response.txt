@@ -1,0 +1,40 @@
+Step 1: Identify the top 3 countries with the most Primary schools.  
+Step 2: Sum the "Primary" schools for these top 3 countries.  
+Step 3: Find the total number of "Career-related" schools across all countries.  
+Step 4: Compute the difference between the two values.
+
+Note: The row with "Total Schools Globally" and "Countries & Territories" is at the end. We need to exclude rows that are headers or totals. Also, the row with "-" and "Primary" is a header, not data. So we filter out non-country rows.
+
+We will:
+- Filter rows where Country is not "-" and not a total.
+- Extract the "Primary" and "Career-related" values.
+- Sort by Primary schools in descending order to get top 3.
+- Sum the Primary schools of top 3.
+- Sum all Career-related schools.
+- Compute the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter out header and total rows
+data_rows = df[df['Country'] != '-']
+data_rows = data_rows[data_rows['Country'] != 'Total Schools Globally']
+data_rows = data_rows[data_rows['Country'] != 'Countries & Territories']
+
+# Convert relevant columns to numeric (remove commas)
+data_rows['Primary'] = data_rows['Primary'].str.replace(',', '').astype(int)
+data_rows['Career-related'] = data_rows['Career-related'].str.replace(',', '').astype(int)
+
+# Sort by Primary schools in descending order and take top 3
+top_3_primary = data_rows.nlargest(3, 'Primary')[['Primary']].sum()
+
+# Total Career-related schools across all countries
+total_career_related = data_rows['Career-related'].sum()
+
+# Compute difference
+difference = top_3_primary - total_career_related
+
+print(f"Final Answer: {difference}")
+```

@@ -1,0 +1,14 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert '%' column to numeric, removing the '%' sign and handling the '-' in total row
+df['%'] = df['%'].str.replace('%', '').astype(float)
+# Exclude the 'Total:' row
+df_filtered = df[df['Party'] != 'Total:']
+# Find the party with the highest percentage
+max_party = df_filtered.loc[df_filtered['%'].idxmax()]
+# Get the percentage of Forward Bloc (Ruikar)
+fb_ruikar_percent = df_filtered[df_filtered['Party'] == 'Forward Bloc (Ruikar)']['%'].values[0]
+# Calculate the difference
+difference = max_party['%'] - fb_ruikar_percent
+print(f"Final Answer: {max_party['Party']}, {difference:.2f}")

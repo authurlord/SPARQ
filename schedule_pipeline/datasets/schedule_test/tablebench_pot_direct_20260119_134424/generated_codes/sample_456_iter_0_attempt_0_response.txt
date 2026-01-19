@@ -1,0 +1,40 @@
+Step 1: The user wants to identify mountains with abnormal elevation or prominence values. We will analyze the data by calculating the mean and standard deviation for both elevation and prominence. Then, we will flag any mountain that has an elevation or prominence value more than 2 standard deviations away from the mean, as these could be considered outliers.
+
+Step 2: Load the dataframe and convert 'elevation (m)' and 'prominence (m)' columns to numeric type.
+
+Step 3: Calculate mean and standard deviation for elevation and prominence.
+
+Step 4: Identify outliers based on the 2-sigma rule.
+
+Step 5: Print the names of mountains that are outliers.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert elevation and prominence to numeric
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'], errors='coerce')
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'], errors='coerce')
+
+# Drop rows with invalid values
+df.dropna(subset=['elevation (m)', 'prominence (m)'], inplace=True)
+
+# Calculate mean and std for elevation and prominence
+elevation_mean = df['elevation (m)'].mean()
+elevation_std = df['elevation (m)'].std()
+
+prominence_mean = df['prominence (m)'].mean()
+prominence_std = df['prominence (m)'].std()
+
+# Identify outliers (more than 2 std away)
+elevation_outliers = df[abs(df['elevation (m)'] - elevation_mean) > 2 * elevation_std]
+prominence_outliers = df[abs(df['prominence (m)'] - prominence_mean) > 2 * prominence_std]
+
+# Combine outlier peaks
+outliers = pd.concat([elevation_outliers, prominence_outliers]).drop_duplicates()
+
+# Extract peak names
+outlier_peaks = outliers['peak'].tolist()
+
+print(f"Final Answer: {', '.join(outlier_peaks)}")
+```

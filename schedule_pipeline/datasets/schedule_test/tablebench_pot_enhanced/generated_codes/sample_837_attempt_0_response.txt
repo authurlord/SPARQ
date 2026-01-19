@@ -1,0 +1,30 @@
+Step 1: The user wants to find the model with the highest CPU clock speed.
+Step 2: Load the dataframe.
+Step 3: Convert the 'cpu clock ( mhz )' column to numeric, handling any non-numeric values (like '0 800' or '1000 / 1333 (turbo)').
+Step 4: Extract the maximum CPU clock speed and identify the corresponding model.
+Step 5: Print the model with the highest CPU clock speed.
+
+Note: Some values in 'cpu clock ( mhz )' are formatted with spaces or turbo notation. We'll extract the numeric part by splitting on spaces and taking the first number, and for turbo speeds, we'll use the higher value (e.g., '1000 / 1333' → 1333).
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert 'cpu clock ( mhz )' to numeric
+def extract_clock(speed):
+    if isinstance(speed, str):
+        # Split by space and take the first numeric part
+        parts = speed.split()
+        # Try to extract numbers from the string
+        nums = [int(part.replace('(', '').replace(')', '')) for part in parts if part.replace('(', '').replace(')', '').isdigit()]
+        if nums:
+            return max(nums)
+    return 0
+
+df['cpu_clock_clean'] = df['cpu clock ( mhz )'].apply(extract_clock)
+
+# Find the model with the highest CPU clock speed
+max_clock_model = df.loc[df['cpu_clock_clean'].idxmax(), 'model']
+print(f"Final Answer: {max_clock_model}")
+```

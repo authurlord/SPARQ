@@ -1,0 +1,16 @@
+Step 1: The user wants the total number of votes cast in counties where Obama received more than 60% of the votes.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'obama%' is greater than 60%.
+Step 4: Sum the 'total' column for these filtered rows.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Obama's percentage is greater than 60%
+filtered_df = df[df['obama%'].str.replace('%', '').astype(float) > 60]
+# Sum the total votes in these counties
+total_votes = filtered_df['total'].sum()
+print(f"Final Answer: {total_votes}")
+```

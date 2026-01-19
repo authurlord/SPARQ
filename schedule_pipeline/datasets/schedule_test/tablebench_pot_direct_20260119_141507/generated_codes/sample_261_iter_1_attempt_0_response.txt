@@ -1,0 +1,28 @@
+The error occurred because the market value column contains string values that were not properly parsed as numbers. In the original data, the values like '407.2', '212.9', etc., are stored as strings due to a formatting issue or missing type conversion. We need to ensure that all numeric columns are converted to float before computing the average.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter the companies in the "oil and gas" industry.
+3. Select only the top 5 companies in oil and gas (by rank).
+4. Convert the 'market value (billion )' column to numeric (to avoid parsing errors).
+5. Compute the average market value of these top 5 companies.
+
+Note: The "top 5" refers to the first 5 companies in the list by rank, so we take the first 5 rows where the industry is "oil and gas".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for oil and gas industry
+oil_gas_df = df[df['industry'] == 'oil and gas']
+
+# Ensure market value is numeric
+oil_gas_df['market value (billion )'] = pd.to_numeric(oil_gas_df['market value (billion )'], errors='coerce')
+
+# Take the top 5 companies (first 5 rows) in oil and gas industry
+top_5_oil_gas = oil_gas_df.head(5)
+
+# Calculate average market value
+avg_market_value = top_5_oil_gas['market value (billion )'].mean()
+print(f"Final Answer: {avg_market_value:.1f}")
+```

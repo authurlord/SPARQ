@@ -1,0 +1,25 @@
+Step 1: The user wants to determine which factors ('judges', 'public', 'vote percentage') contribute most to the 'result' (e.g., 'safe' or 'bottom two') of each couple.
+Step 2: Analyze the data by comparing the values of 'judges', 'public', and 'vote percentage' across couples with different results.
+Step 3: Since 'result' is categorical, we can assess correlation by observing trends:
+   - Couples in 'bottom two' should have lower scores or vote percentages.
+   - 'Vote percentage' is a direct measure of public influence.
+   - 'Judges' and 'public' scores are individual contributions to the total.
+Step 4: Compare 'vote percentage' with the 'result'. The only couple in 'bottom two' has the lowest total (7), lowest 'public' score (1), and lowest 'vote percentage' (4.2%).
+Step 5: Conclude that 'vote percentage' and 'public' scores strongly correlate with the result, while 'judges' score is less predictive (e.g., Hayley and Daniel had high judges but not the highest total).
+Step 6: The strongest indicator of result is 'vote percentage' as it directly reflects audience influence.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check for correlation between vote percentage and result
+bottom_two = df[df['result'] == 'bottom two']
+safe_couples = df[df['result'] == 'safe']
+
+# Compare vote percentage
+if bottom_two['vote percentage'].values[0] < safe_couples['vote percentage'].min():
+    print("Final Answer: vote percentage")
+else:
+    print("Final Answer: no clear impact")
+```

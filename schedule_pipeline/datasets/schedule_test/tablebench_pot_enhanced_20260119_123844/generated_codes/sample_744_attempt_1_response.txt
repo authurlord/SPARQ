@@ -1,0 +1,35 @@
+Step 1: The user is asking for a prediction of the number of candidates fielded and the percentage of popular vote in the next election cycle based on the increasing trend from 1983 to 2009.
+
+Step 2: We will analyze the trend in "candidates fielded" and "% of popular vote" over time. Since both values are increasing, we can use linear regression to extrapolate the next data point (2013, assuming the pattern continues every 4 years).
+
+Step 3: Extract the years (as numerical values) and the two variables of interest: "candidates fielded" and "% of popular vote".
+
+Step 4: Fit a linear model for each variable and predict the value for the next year (2013).
+
+Step 5: Print the predicted values.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'election' to numeric for analysis
+df['election'] = pd.to_numeric(df['election'])
+
+# Prepare data for linear regression
+X = df['election'].values.reshape(-1, 1)
+y_candidates = df['candidates fielded'].values
+y_votes = df['% of popular vote'].str.replace('%', '').astype(float).values
+
+# Fit linear regression models
+model_candidates = np.polyfit(X.flatten(), y_candidates, 1)
+model_votes = np.polyfit(X.flatten(), y_votes, 1)
+
+# Predict for the next election cycle (2013)
+next_year = 2013
+pred_candidates = np.polyval(model_candidates, next_year)
+pred_votes = np.polyval(model_votes, next_year)
+
+print(f"Final Answer: {int(pred_candidates)}, {pred_votes:.2f}%")
+```

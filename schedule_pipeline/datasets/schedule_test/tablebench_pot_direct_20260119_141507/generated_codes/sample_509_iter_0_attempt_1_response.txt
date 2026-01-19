@@ -1,0 +1,21 @@
+Step 1: The user wants to find the series with the highest win rate, defined as (total wins / total races) * 100.  
+Step 2: Load the dataframe and extract the 'wins' and 'races' columns.  
+Step 3: Group by 'series' to calculate wins and races per series.  
+Step 4: Compute the win rate for each series and find the one with the maximum value.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Calculate win rate for each series
+df['win_rate'] = df['wins'] / df['races']
+
+# Group by series and compute average win rate
+series_win_rate = df.groupby('series')['win_rate'].mean().reset_index()
+
+# Find the series with the highest win rate
+max_win_rate_series = series_win_rate.loc[series_win_rate['win_rate'].idxmax(), 'series']
+
+print(f"Final Answer: {max_win_rate_series}")
+```

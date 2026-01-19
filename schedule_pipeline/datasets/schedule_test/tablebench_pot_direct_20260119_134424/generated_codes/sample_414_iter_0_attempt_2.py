@@ -1,0 +1,12 @@
+# Table Description and Column Significance
+print("The table provides information about metro lines in Chengdu, China.")
+print("Each row represents a different metro line with details about its route, construction, and specifications.")
+print("\nColumn Significance:")
+print("1. Line: The line number (e.g., 1, 2, 3, etc.) identifying the metro line.")
+print("2. Terminals (District): The starting and ending terminals of the line, including their respective districts.")
+print("3. Terminals (District)_1: An alternative or duplicate representation of the terminal stations, possibly for clarity or formatting.")
+print("4. Commencement: The year when the line first opened for service.")
+print("5. Newest Extension: The year of the most recent extension to the line; '-' indicates no recent extension.")
+print("6. Length km: The total length of the line in kilometers.")
+print("7. Stations: The number of stations on the line.")
+print("Final Answer: The table describes Chengdu's metro lines with details on routes, opening years, extensions, lengths, and stations.")

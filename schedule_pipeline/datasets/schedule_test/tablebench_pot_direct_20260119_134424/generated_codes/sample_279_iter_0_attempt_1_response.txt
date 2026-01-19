@@ -1,0 +1,45 @@
+Step 1: The question asks for the total estimated exposure (mrem/hr) when two specimens are combined, assuming that the calculated activity (Bq) is directly proportional to the specimen weight.
+
+Step 2: Identify the relevant rows:
+- Specimen 1: 0.1 g / 4.08 mm → calculated activity = 18 Bq, estimated exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → calculated activity = 1834 Bq, estimated exposure = 0.03 mrem/hr
+
+Step 3: Since activity is directly proportional to weight, we can scale the exposure of the first specimen based on its weight relative to the second.
+
+However, note that the exposure values in the table are already given per specimen. But the exposure is not linearly scaled with weight — the 0.1g specimen has 0.0 mrem/hr, and the 10g specimen has 0.03 mrem/hr.
+
+But wait: the exposure value for 0.1g is listed as 0.0, which may be due to rounding or measurement limit. However, if we assume that exposure is proportional to activity (and thus to weight), we can calculate the expected exposure for 0.1g specimen based on the 10g specimen.
+
+Step 4: Use proportionality:
+- 10g → 0.03 mrem/hr
+- 0.1g → (0.1 / 10) * 0.03 = 0.0003 mrem/hr
+
+Then, total exposure = 0.0003 + 0.03 = 0.0303 mrem/hr
+
+Step 5: Round to a reasonable precision and output.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Find the row for 0.1 g / 4.08 mm
+row_01g = df[df['specimen weight / size'] == '0.1 g / 4.08 mm']
+# Find the row for 10 g / 1.89 cm
+row_10g = df[df['specimen weight / size'] == '10 g / 1.89 cm']
+
+# Extract activity (Bq) and exposure (mrem/hr)
+activity_01g = float(row_01g['calculated activity ( bq )'].values[0])
+activity_10g = float(row_10g['calculated activity ( bq )'].values[0])
+exposure_10g = float(row_10g['estimated exposure ( mrem ) / hr'].values[0])
+
+# Since activity is proportional to weight, and exposure is proportional to activity,
+# we can compute the expected exposure for 0.1g based on 10g
+weight_ratio = 0.1 / 10
+expected_exposure_01g = weight_ratio * exposure_10g
+
+# Total exposure
+total_exposure = expected_exposure_01g + exposure_10g
+
+print(f"Final Answer: {total_exposure:.4f}")
+```

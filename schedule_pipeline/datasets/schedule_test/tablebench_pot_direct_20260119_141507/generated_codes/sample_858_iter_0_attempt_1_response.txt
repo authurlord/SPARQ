@@ -1,0 +1,21 @@
+Step 1: Identify the country with the highest GDP per capita from the 'gdp per capita (us)' column.  
+Step 2: Find the GDP per capita of the EC6 (1958) region.  
+Step 3: Calculate the difference between the highest GDP per capita and that of EC6 (1958).  
+Step 4: Return the country name and the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the country with the highest GDP per capita
+max_gdp_per_capita = df['gdp per capita (us)'].max()
+highest_gdp_country = df[df['gdp per capita (us)'] == max_gdp_per_capita]['member countries'].values[0]
+
+# GDP per capita of EC6 (1958)
+ec6_gdp_per_capita = df[df['member countries'] == 'ec6 (1958)']['gdp per capita (us)'].values[0]
+
+# Calculate the difference
+difference = max_gdp_per_capita - ec6_gdp_per_capita
+
+print(f"Final Answer: {highest_gdp_country}, {difference:.0f}")
+```

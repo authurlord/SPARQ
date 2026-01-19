@@ -1,0 +1,14 @@
+Step 1: Identify which conferences have a non-empty (i.e., not '-') value in the '1996' column.  
+Step 2: Count how many such entries exist.  
+Step 3: The '1996' column corresponds to the fifth column in the table (index 3).  
+Step 4: Filter rows where the value in the '1996' column is not '-'.  
+Step 5: Count the number of such rows.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count the number of conferences with occurrences in 1996 (non '-' values in the '1996' column)
+count_1996 = df[df['1996'] != '-'].shape[0]
+print(f"Final Answer: {count_1996}")
+```

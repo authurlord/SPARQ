@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The human development index (2000) shows a positive correlation with population density ( / km²), particularly in municipalities with larger areas, indicating that higher HDI is associated with higher population density.

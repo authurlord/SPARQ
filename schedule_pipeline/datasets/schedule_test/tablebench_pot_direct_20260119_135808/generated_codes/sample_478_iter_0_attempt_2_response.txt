@@ -1,0 +1,33 @@
+Step 1: The user is asking for the city with an unusually high total passengers and annual change. We need to identify outliers in both 'total passengers' and 'annual change'.
+Step 2: Load the dataframe.
+Step 3: Convert 'total passengers' and 'annual change' to numeric types (note that 'annual change' contains '%' signs).
+Step 4: Identify extreme values by checking for unusually high values in both columns, such as very high total passengers or extremely high annual change (e.g., 1000% or more).
+Step 5: Check which city has both high total passengers and a very high annual change.
+Step 6: Print the city name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert 'total passengers' to integer
+df['total passengers'] = df['total passengers'].astype(int)
+
+# Clean 'annual change' by removing '%' and converting to float
+df['annual change'] = df['annual change'].str.replace('%', '').astype(float)
+
+# Identify cities with unusually high total passengers (e.g., > 10 million) and high annual change (e.g., > 100%)
+high_passengers = df[df['total passengers'] > 10000000]
+high_annual_change = df[df['annual change'] > 100]
+
+# Find intersection of both conditions
+unusual_city = pd.merge(high_passengers, high_annual_change, on='location')
+
+# Extract the city name
+if not unusual_city.empty:
+    city = unusual_city['location'].iloc[0]
+else:
+    city = "None"
+
+print(f"Final Answer: {city}")
+```

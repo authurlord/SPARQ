@@ -1,0 +1,28 @@
+Step 1: Understand that a "podium finish" includes finishes in first, second, or third place.  
+Step 2: Extract the "second" and "third" columns from the data, as these represent second and third place finishes.  
+Step 3: For each driver, sum their "second" and "third" values (treat "-" as missing/0).  
+Step 4: Identify the driver with the highest total podium finishes.  
+Step 5: Print the name of that driver.
+
+Note: The "points" and other columns are not relevant to podium finishes.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert "second" and "third" columns to numeric, treating '-' as NaN
+df['second'] = pd.to_numeric(df['second'], errors='coerce')
+df['third'] = pd.to_numeric(df['third'], errors='coerce')
+
+# Calculate total podium finishes per driver
+df['podium_finishes'] = df['second'] + df['third']
+
+# Group by driver and sum podium finishes
+podium_summary = df.groupby('driver')['podium_finishes'].sum()
+
+# Find the driver with the maximum podium finishes
+top_driver = podium_summary.idxmax()
+print(f"Final Answer: {top_driver}")
+```

@@ -1,0 +1,12 @@
+Step 1: The user wants the average number of viewers for the first 5 episodes.
+Step 2: Load the dataframe.
+Step 3: Select the 'viewers (millions)' column and extract the first 5 values.
+Step 4: Calculate the mean of these values and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select the first 5 episodes and calculate average viewers
+first_five_viewers = df['viewers (millions)'].head(5).mean()
+print(f"Final Answer: {first_five_viewers:.2f}")
+```

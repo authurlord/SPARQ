@@ -1,0 +1,17 @@
+The error occurred because the "occurrence" column contains string values (e.g., '1', '4'), not integers. We need to convert this column to numeric before comparing it with 1.
+
+Step 1: Load the dataframe.
+Step 2: Convert the "occurrence" column to numeric, handling any non-numeric entries.
+Step 3: Filter rows where the occurrence is greater than 1.
+Step 4: Count such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'occurrence' to numeric, coercing errors to NaN
+df['occurrence'] = pd.to_numeric(df['occurrence'], errors='coerce')
+# Count how many have occurrence > 1
+count_occurrence_gt_1 = df[df['occurrence'] > 1].shape[0]
+print(f"Final Answer: {count_occurrence_gt_1}")
+```

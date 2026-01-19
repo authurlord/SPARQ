@@ -1,0 +1,45 @@
+Step 1: The population dependency ratio is calculated as (population aged 0-10 + population aged 60+) / (population aged 11-59).
+
+Step 2: From the table, extract the population values:
+- Population aged 0-9: 41 (from '0-9' column)
+- Population aged 10-19: 45 (from '10-19' column) → this is part of 0-10
+- So, population aged 0-10 = 41 (0-9) + 45 (10-19) = 86
+- Population aged 60-69: 20 (from '60-69' column)
+- Population aged 70-79: 24 (from '70-79' column)
+- Population aged 80+: 14 (from '80 +' column)
+- So, population aged 60+ = 20 + 24 + 14 = 58
+
+- Population aged 11-59 = sum of '10-19', '20-29', '30-39', '40-49', '50-59'
+  = 45 + 47 + 27 + 38 + 31 = 188
+
+Step 3: Calculate dependency ratio = (86 + 58) / 188 = 144 / 188 ≈ 0.766
+
+Step 4: Round to two decimal places for approximation.
+
+```python
+# Extract population data from the table
+pop_0_9 = 41
+pop_10_19 = 45
+pop_20_29 = 47
+pop_30_39 = 27
+pop_40_49 = 38
+pop_50_59 = 31
+pop_60_69 = 20
+pop_70_79 = 24
+pop_80_plus = 14
+
+# Calculate population aged 0-10
+pop_0_10 = pop_0_9 + pop_10_19
+
+# Calculate population aged 60+
+pop_60_plus = pop_60_69 + pop_70_79 + pop_80_plus
+
+# Calculate population aged 11-59
+pop_11_59 = pop_10_19 + pop_20_29 + pop_30_39 + pop_40_49 + pop_50_59
+
+# Calculate dependency ratio
+dependency_ratio = (pop_0_10 + pop_60_plus) / pop_11_59
+
+# Print the result rounded to two decimal places
+print(f"Final Answer: {dependency_ratio:.2f}")
+```

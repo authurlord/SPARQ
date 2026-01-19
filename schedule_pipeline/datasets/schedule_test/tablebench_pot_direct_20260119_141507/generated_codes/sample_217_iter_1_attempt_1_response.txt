@@ -1,0 +1,37 @@
+We are asked to determine whether energy content in staple foods is more closely related to carbohydrates, fat, or protein. 
+
+Step-by-step approach:
+1. The "Energy (kJ)" column represents the total energy per 100g portion.
+2. We need to examine the correlation between "Energy (kJ)" and the amounts of carbohydrates, fat, and protein.
+3. Since the data is tabular and we have numerical values for each nutrient, we can compute the correlation coefficients between "Energy (kJ)" and each of the three nutrients: Carbohydrates (g), Fat (g), and Protein (g).
+4. The nutrient with the highest absolute correlation coefficient will indicate which one is most closely related to energy content.
+
+Note: The table has a header row labeled "STAPLE:", followed by nutrient categories. The actual data rows start from "Water (g)" onwards. We will extract only the relevant columns: "Energy (kJ)", "Carbohydrates (g)", "Fat (g)", "Protein (g)".
+
+We will:
+- Load the DataFrame.
+- Select the relevant columns.
+- Compute pairwise correlation between "Energy (kJ)" and the other three nutrients.
+- Identify the nutrient with the highest absolute correlation.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns
+columns_of_interest = ['Energy (kJ)', 'Carbohydrates (g)', 'Fat (g)', 'Protein (g)']
+df_filtered = df[columns_of_interest]
+
+# Drop any rows with NaN values (e.g., due to missing data like '-')
+df_filtered = df_filtered.dropna()
+
+# Compute correlation between Energy and each nutrient
+correlations = df_filtered.corr()['Energy (kJ)'].abs()
+
+# Find the nutrient with the highest correlation
+most_correlated_nutrient = correlations.idxmax()
+
+print(f"Final Answer: {most_correlated_nutrient}")
+```

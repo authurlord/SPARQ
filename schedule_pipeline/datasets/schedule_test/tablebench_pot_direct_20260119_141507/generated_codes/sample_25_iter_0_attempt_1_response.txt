@@ -1,0 +1,13 @@
+Step 1: The user wants to calculate the average percentage of males across all states in India.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'males (%)' column, which contains the male percentage values.  
+Step 4: Compute the mean of this column and print it.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the mean of 'males (%)' column
+average_males_percent = df['males (%)'].mean()
+print(f"Final Answer: {average_males_percent:.2f}")
+```

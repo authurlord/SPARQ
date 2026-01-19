@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the season in which the driver won 13 races.
+Step 2: Load the dataframe.
+Step 3: Filter the rows where 'wins' equals 13.
+Step 4: Extract the 'season' value from the filtered row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where wins are 13
+winning_season = df[df['wins'] == 13]['season'].values[0]
+print(f"Final Answer: {winning_season}")
+```

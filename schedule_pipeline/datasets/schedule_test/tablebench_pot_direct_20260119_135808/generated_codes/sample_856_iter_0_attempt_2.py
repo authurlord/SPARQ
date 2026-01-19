@@ -1,0 +1,14 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for 1999 election and 2004 election
+election_1999 = df[df['event'] == '1999 election']
+election_2004 = df[df['event'] == '2004 election']
+
+# Extract dp/da values
+dp_da_1999 = int(election_1999['dp / da'].values[0])
+dp_da_2004 = int(election_2004['dp / da'].values[0])
+
+# Calculate the difference
+difference = dp_da_2004 - dp_da_1999
+print(f"Final Answer: {difference}")

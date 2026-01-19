@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of songs in the French language.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'language' column is 'french'.  
+Step 4: Count the number of such rows and print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count the number of songs where language is 'french'
+french_songs_count = df[df['language'] == 'french'].shape[0]
+print(f"Final Answer: {french_songs_count}")
+```

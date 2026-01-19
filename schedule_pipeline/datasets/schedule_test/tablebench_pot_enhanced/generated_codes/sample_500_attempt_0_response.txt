@@ -1,0 +1,16 @@
+Step 1: The user wants the average magnitude of the top 5 earthquakes ranked by death toll.
+Step 2: Load the dataframe.
+Step 3: Sort the data by 'Death toll' in descending order to get the top 5 earthquakes with the highest death toll.
+Step 4: Select the 'Magnitude' column for these top 5 entries.
+Step 5: Calculate the mean of these magnitudes and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by 'Death toll' in descending order and take top 5
+top_5_by_death_toll = df.sort_values(by='Death toll', ascending=False).head(5)
+# Calculate average magnitude of these top 5
+average_magnitude = top_5_by_death_toll['Magnitude'].mean()
+print(f"Final Answer: {average_magnitude:.1f}")
+```

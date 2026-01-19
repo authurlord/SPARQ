@@ -1,0 +1,22 @@
+Step 1: Identify the author(s) who wrote a book with a narrator named "Katherine Kellgren".  
+Step 2: Among those authors, check if they also wrote a book that won the award in 2013 (i.e., where the citation is "winner").  
+Step 3: Return the name of such an author.
+
+From the table:
+- "Katherine Kellgren" is the narrator for:
+  - "Monstrous Beauty" (2013) → Author: Elizabeth Fama
+  - "The True Meaning of Smekday" (2011) → Author: Adam Rex
+  - "In the Belly of the Bloodhound" (2010) → Author: L.A. Meyer
+  - "Curse of the Blue Tattoo" (2009) → Author: L.A. Meyer
+  - "Alchemy and Meggy Swann" (2011) → Author: Karen Cushman
+
+Now, check which of these authors also wrote a book that won in 2013:
+- "The Fault in Our Stars" (2013) → Winner → Author: John Green → Narrator: Kate Rudd → Not Katherine Kellgren
+- "Ghost Knight" (2013) → Honor → Author: Cornelia Funke → Narrator: Elliot Hill
+- "Monstrous Beauty" (2013) → Honor → Author: Elizabeth Fama → Narrator: Katherine Kellgren → But citation is "honor", not "winner"
+
+No book with a narrator named Katherine Kellgren has a citation of "winner" in 2013.
+
+Thus, no author who has a book narrated by Katherine Kellgren also has a book that won the award in 2013.
+
+Final Answer: None

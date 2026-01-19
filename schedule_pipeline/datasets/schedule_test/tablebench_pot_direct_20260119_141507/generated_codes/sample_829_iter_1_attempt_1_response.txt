@@ -1,0 +1,40 @@
+The error occurred because the 'bello' column contains string values that appear to be malformed or concatenated with other data (e.g., "5141362369374033847066684739524058391573629lyrette14533129487917188695911628"), which cannot be converted to numeric. This suggests that the data might be misaligned — possibly the first row of the table has a mix-up in column names or values.
+
+Looking at the structure:
+- The first row of data is: `['orlãans', '51', '27', '1918', '14', ...]`
+- The second row: `['innes', '41', '11', '1466', '11', ...]`
+- But then later, we see a row: `['ward', 'lyrette', 'maguire', ...]` — this appears to be a header row for the second set of columns.
+
+So it seems the table has two separate parts:
+1. A list of wards with numerical values for each councillor (like 'bello', 'ben-tahir', etc.)
+2. A second section where the ward name is repeated, and the values are now strings like "514136..." — clearly not valid numbers.
+
+Therefore, the 'bello' column in the first part (e.g., 51, 41, 36) is valid and numeric. The later rows where 'ward' is repeated are not part of the original ward data and likely represent a misalignment.
+
+We must extract only the first set of rows (the ward-level data), where each row starts with a ward name (e.g., 'orlãans', 'innes') and contains numeric values for the councillors.
+
+Thus, the correct approach:
+1. Filter rows where the first value (ward) is not one of the councillor names (like 'lyrette', 'maguire', etc.).
+2. Extract the 'bello' column from those valid rows.
+3. Compute the mean and standard deviation.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Identify valid ward rows: those where the first element is a ward name (not a councillor name)
+# Councillor names start with letters like 'lyrette', 'maguire', etc.
+valid_ward_rows = df[df['ward'].str.contains(r'^[a-zA-Z]+$', na=False) & (~df['ward'].str.contains(r'lyrette|maguire|o\'brien|pita|ryan|st arnaud|scharf|taylor|watson|wright', case=False))]
+
+# Extract the 'bello' column from valid rows
+bello_values = valid_ward_rows['bello'].astype(str).str.strip().str.replace(',', '').astype(float)
+
+# Calculate mean and standard deviation
+mean_bello = np.mean(bello_values)
+std_bello = np.std(bello_values)
+
+print(f"Final Answer: {mean_bello:.2f}, {std_bello:.2f}")
+```

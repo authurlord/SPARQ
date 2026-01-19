@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: High annual change leads to higher capacity in use, as seen in airports like Belém (11.56% annual change, 123.80% capacity in use) and Juazeiro do Norte (31.51% annual change, 451.08% capacity in use).

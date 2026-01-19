@@ -1,0 +1,35 @@
+Step 1: The question asks for the year when the European Union's total energy production exceeded that of the United States.  
+Step 2: Identify the relevant rows: European Union and United States.  
+Step 3: Extract the "total" column values for both countries and their corresponding years.  
+Step 4: Compare the totals year by year and find the first year where EU's total > US's total.  
+
+Note: The data has two years: 2010 (EU, US) and 2011 (EU, US). The EU data is available for 2010 and 2012, while the US data is available for 2010 and 2011. So we compare only the overlapping years (2010).  
+
+In 2010:  
+- EU total = 699.3  
+- US total = 520.1 → EU > US  
+
+Thus, the answer is 2010.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows for European Union and United States
+eu_data = df[df['country'] == 'european union']
+us_data = df[df['country'] == 'united states']
+
+# Extract total and year for both
+eu_totals = eu_data.set_index('year')['total'].to_dict()
+us_totals = us_data.set_index('year')['total'].to_dict()
+
+# Find common years
+common_years = set(eu_totals.keys()) & set(us_totals.keys())
+
+# Check which year EU exceeds US
+for year in common_years:
+    if eu_totals[year] > us_totals[year]:
+        print(f"Final Answer: {year}")
+        break
+```

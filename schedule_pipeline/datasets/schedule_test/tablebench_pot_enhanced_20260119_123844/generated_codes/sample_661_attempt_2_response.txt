@@ -1,0 +1,21 @@
+Step 1: The user wants to calculate the correlation coefficient between 'sunshine (hrs / year)' and 'storms (days / year)'.
+Step 2: Load the dataframe.
+Step 3: Clean the data by removing any non-numeric characters (like spaces in numbers) from the 'sunshine (hrs / year)' and 'storms (days / year)' columns.
+Step 4: Convert these columns to numeric type.
+Step 5: Compute the correlation coefficient using pandas corr() function.
+Step 6: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert 'sunshine (hrs / year)' and 'storms (days / year)' to numeric
+df['sunshine (hrs / year)'] = df['sunshine (hrs / year)'].str.replace(' ', '').astype(float)
+df['storms (days / year)'] = df['storms (days / year)'].astype(float)
+
+# Calculate correlation coefficient
+correlation = df['sunshine (hrs / year)'].corr(df['storms (days / year)'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

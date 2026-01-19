@@ -1,0 +1,36 @@
+import pandas as pd
+from statistics import median
+
+df = pd.read_csv('table.csv')
+
+# Count how many drivers are in each team
+team_counts = df['team'].value_counts()
+
+# Get teams with more than one driver
+teams_with_multiple_drivers = team_counts[team_counts > 1].index
+
+# Filter drivers from teams with more than one driver
+filtered_df = df[df['team'].isin(teams_with_multiple_drivers)]
+
+# Function to convert time string to seconds
+def time_to_seconds(time_str):
+    if ':' in time_str:
+        parts = time_str.split(':')
+        if len(parts) == 2:
+            return float(parts[0]) * 60 + float(parts[1])
+        elif len(parts) == 3:
+            return float(parts[0]) * 3600 + float(parts[1]) * 60 + float(parts[2])
+    return float(time_str)
+
+# Convert 'qual 2' to seconds
+filtered_df['qual_2_seconds'] = filtered_df['qual 2'].apply(time_to_seconds)
+
+# Calculate median
+median_time_seconds = median(filtered_df['qual_2_seconds'])
+
+# Convert back to mm:ss.sss format for readability
+minutes = int(median_time_seconds // 60)
+seconds = median_time_seconds % 60
+formatted_median = f"{minutes}:{seconds:05.2f}"
+
+print(f"Final Answer: {formatted_median}")

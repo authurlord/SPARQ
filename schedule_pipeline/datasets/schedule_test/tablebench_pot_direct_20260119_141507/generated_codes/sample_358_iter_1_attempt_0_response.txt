@@ -1,0 +1,30 @@
+The error occurred because the "year" column is not being used in the condition — we are comparing the number of Indians admitted (which is numeric) with 25000, but the data type of "indians admitted" is correctly numeric. However, the error suggests a misinterpretation — actually, the issue is not in the comparison logic, but rather in how the data is loaded or interpreted.
+
+Let's recheck: The column "indians admitted" contains integers as strings? No — looking at the data, values like '26122', '27901' are clearly numeric strings. But when loaded into a DataFrame, pandas will convert them to integers automatically.
+
+So the correct approach is:
+1. Load the DataFrame.
+2. Extract the "indians admitted" column.
+3. Filter rows where the value is greater than 25000.
+4. Count the number of such rows.
+
+The error message suggests a type mismatch, which may stem from a misreading of the column — but in this case, it's likely due to improper handling during load. We should ensure proper parsing.
+
+But in reality, pandas will parse numbers correctly from strings like '26122'. So the error is likely due to a misstep in code logic — perhaps a typo or incorrect column access.
+
+Let’s fix and write clean, safe code.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'indians admitted' to integer (just in case)
+df['indians admitted'] = pd.to_numeric(df['indians admitted'], errors='coerce')
+# Filter years where indians admitted > 25000
+count = (df['indians admitted'] > 25000).sum()
+print(f"Final Answer: {count}")
+```
+
+This ensures robustness and avoids any string-int comparison errors.
+
+Final Answer: 6

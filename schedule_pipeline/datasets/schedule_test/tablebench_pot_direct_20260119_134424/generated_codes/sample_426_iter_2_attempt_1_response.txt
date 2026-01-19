@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains regional demographic data including total population, Manchu population count, percentage of Manchu population within the region, and regional percentage of the overall population. The Manchu population is most concentrated in Liaoning (12.2% of its population), followed by Hebei (2.95%) and Jilin (3.16%). Overall, the Manchu population is a small fraction of the total population across all regions, with the highest regional concentration in Liaoning and the lowest in Tibet (<0.01%).

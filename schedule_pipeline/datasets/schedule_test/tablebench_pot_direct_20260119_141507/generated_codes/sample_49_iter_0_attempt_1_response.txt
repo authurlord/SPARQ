@@ -1,0 +1,13 @@
+Step 1: The user wants the average percentage of votes for the Progressive Conservative party across all polling firms and dates.  
+Step 2: Load the dataframe.  
+Step 3: Select the 'progressive conservative' column, which contains the vote percentages.  
+Step 4: Calculate the mean of this column and print it.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the mean of the 'progressive conservative' column
+avg_pc_votes = df['progressive conservative'].mean()
+print(f"Final Answer: {avg_pc_votes:.1f}")
+```

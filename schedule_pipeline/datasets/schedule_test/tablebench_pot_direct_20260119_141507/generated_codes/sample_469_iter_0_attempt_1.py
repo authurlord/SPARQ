@@ -1,0 +1,56 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert all relevant columns to numeric, with errors='coerce' to turn non-numeric into NaN
+df_numeric = df.apply(pd.to_numeric, errors='coerce')
+
+# Check for anomalies:
+# 1. Total deaths should be >= military deaths + civilian deaths
+# 2. Total casualties should be >= military and civilian wounded
+# 3. Any row where total deaths is less than sum of military and civilian deaths
+# 4. Any row where total casualties is less than sum of wounded
+
+anomalies = []
+
+# Check if total deaths < sum of military and civilian deaths
+for idx, row in df_numeric.iterrows():
+    try:
+        m_deaths = row['military deaths']
+        c_deaths = row['civilian deaths']
+        t_deaths = row['total deaths (not including foreigners)']
+        wounded = row['military and / or civilian wounded']
+        total_casualties = row['total casualties']
+
+        # If any value is NaN, skip
+        if pd.isna(m_deaths) or pd.isna(c_deaths) or pd.isna(t_deaths) or pd.isna(wounded) or pd.isna(total_casualties):
+            continue
+
+        # Check if total deaths is less than sum of military and civilian deaths
+        if t_deaths < m_deaths + c_deaths:
+            anomalies.append(f"Row {idx}: Total deaths ({t_deaths}) < sum of military ({m_deaths}) and civilian ({c_deaths}) deaths")
+
+        # Check if total casualties < sum of wounded
+        if total_casualties < wounded:
+            anomalies.append(f"Row {idx}: Total casualties ({total_casualties}) < wounded ({wounded})")
+
+    except Exception as e:
+        anomalies.append(f"Error processing row {idx}: {e}")
+
+# Also note rows with "unknown" in key fields
+unknown_rows = df[df['military deaths'].astype(str).str.contains('unknown', case=False) | 
+                  df['civilian deaths'].astype(str).str.contains('unknown', case=False) | 
+                  df['total deaths (not including foreigners)'].astype(str).str.contains('unknown', case=False) | 
+                  df['military and / or civilian wounded'].astype(str).str.contains('unknown', case=False) | 
+                  df['total casualties'].astype(str).str.contains('unknown', case=False)]
+
+if len(unknown_rows) > 0:
+    anomalies.append("Rows with 'unknown' values in key fields may indicate missing or incomplete data.")
+
+# Print anomalies
+print("Anomalies found:")
+for anomaly in anomalies:
+    print(anomaly)
+
+Final Answer: Rows with unknown values, total deaths less than sum of military and civilian deaths, total casualties less than wounded

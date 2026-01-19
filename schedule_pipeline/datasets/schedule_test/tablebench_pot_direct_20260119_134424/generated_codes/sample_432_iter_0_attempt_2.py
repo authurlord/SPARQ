@@ -1,0 +1,2 @@
+# No code execution needed for descriptive analysis, but we provide final answer as per format
+print("Final Answer: The table shows the number of same-sex marriages (between men and between women) and their percentage of total marriages from 2005 to 2011. Same-sex marriages increased significantly over time, with the percentage rising from 1.06% to 2.38%.")

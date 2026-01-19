@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table defines BMI categories and their corresponding BMI values and BMI Prime ranges, used to assess weight status and health risk. BMI (kg/m²) indicates body mass index thresholds for different weight categories. BMI Prime is a normalized version of BMI (BMI divided by 25), where 1.0 represents the upper limit of normal weight. Notable patterns include: BMI Prime increases linearly with BMI, and each category corresponds to a specific health risk level, with higher values indicating greater obesity and associated health risks.

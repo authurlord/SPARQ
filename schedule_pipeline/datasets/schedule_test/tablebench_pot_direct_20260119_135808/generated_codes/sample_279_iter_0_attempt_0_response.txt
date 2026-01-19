@@ -1,0 +1,83 @@
+Step 1: The question asks for the estimated total exposure (mrem/hr) when combining two specimens, assuming that the calculated activity (Bq) is directly proportional to the specimen weight.
+
+Step 2: From the table:
+- Specimen 1: 0.1 g / 4.08 mm → calculated activity (Bq) = 18, estimated exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → calculated activity (Bq) = 1834, estimated exposure = 0.03 mrem/hr
+
+Step 3: Since activity is directly proportional to weight, we can scale the exposure of the 0.1g specimen to match the 10g specimen's weight (i.e., scale by factor 100), but note: the exposure is already given per specimen and appears to be based on the calculated activity.
+
+However, the exposure values are not linearly scaled with weight — the 0.1g specimen has 0.0 mrem/hr while the 10g specimen has 0.03 mrem/hr. But the activity (Bq) scales as expected: 18 vs 1834 (≈100×). So the exposure should scale with activity (Bq), not weight directly.
+
+Thus, we can calculate the exposure per Bq for each specimen and then use it to estimate the combined exposure.
+
+But since the exposure is already calculated based on activity, and the activities are additive, we can simply sum the exposures if they are independent and linear.
+
+Wait: The exposure is given as "estimated exposure (mrem)/hr" and is already calculated. If the two specimens are combined, and exposure is additive, then the total exposure is the sum of individual exposures.
+
+But the 0.1g specimen shows 0.0 mrem/hr — likely due to rounding or being below detection threshold.
+
+However, let's check: For the 0.1g specimen, activity is 18 Bq → exposure = 0.0 mrem/hr  
+For the 10g specimen, activity is 1834 Bq → exposure = 0.03 mrem/hr
+
+So the ratio of activity: 1834 / 18 ≈ 101.9  
+Ratio of exposure: 0.03 / 0.0 → undefined (division by zero)
+
+This suggests the 0.1g specimen's exposure is rounded to 0.0, but in reality, it should be proportional.
+
+So we can compute the exposure per Bq from the 10g specimen:  
+0.03 mrem/hr / 1834 Bq ≈ 1.6357e-5 mrem/hr per Bq
+
+Then for the 0.1g specimen (18 Bq):  
+18 * 1.6357e-5 ≈ 0.0002944 mrem/hr
+
+Now add to 10g specimen's exposure:  
+0.03 + 0.0002944 ≈ 0.0302944 mrem/hr
+
+But the question says "assuming the calculated activity (Bq) is directly proportional to the specimen weight", which is already satisfied in the data. So we can also compute the expected activity for 0.1g specimen based on 10g:  
+(0.1 / 10) * 1834 = 18.34 Bq → matches the given 18 Bq
+
+So exposure should scale linearly with activity (Bq), so:
+
+Exposure from 0.1g specimen = (18 / 1834) * 0.03 ≈ 0.0002944 mrem/hr
+
+Total exposure = 0.03 + 0.0002944 ≈ 0.0302944 mrem/hr
+
+Round to 3 decimal places: 0.030 mrem/hr
+
+But note: the 10g specimen’s exposure is already 0.03, and the 0.1g adds a negligible amount.
+
+Alternatively, since the 0.1g specimen’s exposure is listed as 0.0, but we know it should be about 0.0003, the total is approximately 0.0303.
+
+But let's do it cleanly:
+
+We use the exposure value from the 10g specimen (0.03 mrem/hr) and calculate the exposure from the 0.1g specimen using proportionality.
+
+Final Answer: 0.0303 → but we need to present it as a number.
+
+But the question asks for the total estimated exposure, so we sum the exposures based on activity proportionality.
+
+We can use the ratio of activities to compute the exposure of the 0.1g specimen.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Find the row for 0.1 g / 4.08 mm (specimen 1)
+row_01g = df[df['specimen weight / size'] == '0.1 g / 4.08 mm']
+# Find the row for 10 g / 1.89 cm (specimen 2)
+row_10g = df[df['specimen weight / size'] == '10 g / 1.89 cm']
+
+# Extract activities (Bq) and exposures (mrem/hr)
+activity_01g = int(row_01g['calculated activity ( bq )'].values[0])
+activity_10g = int(row_10g['calculated activity ( bq )'].values[0])
+exposure_10g = float(row_10g['estimated exposure ( mrem ) / hr'].values[0])
+
+# Calculate exposure for 0.1g specimen using proportionality
+exposure_01g = (activity_01g / activity_10g) * exposure_10g
+
+# Total exposure
+total_exposure = exposure_01g + exposure_10g
+
+print(f"Final Answer: {total_exposure:.4f}")
+```

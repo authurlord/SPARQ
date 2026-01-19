@@ -1,0 +1,15 @@
+Step 1: The user wants to find the difference in seats between Fianna Fáil and Fine Gael in the agricultural panel.  
+Step 2: Load the dataframe.  
+Step 3: Extract the values for "Fianna Fáil" and "Fine Gael" in the "agricultural panel" column.  
+Step 4: Compute the difference and print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Get the number of seats in agricultural panel for Fianna Fáil and Fine Gael
+fianna_fail_agri = df.loc[df['party'] == 'fianna fáil', 'agricultural panel'].values[0]
+fine_gael_agri = df.loc[df['party'] == 'fine gael', 'agricultural panel'].values[0]
+difference = fianna_fail_agri - fine_gael_agri
+print(f"Final Answer: {difference}")
+```

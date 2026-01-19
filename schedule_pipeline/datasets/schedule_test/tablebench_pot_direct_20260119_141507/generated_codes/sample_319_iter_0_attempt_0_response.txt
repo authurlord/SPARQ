@@ -1,0 +1,36 @@
+Step 1: The user wants to find the year when the athlete won the Stockholm Marathon with a time less than 2:35:00.  
+Step 2: Filter the rows where 'Venue' is 'Stockholm, Sweden' and 'Event' is 'Marathon'.  
+Step 3: Check if the 'Notes' column contains a time value less than 2:35:00 (i.e., convert time to seconds or compare as string).  
+Step 4: Extract the 'Year' from those rows that meet the condition.  
+
+Note: The time values are in format like "2:38:45". We can compare them directly by converting to total seconds or using string comparison. Since all times are in HH:MM:SS format and we only care about less than 2:35:00, we can compare the minutes and seconds.
+
+For example:
+- 2:38:45 → greater than 2:35:00 → exclude
+- 2:34:26 → less than 2:35:00 → include
+
+We will parse the time string and compare.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where venue is Stockholm, Sweden and event is Marathon
+filtered = df[(df['Venue'] == 'Stockholm, Sweden') & (df['Event'] == 'Marathon')]
+
+# Convert time to seconds for comparison
+def time_to_seconds(time_str):
+    h, m, s = map(int, time_str.split(':'))
+    return h * 3600 + m * 60 + s
+
+# Apply condition: time less than 2:35:00 (i.e., < 2*3600 + 35*60 + 0)
+valid_times = filtered[filtered['Notes'].apply(lambda x: x.startswith('2:') and len(x.split(':')) == 3)]
+valid_times = valid_times[valid_times['Notes'].apply(lambda x: time_to_seconds(x) < 2*3600 + 35*60)]
+
+# Extract the year (first row's Year, since it's the only one per year in this case)
+years = valid_times['Year'].dropna().tolist()
+
+# Since the question asks for "the year", and there might be multiple, we list them
+print(f"Final Answer: {', '.join(years)}")
+```

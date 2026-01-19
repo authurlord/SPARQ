@@ -1,0 +1,18 @@
+Step 1: The user wants the correlation coefficient between 'magnitude' and 'death toll' columns.
+Step 2: Load the dataframe.
+Step 3: Convert 'death toll' from string with commas to integer and 'magnitude' to float.
+Step 4: Calculate the correlation coefficient using pandas corr() method.
+Step 5: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean 'death toll' by removing commas and converting to integer
+df['death toll'] = df['Death toll'].str.replace(',', '').astype(int)
+# Convert 'magnitude' to float
+df['magnitude'] = df['Magnitude'].astype(float)
+# Calculate correlation coefficient
+correlation = df['magnitude'].corr(df['death toll'])
+print(f"Final Answer: {correlation:.3f}")
+```

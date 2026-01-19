@@ -1,0 +1,32 @@
+Step 1: The user is asking whether there is a relationship between viewers (m) and rating — specifically, if an increase in viewers leads to an increase in rating. This requires analyzing the correlation between these two numerical variables.
+
+Step 2: Extract the "viewers (m)" and "rating" columns from the table.
+
+Step 3: Compute the Pearson correlation coefficient between viewers (m) and rating to determine the strength and direction of the linear relationship.
+
+Step 4: Interpret the result: if the correlation is positive and significant, it suggests that higher viewership is associated with higher ratings.
+
+Note: Since the data contains some non-numeric values like "tba", we must clean the data before analysis.
+
+Step 5: Convert "rating" and "viewers (m)" to numeric, handling missing or invalid entries.
+
+Step 6: Calculate and print the correlation coefficient.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'viewers (m)' and 'rating' to numeric, handling errors
+df['viewers (m)'] = pd.to_numeric(df['viewers (m)'], errors='coerce')
+df['rating'] = pd.to_numeric(df['rating'], errors='coerce')
+
+# Drop rows with missing values
+df_clean = df.dropna(subset=['viewers (m)', 'rating'])
+
+# Calculate the correlation between viewers (m) and rating
+correlation = df_clean['viewers (m)'].corr(df_clean['rating'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

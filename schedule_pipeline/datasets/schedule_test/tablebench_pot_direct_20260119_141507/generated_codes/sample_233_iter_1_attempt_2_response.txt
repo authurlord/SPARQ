@@ -1,0 +1,39 @@
+We are tasked with analyzing how GDP per capita (€) changes with increasing GDP (€, billions) for regions where GDP (% of national total) is above 5%.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Filter rows where 'GDP (% of national total)' is greater than 5%.
+3. Exclude any rows where the GDP values are invalid (e.g., strings like '-' or '–').
+4. Convert relevant columns to numeric types (especially GDP and GDP per capita).
+5. Analyze the relationship between GDP (€, billions) and GDP per capita (€) — we can compute the correlation or simply observe the trend.
+6. Since the question asks "how does it change", we interpret this as asking for the relationship (e.g., positive correlation), and we will compute the correlation coefficient.
+
+Note: The raw data has some non-numeric entries like '-', '–', and a row with a very large GDP value. We must filter out invalid entries.
+
+Let’s proceed:
+
+```python
+import pandas as pd
+
+# Load the table
+df = pd.read_csv('table.csv')
+
+# Clean and filter data
+# Remove rows with invalid GDP (% of national total) or missing values
+df_clean = df[df['GDP (% of national total)'].str.strip().astype(float).notna()]
+
+# Filter only regions where GDP (% of national total) > 5
+df_filtered = df_clean[df_clean['GDP (% of national total)'] > 5]
+
+# Convert GDP (€, billions) and GDP per capita (€) to numeric
+df_filtered['GDP (€, billions)'] = pd.to_numeric(df_filtered['GDP (€, billions)'], errors='coerce')
+df_filtered['GDP per capita (€)'] = pd.to_numeric(df_filtered['GDP per capita (€)'], errors='coerce')
+
+# Drop rows with NaN after conversion
+df_filtered = df_filtered.dropna(subset=['GDP (€, billions)', 'GDP per capita (€)'])
+
+# Compute the correlation between GDP (€, billions) and GDP per capita (€)
+correlation = df_filtered['GDP (€, billions)'].corr(df_filtered['GDP per capita (€)'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of squadrons built by 'brighton' in 1948.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'builder' is 'brighton' and 'whenbuilt' is '1948'.  
+Step 4: Count the number of such rows.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter squadrons built by 'brighton' in 1948
+brighton_1948 = df[(df['builder'] == 'brighton') & (df['whenbuilt'] == '1948')]
+count = len(brighton_1948)
+print(f"Final Answer: {count}")
+```

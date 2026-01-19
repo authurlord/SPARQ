@@ -1,0 +1,12 @@
+Step 1: The user wants the total number of PR seats won by all parties combined.
+Step 2: Load the dataframe.
+Step 3: Select the 'pr seats' column.
+Step 4: Sum the values in this column and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sum the 'pr seats' column to get total PR seats
+total_pr_seats = df['pr seats'].sum()
+print(f"Final Answer: {total_pr_seats}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 24, 30, 36, 36, 35, 40, 44, 43, 41, 36, 32, 26

@@ -1,0 +1,20 @@
+The question asks to detect anomalies in the demographic data and provide possible explanations. Let's analyze the table step by step.
+
+Step 1: Identify potential anomalies in the data.
+- "Total No. of Houses" is 14, but "Population" is 55. Average household size = 55 / 14 ≈ 3.93. This is plausible.
+- "Child (0-6)" is 7, with 3 males and 4 females — total matches.
+- "Schedule Caste" is 1000, with 500 males and 500 females. This is significantly higher than total population (55), which is clearly impossible.
+- "Literacy" is given as percentages: 86.36% for male and 73.08% for female — these are reasonable.
+- "Total Workers" is 15, with 12 males and 3 females — plausible.
+- "Main Worker" has a value of "-10" and "-5" for male and female, which is negative and meaningless in context — this is an anomaly.
+- "Marginal Worker" is 0 for both — plausible.
+
+Step 2: The most glaring anomaly is "Schedule Caste" being 1000, which exceeds the total population (55). This is inconsistent and likely a data entry error.
+
+Possible explanation: The value "1000" for Schedule Caste is likely a typo or misplacement. It might have been intended to be "100" or "10", or it could be a misalignment with another category (e.g., population in thousands).
+
+Another anomaly: "Main Worker" has negative values (-10, -5), which is not possible since number of workers cannot be negative.
+
+Possible explanation: This is likely a typo or formatting error — perhaps it should be "10" and "5" instead of "-10" and "-5".
+
+Final Answer: Schedule Caste_1000, Main Worker_negative_values

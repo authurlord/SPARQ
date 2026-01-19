@@ -1,0 +1,41 @@
+We are tasked with identifying data points that exhibit unusual patterns in orbital characteristics — specifically eccentricity, inclination, periselene, and aposelene.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Focus on the columns: 'eccentricity', 'inclination (deg) (to moon equator)', 'periselene (km)', 'aposelene (km)'.
+3. "Unusual" patterns can be interpreted as outliers — values that are significantly different from the rest. We will use statistical methods like Z-scores or IQR to detect outliers.
+4. Since these are physical measurements, we can consider extreme values (e.g., very high eccentricity or very low periselene) as unusual.
+5. We will calculate the IQR (Interquartile Range) for each column to detect outliers, and flag rows where any of the values fall outside the 1.5×IQR range.
+6. Return the rows (or indices) that are flagged as having unusual patterns.
+
+Note: We’ll apply outlier detection per column and identify rows where at least one value is an outlier.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Select relevant columns
+columns = ['eccentricity', 'inclination (deg) (to moon equator)', 'periselene (km)', 'aposelene (km)']
+data = df[columns].copy()
+
+# Function to detect outliers using IQR method
+def detect_outliers_iqr(series):
+    Q1 = series.quantile(0.25)
+    Q3 = series.quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    return (series < lower_bound) | (series > upper_bound)
+
+# Apply outlier detection to each column
+outlier_mask = data.apply(detect_outliers_iqr).any(axis=1)
+
+# Get the rows with unusual patterns
+unusual_rows = df[outlier_mask].index.tolist()
+
+# Print the indices or the actual data points (we'll print the index for clarity)
+print(f"Final Answer: {unusual_rows}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table provides BMI classification criteria, with columns for BMI ranges (kg/m²), BMI Prime ranges, and corresponding weight categories. BMI Prime is a normalized measure of body mass relative to the upper limit of normal BMI (25 kg/m²). Notable patterns include: BMI Prime values increase linearly with BMI, and each category corresponds to a specific health risk level. Higher BMI and BMI Prime values indicate greater obesity severity, with categories progressing from underweight to hyper obese.

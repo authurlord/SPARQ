@@ -1,0 +1,15 @@
+Step 1: The user wants the total sales of the top 5 albums, which are the first 5 rows in the table based on the 'position' column.
+Step 2: Load the dataframe.
+Step 3: Select the 'sales' column and convert it to integers.
+Step 4: Sum the sales of the first 5 rows.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'sales' column to integer type
+df['sales'] = df['sales'].astype(int)
+# Sum the sales of the top 5 albums
+total_sales = df['sales'].head(5).sum()
+print(f"Final Answer: {total_sales}")
+```

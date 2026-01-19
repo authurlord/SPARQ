@@ -1,0 +1,32 @@
+Step 1: The question asks about the factor (carbohydrates, fat, or protein) that most closely correlates with energy content in staple foods.  
+Step 2: Load the dataframe and extract the relevant columns: 'Energy (kJ)', 'Carbohydrates (g)', 'Fat (g)', and 'Protein (g)'.  
+Step 3: Calculate the correlation between energy and each of the three macronutrients.  
+Step 4: Identify which macronutrient has the highest correlation with energy.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract relevant columns
+energy = df['Energy (kJ)'].astype(float)
+carbs = df['Carbohydrates (g)'].astype(float)
+fat = df['Fat (g)'].astype(float)
+protein = df['Protein (g)'].astype(float)
+
+# Calculate correlations
+corr_carbs = energy.corr(carbs)
+corr_fat = energy.corr(fat)
+corr_protein = energy.corr(protein)
+
+# Find the highest correlation
+max_corr = max(corr_carbs, corr_fat, corr_protein)
+if max_corr == corr_carbs:
+    answer = "Carbohydrates"
+elif max_corr == corr_fat:
+    answer = "Fat"
+else:
+    answer = "Protein"
+
+print(f"Final Answer: {answer}")
+```

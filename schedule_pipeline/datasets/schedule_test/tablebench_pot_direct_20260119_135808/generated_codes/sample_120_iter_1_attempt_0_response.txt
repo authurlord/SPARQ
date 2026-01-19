@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 6.574, 6.668, 6.487, 5.709, 6.337, 5.1, 5.5, NaN

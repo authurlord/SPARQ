@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: increase in eccentricity leads to greater difference between periselene and aposelene distances

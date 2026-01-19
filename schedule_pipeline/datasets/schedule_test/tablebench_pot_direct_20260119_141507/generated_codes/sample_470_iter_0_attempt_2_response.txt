@@ -1,0 +1,22 @@
+Step 1: The question asks for countries whose values deviate significantly from the norm. Since there are two economic indicators (2011 IMF and 2008 CIA Factbook), we need to assess deviation. A reasonable approach is to compute the absolute difference between the two years' values for each country and identify those with a large difference, possibly using a threshold (e.g., more than 10% of the mean difference or a fixed threshold like 5000).
+
+Step 2: Load the data into a DataFrame.
+
+Step 3: Calculate the absolute difference between "2011 (imf)" and "2008 (cia factbook)" for each country.
+
+Step 4: Identify countries where this difference is relatively large (e.g., greater than the median or mean difference).
+
+Step 5: Return the names of such countries.
+
+We will use a threshold of 3000 to identify significant deviations.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the absolute difference between 2011 and 2008 values
+df['diff'] = abs(df['2011 (imf)'] - df['2008 (cia factbook)'])
+# Identify countries with a significant deviation (difference > 3000)
+deviant_countries = df[df['diff'] > 3000]['nation'].tolist()
+print(f"Final Answer: {', '.join(deviant_countries)}")
+```

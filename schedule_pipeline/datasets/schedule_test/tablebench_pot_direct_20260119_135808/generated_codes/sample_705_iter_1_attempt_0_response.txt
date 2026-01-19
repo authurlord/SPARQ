@@ -1,0 +1,24 @@
+Step 1: The user wants to find the staple food with the highest amount of Copper (mg) per 100g portion.
+Step 2: Load the dataframe from the provided JSON table.
+Step 3: Extract the 'Copper (mg)' row (index 26) and the corresponding staple food names (columns starting from 'Maize / Corn').
+Step 4: Find the maximum value in the 'Copper (mg)' row and identify the corresponding staple food.
+Step 5: Print the staple food with the highest Copper content.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the row for Copper (mg) - it's at index 26
+copper_row = df.iloc[26]
+
+# Get the staple food names (columns from 'Maize / Corn' onwards)
+staples = df.columns[1:]  # Skip the first column 'STAPLE:'
+copper_values = copper_row[1:]  # Skip the first value (label)
+
+# Find the staple with the highest Copper (mg)
+max_copper_staple = staples[copper_values.idxmax()]
+
+print(f"Final Answer: {max_copper_staple}")
+```

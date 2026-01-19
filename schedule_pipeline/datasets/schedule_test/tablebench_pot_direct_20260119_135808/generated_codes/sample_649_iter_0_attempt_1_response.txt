@@ -1,0 +1,19 @@
+Step 1: The user wants the correlation coefficient between UN budget (as a percentage) and international trade (in millions of USD).
+Step 2: Load the dataframe.
+Step 3: Convert 'un budget' from percentage string to float (e.g., '4.999%' → 4.999).
+Step 4: Convert 'international trade (millions of usd) 2011' to numeric.
+Step 5: Calculate the correlation coefficient using pandas corr() method.
+Step 6: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'un budget' from percentage string to float
+df['un budget'] = df['un budget'].str.rstrip('%').astype(float)
+# Convert 'international trade (millions of usd) 2011' to numeric
+df['international trade (millions of usd) 2011'] = pd.to_numeric(df['international trade (millions of usd) 2011'])
+# Calculate correlation coefficient
+correlation = df['un budget'].corr(df['international trade (millions of usd) 2011'])
+print(f"Final Answer: {correlation:.4f}")
+```

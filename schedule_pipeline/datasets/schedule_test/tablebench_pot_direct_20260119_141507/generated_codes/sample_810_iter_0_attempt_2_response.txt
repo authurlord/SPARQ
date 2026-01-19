@@ -1,0 +1,20 @@
+Step 1: Identify the airlines that are part of the "star alliance" from the "alliance / association" column.
+Step 2: Filter the dataframe to include only those rows where "alliance / association" is "star alliance".
+Step 3: Extract the "passenger fleet" values for these filtered rows.
+Step 4: Compute the mean and standard deviation of the filtered "passenger fleet" values.
+Step 5: Print the results.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Filter airlines that are part of 'star alliance'
+star_alliance_fleet = df[df['alliance / association'] == 'star alliance']['passenger fleet'].astype(float)
+
+# Calculate mean and standard deviation
+mean_fleet = star_alliance_fleet.mean()
+std_fleet = star_alliance_fleet.std()
+
+print(f"Final Answer: {mean_fleet:.1f}, {std_fleet:.1f}")
+```

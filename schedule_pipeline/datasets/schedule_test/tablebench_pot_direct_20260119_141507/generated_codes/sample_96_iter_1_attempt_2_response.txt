@@ -1,0 +1,54 @@
+We are tasked with drawing a bar chart to illustrate the record high temperatures in Celsius degrees from the given table.
+
+Step-by-step analysis:
+1. The table has multiple rows, each representing a different category (e.g., "Record high °F (°C)", "Average high °F (°C)", etc.).
+2. The first row corresponds to "Record high °F (°C)", and within that row, each column (Jan to Dec) contains values like "76\n(24)", where "24" is the temperature in Celsius.
+3. We need to extract only the Celsius values from the "Record high °F (°C)" row.
+4. Clean the string values by extracting the number in parentheses (e.g., "24" from "76\n(24)") and convert them to floats.
+5. Create a bar chart using these Celsius values for each month.
+
+Common mistake: Trying to directly use the entire row as a list without parsing the parentheses content leads to shape mismatch because the data is not properly structured.
+
+Correct approach:
+- Extract the "Record high °F (°C)" row.
+- Split it by whitespace or newline and parse the numbers in parentheses.
+- Use pandas to handle the structure, or manually extract values.
+
+Let's proceed with clean parsing.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the table
+df = pd.read_csv('table.csv')
+
+# Extract the 'Record high °F (°C)' row
+record_high_row = df.iloc[0]
+
+# Parse the Celsius values from the parentheses
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+celsius_values = []
+
+for cell in record_high_row[1:]:  # Skip the first column 'Month'
+    # Extract the value in parentheses
+    if isinstance(cell, str):
+        # Find the part in parentheses
+        celsius_str = cell.split('(')[1].split(')')[0]
+        celsius_values.append(float(celsius_str))
+    else:
+        celsius_values.append(0)
+
+# Create a bar chart
+plt.figure(figsize=(12, 6))
+plt.bar(months, celsius_values, color='skyblue')
+plt.title('Record High Temperatures in Celsius Degrees')
+plt.xlabel('Month')
+plt.ylabel('Temperature (°C)')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Print the final answer as required (though no numerical answer, just visualization)
+Final Answer: bar chart of record high in Celsius
+```

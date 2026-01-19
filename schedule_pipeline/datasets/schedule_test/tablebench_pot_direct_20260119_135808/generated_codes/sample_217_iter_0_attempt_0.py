@@ -1,0 +1,41 @@
+import pandas as pd
+
+# Convert the JSON table into a DataFrame
+df = pd.DataFrame(TABLE['data'], columns=TABLE['columns'])
+
+# Extract the relevant rows
+energy_row = df[df['STAPLE:'] == 'Energy (kJ)'].iloc[0]
+carbs_row = df[df['STAPLE:'] == 'Carbohydrates (g)'].iloc[0]
+fat_row = df[df['STAPLE:'] == 'Fat (g)'].iloc[0]
+protein_row = df[df['STAPLE:'] == 'Protein (g)'].iloc[0]
+
+# Extract values for each staple food
+staples = df.columns[1:]  # Exclude the first column 'STAPLE:'
+energy_values = [float(energy_row[col]) for col in staples]
+carbs_values = [float(carbs_row[col]) for col in staples]
+fat_values = [float(fat_row[col]) for col in staples]
+protein_values = [float(protein_row[col]) for col in staples]
+
+# Create a DataFrame for analysis
+analysis_df = pd.DataFrame({
+    'Energy (kJ)': energy_values,
+    'Carbohydrates (g)': carbs_values,
+    'Fat (g)': fat_values,
+    'Protein (g)': protein_values
+})
+
+# Calculate correlation coefficients
+correlation_carbs = analysis_df['Energy (kJ)'].corr(analysis_df['Carbohydrates (g)'])
+correlation_fat = analysis_df['Energy (kJ)'].corr(analysis_df['Fat (g)'])
+correlation_protein = analysis_df['Energy (kJ)'].corr(analysis_df['Protein (g)'])
+
+# Find the highest correlation
+max_corr = max(correlation_carbs, correlation_fat, correlation_protein)
+if max_corr == correlation_carbs:
+    result = "carbohydrates"
+elif max_corr == correlation_fat:
+    result = "fat"
+else:
+    result = "protein"
+
+print(f"Final Answer: {result}")

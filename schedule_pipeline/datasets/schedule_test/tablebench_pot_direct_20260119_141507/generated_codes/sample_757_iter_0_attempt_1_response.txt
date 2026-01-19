@@ -1,0 +1,18 @@
+Step 1: The user wants to forecast the viewership for season 7 based on trends from seasons 1 to 6.  
+Step 2: Extract the "us viewers (millions)" values for seasons 1 to 6.  
+Step 3: Analyze the trend (e.g., average, increase/decrease) and use it to estimate season 7 viewership.  
+Step 4: Since the data is small and no clear pattern is evident, we compute the average of seasons 1–6 as a simple forecast.  
+
+Note: The actual viewership values are not strictly linear or increasing/decreasing, so a simple mean provides a reasonable baseline forecast.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract viewership for seasons 1 to 6
+seasons_1_to_6 = df[df['season'].between(1, 6)]
+viewership_1_to_6 = seasons_1_to_6['us viewers (millions)']
+# Forecast as the average of seasons 1 to 6
+forecast_season_7 = viewership_1_to_6.mean()
+print(f"Final Answer: {forecast_season_7:.2f}")
+```

@@ -1,0 +1,23 @@
+Step 1: The user wants to determine which of the three financial metrics — sales, profits, or assets — is the primary driver of market value.  
+Step 2: We will calculate the correlation between each of these variables (sales, profits, assets) and market value.  
+Step 3: The variable with the highest absolute correlation coefficient will be identified as the primary driver.  
+Step 4: Use pandas to compute pairwise correlations and find the strongest one.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select relevant columns for correlation analysis
+numeric_columns = ['sales (billion )', 'profits (billion )', 'assets (billion )', 'market value (billion )']
+df_numeric = df[numeric_columns].astype(float)
+
+# Compute correlation matrix
+correlation_matrix = df_numeric.corr()
+
+# Find the column with the highest absolute correlation to 'market value (billion )'
+market_value_corr = correlation_matrix['market value (billion )']
+primary_driver = market_value_corr.abs().idxmax()
+
+print(f"Final Answer: {primary_driver}")
+```

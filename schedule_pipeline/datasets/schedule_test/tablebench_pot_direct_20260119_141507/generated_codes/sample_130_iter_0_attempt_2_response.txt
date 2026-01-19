@@ -1,0 +1,37 @@
+Step 1: The user wants a bar chart showing the cumulative lengths at each stage of the competition.  
+Step 2: Extract the "Length" column, which contains the length of each stage.  
+Step 3: Compute the cumulative sum of lengths to get the cumulative length at each stage.  
+Step 4: Create a bar chart with stage numbers on the x-axis and cumulative lengths on the y-axis.  
+
+Note: The "Leg" and "Stage" columns are not directly needed for cumulative length, as we only care about the length per stage. We will use the "Length" column and compute cumulative values.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Extract the 'Length' column and convert to numeric
+lengths = df['Length'].str.replace(' km', '').astype(float)
+
+# Compute cumulative lengths
+cumulative_lengths = lengths.cumsum()
+
+# Create a list of stage names from the 'Stage' column (e.g., SS1, SS2, etc.)
+stages = df['Stage']
+
+# Create bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(stages, cumulative_lengths, color='skyblue')
+plt.xlabel('Stage')
+plt.ylabel('Cumulative Length (km)')
+plt.title('Cumulative Length at Each Stage')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Print the cumulative lengths for reference
+print(cumulative_lengths.tolist())
+```
+
+Final Answer: 30.30, 42.22, 72.52, 86.86, 101.50, 116.10, 137.34, 143.30, 187.60, 197.59, 221.99, 227.95, 255.25, 256.39, 280.68, 286.52, 297.63, 307.72

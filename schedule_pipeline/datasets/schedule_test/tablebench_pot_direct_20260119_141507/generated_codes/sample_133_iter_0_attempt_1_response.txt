@@ -1,0 +1,10 @@
+The question asks for a grouped bar chart showing the maximum and minimum baselines for different interferometer and observing modes. However, the table has only two rows of data:
+
+- The first row contains values for "H" mode with specific baseline values (minimum baseline = 34 m, maximum baseline = 330 m).
+- The second row is labeled "No imaging on a single baseline instrument. CLOSED 2009." and has no baseline values (None).
+
+There is no clear grouping of "Interferometer and observing mode" with multiple entries to form a grouped bar chart. Only one valid mode ("H") is present, and it does not have a paired entry for multiple modes.
+
+Therefore, it is not possible to create a meaningful grouped bar chart with the given data.
+
+Final Answer: None

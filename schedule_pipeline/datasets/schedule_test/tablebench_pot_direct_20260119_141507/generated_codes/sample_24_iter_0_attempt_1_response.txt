@@ -1,0 +1,17 @@
+Step 1: The user wants the total number of people admitted from all nationalities over the years 2000 to 2008.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows for years 2000 to 2008 (inclusive).  
+Step 4: Sum all values in the columns 'indians admitted', 'pakistanis admitted', 'sri lankans admitted', 'bangladeshis admitted', and 'nepalis admitted'.  
+Step 5: Print the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years 2000 to 2008 inclusive
+filtered_df = df[df['year'].between(2000, 2008)]
+# Sum all admission numbers across nationalities
+total_admitted = filtered_df[['indians admitted', 'pakistanis admitted', 'sri lankans admitted', 
+                              'bangladeshis admitted', 'nepalis admitted']].sum().sum()
+print(f"Final Answer: {total_admitted}")
+```

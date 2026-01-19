@@ -1,0 +1,17 @@
+Step 1: The user wants to calculate the number of R class locomotives in service at the end of 1931.
+Step 2: From the data, the R class in service at the start of 1931 is 11, and 1 locomotive was withdrawn during the year.
+Step 3: Subtract the number withdrawn from the starting number to get the end-of-year count.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the R class in service at start of 1931 and the quantity withdrawn
+start_r_class = df[df['Year'] == '1931']['R class in service at start of year'].values[0]
+withdrawn = df[df['Year'] == '1931']['Quantity withdrawn'].values[0]
+
+# Calculate the number at the end of the year
+end_r_class = int(start_r_class) - int(withdrawn)
+print(f"Final Answer: {end_r_class}")
+```

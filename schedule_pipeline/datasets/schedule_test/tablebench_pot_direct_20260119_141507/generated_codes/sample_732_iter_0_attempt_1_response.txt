@@ -1,0 +1,7 @@
+Step 1: The question asks for the demographic category with the highest percentage value of males. From the table, the "Literacy" row shows percentages for males and females (65.12% and 55.14%). Other rows like "Total No. of Houses", "Population", etc., do not have percentage values for males. Only "Literacy" has a percentage explicitly indicating male participation.
+
+Step 2: Identify which row has a percentage value for males. The "Literacy" row has "Male: 65.12%", which is clearly a percentage. All other rows either have total numbers or no percentage at all.
+
+Step 3: Confirm that "Literacy" is the only row where male percentage is provided and it is the highest among those with percentage data.
+
+Final Answer: Literacy

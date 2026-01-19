@@ -1,0 +1,27 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Win' and 'Lose' to numeric
+df['Win'] = pd.to_numeric(df['Win'])
+df['Lose'] = pd.to_numeric(df['Lose'])
+
+# Set 'League.1' as the index for labeling
+league_labels = df['League.1']
+
+# Create stacked bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(league_labels, df['Win'], label='Wins', color='green')
+plt.bar(league_labels, df['Lose'], bottom=df['Win'], label='Losses', color='red')
+
+# Add labels and title
+plt.xlabel('Season')
+plt.ylabel('Number of Matches')
+plt.title('Wins and Losses by Season')
+plt.xticks(rotation=45)
+plt.legend()
+
+# Show the plot
+plt.tight_layout()
+plt.show()

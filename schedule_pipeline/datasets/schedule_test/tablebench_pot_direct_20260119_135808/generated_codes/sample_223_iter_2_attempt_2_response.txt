@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The percentage of votes for McCain (`mccain %`) generally remains high (around 75-79%) across counties with increasing total votes, indicating a consistent dominance of McCain in counties with larger populations.

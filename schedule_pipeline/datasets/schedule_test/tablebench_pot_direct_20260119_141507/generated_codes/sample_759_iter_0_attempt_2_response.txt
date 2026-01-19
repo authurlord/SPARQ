@@ -1,0 +1,34 @@
+Step 1: The user wants to project the population of Tabriz in 2026 based on historical growth from 1956 to 2006.  
+Step 2: Extract the population data for Tabriz (row index 3) from 1956 to 2006.  
+Step 3: Calculate the annual growth rate from 1956 to 2006.  
+Step 4: Project the population for 2026 using the same growth rate.  
+Step 5: Since the data is only available from 1956 to 2006, we assume constant annual growth rate over time.  
+
+Note: We will use the formula:  
+Projected Population = Population in 2006 × (1 + r)^n  
+where r = annual growth rate, n = number of years from 2006 to 2026.
+
+We compute the growth rate as:  
+r = (Population_2006 / Population_1956)^(1/50) - 1  
+Then apply it to 20 years (2026 - 2006).
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract Tabriz row (index 3)
+tabriz_data = df.iloc[3]
+# Get population values from 1956 to 2006
+pop_1956 = tabriz_data['1956']
+pop_2006 = tabriz_data['2006']
+
+# Calculate annual growth rate
+n_years = 50  # from 1956 to 2006
+growth_rate = (pop_2006 / pop_1956) ** (1 / n_years) - 1
+
+# Project to 2026 (20 years after 2006)
+years_to_project = 20
+projected_pop = pop_2006 * (1 + growth_rate) ** years_to_project
+
+print(f"Final Answer: {projected_pop:.0f}")
+```

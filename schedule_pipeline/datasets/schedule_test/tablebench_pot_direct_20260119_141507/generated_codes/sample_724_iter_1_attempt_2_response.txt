@@ -1,0 +1,46 @@
+The error occurred because the "Power output (hp)" column contains mixed values — some are simple numbers (e.g., 140), some are ranges (e.g., "200/235"), and others are missing. We need to extract only the numeric values and handle the ranges properly before ranking.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Extract the "Power output (hp)" column.
+3. Clean the values: split ranges like "200/235" into two values, take the maximum (as higher power is better), and convert all to numeric.
+4. Handle missing or invalid entries (e.g., "-" in displacement).
+5. Create a new list of clean power outputs.
+6. Rank models from highest to lowest power output.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Extract power output column
+power_output = df['Power output (hp)']
+
+# Clean and convert to numeric
+clean_power = []
+for value in power_output:
+    if pd.isna(value) or value == '-':
+        clean_power.append(np.nan)
+    elif '/' in str(value):
+        parts = str(value).split('/')
+        # Take the maximum of the two values
+        clean_power.append(max(float(p) for p in parts))
+    else:
+        clean_power.append(float(value))
+
+# Replace NaN with 0 for ranking purposes (or remove if preferred)
+clean_power = [p if not pd.isna(p) else 0 for p in clean_power]
+
+# Create a copy of the original index (Model) and pair with cleaned power
+models = df['Model']
+ranked_data = list(zip(models, clean_power))
+
+# Sort by power output in descending order
+ranked_data.sort(key=lambda x: x[1], reverse=True)
+
+# Extract just the model names in ranked order
+ranked_models = [model for model, _ in ranked_data]
+
+print(f"Final Answer: {', '.join(ranked_models)}")
+```

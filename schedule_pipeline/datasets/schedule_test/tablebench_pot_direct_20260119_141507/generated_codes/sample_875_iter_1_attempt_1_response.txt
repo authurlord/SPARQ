@@ -1,0 +1,23 @@
+The error occurred because the "points" column contains string values (e.g., '118', '54') instead of integers. We need to convert them to numeric values before performing the subtraction.
+
+Step 1: Load the dataframe.
+Step 2: Convert the "points" column to numeric (to handle string-to-int conversion).
+Step 3: Find the highest and second-highest points.
+Step 4: Calculate the difference between them.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'points' to numeric, coercing errors to NaN (should not happen here)
+df['points'] = pd.to_numeric(df['points'], errors='coerce')
+
+# Get the highest and second-highest points
+highest_points = df['points'].max()
+second_highest_points = df['points'].nlargest(2).iloc[1]  # Second largest value
+
+# Calculate the difference
+difference = highest_points - second_highest_points
+print(f"Final Answer: {difference}")
+```

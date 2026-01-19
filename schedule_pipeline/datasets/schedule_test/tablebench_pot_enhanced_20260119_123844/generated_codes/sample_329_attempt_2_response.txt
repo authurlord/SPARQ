@@ -1,0 +1,17 @@
+Step 1: The user wants to find the event and venue where the athlete achieved a 4th position in 2005.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Year' is 2005 and 'Position' is '4th'.
+Step 4: Extract the 'Event' and 'Venue' columns from the filtered rows.
+Step 5: Print the results.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for year 2005 and position 4th
+filtered_data = df[(df['Year'] == '2005') & (df['Position'] == '4th')]
+# Extract event and venue
+event = filtered_data['Event'].values[0]
+venue = filtered_data['Venue'].values[0]
+print(f"Final Answer: {event}, {venue}")
+```

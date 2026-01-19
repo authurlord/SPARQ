@@ -1,0 +1,16 @@
+Step 1: The user wants to find the state with the highest HIV awareness percentage among females.
+Step 2: Load the dataframe.
+Step 3: Convert the 'females (%)' column to numeric for comparison.
+Step 4: Find the state with the maximum value in the 'females (%)' column.
+Step 5: Print the state name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'females (%)' to numeric for proper comparison
+df['females (%)'] = pd.to_numeric(df['females (%)'])
+# Find the state with the highest female HIV awareness percentage
+max_female_state = df.loc[df['females (%)'].idxmax(), 'state']
+print(f"Final Answer: {max_female_state}")
+```

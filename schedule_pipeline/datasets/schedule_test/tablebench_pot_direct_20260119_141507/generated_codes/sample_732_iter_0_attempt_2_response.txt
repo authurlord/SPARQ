@@ -1,0 +1,20 @@
+Step 1: The user is asking for the demographic category that has the highest percentage value of males.  
+Step 2: From the table, the "Literacy" row shows literacy rates by gender (65.12% for male, 55.14% for female), and other rows have values like "Total No. of Houses", "Population", etc., but only "Literacy" has a percentage value.  
+Step 3: Among the rows with percentage values (e.g., Literacy), we need to compare the "Male" percentage.  
+Step 4: The only row with a percentage for males is "Literacy" (65.12%), and no other row has a percentage value for male.  
+Step 5: Therefore, "Literacy" is the only category with a male percentage value, and it is the highest.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'Male' has a percentage value (non-empty and not '-')
+male_percentage_rows = df[df['Male'] != '-']
+# Convert 'Male' column to numeric for comparison
+male_percentage = pd.to_numeric(male_percentage_rows['Male'], errors='coerce')
+# Find the row with the highest male percentage
+max_male_row = male_percentage.idxmax()
+# Get the corresponding 'Particulars' value
+highest_male_category = df.loc[max_male_row, 'Particulars']
+print(f"Final Answer: {highest_male_category}")
+```

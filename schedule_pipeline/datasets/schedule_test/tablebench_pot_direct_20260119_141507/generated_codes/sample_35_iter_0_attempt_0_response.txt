@@ -1,0 +1,20 @@
+Step 1: The user wants the total number of locomotives introduced between 1867 and 1873, but only for the '2 - 4 - 0' and '0 - 6 - 0' types.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'type' is either '2 - 4 - 0' or '0 - 6 - 0'.  
+Step 4: Further filter rows where the 'introduced' year is between 1867 and 1873 (inclusive).  
+Step 5: Sum the 'total' column for these filtered rows.  
+
+Note: The 'nbr class' column appears to be the number of locomotives, but the question asks for "total number of locomotives introduced", which matches the 'total' column. So we sum the 'total' values after filtering.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for types '2 - 4 - 0' or '0 - 6 - 0'
+filtered_df = df[(df['type'].str.contains('2 - 4 - 0') | df['type'].str.contains('0 - 6 - 0'))]
+# Filter introduced between 1867 and 1873 (inclusive)
+filtered_df = filtered_df[(filtered_df['introduced'] >= 1867) & (filtered_df['introduced'] <= 1873)]
+# Sum the 'total' column
+total_locomotives = filtered_df['total'].sum()
+print(f"Final Answer: {total_locomotives}")
+```

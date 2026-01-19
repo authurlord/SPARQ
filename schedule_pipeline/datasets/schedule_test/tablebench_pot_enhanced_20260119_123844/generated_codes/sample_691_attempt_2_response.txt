@@ -1,0 +1,28 @@
+Step 1: The user wants to identify the age group with the highest percentage and calculate the difference between the highest and lowest percentages.
+Step 2: Load the dataframe.
+Step 3: Focus on the '%', '%_1', and '%_2' columns to extract percentages for both genders and overall.
+Step 4: Identify the maximum and minimum percentages from the 'Both Gender' column (excluding 'All Ages' and 'TOTAL' rows).
+Step 5: Calculate the difference and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Exclude 'All Ages' and 'TOTAL' rows for analysis
+age_groups = df[df['Age Group'] != 'All Ages']
+age_groups = age_groups[age_groups['Age Group'] != 'TOTAL']
+
+# Find the age group with the highest percentage
+max_percentage_row = age_groups.loc[age_groups['%'].idxmax()]
+max_percentage = float(max_percentage_row['%'])
+
+# Find the age group with the lowest percentage
+min_percentage_row = age_groups.loc[age_groups['%'].idxmin()]
+min_percentage = float(min_percentage_row['%'])
+
+# Calculate the difference
+difference = max_percentage - min_percentage
+
+# Print final answer
+print(f"Final Answer: {max_percentage_row['Age Group']}, {difference:.2f}")
+```

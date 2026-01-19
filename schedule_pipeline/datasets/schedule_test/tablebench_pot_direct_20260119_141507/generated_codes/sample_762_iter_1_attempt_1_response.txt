@@ -1,0 +1,7 @@
+The question asks for a forecast of tropical storms and hurricanes for the next 5 years based on historical data from 1850 to 1858. However, the dataset is very small (only 9 years), and there is no clear, statistically significant trend or correlation between the number of tropical storms, hurricanes, or major hurricanes and deaths that would allow for a reliable long-term forecast.
+
+Additionally, forecasting future values using only 9 years of data with limited variability and no external factors (like climate change, ocean temperatures, etc.) is highly speculative and not supported by sound statistical methods without assumptions.
+
+Therefore, based on the provided data and the lack of sufficient patterns or trends to support a meaningful forecast, it is not appropriate to generate a predictive model or make a numerical forecast.
+
+Final Answer: no_forecast_possible

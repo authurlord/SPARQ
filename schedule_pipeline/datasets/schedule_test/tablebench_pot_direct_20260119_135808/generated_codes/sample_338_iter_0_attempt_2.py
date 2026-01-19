@@ -1,0 +1,21 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the header row which is incorrectly included in the data
+df = df.iloc[1:]
+
+# Filter for Telugu movie released in 1955
+telugu_1955 = df[(df['Language'] == 'Telugu') & (df['Year'] == '1955')]
+
+# Get the director of the Telugu movie from 1955
+director_1955 = telugu_1955['Director'].values[0]
+
+# Check if this director also directed a Tamil movie in 1956
+tamil_1956 = df[(df['Language'] == 'Tamil') & (df['Year'] == '1956') & (df['Director'] == director_1955)]
+
+# If such a movie exists, return its title
+if not tamil_1956.empty:
+    movie_title = telugu_1955['Title'].values[0]
+    print(f"Final Answer: {movie_title}")
+else:
+    print("Final Answer: None")

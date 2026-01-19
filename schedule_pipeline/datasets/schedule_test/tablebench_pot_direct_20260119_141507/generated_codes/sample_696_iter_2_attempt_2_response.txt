@@ -1,0 +1,35 @@
+The error occurred because the column values (e.g., "foreign") contain strings like "70.0", "86.0", etc., but when trying to index directly, pandas may interpret them incorrectly if not properly converted to numeric.
+
+Step 1: Identify the correct column for "foreign" language speakers.
+Step 2: Convert all values in that column to numeric (to handle string-formatted floats).
+Step 3: Find the maximum and minimum values across municipalities.
+Step 4: Compute the difference between the highest and lowest values.
+Step 5: Identify the municipality with the highest and lowest values.
+
+Note: The column names are in the table as "sorata municipality", etc. So we need to extract the "foreign" row and then find the max and min across the municipalities.
+
+```python
+import pandas as pd
+
+# Load the dataframe
+df = pd.read_csv('table.csv')
+
+# Convert the 'foreign' column to numeric (it's stored as strings with decimal points)
+# We need to extract the row where language is 'foreign'
+foreign_data = df[df['language'] == 'foreign']
+
+# Convert the values in the foreign row to numeric
+foreign_values = pd.to_numeric(foreign_data.iloc[:, 1:], errors='coerce')
+
+# Find the municipality with the highest and lowest values
+max_value = foreign_values.max()
+min_value = foreign_values.min()
+difference = max_value - min_value
+
+# Get the corresponding municipality names
+municipalities = foreign_values.index.tolist()
+max_mun = municipalities[foreign_values.idxmax()]
+min_mun = municipalities[foreign_values.idxmin()]
+
+print(f"Final Answer: {max_mun}, {min_mun}, {difference:.1f}")
+```

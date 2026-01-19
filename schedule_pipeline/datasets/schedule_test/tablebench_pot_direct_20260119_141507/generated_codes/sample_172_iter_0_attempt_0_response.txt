@@ -1,0 +1,44 @@
+Step 1: The question asks which factors significantly influence tourism receipts (2011) (millions of US). We need to assess correlations between the target variable (tourism receipts 2011) and the other numerical variables.
+
+Step 2: Load the data into a DataFrame.
+
+Step 3: Identify relevant columns:  
+- tourist arrivals (2011) (millions)  
+- tourism receipts (2011) (us per arrival)  
+- tourism receipts (2011) (us per capita)  
+- tourism receipts (2003) (as % of gdp)  
+- tourism competitiveness (2011) (ttci)
+
+Step 4: Compute pairwise correlation coefficients between tourism receipts (2011) (millions of US) and each of these variables.  
+We will check if any have a strong positive or negative correlation (e.g., > 0.7 or < -0.7).
+
+Step 5: If at least one factor has a significant correlation, list the factor(s) with high correlation. Otherwise, return "no clear impact".
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert all relevant columns to numeric (handling non-numeric entries like 'n/a')
+df['tourist arrivals (2011) (millions)'] = pd.to_numeric(df['tourist arrivals (2011) (millions)'], errors='coerce')
+df['tourism receipts (2011) (millions of us)'] = pd.to_numeric(df['tourism receipts (2011) (millions of us)'], errors='coerce')
+df['tourism receipts (2011) (us per arrival)'] = pd.to_numeric(df['tourism receipts (2011) (us per arrival)'], errors='coerce')
+df['tourism receipts (2011) (us per capita)'] = pd.to_numeric(df['tourism receipts (2011) (us per capita)'], errors='coerce')
+df['tourism receipts (2003) (as % of gdp)'] = pd.to_numeric(df['tourism receipts (2003) (as % of gdp)'].replace('n / a', pd.NA), errors='coerce')
+df['tourism competitiveness (2011) (ttci)'] = pd.to_numeric(df['tourism competitiveness (2011) (ttci)'], errors='coerce')
+
+# Drop rows with NaN values in the target variable
+df_clean = df.dropna(subset=['tourism receipts (2011) (millions of us)'])
+
+# Compute correlation with tourism receipts (2011) (millions of US)
+correlations = df_clean.corr()['tourism receipts (2011) (millions of us)'].drop('tourism receipts (2011) (millions of us)')
+
+# Identify significant correlations (absolute value > 0.7)
+significant_factors = correlations[abs(correlations) > 0.7].index.tolist()
+
+if significant_factors:
+    print(f"Final Answer: {', '.join(significant_factors)}")
+else:
+    print("Final Answer: no clear impact")
+```

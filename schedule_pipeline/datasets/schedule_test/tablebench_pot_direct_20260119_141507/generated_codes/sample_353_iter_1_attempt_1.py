@@ -1,0 +1,12 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'per capita income' to numeric, coercing errors to NaN
+df['per capita income'] = pd.to_numeric(df['per capita income'], errors='coerce')
+
+# Filter counties with per capita income between 18000 and 27000 (inclusive)
+filtered_counties = df[(df['per capita income'] >= 18000) & (df['per capita income'] <= 27000)]
+
+# Count the number of such counties
+count = filtered_counties.shape[0]
+print(f"Final Answer: {count}")

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains payout information for a video poker game based on hand rankings and the number of credits played. The 'hand' column lists the poker hand types (e.g., royal flush, straight flush). The columns '1 credit' to '5 credits' show the corresponding payouts in units of coins for each hand when 1 to 5 credits are wagered. The last row, 'theoretical return', indicates the expected return percentage for each credit level, with 98.9% for 1–4 credits and 100.1% for 5 credits, suggesting a slight player advantage when playing 5 credits.

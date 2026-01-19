@@ -1,0 +1,20 @@
+Step 1: The user wants the average profit of the top 5 companies based on rank (i.e., the first 5 rows).
+Step 2: Load the dataframe.
+Step 3: Select the 'profit (us billion)' column for the first 5 rows.
+Step 4: Convert the profit values to numeric (handling the '-' and space issues like '-16').
+Step 5: Calculate the mean of these profits and print it.
+
+Note: The profit column has values like "- 16", which need to be parsed as -16. We'll remove spaces and convert to float.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the first 5 rows (top 5 companies)
+top_5 = df.head(5)
+# Clean the 'profit (us billion)' column by removing spaces and converting to float
+top_5['profit (us billion)'] = top_5['profit (us billion)'].str.replace(' - ', '-').astype(float)
+# Calculate the average profit
+average_profit = top_5['profit (us billion)'].mean()
+print(f"Final Answer: {average_profit:.1f}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants the total number of medals won by Switzerland.  
+Step 2: Load the dataframe.  
+Step 3: Filter the row where 'nation' is 'switzerland'.  
+Step 4: Sum the 'gold', 'silver', and 'bronze' columns for that row.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter row where nation is 'switzerland' and sum all medal types
+switzerland_medals = df[df['nation'] == 'switzerland']['gold'].iloc[0] + df[df['nation'] == 'switzerland']['silver'].iloc[0] + df[df['nation'] == 'switzerland']['bronze'].iloc[0]
+print(f"Final Answer: {switzerland_medals}")
+```

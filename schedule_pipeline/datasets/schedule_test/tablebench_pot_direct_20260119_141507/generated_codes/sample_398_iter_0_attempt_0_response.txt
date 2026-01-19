@@ -1,0 +1,19 @@
+The table contains data about dance competition performances, with each row representing a couple's performance in a dance competition. The columns are:
+
+- **rank by average**: The ranking of the couple based on their average score per dance.
+- **competition finish**: The final position the couple achieved in the competition.
+- **couple**: The names of the two individuals who performed together.
+- **total**: The total score accumulated by the couple across all dances.
+- **number of dances**: The number of dances performed by the couple.
+- **average**: The average score per dance, calculated as total divided by number of dances.
+
+Insights:
+- The couple "Darren & Lana" has the highest total score (374) and best average (34.0), indicating strong overall performance.
+- "Ben & Stephanie" follow closely with a high average (31.1) and a good total (342).
+- "Paul & Pamela" have a low total (150) and fewer dances (5), which may indicate less consistency or fewer performances.
+- "Stewart & Clare" have the lowest total (80) and fewest dances (3), suggesting weaker performance.
+- The average score is directly related to both total and number of dances — more dances can lead to a higher average if scores are consistent.
+
+This data suggests that performance quality (as measured by average score) is a strong indicator of success, with consistency across multiple dances being crucial.
+
+Final Answer: rank by average, competition finish, couple, total, number of dances, average

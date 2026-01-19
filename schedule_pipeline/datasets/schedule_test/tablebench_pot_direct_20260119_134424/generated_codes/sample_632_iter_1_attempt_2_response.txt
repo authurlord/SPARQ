@@ -1,0 +1,24 @@
+Step 1: The user wants to calculate the new average height of the top 5 buildings after increasing each of their heights by 5 meters.
+Step 2: Load the dataframe.
+Step 3: Extract the 'height' column, which contains values in the format like "98 m (322ft)".
+Step 4: Clean the 'height' column by extracting only the numeric part before 'm'.
+Step 5: Convert the cleaned values to float.
+Step 6: Select the top 5 buildings (first 5 rows).
+Step 7: Add 5 meters to each of their heights.
+Step 8: Compute the new average.
+Step 9: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean the 'height' column by extracting the numeric value before 'm'
+df['height'] = df['height'].str.extract(r'(\d+)').astype(float)
+# Get the top 5 buildings by rank
+top_5_heights = df['height'].head(5)
+# Increase each height by 5 meters
+new_heights = top_5_heights + 5
+# Calculate the new average
+new_average = new_heights.mean()
+print(f"Final Answer: {new_average:.1f}")
+```

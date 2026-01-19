@@ -1,0 +1,11 @@
+Step 1: The user wants to analyze the contribution of 'judges', 'public', and 'vote percentage' to the 'result' of each couple.  
+Step 2: Load the dataframe.  
+Step 3: Examine the relationship between each factor (judges, public, vote percentage) and the 'result' column.  
+Step 4: Since 'result' is categorical (e.g., 'safe', 'bottom two'), we can analyze whether higher scores in judges, public, or vote percentage correlate with being 'safe' or in the 'bottom two'.  
+Step 5: Check for patterns:  
+- The 'bottom two' couple (Danniella and Matthew) has the lowest public score (1), low judges score (6), and lowest vote percentage (4.2%).  
+- All other couples with 'safe' result have higher public and judges scores and higher vote percentages.  
+Step 6: Conclude that all three factors contribute to the result, but 'public' and 'vote percentage' show the clearest correlation with the result.  
+Step 7: Since the question asks which factors contribute most, and 'vote percentage' directly reflects audience support (which likely determines elimination), it is the most significant factor.  
+
+Final Answer: vote percentage

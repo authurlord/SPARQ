@@ -1,0 +1,23 @@
+Step 1: Identify the district with the highest population density.  
+Step 2: Calculate the average population density of all districts.  
+Step 3: Compute the percentage difference between the highest density and the average density.  
+Step 4: Return the district name and the percentage difference.
+
+Note: The population density is already in "per km²", so we can directly use it for comparison.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'pop density (per km2)' to numeric and find the max
+max_density = df['pop density (per km2)'].max()
+max_district = df[df['pop density (per km2)'] == max_density]['district'].values[0]
+
+# Calculate average population density
+avg_density = df['pop density (per km2)'].mean()
+
+# Compute percentage difference
+percentage_diff = ((max_density - avg_density) / avg_density) * 100
+
+print(f"Final Answer: {max_district}, {percentage_diff:.2f}")
+```

@@ -1,0 +1,19 @@
+Step 1: Understand the question — we are looking for the period (in terms of atomic number, as implied by the "number" column) when the ionization energy first exceeds 700000. However, the table does not explicitly define "Ionization Energy" or provide a direct column for it.
+
+Step 2: Observe the data — the columns labeled "21st", "22nd", ..., "30th" appear to represent ionization energies for different electron shells (possibly corresponding to energy levels). The values in these columns are numerical and likely represent ionization energies in some unit.
+
+Step 3: Identify which row has an ionization energy value exceeding 700000. We need to check each element's data from the "21st" onward. Since the "number" column corresponds to atomic numbers, and the values in "21st" to "30th" are likely the ionization energies for successive electron shells, we interpret the "21st" column as the first ionization energy (removal of the first electron), "22nd" as second, etc.
+
+We are asked: in which period did the ionization energy first exceed 700000?
+
+Note: The term "period" in periodic table context usually refers to rows (e.g., period 3, 4, etc.), but here the data is not structured by periods. The "number" column gives atomic numbers, and the data seems to be sequential. So we interpret "period" as the atomic number group — but since the data only goes up to atomic number 42, and there's no clear grouping into periods, we assume the question means: in which atomic number (i.e., element) did the first ionization energy first exceed 700000?
+
+Looking at the data:
+- For Sc (21): 21st = 582163 → below
+- Ti (22): 22nd = 639294 → below
+- V (23): 23rd = 699144 → below
+- Cr (24): 24th = 761733 → above 700000
+
+So the first time ionization energy exceeds 700000 is in chromium (Cr), atomic number 24.
+
+Final Answer: 24

@@ -1,0 +1,33 @@
+The error occurred because the "prominence (m)" column was being concatenated as a string due to incorrect data parsing. The issue arises when values are not properly separated — in this case, the data appears to have been incorrectly formatted or merged during input. Let's fix this by ensuring that all elevation and prominence values are properly parsed as numeric.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter rows where the country contains "Democratic Republic of the Congo" (since it appears in multiple entries).
+3. Ensure that the "elevation (m)" column is converted to numeric (to avoid string concatenation errors).
+4. Filter peaks with elevation ≥ 3000 meters.
+5. Compute the average prominence of these filtered peaks.
+
+Corrected Python code:
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert elevation and prominence to numeric, handling any parsing issues
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'], errors='coerce')
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'], errors='coerce')
+
+# Filter mountains in Democratic Republic of the Congo with elevation >= 3000
+filtered_df = df[
+    (df['country'].str.contains('Democratic Republic of the Congo', case=False)) &
+    (df['elevation (m)'] >= 3000)
+]
+
+# Calculate average prominence
+if not filtered_df.empty:
+    avg_prominence = filtered_df['prominence (m)'].mean()
+else:
+    avg_prominence = 0
+
+print(f"Final Answer: {avg_prominence:.1f}")
+```

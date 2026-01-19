@@ -1,0 +1,19 @@
+Step 1: The user wants the average annual increase in issue price from 2005 to 2010.
+Step 2: Load the dataframe.
+Step 3: Extract the 'issue price' column and convert it to float.
+Step 4: Calculate the difference in issue price between consecutive years.
+Step 5: Compute the average of these differences.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'issue price' to float for numerical operations
+df['issue price'] = pd.to_numeric(df['issue price'])
+# Calculate year-over-year price increases
+price_increase = df['issue price'].diff().dropna()
+# Compute average increase
+avg_increase = price_increase.mean()
+print(f"Final Answer: {avg_increase:.2f}")
+```

@@ -1,0 +1,18 @@
+Step 1: The user is asking for the year when the athlete won a gold medal (i.e., 1st place) in the 100 m event at the African Junior Championships.  
+Step 2: Look through the "Event" column to find entries where the event is "100 m" and the "Competition" is "African Junior Championships".  
+Step 3: Check the "Position" column for "1st" in those cases.  
+Step 4: Extract the corresponding "Year" from the row.  
+
+From the data:
+- In 1997, the athlete finished 1st in the 100 m at the African Junior Championships in Ibadan, Nigeria.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Event is '100 m' and Competition is 'African Junior Championships' and Position is '1st'
+filtered_rows = df[(df['Event'] == '100 m') & (df['Competition'] == 'African Junior Championships') & (df['Position'] == '1st')]
+# Get the Year of that row
+year = filtered_rows.iloc[0]['Year'] if not filtered_rows.empty else None
+print(f"Final Answer: {year}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: year, number of tropical storms, number of hurricanes, number of major hurricanes, deaths, strongest storm

@@ -1,0 +1,16 @@
+Step 1: The user wants the total quantity of orders placed in the earliest two years (1893 and 1894).
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'Year' is either 1893 or 1894.
+Step 4: Sum the 'Quantity' column for these filtered rows.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for the earliest two years: 1893 and 1894
+earliest_years = df[df['Year'].isin(['1893', '1894'])]
+# Calculate total quantity
+total_quantity = earliest_years['Quantity'].sum()
+print(f"Final Answer: {total_quantity}")
+```

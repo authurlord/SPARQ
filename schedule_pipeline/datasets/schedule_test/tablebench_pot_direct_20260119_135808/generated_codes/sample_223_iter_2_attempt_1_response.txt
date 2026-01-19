@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The percentage of votes for McCain (`mccain %`) generally increases with increasing total votes (`total`) across different counties, indicating a positive correlation.

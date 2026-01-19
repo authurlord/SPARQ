@@ -1,0 +1,21 @@
+We are asked to provide a detailed description of the table, including the main columns and initial observations about trends in political party support over time.
+
+Step 1: Understand the structure of the table.
+- The table contains polling data for political party support over time.
+- Columns: 
+  - polling firm: name of the firm conducting the poll
+  - date of polling: range of dates when the poll was conducted
+  - link: reference link (not used in analysis)
+  - progressive conservative: percentage support
+  - liberal: percentage support
+  - new democratic: percentage support
+
+Step 2: Identify key observations:
+- The data spans from 2007 to 2011.
+- The "progressive conservative" party appears to have shown a general trend of declining support over time, especially after 2008.
+- The "liberal" party shows fluctuating support, with a slight increase around 2009–2010 and a drop in 2011.
+- The "new democratic" party has relatively stable support, with minor fluctuations.
+
+However, since the question asks for a detailed description and initial observations, we will not perform statistical modeling or complex analysis — just summarize the structure and describe observable trends.
+
+Final Answer: polling firm, date of polling, link, progressive conservative, liberal, new democratic, progressive conservative support declines after 2008, liberal support fluctuates, new democratic support remains stable

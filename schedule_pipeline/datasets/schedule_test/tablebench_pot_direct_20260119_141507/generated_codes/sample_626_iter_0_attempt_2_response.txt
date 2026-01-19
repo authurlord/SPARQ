@@ -1,0 +1,12 @@
+Step 1: The user wants to know the total number of locomotives built in the year 1909.  
+Step 2: The 'Year built' column contains the years, and we need to filter rows where the year is 1909.  
+Step 3: Count the number of such rows.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'Year built' is 1909 and count them
+count_1909 = df[df['Year built'] == 1909].shape[0]
+print(f"Final Answer: {count_1909}")
+```

@@ -1,0 +1,15 @@
+Step 1: The question asks to identify demographic categories where values significantly deviate from expected patterns.  
+Step 2: First, examine the data for inconsistencies or impossible values. For example:
+- "Total Workers" is 194, but "Male" has 143 and "Female" has 1000 — this is clearly inconsistent (1000 > 194).
+- "Literacy" shows "150 %" for males, which is impossible as literacy rate cannot exceed 100%.
+- "Total" for "Child (0-6)" is 95, with 46 males and 49 females — this adds up correctly.
+- "Schedule Caste" totals 275 with 137 males and 138 females — reasonable.
+- "Main Worker" is 194 for both male and female, but listed as 0 — this seems like a typo or mislabeling.
+
+Key deviations:
+- Literacy rate for males is 150%, which is invalid.
+- Total workers: 194 total, but female value is 1000 — clearly incorrect.
+
+These are significant deviations from expected patterns.
+
+Final Answer: Literacy, Total Workers

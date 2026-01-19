@@ -1,0 +1,19 @@
+Step 1: The user wants the average annual change in the number of Conservative councillors from 1947 to 1972.
+Step 2: Load the dataframe.
+Step 3: Extract the 'Conservative councillors' values for the years 1947 and 1972.
+Step 4: Calculate the total change over the period (1972 - 1947 = 25 years).
+Step 5: Compute the average annual change as (final value - initial value) / number of years.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for the years 1947 and 1972
+initial_value = df[df['Year'] == '1947']['Conservative councillors'].values[0]
+final_value = df[df['Year'] == '1972']['Conservative councillors'].values[0]
+# Calculate average annual change
+years = 1972 - 1947
+average_change = (int(final_value) - int(initial_value)) / years
+print(f"Final Answer: {average_change:.2f}")
+```

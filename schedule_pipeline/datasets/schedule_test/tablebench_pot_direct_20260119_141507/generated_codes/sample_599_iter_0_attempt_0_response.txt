@@ -1,0 +1,16 @@
+Step 1: The user wants the average US Chart position of songs released in 1944.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'Year' is '1944'.  
+Step 4: Extract the 'US Chart position' column from the filtered data.  
+Step 5: Calculate the mean of these positions and print it.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Year is 1944
+filtered_df = df[df['Year'] == '1944']
+# Calculate the mean of 'US Chart position'
+average_position = filtered_df['US Chart position'].mean()
+print(f"Final Answer: {average_position:.1f}")
+```

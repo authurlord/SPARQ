@@ -1,0 +1,25 @@
+Step 1: The user wants to identify the year with a higher percentage increase in domestic steel tonnage compared to foreign total steel tonnage.  
+Step 2: Load the dataframe.  
+Step 3: Calculate the percentage increase in domestic steel tonnage and foreign total steel tonnage from one year to the next.  
+Step 4: Compare the percentage increases and find the year where domestic increase > foreign increase.  
+Step 5: Return the year.
+
+Note: Since percentage increase is calculated between consecutive years, we compute for each year (except the first) the change from the previous year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert relevant columns to numeric
+df['domestic s ton'] = pd.to_numeric(df['domestic s ton'])
+df['foreign total s ton'] = pd.to_numeric(df['foreign total s ton'])
+
+# Calculate percentage increase from previous year
+df['domestic_pct_increase'] = df['domestic s ton'].pct_change() * 100
+df['foreign_pct_increase'] = df['foreign total s ton'].pct_change() * 100
+
+# Find the year where domestic increase > foreign increase (skip first year since no prior data)
+result_year = df.loc[df['domestic_pct_increase'] > df['foreign_pct_increase'], 'year'].iloc[0]
+
+print(f"Final Answer: {result_year}")
+```

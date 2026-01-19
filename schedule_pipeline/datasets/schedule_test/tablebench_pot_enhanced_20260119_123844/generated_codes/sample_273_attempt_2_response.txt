@@ -1,0 +1,15 @@
+Step 1: Filter the data to include only mountain peaks in the Democratic Republic of the Congo (DR Congo) with an elevation of at least 3000 meters.
+Step 2: Extract the 'prominence (m)' values for these filtered peaks.
+Step 3: Calculate the average prominence.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter peaks in DR Congo with elevation >= 3000 meters
+dr_congo_peaks = df[df['country'].str.contains('democratic republic of the congo', case=False) & (df['elevation (m)'].astype(int) >= 3000)]
+# Calculate average prominence
+avg_prominence = dr_congo_peaks['prominence (m)'].astype(int).mean()
+print(f"Final Answer: {avg_prominence:.1f}")
+```

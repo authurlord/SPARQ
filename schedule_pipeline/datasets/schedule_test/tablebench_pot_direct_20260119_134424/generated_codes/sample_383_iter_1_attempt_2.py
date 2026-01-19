@@ -1,0 +1,14 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+count = 0
+
+# Iterate through each cell in the DataFrame
+for col in df.columns:
+    for date_str in df[col]:
+        # Extract year from the date string (last 4 characters)
+        year = int(date_str[-4:])
+        if year >= 1990:
+            count += 1
+
+print(f"Final Answer: {count}")

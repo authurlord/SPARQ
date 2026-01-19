@@ -1,0 +1,39 @@
+Step 1: The user is asking about anomalies in the viewership data. Anomalies can be identified as values that are significantly different from the rest, such as outliers. We will use statistical methods like the Interquartile Range (IQR) to detect outliers.
+
+Step 2: Load the dataframe and extract the 'viewers' column.
+
+Step 3: Convert 'viewers' to numeric (some values like "1000" might be misinterpreted as strings).
+
+Step 4: Compute the first quartile (Q1), third quartile (Q3), and IQR.
+
+Step 5: Identify values below Q1 - 1.5 * IQR or above Q3 + 1.5 * IQR as anomalies.
+
+Step 6: Print the list of anomalous viewer counts.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert viewers to numeric, handling any parsing issues
+df['viewers'] = pd.to_numeric(df['viewers'], errors='coerce')
+
+# Drop rows with NaN after conversion
+df = df.dropna(subset=['viewers'])
+
+# Extract viewership data
+viewers = df['viewers']
+
+# Calculate Q1, Q3, and IQR
+Q1 = viewers.quantile(0.25)
+Q3 = viewers.quantile(0.75)
+IQR = Q3 - Q1
+
+# Define lower and upper bounds for outliers
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+# Find anomalies (outliers)
+anomalies = viewers[(viewers < lower_bound) | (viewers > upper_bound)]
+
+print(f"Final Answer: {anomalies.tolist()}")
+```

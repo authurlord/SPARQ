@@ -1,0 +1,39 @@
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Drop the first column (Unnamed: 0) since it's not needed
+df = df.iloc[:, 1:]
+
+# Clean the data: extract numeric values from each cell
+def extract_numeric(value):
+    if isinstance(value, str):
+        # Remove any text in parentheses or other non-numeric parts
+        import re
+        match = re.search(r'(-?\d+\.?\d*)', value)
+        if match:
+            return float(match.group(1))
+    return np.nan
+
+# Apply cleaning to each cell
+cleaned_data = df.applymap(extract_numeric)
+
+# Compute standard deviation for each region (row)
+std_devs = cleaned_data.std(axis=1)
+
+# Create a list of regions and their standard deviations
+regions = df.index.tolist()
+std_dev_list = std_devs.tolist()
+
+# Final answer: list of regions with their standard deviations (we are asked to identify patterns)
+# But the question asks to "identify" consistent and inconsistent — so we just report the standard deviations
+# Since the final answer format requires names, we output the regions with their std dev values
+
+# Print the result in required format: region_name, std_dev (as float)
+result = []
+for region, std_dev in zip(regions, std_devs):
+    result.append(f"{region}, {std_dev:.2f}")
+
+print("Final Answer: " + ", ".join(result))

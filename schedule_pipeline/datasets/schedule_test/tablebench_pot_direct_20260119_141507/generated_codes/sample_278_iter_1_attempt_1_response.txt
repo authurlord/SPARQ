@@ -1,0 +1,32 @@
+The error occurred because the "Magnitude" column contains string values like '7.5', '7.0', which need to be converted to numeric for averaging. Additionally, we need to filter rows where:
+- Death toll ≥ 1,000
+- Depth < 30 km
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert "Magnitude" and "Death toll" columns to numeric (handling string formats).
+3. Filter rows where death toll ≥ 1000 and depth < 30.
+4. Compute the average magnitude of the filtered rows.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert necessary columns to numeric, handling errors by converting to float
+df['Death toll'] = pd.to_numeric(df['Death toll'], errors='coerce')
+df['Magnitude'] = pd.to_numeric(df['Magnitude'], errors='coerce')
+df['Depth (km)'] = pd.to_numeric(df['Depth (km)'], errors='coerce')
+
+# Filter rows: death toll >= 1000 and depth < 30
+filtered_df = df[(df['Death toll'] >= 1000) & (df['Depth (km)'] < 30)]
+
+# Calculate average magnitude of filtered rows
+if not filtered_df.empty:
+    avg_magnitude = filtered_df['Magnitude'].mean()
+else:
+    avg_magnitude = None
+
+print(f"Final Answer: {avg_magnitude:.2f}")
+```

@@ -1,0 +1,17 @@
+Step 1: Filter the data to include only rows where the venue is "waverley park" and the crowd is greater than 40,000.
+Step 2: Extract the 'margin' column and find the maximum margin.
+Step 3: Identify the team (winner) associated with that maximum margin.
+Step 4: Print the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where venue is 'waverley park' and crowd > 40000
+filtered_df = df[(df['venue'] == 'waverley park') & (df['crowd'].astype(int) > 40000)]
+# Find the row with the highest margin
+max_margin_row = filtered_df.loc[filtered_df['margin'].idxmax()]
+# Get the winner team
+winner_team = max_margin_row['winners']
+print(f"Final Answer: {winner_team}")
+```

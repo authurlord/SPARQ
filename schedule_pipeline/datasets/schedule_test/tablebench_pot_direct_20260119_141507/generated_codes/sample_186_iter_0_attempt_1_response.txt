@@ -1,0 +1,21 @@
+Step 1: The user wants to understand the relationship between the number of candidates nominated and the percentage of popular vote over time.  
+Step 2: We need to analyze whether there is a trend or correlation between these two variables across years.  
+Step 3: Load the dataframe and extract the relevant columns: 'of candidates nominated' and '% of popular vote'.  
+Step 4: Convert the 'of candidates nominated' column to integer (since it's currently a string with numbers).  
+Step 5: Check for correlation or visualize the trend using a scatter plot.  
+Step 6: Since the question asks "how", we will compute the correlation coefficient and provide a brief interpretation via the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'of candidates nominated' to integer
+df['of candidates nominated'] = df['of candidates nominated'].str.replace(',', '').astype(int)
+# Extract the columns for analysis
+candidates = df['of candidates nominated']
+popular_vote = df['% of popular vote'].str.replace('%', '').astype(float)
+
+# Calculate correlation between candidates and popular vote
+correlation = candidates.corr(popular_vote)
+print(f"Final Answer: {correlation:.2f}")
+```

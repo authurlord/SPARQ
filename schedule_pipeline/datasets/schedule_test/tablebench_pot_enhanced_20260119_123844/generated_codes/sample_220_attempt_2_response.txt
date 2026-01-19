@@ -1,0 +1,18 @@
+Step 1: The user wants to analyze how the urban percentage changes with increasing population size between 1959 and 1989.  
+Step 2: Load the dataframe.  
+Step 3: Filter the data for years between 1959 and 1989 (inclusive).  
+Step 4: Extract the 'population (000)' and 'urban , %' columns.  
+Step 5: Since the question asks for a change in urban percentage with population, we can observe the trend by examining the values or plotting them.  
+Step 6: We will print the filtered data to show the relationship clearly.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years between 1959 and 1989 (inclusive)
+filtered_df = df[(df['year (january)'] >= '1959') & (df['year (january)'] <= '1989')]
+# Display the urban percentage and population for these years
+print("Urban percentage vs Population (1959-1989):")
+for index, row in filtered_df.iterrows():
+    print(f"Year: {row['year (january)']}, Population: {row['population (000)']}k, Urban %: {row['urban , %']}")
+```

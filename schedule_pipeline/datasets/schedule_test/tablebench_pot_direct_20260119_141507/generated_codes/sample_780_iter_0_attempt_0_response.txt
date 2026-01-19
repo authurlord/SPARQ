@@ -1,0 +1,31 @@
+Step 1: The user wants to project the total support and revenue for the next year (2012/2013) based on historical trends.  
+Step 2: We observe that "total support and revenue" increases over time. We can model this trend using linear regression or simply fit a trend line based on the historical data.  
+Step 3: Extract the "total support and revenue" column and fit a linear trend to predict the value for the next year.  
+Step 4: Since the last available year is 2011/2012, we will extrapolate the trend to predict 2012/2013.
+
+We'll use linear regression to model the relationship between year and total support and revenue.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Convert year to numeric (extract from the 'year' column)
+df['year'] = df['year'].str.replace('/','').astype(int)
+
+# Prepare data: years as independent variable, total support and revenue as dependent
+X = df[['year']]
+y = df['total support and revenue']
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict for the next year: 2012/2013 → year 2013
+next_year = 2013
+predicted_revenue = model.predict([[next_year]])[0]
+
+print(f"Final Answer: {predicted_revenue:.0f}")
+```

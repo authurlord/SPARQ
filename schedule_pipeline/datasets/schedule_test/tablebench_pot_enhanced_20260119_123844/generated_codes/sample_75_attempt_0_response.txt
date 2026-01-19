@@ -1,0 +1,12 @@
+Step 1: The user wants the crude birth rate per 1000 in 1995.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'Unnamed: 0' is '1995'.
+Step 4: Extract the value from the 'Crude birth rate (per 1000)' column and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for year 1995
+crude_birth_rate_1995 = df[df['Unnamed: 0'] == '1995']['Crude birth rate (per 1000)'].values[0]
+print(f"Final Answer: {crude_birth_rate_1995}")
+```

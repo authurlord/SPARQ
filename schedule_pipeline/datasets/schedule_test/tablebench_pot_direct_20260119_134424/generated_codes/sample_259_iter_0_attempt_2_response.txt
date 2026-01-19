@@ -1,0 +1,27 @@
+Step 1: Extract the Manchu population for the "north" region and the "liaoning" region from the data.
+Step 2: Calculate the difference between the Manchu population in "liaoning" and the "north" region.
+Step 3: This difference represents the minimum number of additional Manchu people needed in the "north" region to surpass "liaoning".
+Step 4: Since the question asks for the percentage increase, compute the required percentage increase based on the current Manchu population in the "north" region.
+Step 5: Return the result as a float.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows for 'north' and 'liaoning'
+north_manchu = df[df['region'] == 'north']['manchu'].values[0]
+liaoning_manchu = df[df['region'] == 'liaoning']['manchu'].values[0]
+
+# Convert to integers (they are strings in the data)
+north_manchu = int(north_manchu)
+liaoning_manchu = int(liaoning_manchu)
+
+# Calculate the minimum increase needed
+increase_needed = liaoning_manchu - north_manchu + 1  # +1 to surpass
+
+# Calculate percentage increase
+percentage_increase = (increase_needed / north_manchu) * 100
+
+print(f"Final Answer: {percentage_increase:.2f}")
+```

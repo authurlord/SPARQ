@@ -1,0 +1,25 @@
+Step 1: The user wants the total number of years served by all mayors. Since some mayors served multiple non-consecutive terms, we need to calculate the duration for each term and sum them up.
+
+Step 2: Load the dataframe.
+
+Step 3: For each row, calculate the number of years served as (Leaving - Taking Office), handling the case where "Current" is in the 'Leaving' column by treating it as the current year (e.g., 2024). However, since the table does not specify a current year, we assume "Current" means the term is ongoing, so we use the latest year from the data (2009) or a placeholder (e.g., 2024). But since the last term starts in 2009 and is still ongoing, we assume it ends in 2024 (a reasonable assumption).
+
+Step 4: Sum all the years served.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Taking Office' and 'Leaving' to integers, replacing 'Current' with 2024
+df['Taking Office'] = df['Taking Office'].astype(int)
+df['Leaving'] = df['Leaving'].replace('Current', 2024).astype(int)
+
+# Calculate years served for each term
+df['Years Served'] = df['Leaving'] - df['Taking Office']
+
+# Sum all years served
+total_years = df['Years Served'].sum()
+print(f"Final Answer: {total_years}")
+```

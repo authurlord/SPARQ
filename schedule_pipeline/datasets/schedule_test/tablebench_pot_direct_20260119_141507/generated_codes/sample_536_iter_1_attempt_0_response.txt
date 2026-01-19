@@ -1,0 +1,23 @@
+The error occurred because the "total votes" and "televotes" columns contain string values (like '9', '14') instead of integers. We need to convert them to numeric types before performing the division.
+
+Step 1: Load the dataframe.
+Step 2: Convert "total votes" and "televotes" columns to numeric (handling any parsing errors).
+Step 3: Calculate the "Tele Efficiency" as total_votes / televotes for each artist.
+Step 4: Find the artist with the highest Tele Efficiency.
+Step 5: Print the name of that artist.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'total votes' and 'televotes' to numeric, coercing errors to NaN
+df['total votes'] = pd.to_numeric(df['total votes'], errors='coerce')
+df['televotes'] = pd.to_numeric(df['televotes'], errors='coerce')
+
+# Calculate Tele Efficiency (total votes / televotes)
+df['tele_efficiency'] = df['total votes'] / df['televotes']
+
+# Find the artist with the highest tele efficiency
+top_artist = df.loc[df['tele_efficiency'].idxmax(), 'artist']
+print(f"Final Answer: {top_artist}")
+```

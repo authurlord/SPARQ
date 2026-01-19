@@ -1,0 +1,21 @@
+Step 1: The user wants to find the dairy producer with the lowest failure rate, where failure rate is calculated as (samples failed / samples taken).
+Step 2: Load the dataframe.
+Step 3: Calculate the failure rate for each producer by dividing 'samples failed' by 'samples taken'.
+Step 4: Identify the producer with the minimum failure rate.
+Step 5: Print the producer with the lowest failure rate.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric for calculation
+df['samples failed'] = pd.to_numeric(df['samples failed'])
+df['samples taken'] = pd.to_numeric(df['samples taken'])
+
+# Calculate failure rate
+df['failure rate'] = df['samples failed'] / df['samples taken']
+
+# Find the producer with the lowest failure rate
+lowest_failure_producer = df.loc[df['failure rate'].idxmin(), 'producer']
+print(f"Final Answer: {lowest_failure_producer}")
+```

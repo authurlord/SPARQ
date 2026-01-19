@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: engine type, scenario, sfc in lb / (lbf h), sfc in g / (kn s), specific impulse (s), effective exhaust velocity (m / s)

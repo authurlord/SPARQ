@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The latitude of a township does not directly determine its population density; population density depends on both population and land area, which are not solely influenced by latitude.

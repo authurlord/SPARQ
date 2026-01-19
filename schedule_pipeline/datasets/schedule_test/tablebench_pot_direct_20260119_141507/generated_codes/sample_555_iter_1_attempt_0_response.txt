@@ -1,0 +1,29 @@
+Step 1: The user wants to find the year when 'Transparency International' published the highest-ranked index.  
+Step 2: Filter the rows where the 'organization' is 'Transparency International'.  
+Step 3: Among those rows, find the one with the lowest rank (since lower rank means higher rank in terms of performance).  
+Step 4: Extract the corresponding 'year' from that row.  
+Step 5: Handle the case where no such organization exists (avoid empty sequence error).
+
+Note: In the given data, 'Transparency International' appears in two rows:  
+- 2011: rank 19  
+- 2012: rank 37  
+
+The lowest rank (best performance) is 19 in 2011.
+
+We must ensure we only consider valid rows and avoid empty sequences.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where organization is 'Transparency International'
+transparency_rows = df[df['organization'] == 'Transparency International']
+# If any rows exist, find the one with minimum rank (best rank)
+if not transparency_rows.empty:
+    best_year = transparency_rows.loc[transparency_rows['rank'].idxmin(), 'year']
+    print(f"Final Answer: {best_year}")
+else:
+    print("Final Answer: None")
+```
+
+Final Answer: 2011

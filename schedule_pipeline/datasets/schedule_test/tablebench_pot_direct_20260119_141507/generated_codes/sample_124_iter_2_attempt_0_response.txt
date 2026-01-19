@@ -1,0 +1,30 @@
+Step 1: The user wants a horizontal bar chart showing the tonnage of sunken ships.  
+Step 2: We need to filter the data to include only ships with 'Fate' as 'Sunk' (since 'Damaged' is not fully sunk).  
+Step 3: Extract the 'Tonnage (GRT)' column and convert it to numeric.  
+Step 4: Create a horizontal bar chart using matplotlib, with ship names on the x-axis and tonnage on the y-axis.  
+
+Note: The original table has a row with 'Damaged', which we exclude since the question specifies "sunken ships".  
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter only sunken ships (exclude 'Damaged')
+sunk_ships = df[df['Fate'] == 'Sunk']
+# Convert tonnage to numeric
+sunk_ships['Tonnage (GRT)'] = pd.to_numeric(sunk_ships['Tonnage (GRT)'], errors='coerce')
+# Drop any rows with invalid tonnage
+sunk_ships = sunk_ships.dropna(subset=['Tonnage (GRT)'])
+
+# Create horizontal bar chart
+plt.figure(figsize=(10, 6))
+plt.barh(sunk_ships['Name'], sunk_ships['Tonnage (GRT)'], color='skyblue')
+plt.xlabel('Tonnage (GRT)')
+plt.title('Tonnage of Sunken Ships')
+plt.gca().invert_yaxis()  # Invert so highest tonnage is at top
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: None

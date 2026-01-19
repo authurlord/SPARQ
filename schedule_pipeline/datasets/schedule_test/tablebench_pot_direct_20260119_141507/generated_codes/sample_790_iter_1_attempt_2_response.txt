@@ -1,0 +1,19 @@
+The error occurred because the "average" column contains some values as strings (like 'n / a'), which cannot be used in numerical calculations. We need to filter out or convert those non-numeric values before computing the standard deviation.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the "average" column to numeric, replacing 'n / a' with NaN.
+3. Compute the standard deviation of the cleaned "average" column.
+4. Print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Convert 'average' column to numeric, treating 'n / a' as NaN
+df['average'] = pd.to_numeric(df['average'], errors='coerce')
+# Calculate standard deviation of the average comprehension scores
+std_avg = df['average'].std()
+print(f"Final Answer: {std_avg:.2f}")
+```

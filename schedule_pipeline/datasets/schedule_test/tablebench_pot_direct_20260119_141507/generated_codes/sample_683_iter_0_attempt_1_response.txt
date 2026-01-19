@@ -1,0 +1,26 @@
+Step 1: The user wants the correlation coefficient between 'total fertility rate' and 'natural growth' columns.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'total fertility rate' and 'natural growth' columns.  
+Step 4: Compute the Pearson correlation coefficient between these two columns, excluding rows with missing values (e.g., 'na').  
+Step 5: Print the correlation coefficient.
+
+Note: The 'total fertility rate' and 'natural growth' columns contain numeric values, but some entries (like 'na') must be excluded from the calculation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'total fertility rate' and 'natural growth' to numeric, handling 'na' as NaN
+df['total fertility rate'] = pd.to_numeric(df['total fertility rate'], errors='coerce')
+df['natural growth'] = pd.to_numeric(df['natural growth'], errors='coerce')
+
+# Drop rows where either column has NaN (missing data)
+df_clean = df.dropna(subset=['total fertility rate', 'natural growth'])
+
+# Calculate the correlation coefficient
+correlation = df_clean['total fertility rate'].corr(df_clean['natural growth'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

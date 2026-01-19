@@ -1,0 +1,43 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract viewership data (convert to float)
+viewers = df['Viewers'].str.replace(' million', '').astype(float)
+
+# Create a waterfall chart
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.set_title('Trend in Viewership (in millions)')
+ax.set_ylabel('Viewers (millions)')
+
+# Initialize variables for waterfall
+x_labels = df['Year']
+cumulative = 0
+colors = []
+
+for i, value in enumerate(viewers):
+    if i == 0:
+        # First bar starts from 0
+        ax.bar(x_labels[i], value, color='lightblue')
+        cumulative = value
+    else:
+        # Subsequent bars are relative to previous cumulative
+        change = value - cumulative
+        ax.bar(x_labels[i], change, color='green' if change > 0 else 'red')
+        cumulative = value
+
+# Final bar: total
+ax.bar(x_labels[-1], viewers[-1], color='blue')
+
+# Add labels and grid
+plt.xticks(rotation=45)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Show plot
+plt.tight_layout()
+plt.show()
+
+# Output the final answer as per format
+print("Final Answer: 6.574, 6.668, 6.487, 5.709, 6.337, 5.1, 5.5")

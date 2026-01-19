@@ -1,0 +1,16 @@
+Step 1: The user wants to find the borough or census area with the highest combined number of lakes and reservoirs.  
+Step 2: The relevant columns are 's lake and gnis query link' and 's reservoir and gnis query link'.  
+Step 3: We will sum these two columns for each row to get the total number of lakes and reservoirs.  
+Step 4: Identify the borough with the maximum total.  
+Step 5: Return the name of that borough.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate total lakes and reservoirs per borough
+df['total_lakes_reservoirs'] = df['s lake and gnis query link'] + df['s reservoir and gnis query link']
+# Find the borough with the highest total
+max_borough = df.loc[df['total_lakes_reservoirs'].idxmax(), 'borough or census area']
+print(f"Final Answer: {max_borough}")
+```

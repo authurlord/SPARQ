@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: rank by average, competition finish, couple, total, number of dances, average

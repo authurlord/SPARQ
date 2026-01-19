@@ -1,0 +1,65 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'foreign' column to numeric, handling any parsing errors
+df['foreign'] = pd.to_numeric(df['foreign'], errors='coerce')
+
+# Find the maximum and minimum values in the 'foreign' column
+max_foreign = df['foreign'].max()
+min_foreign = df['foreign'].min()
+
+# Find the corresponding municipality names for max and min
+max_municipality = df[df['foreign'] == max_foreign].index[0]
+min_municipality = df[df['foreign'] == min_foreign].index[0]
+
+# Map the index to the actual municipality name (since the row is indexed by language)
+# The columns are the municipalities, so we need to find which column has the max/min
+# Instead, we'll extract the municipality names directly from the column headers
+municipalities = df.columns[1:]  # All columns after 'language'
+
+# Get the max and min values and their corresponding municipality names
+max_val = df['foreign'].max()
+min_val = df['foreign'].min()
+
+# Find the municipality with max and min
+max_idx = df['foreign'].idxmax()
+min_idx = df['foreign'].idxmin()
+
+# Extract the municipality name (column name) where max/min occurs
+max_mun = df.columns[1:].tolist()[df.index.get_loc(max_idx)]
+min_mun = df.columns[1:].tolist()[df.index.get_loc(min_idx)]
+
+# But note: the index in df is by row (language), not by column. So we need to reframe.
+
+# Correct approach: since each row is a language, and each column is a municipality,
+# we need to find the column with max/min value for each row.
+
+# Let's do it properly: iterate through each municipality column and find the max and min
+foreign_values = df[['foreign']].copy()
+foreign_values = foreign_values.apply(pd.to_numeric, errors='coerce')
+
+# Find the column (municipality) with the highest and lowest foreign values
+max_foreign_col = foreign_values.idxmax(axis=1).iloc[0]  # This is not correct either.
+
+# Actually, we need to find per column (municipality), so we should pivot or just loop over columns.
+
+# Correct approach: loop through each municipality column and find the max and min across rows
+municipalities = df.columns[1:]
+max_foreign_mun = None
+min_foreign_mun = None
+max_val = 0
+min_val = float('inf')
+
+for mun in municipalities:
+    col_vals = df[mun].dropna().astype(float)
+    if col_vals.max() > max_val:
+        max_val = col_vals.max()
+        max_foreign_mun = mun
+    if col_vals.min() < min_val:
+        min_val = col_vals.min()
+        min_foreign_mun = mun
+
+difference = max_val - min_val
+
+print(f"Final Answer: {max_foreign_mun}, {difference}")

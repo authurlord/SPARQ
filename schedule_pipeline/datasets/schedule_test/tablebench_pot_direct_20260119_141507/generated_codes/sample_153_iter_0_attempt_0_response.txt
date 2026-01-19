@@ -1,0 +1,48 @@
+Step 1: The question asks which factor significantly influences the 'bp azeo (˚c)' values. This implies we need to assess the correlation between 'bp azeo (˚c)' and the other variables: '2nd component', 'bp 2nd comp (˚c)', '3rd component', 'bp 3rd comp (˚c)', '% wt 2nd', and '% wt 3rd'.
+
+Step 2: Since 'bp azeo (˚c)' is the dependent variable, we will compute the correlation coefficient between 'bp azeo (˚c)' and each of the listed variables.
+
+Step 3: Identify the variable with the highest absolute correlation (closest to 1 or -1), as it would be the most influential.
+
+Step 4: Clean the data: convert 'bp azeo (˚c)' from string to numeric (e.g., remove "degree" and parse numbers). Also, handle missing or non-numeric entries.
+
+Step 5: Compute pairwise correlations and find the strongest one.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the table
+df = pd.read_csv('table.csv')
+
+# Clean the 'bp azeo (˚c)' column by removing 'degree' and converting to float
+def clean_bp_azeo(x):
+    if isinstance(x, str):
+        x = x.replace('degree', '').strip()
+        if x.endswith('degree'):
+            x = x[:-7].strip()
+        try:
+            return float(x)
+        except ValueError:
+            return np.nan
+    return np.nan
+
+df['bp azeo (˚c)'] = df['bp azeo (˚c)'].apply(clean_bp_azeo)
+
+# Convert other columns to numeric where possible
+df['bp 2nd comp (˚c)'] = pd.to_numeric(df['bp 2nd comp (˚c)'], errors='coerce')
+df['bp 3rd comp (˚c)'] = pd.to_numeric(df['bp 3rd comp (˚c)'], errors='coerce')
+df['% wt 2nd'] = pd.to_numeric(df['% wt 2nd'].str.replace('u', '', regex=False), errors='coerce')
+df['% wt 3rd'] = pd.to_numeric(df['% wt 3rd'].str.replace('u', '', regex=False), errors='coerce')
+
+# Drop rows with NaN in 'bp azeo (˚c)' for correlation analysis
+df_clean = df.dropna(subset=['bp azeo (˚c)'])
+
+# Compute correlation with 'bp azeo (˚c)'
+correlations = df_clean[['bp 2nd comp (˚c)', 'bp 3rd comp (˚c)', '% wt 2nd', '% wt 3rd']].corrwith(df_clean['bp azeo (˚c)'])
+correlations = correlations.abs().sort_values(ascending=False)
+
+# Get the top influencing factor
+main_factor = correlations.index[0]
+print(f"Final Answer: {main_factor}")
+```

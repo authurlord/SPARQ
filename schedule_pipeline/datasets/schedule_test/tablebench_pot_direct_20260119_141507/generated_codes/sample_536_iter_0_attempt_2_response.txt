@@ -1,0 +1,16 @@
+Step 1: Understand the definition of "Tele Efficiency" — it is the ratio of total votes to televotes (total_votes / televotes).  
+Step 2: Extract the 'total votes' and 'televotes' columns from the table.  
+Step 3: Calculate the Tele Efficiency for each artist.  
+Step 4: Find the artist with the highest Tele Efficiency.  
+Step 5: Return the name of that artist.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate Tele Efficiency (total_votes / televotes)
+df['tele_efficiency'] = df['total votes'] / df['televotes']
+# Find the artist with the highest Tele Efficiency
+highest_efficiency_artist = df.loc[df['tele_efficiency'].idxmax(), 'artist']
+print(f"Final Answer: {highest_efficiency_artist}")
+```

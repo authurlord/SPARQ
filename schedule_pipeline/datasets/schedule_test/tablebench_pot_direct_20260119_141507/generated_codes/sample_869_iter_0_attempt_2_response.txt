@@ -1,0 +1,19 @@
+Step 1: The user wants the difference between the highest and lowest metabolic rates among female animals.  
+Step 2: From the table, the "Metabolic rate" column contains the values for female animals (rows 1 to 6).  
+Step 3: Identify the maximum and minimum values in the "Metabolic rate" column for female animals.  
+Step 4: Compute the difference between the maximum and minimum values.  
+
+Note: The row with "-" indicates a header or summary row, so we exclude it when analyzing data. We focus only on rows where "Sex" is "Female" and the "Metabolic rate" is numerical.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Sex is 'Female' and exclude the summary row
+female_data = df[df['Sex'] == 'Female'].dropna(subset=['Metabolic rate'])
+# Extract metabolic rates as floats
+metabolic_rates = female_data['Metabolic rate'].astype(float)
+# Calculate difference between max and min
+difference = metabolic_rates.max() - metabolic_rates.min()
+print(f"Final Answer: {difference:.2f}")
+```

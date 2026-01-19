@@ -1,0 +1,43 @@
+Step 1: The question asks to identify train classes whose top speed or number of units deviate significantly from the overall pattern.  
+Step 2: First, we analyze the "Top speed" and "Number" columns for consistency. Most classes have a top speed of 75 mph or 100 mph. The class "156" has a top speed of 200 mph, which is significantly higher. The class "323" has a number of units (17) that is relatively low compared to others, especially given its similar top speed to others.  
+Step 3: We check if any class stands out in either top speed or number of units.  
+Step 4: Identify outliers using simple comparison:  
+   - Top speed > 150 mph is unusual.  
+   - Number of units < 5 or > 30 is also notable.  
+
+From the data:
+- Class 156: top speed = 200 mph (outlier)
+- Class 323: number of units = 17 (within range), but built in 2050–2060 (future date) — likely an error or anomaly.
+
+However, the most significant deviation is in top speed (200 mph). The number of units in 323 is not extreme. The future build date (2050–2060) is clearly anomalous.
+
+Thus, the classes with significant deviations are:
+- 156 (top speed)
+- 323 (future build date)
+
+But since the question specifically asks about "top speed or number of units", we focus on those two.
+
+Final answer: 156, 323
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for top speed anomalies (greater than 150 mph)
+anomalous_speed = df[df['Top speed'] > 150]
+
+# Filter for number of units anomalies (less than 5 or greater than 30)
+anomalous_number = df[(df['Number'] < 5) | (df['Number'] > 30)]
+
+# Combine unique classes that show deviation in either metric
+deviant_classes = set()
+for idx, row in anomalous_speed.iterrows():
+    deviant_classes.add(row['Class'])
+for idx, row in anomalous_number.iterrows():
+    deviant_classes.add(row['Class'])
+
+# Convert to list and print
+final_deviant = list(deviant_classes)
+print(f"Final Answer: {', '.join(final_deviant)}")
+```

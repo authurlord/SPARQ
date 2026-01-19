@@ -1,0 +1,40 @@
+Step 1: The question asks for the total estimated exposure (mrem/hr) when two specimens are combined, assuming that the calculated activity (Bq) is directly proportional to the specimen weight.
+
+Step 2: Identify the relevant rows:
+- Specimen 1: 0.1 g / 4.08 mm → calculated activity = 18 Bq, estimated exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → calculated activity = 1834 Bq, estimated exposure = 0.03 mrem/hr
+
+Step 3: Since the exposure is assumed to be proportional to the activity (which is proportional to weight), we can calculate the expected exposure for the 0.1 g specimen based on the 10 g specimen's exposure per unit weight.
+
+Step 4: Compute the exposure per gram for the 10 g specimen: 0.03 mrem/hr / 10 g = 0.003 mrem/hr per gram.
+
+Step 5: Multiply by 0.1 g: 0.003 * 0.1 = 0.0003 mrem/hr.
+
+Step 6: Add to the 10 g specimen’s exposure: 0.03 + 0.0003 = 0.0303 mrem/hr.
+
+Step 7: Round to a reasonable precision and output.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract data for the two specimens
+specimen_0_1g = df[df['specimen weight / size'] == '0.1 g / 4.08 mm']
+specimen_10g = df[df['specimen weight / size'] == '10 g / 1.89 cm']
+
+# Get exposure values
+exposure_0_1g = float(specimen_0_1g['estimated exposure ( mrem ) / hr'].values[0])
+exposure_10g = float(specimen_10g['estimated exposure ( mrem ) / hr'].values[0])
+
+# Calculate exposure per gram for the 10g specimen
+exposure_per_gram = exposure_10g / 10
+
+# Calculate expected exposure for 0.1g specimen
+expected_exposure_0_1g = exposure_per_gram * 0.1
+
+# Total estimated exposure
+total_exposure = exposure_10g + expected_exposure_0_1g
+
+print(f"Final Answer: {total_exposure:.4f}")
+```

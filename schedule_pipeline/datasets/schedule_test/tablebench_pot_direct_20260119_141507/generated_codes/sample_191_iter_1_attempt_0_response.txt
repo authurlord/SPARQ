@@ -1,0 +1,5 @@
+The question asks about the impact of an increase in GDP per capita on a country's population growth rate. However, the provided table does not contain any data on population growth rates. It includes population, area, GDP, and GDP per capita, but no information about how GDP per capita relates to changes in population growth.
+
+Since there is no data on population growth rates in the table, it is not possible to analyze or compute the impact of GDP per capita on population growth.
+
+Final Answer: none

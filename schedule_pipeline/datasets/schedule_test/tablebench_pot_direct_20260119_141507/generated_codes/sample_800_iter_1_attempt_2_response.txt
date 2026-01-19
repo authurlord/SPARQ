@@ -1,0 +1,19 @@
+The error occurred because the code attempted to convert a list of strings (like ['4', '0', '0', '2', '4', '9', '0', '2', '10', '10', '3']) directly into numeric values without proper handling. We need to filter out rows where the language is "French", then compute the median of the "points" column for the remaining rows.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter rows where the 'language' is not "French".
+3. Extract the 'points' column from the filtered data.
+4. Compute the median of the filtered points.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where language is not French
+filtered_df = df[df['language'] != 'french']
+# Calculate median of points for non-French languages
+median_points = filtered_df['points'].median()
+print(f"Final Answer: {median_points}")
+```

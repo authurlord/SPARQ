@@ -1,0 +1,15 @@
+Step 1: The user wants the total number of 12-inch guns across all ships.  
+Step 2: The column "12 - inch" contains the count of 12-inch guns per ship.  
+Step 3: We need to sum the values in the "12 - inch" column, excluding the row labeled "total" (which is a summary row).  
+Step 4: Since the "total" row is at the end and contains aggregated values, we will skip it when summing.  
+
+We load the dataframe and sum the "12 - inch" column, but only for rows that are not the "total" row.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Exclude the 'total' row and sum the '12 - inch' column
+total_12_inch = df[df['ship'] != 'total']['12 - inch'].sum()
+print(f"Final Answer: {total_12_inch}")
+```

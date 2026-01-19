@@ -1,0 +1,40 @@
+The error occurred because the market value column was not properly parsed as numeric — likely due to incorrect data type handling or malformed string concatenation. The issue arises when values like "407.4227.6294.7147.4" are present, which suggests a misalignment in how the data was read or formatted.
+
+However, upon closer inspection of the provided table, each row has a separate value for "market value (billion )", and the values are correctly formatted as decimals (e.g., 407.4, 227.6, etc.). The error must stem from a misreading of the data — possibly due to a formatting issue during CSV parsing.
+
+But the real issue is that the data in the table appears to be correctly structured per row. So the problem might be in how the values are being interpreted — especially if there's a typo or misalignment in the raw data.
+
+Let’s re-express the correct approach:
+
+Step 1: Filter companies in the "oil and gas" industry.
+Step 2: Among those, select only those with sales ≥ 300 billion.
+Step 3: Compute the average of their "market value (billion )" values.
+Step 4: Ensure all values are properly converted to numeric (using pd.to_numeric with errors='coerce').
+
+We will now write the corrected and safe code.
+
+```python
+import pandas as pd
+
+# Load the dataframe
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, handling any parsing issues
+df['sales (billion )'] = pd.to_numeric(df['sales (billion )'], errors='coerce')
+df['market value (billion )'] = pd.to_numeric(df['market value (billion )'], errors='coerce')
+
+# Filter companies in 'oil and gas' industry with sales >= 300
+oil_gas_sales_filtered = df[
+    (df['industry'] == 'oil and gas') & 
+    (df['sales (billion )'] >= 300)
+]
+
+# Calculate average market value of filtered companies
+if not oil_gas_sales_filtered.empty:
+    avg_market_value = oil_gas_sales_filtered['market value (billion )'].mean()
+    print(f"Final Answer: {avg_market_value:.1f}")
+else:
+    print("Final Answer: 0")
+```
+
+This code safely converts the columns to numeric and avoids invalid parsing errors. It filters only oil and gas companies with sales ≥ 300 billion and computes the average market value. If no such companies exist, it returns 0.

@@ -1,0 +1,13 @@
+Step 1: Identify universities located in London from the "location" column.  
+Step 2: Filter the rows where "location" is "london".  
+Step 3: Sum the "total number of students" for those filtered rows.  
+Step 4: Print the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter universities located in London and sum the total number of students
+london_students = df[df['location'] == 'london']['total number of students'].sum()
+print(f"Final Answer: {london_students}")
+```

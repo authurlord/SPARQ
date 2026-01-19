@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select the top 5 rows (ranks 1 to 5) and get the 'screens' column
+top_5_screens = df[df['rank'].isin(['1', '2', '3', '4', '5'])]['screens'].astype(int)
+# Calculate standard deviation
+std_screens = top_5_screens.std()
+print(f"Final Answer: {std_screens:.1f}")

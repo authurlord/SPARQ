@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The number of branches generally correlates with higher total assets, as banks with more branches tend to have larger asset values. For example, Türkiye İş Bankası has 1,294 branches and 210,535 million TL in assets, while smaller banks like Habib Bank Limited have only 1 branch and 80 million TL in assets.

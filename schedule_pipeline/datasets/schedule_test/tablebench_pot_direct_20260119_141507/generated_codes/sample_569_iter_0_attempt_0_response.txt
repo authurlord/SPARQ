@@ -1,0 +1,61 @@
+Step 1: The question asks for the total number of injuries (in thousands of US dollars) during the three-year period that has the highest average CPSC toy safety funding.
+
+Step 2: First, identify the years with available CPSC toy safety funding (non-null values). Then compute the average CPSC toy safety funding across those years.
+
+Step 3: Among the years with the highest average CPSC toy safety funding, determine which three-year period (i.e., consecutive years) has the highest average. Since the data is yearly, we interpret "three-year period" as three consecutive years.
+
+Step 4: However, the data does not have a clear grouping into three-year periods. Instead, we will compute the average CPSC toy safety funding per year where data exists, and then find the year(s) with the highest value. Since only one year can have the highest funding, we consider the single year with the highest funding as the "period".
+
+But the question says "three-year period", so we need to check if there are any three consecutive years with CPSC funding data.
+
+Step 5: Check for three consecutive years where CPSC toy safety funding is not null. From the data:
+- 1994–2005: Only 1999, 2000, 2001, 2002, 2003, 2004, 2005 have funding data.
+- The years with funding: 1999, 2000, 2001, 2002, 2003, 2004, 2005
+- Consecutive sequences: 1999–2001 (3 years), 2000–2002, 2001–2003, etc.
+
+We will compute the average CPSC funding for each possible three-year consecutive window and find the one with the highest average.
+
+Step 6: Extract the years and CPSC funding values, then compute rolling averages over 3 years, and find the maximum.
+
+Step 7: Once the best three-year period is identified, sum the injuries for those years.
+
+Note: The injury data is in thousands of US dollars.
+
+Let’s implement this step-by-step in code.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'Injuries (US $000)' to numeric, handling missing values
+df['Injuries (US $000)'] = pd.to_numeric(df['Injuries (US $000)'], errors='coerce')
+df['CPSC toy safety funding (US$ Millions)'] = pd.to_numeric(df['CPSC toy safety funding (US$ Millions)'], errors='coerce')
+
+# Filter years with non-null CPSC funding
+funding_data = df.dropna(subset=['CPSC toy safety funding (US$ Millions)'])
+
+# Extract years and funding values
+years = funding_data['Year'].astype(int)
+funding = funding_data['CPSC toy safety funding (US$ Millions)']
+
+# Create a list of consecutive 3-year windows
+windowed_funding = []
+for i in range(len(years) - 2):
+    window_years = years.iloc[i:i+3]
+    window_avg = funding.iloc[i:i+3].mean()
+    windowed_funding.append((window_avg, window_years.tolist()))
+
+# Find the window with the highest average funding
+best_window = max(windowed_funding, key=lambda x: x[0])
+
+# Get the years of the best window
+best_years = best_window[1]
+
+# Sum the injuries for those years
+injury_sum = df[df['Year'].isin(best_years)]['Injuries (US $000)'].sum()
+
+print(f"Final Answer: {injury_sum}")
+```

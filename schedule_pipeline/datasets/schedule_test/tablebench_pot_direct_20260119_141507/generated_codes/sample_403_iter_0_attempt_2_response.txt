@@ -1,0 +1,23 @@
+The table provides a detailed overview of tourism-related metrics for various countries in 2011, including tourist arrivals, tourism receipts, per-arrival and per-capita revenue, tourism's share of GDP and exports, and a competitiveness index (TTCI). 
+
+Key columns and their significance:
+- "Tourist arrivals (2011) (millions)": Total number of tourists visiting the country.
+- "Tourism receipts (2011) (millions of US)": Total revenue generated from tourism.
+- "Tourism receipts (2011) (US per arrival)": Average revenue per tourist.
+- "Tourism receipts (2011) (US per capita)": Average revenue per person in the country.
+- "Tourism receipts (2003) (as % of GDP)": Proportion of tourism income relative to national GDP.
+- "Tourism receipts (2003) (as % of exports)": Proportion of tourism income relative to total exports.
+- "Tourism competitiveness (2011) (TTCI)": A measure of how competitive the country's tourism sector is.
+
+Notable trends:
+- Mexico has the highest tourist arrivals (23.4 million), followed by Brazil and Argentina. However, its tourism per capita is relatively low (507 USD), suggesting that despite high volume, the average visitor contributes less than in countries like Costa Rica or Panama.
+- Costa Rica and Panama have high per-capita tourism receipts (459 and 550 USD respectively), indicating strong economic returns from tourism per resident.
+- The Dominican Republic and Cuba show high per-capita tourism revenue (440 and 194 USD), but the Dominican Republic has a large number of arrivals, indicating efficiency in revenue generation.
+- Countries like Haiti and Venezuela have low tourist arrivals and per-capita receipts, with Venezuela showing very low tourism as a share of GDP and exports.
+- Higher tourism receipts as a percentage of GDP (e.g., Dominican Republic at 36.2%) suggest tourism is a major economic driver in those nations.
+
+Overall, the data reveals that while some countries (e.g., Mexico, Brazil) have high tourist volumes, others (e.g., Costa Rica, Panama) generate higher value per tourist and per capita, highlighting the importance of both volume and revenue efficiency in tourism economies.
+
+Since the question asks for a descriptive analysis rather than a specific calculation or visualization, no code is required for computation. The answer is purely interpretative.
+
+Final Answer: tourist arrivals, tourism receipts, per-arrival revenue, per-capita revenue, GDP share, export share, competitiveness

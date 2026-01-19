@@ -1,0 +1,19 @@
+Step 1: The user wants the median number of aircraft movements among the top 10 busiest airports.  
+Step 2: Identify the top 10 busiest airports by passengers (since "passengers" is the most direct measure of busyness).  
+Step 3: Extract the "aircraft movements" for these top 10 airports.  
+Step 4: Compute the median of the "aircraft movements" values.  
+
+Note: The table has a "rank" column, where rank 1 is the busiest. So the top 10 busiest airports are those with ranks 1 through 10.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select top 10 busiest airports (ranks 1 to 10)
+top_10 = df.head(10)
+# Extract aircraft movements for these airports
+aircraft_movements = top_10['aircraft movements'].astype(float)
+# Calculate median
+median_movements = aircraft_movements.median()
+print(f"Final Answer: {median_movements}")
+```

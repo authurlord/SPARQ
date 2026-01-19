@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table displays transmission line parameters (R, L, G, C) at different frequencies (Hz). R (resistance) decreases slightly with increasing frequency. L (inductance) decreases significantly as frequency increases. G (conductance) increases with frequency, indicating higher leakage. C (capacitance) remains constant at 51.57 nf/km across all frequencies. Notable trend: As frequency increases, R and L decrease, while G increases, showing frequency-dependent behavior in transmission lines.

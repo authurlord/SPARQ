@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The data provided only covers the years 2004 to 2010, and there is no clear numerical trend in tries, goals, or points that can be reliably extrapolated for forecasting. Additionally, the dataset does not include variables such as team changes, player performance, or external factors necessary for accurate prediction. Therefore, a forecast cannot be generated from the given data.
+
+Final Answer: Cannot forecast

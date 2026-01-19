@@ -1,0 +1,97 @@
+Step 1: Understand the question. We are asked to calculate the change in total seating capacity of an airline's fleet from 2004 to 2008.  
+Step 2: Identify relevant data. The "seating" column contains the seating capacity for each aircraft. We need to consider only aircraft introduced before or during 2004 (i.e., introduced ≤ 2004) and those introduced after 2004 (i.e., introduced > 2004) to compute the total seating capacity at those two points in time.  
+Step 3: From the table:
+- Aircraft introduced in 2004 or earlier: 
+  - Airbus A319-100 (2004): 156
+  - Boeing 737-204 (1995): 115
+  - Boeing 737-300 (1996): 148 (148 / 9 — we take 148 as standard seating)
+  - Boeing 737-700 (2000): 149
+- Aircraft introduced after 2004 (i.e., after 2004, but retired before 2008):
+  - Airbus A320-200 (2008): 180
+  - Airbus A321-200 (2008): 220
+- Note: The A321-200 and A320-200 were introduced in 2008, so they are not present in the fleet before 2008.
+- Therefore, from 2004 to 2008, the fleet gains the A320-200 and A321-200 models.
+
+Step 4: Compute total seating capacity:
+- Before 2004: sum of seating of aircraft introduced before or in 2004
+- After 2008: sum of seating of aircraft introduced in 2008
+- Change = total seating in 2008 - total seating in 2004
+
+Step 5: Extract values:
+- Before 2004: 156 (A319) + 115 (737-204) + 148 (737-300) + 149 (737-700) = 568
+- After 2008: 180 (A320-200) + 220 (A321-200) = 400
+
+Wait — this is incorrect. The A320-200 and A321-200 were introduced in 2008, so they are not in the fleet in 2004. But the question is about change from 2004 to 2008, so we should include only those that were in service during that period.
+
+But the table says:
+- A319-100 introduced in 2004 → in service
+- A320-200 introduced in 2008 → in service from 2008 onward
+- A321-200 introduced in 2008 → in service from 2008 onward
+
+So in 2004: only A319-100, 737-204, 737-300, 737-700 are in service → total = 156 + 115 + 148 + 149 = 568  
+In 2008: A319-100, A320-200, A321-200, and others?  
+But A320-200 and A321-200 are introduced in 2008, so they are added in 2008.
+
+Thus, total seating in 2004: 568  
+Total seating in 2008: 156 (A319) + 180 (A320) + 220 (A321) = 556
+
+Wait — that would be a decrease. But the 737-300 was retired in 2007, and 737-700 retired in 2011, so they are still in service until retirement.
+
+But the question is about fleet capacity change from 2004 to 2008. So we must consider:
+- What was the fleet in 2004?
+- What was the fleet in 2008?
+
+From the table:
+- In 2004: A319-100 (156), 737-204 (115), 737-300 (148), 737-700 (149) → total = 568
+- In 2008: A320-200 (180), A321-200 (220), and possibly others? But A319-100 and 737-700 are still in service? The notes say:
+  - A319-100: in service
+  - A320-200: in service
+  - A321-200: inherited from GB Airways → likely in service
+  - 737-300: retired in 2007 → not in 2008
+  - 737-700: retired in 2011 → still in service in 2008
+
+So in 2008:
+- A319-100: 156
+- A320-200: 180
+- A321-200: 220
+- 737-700: 149 (still in service)
+
+Total in 2008 = 156 + 180 + 220 + 149 = 705
+
+In 2004:
+- A319-100: 156
+- 737-204: 115
+- 737-300: 148
+- 737-700: 149
+→ Total = 156 + 115 + 148 + 149 = 568
+
+Change = 705 - 568 = 137
+
+Therefore, the total seating capacity increased by 137.
+
+Now write the code accordingly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows based on introduction year
+# Before 2004: introduced <= 2004
+before_2004 = df[df['introduced'].astype(int) <= 2004]
+# After 2004: introduced > 2004, but we are considering up to 2008
+# We include any aircraft introduced in 2008 (since they are in service from 2008)
+after_2004 = df[df['introduced'].astype(int) >= 2008]
+
+# Total seating capacity in 2004 (only aircraft introduced before or in 2004)
+total_seating_2004 = before_2004['seating'].sum()
+
+# Total seating capacity in 2008 (aircraft introduced in 2008 or later, but only those in service)
+# All aircraft introduced in 2008 are in service (as per notes)
+total_seating_2008 = after_2004['seating'].sum()
+
+# Change = total in 2008 - total in 2004
+change = total_seating_2008 - total_seating_2004
+
+print(f"Final Answer: {change}")
+```

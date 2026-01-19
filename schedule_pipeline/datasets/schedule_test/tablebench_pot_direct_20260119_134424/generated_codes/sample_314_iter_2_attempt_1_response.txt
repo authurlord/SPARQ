@@ -1,0 +1,26 @@
+Step 1: The user wants to find the year when a work won an award for a song that was nominated for Song of the Year at the Grammy Awards.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Category' is 'Song of the Year' and 'Result' is 'Nominated'.
+Step 4: From those rows, check if the same work (Nominated work) also won another award (i.e., Result is 'Won').
+Step 5: Extract the corresponding 'Year' for such cases and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where the category is 'Song of the Year' and result is 'Nominated'
+song_of_year_nominated = df[(df['Category'] == 'Song of the Year') & (df['Result'] == 'Nominated')]
+
+# Get the nominated work (e.g., "Love Song")
+nominated_work = song_of_year_nominated['Nominated work'].iloc[0]
+
+# Now check if this work won any award (Result == 'Won')
+won_award = df[(df['Nominated work'] == nominated_work) & (df['Result'] == 'Won')]
+
+# Extract the year from the winning row
+if not won_award.empty:
+    winning_year = won_award['Year'].iloc[0]
+    print(f"Final Answer: {winning_year}")
+else:
+    print("Final Answer: None")
+```

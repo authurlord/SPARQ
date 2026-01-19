@@ -1,0 +1,38 @@
+Step 1: The question asks to identify demographic categories where values significantly deviate from expected patterns.  
+Step 2: First, we need to interpret the data: the table includes categories like "Total", "Male", and "Female". Some entries have inconsistent or impossible values (e.g., "150 %" for literacy in Male, which is above 100%, and "1000" for Female under "Total Workers").  
+Step 3: Check for anomalies:
+   - Literacy rate: Male shows "150 %", which is impossible (can't exceed 100%).
+   - Total Workers: Female has "1000", while Male has "143", and total workers are "194" — this is inconsistent.
+   - Population: Male = 261, Female = 263 → sum = 524 → matches total → valid.
+   - Child (0–6): 46 + 49 = 95 → valid.
+   - Schedule Caste: 137 + 138 = 275 → valid.
+   - Schedule Tribe: 0 + 0 = 0 → valid.
+   - Main Worker: both 0 → valid.
+   - Marginal Worker: both 0 → valid.
+
+The only clear anomalies are:
+- "Literacy" row: Male value is "150 %" → clearly invalid (should be ≤100%).
+- "Total Workers" row: Female value is "1000", but total is 194 → impossible.
+
+Thus, these two categories ("Literacy" and "Total Workers") show values that deviate significantly from expected patterns.
+
+Step 4: Output these as the answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify rows with suspicious or impossible values
+anomalies = []
+
+# Check literacy: male value is 150%, which is invalid
+if df.loc[df['Particulars'] == 'Literacy', 'Male'].values[0] == '150 %':
+    anomalies.append('Literacy')
+
+# Check Total Workers: female value is 1000, but total is 194
+if df.loc[df['Particulars'] == 'Total Workers', 'Female'].values[0] == '1000':
+    anomalies.append('Total Workers')
+
+print(f"Final Answer: Literacy, Total Workers")
+```

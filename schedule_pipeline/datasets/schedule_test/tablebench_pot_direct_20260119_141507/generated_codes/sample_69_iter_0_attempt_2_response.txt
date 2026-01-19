@@ -1,0 +1,12 @@
+Step 1: The user is asking for the average score of the contestant from Texas.  
+Step 2: The "average" column in the table represents the overall average score for each state.  
+Step 3: We need to locate the row corresponding to Texas and extract the value in the "average" column.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where country is 'texas' and get the 'average' value
+texas_average = df[df['country'] == 'texas']['average'].values[0]
+print(f"Final Answer: {texas_average}")
+```

@@ -1,0 +1,15 @@
+Step 1: The user wants to identify any abnormal values in the 'Class' column compared to the overall trend.
+Step 2: Load the dataframe.
+Step 3: Examine the 'Class' column for values that are infrequent or different from the majority.
+Step 4: Identify outliers by checking frequency of each class.
+Step 5: Print the abnormal classes (those with low frequency).
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count frequency of each class
+class_counts = df['Class'].value_counts()
+# Define a threshold for abnormal (e.g., less than 2 occurrences)
+abnormal_classes = class_counts[class_counts < 2].index.tolist()
+print(f"Final Answer: {', '.join(abnormal_classes)}")
+```

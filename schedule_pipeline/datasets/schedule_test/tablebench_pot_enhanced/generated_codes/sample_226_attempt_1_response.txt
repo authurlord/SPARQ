@@ -1,0 +1,31 @@
+Step 1: The question asks whether the natural change per year is more closely related to live births or deaths. Natural change is calculated as live births minus deaths. To determine which factor drives natural change more, we can analyze the correlation between natural change and live births, and between natural change and deaths.
+
+Step 2: Load the dataframe and clean the numerical columns (e.g., remove spaces and convert to numeric).
+
+Step 3: Compute the correlation between natural change and live births, and between natural change and deaths.
+
+Step 4: Compare the absolute values of the correlations to determine which is stronger.
+
+Step 5: Print the result indicating which factor is more closely related.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert columns to numeric
+for col in ['live births per year', 'deaths per year', 'natural change per year']:
+    df[col] = df[col].str.replace(' ', '').astype(int)
+
+# Calculate correlation between natural change and live births, and deaths
+corr_births = df['natural change per year'].corr(df['live births per year'])
+corr_deaths = df['natural change per year'].corr(df['deaths per year'])
+
+# Determine which correlation is stronger
+if abs(corr_births) > abs(corr_deaths):
+    result = "live births per year"
+else:
+    result = "deaths per year"
+
+print(f"Final Answer: {result}")
+```

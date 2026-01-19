@@ -1,0 +1,31 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean column names to handle spaces and special characters
+df.columns = df.columns.str.replace(' ', '_').str.strip()
+
+# Correct column names after cleaning
+max_pressure_col = 'p_max_(bar)'
+external_area_col = 'a_external_(cm_2)'
+
+# Ensure columns exist
+if max_pressure_col not in df.columns or external_area_col not in df.columns:
+    raise ValueError(f"Columns {max_pressure_col} or {external_area_col} not found")
+
+# Extract values
+external_areas = df[external_area_col].astype(float)
+max_pressures = df[max_pressure_col].astype(float)
+
+# Find the index of the largest and smallest external area
+largest_idx = external_areas.idxmax()
+smallest_idx = external_areas.idxmin()
+
+# Get the corresponding maximum pressures
+max_pressure_largest = max_pressures.loc[largest_idx]
+max_pressure_smallest = max_pressures.loc[smallest_idx]
+
+# Compute the difference
+pressure_difference = max_pressure_largest - max_pressure_smallest
+
+print(f"Final Answer: {pressure_difference:.1f}")

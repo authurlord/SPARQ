@@ -1,0 +1,18 @@
+Step 1: The user wants to find the difference between the highest and lowest total medals among schools.
+Step 2: Load the dataframe.
+Step 3: Convert 'total medals' column to integer for numerical operations.
+Step 4: Find the maximum and minimum values of 'total medals'.
+Step 5: Calculate the difference and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'total medals' to integer
+df['total medals'] = pd.to_numeric(df['total medals'])
+# Find max and min total medals
+max_medals = df['total medals'].max()
+min_medals = df['total medals'].min()
+# Calculate the difference
+difference = max_medals - min_medals
+print(f"Final Answer: {difference}")
+```

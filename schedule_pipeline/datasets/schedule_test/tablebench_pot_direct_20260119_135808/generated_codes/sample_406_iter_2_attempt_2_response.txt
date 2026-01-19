@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table categorizes BMI levels and their corresponding BMI Prime values, with main columns showing BMI ranges (kg/m²), BMI Prime ranges, and health categories. Notable patterns include a linear relationship between BMI and BMI Prime, where BMI Prime = BMI / 25. This allows easy interpretation of weight status relative to a standard reference (25 kg/m²).

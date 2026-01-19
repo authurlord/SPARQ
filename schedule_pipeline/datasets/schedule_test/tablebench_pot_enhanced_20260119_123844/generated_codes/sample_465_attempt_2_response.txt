@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: london heathrow, london gatwick, london stansted, manchester, london luton, birmingham airport, glasgow international, edinburgh, bristol, newcastle, belfast international, liverpool, east midlands, aberdeen, leeds bradford, glasgow prestwick, london city, belfast city, cardiff

@@ -1,0 +1,9 @@
+The question asks for a forecast of bus characteristics (fuel propulsion and quantity) in 2025 based on trends: increasing quantity and a shift toward more environmentally friendly fuel propulsion.
+
+However, the provided data does not contain enough temporal or trend-based information to make a statistically valid or accurate forecast. The data includes only a few entries from 1999 to 2012, with no clear trend line or pattern in fuel propulsion types (e.g., diesel vs. hybrid) over time. While "diesel - electric hybrid" appears once, it is not dominant or consistently increasing.
+
+Moreover, the term "environmentally friendly fuel propulsion" implies a prediction beyond the data range, which requires extrapolation without sufficient evidence.
+
+Therefore, a reliable forecast cannot be generated from this dataset with confidence.
+
+Final Answer: None

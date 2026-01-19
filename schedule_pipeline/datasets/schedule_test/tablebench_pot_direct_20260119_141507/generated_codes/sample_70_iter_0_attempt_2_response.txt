@@ -1,0 +1,13 @@
+Step 1: The user wants the number of Indians admitted in the year 2005.  
+Step 2: Load the dataframe.  
+Step 3: Locate the row where 'year' is '2005' and extract the value in the 'indians admitted' column.  
+Step 4: Print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where year is 2005 and get the value for 'indians admitted'
+indians_2005 = df[df['year'] == '2005']['indians admitted'].values[0]
+print(f"Final Answer: {indians_2005}")
+```

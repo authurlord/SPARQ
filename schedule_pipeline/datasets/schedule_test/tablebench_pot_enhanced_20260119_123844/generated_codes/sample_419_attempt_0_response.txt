@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: county, starky, starky %, hancock, hancock %, mccain, mccain %, total

@@ -1,0 +1,20 @@
+Step 1: Identify the relevant data for Córdoba and Valencia from the table.  
+- For Córdoba: "Executions in persona" = 17, "Executions in effigie" = 19 → total = 17 + 19 = 36  
+- For Valencia: "Executions in persona" = 2, "Executions in effigie" = 0 → total = 2 + 0 = 2  
+
+Step 2: Calculate the difference between Córdoba and Valencia.  
+Difference = 36 - 2 = 34  
+
+Step 3: Output the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the relevant values for Córdoba and Valencia
+cordoba_executions = df[df['Tribunal'] == 'Córdoba']['Executions in persona'].iloc[0] + df[df['Tribunal'] == 'Córdoba']['Executions in effigie'].iloc[0]
+valencia_executions = df[df['Tribunal'] == 'Valencia']['Executions in persona'].iloc[0] + df[df['Tribunal'] == 'Valencia']['Executions in effigie'].iloc[0]
+
+difference = cordoba_executions - valencia_executions
+print(f"Final Answer: {difference}")
+```

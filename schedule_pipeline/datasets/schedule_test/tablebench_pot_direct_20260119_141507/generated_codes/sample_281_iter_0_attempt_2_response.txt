@@ -1,0 +1,15 @@
+Step 1: Identify teams with a win percentage greater than 0.7.  
+Step 2: Filter the dataframe to include only those rows where 'win pct' > 0.7.  
+Step 3: Sum the 'wins' column for these filtered rows.  
+Step 4: Print the total number of wins.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter teams with win percentage greater than 0.7
+filtered_teams = df[df['win pct'] > 0.7]
+# Sum the wins of these teams
+total_wins = filtered_teams['wins'].sum()
+print(f"Final Answer: {total_wins}")
+```

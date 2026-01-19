@@ -1,0 +1,17 @@
+Step 1: The user wants the mean and standard deviation of the 'against' column, which represents some numerical metric (likely points scored against).
+Step 2: Load the dataframe.
+Step 3: Convert the 'against' column to numeric type to ensure proper calculation.
+Step 4: Calculate the mean and standard deviation of the 'against' column.
+Step 5: Print both values in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'against' column to numeric
+df['against'] = pd.to_numeric(df['against'])
+# Calculate mean and standard deviation
+mean_against = df['against'].mean()
+std_against = df['against'].std()
+print(f"Final Answer: {mean_against:.1f}, {std_against:.1f}")
+```

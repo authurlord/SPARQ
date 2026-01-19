@@ -1,0 +1,22 @@
+Step 1: The user wants to calculate the domestic freshwater use in Kyrgyzstan in billion cubic meters, given that domestic use accounts for 39% of the total freshwater withdrawal.
+
+Step 2: Load the dataframe and locate the row for Kyrgyzstan.
+
+Step 3: Extract the total freshwater withdrawal value for Kyrgyzstan (which is in billion cubic meters).
+
+Step 4: Multiply the total freshwater withdrawal by 39% (0.39) to get domestic use.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row for Kyrgyzstan
+kyrgyzstan_row = df[df['Unnamed: 0'] == 'kyrgyzstan']
+# Extract total freshwater withdrawal
+total_withdrawal = float(kyrgyzstan_row['total freshwater withdrawal'].values[0])
+# Calculate domestic use (39% of total)
+domestic_use = total_withdrawal * 0.39
+print(f"Final Answer: {domestic_use:.2f}")
+```

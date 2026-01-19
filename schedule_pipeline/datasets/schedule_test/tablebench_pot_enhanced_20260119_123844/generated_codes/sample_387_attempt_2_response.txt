@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of cities where the residential monthly usage is above 12.
+Step 2: Load the dataframe.
+Step 3: Select the 'residential monthly usage : 1000 kwh' column and convert it to float for comparison.
+Step 4: Count how many values are greater than 12.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'residential monthly usage : 1000 kwh' to float and count values > 12
+count_above_12 = (df['residential monthly usage : 1000 kwh'].astype(float) > 12).sum()
+print(f"Final Answer: {count_above_12}")
+```

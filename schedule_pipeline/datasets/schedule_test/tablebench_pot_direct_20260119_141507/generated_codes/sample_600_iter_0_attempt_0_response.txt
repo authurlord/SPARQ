@@ -1,0 +1,22 @@
+Step 1: Identify the top 5 tallest buildings based on height. Since height is given in "ft / m", we will use the "height ft / m" column and extract the numeric part in feet (or meters) for comparison.  
+Step 2: Convert the "height ft / m" string (e.g., "443 / 135") to a float by taking the first value (feet).  
+Step 3: Sort the buildings by height in descending order and pick the top 5.  
+Step 4: Extract the "floors" of these top 5 buildings and compute their average.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert height string to numeric (take first value before '/')
+df['height_ft'] = df['height ft / m'].str.split('/').str[0].astype(float)
+
+# Sort by height in descending order and get top 5
+top_5 = df.sort_values(by='height_ft', ascending=False).head(5)
+
+# Calculate average number of floors among top 5
+avg_floors = top_5['floors'].mean()
+
+print(f"Final Answer: {avg_floors:.1f}")
+```

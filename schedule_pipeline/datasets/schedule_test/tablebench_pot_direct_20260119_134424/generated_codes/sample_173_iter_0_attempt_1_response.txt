@@ -1,0 +1,9 @@
+Step 1: The question asks about the impact of an increase in eccentricity on periselene and aposelene distances. From orbital mechanics, we know that:
+- Periselene (closest approach to the Moon) decreases as eccentricity increases.
+- Aposelene (farthest distance from the Moon) increases as eccentricity increases.
+Step 2: Load the dataframe.
+Step 3: Observe the trend in 'periselene' and 'aposelene' as 'eccentricity' increases.
+Step 4: Based on the data, confirm the inverse relationship between eccentricity and periselene, and the direct relationship with aposelene.
+Step 5: Since the question is conceptual and based on known physics, no calculation is needed—only interpretation.
+
+Final Answer: Periselene decreases, aposelene increases

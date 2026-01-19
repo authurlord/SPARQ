@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 90, 70, 105, 105, 120, 120, 120

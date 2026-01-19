@@ -1,0 +1,29 @@
+Step 1: The user wants to analyze how the urban percentage changes with increasing population size between 1959 and 1989.  
+Step 2: Filter the data for years between 1959 and 1989 inclusive.  
+Step 3: Check if there's a correlation or trend between population (in thousands) and urban percentage. Since the question asks "how does the urban percentage change", we will examine the relationship — specifically, whether it increases, decreases, or remains stable as population grows.  
+Step 4: Since the data is small and only spans a few points, we can simply observe the trend by printing the values in order.  
+
+Note: Urban percentage remains constant at 57% from 1989 onwards, but in the range 1959–1989, it increases from 44% to 57%. However, population increases from 9295 (thousands) to 16537 (thousands). So, we check if urban percentage increases with population.  
+
+We will plot the urban percentage against population to visualize the trend.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years between 1959 and 1989 inclusive
+filtered_df = df[(df['year (january)'].astype(int) >= 1959) & (df['year (january)'].astype(int) <= 1989)]
+
+# Convert population to numeric (already in thousands)
+population = filtered_df['population (000)'].astype(float)
+urban_percent = filtered_df['urban , %'].astype(float)
+
+# Check the trend: urban percentage vs population
+print("Urban percentage trend with increasing population (1959–1989):")
+print(f"Year: {filtered_df['year (january)'].tolist()}")
+print(f"Population (000): {population.tolist()}")
+print(f"Urban %: {urban_percent.tolist()}")
+
+# Final answer: urban percentage increases with population
+Final Answer: increases
+```

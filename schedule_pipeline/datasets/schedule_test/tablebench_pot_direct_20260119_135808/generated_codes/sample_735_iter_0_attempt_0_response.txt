@@ -1,0 +1,18 @@
+Step 1: Identify the city with the highest density (inhabitants / km²) and the city with the lowest density.
+Step 2: Calculate the difference between the highest and lowest density values.
+Step 3: Output the city with the highest density and the difference compared to the lowest.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'density (inhabitants / km 2 )' to float for numerical operations
+df['density (inhabitants / km 2 )'] = pd.to_numeric(df['density (inhabitants / km 2 )'])
+# Find the city with the highest density
+max_density_city = df.loc[df['density (inhabitants / km 2 )'].idxmax(), 'city']
+# Find the city with the lowest density
+min_density_city = df.loc[df['density (inhabitants / km 2 )'].idxmin(), 'city']
+# Calculate the difference
+density_difference = df['density (inhabitants / km 2 )'].max() - df['density (inhabitants / km 2 )'].min()
+print(f"Final Answer: {max_density_city}, {density_difference:.1f}")
+```

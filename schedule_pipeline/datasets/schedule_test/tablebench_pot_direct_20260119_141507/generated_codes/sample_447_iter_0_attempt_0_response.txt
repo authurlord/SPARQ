@@ -1,0 +1,19 @@
+Step 1: The user is asking to identify abnormal values in the 'Class' column. Abnormal values (outliers) can be detected by observing deviations from the majority pattern. In this dataset, most entries in the 'Class' column are "10CR" or "10C", with only a few being "ABC" and "XYZ". These are rare and do not follow the dominant trend.
+
+Step 2: We can identify abnormal values by checking which entries differ from the most frequent class values.
+
+Step 3: Count the frequency of each class value. If any class appears significantly less than others, it may be considered abnormal.
+
+Step 4: List the class values that appear only once or are rare compared to the majority.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count frequency of each class
+class_counts = df['Class'].value_counts()
+# Identify classes that are not "10CR" or "10C" (the majority)
+majority_classes = ['10CR', '10C']
+abnormal_classes = class_counts[class_counts.index.isin(majority_classes) == False].index.tolist()
+print(f"Final Answer: {abnormal_classes}")
+```

@@ -1,0 +1,18 @@
+Step 1: The user wants to calculate the standard deviation of scores given by each judge (columns) to determine which judge has the most variation in scores.
+Step 2: Load the dataframe.
+Step 3: Exclude the 'artist' and 'total' columns, as they are not scores given by judges.
+Step 4: Calculate the standard deviation for each column (judge).
+Step 5: Identify the judge with the highest standard deviation.
+Step 6: Print the judge with the highest variation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select only the score columns (excluding 'artist', 'total', and 'points')
+score_columns = df.columns[1:-1]  # Skip first (artist) and last two (total, points)
+std_devs = df[score_columns].std()
+# Find the judge with the highest standard deviation
+max_std_judge = std_devs.idxmax()
+print(f"Final Answer: {max_std_judge}")
+```

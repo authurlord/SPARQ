@@ -1,0 +1,17 @@
+Step 1: The user is asking for the correlation between 'commissioned capacity (mw)' and 'year of commission'.  
+Step 2: Correlation coefficient measures the strength and direction of the linear relationship between two variables.  
+Step 3: Load the dataframe.  
+Step 4: Extract the two columns: 'commissioned capacity (mw)' and 'year of commission'.  
+Step 5: Compute the Pearson correlation coefficient using `corr()` method.  
+Step 6: Print the correlation coefficient.
+
+Note: Since "year of commission" increases over time and "commissioned capacity" may not show a clear trend, we expect a weak or slightly negative correlation if capacity increased over time, but it's not guaranteed. We will compute it directly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'commissioned capacity (mw)' and 'year of commission'
+correlation = df['commissioned capacity (mw)'].corr(df['year of commission'])
+print(f"Final Answer: {correlation:.2f}")
+```

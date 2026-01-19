@@ -1,0 +1,50 @@
+Step 1: The user wants a grouped bar chart showing the maximum and minimum baselines for different interferometer and observing modes.  
+Step 2: From the table, we have two rows of data. The first row contains values for "H" and "No imaging on a single baseline instrument. CLOSED 2009." with columns including "Minimum baseline (m)" and "Maximum baseline (m)".  
+Step 3: However, the second row has a value of `None` for the first column, so we only have valid data for one mode ("H").  
+Step 4: We will extract the minimum and maximum baselines for the "H" mode and plot them as a grouped bar chart.  
+Step 5: Since there is only one mode, the chart will show two bars (min and max) for that mode.  
+
+Note: The table does not provide multiple modes with clear groupings, so we proceed with the available data.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Filter out the row with None in the first column
+df = df.dropna(subset=['Interferometer and observing mode'])
+
+# Extract the relevant columns
+df = df[['Interferometer and observing mode', 'Minimum baseline (m)\n(un-projected)', 'Maximum baseline (m)']]
+
+# Convert to numeric, handling any formatting issues
+df['Minimum baseline (m)\n(un-projected)'] = pd.to_numeric(df['Minimum baseline (m)\n(un-projected)'], errors='coerce')
+df['Maximum baseline (m)'] = pd.to_numeric(df['Maximum baseline (m)'], errors='coerce')
+
+# Drop any rows with NaN after conversion
+df = df.dropna()
+
+# Prepare data for plotting
+modes = df['Interferometer and observing mode']
+min_baselines = df['Minimum baseline (m)\n(un-projected)']
+max_baselines = df['Maximum baseline (m)']
+
+# Create grouped bar chart
+fig, ax = plt.subplots(figsize=(8, 6))
+bar_width = 0.35
+index = range(len(modes))
+
+bars1 = ax.bar([i - bar_width/2 for i in index], min_baselines, bar_width, label='Minimum baseline (m)')
+bars2 = ax.bar([i + bar_width/2 for i in index], max_baselines, bar_width, label='Maximum baseline (m)')
+
+ax.set_xlabel('Interferometer and Observing Mode')
+ax.set_ylabel('Baseline (m)')
+ax.set_title('Maximum and Minimum Baselines by Interferometer and Observing Mode')
+ax.set_xticks([i for i in index])
+ax.set_xticklabels(modes)
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+```

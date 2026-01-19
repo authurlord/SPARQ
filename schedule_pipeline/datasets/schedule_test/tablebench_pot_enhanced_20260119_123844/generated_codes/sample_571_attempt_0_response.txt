@@ -1,0 +1,20 @@
+Step 1: Filter the data for the 'all around' event in both 'olympic trials' and 'us championships' during 2008.
+Step 2: Extract the qualifying scores for these two competitions.
+Step 3: Calculate the difference (change) between the qualifying scores.
+Step 4: Since the question asks for the average change, and only one comparison exists, the result is simply the difference.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 'all around' event in 'olympic trials' and 'us championships'
+olympic_trials = df[(df['event'] == 'all around') & (df['competition'] == 'olympic trials')]
+us_championships = df[(df['event'] == 'all around') & (df['competition'] == 'us championships')]
+
+# Extract qualifying scores
+qualifying_score_olympic_trials = float(olympic_trials['qualifying score'].values[0])
+qualifying_score_us_championships = float(us_championships['qualifying score'].values[0])
+
+# Calculate the change
+change = qualifying_score_us_championships - qualifying_score_olympic_trials
+print(f"Final Answer: {change:.1f}")
+```

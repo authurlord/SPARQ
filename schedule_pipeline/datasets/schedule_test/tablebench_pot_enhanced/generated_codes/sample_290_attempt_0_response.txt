@@ -1,0 +1,19 @@
+Step 1: The user wants the difference in maximum pressure (in bar) between the ammunition type with the largest external area and the smallest external area.
+Step 2: Load the dataframe.
+Step 3: Identify the row with the largest 'a external (cm 2 )' and the row with the smallest 'a external (cm 2 )'.
+Step 4: Extract their respective 'p max ( bar )' values.
+Step 5: Calculate the difference and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the max and min external area
+max_area_row = df.loc[df['a external (cm 2 )'].idxmax()]
+min_area_row = df.loc[df['a external (cm 2 )'].idxmin()]
+# Get their p max values
+max_pressure = float(max_area_row['p max ( bar )'])
+min_pressure = float(min_area_row['p max ( bar )'])
+# Calculate difference
+pressure_difference = max_pressure - min_pressure
+print(f"Final Answer: {pressure_difference}")
+```

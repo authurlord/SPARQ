@@ -1,0 +1,21 @@
+Step 1: The user wants to find the year when the athlete achieved their personal best time in the 20 km walk event at the African Championships.  
+Step 2: Filter the rows where the 'Competition' is 'African Championships' and the 'Event' is '20 km walk'.  
+Step 3: Among these rows, identify the one with the best (lowest) time, which is indicated by the 'Notes' column.  
+Step 4: The personal best time is marked as '1:22:55 (CR)', where (CR) stands for Championship Record.  
+Step 5: Extract the corresponding 'Year' from that row and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for African Championships and 20 km walk
+african_championships_20km = df[(df['Competition'] == 'African Championships') & (df['Event'] == '20 km walk')]
+
+# Find the row with the best time (lowest time in Notes)
+# The personal best is marked as (CR), so look for that
+best_time_row = african_championships_20km[african_championships_20km['Notes'].str.contains('CR', na=False)]
+
+# Extract the year
+year_best_time = best_time_row['Year'].values[0]
+print(f"Final Answer: {year_best_time}")
+```

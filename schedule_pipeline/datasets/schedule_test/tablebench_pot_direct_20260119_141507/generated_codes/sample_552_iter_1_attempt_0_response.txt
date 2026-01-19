@@ -1,0 +1,19 @@
+The error occurred because the data contains a row labeled "total" which includes values that are not meant to be averaged (they represent totals across all years). We need to exclude the "total" row when calculating the average number of Indians admitted from 2000 to 2010.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter out the row where 'year' is "total".
+3. Extract the 'indians admitted' column for years 2000 to 2010.
+4. Compute the mean of this filtered column.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out the 'total' row and keep only years from 2000 to 2010
+df_filtered = df[df['year'].str.contains(r'^20\d{2}$') & (df['year'] != 'total')]
+# Calculate the average number of Indians admitted
+average_indians = df_filtered['indians admitted'].mean()
+print(f"Final Answer: {average_indians:.0f}")
+```

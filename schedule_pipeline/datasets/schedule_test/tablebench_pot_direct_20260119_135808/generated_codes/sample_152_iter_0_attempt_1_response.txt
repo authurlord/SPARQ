@@ -1,0 +1,12 @@
+Step 1: The user wants to determine which factors ('judges', 'public', 'vote percentage') contribute most to the 'result' (e.g., 'safe' or 'bottom two').
+
+Step 2: Since 'result' is a categorical outcome (either 'safe' or 'bottom two'), we can analyze the correlation between each factor and the result. However, because the result is binary and the data is small, we can manually inspect trends:
+- The 'bottom two' couple (Danniella and Matthew) has the lowest public score (1), lowest total (7), and lowest vote percentage (4.2%).
+- The highest public scores (7, 6, 5, etc.) are associated with 'safe' results.
+- The judges' scores are more evenly distributed and do not clearly separate the bottom two.
+
+Step 3: We can calculate the average of 'judges', 'public', and 'vote percentage' for 'safe' vs. 'bottom two' to compare.
+
+Step 4: Based on this analysis, 'public' and 'vote percentage' show strong alignment with the result, while 'judges' do not.
+
+Final Answer: public, vote percentage

@@ -1,0 +1,16 @@
+Step 1: The question asks for an anomaly in the demographic data and possible explanations. This requires analyzing inconsistencies or impossible values in the table.
+
+Step 2: Look for logical inconsistencies:
+- "Total No. of Houses" is 14, but no breakdown is given.
+- "Population" is 55, with 25 males and 30 females → sum is 55 → valid.
+- "Child (0–6)" is 7, with 3 males and 4 females → sum is 7 → valid.
+- "Schedule Caste" is 1000, with 500 males and 500 females → total 1000 → valid.
+- "Literacy" is given as percentages: 86.36% for male, 73.08% for female → plausible.
+- "Total Workers" is 15, with 12 males and 3 females → valid.
+- "Main Worker" has a value of "-10", "-5", "-5" — this is clearly invalid. Negative numbers do not make sense for worker counts.
+
+Step 3: The anomaly is the negative values in the "Main Worker" row: "-10", "-5", "-5". These are impossible for a count of workers.
+
+Step 4: Possible explanation: The data may have been entered incorrectly. The negative values likely represent a typo or error in recording, possibly due to a misinterpretation of the data entry or calculation.
+
+Final Answer: negative_main_worker_count, data_entry_error

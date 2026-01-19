@@ -1,0 +1,25 @@
+Step 1: The user wants the total number of students at universities located in London.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'location' is 'london' (or contains 'london' as a substring, considering entries like 'london', 'egham', etc.).  
+Step 4: Sum the 'total number of students' column for those rows.  
+Step 5: Print the result.
+
+Note: From the data, only institutions with "London" in their location are:  
+- Birkbeck, University of London  
+- Goldsmiths, University of London  
+- Institute of Education, University of London  
+- Royal Holloway, University of London  
+- SOAS, University of London  
+
+All these are in London.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter universities located in London
+london_universities = df[df['location'].str.contains('london', case=False)]
+# Sum the total number of students
+total_students_london = london_universities['total number of students'].sum()
+print(f"Final Answer: {total_students_london}")
+```

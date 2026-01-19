@@ -1,0 +1,48 @@
+The error occurred because the "Total" column contains values with commas (e.g., "1,162"), which cannot be directly converted to floats. We need to clean the data by removing commas before converting to numeric.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Clean the "Total" column by removing commas and convert to numeric.
+3. Filter rows where City is "Moscow".
+4. Extract the total number of examinees for each year in Moscow.
+5. Compute the percentage increase from one year to the next (only for years with valid data).
+6. Identify the year with the largest percentage increase.
+
+Note: Since the data includes a row with "Data missing", we skip those. Also, the last year (1998) has a missing value in the "Total" column, so we exclude it.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean the 'Total' column by removing commas and convert to numeric
+df['Number of Examinees by Level_4'] = df['Number of Examinees by Level_4'].fillna(0)
+df['Total'] = df['Total'].str.replace(',', '').astype(float)
+
+# Filter only Moscow entries
+moscow_data = df[df['City'] == 'Moscow']
+
+# Extract the 'Total' values for Moscow by year
+moscow_totals = moscow_data[['Year', 'Total']].dropna()
+
+# Convert to numeric and ensure proper order
+moscow_totals['Total'] = pd.to_numeric(moscow_totals['Total'], errors='coerce')
+moscow_totals = moscow_totals.dropna(subset=['Total'])
+
+# Sort by Year
+moscow_totals = moscow_totals.sort_values('Year').reset_index(drop=True)
+
+# Calculate percentage increase from previous year
+moscow_totals['percentage_increase'] = (
+    (moscow_totals['Total'] - moscow_totals['Total'].shift(1)) / 
+    moscow_totals['Total'].shift(1)
+)
+
+# Find the year with the largest percentage increase
+max_increase_row = moscow_totals.loc[moscow_totals['percentage_increase'].idxmax()]
+final_year = max_increase_row['Year']
+
+print(f"Final Answer: {final_year}")
+```

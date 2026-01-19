@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The data provided is historical and limited to 9 years (1850–1858), which is insufficient for reliable forecasting of future trends. No clear pattern or correlation between the number of tropical storms, hurricanes, major hurricanes, and deaths is evident across the dataset. Therefore, forecasting the next 5 years is not feasible with the given information.

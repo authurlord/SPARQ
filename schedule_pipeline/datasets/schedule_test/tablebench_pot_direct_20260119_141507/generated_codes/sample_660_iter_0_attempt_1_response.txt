@@ -1,0 +1,31 @@
+Step 1: The user wants the correlation between "official itv rating (millions)" and "share (%)" across different episode types.  
+Step 2: First, we need to identify episode types — these can be categorized as "auditions", "semi-final", or "results" based on the episode name.  
+Step 3: We will group the data by episode type and compute the correlation coefficient between "official itv rating (millions)" and "share (%)" within each group.  
+Step 4: Since the question asks for the correlation coefficient as evidence, we will calculate and print the correlation for each group.  
+
+Note: The correlation coefficient ranges from -1 to 1. A positive value indicates a direct relationship, while a negative one indicates an inverse relationship.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Define function to classify episode type
+def get_episode_type(episode):
+    if 'auditions' in episode:
+        return 'auditions'
+    elif 'semi-final' in episode:
+        return 'semi-final'
+    elif 'results' in episode:
+        return 'results'
+    else:
+        return 'other'
+
+# Apply the function to create a new column
+df['episode_type'] = df['episode'].apply(get_episode_type)
+
+# Group by episode type and compute correlation between 'official itv rating (millions)' and 'share (%)'
+correlations = df.groupby('episode_type')[['official itv rating (millions)', 'share (%)']].corr()['share (%)']['official itv rating (millions)']
+
+print(f"Final Answer: {correlations.to_dict()}")
+```

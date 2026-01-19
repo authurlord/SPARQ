@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table presents payout values for various poker hands in a video poker game, with columns indicating the hand type and payouts for 1 to 5 credits. The "theoretical return" row shows the expected return percentage for each credit level, with the highest return (100.1%) at 5 credits. The most valuable hand is the royal flush, offering the highest payouts across all credit levels. The data suggests that playing with 5 credits maximizes returns, especially for rare hands like the royal flush and four of a kind.

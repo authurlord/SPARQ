@@ -1,0 +1,17 @@
+Step 1: Identify the winning team and the corresponding US captain from the data.
+Step 2: Count how many times each US captain led the United States to victory.
+Step 3: Find the captain with the highest number of victories.
+Step 4: Return the count of victories for that captain.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where the winning team is 'united states'
+us_wins = df[df['winning team'] == 'united states']
+# Count how many times each US captain led the team to victory
+captain_victories = us_wins['us captain'].value_counts()
+# Get the maximum number of victories by a single US captain
+max_victories = captain_victories.max()
+print(f"Final Answer: {max_victories}")
+```

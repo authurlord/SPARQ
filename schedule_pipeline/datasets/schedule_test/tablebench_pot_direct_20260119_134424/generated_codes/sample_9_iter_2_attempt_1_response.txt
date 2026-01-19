@@ -1,0 +1,13 @@
+Step 1: The user wants the average number of podiums achieved by a team in a single season.
+Step 2: Load the dataframe.
+Step 3: Select the 'podiums' column and calculate its mean.
+Step 4: Print the result as a float with one decimal place.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the average number of podiums per season
+average_podiums = df['podiums'].mean()
+print(f"Final Answer: {average_podiums:.1f}")
+```

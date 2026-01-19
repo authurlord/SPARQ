@@ -1,0 +1,33 @@
+Step 1: The user is asking for airports whose total passenger counts deviate significantly from the norm. "Significant deviation" suggests identifying outliers — values that are far from the mean or median of the total passenger counts.
+
+Step 2: Load the dataframe and extract the 'total passengers' column.
+
+Step 3: Calculate the mean and standard deviation of total passengers to define what "significant deviation" means (e.g., more than 2 standard deviations away from the mean).
+
+Step 4: Identify airports whose total passenger count is more than 2 standard deviations above or below the mean.
+
+Step 5: Return the names of such airports.
+
+Note: Since the data is in a table with a clear ranking, we will use the 'airport' column to identify the names.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract total passengers as numeric
+passenger_counts = df['total passengers'].astype(float)
+
+# Calculate mean and standard deviation
+mean_passengers = passenger_counts.mean()
+std_passengers = passenger_counts.std()
+
+# Define threshold: more than 2 standard deviations from mean
+threshold = 2 * std_passengers
+outliers = df[(df['total passengers'].astype(float) < (mean_passengers - threshold)) | 
+              (df['total passengers'].astype(float) > (mean_passengers + threshold))]
+
+# Extract airport names of outliers
+outlier_airports = outliers['airport'].tolist()
+
+print(f"Final Answer: {', '.join(outlier_airports)}")
+```

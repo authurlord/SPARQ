@@ -1,0 +1,12 @@
+Step 1: The user is asking for the player who has an average of 11.4 yards per reception.  
+Step 2: Look at the "Avg." column in the table and find the row where the value is "11.4".  
+Step 3: The corresponding "Player" in that row is the answer.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the player with average of 11.4 yards per reception
+player = df[df['Avg.'] == '11.4']['Player'].values[0]
+print(f"Final Answer: {player}")
+```

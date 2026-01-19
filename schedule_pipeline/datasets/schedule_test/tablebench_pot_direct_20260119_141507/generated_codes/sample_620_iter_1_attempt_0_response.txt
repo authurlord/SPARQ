@@ -1,0 +1,26 @@
+The error occurred because the years in the dataset are strings (e.g., '2002'), and we tried to compare them with integers using `>=`. To fix this, we need to ensure that we are filtering only the rows where the year is between 2002 and 2005 (inclusive), and convert the year column to numeric for proper comparison.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Convert the 'year' column to integer type to enable numerical comparison.
+3. Filter rows where the year is between 2002 and 2005 (inclusive).
+4. Sum the 'mintage' values for those rows.
+5. Divide the total by 5 to get the number of coins each person receives.
+6. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'year' to integer for proper comparison
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+
+# Filter rows from 2002 to 2005 inclusive
+filtered_df = df[(df['year'] >= 2002) & (df['year'] <= 2005)]
+
+# Sum the mintage and divide by 5
+total_mintage = filtered_df['mintage'].sum()
+coins_per_person = total_mintage / 5
+
+print(f"Final Answer: {coins_per_person}")
+```

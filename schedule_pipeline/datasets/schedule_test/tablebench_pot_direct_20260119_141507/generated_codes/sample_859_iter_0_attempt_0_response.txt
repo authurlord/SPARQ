@@ -1,0 +1,30 @@
+Step 1: Identify the party with the highest percentage of votes from the 'Party' and '%' columns.  
+Step 2: Find the percentage of the Forward Bloc (Ruikar) party, which is listed as 1.45%.  
+Step 3: Calculate the difference between the highest percentage and that of Forward Bloc (Ruikar).  
+Step 4: Print the party name and the difference.
+
+Note: The "Total:" row has a percentage of "-", so we exclude it. All other rows are valid.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the total row (last row with 'Total:')
+df = df[df['Party'] != 'Total:']
+
+# Convert the '%' column to float for numerical comparison
+df['%'] = df['%'].str.rstrip('%').astype(float)
+
+# Find the party with the highest percentage
+max_percentage_row = df.loc[df['%'].idxmax()]
+highest_percentage_party = max_percentage_row['Party']
+highest_percentage = max_percentage_row['%']
+
+# Forward Bloc (Ruikar)'s percentage
+forward_bloc_ruikar_percentage = 1.45
+
+# Calculate the difference
+difference = highest_percentage - forward_bloc_ruikar_percentage
+
+print(f"Final Answer: {highest_percentage_party}, {difference:.2f}")
+```

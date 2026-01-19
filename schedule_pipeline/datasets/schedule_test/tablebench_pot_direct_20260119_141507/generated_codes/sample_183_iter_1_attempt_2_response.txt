@@ -1,0 +1,41 @@
+We are tasked with determining which factors (passengers flown, employees, or basic eps) significantly impact the 'net profit / loss (sek)' values. The issue in the previous attempt was that the values like '- 7.79' cannot be directly converted to float — they contain a space and a minus sign.
+
+Step 1: Clean the 'net profit / loss (sek)' and other numerical columns to remove the leading space and convert to float.
+Step 2: Check for correlation between each factor and net profit/loss using Pearson correlation.
+Step 3: Evaluate which variable has the highest absolute correlation (i.e., strongest linear relationship). If none exceed a threshold (e.g., |r| > 0.3), then conclude "no clear impact".
+
+Note: We will only consider numeric variables and clean them properly.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, handling strings like '- 7.79'
+df['passengers flown'] = pd.to_numeric(df['passengers flown'].str.replace(',', ''), errors='coerce')
+df['employees (average / year)'] = pd.to_numeric(df['employees (average / year)'], errors='coerce')
+df['net profit / loss (sek)'] = pd.to_numeric(df['net profit / loss (sek)'].str.replace('-', '', regex=False), errors='coerce')
+df['basic eps (sek)'] = pd.to_numeric(df['basic eps (sek)'].str.replace('-', '', regex=False), errors='coerce')
+
+# Drop rows with NaN after conversion
+df = df.dropna()
+
+# Compute correlation with net profit / loss
+correlations = {
+    'passengers flown': df['passengers flown'].corr(df['net profit / loss (sek)']),
+    'employees (average / year)': df['employees (average / year)'].corr(df['net profit / loss (sek)']),
+    'basic eps (sek)': df['basic eps (sek)'].corr(df['net profit / loss (sek)'])
+}
+
+# Find the factor with the highest absolute correlation
+max_corr = max(abs(correlations[k]) for k in correlations)
+if max_corr < 0.3:
+    final_answer = 'no clear impact'
+else:
+    # Return the factor with the highest absolute correlation
+    final_answer = max(correlations, key=lambda x: abs(correlations[x]))
+
+print(f"Final Answer: {final_answer}")
+```

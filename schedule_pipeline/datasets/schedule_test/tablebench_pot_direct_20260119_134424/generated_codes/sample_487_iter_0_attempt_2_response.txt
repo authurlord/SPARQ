@@ -1,0 +1,34 @@
+Step 1: The user wants to identify data points that deviate significantly from the norm. This requires detecting outliers in the dataset.
+Step 2: Load the dataframe.
+Step 3: For each row (term abroad), calculate the mean and standard deviation of the values across the years.
+Step 4: Use the Z-score method to identify values that are more than 2 standard deviations away from the mean (common threshold for outliers).
+Step 5: Collect and print the outlier data points (term abroad, year, value).
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert all columns except 'term abroad' to numeric
+numeric_columns = df.columns[1:]
+df[numeric_columns] = df[numeric_columns].astype(float)
+
+# Initialize list to store outliers
+outliers = []
+
+# Iterate over each row (term abroad)
+for _, row in df.iterrows():
+    term_abroad = row['term abroad']
+    values = row[numeric_columns]
+    mean_val = values.mean()
+    std_val = values.std()
+    
+    # Identify values with Z-score > 2
+    z_scores = (values - mean_val) / std_val
+    for col, z_score in z_scores.items():
+        if abs(z_score) > 2:
+            outliers.append((term_abroad, col, values[col]))
+
+# Print the outliers
+print(f"Final Answer: {outliers}")
+```

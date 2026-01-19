@@ -1,0 +1,15 @@
+Step 1: Identify the years where the legislator sponsored more than 50 bills. This is found in the "all bills sponsored" column.
+Step 2: Filter the rows where "all bills sponsored" > 50.
+Step 3: For the filtered rows, extract the value in the "bills originally cosponsored" column.
+Step 4: Sum these values to get the total number of bills originally cosponsored.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'all bills sponsored' > 50
+filtered_df = df[df['all bills sponsored'] > 50]
+# Sum the 'bills originally cosponsored' for those rows
+total_cosponsored = filtered_df['bills originally cosponsored'].sum()
+print(f"Final Answer: {total_cosponsored}")
+```

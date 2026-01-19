@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The higher the annual change in total passengers, the greater the capacity in use tends to be, indicating increased utilization of airport capacity.

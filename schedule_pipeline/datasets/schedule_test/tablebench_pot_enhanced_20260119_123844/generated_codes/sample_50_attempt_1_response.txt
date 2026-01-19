@@ -1,0 +1,12 @@
+Step 1: The user wants to know the total points scored by Wattstown RFC.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'club' is 'wattstown rfc'.
+Step 4: Extract the 'points' value from that row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for Wattstown RFC
+wattstown_points = df[df['club'] == 'wattstown rfc']['points'].iloc[0]
+print(f"Final Answer: {wattstown_points}")
+```

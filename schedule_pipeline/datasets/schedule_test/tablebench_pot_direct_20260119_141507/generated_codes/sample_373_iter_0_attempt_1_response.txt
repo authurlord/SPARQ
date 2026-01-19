@@ -1,0 +1,19 @@
+Step 1: Identify the seasons in which Liverpool played in the Premier League. From the table, the "League" column indicates the division, and we are interested in rows where "League" is "Premier League".  
+Step 2: Filter the rows where "League" equals "Premier League" and exclude the total rows (like "Liverpool Total" or "Career Total").  
+Step 3: Count the number of such rows to get the number of seasons.  
+
+Note: The row "Liverpool, 1990–91, First Division" is not in Premier League, so we skip it. The rest of the Liverpool rows from 1991–92 onwards are in Premier League until 1998–99.  
+
+Python code to count the relevant seasons:
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Club is 'Liverpool' and League is 'Premier League'
+premier_league_seasons = df[(df['Club'] == 'Liverpool') & (df['League'] == 'Premier League')]
+# Exclude the total row (last row for Liverpool)
+premier_league_seasons = premier_league_seasons[~(premier_league_seasons['Season'] == 'Liverpool Total')]
+# Count the number of such rows
+num_seasons = len(premier_league_seasons)
+print(f"Final Answer: {num_seasons}")
+```

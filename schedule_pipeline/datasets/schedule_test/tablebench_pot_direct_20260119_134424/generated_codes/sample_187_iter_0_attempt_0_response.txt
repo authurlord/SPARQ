@@ -1,0 +1,28 @@
+Step 1: The user wants to determine which factors (wins, draws, losses) significantly contribute to the points total. In football/soccer leagues, points are typically calculated as:  
+- 3 points for a win  
+- 1 point for a draw  
+- 0 points for a loss  
+
+So, we can validate this by checking if the 'points' column matches the formula: `3 * wins + 1 * draws`.  
+Step 2: Load the dataframe.  
+Step 3: Calculate expected points using the formula.  
+Step 4: Compare the calculated points with the actual 'points' column.  
+Step 5: If they match exactly, then wins and draws are the key contributors; otherwise, state no clear impact.  
+Step 6: Since the data appears consistent with standard scoring, wins and draws should be significant.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Calculate expected points from wins and draws
+df['expected_points'] = df['wins'].astype(int) * 3 + df['draws'].astype(int) * 1
+
+# Check if expected points match actual points
+matches = (df['expected_points'] == df['points']).all()
+
+if matches:
+    print("Final Answer: wins, draws")
+else:
+    print("Final Answer: no clear impact")
+```

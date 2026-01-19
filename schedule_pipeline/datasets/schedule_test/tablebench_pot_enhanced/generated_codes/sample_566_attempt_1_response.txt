@@ -1,0 +1,15 @@
+Step 1: Identify the earliest two years in the table. From the 'Year' column, the earliest years are 1893 and 1894.
+Step 2: Filter the data to include only rows where the year is 1893 or 1894.
+Step 3: Sum the 'Quantity' values for these filtered rows.
+Step 4: Print the total quantity.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for the earliest two years: 1893 and 1894
+earliest_years = df[df['Year'].isin(['1893', '1894'])]
+# Calculate total quantity for these years
+total_quantity = earliest_years['Quantity'].sum()
+print(f"Final Answer: {total_quantity}")
+```

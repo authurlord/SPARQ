@@ -1,0 +1,42 @@
+[Answer Format]
+Final Answer: None
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert the 'Year' column to integer and ensure proper data types
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
+
+# Clean the data: handle missing values (None or NaN) in International (non-CIS) and CIS
+df['International (non-CIS)'] = pd.to_numeric(df['International (non-CIS)'], errors='coerce')
+df['CIS'] = pd.to_numeric(df['CIS'], errors='coerce')
+
+# Select only relevant columns for plotting
+data = df[['Year', 'Domestic', 'International (non-CIS)', 'CIS']].dropna()
+
+# Create a stacked bar chart
+plt.figure(figsize=(12, 7))
+bar_width = 0.25
+index = range(len(data))
+
+# Plot bars
+plt.bar([i - bar_width for i in index], data['Domestic'], width=bar_width, label='Domestic', color='skyblue')
+plt.bar([i for i in index], data['International (non-CIS)'], width=bar_width, label='International (non-CIS)', color='lightgreen')
+plt.bar([i + bar_width for i in index], data['CIS'], width=bar_width, label='CIS', color='salmon')
+
+# Customize plot
+plt.xlabel('Year')
+plt.ylabel('Passenger Count')
+plt.title('Trends in Domestic, International (non-CIS), and CIS Passenger Counts (2000–2013)')
+plt.xticks(index, data['Year'])
+plt.legend()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Show plot
+plt.tight_layout()
+plt.show()
+```

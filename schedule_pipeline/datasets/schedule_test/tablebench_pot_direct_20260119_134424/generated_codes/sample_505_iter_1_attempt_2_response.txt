@@ -1,0 +1,28 @@
+Step 1: The user wants to calculate the Hurricane Severity Index (HSI) for each year, which is defined as (number of hurricanes + number of major hurricanes) / number of tropical storms. This requires numerical operations, so we must ensure that all relevant columns are converted to integers.
+
+Step 2: Load the dataframe.
+
+Step 3: Convert the 'number of hurricanes' and 'number of major hurricanes' columns to integers, and also convert 'number of tropical storms' to integer.
+
+Step 4: Calculate HSI for each year.
+
+Step 5: Find the year with the maximum HSI.
+
+Step 6: Print the result in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert necessary columns to integers
+df['number of hurricanes'] = pd.to_numeric(df['number of hurricanes'])
+df['number of major hurricanes'] = pd.to_numeric(df['number of major hurricanes'])
+df['number of tropical storms'] = pd.to_numeric(df['number of tropical storms'])
+
+# Calculate HSI: (hurricanes + major hurricanes) / tropical storms
+df['HSI'] = (df['number of hurricanes'] + df['number of major hurricanes']) / df['number of tropical storms']
+
+# Find the year with the highest HSI
+max_hsi_year = df.loc[df['HSI'].idxmax(), 'year']
+print(f"Final Answer: {max_hsi_year}")
+```

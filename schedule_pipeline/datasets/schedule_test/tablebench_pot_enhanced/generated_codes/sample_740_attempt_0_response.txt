@@ -1,0 +1,42 @@
+Step 1: The user is asking for projected values of CBR (Crude Birth Rate), CDR (Crude Death Rate), and IMR (Infant Mortality Rate) for the period 2010–2015 based on trends from 1950 to 2010.
+
+Step 2: Analyze the trends in CBR, CDR, and IMR over time:
+- CBR has been steadily decreasing from 47.9 (1950–1955) to 21.5 (2005–2010).
+- CDR has also been declining from 27.1 to 7.2.
+- IMR has significantly decreased from 184.8 to 44.4.
+
+Step 3: Since the decline appears linear or near-linear in recent decades, we can estimate the next values by observing the rate of change in the last few periods.
+
+Step 4: Calculate the average annual decrease in each metric from 2000–2005 to 2005–2010:
+- CBR: (25.2 → 21.5) = -3.7 over 5 years → -0.74 per year
+- CDR: (7.9 → 7.2) = -0.7 over 5 years → -0.14 per year
+- IMR: (52.8 → 44.4) = -8.4 over 5 years → -1.68 per year
+
+Step 5: Project forward 5 years (2010–2015):
+- CBR: 21.5 - (0.74 × 5) = 21.5 - 3.7 = 17.8
+- CDR: 7.2 - (0.14 × 5) = 7.2 - 0.7 = 6.5
+- IMR: 44.4 - (1.68 × 5) = 44.4 - 8.4 = 36.0
+
+Step 6: Present the projected values.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the last two periods to calculate average annual decline
+last_period = df.iloc[-1]  # 2005-2010
+second_last = df.iloc[-2]  # 2000-2005
+
+# Calculate average annual decline
+cbra = (float(second_last['CBR1']) - float(last_period['CBR1'])) / 5
+cdra = (float(second_last['CDR1']) - float(last_period['CDR1'])) / 5
+imra = (float(second_last['IMR1']) - float(last_period['IMR1'])) / 5
+
+# Project for 2010-2015 (5 years ahead)
+projected_cbr = float(last_period['CBR1']) - (cbra * 5)
+projected_cdr = float(last_period['CDR1']) - (cdra * 5)
+projected_imr = float(last_period['IMR1']) - (imra * 5)
+
+print(f"Final Answer: {projected_cbr:.1f}, {projected_cdr:.1f}, {projected_imr:.1f}")
+```

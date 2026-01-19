@@ -1,0 +1,65 @@
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Remove the last row (Liiga totals) since it's aggregate
+df = df.iloc[:-1]
+
+# Extract GP from Regular season and Playoffs
+# The GP column is in the 'Regular season' section (columns starting with 'GP')
+# We can find it by matching the header pattern
+# The headers are: ['-', '-_1', '-_2', 'Regular season', 'Regular season_1', ...]
+# We need to extract GP from 'Regular season' and 'Playoffs'
+
+# Create a mapping of column names to GP values
+regular_gp_cols = [col for col in df.columns if 'Regular season' in col]
+playoff_gp_cols = [col for col in df.columns if 'Playoffs' in col]
+
+# The first GP value under 'Regular season' is at index 3, and we can extract it by position
+# But the data is structured such that GP is in the 4th column (index 3) of the 'Regular season' block
+# So we extract GP from the first column after 'Regular season'
+
+# Since the actual GP is in the 4th column (index 3), and the data is structured per row,
+# we can extract GP from 'Regular season' and 'Playoffs' by looking at the correct positions
+
+# Let's extract GP from the 'Regular season' and 'Playoffs' blocks
+# The GP column is in the 4th position of the row (index 3), so we extract from there
+# We'll use the fact that GP is in the 4th column of the 'Regular season' section
+
+# Extract GP from Regular season (column index 3)
+regular_gp_col = df.columns[3]  # This is 'GP'
+playoff_gp_col = df.columns[9]  # This is 'GP' in Playoffs section
+
+# Extract GP values
+df['regular_gp'] = df[regular_gp_col].astype(float)
+df['playoff_gp'] = df[playoff_gp_col].astype(float)
+
+# Get the overall Liiga totals from the last row
+total_regular_gp = 415  # from the last row, 'Regular season' GP
+total_playoff_gp = 60   # from the last row, 'Playoffs' GP
+
+# Calculate the average GP per season
+avg_regular_gp = total_regular_gp / len(df)
+avg_playoff_gp = total_playoff_gp / len(df)
+
+# Identify deviations: any season where GP is more than 10% above or below average
+deviations = []
+
+for idx, row in df.iterrows():
+    reg_gp = row['regular_gp']
+    playoff_gp = row['playoff_gp']
+    
+    # Check deviation in regular season
+    if abs(reg_gp - avg_regular_gp) > 0.1 * avg_regular_gp:
+        deviations.append(f"Regular season: {row['Season']} (GP: {reg_gp}, avg: {avg_regular_gp})")
+    
+    # Check deviation in playoffs
+    if abs(playoff_gp - avg_playoff_gp) > 0.1 * avg_playoff_gp:
+        deviations.append(f"Playoffs: {row['Season']} (GP: {playoff_gp}, avg: {avg_playoff_gp})")
+
+# If no deviations found, return a message
+if not deviations:
+    print("Final Answer: No significant deviations found")
+else:
+    print("Final Answer:", ", ".join(deviations))

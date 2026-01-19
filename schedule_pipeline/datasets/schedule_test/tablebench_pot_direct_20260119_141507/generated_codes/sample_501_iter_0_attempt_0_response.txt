@@ -1,0 +1,32 @@
+Step 1: Understand the question. We are to compute the Ionization Energy Ratio from the 21st to the 22nd level for each element that has both 21st and 22nd ionization energy values. The ratio is defined as (22nd level ionization energy) / (21st level ionization energy).  
+Step 2: Identify rows where both 21st and 22nd columns have non-null values.  
+Step 3: Compute the ratio for each such element.  
+Step 4: Find the element with the highest ratio.  
+
+Note: The data contains only numeric values in the 21st to 30th columns. We will extract those values, skip missing (None) entries, and compute ratios.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Select rows where both 21st and 22nd ionization energies are not null
+valid_rows = df.dropna(subset=['21st', '22nd'])
+
+# Convert 21st and 22nd to numeric (handle any potential string issues)
+valid_rows['21st'] = pd.to_numeric(valid_rows['21st'], errors='coerce')
+valid_rows['22nd'] = pd.to_numeric(valid_rows['22nd'], errors='coerce')
+
+# Filter out rows where either value is still NaN
+valid_rows = valid_rows.dropna(subset=['21st', '22nd'])
+
+# Compute the ratio: 22nd / 21st
+valid_rows['ratio'] = valid_rows['22nd'] / valid_rows['21st']
+
+# Find the element with the highest ratio
+max_ratio_row = valid_rows.loc[valid_rows['ratio'].idxmax()]
+element_name = max_ratio_row['name']
+
+print(f"Final Answer: {element_name}")
+```

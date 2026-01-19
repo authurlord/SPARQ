@@ -1,0 +1,14 @@
+Step 1: The user wants to calculate the correlation coefficient between 'total renewable generation' and 'total electricity demand' across Spanish autonomous communities.  
+Step 2: Load the dataframe.  
+Step 3: Extract the two columns: 'total renewable generation' and 'total electricity demand'.  
+Step 4: Compute the Pearson correlation coefficient using pandas.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'total renewable generation' and 'total electricity demand'
+correlation = df['total renewable generation'].corr(df['total electricity demand'])
+print(f"Final Answer: {correlation:.3f}")
+```

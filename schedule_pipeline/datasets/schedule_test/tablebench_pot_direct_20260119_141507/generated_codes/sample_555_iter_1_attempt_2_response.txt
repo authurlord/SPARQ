@@ -1,0 +1,25 @@
+Step 1: The user wants to find the year when "Transparency International" published the highest-ranked index (i.e., the smallest rank value).  
+Step 2: Filter the rows where the 'organization' is "Transparency International".  
+Step 3: Among those rows, find the one with the minimum 'rank' value.  
+Step 4: Extract and return the corresponding 'year'.  
+
+Note: The error occurred because no row matched "Transparency International" in the original data. Let's verify the data:  
+- The first two rows have "Transparency International" — "bribe payers index" and "corruption perceptions index".  
+- We must ensure we are filtering correctly and not missing any entries.  
+
+Corrected approach: Filter by organization, then find the year of the lowest rank.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where organization is 'Transparency International'
+transparency_rows = df[df['organization'] == 'transparency international']
+# If any rows exist, find the one with the minimum rank (highest rank = lowest number)
+if not transparency_rows.empty:
+    min_rank_row = transparency_rows.loc[transparency_rows['rank'].idxmin()]
+    year = min_rank_row['year']
+    print(f"Final Answer: {year}")
+else:
+    print("Final Answer: None")
+```

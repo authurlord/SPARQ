@@ -1,0 +1,15 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter out total and career total rows
+clubs_data = df[df['Club'] != 'Total']
+clubs_data = clubs_data[clubs_data['Club'] != 'Career Total']
+
+# Calculate goal-to-game ratio
+clubs_data['goal_to_game_ratio'] = clubs_data['Total_1'] / clubs_data['Total']
+
+# Find the club with the highest ratio
+highest_ratio_club = clubs_data.loc[clubs_data['goal_to_game_ratio'].idxmax(), 'Club']
+
+print(f"Final Answer: {highest_ratio_club}")

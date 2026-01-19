@@ -1,0 +1,15 @@
+Step 1: The user wants to identify a district with an unusually high or low data point that may indicate an error or unusual pattern. We should examine the data for outliers, particularly in population, area, or population density.
+
+Step 2: Load the dataframe.
+
+Step 3: Look for anomalies:
+- Population density is calculated as population / area (converted to km²).
+- Check for districts with extremely high or low population densities.
+- Note: San Lorenzo has a population of 100,000 and an area of only 10.0 hectares (0.1 km²), which results in a population density of 1,000,000 per km² — extremely high compared to others.
+- Also, Sta. Teresa has a population of 100 in 1000.0 hectares (10 km²), resulting in a density of 0.1 per km² — extremely low.
+
+However, San Lorenzo's density is so high it's likely due to a data entry error (e.g., area might be in hectares but incorrectly entered as 10 instead of 1000). This is a strong candidate for an error.
+
+Step 4: Identify San Lorenzo as the district with an unusually high population density.
+
+Final Answer: san lorenzo

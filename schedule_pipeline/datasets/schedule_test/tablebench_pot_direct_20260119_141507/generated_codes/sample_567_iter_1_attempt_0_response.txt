@@ -1,0 +1,24 @@
+The error occurred because the "issue price" column contains string values (like '388.88') instead of numeric values, which prevents direct arithmetic operations.
+
+Step 1: Convert the "issue price" column to numeric type to enable mathematical operations.
+Step 2: Extract the issue prices for the years 2000 and 2010.
+Step 3: Calculate the percentage increase using the formula:  
+   ((new_value - old_value) / old_value) * 100
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert issue price to numeric, handling any parsing errors
+df['issue price'] = pd.to_numeric(df['issue price'], errors='coerce')
+
+# Get issue prices for 2000 and 2010
+price_2000 = df.loc[df['year'] == '2000', 'issue price'].values[0]
+price_2010 = df.loc[df['year'] == '2010', 'issue price'].values[0]
+
+# Calculate percentage increase
+percentage_increase = ((price_2010 - price_2000) / price_2000) * 100
+
+print(f"Final Answer: {percentage_increase:.2f}")
+```

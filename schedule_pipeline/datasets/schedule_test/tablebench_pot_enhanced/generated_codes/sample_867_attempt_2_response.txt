@@ -1,0 +1,18 @@
+Step 1: The user wants to compare the number of days served by Calvin L. Rampton and Mike Leavitt to determine who served longer.
+Step 2: Load the dataframe.
+Step 3: Filter the rows for Calvin L. Rampton and Mike Leavitt.
+Step 4: Compare their 'Days' values and print the governor with more days.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for the two governors
+rampton_days = df[df['Governor'] == 'Calvin L. Rampton']['Days'].iloc[0]
+leavitt_days = df[df['Governor'] == 'Mike Leavitt']['Days'].iloc[0]
+
+# Compare and determine who served longer
+if rampton_days > leavitt_days:
+    print("Final Answer: Calvin L. Rampton")
+else:
+    print("Final Answer: Mike Leavitt")
+```

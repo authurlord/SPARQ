@@ -1,0 +1,47 @@
+The error occurred because the 'bello' column contains string values that appear to be malformed or concatenated with other data (e.g., "5141362369374033847066684739524058391573629lyrette14533129487917188695911628"), which cannot be converted directly to numeric. This suggests that the data may have been incorrectly structured — likely, the "bello" column should contain only numeric values, and the strings are actually combinations of different columns (like ward names and other values).
+
+Looking at the table structure:
+- The first row has a header: ['ward', 'bello', 'ben - tahir', ..., 'wright']
+- Then, each row represents a ward, with values for each column.
+- The last few rows seem to represent a different set of data — possibly a misalignment where the first set of data (ward names) is followed by another set of values that mix ward names and numbers.
+
+Upon closer inspection:
+- The first 23 rows (from "orlãans" to "rideau - goulbourn") have consistent structure: ward name + numerical values.
+- The next 23 rows start with "ward", then list names like "lyrette", "maguire", etc., which are not ward names but appear to be individual column headers.
+- This implies that the second block is not part of the same dataset — it seems to be a duplicate or misaligned header row.
+
+Therefore, we must:
+1. Identify valid rows where the first column is a ward name (e.g., "orlãans", "innes", etc.).
+2. Extract only the 'bello' column from those rows.
+3. Convert the values to numeric and compute mean and standard deviation.
+
+Step-by-step approach:
+- Filter rows where the first column (index 0) is a ward name (i.e., not "ward", "lyrette", etc.).
+- Select the 'bello' column from these valid rows.
+- Convert to numeric (handling any non-numeric strings).
+- Compute mean and standard deviation.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter rows where the first column is a ward name (not "ward", "lyrette", etc.)
+# We exclude any row where the first value is "ward" or a person's name
+valid_rows = df[df['ward'] != 'ward']  # Exclude the header-like row
+
+# Extract the 'bello' column
+bello_values = valid_rows['bello']
+
+# Convert to numeric, coercing errors to NaN, then drop invalid entries
+bello_numeric = pd.to_numeric(bello_values, errors='coerce')
+bello_numeric = bello_numeric.dropna()
+
+# Calculate mean and standard deviation
+mean_bello = bello_numeric.mean()
+std_bello = bello_numeric.std()
+
+print(f"Final Answer: {mean_bello:.1f}, {std_bello:.1f}")
+```

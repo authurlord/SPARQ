@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of years where more than 25,000 Indians were admitted.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'indians admitted' > 25000.  
+Step 4: Count the number of such rows and print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count years where 'indians admitted' is greater than 25000
+count_years = df[df['indians admitted'] > 25000].shape[0]
+print(f"Final Answer: {count_years}")
+```

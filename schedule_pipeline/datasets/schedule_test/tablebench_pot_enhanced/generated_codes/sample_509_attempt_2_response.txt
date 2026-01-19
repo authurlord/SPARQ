@@ -1,0 +1,27 @@
+Step 1: The user wants to find the series with the highest win rate, where win rate is calculated as (wins / races) * 100.
+Step 2: Load the dataframe.
+Step 3: Filter out rows where races or wins are 'nc' (not competed) or 'n/a' (not applicable).
+Step 4: Convert 'races' and 'wins' columns to numeric, handling any non-numeric values.
+Step 5: Calculate the win rate for each series.
+Step 6: Identify the series with the highest win rate.
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'races' and 'wins' to numeric, coercing errors to NaN
+df['races'] = pd.to_numeric(df['races'], errors='coerce')
+df['wins'] = pd.to_numeric(df['wins'], errors='coerce')
+
+# Drop rows where races or wins are NaN (due to 'nc', 'n/a', etc.)
+df_clean = df.dropna(subset=['races', 'wins'])
+
+# Calculate win rate for each series
+df_clean['win_rate'] = (df_clean['wins'] / df_clean['races']) * 100
+
+# Find the series with the highest win rate
+max_win_rate_series = df_clean.loc[df_clean['win_rate'].idxmax()]['series']
+
+print(f"Final Answer: {max_win_rate_series}")
+```

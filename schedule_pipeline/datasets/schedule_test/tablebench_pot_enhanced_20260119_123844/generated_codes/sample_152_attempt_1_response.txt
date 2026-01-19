@@ -1,0 +1,9 @@
+Step 1: The user wants to analyze which factors ('judges', 'public', 'vote percentage') contribute most to the 'result' of each couple.
+Step 2: Load the dataframe.
+Step 3: Examine the relationship between the 'result' and the other columns. Since 'result' is categorical (e.g., 'safe', 'bottom two'), we can look at how 'judges', 'public', and 'vote percentage' vary across these categories.
+Step 4: Check if there's a pattern: for example, does the 'bottom two' have consistently low scores or vote percentages?
+Step 5: Compare values: the couple in 'bottom two' has the lowest 'judges' (6), lowest 'public' (1), and lowest 'vote percentage' (4.2%), while others are higher.
+Step 6: Conclude that all three factors (judges, public, vote percentage) contribute to the result, with 'public' and 'vote percentage' showing the clearest drop for the bottom couple.
+Step 7: Since 'vote percentage' is derived from 'public' and 'judges' (via total), it's a combined metric, but the 'public' score is the most directly impactful as it drops significantly for the bottom couple.
+
+Final Answer: public, vote percentage

@@ -1,0 +1,16 @@
+Step 1: The user wants to count how many cost categories have a percentage increase greater than 5% from 2017 to 2018.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'Percent Increase (Decrease) (In cents, except percentage changes)' column.  
+Step 4: Filter rows where the percentage increase is greater than 5%.  
+Step 5: Count such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where percentage increase is greater than 5%
+increased_categories = df[df['Percent Increase (Decrease) (In cents, except percentage changes)'] > 5]
+# Count the number of such categories
+count = len(increased_categories)
+print(f"Final Answer: {count}")
+```

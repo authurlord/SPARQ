@@ -1,0 +1,21 @@
+Step 1: The user is asking for a nation that has exactly 5 gold medals and 2 silver medals.  
+Step 2: Look through the table for a row where 'Gold' = 5 and 'Silver' = 2.  
+Step 3: From the data, check each row.  
+Observing the table:  
+- Bulgaria has 5 gold and 2 silver.  
+- No other nation has both 5 gold and 2 silver.  
+
+Thus, Bulgaria is the only nation matching the criteria.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Gold is 5 and Silver is 2
+result = df[(df['Gold'] == 5) & (df['Silver'] == 2)]
+if not result.empty:
+    nation = result.iloc[0]['Nation']
+    print(f"Final Answer: {nation}")
+else:
+    print("Final Answer: None")
+```

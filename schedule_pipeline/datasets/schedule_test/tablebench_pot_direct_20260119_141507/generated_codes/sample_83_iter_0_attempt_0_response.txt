@@ -1,0 +1,14 @@
+Step 1: The user is asking for the nation that has a total of 6 medals.  
+Step 2: Look at the 'total' column to find the row where the total is 6.  
+Step 3: Match that row with the corresponding 'nation' value.  
+
+From the table, we can see that "Russia" has a total of 6 medals.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the nation where total medals is 6
+nation_with_6_medals = df[df['total'] == 6]['nation'].values[0]
+print(f"Final Answer: {nation_with_6_medals}")
+```

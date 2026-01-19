@@ -1,0 +1,26 @@
+Step 1: The user wants two values:
+- The median total number of medals for the top 5 nations (rank 1 to 5).
+- The median total number of medals for all countries.
+
+Step 2: Load the dataframe and extract the 'total' column.
+
+Step 3: For the top 5 rankings, filter rows where 'rank' is between 1 and 5 (inclusive), then compute the median of the 'total' column.
+
+Step 4: For all countries, compute the median of the 'total' column across all rows.
+
+Step 5: Print both medians.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter top 5 nations (rank 1 to 5)
+top_5 = df[df['rank'].between(1, 5)]
+median_top_5 = top_5['total'].median()
+
+# Median for all nations
+median_all = df['total'].median()
+
+print(f"Final Answer: {median_top_5}, {median_all}")
+```

@@ -1,0 +1,7 @@
+Step 1: The question asks to identify seasons where a player's performance significantly deviates from their overall career statistics. However, the table does not contain individual player data or clear metrics for comparing performance per season to overall career averages. Instead, it contains team-level data with regular season and playoff statistics.
+
+Step 2: Since there is no individual player data, we cannot compute personal performance or deviations from career averages. The only aggregate row at the end ("Liiga totals") represents team-level totals, not individual player performance.
+
+Step 3: Therefore, based on the provided data, it is not possible to identify any season where a player's performance significantly deviates from their overall career statistics.
+
+Final Answer: none

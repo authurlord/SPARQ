@@ -1,0 +1,14 @@
+Step 1: The user wants to find the correlation between the 'poles' and 'wins' columns across different series and seasons.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'poles' and 'wins' columns.  
+Step 4: Compute the Pearson correlation coefficient between these two columns.  
+Step 5: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'poles' and 'wins'
+correlation = df['poles'].corr(df['wins'])
+print(f"Final Answer: {correlation:.2f}")
+```

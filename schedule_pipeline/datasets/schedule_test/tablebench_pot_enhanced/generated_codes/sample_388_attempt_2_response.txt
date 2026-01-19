@@ -1,0 +1,12 @@
+Step 1: The user wants to count how many entries in the 'Source' column contain the book "Psalms".
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'Source' column contains the string "Psalms".
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count rows where 'Source' contains 'Psalms'
+count_psalms = df[df['Source'].str.contains('Psalms', na=False)].shape[0]
+print(f"Final Answer: {count_psalms}")
+```

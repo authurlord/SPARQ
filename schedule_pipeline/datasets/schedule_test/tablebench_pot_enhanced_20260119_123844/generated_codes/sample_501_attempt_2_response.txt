@@ -1,0 +1,27 @@
+Step 1: The user wants to find the element with the highest ionization energy ratio from the 21st to the 22nd level.
+Step 2: Load the dataframe.
+Step 3: Filter rows where both '21st' and '22nd' columns have non-null values.
+Step 4: Calculate the ratio of '22nd' / '21st' for each element.
+Step 5: Find the element with the maximum ratio.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Drop rows where '21st' or '22nd' is missing
+df_filtered = df.dropna(subset=['21st', '22nd'])
+
+# Convert '21st' and '22nd' to float for calculation
+df_filtered['21st'] = pd.to_numeric(df_filtered['21st'])
+df_filtered['22nd'] = pd.to_numeric(df_filtered['22nd'])
+
+# Calculate the ratio of 22nd to 21st ionization energy
+df_filtered['ratio'] = df_filtered['22nd'] / df_filtered['21st']
+
+# Find the element with the highest ratio
+max_ratio_element = df_filtered.loc[df_filtered['ratio'].idxmax()]['name']
+
+print(f"Final Answer: {max_ratio_element}")
+```

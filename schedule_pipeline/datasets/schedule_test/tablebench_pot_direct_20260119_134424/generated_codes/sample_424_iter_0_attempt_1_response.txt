@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains shipping tonnage data for the United States from 2000 to 2006, with columns representing year, US rank in global shipping, total shipping tonnage (s ton), domestic shipping tonnage, foreign total shipping tonnage, foreign imports, and foreign exports. The data shows that total shipping tonnage fluctuated over time, peaking in 2005, with domestic tonnage consistently forming the largest portion of total tonnage. Foreign imports and exports show variability, with imports generally exceeding exports.

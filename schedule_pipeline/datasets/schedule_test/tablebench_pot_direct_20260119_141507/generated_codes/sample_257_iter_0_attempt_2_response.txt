@@ -1,0 +1,23 @@
+Step 1: The user wants the difference in months between the earliest and latest 'Date Built' for locomotives with consecutive 'SR No.'.
+
+Note: The 'SR No.' values (950 to 957) are consecutive integers. So, all entries have consecutive SR No. Therefore, we consider the entire dataset.
+
+Step 2: Extract the 'Date Built' column and convert it into a datetime format to compute the difference in months.
+
+Step 3: Find the earliest and latest dates, then calculate the difference in months.
+
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Date Built' to datetime
+df['Date Built'] = pd.to_datetime(df['Date Built'], format='%B %Y', errors='coerce')
+
+# Calculate the difference in months between the earliest and latest date built
+date_diff = (df['Date Built'].max() - df['Date Built'].min()).days / 30.44  # Approximate days to months
+months_diff = round(date_diff, 1)
+
+print(f"Final Answer: {months_diff}")
+```

@@ -1,0 +1,26 @@
+Step 1: The user wants the average annual increase in points for the 'honda' team in the '125cc' class from 1994 to 1998.  
+Step 2: Filter the data to include only rows where team is 'honda' and class is '125cc'.  
+Step 3: Extract the points for years 1994 to 1998.  
+Step 4: Calculate the yearly differences in points and then compute the average increase per year.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for 'honda' team in '125cc' class
+filtered_df = df[(df['team'] == 'honda') & (df['class'] == '125cc')]
+
+# Extract points and years
+points = filtered_df['points'].astype(int)
+years = pd.to_numeric(filtered_df['year'])
+
+# Calculate the difference in points between consecutive years
+point_diffs = []
+for i in range(1, len(years)):
+    diff = points.iloc[i] - points.iloc[i-1]
+    point_diffs.append(diff)
+
+# Compute average annual increase
+average_increase = sum(point_diffs) / len(point_diffs) if point_diffs else 0
+print(f"Final Answer: {average_increase:.1f}")
+```

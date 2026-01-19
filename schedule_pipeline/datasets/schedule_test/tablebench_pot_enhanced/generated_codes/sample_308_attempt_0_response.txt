@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of songs written by Glen Campbell that were released in the 1980s.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'Artist' is 'Glen Campbell' and the 'Year' is between 1980 and 1989 (inclusive).
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Glen Campbell and songs released in the 1980s
+glen_campbell_1980s = df[(df['Artist'] == 'Glen Campbell') & (df['Year'].astype(int) >= 1980) & (df['Year'].astype(int) <= 1989)]
+count = len(glen_campbell_1980s)
+print(f"Final Answer: {count}")
+```

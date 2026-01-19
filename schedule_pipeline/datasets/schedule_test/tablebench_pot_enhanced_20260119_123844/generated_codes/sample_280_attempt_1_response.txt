@@ -1,0 +1,16 @@
+Step 1: The user wants the total number of employees in 2012 for employers in the 'healthcare' and 'education' industries.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'industry' is either 'healthcare' or 'education'.
+Step 4: Select the '2012 employees (total)' column, convert values to integers, and sum them.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for healthcare and education industries
+filtered_df = df[(df['industry'] == 'healthcare') | (df['industry'] == 'education')]
+# Convert '2012 employees (total)' to integer and sum
+total_employees_2012 = filtered_df['2012 employees (total)'].astype(int).sum()
+print(f"Final Answer: {total_employees_2012}")
+```

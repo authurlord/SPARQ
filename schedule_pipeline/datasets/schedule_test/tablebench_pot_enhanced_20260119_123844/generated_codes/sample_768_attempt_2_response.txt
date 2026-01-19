@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The data provided is limited to the years 2004 to 2010, and there is no clear trend in tries, goals, or points that can be reliably extrapolated for a five-year forecast. Additionally, the dataset does not include sufficient variables (e.g., team performance indicators, external factors) to support predictive modeling. Therefore, a meaningful forecast cannot be generated from this data alone.
+
+Final Answer: Cannot forecast

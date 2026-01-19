@@ -1,0 +1,38 @@
+We are asked to calculate the Hurricane Severity Index (HSI) for each year, defined as:
+
+$$
+\text{HSI} = \frac{\text{number of hurricanes} + \text{number of major hurricanes}}{\text{number of tropical storms}}
+$$
+
+However, in the data, some values like "60 +" and "none" are strings, not numbers. These cannot be used in arithmetic operations.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the "number of tropical storms", "number of hurricanes", and "number of major hurricanes" columns to numeric types. This will convert string values like "60 +" or "none" to NaN, which we then handle.
+3. Calculate HSI for each year.
+4. Identify the year with the highest HSI.
+
+Note: We must ensure that any non-numeric entries are properly handled (e.g., "60 +" → NaN, "none" → NaN), and avoid division by zero.
+
+Let’s write the corrected code accordingly.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, coercing errors to NaN
+df['number of tropical storms'] = pd.to_numeric(df['number of tropical storms'], errors='coerce')
+df['number of hurricanes'] = pd.to_numeric(df['number of hurricanes'], errors='coerce')
+df['number of major hurricanes'] = pd.to_numeric(df['number of major hurricanes'], errors='coerce')
+
+# Calculate HSI: (hurricanes + major hurricanes) / tropical storms
+df['hsi'] = (df['number of hurricanes'] + df['number of major hurricanes']) / df['number of tropical storms']
+
+# Find the year with the highest HSI, skipping rows where tropical storms is 0 or NaN
+valid_years = df.dropna(subset=['hsi'])
+max_hsi_year = valid_years.loc[valid_years['hsi'].idxmax(), 'year']
+
+print(f"Final Answer: {max_hsi_year}")
+```

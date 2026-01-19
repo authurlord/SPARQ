@@ -1,0 +1,15 @@
+Step 1: Filter the rows where the country is "democratic republic of the congo" and the elevation is at least 3000 meters.
+Step 2: Extract the 'prominence (m)' column for these filtered rows.
+Step 3: Calculate the average of the prominence values.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where country is 'democratic republic of the congo' and elevation >= 3000
+filtered_df = df[(df['country'] == 'democratic republic of the congo') & (df['elevation (m)'].astype(int) >= 3000)]
+# Calculate average prominence
+avg_prominence = filtered_df['prominence (m)'].astype(int).mean()
+print(f"Final Answer: {avg_prominence:.1f}")
+```

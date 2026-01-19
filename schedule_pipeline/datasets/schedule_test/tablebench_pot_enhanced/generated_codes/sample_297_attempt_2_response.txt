@@ -1,0 +1,37 @@
+Step 1: The user wants to identify the player who scored the most points in a single year and also had the highest number of rebounds in that same year.
+Step 2: Load the dataframe.
+Step 3: Parse the 'points' and 'rebounds' columns to extract the player names and their values (since they are in format "player (value)").
+Step 4: Find the year with the maximum points.
+Step 5: In that year, find the player with the maximum rebounds.
+Step 6: Return the player name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Function to extract player name and value from string like "player (value)"
+def extract_player_and_value(x):
+    if '(' in x:
+        player = x.split('(')[0].strip()
+        value = int(x.split('(')[1].split(')')[0])
+        return player, value
+    return None, None
+
+# Extract points and rebounds data for each year
+max_points_year = None
+max_points_value = -1
+best_rebounder_in_max_points_year = None
+
+for index, row in df.iterrows():
+    year = row['year']
+    points_player, points_value = extract_player_and_value(row['points'])
+    rebounds_player, rebounds_value = extract_player_and_value(row['rebounds'])
+
+    if points_value > max_points_value:
+        max_points_value = points_value
+        max_points_year = year
+        best_rebounder_in_max_points_year = rebounds_player
+
+print(f"Final Answer: {best_rebounder_in_max_points_year}")
+```

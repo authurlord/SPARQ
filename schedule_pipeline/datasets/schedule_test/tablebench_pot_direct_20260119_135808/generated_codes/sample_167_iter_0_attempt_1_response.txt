@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The rank of an airport is not directly determined by the change in international passengers; it is based on total passengers. A higher percentage change in international passengers does not necessarily correlate with a better rank, as rank is determined by total passenger volume, not change in international passengers.

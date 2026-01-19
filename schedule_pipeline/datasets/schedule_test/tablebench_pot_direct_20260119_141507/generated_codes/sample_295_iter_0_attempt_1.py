@@ -1,0 +1,32 @@
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter years between 1975 and 1982 (inclusive)
+filtered_df = df[(df['year'].str.contains(r'1975|1976|1977|1978|1979|1980|1981|1982'))]
+
+# Extract men's singles and men's doubles winners
+singles_winners = filtered_df['"men \'s singles"'].dropna().astype(str)
+doubles_winners = filtered_df['"men \'s doubles"'].dropna().astype(str)
+
+# Split doubles winners (they are in format "first_name second_name")
+doubles_list = []
+for entry in doubles_winners:
+    if ' ' in entry:
+        names = entry.split(' ')
+        doubles_list.extend(names)
+    else:
+        doubles_list.append(entry)
+
+# Combine all winners from singles and doubles
+all_winners = singles_winners.tolist() + doubles_list
+
+# Count frequency of each player
+from collections import Counter
+winner_counts = Counter(all_winners)
+
+# Find the player with the maximum count
+most_titles_player = winner_counts.most_common(1)[0][0] if winner_counts else "No player"
+
+print(f"Final Answer: {most_titles_player}")

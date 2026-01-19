@@ -1,0 +1,28 @@
+Step 1: The user wants to determine if there is a correlation between typhus and typhoid fever cases in the same year.
+Step 2: Load the dataframe.
+Step 3: Convert 'typhus' and 'typhoid fever' columns to numeric (some values like '2940 (avg)' may need cleaning).
+Step 4: Calculate the correlation coefficient between typhus and typhoid fever.
+Step 5: Print the correlation coefficient as the result.
+
+Note: The row '191822' appears to be a typo or formatting error (likely meant to be '1918' or '1922'), but since it's a single data point and contains non-numeric text, we will drop it for accurate analysis.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean the data: Drop the row with invalid year '191822'
+df = df[df['year'] != '191822']
+
+# Convert 'typhus' and 'typhoid fever' to numeric, coercing errors to NaN
+df['typhus'] = pd.to_numeric(df['typhus'], errors='coerce')
+df['typhoid fever'] = pd.to_numeric(df['typhoid fever'], errors='coerce')
+
+# Drop rows with NaN values in either column
+df.dropna(subset=['typhus', 'typhoid fever'], inplace=True)
+
+# Calculate correlation coefficient
+correlation = df['typhus'].corr(df['typhoid fever'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

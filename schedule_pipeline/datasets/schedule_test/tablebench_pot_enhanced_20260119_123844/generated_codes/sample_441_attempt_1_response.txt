@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: hand, 1 credit, 2 credits, 3 credits, 4 credits, 5 credits

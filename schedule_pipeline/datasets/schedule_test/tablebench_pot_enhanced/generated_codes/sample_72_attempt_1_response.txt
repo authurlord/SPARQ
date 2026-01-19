@@ -1,0 +1,12 @@
+Step 1: The user wants to find the ward that has a value of 51 in the "bello" column.
+Step 2: Load the dataframe.
+Step 3: Filter the rows where the "bello" column equals 51.
+Step 4: Extract the corresponding ward name and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the ward where 'bello' is 51
+ward_with_bello_51 = df[df['bello'] == '51']['ward'].values[0]
+print(f"Final Answer: {ward_with_bello_51}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains data on marriages in various years, including marriages between men, marriages between women, same-sex marriages, total marriages, and the percentage of same-sex marriages. Over the years, the number of same-sex marriages and their percentage of total marriages have generally increased, indicating a growing trend in same-sex marriage acceptance and participation.

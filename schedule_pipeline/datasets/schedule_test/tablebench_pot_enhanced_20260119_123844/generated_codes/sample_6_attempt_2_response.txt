@@ -1,0 +1,27 @@
+Step 1: The user wants the total number of years served by all mayors.  
+Step 2: Load the dataframe.  
+Step 3: Convert 'Taking Office' and 'Leaving' columns to integers (years).  
+Step 4: Calculate the difference between 'Leaving' and 'Taking Office' for each mayor.  
+Step 5: Sum all the years served.  
+Step 6: Print the total.
+
+Note: For the current mayor (Michel Angers), 'Leaving' is 'Current', so we assume they are still serving. Since no end year is given, we cannot include a full duration. However, based on the context and data format, it's likely that the 'Current' entry should be treated as incomplete or not fully counted. But since the question asks for "all mayors listed", and Michel Angers has been in office since 2009, we can assume we calculate up to the current year (2024) for consistency unless specified otherwise.
+
+We'll use 2024 as the reference year for the current mayor.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Taking Office' and 'Leaving' to integers, handling 'Current' as 2024
+df['Taking Office'] = pd.to_numeric(df['Taking Office'], errors='coerce')
+df['Leaving'] = df['Leaving'].replace('Current', 2024)
+df['Leaving'] = pd.to_numeric(df['Leaving'], errors='coerce')
+
+# Calculate years served
+df['Years Served'] = df['Leaving'] - df['Taking Office']
+
+# Sum total years served
+total_years = df['Years Served'].sum()
+print(f"Final Answer: {int(total_years)}")
+```

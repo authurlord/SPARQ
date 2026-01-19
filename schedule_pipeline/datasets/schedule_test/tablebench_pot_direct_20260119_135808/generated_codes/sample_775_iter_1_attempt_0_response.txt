@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The team's performance trend shows fluctuating success rates, with a peak in 2011 (68.75%) and a decline in 2012 (52.63%), followed by improvement in 2013 (66.67%). The overall success rate over the period is 60.2%. Without clear upward or downward momentum, the forecast for the next five years is uncertain, but maintaining consistency around 60-67% success rate is plausible.

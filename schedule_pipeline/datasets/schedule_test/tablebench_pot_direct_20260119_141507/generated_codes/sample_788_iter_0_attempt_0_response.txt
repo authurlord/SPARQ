@@ -1,0 +1,18 @@
+Step 1: The user wants the median elevation of mountain peaks located in Greece.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'country' column contains "greece" (including variations like "greece (crete)", "greece (euboea)", etc.).  
+Step 4: Extract the 'elevation (m)' values from the filtered data.  
+Step 5: Compute the median of these elevations and print it.  
+
+Note: Since the country column has entries like "greece (crete)", we need to check if any entry contains "greece" as a substring.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter mountains in Greece (case-insensitive, using substring match)
+greece_peaks = df[df['country'].str.contains('greece', case=False, na=False)]
+# Extract elevation values and compute median
+median_elevation = greece_peaks['elevation (m)'].median()
+print(f"Final Answer: {median_elevation}")
+```

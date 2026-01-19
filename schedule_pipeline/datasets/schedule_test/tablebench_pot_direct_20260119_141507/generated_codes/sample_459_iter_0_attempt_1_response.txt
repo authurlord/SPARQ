@@ -1,0 +1,55 @@
+Step 1: The question asks for counties with unusual data patterns in specific years. "Unusual" patterns could be interpreted as significant deviations from trends (e.g., sudden spikes or drops) or outliers compared to neighboring years.
+
+Step 2: Since the data spans multiple years, we can analyze year-to-year changes per county. A "unusual" pattern might include:
+- Large increases or decreases in population between consecutive years.
+- Deviations from the overall trend (e.g., a county growing rapidly while others stabilize).
+
+Step 3: We will:
+- Compute the year-on-year change (difference between consecutive years) for each county.
+- Identify counties where the change is unusually large (e.g., absolute change > 10% of the value or greater than 100,000).
+- Focus on specific years like 1948, 1992, 2002, 2011 to compare with trends.
+
+Step 4: We will filter out the "total" row since it's not a county.
+
+Step 5: Use a threshold (e.g., absolute change > 100,000 or > 15% of the value) to flag unusual patterns.
+
+Step 6: Return the names of such counties and the years when the pattern occurs.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Remove the 'total' row
+df = df[df['county'] != 'total']
+
+# Convert the numeric columns to integers
+for col in df.columns[1:]:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# Calculate year-on-year differences
+years = ['1948', '1956', '1966', '1977', '1992', '2002', '2011']
+df_years = df.copy()
+df_years.set_index('county', inplace=True)
+
+# Compute year-on-year differences
+diffs = {}
+for i in range(1, len(years)):
+    year1, year2 = years[i-1], years[i]
+    diff_col = f"{year2} - {year1}"
+    df_years[diff_col] = df_years[year2] - df_years[year1]
+
+# Identify counties with large changes (absolute difference > 100,000)
+threshold = 100000
+unusual_counties = []
+
+for county in df_years.index:
+    row_diffs = df_years.loc[county, [f"{y} - {y2}" for y2 in years[1:] for y in years[:len(years)-1]]]
+    # Check if any year-on-year change exceeds threshold
+    if any(abs(row_diffs[d]) > threshold for d in row_diffs):
+        unusual_counties.append(county)
+
+# Final answer: list of counties with unusual patterns
+print(f"Final Answer: {', '.join(unusual_counties)}")
+```

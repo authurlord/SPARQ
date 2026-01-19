@@ -1,0 +1,11 @@
+Step 1: The user is asking about the trend of points scored per year by the Castleford Tigers for the next 5 years. However, the data provided only covers the years 2004 to 2010, and there is no information about future trends or predictive modeling. Therefore, we cannot determine a future trend based on historical data alone without additional assumptions or models.
+
+Step 2: Since the question asks for a prediction of the next 5 years, and no external data or model is provided, it is not possible to generate a valid answer from the given data.
+
+Step 3: We must politely refuse to provide an answer that is not supported by the data.
+
+```python
+# The data provided only includes historical performance from 2004 to 2010.
+# There is no information to predict future trends for the next 5 years.
+print("Final Answer: Cannot be determined")
+```

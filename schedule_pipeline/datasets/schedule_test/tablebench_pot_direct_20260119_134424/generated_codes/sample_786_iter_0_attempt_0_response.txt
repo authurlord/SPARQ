@@ -1,0 +1,15 @@
+Step 1: Filter the dataframe to include only rows where the 'car' column is 'chevrolet'.
+Step 2: Extract the 'winnings' column for these filtered rows.
+Step 3: Calculate the median of the 'winnings' column.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'car' is 'chevrolet'
+chevrolet_drivers = df[df['car'] == 'chevrolet']
+# Calculate median winnings
+median_winnings = chevrolet_drivers['winnings'].median()
+print(f"Final Answer: {median_winnings}")
+```

@@ -1,0 +1,26 @@
+Step 1: The user wants to find the school with the highest Title Winning Percentage, which is calculated as (Outright Titles / Total Finals) * 100.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'Outright Titles' and 'Total Finals' columns.  
+Step 4: Calculate the Title Winning Percentage for each school.  
+Step 5: Find the school with the maximum percentage.  
+Step 6: Print the name of that school.
+
+Note: Handle cases where 'Total Finals' is NaN (e.g., value is None), as division by zero would cause an error. In such cases, we treat it as 0 or skip the calculation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Outright Titles' and 'Total Finals' to numeric, handling NaN values
+df['Outright Titles'] = pd.to_numeric(df['Outright Titles'], errors='coerce')
+df['Total Finals'] = pd.to_numeric(df['Total Finals'], errors='coerce')
+
+# Calculate Title Winning Percentage (only where Total Finals is not NaN)
+df['Title Winning Percentage'] = (df['Outright Titles'] / df['Total Finals']) * 100
+
+# Find the school with the highest percentage, ignoring rows where Total Finals is NaN
+max_percentage_row = df.dropna(subset=['Total Finals']).loc[df['Title Winning Percentage'].idxmax()]
+
+print(f"Final Answer: {max_percentage_row['School']}")
+```

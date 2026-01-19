@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The percentage of votes for McCain decreases as the total votes increase across different counties.

@@ -1,0 +1,13 @@
+Step 1: The user wants to identify the beam type with the highest moment of inertia in torsion (J).  
+Step 2: Load the dataframe.  
+Step 3: Select the 'moment of inertia in torsion (j) (cm 4)' column and match it with the 'type' column.  
+Step 4: Find the row with the maximum value in the moment of inertia column and return the corresponding beam type.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the beam type with the highest moment of inertia in torsion
+max_torsion = df.loc[df['moment of inertia in torsion (j) (cm 4)'].idxmax(), 'type']
+print(f"Final Answer: {max_torsion}")
+```

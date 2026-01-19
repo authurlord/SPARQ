@@ -1,0 +1,36 @@
+Step 1: The user wants to calculate the difference between the number of males in the 10–29 age group and the number of males in the 60+ age group.
+
+Step 2: From the table, extract the male population for the age groups:
+- 10–19: 21 (from row with 'A.' and 'Males')
+- 20–29: 12 (from same row)
+- 60–69: 6 (from same row)
+- 70–79: 8
+- 80+: 3
+
+Step 3: Sum the males in the 10–29 age group: 21 + 12 = 33
+Step 4: Sum the males in the 60+ age group: 6 + 8 + 3 = 17
+Step 5: Compute the difference: 33 - 17 = 16
+
+Step 6: Output the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract male population data
+males_10_19 = df.loc[df['SPECIFICATION'] == 'I.', 'POPULATION (by age group in 2002)_2'].iloc[4]
+males_20_29 = df.loc[df['SPECIFICATION'] == 'I.', 'POPULATION (by age group in 2002)_3'].iloc[4]
+males_60_69 = df.loc[df['SPECIFICATION'] == 'I.', 'POPULATION (by age group in 2002)_6'].iloc[4]
+males_70_79 = df.loc[df['SPECIFICATION'] == 'I.', 'POPULATION (by age group in 2002)_7'].iloc[4]
+males_80_plus = df.loc[df['SPECIFICATION'] == 'I.', 'POPULATION (by age group in 2002)_8'].iloc[4]
+
+# Calculate totals
+males_10_29 = int(males_10_19) + int(males_20_29)
+males_60_plus = int(males_60_69) + int(males_70_79) + int(males_80_plus)
+
+# Compute difference
+difference = males_10_29 - males_60_plus
+
+print(f"Final Answer: {difference}")
+```

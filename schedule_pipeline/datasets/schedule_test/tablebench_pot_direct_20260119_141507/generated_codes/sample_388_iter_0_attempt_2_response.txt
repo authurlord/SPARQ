@@ -1,0 +1,12 @@
+Step 1: The user wants to count how many songs or hymns have a source from the book of Psalms.  
+Step 2: Look at the "Source" column in the table and check which entries mention "Psalms".  
+Step 3: Count the number of rows where the "Source" contains "Psalms".  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count rows where 'Source' contains 'Psalms'
+psalm_count = df[df['Source'].str.contains('Psalms', case=False, na=False)].shape[0]
+print(f"Final Answer: {psalm_count}")
+```

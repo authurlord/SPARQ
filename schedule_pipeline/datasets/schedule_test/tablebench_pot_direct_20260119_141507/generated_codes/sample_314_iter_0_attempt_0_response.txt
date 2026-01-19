@@ -1,0 +1,17 @@
+Step 1: The question asks for the year when a work won an award for a song that was nominated for "Song of the Year" at the Grammy Awards.  
+Step 2: We need to look through the "Nominated work" and "Result" columns to find a row where:
+- The "Category" is related to a song performance (e.g., "Best Female Pop Vocal Performance" or "Song of the Year").
+- The "Result" is "Won".
+- The "Nominated work" corresponds to a song that was previously nominated for "Song of the Year" at the Grammy Awards.
+
+Looking at the data:
+- In 2009, the song "Love Song" was nominated for "Song of the Year" at the Grammy Awards.
+- In that same year, "Love Song" was also nominated for "Best Female Pop Vocal Performance" and did not win.
+- There is no record of a "Won" result for a song that was nominated for "Song of the Year".
+
+However, the question is asking for a year when a work **won** an award for a song that was **nominated** for "Song of the Year".  
+Since "Love Song" was nominated for "Song of the Year" in 2009 but did not win, and no other song is linked to being nominated for "Song of the Year", there is no instance where a work won an award for a song that was nominated for "Song of the Year".
+
+Thus, there is no such year.
+
+Final Answer: None

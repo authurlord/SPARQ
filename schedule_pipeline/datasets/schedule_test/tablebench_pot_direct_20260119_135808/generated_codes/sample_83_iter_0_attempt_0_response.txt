@@ -1,0 +1,12 @@
+Step 1: The user wants to find the nation that has a total of 6 medals.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'total' equals 6.
+Step 4: Extract the 'nation' column value from that row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where total is 6
+nation_with_6_medals = df[df['total'] == '6']['nation'].values[0]
+print(f"Final Answer: {nation_with_6_medals}")
+```

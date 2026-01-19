@@ -1,0 +1,16 @@
+Step 1: The user wants to forecast the issue price for the year 2012 based on the trend in issue prices from 2000 to 2011.
+Step 2: Load the dataframe.
+Step 3: Extract the 'year' and 'issue price' columns.
+Step 4: Observe the pattern in issue prices. From 2000 to 2003, the price increases from 388.88 to 398.88, then remains at 398.88 until 2006, jumps to 448.88 in 2006, then increases gradually to 638.88 by 2011.
+Step 5: Since the price increases steadily after 2006 (2006: 448.88, 2007: 498.95, 2008: 508.95, 2009: 638.88, 2010: 555.55, 2011: 638.88), there is no consistent linear trend. However, the highest increase occurred between 2008 and 2009 (from 508.95 to 638.88). But since 2010 dropped to 555.55, it suggests possible fluctuations.
+Step 6: Given that 2011 was 638.88, and assuming a similar or slightly higher price due to increasing trend, we can forecast 2012 as 638.88 or slightly higher. However, since the data shows no clear linear progression, the most reasonable forecast based on the last known value (2011) is to assume the same price unless a clear upward trend is evident. But note that 2009 and 2011 both have 638.88, suggesting a possible plateau. Thus, the most likely forecast is 638.88.
+Step 7: Output the forecasted price.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the issue price for 2011
+last_price = df[df['year'] == '2011']['issue price'].values[0]
+print(f"Final Answer: {last_price}")
+```

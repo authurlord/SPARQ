@@ -1,0 +1,53 @@
+We are tasked with identifying which breeds have unusually high or low registrations in specific years. 
+
+Step-by-step approach:
+1. "Unusually high or low" suggests we need to detect outliers — values that are significantly higher or lower than the rest.
+2. We will analyze each breed's registration data across years (2002, 2005, 2011).
+3. For each year, we can calculate the interquartile range (IQR) to identify outliers.
+4. However, since the question does not specify a particular year or threshold, we will focus on identifying breeds where any registration value stands out (e.g., extreme highs or lows relative to others in the same year).
+5. We'll check for outliers per year using IQR method.
+
+We’ll:
+- Load the data.
+- For each year (2002, 2005, 2011), compute IQR and flag breeds whose registrations fall outside the upper/lower bounds.
+- Print the list of breeds with unusual registrations in each year.
+
+Note: Since there are only a few data points per year, we can also consider absolute extremes (e.g., highest or lowest values) as indicators of unusual behavior.
+
+Let’s go with a simple approach: find the breed with the highest and lowest registration in each year, as these are likely the most "unusual".
+
+Final plan:
+- For each year, find the breed with the maximum and minimum registration.
+- Report those breeds as having unusually high or low registrations.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert registration columns to numeric (in case of strings)
+for col in ['2002 registrations', '2005 registrations', '2011 registrations']:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# Define function to find breeds with max/min in a given year
+def find_extreme_breeds(year_col):
+    year_data = df[[col for col in df.columns if col.startswith('200')]][year_col]
+    max_val = year_data.max()
+    min_val = year_data.min()
+    max_breed = df[df[year_col] == max_val]['breed'].values[0]
+    min_breed = df[df[year_col] == min_val]['breed'].values[0]
+    return max_breed, min_breed
+
+# Extract years
+years = ['2002 registrations', '2005 registrations', '2011 registrations']
+
+# Find extreme breeds per year
+results = {}
+for year in years:
+    max_breed, min_breed = find_extreme_breeds(year)
+    results[year] = (max_breed, min_breed)
+
+# Output the results
+print(f"Final Answer: {results['2002 registrations'][0]}, {results['2002 registrations'][1]}, {results['2005 registrations'][0]}, {results['2005 registrations'][1]}, {results['2011 registrations'][0]}, {results['2011 registrations'][1]}")
+```

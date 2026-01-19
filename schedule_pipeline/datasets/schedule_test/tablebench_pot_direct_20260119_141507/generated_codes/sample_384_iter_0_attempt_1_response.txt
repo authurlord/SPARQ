@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of earthquakes with a magnitude of 6.5 or higher.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'Magnitude' column is greater than or equal to 6.5.  
+Step 4: Count the number of such rows and print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter earthquakes with magnitude >= 6.5 and count them
+count_high_magnitude = df[df['Magnitude'] >= '6.5'].shape[0]
+print(f"Final Answer: {count_high_magnitude}")
+```

@@ -1,0 +1,32 @@
+Step 1: The user wants a detailed description of the table, including the main columns and initial insights.
+Step 2: Load the dataframe.
+Step 3: Display the column names and a brief description of each.
+Step 4: Provide initial insights such as ranges, highest/lowest values, and notable observations.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Display column descriptions
+print("Main Columns:")
+print("- city / municipality: Name of the city or municipality.")
+print("- no of barangays: Number of barangays (smallest administrative division) in the city/municipality.")
+print("- area (km square): Total land area in square kilometers.")
+print("- population (2010 census): Population count from the 2010 census.")
+print("- pop density (per km square): Population per square kilometer.")
+
+# Initial insights
+print("\nInitial Insights:")
+print(f"Number of cities/municipalities: {len(df)}")
+print(f"Average number of barangays: {df['no of barangays'].astype(int).mean():.2f}")
+print(f"Average area: {df['area (km square)'].astype(float).mean():.2f} km²")
+print(f"Average population: {df['population (2010 census)'].astype(int).mean():.0f}")
+print(f"Average population density: {df['pop density (per km square)'].astype(float).mean():.2f} per km²")
+print(f"Highest population: {df['population (2010 census)'].astype(int).max()} ({df.loc[df['population (2010 census)'].idxmax(), 'city / municipality']})")
+print(f"Highest population density: {df['pop density (per km square)'].astype(float).max():.2f} ({df.loc[df['pop density (per km square)'].idxmax(), 'city / municipality']})")
+print(f"Smallest area: {df['area (km square)'].astype(float).min():.2f} km² ({df.loc[df['area (km square)'].idxmin(), 'city / municipality']})")
+print(f"Most barangays: {df['no of barangays'].astype(int).max()} ({df.loc[df['no of barangays'].idxmax(), 'city / municipality']})")
+
+# Final summary
+print("\nFinal Answer: city / municipality, no of barangays, area (km square), population (2010 census), pop density (per km square)")
+```

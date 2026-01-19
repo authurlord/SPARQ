@@ -1,0 +1,36 @@
+Step 1: The user wants to find the college with the highest pick efficiency in the first 10 rounds. Pick efficiency is defined as the total number of players drafted from a college divided by the total number of players drafted in the first 10 rounds.
+
+Step 2: Load the dataframe and filter data for the first 10 rounds (round 1 to round 10).
+
+Step 3: Count the total number of players drafted in the first 10 rounds.
+
+Step 4: For each college, count how many players were drafted from it in the first 10 rounds.
+
+Step 5: Calculate pick efficiency for each college (players from college / total players in first 10 rounds).
+
+Step 6: Identify the college with the highest pick efficiency.
+
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for first 10 rounds
+df_first_10 = df[df['round'].astype(int) <= 10]
+
+# Total number of players drafted in first 10 rounds
+total_players = len(df_first_10)
+
+# Count players per college in first 10 rounds
+college_counts = df_first_10['college'].value_counts()
+
+# Calculate pick efficiency for each college
+pick_efficiency = college_counts / total_players
+
+# Find the college with the highest pick efficiency
+best_college = pick_efficiency.idxmax()
+
+print(f"Final Answer: {best_college}")
+```

@@ -1,0 +1,20 @@
+Step 1: The user is asking about the relationship between power (horsepower) and maximum speed (km/h) across different years. This requires analyzing the correlation or trend between these two variables.
+
+Step 2: Load the dataframe and extract the 'power (horsepower)' and 'max speed (km / h)' columns.
+
+Step 3: Since the data is small, we can compute the correlation coefficient to assess the strength and direction of the relationship.
+
+Step 4: Print the correlation value to answer the question.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract power and max speed columns
+power_hp = df['power (horsepower)']
+max_speed = df['max speed (km / h)']
+
+# Calculate correlation between power and max speed
+correlation = power_hp.corr(max_speed)
+print(f"Final Answer: {correlation:.2f}")
+```

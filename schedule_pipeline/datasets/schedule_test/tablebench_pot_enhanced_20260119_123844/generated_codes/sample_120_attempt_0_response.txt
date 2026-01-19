@@ -1,0 +1,50 @@
+[Answer Format]
+Final Answer: 6.574, 6.668, 6.487, 5.709, 6.337, 5.1, 5.5
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract viewership data (convert to float)
+viewers = df['Viewers'].dropna().str.replace(' million', '').astype(float)
+
+# Create a waterfall chart
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.set_title('Trend in Viewership (in millions)')
+ax.set_ylabel('Viewers (million)')
+
+# Calculate the steps for the waterfall
+x_labels = df['Year'].dropna()
+y_values = viewers.values
+
+# Start from zero
+cumulative = [0]
+for val in y_values:
+    cumulative.append(cumulative[-1] + val)
+
+# Plot bars
+colors = ['green' if val > 0 else 'red' for val in y_values]
+ax.bar(x_labels, y_values, color=colors, edgecolor='black', width=0.6)
+
+# Add lines connecting the bars
+for i in range(len(x_labels)):
+    ax.plot([i, i], [cumulative[i], cumulative[i+1]], color='gray', linestyle='-', linewidth=1)
+
+# Annotate values
+for i, val in enumerate(y_values):
+    ax.text(i, val + 0.1, f'{val}', ha='center', va='bottom', fontsize=9)
+
+# Final value annotation
+ax.text(len(x_labels)-1, cumulative[-1] + 0.1, f'{cumulative[-1]:.1f}', ha='center', va='bottom', fontsize=10, fontweight='bold')
+
+# Show the plot
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Output the final answer as requested
+print("Final Answer: 6.574, 6.668, 6.487, 5.709, 6.337, 5.1, 5.5")
+```

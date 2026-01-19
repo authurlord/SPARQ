@@ -1,0 +1,92 @@
+Step 1: Understand the question — we are to calculate the change in total seating capacity of the airline's fleet from 2004 to 2008.  
+Step 2: Identify relevant data — the "seating" column gives the seating capacity of each aircraft type. The "introduced" column tells us when an aircraft type was introduced.  
+Step 3: Focus on aircraft types introduced before or during 2004 and those introduced after or during 2008.  
+- Before 2004: Only "boeing 737 - 204" (introduced 1995) and "boeing 737 - 300" (introduced 1996) are before 2004.  
+- After 2008: "airbus a321 - 200" (introduced 2008), "airbus a320 - 200" (introduced 2008), and "boeing 737 - 700" (introduced 2000, but retired in 2011 — not relevant for 2008).  
+But the question asks for the change *from 2004 to 2008*. So we need to consider only aircraft that were in service during this period.  
+- In 2004: Aircraft in service: "airbus a319 - 100" (introduced 2004), "airbus a320 - 200" (2008), "boeing 737 - 300" (1996–2007), "boeing 737 - 204" (1995–1996).  
+- In 2008: New aircraft introduced: "airbus a320 - 200", "airbus a321 - 200", "boeing 737 - 700".  
+So, from 2004 to 2008, the fleet changes by adding new aircraft and retiring older ones.  
+We need to compute the total seating capacity at the start (2004) and end (2008), then find the difference.  
+
+However, note:  
+- "boeing 737 - 204" retired in 1996 → not in service in 2004.  
+- "boeing 737 - 300" retired in 2007 → still in service in 2004, but not in 2008.  
+- "airbus a319 - 100" introduced in 2004 → in service from 2004 onward.  
+- "airbus a320 - 200" introduced in 2008 → starts in 2008.  
+- "airbus a321 - 200" introduced in 2008 → starts in 2008.  
+- "boeing 737 - 700" introduced in 2000 → still in service in 2008.  
+
+So, in 2004:  
+- airbus a319 - 100: 156  
+- boeing 737 - 300: 148  
+Total = 156 + 148 = 304  
+
+In 2008:  
+- airbus a320 - 200: 180  
+- airbus a321 - 200: 220  
+- boeing 737 - 700: 149  
+Total = 180 + 220 + 149 = 549  
+
+Change = 549 - 304 = 245  
+
+Thus, the total seating capacity increased by 245 seats.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter aircraft introduced before or in 2004 (in service in 2004)
+# Exclude retired ones before 2004
+# For 2004: aircraft introduced <= 2004 and not retired before 2004
+# boeing 737 - 204: retired 1996 → not in 2004
+# boeing 737 - 300: retired 2007 → in service until 2007 → in 2004
+# airbus a319 - 100: introduced 2004 → in 2004
+# airbus a320 - 200: introduced 2008 → not in 2004
+# airbus a321 - 200: introduced 2008 → not in 2004
+
+# So in 2004: only a319-100 and a320-200 (but a320-200 not in 2004) → only a319-100 and b737-300
+# But b737-300 retired in 2007 → still in 2004 → yes
+
+# 2004 capacity:
+capacity_2004 = 0
+for _, row in df.iterrows():
+    if row['introduced'] <= '2004' and row['retired'] == '-' or row['retired'] > '2004':
+        capacity_2004 += int(row['seating'])
+
+# 2008 capacity:
+capacity_2008 = 0
+for _, row in df.iterrows():
+    if row['introduced'] <= '2008' and (row['retired'] == '-' or row['retired'] > '2008'):
+        capacity_2008 += int(row['seating'])
+
+# But we must ensure aircraft are active in 2004 and 2008 respectively
+# More precise: 
+# In 2004: introduced <= 2004 and retired > 2004 or retired == '-'
+# In 2008: introduced <= 2008 and retired > 2008 or retired == '-'
+
+# Apply filtering
+def is_active_in_year(year):
+    return (pd.to_numeric(df['introduced']) <= year) and (df['retired'] == '-' or pd.to_numeric(df['retired']) > year)
+
+# But since years are strings, we do manual string comparison
+capacity_2004 = 0
+capacity_2008 = 0
+
+for _, row in df.iterrows():
+    introduced = row['introduced']
+    retired = row['retired']
+    seating = row['seating']
+    
+    # 2004: introduced <= 2004 and retired > 2004 or retired not specified
+    if introduced <= '2004' and (retired == '-' or retired > '2004'):
+        capacity_2004 += int(seating)
+    
+    # 2008: introduced <= 2008 and retired > 2008 or retired not specified
+    if introduced <= '2008' and (retired == '-' or retired > '2008'):
+        capacity_2008 += int(seating)
+
+change = capacity_2008 - capacity_2004
+print(f"Final Answer: {change}")
+```

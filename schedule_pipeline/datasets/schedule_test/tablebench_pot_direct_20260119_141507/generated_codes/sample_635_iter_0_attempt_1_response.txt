@@ -1,0 +1,25 @@
+Step 1: Identify intervals with a "just ratio" that involves the number 11.  
+Looking at the "just ratio" column, the relevant entries are:
+- "11:8 wide fourth" → 556.1 cents
+- "undecimal major third" → 409.76 cents
+- "undecimal neutral third" → 351.22 cents
+
+Step 2: Extract the "size (cents)" values for these intervals.  
+Step 3: Calculate the average of these values.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where 'just ratio' contains '11'
+filtered_rows = df[df['just ratio'].str.contains('11', na=False)]
+
+# Extract 'size (cents)' values
+size_cents = filtered_rows['size (cents)'].astype(float)
+
+# Calculate average
+average_size = size_cents.mean()
+
+print(f"Final Answer: {average_size:.2f}")
+```

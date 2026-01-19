@@ -1,0 +1,15 @@
+Step 1: The user wants to find the series with the highest average viewership.
+Step 2: Load the dataframe.
+Step 3: Convert the 'average viewers (millions)' column to float for numerical comparison.
+Step 4: Find the row with the maximum value in this column.
+Step 5: Extract the 'series' value from that row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'average viewers (millions)' to float
+df['average viewers (millions)'] = pd.to_numeric(df['average viewers (millions)'])
+# Find the series with the highest average viewership
+max_series = df.loc[df['average viewers (millions)'].idxmax(), 'series']
+print(f"Final Answer: {max_series}")
+```

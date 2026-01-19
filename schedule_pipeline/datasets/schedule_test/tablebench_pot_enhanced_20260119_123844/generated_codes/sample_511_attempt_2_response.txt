@@ -1,0 +1,16 @@
+Step 1: The user wants to find the couple with the highest Dance Efficiency, which is defined as total points divided by the number of dances.
+Step 2: Load the dataframe.
+Step 3: Calculate the Dance Efficiency for each couple using the formula: total points / number of dances.
+Step 4: Identify the couple with the maximum Dance Efficiency.
+Step 5: Output the name of the couple with the highest efficiency.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate Dance Efficiency
+df['Dance Efficiency'] = df['total points'].astype(int) / df['number of dances'].astype(int)
+# Find the couple with the highest Dance Efficiency
+max_efficiency_couple = df.loc[df['Dance Efficiency'].idxmax(), 'couple']
+print(f"Final Answer: {max_efficiency_couple}")
+```

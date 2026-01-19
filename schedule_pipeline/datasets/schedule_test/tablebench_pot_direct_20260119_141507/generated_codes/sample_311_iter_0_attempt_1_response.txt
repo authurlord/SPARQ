@@ -1,0 +1,44 @@
+Step 1: The user wants to identify the only player who won both the men's singles and men's doubles titles in the same year.  
+Step 2: Extract the "men 's singles" and "men 's doubles" columns from the table.  
+Step 3: For each year, check if the same player appears in both "men 's singles" and "men 's doubles".  
+Step 4: Since the data shows team entries for doubles (e.g., "A B"), we need to parse the names and compare them. However, the men's singles entries are individual names, and men's doubles are pairs. So we need to determine if any individual name appears in both lists as a single player.  
+Step 5: Go through each row and check if the men's singles name is also part of the men's doubles pair (i.e., appears as one of the two names).  
+Step 6: If such a match exists, record the player and year.  
+
+Note: In the dataset, men's doubles are listed as pairs like "X Y", so we will split them and check if the men's singles name appears in either half.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns
+men_singles = df["men 's singles"]
+men_doubles = df["men 's doubles"]
+
+# List to store matches
+matches = []
+
+# Iterate through each row
+for index, row in df.iterrows():
+    year = row['year']
+    ms = row['men "s singles']
+    md = row['men "s doubles']
+    
+    # Split doubles into two names
+    md_names = md.split()
+    
+    # Check if the men's singles name is in the doubles pair
+    if ms in md_names:
+        matches.append((ms, year))
+
+# If there's exactly one match, that's our answer
+if matches:
+    player, year = matches[0]
+    print(f"Final Answer: {player}, {year}")
+else:
+    print("Final Answer: none")
+```
+
+Final Answer: robert nock, 1998

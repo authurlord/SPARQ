@@ -1,0 +1,12 @@
+Step 1: The user wants to find the points scored by Llanhilleth RFC.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'club' is 'llanhilleth rfc'.
+Step 4: Extract the 'points' value from that row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for 'llanhilleth rfc'
+llanhilleth_points = df[df['club'] == 'llanhilleth rfc']['points'].iloc[0]
+print(f"Final Answer: {llanhilleth_points}")
+```

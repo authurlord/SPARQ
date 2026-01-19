@@ -1,0 +1,18 @@
+Step 1: The user wants to calculate the correlation coefficient between 'Magnitude' and 'Depth (km)' of earthquakes.
+Step 2: Load the dataframe.
+Step 3: Convert 'Magnitude' and 'Depth (km)' columns to numeric types.
+Step 4: Calculate the correlation coefficient using pandas corr() method.
+Step 5: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Magnitude' and 'Depth (km)' to numeric
+df['Magnitude'] = pd.to_numeric(df['Magnitude'])
+df['Depth (km)'] = pd.to_numeric(df['Depth (km)'])
+
+# Calculate correlation coefficient
+correlation = df['Magnitude'].corr(df['Depth (km)'])
+print(f"Final Answer: {correlation:.3f}")
+```

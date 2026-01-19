@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The human development index (2000) does not show a clear direct impact on population density (/ km²) across municipalities with varying area (km²).

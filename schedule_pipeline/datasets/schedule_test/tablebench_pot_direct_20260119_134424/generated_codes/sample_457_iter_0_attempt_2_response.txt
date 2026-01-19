@@ -1,0 +1,8 @@
+Step 1: Analyze the data for anomalies. Look for countries with extreme values in population, area, population density, or HDI.
+Step 2: Identify potential outliers:
+- Macau has an extremely high population density (18,662 per km²), which is significantly higher than others.
+- North Korea and China have very large populations but different population densities.
+- Macau's area is very small (30 km²) compared to others.
+- HDI data missing for Macau and North Korea.
+Step 3: Focus on Macau as it stands out due to extreme population density and small area, making it a clear outlier.
+Final Answer: macau (prc)

@@ -1,0 +1,55 @@
+Step 1: The question asks for an estimate of the percentage of students learning in Russian for the school year 2009–2010, based on the historical trend of increasing percentages of students learning in Latvian from 1995 to 2007.
+
+Step 2: From the table, we observe that the "% learning in latvian" column shows a steady increase over time (from 60.3% in 1995–96 to 73.0% in 2006–07). This implies a positive trend. Since the total percentage of students learning in Latvian is increasing, and assuming the sum of percentages across languages is 100%, then the percentage of students learning in Russian should decrease over time.
+
+Step 3: We can infer that the percentage of students learning in Russian decreases as the percentage in Latvian increases. We can model this trend by observing the trend in the "Russian" column (which is not directly given as a percentage but as a raw number). However, the "total" column gives us the total number of students, and the "% learning in latvian" is provided.
+
+Step 4: To estimate the percentage of students learning in Russian in 2009–2010, we first compute the percentage of students learning in Russian for each school year using the formula:
+   % Russian = (number of students learning in Russian / total students) * 100
+
+From the data:
+- For each year, the "russian" value is given, and the "total" value is given.
+- We calculate the percentage for each year.
+- Then, we observe the trend in these percentages and project it to 2009–2010 (i.e., the next year after 2006–07).
+
+Step 5: Since the data ends at 2006–07, we can assume the trend continues linearly or follows a decreasing pattern. We will fit a linear regression model to the percentage of students learning in Russian over the years and extrapolate to 2009–2010.
+
+Step 6: Convert the school years to numerical values (e.g., 1995–96 → 1995, ..., 2006–07 → 2006), and fit a linear model to the percentage of Russian learners.
+
+Step 7: Predict the value for 2009–2010 (i.e., year 2009).
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns
+years = [1995, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006]
+russian_percent = [
+    (132540 / 337660) * 100,
+    (120925 / 361432) * 100,
+    (116009 / 359818) * 100,
+    (108454 / 351989) * 100,
+    (101486 / 340308) * 100,
+    (95841 / 327358) * 100,
+    (84559 / 300667) * 100,
+    (77471 / 283947) * 100,
+    (70683 / 266111) * 100
+]
+
+# Convert to DataFrame
+X = np.array(years).reshape(-1, 1)
+y = np.array(russian_percent)
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict for year 2009
+predicted_russian_percent_2009 = model.predict([[2009]])[0]
+
+print(f"Final Answer: {predicted_russian_percent_2009:.1f}")
+```

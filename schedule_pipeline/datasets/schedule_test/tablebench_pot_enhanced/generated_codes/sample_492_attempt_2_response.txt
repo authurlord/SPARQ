@@ -1,0 +1,46 @@
+Step 1: Understand the question. We are to determine in which round Miloš Zeman achieved his first majority win, defined as receiving more than 50% of the total deputies and senators combined in a single round.
+
+Step 2: The data contains multiple rows per round (due to different categories like "Deputies" and "Senators"). We need to:
+- Identify the total number of deputies and senators for each round.
+- For Miloš Zeman, sum his deputies and senators in each round.
+- Calculate the percentage of total seats he obtained in each round.
+- Check if any round exceeds 50% for both deputies and senators.
+
+Step 3: Since the data has two entries per round (one for each candidate), we must group by Round and aggregate the values for Miloš Zeman.
+
+Step 4: Compute the total seats (deputies + senators) and check if Miloš Zeman's share exceeds 50%.
+
+Step 5: Output the first round where this occurs.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean column names
+df.columns = ['Round', 'Vaclav Klaus', 'Vaclav Klaus_1', 'Jaroslava Moserová', 'Jaroslava Moserová_1', 'Miloš Zeman', 'Miloš Zeman_1']
+
+# Filter out the header row
+df = df[df['Round'] != 'Round']
+
+# Convert numeric columns to numeric, handling '-' as NaN
+numeric_columns = ['Vaclav Klaus', 'Vaclav Klaus_1', 'Jaroslava Moserová', 'Jaroslava Moserová_1', 'Miloš Zeman', 'Miloš Zeman_1']
+df[numeric_columns] = df[numeric_columns].apply(pd.to_numeric, errors='coerce')
+
+# Group by Round and calculate total deputies and senators for Miloš Zeman
+miloš_data = df.groupby('Round')[['Miloš Zeman', 'Miloš Zeman_1']].sum()
+
+# Calculate total seats (deputies + senators)
+total_deputies = df['Miloš Zeman'].sum()
+total_senators = df['Miloš Zeman_1'].sum()
+total_seats = total_deputies + total_senators
+
+# Calculate percentage of total seats for each round
+miloš_data['Total'] = miloš_data.sum(axis=1)
+miloš_data['Percentage'] = (miloš_data['Total'] / total_seats) * 100
+
+# Find the first round where Miloš Zeman got over 50%
+majority_round = miloš_data[miloš_data['Percentage'] > 50].index[0] if not miloš_data[miloš_data['Percentage'] > 50].empty else None
+
+print(f"Final Answer: {majority_round}")
+```

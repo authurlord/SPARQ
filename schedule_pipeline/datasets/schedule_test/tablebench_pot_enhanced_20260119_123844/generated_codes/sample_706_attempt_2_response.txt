@@ -1,0 +1,13 @@
+Step 1: The user wants to find the crater with the largest diameter.
+Step 2: Load the dataframe.
+Step 3: Select the 'diameter (km)' column and find the maximum value.
+Step 4: Identify the corresponding crater name from the 'name' column.
+Step 5: Print the name of the crater with the largest diameter.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row with the maximum diameter
+max_diameter_crater = df.loc[df['diameter (km)'].idxmax()]['name']
+print(f"Final Answer: {max_diameter_crater}")
+```

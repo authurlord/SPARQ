@@ -1,0 +1,16 @@
+Step 1: The user wants the average number of viewers (in millions) for episodes with a rating of 6.0 or higher.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'rating' is 6.0 or higher.
+Step 4: Calculate the mean of the 'viewers (millions)' column for these filtered rows.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter episodes with rating >= 6.0
+filtered_df = df[df['rating'] >= '6.0']
+# Convert 'viewers (millions)' to float and calculate mean
+average_viewers = filtered_df['viewers (millions)'].astype(float).mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

@@ -1,0 +1,55 @@
+We are asked to find the variance of goals scored by teams in the Third Division North.
+
+Step 1: Identify relevant data — we need to filter rows where "Division" is "Third Division North".
+Step 2: Extract the "Goals" column from those rows.
+Step 3: Compute the variance of the "Goals" values.
+Step 4: Ensure we are not using a column named 'Goals' incorrectly — the table has "Goals" as a column, so we must verify it exists and is correctly referenced.
+
+Looking at the table:
+- The columns are: ['Club', 'Season', 'Division', 'League', 'League_1', 'FA Cup', 'FA Cup_1', 'Total', 'Total_1']
+- But the data includes entries like "Apps", "Goals" — these appear to be under separate columns.
+- Actually, the first row is headers: ['Club', 'Season', 'Division', 'Apps', 'Goals', 'Apps', 'Goals', 'Apps', 'Goals']
+- So the actual data columns are: Club, Season, Division, Apps, Goals, Apps (FA Cup), Goals (FA Cup), Apps (Total), Goals (Total)
+
+Therefore, the "Goals" column appears in multiple places. However, for the "Third Division North" teams, we want the goals from their primary league (i.e., the "Goals" column in the 4th position after "Division").
+
+So, we will:
+- Filter rows where "Division" == "Third Division North"
+- Extract the "Goals" value from the correct column (the 5th column, index 4)
+- Compute the variance of those values
+
+Note: There are two teams in Third Division North:
+- Lincoln City (1946–47, 1947–48, 1948–49)
+- Oldham Athletic (1948–49)
+
+But Oldham Athletic is in Third Division North only in 1948–49, and its goals are 3.
+
+Lincoln City:
+- 1946–47: 15 goals
+- 1947–48: 32 goals
+- 1948–49: 8 goals
+
+So the goals in Third Division North are: 15, 32, 8, 3
+
+We compute the variance of these values.
+
+Let’s write the code accordingly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where Division is 'Third Division North'
+third_div_north = df[df['Division'] == 'Third Division North']
+
+# Extract the 'Goals' column — it's the 5th column (index 4) in the data
+# The column names are: ['Club', 'Season', 'Division', 'Apps', 'Goals', 'Apps', 'Goals', 'Apps', 'Goals']
+# So 'Goals' is at index 4
+goals_values = third_div_north.iloc[:, 4]  # Goals column
+
+# Calculate variance
+variance = goals_values.var()
+
+print(f"Final Answer: {variance:.2f}")
+```

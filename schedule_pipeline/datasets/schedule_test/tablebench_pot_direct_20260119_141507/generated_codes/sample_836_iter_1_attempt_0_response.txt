@@ -1,0 +1,29 @@
+Step 1: The user wants to find the municipality with the highest number of Spanish speakers.  
+Step 2: The column names include language types (e.g., "spanish", "only spanish", "native and spanish"), and each row corresponds to a municipality.  
+Step 3: We need to identify which municipality has the highest value under any "Spanish" related category.  
+Step 4: The relevant columns are: 'spanish', 'only spanish', 'native and spanish'.  
+Step 5: We will sum the values across these three language categories per municipality, then find the municipality with the maximum total.  
+
+Note: "Spanish" speakers include:
+- "spanish" → general Spanish
+- "only spanish" → only Spanish
+- "native and spanish" → native and speaks Spanish
+
+We sum these for each municipality and find the one with the highest total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select relevant language columns for Spanish speakers
+spanish_columns = ['spanish', 'only spanish', 'native and spanish']
+
+# Sum the Spanish-related values for each municipality
+df['total_spanish_speakers'] = df[spanish_columns].sum(axis=1)
+
+# Find the municipality with the highest total
+municipality_with_most_spanish = df.loc[df['total_spanish_speakers'].idxmax(), 'language']
+
+print(f"Final Answer: {municipality_with_most_spanish}")
+```

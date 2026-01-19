@@ -1,0 +1,36 @@
+The error occurred because the 'year' column contains a value "2010 , 2012" (with a space and comma), which cannot be converted to an integer when filtering for the 2000–2007 period. We need to filter only rows where the year is within 2000 to 2007, and handle the "2010 , 2012" entry properly by checking if it falls in the range.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the 'year' column to string and clean it — split values if there are multiple years.
+3. Filter rows where any of the years is between 2000 and 2007 inclusive.
+4. Compute the average of the 'quantity' column for the filtered rows.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'year' column: split strings like "2010 , 2012" into individual years
+def extract_years(year_str):
+    if isinstance(year_str, str):
+        # Split by comma and space, then convert to integers
+        years = [int(y.strip()) for y in year_str.split(', ') if y.strip().isdigit()]
+        return years
+    return []
+
+# Apply the function to create a list of years for each row
+df['years'] = df['year'].apply(extract_years)
+
+# Create a boolean mask for rows where any year is in 2000-2007
+mask = df['years'].apply(lambda x: any(y >= 2000 and y <= 2007 for y in x))
+
+# Filter data for those years
+filtered_df = df[mask]
+
+# Compute average quantity
+avg_quantity = filtered_df['quantity'].mean()
+
+print(f"Final Answer: {avg_quantity:.1f}")
+```

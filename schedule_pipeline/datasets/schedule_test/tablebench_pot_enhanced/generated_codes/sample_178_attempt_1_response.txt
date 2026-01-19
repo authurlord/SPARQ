@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The maximum speed increases with higher horsepower, reaching 120 km/h at 298 horsepower, regardless of the year built.

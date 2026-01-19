@@ -1,0 +1,16 @@
+Step 1: The user wants the total number of goals scored by Liverpool in the Premier League.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Club' is 'Liverpool' and 'League' is 'Premier League'.
+Step 4: Sum the 'Goals' column for these rows.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Liverpool in Premier League seasons
+liverpool_premier = df[(df['Club'] == 'Liverpool') & (df['League'] == 'Premier League')]
+# Sum the 'Goals' column for these rows
+total_goals = liverpool_premier['Goals'].sum()
+print(f"Final Answer: {total_goals}")
+```

@@ -1,0 +1,36 @@
+Step 1: Identify the films that were nominated for Best Actor and released in 2017 or earlier.  
+From the table, we look at rows where "Category" is "Best Actor" and "Year" is ≤ 2017.  
+The relevant rows are:  
+- 2017: "Cock and Bull" (Won), "Feather Flies to the Sky" (Won)  
+- 2017: "Dearest" (Nominated for Best Supporting Actor, not Best Actor)  
+
+So only "Cock and Bull" and "Feather Flies to the Sky" are relevant.  
+
+Step 2: Count the number of award wins for each film among those nominated for Best Actor and released in 2017 or earlier.  
+- "Cock and Bull": Won at "24th Beijing College Student Film Festival" and "8th China Film Director's Guild Awards" → 2 wins  
+- "Feather Flies to the Sky": Won at "23rd Shanghai Television Festival" → 1 win  
+
+Step 3: Determine which film has the most award wins.  
+"Cock and Bull" has 2 wins, which is more than "Feather Flies to the Sky".  
+
+Final Answer: Cock and Bull
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where Category is 'Best Actor' and Year is 2017 or earlier
+filtered_df = df[(df['Category'] == 'Best Actor') & (df['Year'].astype(int) <= 2017)]
+
+# Group by 'Nominated work' and count wins (where Result is 'Won')
+win_counts = filtered_df[filtered_df['Result'] == 'Won'].groupby('Nominated work').size()
+
+# Find the film with the maximum wins
+if not win_counts.empty:
+    film_with_most_wins = win_counts.idxmax()
+else:
+    film_with_most_wins = None
+
+print(f"Final Answer: {film_with_most_wins}")
+```

@@ -1,0 +1,27 @@
+Step 1: The user wants to project the net asset value at the end of 2012/2013 based on historical trends.  
+Step 2: Load the dataframe and extract the 'net assets at end of year' column.  
+Step 3: Fit a simple linear trend (using the last few years) to estimate the increase and project the next value.  
+Step 4: Use the average annual increase in net assets to project the value for 2012/2013.  
+Step 5: Calculate the average increase from year to year and add it to the last known value.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'net assets at end of year' to numeric
+df['net assets at end of year'] = pd.to_numeric(df['net assets at end of year'])
+
+# Calculate the year-on-year increase in net assets
+df['increase'] = df['net assets at end of year'].diff()
+
+# Take the average increase over the available years
+avg_increase = df['increase'].mean()
+
+# Get the last known net asset value
+last_value = df['net assets at end of year'].iloc[-1]
+
+# Project the next year's value
+projected_value = last_value + avg_increase
+
+print(f"Final Answer: {projected_value:.0f}")
+```

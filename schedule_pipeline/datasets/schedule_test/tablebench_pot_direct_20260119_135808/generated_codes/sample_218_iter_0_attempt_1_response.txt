@@ -1,0 +1,20 @@
+Step 1: The user wants to analyze the relationship between Peak Flow (m³/s) and Water Level (m) at Trent Bridge. This requires examining how Peak Flow changes as the water level increases.
+Step 2: Load the dataframe.
+Step 3: Extract the 'Level at Trent Bridge m' and 'Peak Flow m3/s' columns.
+Step 4: Since the data is not in chronological order by level, sort by water level in ascending order to observe the trend.
+Step 5: Print the sorted data to show the change in peak flow with increasing water level.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Drop the row with missing rank (normal/avg flow) for analysis
+df_clean = df.dropna(subset=['Rank'])
+# Convert columns to numeric for proper sorting
+df_clean['Level at Trent Bridge m'] = pd.to_numeric(df_clean['Level at Trent Bridge m'])
+df_clean['Peak Flow m3/s'] = pd.to_numeric(df_clean['Peak Flow m3/s'].str.replace(',', ''))
+# Sort by water level in ascending order to observe trend
+df_sorted = df_clean.sort_values(by='Level at Trent Bridge m')
+# Display the sorted data showing how peak flow increases with water level
+print(f"Final Answer: {df_sorted[['Level at Trent Bridge m', 'Peak Flow m3/s']].to_string(index=False)}")
+```

@@ -1,0 +1,23 @@
+Step 1: Identify the relevant data for teams in the "Third Division North".
+Step 2: Filter rows where 'Division' is 'Third Division North'.
+Step 3: Extract the 'Goals' column (from 'Goals' or 'Goals_1' as per the data structure).
+Step 4: Calculate the variance of the goals scored.
+Step 5: Print the result.
+
+Note: The 'Goals' column appears to be split into two columns: 'Goals' and 'Goals_1'. From context, 'Goals' seems to represent league goals, and 'Goals_1' might be a duplicate or error. However, looking at the data, 'Goals' contains the actual goals scored in the league. So we will use the 'Goals' column for calculation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Division is 'Third Division North'
+third_division_north = df[df['Division'] == 'Third Division North']
+
+# Extract the 'Goals' column (league goals)
+goals = third_division_north['Goals'].astype(int)
+
+# Calculate variance
+variance = goals.var()
+
+print(f"Final Answer: {variance:.2f}")
+```

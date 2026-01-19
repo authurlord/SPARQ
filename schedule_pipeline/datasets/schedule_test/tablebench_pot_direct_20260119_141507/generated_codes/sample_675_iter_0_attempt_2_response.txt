@@ -1,0 +1,32 @@
+Step 1: The user wants the correlation coefficient between 'total passengers' and 'capacity in use'.
+Step 2: Load the dataframe.
+Step 3: Select the 'total passengers' and 'capacity in use' columns.
+Step 4: Compute the Pearson correlation coefficient between these two columns.
+Step 5: Print the correlation coefficient.
+
+Note: The value in the last row for 'capacity in use' ("119 , 31%") appears to be malformed (likely a typo). We will clean it by removing extra spaces and commas, assuming it should be "119.31%". However, since we are dealing with numerical correlation, we need to convert percentages to decimal form (e.g., 130.97% → 1.3097). But the column is stored as string with % sign. We will parse it properly.
+
+We'll convert 'capacity in use' from percentage strings to float values (by removing % and dividing by 100), and similarly, 'total passengers' is already numeric.
+
+However, note that 'capacity in use' is given as percentages (e.g., '130.97%'), so we interpret it as a multiplier of capacity. So we convert it to decimal (e.g., 130.97% → 1.3097).
+
+But the question asks for correlation between 'total passengers' and 'capacity in use'. Since both are in different scales, we can still compute the Pearson correlation.
+
+We will:
+- Convert 'capacity in use' from string with '%' to float (by removing % and dividing by 100)
+- Ensure 'total passengers' is already numeric
+- Compute correlation
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean 'capacity in use' column: remove % and convert to float
+df['capacity in use'] = df['capacity in use'].str.replace('%', '').str.replace(',', '').astype(float) / 100
+
+# Compute correlation between 'total passengers' and 'capacity in use'
+correlation = df['total passengers'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

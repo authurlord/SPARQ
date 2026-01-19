@@ -1,0 +1,22 @@
+Step 1: Identify the rows where the organization is 'Transparency International'.  
+Step 2: Among those rows, find the one with the highest rank (lowest rank number since lower numbers mean higher rank).  
+Step 3: Extract the year corresponding to that row.  
+
+The data shows two entries for 'Transparency International':  
+- Bribe Payers Index (2011, rank 19)  
+- Corruption Perceptions Index (2012, rank 37)  
+
+The highest rank (lowest numerical rank) is 19 in 2011.  
+
+Thus, the year with the highest-ranked index by Transparency International is 2011.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where organization is 'Transparency International'
+filtered_df = df[df['organization'] == 'Transparency International']
+# Find the year with the lowest rank (highest rank)
+best_year = filtered_df.loc[filtered_df['rank'].idxmin(), 'year']
+print(f"Final Answer: {best_year}")
+```

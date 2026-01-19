@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Fiscal Year, Total External Debt in Million of US Dollars ($), Total Debt Service in Million of US Dollars ($), External Debt to GDP Ratio (%), Debt Service Ratio (%), 1999, 51,157, 6,583, 61.6, 14.6, 2018, 76,415, 5,884, 23.5, -, 73,098, 7,323, 23.3, -, 77,474, 5,584, 26.5, -, 74,763, 7,188, 24.5, -, 75,569, 7,793, 33.7, 9.9, 79,949, 6,604, 32.0, 7.3, 78,489, 7,535, 28.9, 8.2, 77,674, 6,318, 27.3, 6.2, 76,508, 6,993, 44.5, 10.7, 66,508, 6,993, 44.5, 10.7

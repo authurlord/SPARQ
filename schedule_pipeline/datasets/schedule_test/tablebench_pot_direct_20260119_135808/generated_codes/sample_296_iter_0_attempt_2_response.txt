@@ -1,0 +1,24 @@
+Step 1: The user wants to find the year when the athlete won a gold medal (1st position) in the 200m event at the European Junior Championships.
+
+Step 2: Load the dataframe.
+
+Step 3: Filter rows where:
+- Competition is "European Junior Championships"
+- Event is "200 m"
+- Position is "1st"
+
+Step 4: Extract the 'Year' from the filtered row and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for European Junior Championships, 200m event, and 1st position
+filtered_df = df[(df['Competition'] == 'European Junior Championships') & 
+                 (df['Event'] == '200 m') & 
+                 (df['Position'] == '1st')]
+
+# Get the year from the filtered result
+year = filtered_df['Year'].iloc[0]
+print(f"Final Answer: {year}")
+```

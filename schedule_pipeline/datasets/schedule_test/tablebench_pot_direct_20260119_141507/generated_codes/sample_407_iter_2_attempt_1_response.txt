@@ -1,0 +1,15 @@
+The table is provided in JSON format, not as a CSV file. Therefore, we do not need to load from 'table.csv'. Instead, we can directly parse the JSON data into a pandas DataFrame.
+
+Step 1: Parse the given table data (in JSON format) into a DataFrame.
+Step 2: Describe each column:
+- The first row ("-", "2017", "2016", ...) represents headers. The first column is labeled with "-" and contains category names like "Applications", "Offer Rate (%)", etc.
+- Each subsequent row corresponds to a metric (e.g., Applications, Offer Rate, Enrols) with values for years 2017 to 2013.
+Step 3: Highlight notable trends:
+- Applications peaked in 2016 (42,335), then decreased slightly in 2017 (41,000).
+- Offer rate increased from 2013 to 2015, then slightly declined in 2017 (89.7% vs 86.8% in 2013).
+- Enrolment remained relatively stable, with a slight decline from 2015 to 2017.
+- Yield (%) showed a downward trend from 2013 to 2017, indicating lower acceptance rates over time.
+- Applicant/Enrolled Ratio increased from 2013 to 2017, suggesting a growing pool of applicants relative to enrolments.
+- Average Entry Tariff is missing in 2017 ("n/a"), but it was stable at around $176–$471 over the years.
+
+Final Answer: Applications peaked in 2016, offer rate fluctuated, enrolment stable, yield decreased, applicant ratio increased, tariff missing in 2017

@@ -1,0 +1,31 @@
+The error occurred because we attempted to compare string values (like 'season 1') with integers. To avoid this, we must ensure that the "season" column is properly converted to numeric before performing any operations.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Convert the "season" column to numeric (to avoid string-int comparison errors).
+3. Extract the viewership data for seasons 1 to 6.
+4. Calculate the trend (e.g., average increase per season) in viewership.
+5. Use this trend to forecast viewership for season 7.
+
+Note: Since the data is small and linear trends are likely, we can compute the mean viewership of seasons 1–6 and add a simple linear extrapolation based on growth.
+
+However, since there's no clear trend pattern (e.g., increasing or decreasing), we can simply take the average of the viewership from seasons 1 to 6 as a reasonable forecast.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'season' to numeric (in case it's stored as string)
+df['season'] = pd.to_numeric(df['season'], errors='coerce')
+
+# Extract viewership for seasons 1 to 6 (inclusive)
+seasons_1_to_6 = df[(df['season'] >= 1) & (df['season'] <= 6)]
+viewership_1_to_6 = seasons_1_to_6['us viewers (millions)'].astype(float)
+
+# Forecast viewership for season 7: take average of seasons 1 to 6
+forecast_viewership = viewership_1_to_6.mean()
+
+print(f"Final Answer: {forecast_viewership:.2f}")
+```

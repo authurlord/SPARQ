@@ -1,0 +1,17 @@
+Step 1: The user wants to count how many teams have a win percentage of 0.7 or higher.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'win pct' is greater than or equal to 0.7.  
+Step 4: Count the number of such teams (excluding the "totals :" row, which is not a team).  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out the "totals :" row and select only teams with win percentage >= 0.7
+teams = df[df['win pct'] >= 0.7]
+# Exclude the last row (totals) which is not a team
+teams = teams[teams['team'] != 'totals :']
+# Count the number of such teams
+count = len(teams)
+print(f"Final Answer: {count}")
+```

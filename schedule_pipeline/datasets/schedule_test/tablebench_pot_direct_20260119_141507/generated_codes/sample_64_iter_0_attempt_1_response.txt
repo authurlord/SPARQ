@@ -1,0 +1,15 @@
+Step 1: The user wants to find the nation that won exactly 1 gold medal and 0 silver and 0 bronze medals.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'gold' = 1, 'silver' = 0, and 'bronze' = 0.  
+Step 4: Extract the 'nation' value from the matching row.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter nations with 1 gold, 0 silver, 0 bronze
+result = df[(df['gold'] == 1) & (df['silver'] == 0) & (df['bronze'] == 0)]
+# Get the nation name
+nation = result['nation'].iloc[0] if not result.empty else None
+print(f"Final Answer: {nation}")
+```

@@ -1,0 +1,22 @@
+Step 1: The user wants to analyze the relationship between PSI and DC values for provinces where PCI > 12.  
+Step 2: Filter the data to include only provinces with PCI > 12.  
+Step 3: Examine how PSI changes as DC increases — this involves checking the trend (e.g., positive, negative, or no correlation).  
+Step 4: Since the question asks "how does PSI change", we will compute the correlation between DC and PSI for the filtered data.  
+Step 5: If the correlation is positive, PSI increases with DC; if negative, it decreases; if near zero, no clear trend.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter provinces with PCI > 12
+filtered_df = df[df['PCI'] > 12]
+
+# Convert DC and PSI to numeric (in case of string formatting)
+df_numeric = filtered_df[['DC', 'PSI']].apply(pd.to_numeric, errors='coerce')
+
+# Calculate correlation between DC and PSI
+correlation = df_numeric['DC'].corr(df_numeric['PSI'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

@@ -1,0 +1,23 @@
+Step 1: The user wants the correlation coefficient between 'total passengers' and 'capacity in use' across airports.
+Step 2: Load the dataframe.
+Step 3: Clean the 'capacity in use' column by removing spaces and converting to float (the error occurred due to space in '119 , 31%').
+Step 4: Convert 'total passengers' to float as well.
+Step 5: Calculate the correlation coefficient using pandas corr() method.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean 'capacity in use' column: remove spaces and convert to float
+df['capacity in use'] = df['capacity in use'].str.replace(' ', '').str.replace(',', '.').str.replace('%', '').astype(float)
+
+# Convert 'total passengers' to float
+df['total passengers'] = df['total passengers'].astype(int)
+
+# Calculate correlation coefficient
+correlation = df['total passengers'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.4f}")
+```

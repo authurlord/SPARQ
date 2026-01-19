@@ -1,0 +1,33 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert columns to numeric, handling negative signs and special cases
+df['revenues (us billion)'] = pd.to_numeric(df['revenues (us billion)'], errors='coerce')
+df['profit (us billion)'] = pd.to_numeric(df['profit (us billion)'], errors='coerce')
+df['assets (us billion)'] = pd.to_numeric(df['assets (us billion)'], errors='coerce')
+df['market value (us billion)'] = pd.to_numeric(df['market value (us billion)'], errors='coerce')
+
+# Check for outliers using IQR method for revenues and market value
+def find_outliers_iqr(series):
+    Q1 = series.quantile(0.25)
+    Q3 = series.quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    return series[(series < lower_bound) | (series > upper_bound)]
+
+# Identify outliers
+revenue_outliers = find_outliers_iqr(df['revenues (us billion)'])
+market_value_outliers = find_outliers_iqr(df['market value (us billion)'])
+
+# Manual inspection for extreme values
+print("Outliers in revenues (US billion):", revenue_outliers.tolist())
+print("Outliers in market value (US billion):", market_value_outliers.tolist())
+
+# Observations
+print("Unusual patterns:")
+print("- Hellenic Telecom has extremely high revenue (1000) compared to others.")
+print("- Piraeus Bank has a massive negative profit (-8.6) relative to its size.")
+print("- Piraeus Bank's market value (100) is unusually high compared to its profit and assets.")
+print("Final Answer: hellenic telecom, piraeus bank")

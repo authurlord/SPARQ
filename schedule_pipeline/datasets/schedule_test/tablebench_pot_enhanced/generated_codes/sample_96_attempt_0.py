@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the 'Record high °F (°C)' row
+record_high_row = df.iloc[0]  # First row contains record high
+
+# Parse Celsius values from the string format (e.g., "76\n(24)" → 24)
+celsius_values = []
+for cell in record_high_row[1:]:  # Skip the 'Month' column
+    celsius = int(cell.split('(')[1].split(')')[0])
+    celsius_values.append(celsius)
+
+# Months
+months = df.columns[1:13]
+
+# Plot bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(months, celsius_values, color='skyblue')
+plt.title('Record High Temperature (°C) by Month')
+plt.xlabel('Month')
+plt.ylabel('Temperature (°C)')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Final Answer: No numerical answer required, but the chart is generated.
+print("Final Answer: Chart displayed")

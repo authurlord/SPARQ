@@ -1,0 +1,13 @@
+Step 1: The user wants to identify the nation that has 4 gold medals and is ranked 4th in the table.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'Rank' is '4' and 'Gold' is '4'.
+Step 4: Extract the 'Nation' from the filtered row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where Rank is 4 and Gold is 4
+result = df[(df['Rank'] == '4') & (df['Gold'] == '4')]
+nation = result['Nation'].iloc[0]
+print(f"Final Answer: {nation}")
+```

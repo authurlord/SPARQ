@@ -1,0 +1,21 @@
+The table provides a comprehensive overview of tourism statistics for 21 countries in Latin America and the Caribbean for the year 2011. Each row represents a country, and the columns detail various aspects of its tourism sector:
+
+- **Tourist arrivals (2011) (millions)**: The number of tourists visiting the country in 2011.
+- **Tourism receipts (2011) (millions of US)**: The total revenue generated from tourism in US millions.
+- **Tourism receipts (2011) (US per arrival)**: Average revenue per tourist arrival, indicating tourism's economic value per visitor.
+- **Tourism receipts (2011) (US per capita)**: Revenue generated per person in the country, reflecting how tourism contributes to the average citizen’s income.
+- **Tourism receipts (2011) (US per capita)**: The percentage of GDP and exports that tourism contributes, showing its economic importance.
+- **Tourism competitiveness (2011) (TTCI)**: A measure of how competitive a country's tourism sector is globally.
+
+Notable trends:
+- Mexico leads in tourist arrivals (23.4 million), which is significantly higher than other countries, though its per-capita tourism receipts are relatively low (507 USD), suggesting high volume but possibly lower average spending per tourist.
+- Costa Rica has the highest per-capita tourism receipts (459 USD), indicating strong economic returns per visitor.
+- Countries like the Dominican Republic and Cuba have high per-capita tourism receipts (440 USD and 194 USD respectively), suggesting strong tourism-driven economies despite moderate numbers.
+- Tourism receipts as a share of GDP vary widely (from 1.3% in Venezuela to 36.2% in the Dominican Republic), with the latter indicating a highly tourism-dependent economy.
+- The data shows a positive correlation between tourist volume and tourism receipts, except in cases like Haiti and Venezuela, where low tourist numbers are offset by high per-capita receipts or low GDP dependence.
+
+This data highlights the importance of both volume and revenue efficiency in tourism development.
+
+Since the question asks for a descriptive analysis rather than a numerical computation, no code is needed to generate a result. The answer is purely interpretive.
+
+Final Answer: None

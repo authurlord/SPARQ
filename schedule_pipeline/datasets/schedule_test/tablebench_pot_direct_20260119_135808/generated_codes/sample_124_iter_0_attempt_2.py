@@ -1,0 +1,22 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter only sunken ships
+sunken_ships = df[df['Fate'] == 'Sunk']
+# Convert tonnage to numeric, removing commas
+sunken_ships['Tonnage (GRT)'] = sunken_ships['Tonnage (GRT)'].str.replace(',', '').astype(int)
+# Sort by tonnage for better visualization
+sunken_ships = sunken_ships.sort_values('Tonnage (GRT)', ascending=True)
+
+# Plot horizontal bar chart
+plt.figure(figsize=(10, 6))
+plt.barh(sunken_ships['Name'], sunken_ships['Tonnage (GRT)'], color='skyblue')
+plt.xlabel('Tonnage (GRT)')
+plt.ylabel('Ship Name')
+plt.title('Tonnage of Sunken Ships')
+plt.gca().invert_yaxis()  # To show highest tonnage at the top
+plt.tight_layout()
+plt.show()
+
+print("Final Answer: Chart displayed")

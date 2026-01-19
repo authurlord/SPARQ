@@ -1,0 +1,42 @@
+Step 1: Understand the question.
+- We need to find the average 'Composition' score of the top 3 painters with the highest 'Expression' scores.
+- We need to find the average 'Drawing' score of the bottom 5 painters with the lowest 'Color' scores.
+- Then compute the difference between these two averages.
+
+Step 2: Load the data into a DataFrame.
+- The columns are: Painter, Composition, Drawing, Color, Expression.
+
+Step 3: Handle missing values (e.g., 'x', 'O') — treat them as NaN and drop or impute appropriately. Since the question is about averages, we can drop rows with non-numeric values in the relevant columns.
+
+Step 4: 
+- Sort by 'Expression' descending to get top 3 painters.
+- Take their average 'Composition'.
+- Sort by 'Color' ascending to get bottom 5 painters with lowest 'Color'.
+- Take their average 'Drawing'.
+
+Step 5: Compute the difference.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert all relevant columns to numeric, handling non-numeric entries like 'x', 'O' as NaN
+df['Composition'] = pd.to_numeric(df['Composition'], errors='coerce')
+df['Drawing'] = pd.to_numeric(df['Drawing'], errors='coerce')
+df['Color'] = pd.to_numeric(df['Color'], errors='coerce')
+df['Expression'] = pd.to_numeric(df['Expression'], errors='coerce')
+
+# Get top 3 painters with highest Expression
+top_3_composition = df.sort_values(by='Expression', ascending=False).head(3)['Composition'].mean()
+
+# Get bottom 5 painters with lowest Color
+bottom_5_drawing = df.sort_values(by='Color').head(5)['Drawing'].mean()
+
+# Compute the difference
+difference = top_3_composition - bottom_5_drawing
+
+print(f"Final Answer: {difference:.1f}")
+```

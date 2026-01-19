@@ -1,0 +1,30 @@
+Step 1: The user wants a chart showing the number of gold, silver, and bronze medals for each country.  
+Step 2: Load the dataframe and filter out the "Total" row since it represents aggregate values, not individual countries.  
+Step 3: Extract the columns for 'Gold', 'Silver', 'Bronze', and ensure only country-level rows are considered.  
+Step 4: Create a stacked bar chart to visualize the medal distribution per country.  
+Step 5: Use matplotlib to plot the chart and display it.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter out the total row (last row with 'Total' in Nation)
+df_filtered = df[df['Nation'] != 'Total']
+
+# Pivot the data to have countries as index and medals as columns
+pivot_data = df_filtered[['Nation', 'Gold', 'Silver', 'Bronze']].set_index('Nation')
+
+# Create a stacked bar chart
+plt.figure(figsize=(12, 8))
+pivot_data.plot(kind='bar', stacked=True, color=['gold', 'silver', 'lightcoral'])
+plt.title('Number of Gold, Silver, and Bronze Medals by Country')
+plt.xlabel('Country')
+plt.ylabel('Number of Medals')
+plt.xticks(rotation=45)
+plt.legend(title='Medal Type')
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: chart

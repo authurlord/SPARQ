@@ -1,0 +1,16 @@
+Step 1: The user wants to analyze how the percentage of votes for McCain (`mccain %`) changes as the total votes (`total`) increases across counties. This implies a correlation or trend analysis between these two variables.
+
+Step 2: Load the dataframe and extract the `mccain %` and `total` columns.
+
+Step 3: Compute the correlation coefficient between `mccain %` and `total` to determine the strength and direction of the relationship.
+
+Step 4: Print the correlation value as the answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'mccain %' and 'total'
+correlation = df['mccain %'].corr(df['total'])
+print(f"Final Answer: {correlation:.3f}")
+```

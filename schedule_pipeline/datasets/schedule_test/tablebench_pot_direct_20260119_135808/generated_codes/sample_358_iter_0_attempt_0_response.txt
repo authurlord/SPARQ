@@ -1,0 +1,15 @@
+Step 1: The user wants to count the number of years where the number of Indians admitted exceeds 25,000.
+Step 2: Load the dataframe.
+Step 3: Convert the 'indians admitted' column to integer type for numerical comparison.
+Step 4: Filter rows where 'indians admitted' > 25000.
+Step 5: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'indians admitted' to integer for proper comparison
+df['indians admitted'] = pd.to_numeric(df['indians admitted'])
+# Count the number of years with more than 25000 Indians admitted
+count_years = (df['indians admitted'] > 25000).sum()
+print(f"Final Answer: {count_years}")
+```

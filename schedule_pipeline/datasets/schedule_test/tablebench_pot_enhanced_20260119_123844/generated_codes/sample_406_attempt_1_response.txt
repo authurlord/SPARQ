@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table defines BMI categories and their corresponding BMI values and BMI Prime ranges. BMI (kg/m²) indicates body mass index, while BMI Prime is the ratio of actual BMI to the upper limit of normal BMI (25 kg/m²). Notable patterns include a linear increase in BMI Prime with higher obesity classes, where each category corresponds to a consistent increment in BMI and BMI Prime. For example, BMI Prime reaches 2.4 in the highest category (Hyper Obese), showing a direct scaling relationship. The table serves as a clinical reference for assessing weight status across populations.
+
+Final Answer: BMI, BMI Prime

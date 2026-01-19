@@ -1,0 +1,16 @@
+Step 1: The user wants the mean of the 'P' column, excluding rows with missing or null values.
+Step 2: Load the dataframe.
+Step 3: Convert the 'P' column to numeric, coercing errors (like '-' or non-numeric entries) to NaN.
+Step 4: Calculate the mean of the valid numeric values in the 'P' column.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'P' column to numeric, invalid parsing will be set as NaN
+df['P'] = pd.to_numeric(df['P'], errors='coerce')
+# Calculate mean of non-null values in 'P' column
+mean_P = df['P'].mean()
+print(f"Final Answer: {mean_P:.1f}")
+```

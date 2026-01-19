@@ -1,0 +1,48 @@
+[Answer Format]
+Final Answer: None
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean and prepare the data for plotting
+# Remove percentage signs and convert to float
+columns = ['1880', '1899', '1913', '19301', '1956', '1966', '1977', '1992', '2002']
+data_cleaned = df[columns].copy()
+
+# Convert strings with percentages to floats (remove % and convert)
+for col in columns:
+    data_cleaned[col] = data_cleaned[col].str.replace(r'[^\d.]', '', regex=True).astype(float)
+
+# Calculate total population for each year
+total_population = data_cleaned.sum(axis=0)
+
+# Calculate proportions for each ethnic group per year
+proportions = data_cleaned.div(total_population, axis=1) * 100
+
+# Plot stacked bar chart
+plt.figure(figsize=(12, 8))
+bottom = 0
+colors = plt.cm.Set3.colors  # Use a distinct colormap
+
+for idx, row in df.iterrows():
+    if row['Ethnicity'] == 'All':
+        continue  # Skip the "All" row as it's the total
+    ethnic_group = row['Ethnicity']
+    plt.bar(columns, proportions.iloc[idx], bottom=bottom, label=ethnic_group, color=colors[idx % len(colors)])
+
+    # Update bottom for next layer
+    bottom += proportions.iloc[idx]
+
+# Customize the plot
+plt.title('Proportion of Different Ethnic Populations Over Time (Percentage Stacked Bar Chart)')
+plt.xlabel('Year')
+plt.ylabel('Percentage (%)')
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```

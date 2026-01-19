@@ -1,0 +1,26 @@
+Step 1: The user wants a bar chart comparing the average 'mpg (US gallons)' for diesel and petrol fuel types.
+Step 2: Load the dataframe.
+Step 3: Filter the data by 'Fuel Type' (diesel and petrol).
+Step 4: Calculate the mean 'mpg (US gallons)' for each fuel type.
+Step 5: Create a bar chart using matplotlib to compare the averages.
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Convert 'mpg (US gallons)' to numeric
+df['mpg (US gallons)'] = pd.to_numeric(df['mpg (US gallons)'])
+
+# Group by 'Fuel Type' and calculate the mean mpg
+avg_mpg = df.groupby('Fuel Type')['mpg (US gallons)'].mean()
+
+# Create a bar chart
+plt.figure(figsize=(8, 5))
+avg_mpg.plot(kind='bar', color=['blue', 'green'])
+plt.title('Average MPG (US gallons) by Fuel Type')
+plt.ylabel('Average MPG')
+plt.xlabel('Fuel Type')
+plt.xticks(rotation=0)
+plt.show()
+```

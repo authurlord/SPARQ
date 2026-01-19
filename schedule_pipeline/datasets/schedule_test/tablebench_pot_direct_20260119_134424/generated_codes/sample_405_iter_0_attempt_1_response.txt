@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table lists power plants in India with key details such as serial number (sno), plant name (power plant), state, commissioned capacity in megawatts (MW), and year of commission. Main insights include: Himachal Pradesh has the most power plants (4), Madhya Pradesh has the highest total capacity (1520 MW), and the oldest plant is Baira Siul (commissioned in 1981), while the most recent is Chamera-III (2012). The largest single plant is Indira Sagar (1000 MW), and Sikkim has the smallest capacity (60 MW) among states.

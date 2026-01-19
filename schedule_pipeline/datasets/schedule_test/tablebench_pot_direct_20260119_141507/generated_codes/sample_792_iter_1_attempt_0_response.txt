@@ -1,0 +1,24 @@
+The error occurred because the condition `>=` was applied between a string and an integer (likely due to the "Year" column being treated as strings). We need to filter only the rows where the "Year" is between 1975 and 1990 (inclusive), converting the "Year" column to numeric first.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the "Year" column to integer type to ensure proper numerical comparison.
+3. Filter rows where the year is between 1975 and 1990 (inclusive).
+4. Extract the "Political Rights" scores from the filtered rows.
+5. Compute the standard deviation of these scores.
+6. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year' to integer for proper filtering
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
+# Filter rows from 1975 to 1990 inclusive
+filtered_df = df[(df['Year'] >= 1975) & (df['Year'] <= 1990)]
+# Extract Political Rights scores
+political_rights = filtered_df['Political Rights'].dropna()
+# Calculate standard deviation
+std_dev = political_rights.std()
+print(f"Final Answer: {std_dev:.1f}")
+```

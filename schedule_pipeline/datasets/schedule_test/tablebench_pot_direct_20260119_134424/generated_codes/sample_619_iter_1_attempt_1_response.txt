@@ -1,0 +1,19 @@
+Step 1: The user wants the total sales of the top 3 companies in the 'banking' industry.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'industry' is 'banking'.
+Step 4: Convert 'sales (billion )' column to numeric, handling any non-numeric values (like commas).
+Step 5: Select the top 3 sales values and sum them.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for banking industry
+banking_df = df[df['industry'] == 'banking']
+# Clean and convert 'sales (billion )' to numeric, removing commas and handling errors
+banking_df['sales (billion )'] = banking_df['sales (billion )'].str.replace(',', '').astype(float)
+# Get top 3 sales and sum
+total_sales = banking_df['sales (billion )'].nlargest(3).sum()
+print(f"Final Answer: {total_sales:.2f}")
+```

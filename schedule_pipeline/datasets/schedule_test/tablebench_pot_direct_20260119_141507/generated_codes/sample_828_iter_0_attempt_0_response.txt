@@ -1,0 +1,17 @@
+Step 1: The user wants the median GDP per capita of the top 20 countries by world rank.  
+Step 2: Identify the top 20 countries by world rank (i.e., the first 20 rows when sorted by 'gdp world rank' in ascending order).  
+Step 3: Extract the 'gdp per capita' values for these countries.  
+Step 4: Compute the median of these values.  
+
+Note: The table already has the 'gdp world rank' column, so we sort by it and take the first 20 entries.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by 'gdp world rank' and take top 20 countries
+top_20 = df.sort_values(by='gdp world rank').head(20)
+# Extract GDP per capita and compute median
+median_gdp = top_20['gdp per capita'].median()
+print(f"Final Answer: {median_gdp}")
+```

@@ -1,0 +1,15 @@
+Step 1: The user wants to find the season in which the driver achieved the highest number of wins.  
+Step 2: Load the dataframe.  
+Step 3: Identify the 'wins' column and group by 'season' to sum the wins per season.  
+Step 4: Find the season with the maximum wins.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Group by 'season' and sum the 'wins' column
+wins_per_season = df.groupby('season')['wins'].sum()
+# Find the season with the highest total wins
+max_wins_season = wins_per_season.idxmax()
+print(f"Final Answer: {max_wins_season}")
+```

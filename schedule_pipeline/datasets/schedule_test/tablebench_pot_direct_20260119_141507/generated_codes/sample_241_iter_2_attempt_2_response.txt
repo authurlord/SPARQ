@@ -1,0 +1,20 @@
+The error occurred because the "viewers (in millions)" column was incorrectly interpreted as a single string value due to a misalignment in parsing. In reality, each row has a separate viewer value, and the issue arose from a misreading of the data structure — specifically, the viewers column contains individual values per row, not concatenated values.
+
+Let's fix the approach:
+
+Step 1: Identify rows where the number of episodes is greater than 20.
+Step 2: Extract the "viewers (in millions)" for those rows.
+Step 3: Compute the average of those viewer values.
+
+We must ensure that the "viewers" column is properly parsed as numeric, not concatenated.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where episodes > 20
+filtered_df = df[df['episodes'] > 20]
+# Calculate the average viewers (in millions) for those seasons
+average_viewers = filtered_df['viewers (in millions)'].mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

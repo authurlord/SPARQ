@@ -1,0 +1,16 @@
+Step 1: Identify the top 3 contestants who lost the most weight in kilograms.  
+Step 2: Among these, extract their "percentage lost" values.  
+Step 3: Calculate the average of these percentage values.  
+
+From the data, the weight lost (kg) is in the "weight lost (kg)" column. We sort by this column in descending order and take the top 3. Then compute the mean of their "percentage lost".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by 'weight lost (kg)' in descending order and take top 3
+top_3_by_weight_lost = df.sort_values(by='weight lost (kg)', ascending=False).head(3)
+# Calculate average of 'percentage lost' for these top 3
+avg_percentage_lost = top_3_by_weight_lost['percentage lost'].mean()
+print(f"Final Answer: {avg_percentage_lost:.2f}")
+```

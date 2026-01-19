@@ -1,0 +1,26 @@
+The error occurred because the "Confluence [by Lahn-km]" column contains some `None` values (as strings) and others are numeric. We need to ensure we only consider rows where the confluence value is a number and below 100 km.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the "Confluence [by Lahn-km]" column to numeric, treating non-numeric values (like None or empty strings) as NaN.
+3. Filter rows where the confluence value is less than 100 (after converting to numeric).
+4. Select the "Length [km]" column for those filtered rows.
+5. Compute the average length of such rivers.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert confluence to numeric, coercing errors to NaN
+df['Confluence [by Lahn-km]'] = pd.to_numeric(df['Confluence [by Lahn-km']], errors='coerce')
+
+# Filter rivers where confluence is below 100 km and not NaN
+filtered_rivers = df[df['Confluence [by Lahn-km]'] < 100]
+
+# Calculate average length of these rivers
+average_length = filtered_rivers['Length [km]'].mean()
+
+print(f"Final Answer: {average_length:.1f}")
+```

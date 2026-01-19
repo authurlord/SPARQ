@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table categorizes BMI levels and their corresponding BMI Prime values, with main columns representing BMI ranges (kg/m²), BMI Prime ranges, and associated health categories. Notable patterns include a linear relationship between BMI and BMI Prime, where BMI Prime = BMI / 25 (normal weight threshold). Each category progresses consistently by 0.04 in BMI Prime per 1 kg/m² increase in BMI within the normal range. The highest BMI category (Hyper Obese) starts at 60 kg/m² with a BMI Prime of 2.4, indicating extreme obesity.

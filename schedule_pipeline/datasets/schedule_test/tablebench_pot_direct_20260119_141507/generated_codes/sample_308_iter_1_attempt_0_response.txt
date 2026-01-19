@@ -1,0 +1,26 @@
+We are asked to find how many songs written by Glen Campbell were released in the 1980s.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Filter rows where the 'Artist' is "Glen Campbell".
+3. Check the 'Year' column to see if the year is in the 1980s (i.e., between 1980 and 1989 inclusive).
+4. Count the number of such rows.
+
+Note: The error in the previous attempt was due to comparing a string (e.g., '1984') with an integer directly without converting the 'Year' column to numeric. We must ensure the 'Year' column is converted to integer before comparison.
+
+Corrected Python code:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year' to integer type to avoid string-int comparison errors
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
+
+# Filter songs by Glen Campbell and years in the 1980s (1980-1989)
+glen_campbell_1980s = df[(df['Artist'] == 'Glen Campbell') & (df['Year'].between(1980, 1989))]
+
+# Count the number of such songs
+count = len(glen_campbell_1980s)
+print(f"Final Answer: {count}")
+```

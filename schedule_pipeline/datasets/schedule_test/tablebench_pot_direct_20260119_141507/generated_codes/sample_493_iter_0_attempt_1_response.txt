@@ -1,0 +1,20 @@
+Step 1: Identify the states where males' rank is higher than 10.  
+Step 2: Among those states, find the one with the highest female HIV awareness rate (females (%)).  
+Step 3: Return the state name with the highest female HIV awareness rate.
+
+We will:
+- Load the dataframe.
+- Filter rows where 'males rank' > 10.
+- Sort by 'females (%)' in descending order.
+- Get the state with the highest value.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter states where males rank is higher than 10
+filtered_df = df[df['males rank'].astype(int) > 10]
+# Sort by female HIV awareness rate in descending order and get the top state
+top_female_state = filtered_df.sort_values(by='females (%)', ascending=False).iloc[0]['state']
+print(f"Final Answer: {top_female_state}")
+```

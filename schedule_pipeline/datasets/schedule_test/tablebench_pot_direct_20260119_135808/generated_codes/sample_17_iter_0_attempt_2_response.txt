@@ -1,0 +1,14 @@
+Step 1: The user wants the total number of medals won by all nations, which is the sum of the 'total' column.
+Step 2: Load the dataframe.
+Step 3: Convert the 'total' column to integers (handling missing values as 0).
+Step 4: Sum the 'total' column and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'total' column to numeric, treating '-' as NaN and filling with 0
+df['total'] = pd.to_numeric(df['total'], errors='coerce').fillna(0).astype(int)
+# Calculate total medals
+total_medals = df['total'].sum()
+print(f"Final Answer: {total_medals}")
+```

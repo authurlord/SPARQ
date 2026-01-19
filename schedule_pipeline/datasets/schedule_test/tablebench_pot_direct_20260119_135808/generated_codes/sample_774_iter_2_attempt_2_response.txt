@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Cannot predict future trends with given data, only historical data available.

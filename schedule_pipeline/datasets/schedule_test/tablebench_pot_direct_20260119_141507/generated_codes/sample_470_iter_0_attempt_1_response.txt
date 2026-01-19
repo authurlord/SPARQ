@@ -1,0 +1,20 @@
+Step 1: The question asks for countries whose values deviate significantly from the norm. Since there are two columns with financial data (2011 IMF and 2008 CIA Factbook), we interpret "deviation from the norm" as large differences between the 2011 and 2008 values.  
+Step 2: Calculate the absolute difference between 2011 and 2008 values for each country.  
+Step 3: Identify countries where this difference is unusually large (e.g., more than the average or median difference).  
+Step 4: Use a threshold (e.g., > 1.5 times the interquartile range or simply a high absolute difference) to flag outliers.  
+Step 5: Return the names of such countries.
+
+We will compute the absolute differences and identify countries with differences above the median or an arbitrary threshold (e.g., > 10,000) since the values vary widely.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Compute the absolute difference between 2011 and 2008 values
+df['diff'] = abs(df['2011 (imf)'] - df['2008 (cia factbook)'])
+
+# Identify countries with large deviations (difference > 10,000)
+outliers = df[df['diff'] > 10000]['nation'].tolist()
+
+print(f"Final Answer: {', '.join(outliers)}")
+```

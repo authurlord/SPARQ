@@ -1,0 +1,25 @@
+Step 1: The user wants a forecast for the next 5 years based on historical data from 1850 to 1858. Since the dataset is small (only 9 years) and lacks clear numerical trends or statistical patterns, a precise forecast is not feasible. However, we can analyze the data for any observable patterns in tropical storms and hurricanes.
+
+Step 2: Load the dataframe and examine the 'number of tropical storms' and 'number of hurricanes' columns.
+
+Step 3: Compute the average number of tropical storms and hurricanes per year over the period.
+
+Step 4: Use these averages as a simple baseline forecast for the next 5 years.
+
+Step 5: Present the forecasted average values.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Calculate average number of tropical storms and hurricanes per year
+avg_storms = df['number of tropical storms'].astype(int).mean()
+avg_hurricanes = df['number of hurricanes'].astype(int).mean()
+
+# Forecast for next 5 years using the average
+forecast_storms = avg_storms * 5
+forecast_hurricanes = avg_hurricanes * 5
+
+print(f"Final Answer: {forecast_storms:.1f}, {forecast_hurricanes:.1f}")
+```

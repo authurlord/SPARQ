@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of companies in the banking industry.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'industry' column is 'banking'.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where industry is 'banking'
+banking_companies = df[df['industry'] == 'banking']
+# Count the number of banking companies
+num_bankings = len(banking_companies)
+print(f"Final Answer: {num_bankings}")
+```

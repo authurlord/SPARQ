@@ -1,0 +1,24 @@
+Step 1: The user wants to find the two universities with the smallest difference in enrollment and the value of that difference.
+Step 2: Load the dataframe.
+Step 3: Convert 'enrollment' column to integer for numerical operations.
+Step 4: Calculate the absolute difference in enrollment between each pair of universities.
+Step 5: Identify the pair with the smallest difference.
+Step 6: Print the names of the two universities and the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert enrollment to integer
+df['enrollment'] = pd.to_numeric(df['enrollment'])
+# Calculate pairwise differences in enrollment
+min_diff = float('inf')
+best_pair = None
+for i in range(len(df)):
+    for j in range(i + 1, len(df)):
+        diff = abs(df.iloc[i]['enrollment'] - df.iloc[j]['enrollment'])
+        if diff < min_diff:
+            min_diff = diff
+            best_pair = (df.iloc[i]['location'], df.iloc[j]['location'])
+print(f"Final Answer: {best_pair[0]}, {best_pair[1]}, {min_diff}")
+```

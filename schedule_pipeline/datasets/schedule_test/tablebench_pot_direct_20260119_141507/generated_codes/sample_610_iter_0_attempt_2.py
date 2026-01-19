@@ -1,0 +1,29 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter the row where 'SPECIFICATION' is 'Males' and find the relevant values
+# We are interested in the row labeled 'I.', '1.', '1.', 'A.', 'Males'
+# The population values for '20–29' and '30–39' age groups are at index 15 and 16 in the 'POPULATION (by age group in 2002)' column
+# Specifically, we need the values under '20–29' and '30–39' for 'Males'
+
+# Extract the row where SPECIFICATION_1 is 'Males' (from the data structure)
+# The row with 'Males' appears in the data at index 4 (0-indexed) under 'I.', '1.', '1.', 'A.', 'Males'
+# The columns for age groups are at positions 8, 9, 10, 11, 12, 13, 14, 15, 16 (after 'SPECIFICATION')
+# But from the structure, the values for '20–29' and '30–39' are at indices 9 and 10 in the population columns
+
+# Since the data is structured, we can directly extract:
+males_20_29 = df.loc[df['SPECIFICATION'] == 'Males', 'POPULATION (by age group in 2002)_2'].values[0]
+males_30_39 = df.loc[df['SPECIFICATION'] == 'Males', 'POPULATION (by age group in 2002)_3'].values[0]
+
+# Alternatively, we can use direct indexing since the rows are well-defined
+# Row index 4: 'I.', '1.', '1.', 'A.', 'Males'
+# The values for '20–29' and '30–39' are at columns 9 and 10 (0-based in the population columns)
+
+# Actually, from the data, the row with 'Males' has the values:
+# 'POPULATION (by age group in 2002)_2' = 10 (20–29), 'POPULATION (by age group in 2002)_3' = 8 (30–39)
+
+# So sum them
+total_males = df.loc[df['SPECIFICATION'] == 'Males', 'POPULATION (by age group in 2002)_2'].values[0] + df.loc[df['SPECIFICATION'] == 'Males', 'POPULATION (by age group in 2002)_3'].values[0]
+
+print(f"Final Answer: {total_males}")

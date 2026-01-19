@@ -1,0 +1,23 @@
+The error occurred because the 'avg daily flts' value for the Monte Carlo - Nice route was stored as a string ('117'), not a numeric value. We need to ensure the column is properly converted to numeric before performing calculations.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'avg daily flts' column to numeric (to handle string values like '117').
+Step 3: Find the average daily flights for the route "monte carlo ( mcm ) - nice ( nce )".
+Step 4: Increase it by 28% (multiply by 1.28).
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'avg daily flts' to numeric, coercing errors to NaN if any
+df['avg daily flts'] = pd.to_numeric(df['avg daily flts'], errors='coerce')
+
+# Filter the row for the route "monte carlo ( mcm ) - nice ( nce )"
+route_flights = df[df['route'] == 'monte carlo ( mcm ) - nice ( nce )']['avg daily flts'].values[0]
+
+# Increase by 28%
+new_flights = route_flights * 1.28
+
+print(f"Final Answer: {new_flights:.0f}")
+```

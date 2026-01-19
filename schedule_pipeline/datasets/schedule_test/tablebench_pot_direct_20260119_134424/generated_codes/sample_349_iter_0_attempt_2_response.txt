@@ -1,0 +1,14 @@
+Step 1: The user wants to count how many conferences had occurrences in the year 1996.
+Step 2: Load the dataframe.
+Step 3: Focus on the columns corresponding to the years 1993, 1996, 1999, etc.
+Step 4: For each row (conference), check if the value in the '1996' column is not '-' (i.e., it has an occurrence).
+Step 5: Count such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count how many conferences have a non '-' entry in the '1996' column
+count_1996 = df[df['1996'] != '-'].shape[0]
+print(f"Final Answer: {count_1996}")
+```

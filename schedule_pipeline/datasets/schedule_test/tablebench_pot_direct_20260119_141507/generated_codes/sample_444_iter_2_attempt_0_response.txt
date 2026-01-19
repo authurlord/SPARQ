@@ -1,0 +1,5 @@
+The question refers to "orbital characteristics" such as eccentricity, inclination, periselene, and aposelene. However, none of the columns in the provided table contain any of these terms. The table contains data about football (soccer) player statistics—specifically, apps (appearances), goals, and season-related details for clubs like River Plate, Millonarios, and Real Madrid.
+
+Therefore, there are no data points related to orbital characteristics in this table.
+
+Final Answer: None

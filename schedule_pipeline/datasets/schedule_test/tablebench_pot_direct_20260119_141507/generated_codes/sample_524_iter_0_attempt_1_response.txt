@@ -1,0 +1,57 @@
+Step 1: Understand the question. We are to calculate the change in total seating capacity of the airline's fleet from 2004 to 2008.  
+Step 2: Identify relevant data — only the "seating" column is needed, as it represents the seating capacity.  
+Step 3: Filter the rows where the aircraft was introduced before or in 2004 (to include data up to 2004) and after or in 2008 (to include data from 2008 onward). However, note that the table does not explicitly state when each aircraft was retired or introduced relative to 2004–2008. But since we are asked for the fleet capacity change over this period, we interpret it as the sum of seating capacities of all aircraft introduced before or in 2004 versus those introduced after or in 2008.  
+Step 4: The aircraft introduced in 2004 or before:  
+- Airbus A319-100 (2004): 156  
+- Boeing 737-204 (1995): 115  
+- Boeing 737-300 (1996): 148  
+- Boeing 737-700 (2000): 149  
+→ These were in service before or during 2004.  
+
+Aircraft introduced in 2008 or after:  
+- Airbus A320-200 (2008): 180  
+- Airbus A321-200 (2008): 220  
+→ These were introduced in 2008 or after.  
+
+Step 5: Compute total seating capacity in 2004 and 2008:  
+- Before/2004: 156 + 115 + 148 + 149 = 568  
+- After/2008: 180 + 220 = 400  
+→ Change = (Total in 2008) - (Total in 2004) = 400 - 568 = -168  
+
+But wait — the fleet capacity change should reflect the net change in the fleet over time. However, the definition says "variation in total seating capacity". Since the aircraft introduced in 2004–2008 are replacing older ones, we must consider only the total seating capacity at the start (before 2004) and end (after 2008).  
+
+But the table shows that the A320-200 and A321-200 were introduced in 2008, and others were retired or replaced earlier. So the fleet capacity in 2004 includes older models, and in 2008 includes newer ones.  
+
+We calculate total seating in 2004 (all aircraft introduced before or in 2004):  
+- A319-100: 156  
+- 737-204: 115  
+- 737-300: 148  
+- 737-700: 149  
+Sum = 156 + 115 + 148 + 149 = 568  
+
+In 2008:  
+- A320-200: 180  
+- A321-200: 220  
+Sum = 180 + 220 = 400  
+
+So the total seating capacity decreased from 568 to 400 → change = 400 - 568 = -168  
+
+Final Answer: -168
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows by introduction year
+before_2004 = df[df['introduced'].astype(int) <= 2004]
+after_2008 = df[df['introduced'].astype(int) >= 2008]
+
+# Calculate total seating capacity before and after
+total_before_2004 = before_2004['seating'].sum()
+total_after_2008 = after_2008['seating'].sum()
+
+# Change in total seating capacity
+change = total_after_2008 - total_before_2004
+print(f"Final Answer: {change}")
+```

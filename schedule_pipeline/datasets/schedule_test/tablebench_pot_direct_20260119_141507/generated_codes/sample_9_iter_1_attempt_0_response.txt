@@ -1,0 +1,22 @@
+The error occurred because the 'podiums' column contains string values that were not properly converted to numeric. In the dataset, some entries like 'nc' (no classification) need to be handled appropriately — they should not be treated as numbers. We must ensure that only valid numeric values are used in the average calculation.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Extract the 'podiums' column.
+3. Convert the column to numeric, coercing errors (e.g., 'nc' becomes NaN).
+4. Drop any rows where podiums are NaN.
+5. Compute the mean of the remaining valid podium values.
+6. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'podiums' to numeric, coercing errors to NaN
+df['podiums'] = pd.to_numeric(df['podiums'], errors='coerce')
+# Remove rows with NaN values (invalid podium counts)
+df_clean = df.dropna(subset=['podiums'])
+# Calculate the average number of podiums
+average_podiums = df_clean['podiums'].mean()
+print(f"Final Answer: {average_podiums:.1f}")
+```

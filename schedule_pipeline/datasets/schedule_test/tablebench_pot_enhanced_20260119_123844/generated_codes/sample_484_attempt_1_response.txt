@@ -1,0 +1,32 @@
+Step 1: The user wants to identify mountain peaks with elevation and prominence that significantly deviate from the pattern in the dataset.
+Step 2: Load the dataframe.
+Step 3: Convert 'elevation (m)' and 'prominence (m)' columns to numeric for analysis.
+Step 4: Use statistical methods (e.g., Z-scores or IQR) to detect outliers. Here, we'll use Z-scores with a threshold of 2 to flag significant deviations.
+Step 5: Identify peaks where either elevation or prominence has a Z-score > 2.
+Step 6: Return the names of such peaks.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert elevation and prominence to numeric
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'], errors='coerce')
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'], errors='coerce')
+
+# Drop rows with missing values
+df.dropna(subset=['elevation (m)', 'prominence (m)'], inplace=True)
+
+# Calculate Z-scores for elevation and prominence
+elevation_z = np.abs((df['elevation (m)'] - df['elevation (m)'].mean()) / df['elevation (m)'].std())
+prominence_z = np.abs((df['prominence (m)'] - df['prominence (m)'].mean()) / df['prominence (m)'].std())
+
+# Identify peaks with Z-score > 2 in either column
+outliers = df[(elevation_z > 2) | (prominence_z > 2)]
+
+# Extract peak names
+outlier_peaks = outliers['peak'].tolist()
+
+print(f"Final Answer: {', '.join(outlier_peaks)}")
+```

@@ -1,0 +1,18 @@
+Step 1: The question asks for the minimum increase in GDP per capita for West Germany to surpass France's GDP per capita, assuming no change in population.
+Step 2: Extract the GDP per capita values for West Germany and France from the table.
+Step 3: Calculate the difference between France's GDP per capita and West Germany's GDP per capita. If West Germany's value is lower, the difference is the required increase.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract GDP per capita values
+gdp_per_capita_west_germany = float(df[df['member countries'] == 'west germany']['gdp per capita (us)'].values[0])
+gdp_per_capita_france = float(df[df['member countries'] == 'france']['gdp per capita (us)'].values[0])
+
+# Calculate the required increase
+required_increase = gdp_per_capita_france - gdp_per_capita_west_germany + 1  # +1 to surpass
+
+print(f"Final Answer: {required_increase:.0f}")
+```

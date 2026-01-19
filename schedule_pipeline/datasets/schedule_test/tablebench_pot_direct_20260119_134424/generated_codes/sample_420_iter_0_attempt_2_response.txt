@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: order, couple, karen, nicky, jason, ruthie, robin, total, scoreboard, song, public vote %, result

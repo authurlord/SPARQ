@@ -1,0 +1,36 @@
+Step 1: The question asks to identify unusual data points that deviate significantly from the patterns in the table.  
+Step 2: We focus on numerical columns such as population (2011 census), land area, and percentage change.  
+Step 3: Unusual data may include:
+   - Extremely high or low population values (e.g., outliers in 2011 census)
+   - Extremely large or small land areas
+   - Extreme percentage changes (e.g., >10% or < -10%)
+   - Negative land area (which is impossible)
+Step 4: We will check for:
+   - Negative land area (invalid)
+   - Population values that are unusually high or low relative to others
+   - Percentage change with extreme values (e.g., >15% or < -10%)
+
+We will analyze the '2011 census', 'land area (km square)', and '% change' columns for anomalies.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check for negative land area (invalid)
+negative_area = df[df['land area (km square)'] < 0]
+
+# Check for extreme percentage changes (>15% or <-10%)
+extreme_change = df[(df['% change'].str.replace('%', '').astype(float) > 15) | (df['% change'].str.replace('%', '').astype(float) < -10)]
+
+# Check for extremely high or low population values
+population_values = df['2011 census'].astype(int)
+population_outliers = df[(population_values > population_values.quantile(0.95)) | (population_values < population_values.quantile(0.05))]
+
+# Combine all anomalies
+anomalies = pd.concat([negative_area, extreme_change, population_outliers], ignore_index=True)
+
+# Print the names of the regions with anomalies
+anomaly_names = anomalies['name'].tolist()
+print(f"Final Answer: {', '.join(anomaly_names)}")
+```

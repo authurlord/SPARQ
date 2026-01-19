@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The maximum speed increases with higher horsepower, but not linearly across all train types. For example, trains with 220 horsepower (rhn, rts) have max speeds of 90 km/h and 70 km/h respectively, while those with 285–298 horsepower (asr, apd 20, apd 60) reach 120 km/h.

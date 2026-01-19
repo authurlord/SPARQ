@@ -1,0 +1,5 @@
+The question asks for the total increase in medals from 2009 to 2011 for the top 3 countries. However, the provided table does not contain any data about "medals." It contains population data for countries across years (2009, 2010, 2011). 
+
+Since there is no information about medals in the dataset, it is not possible to compute the requested value.
+
+Final Answer: None

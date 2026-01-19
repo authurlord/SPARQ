@@ -1,0 +1,19 @@
+Step 1: The user wants to find the year when the athlete achieved their best (i.e., highest) position in the 800m event at the World Championships.  
+Step 2: Filter the data to include only rows where the 'Event' is '800 m' and 'Competition' is 'World Championships'.  
+Step 3: Among those rows, identify the one with the best (lowest) position number.  
+Step 4: Extract the corresponding 'Year' from that row.  
+
+Note: "Best position" means the lowest rank (e.g., 2nd is better than 21st).  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for World Championships with 800 m event
+filtered_df = df[(df['Competition'] == 'World Championships') & (df['Event'] == '800 m')]
+# Find the row with the best (lowest) position
+best_position_row = filtered_df.loc[filtered_df['Position'].astype(int).idxmin()]
+# Extract the year
+best_year = best_position_row['Year']
+print(f"Final Answer: {best_year}")
+```

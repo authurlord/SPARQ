@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains data on regions, locations, founding dates, depots, routes, and vehicles as of 12.09. The region with the highest number of vehicles is Novosibirsk Oblast (322), and the most routes are in Khakassia (12). The oldest location is Omsk (5 Nov 1955), and Novosibirsk has the most depots (4).

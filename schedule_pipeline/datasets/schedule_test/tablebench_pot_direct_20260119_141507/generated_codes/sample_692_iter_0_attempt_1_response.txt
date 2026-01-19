@@ -1,0 +1,14 @@
+Step 1: The user wants to identify the country with the highest average relative annual growth (%) in population.  
+Step 2: Load the dataframe.  
+Step 3: Focus on the 'average relative annual growth (%)' column and match it with the corresponding country name.  
+Step 4: Find the row with the maximum value in that column and extract the country name.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the country with the highest average relative annual growth (%)
+max_growth_row = df[df['average relative annual growth (%)'] == df['average relative annual growth (%)'].max()]
+country_with_max_growth = max_growth_row.iloc[0]['country (or dependent territory)']
+print(f"Final Answer: {country_with_max_growth}")
+```

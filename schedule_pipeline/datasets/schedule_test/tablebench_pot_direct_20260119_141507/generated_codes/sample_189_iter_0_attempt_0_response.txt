@@ -1,0 +1,35 @@
+Step 1: The question asks which factor significantly contributes to the 'total passengers (millions) 2011 - 12' for each railway station. This implies we need to assess the correlation between each column and the 'total passengers' column.
+
+Step 2: We will calculate the correlation between 'total passengers (millions) 2011 - 12' and each of the other numerical columns:  
+- 'annual entry / exit (millions) 2011 - 12'  
+- 'annual interchanges (millions) 2011 - 12'  
+- 'number of platforms'  
+
+Note: 'location' is categorical and not suitable for correlation analysis.
+
+Step 3: Identify the column with the highest absolute correlation coefficient with 'total passengers'.
+
+Step 4: Print the name of the most correlated factor.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select only numerical columns for correlation
+numeric_columns = ['annual entry / exit (millions) 2011 - 12', 
+                   'annual interchanges (millions) 2011 - 12', 
+                   'number of platforms', 
+                   'total passengers (millions) 2011 - 12']
+
+# Compute correlation matrix
+correlation_matrix = df[numeric_columns].corr()
+
+# Get the correlation between 'total passengers' and the other columns
+correlations = correlation_matrix['total passengers (millions) 2011 - 12'].drop('total passengers (millions) 2011 - 12')
+
+# Find the column with the highest absolute correlation
+most_correlated = correlations.abs().idxmax()
+
+print(f"Final Answer: {most_correlated}")
+```

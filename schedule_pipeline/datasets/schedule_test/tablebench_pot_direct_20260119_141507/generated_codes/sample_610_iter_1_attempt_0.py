@@ -1,0 +1,37 @@
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter rows where SPECIFICATION_1 is 'A.' and SPECIFICATION_2 is 'Males'
+# The relevant row is at index 5 (after the header) where the row is ['I.', '1.', 'A.', 'Males', ...]
+# We locate it by checking the first few columns
+
+# Since the data is structured, we can directly extract the row where the second column is 'A.' and third is 'Males'
+# But easier: manually locate the row with 'Males' in the 'SPECIFICATION_2' column
+# In the data, the row is at index 5: ['I.', '1.', 'A.', 'Males', ...]
+
+# Extract the values for age groups 20–29 and 30–39
+# The values are in the 4th and 5th columns of the "POPULATION (by age group in 2002)" list
+# Column indices: 
+#   'POPULATION (by age group in 2002)' starts at index 15 (last column)
+#   So we take df.iloc[5, 15], df.iloc[5, 16], df.iloc[5, 17], etc.
+
+# Actually, the data is structured such that:
+# Row 5: ['I.', '1.', 'A.', 'Males', 'Males', 'person', '74', '13', '16', '10', '8', '10', '9', '4', '3', '1']
+# So the values for 20–29 (index 3) is 10, 30–39 (index 4) is 8
+
+# We can directly access row index 5 (0-based), and get the values at positions 3 and 4 (0-indexed in the population list)
+# The population values start at index 6 (column index 6) and go to 15.
+
+# So for row index 5:
+# Population values: index 6 to 15 → [74, 13, 16, 10, 8, 10, 9, 4, 3, 1]
+# Age group 20–29 is at index 3 → value 10
+# Age group 30–39 is at index 4 → value 8
+
+# Sum them
+males_20_29 = df.iloc[5, 9]  # column index 9 → 20–29
+males_30_39 = df.iloc[5, 10] # column index 10 → 30–39
+
+total_males = males_20_29 + males_30_39
+print(f"Final Answer: {total_males}")

@@ -1,0 +1,18 @@
+Step 1: The user wants a forecasted average finish position for the year 2005 based on historical data from 1985 to 2004. Since no explicit trend or model is specified, we assume a simple linear extrapolation using the average finish positions over time.
+
+Step 2: Load the dataframe.
+
+Step 3: Extract the 'avg finish' column and compute its average across all years (1985–2004).
+
+Step 4: Use this average as the forecasted value for 2005, assuming similar performance.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the average of 'avg finish' from 1985 to 2004
+forecast_avg_finish = df['avg finish'].mean()
+print(f"Final Answer: {forecast_avg_finish:.1f}")
+```

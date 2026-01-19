@@ -1,0 +1,26 @@
+The error occurred because the 'points for' column contains a string value "93 1" (e.g., in Bryncoch RFC's row), which cannot be directly converted to a float. This is likely due to formatting issues where the points are represented as "93 1" instead of a single number.
+
+Step 1: Identify that the 'points for' column has mixed data types — some are numbers, others are strings like "93 1".
+Step 2: Clean the 'points for' column by splitting and converting values appropriately.
+Step 3: Remove any non-numeric entries or parse the string correctly.
+Step 4: Compute the standard deviation of the cleaned numeric values.
+
+We will:
+- Extract the 'points for' column.
+- For each entry, split if it contains space (like "93 1"), and take the first part as the numeric value.
+- Convert to float and compute standard deviation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean 'points for' column: split on space and take first number
+df['points for'] = df['points for'].astype(str).str.split().str[0].astype(float)
+
+# Calculate standard deviation of 'points for'
+std_points_for = df['points for'].std()
+
+print(f"Final Answer: {std_points_for:.1f}")
+```

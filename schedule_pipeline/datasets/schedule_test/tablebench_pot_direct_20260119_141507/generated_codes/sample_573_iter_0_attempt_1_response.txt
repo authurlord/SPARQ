@@ -1,0 +1,16 @@
+Step 1: The user wants the average number of floors for buildings constructed between 1960 and 1980 (inclusive).  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'year' is between 1960 and 1980 (inclusive).  
+Step 4: Select the 'floors' column from the filtered data.  
+Step 5: Calculate the mean of the 'floors' column and print it.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter buildings constructed between 1960 and 1980 inclusive
+filtered_df = df[(df['year'] >= 1960) & (df['year'] <= 1980)]
+# Calculate the average number of floors
+avg_floors = filtered_df['floors'].mean()
+print(f"Final Answer: {avg_floors:.1f}")
+```

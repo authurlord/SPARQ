@@ -1,0 +1,17 @@
+Step 1: The user wants the difference in reported offenses between 'larceny - theft' and 'burglary'.
+Step 2: Load the dataframe.
+Step 3: Filter rows for 'larceny - theft' and 'burglary' based on the 'crime' column.
+Step 4: Extract the 'reported offenses' values for both crimes.
+Step 5: Calculate the difference and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for 'larceny - theft' and 'burglary'
+larceny_offenses = df[df['crime'] == 'larceny - theft']['reported offenses'].values[0]
+burglary_offenses = df[df['crime'] == 'burglary']['reported offenses'].values[0]
+
+# Convert to integers and calculate difference
+difference = int(larceny_offenses) - int(burglary_offenses)
+print(f"Final Answer: {difference}")
+```

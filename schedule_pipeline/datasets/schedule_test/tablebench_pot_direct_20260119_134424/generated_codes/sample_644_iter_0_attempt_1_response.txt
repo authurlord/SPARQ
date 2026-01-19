@@ -1,0 +1,19 @@
+Step 1: The user wants to calculate the correlation coefficient between boiling point and critical temperature of noble gases.
+Step 2: Load the dataframe.
+Step 3: Extract the 'boiling point (degree)' and 'critical temperature (k)' columns.
+Step 4: Convert the values to float for numerical operations.
+Step 5: Calculate the correlation coefficient using pandas corr() method.
+Step 6: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert boiling point and critical temperature to float
+boiling_point = df['boiling point (degree)'].astype(float)
+critical_temp = df['critical temperature (k)'].astype(float)
+
+# Calculate correlation coefficient
+correlation = boiling_point.corr(critical_temp)
+print(f"Final Answer: {correlation:.3f}")
+```

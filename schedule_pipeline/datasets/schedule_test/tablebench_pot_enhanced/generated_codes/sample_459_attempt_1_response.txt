@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: zzz bucharest, iasi, prahova, cluj, constanța, timiș, dolj, suceava, bacău, argeș, bihor, mureș, brașov, galați, dmbovița, maramureș, neamț, buza, olt, arad, hunedoara, botoșani, sibiu, vaslui, ilfov, teleorman, vlcea, satu mare, alba, gorj, vrancea, brăila, harghita, călărași, caraș - severin, bistrița - năsăud, giurgiu, ialomiţa, mehedinti, sălaj, tulcea, covasna, total

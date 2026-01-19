@@ -1,0 +1,24 @@
+Step 1: The user wants a pie chart showing the proportions of all species in Costa Rica.
+Step 2: Load the dataframe.
+Step 3: Extract the row for Costa Rica.
+Step 4: Select the columns representing species (Amphibians, Birds, Mammals, Reptile, Vascular plants).
+Step 5: Use matplotlib to create a pie chart with these values.
+Step 6: Display the chart.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter data for Costa Rica
+costa_rica_data = df[df['Country'] == 'Costa Rica']
+# Extract species data
+species = ['Amphibians', 'Birds', 'Mammals', 'Reptile', 'Vascular plants']
+values = [int(costa_rica_data[sp].values[0]) for sp in species]
+
+# Create pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(values, labels=species, autopct='%1.1f%%', startangle=140)
+plt.title('Proportions of Species in Costa Rica')
+plt.show()
+```

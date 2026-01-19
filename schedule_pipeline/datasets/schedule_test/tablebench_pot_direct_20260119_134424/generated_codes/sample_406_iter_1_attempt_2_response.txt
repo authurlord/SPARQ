@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table defines BMI categories and their corresponding BMI values and BMI Prime ranges. BMI (Body Mass Index) is a measure of body fat based on height and weight, while BMI Prime is the ratio of an individual's BMI to the upper limit of the normal BMI range (25 kg/m²). Notable patterns include: BMI Prime values increase proportionally with BMI, and each category represents a health risk level, with higher values indicating greater health risks. The classification system helps standardize BMI interpretation across populations.

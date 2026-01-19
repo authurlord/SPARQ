@@ -1,0 +1,39 @@
+Step 1: Identify anomalies in the "mintage (proof)" and "issue price (proof)" columns. Anomalies could include missing values ("n/a", "no bu exists"), inconsistent data types, or unusually high/low values compared to trends.
+Step 2: Check for missing values in "mintage (proof)" and "issue price (proof)".
+Step 3: Look for outliers — e.g., extremely high issue prices or very low mintages.
+Step 4: Note any inconsistencies such as "no bu exists" in mintage but not in issue price, or vice versa.
+
+Anomalies:
+- Missing values: "n/a" and "no bu exists" in both mintage and issue price columns.
+- Inconsistent data: For example, in 2005, "mintage (proof)" is "n/a", but "issue price (proof)" is 34.95; similarly, in 2006, "mintage (proof)" is "n/a", but "issue price (proof)" is 34.95 or 54.95.
+- High issue price: The "the poppy (with ultra high relief)" (2008) has an issue price of $139.95, which is significantly higher than others.
+- Very low mintage: "The Queen Mother" (2002) has only 9,994 proof minted, which is unusually low.
+- Mintage and BU inconsistency: Some entries have "no bu exists" but no corresponding BU price.
+
+Python code to detect and summarize these anomalies:
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check for missing values
+missing_mintage_proof = df['mintage (proof)'].isna().sum()
+missing_issue_price_proof = df['issue price (proof)'].isna().sum()
+
+# Identify high issue price outlier
+high_issue_price = df[df['issue price (proof)'] > 100]
+
+# Identify very low mintage
+low_mintage = df[df['mintage (proof)'] < 10000]
+
+# Identify entries with "no bu exists"
+no_bu_exists = df[df['mintage (bu)'].str.contains('no bu exists', case=False) | df['issue price (bu)'].str.contains('n / a', case=False)]
+
+print(f"Missing values in mintage (proof): {missing_mintage_proof}")
+print(f"Missing values in issue price (proof): {missing_issue_price_proof}")
+print(f"High issue price (>$100): {high_issue_price[['year', 'theme', 'artist', 'issue price (proof)']]}")
+print(f"Very low mintage (<10,000): {low_mintage[['year', 'theme', 'artist', 'mintage (proof)']]}")
+print(f"Entries with 'no bu exists' or 'n / a': {no_bu_exists[['year', 'theme', 'artist']]}")
+
+Final Answer: missing values, high issue price, low mintage, inconsistent BU data
+```

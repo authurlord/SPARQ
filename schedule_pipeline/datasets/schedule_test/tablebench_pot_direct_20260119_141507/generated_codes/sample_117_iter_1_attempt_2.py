@@ -1,0 +1,41 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'Year' to integer and clean the data for international (non-CIS) and CIS columns
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
+df['International (non-CIS)'] = pd.to_numeric(df['International (non-CIS)'], errors='coerce')
+df['CIS'] = pd.to_numeric(df['CIS'], errors='coerce')
+df['Domestic'] = pd.to_numeric(df['Domestic'], errors='coerce')
+
+# Filter out rows where any of the required columns have NaN values
+df_clean = df.dropna(subset=['Domestic', 'International (non-CIS)', 'CIS'])
+
+# Prepare the data for plotting
+years = df_clean['Year']
+domestic = df_clean['Domestic']
+non_cis_international = df_clean['International (non-CIS)']
+cis = df_clean['CIS']
+
+# Create a stacked bar chart
+plt.figure(figsize=(12, 6))
+bar_width = 0.25
+index = range(len(years))
+
+# Plot each series
+plt.bar([i - bar_width for i in index], domestic, width=bar_width, label='Domestic', color='skyblue')
+plt.bar([i for i in index], non_cis_international, width=bar_width, label='International (non-CIS)', color='lightgreen')
+plt.bar([i + bar_width for i in index], cis, width=bar_width, label='CIS', color='salmon')
+
+# Customize the plot
+plt.xlabel('Year')
+plt.ylabel('Passenger Count')
+plt.title('Trends in Domestic, International (non-CIS), and CIS Passenger Counts (2000–2013)')
+plt.xticks(index, years, rotation=45)
+plt.legend()
+plt.tight_layout()
+
+# Show the plot
+plt.show()

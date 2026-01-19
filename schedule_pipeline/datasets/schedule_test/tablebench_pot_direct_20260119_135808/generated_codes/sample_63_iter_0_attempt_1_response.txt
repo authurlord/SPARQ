@@ -1,0 +1,14 @@
+Step 1: The user wants the highest score achieved by Lionel Palairet.
+Step 2: Load the dataframe.
+Step 3: Filter the row where the player is 'lionel palairet'.
+Step 4: Extract the 'highest score' value from that row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for Lionel Palairet
+lionel_palairet = df[df['player'] == 'lionel palairet']
+# Extract the highest score
+highest_score = lionel_palairet['highest score'].values[0]
+print(f"Final Answer: {highest_score}")
+```

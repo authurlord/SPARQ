@@ -1,0 +1,7 @@
+The question asks for a line chart showing the trend in the athlete's number of attacks. However, the provided table does not contain a clear "athlete" or individual-specific data for attacks. Instead, it contains team-level data with columns like "Att" (number of attacks), but the data is grouped by team and year, not by an individual athlete.
+
+Additionally, the "Career Totals" row at the end suggests this might be summarizing team performance, not individual player statistics. There is no identifiable "athlete" whose attack count can be plotted as a personal trend.
+
+Therefore, it is not possible to accurately draw a line chart showing the trend in an athlete's number of attacks based on this data.
+
+Final Answer: None

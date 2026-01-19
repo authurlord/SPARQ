@@ -1,0 +1,21 @@
+The error occurred because the 'per capita income' column contains string values (e.g., '49474'), but we are trying to compare them directly with integers. We need to convert the values to numeric before performing comparisons.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'per capita income' column to numeric (to handle strings like '49474').
+Step 3: Filter rows where per capita income is between $18,000 and $27,000 (inclusive).
+Step 4: Count the number of such counties.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'per capita income' to numeric, coercing errors to NaN
+df['per capita income'] = pd.to_numeric(df['per capita income'], errors='coerce')
+
+# Filter counties with per capita income between 18000 and 27000 (inclusive)
+filtered_counties = df[(df['per capita income'] >= 18000) & (df['per capita income'] <= 27000)]
+
+# Count the number of such counties
+count = filtered_counties.shape[0]
+print(f"Final Answer: {count}")
+```

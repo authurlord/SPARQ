@@ -1,0 +1,14 @@
+Step 1: The user wants to calculate the average number of points received by the singers.
+Step 2: Load the dataframe from the provided table.
+Step 3: Select the 'points' column, which contains numerical values.
+Step 4: Calculate the mean of the 'points' column.
+Step 5: Print the result as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the average points
+average_points = df['points'].mean()
+print(f"Final Answer: {average_points:.1f}")
+```

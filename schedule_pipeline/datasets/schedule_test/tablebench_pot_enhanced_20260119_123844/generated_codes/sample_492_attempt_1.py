@@ -1,0 +1,61 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Drop the header row which contains column names
+df = df[df['Round'] != 'Round']
+
+# Convert relevant columns to numeric
+miloš_zeman_cols = ['Miloš Zeman', 'Miloš Zeman_1']
+df[miloš_zeman_cols] = df[miloš_zeman_cols].apply(pd.to_numeric, errors='coerce')
+
+# Group by Round and sum Miloš Zeman's deputies and senators
+zeman_totals = df.groupby('Round')[miloš_zeman_cols].sum()
+
+# Calculate total seats (deputies + senators) per round
+# First, get total deputies and senators from other candidates to compute total seats
+# Since we don't have the full total, we infer total seats from the sum of all deputies and senators in the round
+# But note: the data has two entries per round (e.g., "1st" appears twice). We need to combine them.
+
+# Reconstruct the data: each round has two rows (likely from two different voting bodies)
+# So we aggregate by Round and sum all columns to get total deputies and senators
+total_deputies = df.groupby('Round')['Václav Klaus', 'Václav Klaus_1', 'Jaroslava Moserová', 'Jaroslava Moserová_1', 'Miloš Zeman', 'Miloš Zeman_1'].sum()
+total_senators = df.groupby('Round')['Václav Klaus', 'Václav Klaus_1', 'Jaroslava Moserová', 'Jaroslava Moserová_1', 'Miloš Zeman', 'Miloš Zeman_1'].sum()  # same as above
+
+# Actually, since deputies and senators are separate, we need to sum deputies and senators separately
+# But the data structure shows that for each round, there are two rows: one for deputies and one for senators?
+# Wait: the original data has two rows per round: one with deputies and one with senators? No — it's unclear.
+
+# Let's re-analyze: the data has:
+# - Two rows per round: one with deputies (first column = '1st', '2nd', etc.), and one with senators?
+# But the first row says: 'Round', 'Deputies', 'Senators', ... — actually, the first row is a header.
+
+# Actually, the data is structured as:
+# Each round has two entries: one for deputies and one for senators.
+# So for each round, we must sum the deputies and senators separately.
+
+# We'll group by Round and sum all values for deputies and senators separately.
+
+# Create a new DataFrame with only the candidate columns
+candidate_cols = ['Václav Klaus', 'Václav Klaus_1', 'Jaroslava Moserová', 'Jaroslava Moserová_1', 'Miloš Zeman', 'Miloš Zeman_1']
+
+# Sum over both deputies and senators for each round
+round_totals = df.groupby('Round')[candidate_cols].sum()
+
+# Now, for each round, calculate total seats = sum of all deputies and senators (i.e., sum of all values in the round)
+total_seats = round_totals.sum(axis=1)
+
+# Calculate Miloš Zeman's total votes per round
+zeman_votes = round_totals['Miloš Zeman'] + round_totals['Miloš Zeman_1']
+
+# Check for majority (more than 50% of total seats)
+majority_win_rounds = zeman_votes > (0.5 * total_seats)
+
+# Find the first round where majority was achieved
+first_majority_round = None
+for round_name in ['1st', '2nd', '3rd']:
+    if majority_win_rounds[round_name]:
+        first_majority_round = round_name
+        break
+
+print(f"Final Answer: {first_majority_round}")

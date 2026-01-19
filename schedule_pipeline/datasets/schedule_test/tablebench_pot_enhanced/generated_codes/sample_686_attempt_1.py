@@ -1,0 +1,19 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'number of jews (wjc)' to integer
+df['number of jews (wjc)'] = df['number of jews (wjc)'].astype(int)
+
+# Find the metro area with the highest number of Jews (WJC)
+max_jews_row = df.loc[df['number of jews (wjc)'].idxmax()]
+max_metro_area = max_jews_row['metro area']
+max_value = max_jews_row['number of jews (wjc)']
+
+# Find the metro area with the lowest number of Jews (WJC)
+min_jews_row = df.loc[df['number of jews (wjc)'].idxmin()]
+min_value = min_jews_row['number of jews (wjc)']
+
+# Calculate the difference
+difference = max_value - min_value
+
+print(f"Final Answer: {max_metro_area}, {difference}")

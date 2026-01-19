@@ -1,0 +1,18 @@
+Step 1: The user wants to understand the relationship between Peak Flow (in m³/s) and Water Level (in meters) at Trent Bridge.  
+Step 2: We need to analyze if there is a trend or correlation between these two variables.  
+Step 3: Since the data is small and we are looking for a general trend, we can compute the correlation coefficient between "Level at Trent Bridge m" and "Peak Flow m3/s".  
+Step 4: If the correlation is positive, it means as water level increases, peak flow tends to increase.  
+Step 5: We will calculate the Pearson correlation coefficient and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract relevant columns
+level_m = df['Level at Trent Bridge m'].dropna()
+peak_flow_m3s = df['Peak Flow m3/s'].dropna()
+
+# Calculate the correlation between water level (m) and peak flow (m³/s)
+correlation = level_m.corr(peak_flow_m3s, method='pearson')
+print(f"Final Answer: {correlation:.3f}")
+```

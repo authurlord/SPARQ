@@ -1,0 +1,29 @@
+The error occurred because the 'Year' column contains string values, and we need to compare numerical values (Conservative councillors) across consecutive years. We must ensure that we convert the year column to a proper sequence for iteration.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Convert the 'Year' column to integer for proper sorting and iteration.
+3. Calculate the difference in Conservative councillors between each year and the previous year.
+4. Identify the year where this difference is maximum (i.e., the largest increase).
+5. Return that year.
+
+Note: We skip the first year since there's no previous year to compare with.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert Year to integer for proper comparison
+df['Year'] = df['Year'].astype(int)
+
+# Sort by Year to ensure chronological order
+df = df.sort_values('Year').reset_index(drop=True)
+
+# Calculate the difference in Conservative councillors from previous year
+df['diff'] = df['Conservative councillors'] - df['Conservative councillors'].shift(1)
+
+# Find the year with the maximum increase
+max_increase_year = df[df['diff'] == df['diff'].max()]['Year'].iloc[0]
+
+print(f"Final Answer: {max_increase_year}")
+```

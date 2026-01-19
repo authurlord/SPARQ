@@ -1,0 +1,20 @@
+Step 1: The user wants to count the number of parties that have more than 10% of the total votes.
+Step 2: Load the dataframe.
+Step 3: Exclude the 'Total' row and the 'Source' row, as they are not valid parties.
+Step 4: Convert the '%' column to float for comparison.
+Step 5: Count how many parties have a percentage greater than 10.
+Step 6: Print the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the 'Total' and 'Source' rows
+df_clean = df[df['Party'] != 'Total']
+df_clean = df_clean[df_clean['Party'] != 'Source: http://www.stat.go.jp/data/chouki/27.htm']
+# Convert '%' column to float
+df_clean['%'] = pd.to_numeric(df_clean['%'])
+# Count parties with more than 10% votes
+count_parties = (df_clean['%'] > 10).sum()
+print(f"Final Answer: {count_parties}")
+```

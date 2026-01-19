@@ -1,0 +1,32 @@
+[Answer Format]
+Final Answer: None
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert population and land area to numeric
+df['Population (2012 est.)'] = pd.to_numeric(df['Population (2012 est.)'], errors='coerce')
+df['Land area'] = pd.to_numeric(df['Land area'].str.extract(r'(\d+\.?\d*)').fillna(0), errors='coerce')
+
+# Calculate population density (population / land area)
+df['population_density'] = df['Population (2012 est.)'] / df['Land area']
+
+# Remove rows with zero or invalid land area
+df = df[df['Land area'] > 0]
+
+# Sort by population density and get top 10
+top_10 = df.nlargest(10, 'population_density')[['Name', 'population_density']]
+
+# Create bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(top_10['Name'], top_10['population_density'], color='skyblue')
+plt.title('Top 10 Regions by Population Density (2012)')
+plt.xlabel('Region')
+plt.ylabel('Population Density')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```

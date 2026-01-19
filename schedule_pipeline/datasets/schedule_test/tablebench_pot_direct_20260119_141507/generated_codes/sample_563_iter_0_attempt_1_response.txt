@@ -1,0 +1,34 @@
+Step 1: Identify the year with the highest number of major hurricanes between 1870 and 1878.  
+Step 2: For that year, retrieve the total number of tropical storms.  
+
+From the data:
+- The "number of major hurricanes" column is used to find the year with the highest value.
+- The year 1878 has 1 major hurricane, which is the highest (all other years have 0 or 1, but 1878 has 1, and no year has more than 1).
+- However, checking again:
+  - 1870: 2 major hurricanes → highest so far
+  - 1873: 2 major hurricanes
+  - 1875: 1
+  - 1876: 2
+  - 1878: 1
+- So, 1870 and 1873 both have 2 major hurricanes — maximum value.
+
+Now, compare tropical storms:
+- 1870: 11 tropical storms
+- 1873: 5 tropical storms
+
+Thus, the year with the highest number of major hurricanes (2) has the highest tropical storm count in 1870.
+
+Final Answer: 11
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the year with the maximum number of major hurricanes
+max_major_hurricanes = df['number of major hurricanes'].max()
+# Get all years with that maximum
+years_with_max = df[df['number of major hurricanes'] == max_major_hurricanes]
+# Get the number of tropical storms for those years and take the maximum (or just one if unique)
+tropical_storms_in_max_year = years_with_max['number of tropical storms'].max()
+print(f"Final Answer: {tropical_storms_in_max_year}")
+```

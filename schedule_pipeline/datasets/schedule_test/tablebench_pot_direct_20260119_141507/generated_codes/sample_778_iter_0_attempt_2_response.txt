@@ -1,0 +1,58 @@
+Step 1: The user wants to forecast the value for the year 2020 based on the historical trend, assuming a steady increase.  
+However, the table does not have a row for the year 2020. The data provided goes up to 2010.  
+
+Step 2: We need to identify which column corresponds to the year 2020. Looking at the columns:  
+- Year_1: 1885  
+- Year_2: 1950  
+- The last column is '-_2', which seems to be associated with the year 1950, 1955, ..., 2010.  
+But there is no column labeled for 2020.
+
+Step 3: The table has a column for 'Year_2' and it appears to represent values from 1950 onward. The values in 'Year_2' are increasing over time (e.g., 1950: 249,187 → 1970: 373,326 → 1980: 524,295 → 1990: 1,535,872 → 2000: 841,002 → 2005: 1,122,257 → 2010: 1,042,625).  
+Notice that after 1990, the values drop significantly (from 1.5 million to 841k), then rise again. So the trend is not strictly increasing.
+
+Step 4: Since the question assumes a "steady increase continues", we must find the trend from the available data. But there's no clear linear trend — values peak in 1990 and then decline. Therefore, a simple extrapolation may not be valid.
+
+However, if we assume the user meant to extrapolate the trend from the latest available data (i.e., from 1990 to 2010), and if we consider only the 'Year_2' column (which includes 1990 to 2010), we can fit a linear trend and project to 2020.
+
+Step 5: Extract the 'Year_2' values and their corresponding years (1950 to 2010). Then fit a linear regression model and predict the value for 2020.
+
+Step 6: Since the data shows a sharp drop after 1990, a linear fit may not be appropriate. But the user explicitly says "assuming the trend of steady increase continues", so we will proceed with a simple linear extrapolation from the last few points (post-1990) to 2020.
+
+We will take the last three points (1990, 2000, 2005, 2010) and fit a line to predict 2020.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract years and values for Year_2 (last column)
+years = [int(row[0]) for row in df.values]  # Year column
+values = [int(row[-1]) for row in df.values]  # Year_2 values
+
+# We are interested in Year_2 values from 1950 onwards
+# Filter rows where Year_2 >= 1950
+filtered_years = []
+filtered_values = []
+for i, row in enumerate(df.values):
+    year_val = row[0]
+    year_2_val = row[-1]
+    if year_val >= 1950:
+        filtered_years.append(year_val)
+        filtered_values.append(year_2_val)
+
+# Create array for linear regression
+X = np.array(filtered_years).reshape(-1, 1)
+y = np.array(filtered_values)
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict value for 2020
+forecast_2020 = model.predict([[2020]])[0]
+
+print(f"Final Answer: {forecast_2020:.0f}")
+```

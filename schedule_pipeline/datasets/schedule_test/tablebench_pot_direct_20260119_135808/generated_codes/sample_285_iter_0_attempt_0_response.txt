@@ -1,0 +1,17 @@
+Step 1: Filter the data to include only companies in the 'banking' industry.  
+Step 2: Select the top 5 companies by rank (first 5 rows after filtering).  
+Step 3: Extract the 'revenue (millions)' column and calculate the average.  
+Step 4: Print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for banking industry
+banking_companies = df[df['industry'] == 'banking']
+# Get top 5 by rank
+top_5_bankers = banking_companies.head(5)
+# Calculate average revenue
+avg_revenue = top_5_bankers['revenue (millions)'].mean()
+print(f"Final Answer: {avg_revenue:.1f}")
+```

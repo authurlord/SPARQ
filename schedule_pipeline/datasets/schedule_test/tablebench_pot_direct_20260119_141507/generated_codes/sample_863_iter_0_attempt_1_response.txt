@@ -1,0 +1,21 @@
+Step 1: The user wants to find the year with the highest average issue price and compare it to the average issue price of the lowest year (i.e., the difference between the highest and the lowest).  
+Step 2: Load the dataframe.  
+Step 3: Group by 'year' and compute the average issue price per year.  
+Step 4: Identify the year with the maximum average issue price and the year with the minimum average issue price.  
+Step 5: Calculate the difference between the highest and lowest average issue prices.  
+Step 6: Print the year with the highest average issue price and the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Compute average issue price by year
+avg_issue_price_by_year = df.groupby('year')['issue price'].mean()
+
+# Find the year with the highest and lowest average issue price
+highest_year = avg_issue_price_by_year.idxmax()
+lowest_year = avg_issue_price_by_year.idxmin()
+difference = avg_issue_price_by_year.max() - avg_issue_price_by_year.min()
+
+print(f"Final Answer: {highest_year}, {difference:.2f}")
+```

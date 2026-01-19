@@ -1,0 +1,22 @@
+The error occurred because the "percentage lost" column contains values like "43.68%", which are strings with percentage symbols. We need to extract just the numeric part (remove the % symbol and convert to float) before computing the correlation.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert 'starting weight (kg)' to float (already numeric).
+3. Extract the numeric value from 'percentage lost' by removing the '%' and converting to float.
+4. Compute the correlation between 'starting weight (kg)' and 'percentage lost' (after cleaning).
+5. Print the correlation coefficient.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'percentage lost' column: remove '%' and convert to float
+df['percentage lost'] = df['percentage lost'].str.replace('%', '').astype(float)
+
+# Compute correlation between 'starting weight (kg)' and 'percentage lost'
+correlation = df['starting weight (kg)'].corr(df['percentage lost'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

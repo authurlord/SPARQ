@@ -1,0 +1,26 @@
+Step 1: Identify the top 3 buildings by rank (i.e., ranks 1, 2, 3).  
+Step 2: Filter these buildings to include only those completed before 1980.  
+Step 3: Calculate the average number of storeys for the filtered buildings.  
+
+Note: The "completed" column contains year values. We need to check which of the top 3 buildings were completed before 1980.  
+From the data:  
+- Rank 1: 1983 → not before 1980  
+- Rank 2: 1984 → not before 1980  
+- Rank 3: 1979 → before 1980  
+
+Only rank 3 building ("saskatoon square") meets the condition.  
+
+So, we compute the average storeys for just that one building.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter top 3 buildings by rank (ranks 1, 2, 3)
+top_3 = df[df['rank'].isin([1, 2, 3])]
+# Filter only those completed before 1980
+before_1980 = top_3[top_3['completed'].astype(int) < 1980]
+# Calculate average storeys
+avg_storeys = before_1980['storeys'].mean()
+print(f"Final Answer: {avg_storeys}")
+```

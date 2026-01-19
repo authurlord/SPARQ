@@ -1,0 +1,22 @@
+Step 1: The user wants to predict the expected viewership for the next episode based on the trend in the given data.
+Step 2: Load the dataframe and extract the 'viewers (in millions)' column.
+Step 3: Analyze the trend by calculating the differences between consecutive episodes' viewership.
+Step 4: Use a simple linear trend (average change) to estimate the next value.
+Step 5: Calculate the average change and add it to the last viewership value.
+Step 6: Print the predicted viewership.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract viewership data
+viewers = df['viewers (in millions)'].astype(float)
+
+# Calculate the average change between consecutive episodes
+trend = viewers.diff().mean()
+
+# Predict the next episode's viewership
+predicted_viewers = viewers.iloc[-1] + trend
+
+print(f"Final Answer: {predicted_viewers:.2f}")
+```

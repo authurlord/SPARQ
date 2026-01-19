@@ -1,0 +1,6 @@
+Step 1: The user is asking for a nation that has 4 gold medals and is ranked 4th in the table.  
+Step 2: Look at the "Rank" column to identify the 4th row (rank 4).  
+Step 3: Check the "Gold" value in that row. If it is 4, then confirm the nation.  
+Step 4: From the data, rank 4 is Chile, which has 4 gold medals.  
+
+Final Answer: Chile

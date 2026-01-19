@@ -1,0 +1,23 @@
+Step 1: The question asks for the percentage change in 'l (mh / km)' when frequency increases from 1 Hz to 100 kHz, under the assumption that the ratio of 'g' to 'c' remains constant. However, since 'c' is constant (51.57) and 'g' changes with frequency, the ratio g/c is not constant. But the question specifies "assuming the ratio of g to c remains constant", so we must ignore the actual values of g and focus only on the change in 'l'. We'll compute the percentage change in 'l' directly from the given data.
+
+Step 2: Extract the 'l (mh / km)' values at frequency 1 Hz and 100k Hz.
+
+Step 3: Calculate the percentage change using the formula:
+$$
+\text{Percentage Change} = \left( \frac{l_{100k} - l_1}{l_1} \right) \times 100
+$$
+
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row with frequency '1' and '100k'
+l_1 = df[df['frequency (hz)'] == '1']['l (mh / km)'].values[0]
+l_100k = df[df['frequency (hz)'] == '100k']['l (mh / km)'].values[0]
+
+# Calculate percentage change
+percentage_change = ((float(l_100k) - float(l_1)) / float(l_1)) * 100
+print(f"Final Answer: {percentage_change:.2f}")
+```

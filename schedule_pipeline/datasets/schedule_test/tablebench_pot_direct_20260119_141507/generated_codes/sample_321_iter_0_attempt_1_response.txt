@@ -1,0 +1,15 @@
+Step 1: The user wants to find the team that participated in the 'gt1' class and had a co-driver named Peter Kox.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'class' is 'gt1' and check if 'Peter Kox' appears in the 'co - drivers' column.  
+Step 4: Extract and return the corresponding team name.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where class is 'gt1' and Peter Kox is in co-drivers
+filtered_teams = df[(df['class'] == 'gt1') & (df['co - drivers'].str.contains('peter kox', case=False))]
+# Get the team name
+team_name = filtered_teams['team'].values[0] if not filtered_teams.empty else None
+print(f"Final Answer: {team_name}")
+```

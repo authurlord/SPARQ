@@ -1,0 +1,11 @@
+Step 1: Understand the question. We are given GDP per capita values for West Germany and France. We need to find the minimum increase in West Germany's GDP per capita such that it surpasses France's GDP per capita.
+
+From the table:
+- France's GDP per capita = 40690
+- West Germany's GDP per capita = 41168
+
+Note: West Germany already has a higher GDP per capita (41168 > 40690), so it already surpasses France.
+
+Therefore, no increase is required — the current value already satisfies the condition.
+
+Final Answer: 0

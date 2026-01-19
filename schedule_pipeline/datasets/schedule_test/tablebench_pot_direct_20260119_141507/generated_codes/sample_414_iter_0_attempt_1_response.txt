@@ -1,0 +1,14 @@
+The table provides information about various metro lines in Chengdu, China, including their key details such as the line number, terminals (districts), commencement year, newest extension year, length in kilometers, and number of stations. 
+
+- "Line" identifies the metro line (e.g., Line 1, Line 2, etc.).
+- "Terminals (District)" indicates the starting and ending districts or locations of the line.
+- "Commencement" shows the year when the line began operations.
+- "Newest Extension" denotes the year of the most recent extension.
+- "Length km" represents the total length of the line in kilometers.
+- "Stations" specifies the number of stations along the line.
+
+The "Total" row at the end summarizes the overall statistics for all lines combined, including a total length of 226 km and 171 stations.
+
+Since the question asks for a description and explanation of the table content and column significance, no numerical computation is required. Instead, a clear textual explanation is provided.
+
+Final Answer: Line, Terminals (District), Commencement, Newest Extension, Length km, Stations

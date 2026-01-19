@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter buildings with more than 10 floors
+filtered_df = df[df['floors'] > 10]
+# Convert 'height' to numeric and calculate mean
+mean_height = filtered_df['height'].astype(float).mean()
+print(f"Final Answer: {mean_height:.1f}")

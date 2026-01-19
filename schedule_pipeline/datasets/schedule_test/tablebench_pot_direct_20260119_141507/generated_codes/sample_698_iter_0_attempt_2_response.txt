@@ -1,0 +1,16 @@
+Step 1: The user wants to identify the election year when the party achieved the highest percentage of popular vote.  
+Step 2: Load the dataframe.  
+Step 3: Extract the '% of popular vote' column and convert it to numeric (to handle percentage strings).  
+Step 4: Find the row with the maximum value in that column and retrieve the corresponding election year.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert '% of popular vote' to numeric, removing the '%' sign
+df['% of popular vote'] = df['% of popular vote'].str.rstrip('%').astype(float)
+# Find the election year with the highest percentage of popular vote
+max_vote_row = df.loc[df['% of popular vote'].idxmax()]
+print(f"Final Answer: {max_vote_row['election']}")
+```

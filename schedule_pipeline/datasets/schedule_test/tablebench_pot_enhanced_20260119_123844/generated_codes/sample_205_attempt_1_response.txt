@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Temperature T (°C)

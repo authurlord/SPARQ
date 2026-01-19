@@ -1,0 +1,16 @@
+Step 1: The user wants to identify the country with the highest percentage of orphans as a percentage of all children in 2001.  
+Step 2: Load the dataframe.  
+Step 3: Filter the data for the year 2001 (rows where the country ends with "(2001)").  
+Step 4: Extract the 'orphans as % of all children' column and find the maximum value.  
+Step 5: Return the corresponding country name.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for year 2001
+df_2001 = df[df['country'].str.endswith('(2001)')]
+# Find the country with the highest percentage of orphans
+max_orphans_country = df_2001.loc[df_2001['orphans as % of all children'].idxmax(), 'country']
+print(f"Final Answer: {max_orphans_country.split(' (')[0]}")
+```

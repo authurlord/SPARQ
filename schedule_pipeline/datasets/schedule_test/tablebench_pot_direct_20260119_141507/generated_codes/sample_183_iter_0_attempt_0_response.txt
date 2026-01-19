@@ -1,0 +1,37 @@
+Step 1: The question asks which factors (passengers flown, employees, or basic eps) significantly impact net profit/loss. This requires analyzing the correlation between each factor and net profit/loss.
+
+Step 2: Load the data into a DataFrame.
+
+Step 3: Compute the correlation between each column (excluding 'year ended') and 'net profit / loss (sek)'.
+
+Step 4: Identify which factor has the highest absolute correlation (greater than 0.3 is considered significant). If no factor has a significant correlation, return 'no clear impact'.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select relevant columns
+columns_to_check = ['passengers flown', 'employees (average / year)', 'basic eps']
+target_column = 'net profit / loss (sek)'
+
+# Convert string values like '- 2218000000' to numeric (remove space and convert)
+df['net profit / loss (sek)'] = df['net profit / loss (sek)'].str.replace('-', '', regex=False).astype(float)
+df['passengers flown'] = df['passengers flown'].astype(int)
+df['employees (average / year)'] = df['employees (average / year)'].astype(int)
+df['basic eps (sek)'] = df['basic eps (sek)'].astype(float)
+
+# Calculate correlation with net profit / loss
+correlations = df[columns_to_check].corrwith(df[target_column])
+
+# Find the factor with the highest absolute correlation
+significant_factor = correlations.abs().idxmax()
+
+# Check if the correlation is strong enough (e.g., > 0.3)
+if correlations.abs().max() < 0.3:
+    print("Final Answer: no clear impact")
+else:
+    print(f"Final Answer: {significant_factor}")
+```

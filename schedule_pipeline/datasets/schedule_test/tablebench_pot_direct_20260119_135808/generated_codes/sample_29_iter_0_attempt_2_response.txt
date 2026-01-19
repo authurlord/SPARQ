@@ -1,0 +1,16 @@
+Step 1: The user wants the total number of films from 2012 to 2014.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Theme' is between 2012 and 2014 (inclusive).
+Step 4: Sum the 'Films' column values.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years 2012 to 2014
+filtered_df = df[(df['-'] >= '2012') & (df['-'] <= '2014')]
+# Convert 'Films' column to numeric, handling possible non-numeric values like '700+'
+filtered_df['Films'] = pd.to_numeric(filtered_df['Films'].str.replace('+', ''), errors='coerce')
+total_films = filtered_df['Films'].sum()
+print(f"Final Answer: {int(total_films)}")
+```

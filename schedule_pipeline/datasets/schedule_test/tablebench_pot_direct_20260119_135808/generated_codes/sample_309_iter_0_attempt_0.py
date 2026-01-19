@@ -1,0 +1,22 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the women's singles and mixed doubles champions
+women_singles = df['womens singles'].str.split(', ').str[0]  # Only the player name (first part)
+mixed_doubles = df['mixed doubles'].str.split(', ').str[0]  # Only the first player in mixed doubles
+
+# Create a set of women who won both women's singles and mixed doubles
+singles_and_mixed = set(women_singles) & set(mixed_doubles)
+
+# Count occurrences of each woman in both categories
+singles_counts = women_singles.value_counts()
+mixed_counts = mixed_doubles.value_counts()
+
+# Combine counts for those in both categories
+combined_counts = {name: singles_counts.get(name, 0) + mixed_counts.get(name, 0) for name in singles_and_mixed}
+
+# Find the woman with the maximum combined count
+most_titles = max(combined_counts, key=combined_counts.get)
+
+print(f"Final Answer: {most_titles}")

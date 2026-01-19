@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: series, presenters, start date, end date, days in camp, camp mates, winner, highest viewers (millions), lowest viewers (millions), average viewers (millions), notable trends include increasing number of camp mates over time, consistent presenter duo (ant & dec), and fluctuating viewer numbers with peaks in later seasons.

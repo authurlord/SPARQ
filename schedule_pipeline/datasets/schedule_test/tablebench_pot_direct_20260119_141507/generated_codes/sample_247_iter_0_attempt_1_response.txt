@@ -1,0 +1,59 @@
+Step 1: Identify the top 3 contestants who lost the most weight in kilograms.  
+Step 2: Among these, extract their "percentage lost" values.  
+Step 3: Compute the average of these percentage values.  
+
+From the data, the contestant with the highest weight loss is Rick (75.4 kg), followed by Jenni (46.3 kg), and then Phil (53.9 kg). Wait — actually, we need to sort by "weight lost (kg)" in descending order and pick the top 3.  
+
+Sorting by "weight lost (kg)":  
+- Rick: 75.4 kg  
+- Phil: 53.9 kg  
+- David: 66.4 kg → wait, 66.4 > 53.9  
+Correct order:  
+1. Rick: 75.4  
+2. David: 66.4  
+3. Caitlin: 54.6? No — Caitlin lost 54.6 kg.  
+Wait:  
+- Rick: 75.4  
+- David: 66.4  
+- Phil: 53.9  
+- Caitlin: 54.6 → 54.6 > 53.9 → so Caitlin comes before Phil  
+So correct order by weight lost (kg):  
+1. Rick (75.4)  
+2. David (66.4)  
+3. Caitlin (54.6)  
+
+Wait — actually, check all:  
+- Rick: 75.4  
+- David: 66.4  
+- Phil: 53.9  
+- Jarna: 43.3  
+- Elise: 37.9  
+- Jenni: 46.3  
+- Daina: 27.4  
+- Chris: 24.7  
+- Geoff: 43.8  
+- Allan: 24.3  
+
+So top 3 by weight lost:  
+1. Rick (75.4)  
+2. David (66.4)  
+3. Caitlin (54.6)  
+
+Now get their "percentage lost":  
+- Rick: 43.68%  
+- David: 40.10%  
+- Caitlin: 30.43%  
+
+Average = (43.68 + 40.10 + 30.43) / 3 = 114.21 / 3 = 38.07%
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by weight lost (kg) in descending order and take top 3
+top_3 = df.sort_values(by='weight lost (kg)', ascending=False).head(3)
+# Extract percentage lost for top 3
+percentages = top_3['percentage lost'].astype(float)
+average_percentage = percentages.mean()
+print(f"Final Answer: {average_percentage:.2f}")
+```

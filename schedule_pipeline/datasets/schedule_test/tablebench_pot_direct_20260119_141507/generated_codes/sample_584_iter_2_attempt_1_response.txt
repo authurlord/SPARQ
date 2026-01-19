@@ -1,0 +1,18 @@
+The error occurred because the issue price column contains string values (e.g., '24.95', '34.95') that need to be converted to numeric before computing the average. The previous attempt failed due to incorrect handling of string-to-number conversion.
+
+Step 1: Identify the relevant data range — years between 2002 and 2005 (inclusive).  
+Step 2: Filter the dataframe for those years.  
+Step 3: Convert the 'issue price' column from string to float.  
+Step 4: Compute the mean of the filtered issue prices.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where year is between 2002 and 2005 inclusive
+filtered_df = df[(df['year'] >= 2002) & (df['year'] <= 2005)]
+# Convert issue price to numeric and compute average
+average_price = filtered_df['issue price'].astype(float).mean()
+print(f"Final Answer: {average_price:.2f}")
+```

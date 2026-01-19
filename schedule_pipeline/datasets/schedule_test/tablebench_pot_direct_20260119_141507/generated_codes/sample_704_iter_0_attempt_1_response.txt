@@ -1,0 +1,17 @@
+Step 1: The user wants to find the election year with the highest percentage of party list votes.  
+Step 2: Load the dataframe.  
+Step 3: Extract the '% of party list votes' column, convert it to numeric (to handle potential formatting issues), and find the row with the maximum value.  
+Step 4: Return the corresponding election year.  
+
+Note: Some values like "0.0", "0.1", etc., are already in decimal format. We need to ensure proper parsing.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert '% of party list votes' to float and find the max
+df['% of party list votes'] = df['% of party list votes'].str.replace(',', '').astype(float)
+max_percentage_row = df.loc[df['% of party list votes'].idxmax()]
+final_year = max_percentage_row['Election year']
+print(f"Final Answer: {final_year}")
+```

@@ -1,0 +1,86 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'introduced' to integer for comparison, and handle '-' as a missing value
+df['introduced'] = pd.to_numeric(df['introduced'], errors='coerce')
+
+# Filter aircraft introduced from 2004 to 2008 (inclusive)
+fleet_2004 = df[(df['introduced'] >= 2004) & (df['introduced'] <= 2008)]
+
+# Extract seating capacity and convert to int
+fleet_2004['seating'] = pd.to_numeric(fleet_2004['seating'], errors='coerce')
+
+# Calculate total seating capacity in 2004-2008
+total_capacity_2004_2008 = fleet_2004['seating'].sum()
+
+# Now, filter aircraft that were retired before or in 2008
+retired_before_2008 = df[(df['retired'] != '-') & (pd.to_numeric(df['retired'], errors='coerce') <= 2008)]
+retired_before_2008['seating'] = pd.to_numeric(retired_before_2008['seating'], errors='coerce')
+total_retired_capacity = retired_before_2008['seating'].sum()
+
+# The net change is the difference between capacity added (2004-2008) and capacity removed (retired before 2008)
+# But note: aircraft retired before 2008 were already in the fleet before 2004 or during 2004-2008
+# So we need to calculate the net change in fleet capacity by considering only those introduced in 2004-2008 and subtracting those retired before 2008
+
+# We assume the base fleet before 2004 is not known. So instead, we compute the change as:
+# (Total capacity of aircraft introduced in 2004-2008) minus (capacity of aircraft retired before 2008)
+
+# But the question asks for the change from 2004 to 2008 — so we consider only aircraft added in 2004-2008 and removed before 2008.
+# However, the retired aircraft may have been introduced before 2004.
+
+# Correct approach: Only aircraft introduced in 2004–2008 are considered as added. Aircraft retired before 2008 are considered as removed.
+# But if an aircraft was introduced before 2004 and retired before 2008, it's not part of the 2004–2008 change.
+
+# So the net change is:
+# (Sum of seating of aircraft introduced in 2004–2008) minus (Sum of seating of aircraft retired before 2008 and introduced before 2004)
+
+# But we don't know the pre-2004 fleet. So we assume the question wants the **net change** due to new aircraft added (2004–2008) and old ones retired (before 2008), regardless of when they were introduced.
+
+# Actually, the correct interpretation: The total seating capacity change from 2004 to 2008 is:
+# (Total capacity of aircraft in fleet in 2008) - (Total capacity of aircraft in fleet in 2004)
+
+# But since we don’t have data for the entire fleet in 2004, we can only estimate based on what was added and removed.
+
+# Let’s assume that any aircraft introduced in 2004–2008 was part of the fleet in 2008, and any aircraft retired before 2008 was not in the fleet in 2008.
+
+# So:
+# Capacity in 2008 = sum of seating of aircraft introduced in 2004–2008 and still in service (retired after 2008 or not retired)
+# Capacity in 2004 = sum of seating of aircraft introduced before 2004 and still in service in 2004 (not retired before 2004)
+
+# But we lack information about pre-2004 fleet.
+
+# Alternative interpretation: The change is simply the difference between the total seating of aircraft introduced between 2004 and 2008 and the total seating of aircraft retired before 2008.
+
+# However, this would double-count if an aircraft introduced before 2004 was retired before 2008.
+
+# Given the ambiguity, the intended meaning is likely:
+# - Add all aircraft introduced from 2004 to 2008 (inclusive).
+# - Subtract all aircraft retired before 2008.
+
+# But only if they were part of the fleet during that period.
+
+# Since the problem says "from 2004 to 2008", we assume:
+# - Aircraft introduced in 2004–2008 contribute positively.
+# - Aircraft retired before 2008 contribute negatively.
+
+# But aircraft retired before 2008 might have been introduced before 2004 — so they were already in the fleet in 2004.
+
+# Therefore, the net change = (seating of aircraft introduced in 2004–2008) - (seating of aircraft retired before 2008)
+
+# Let’s compute that.
+
+# Aircraft introduced in 2004–2008
+introduced_2004_2008 = df[(df['introduced'] >= 2004) & (df['introduced'] <= 2008)]
+introduced_2004_2008['seating'] = pd.to_numeric(introduced_2004_2008['seating'], errors='coerce')
+added_capacity = introduced_2004_2008['seating'].sum()
+
+# Aircraft retired before 2008
+retired_before_2008 = df[(df['retired'] != '-') & (pd.to_numeric(df['retired'], errors='coerce') < 2008)]
+retired_before_2008['seating'] = pd.to_numeric(retired_before_2008['seating'], errors='coerce')
+removed_capacity = retired_before_2008['seating'].sum()
+
+# Net change
+net_change = added_capacity - removed_capacity
+
+print(f"Final Answer: {int(net_change)}")

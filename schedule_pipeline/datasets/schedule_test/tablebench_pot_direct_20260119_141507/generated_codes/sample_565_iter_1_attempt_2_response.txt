@@ -1,0 +1,66 @@
+We are given a table with columns: ['Year', '-', 'Year_1', '-_1', 'Year_2', '-_2']. The data spans years from 1820 to 2010, with values for three different time periods.
+
+The question asks: **What is the value in the year with the highest increase in value between 1850 and 1870?**
+
+Step-by-step approach:
+
+1. Identify the relevant column for the value of each year. Looking at the structure:
+   - The first column is 'Year' (e.g., 1820, 1825, ..., 1875)
+   - The third column is 'Year_1' (e.g., 1885, 1890, ...)
+   - The fifth column is 'Year_2' (e.g., 1950, 1955, ...)
+
+But note: the table appears to have values labeled by year, and the actual values seem to be in the second, fourth, and sixth columns (with labels like '8,385', '395,346', etc.). However, the first row shows:
+- Year: 1820 → value: 8,385
+- Year_1: 1885 → value: 395,346
+- Year_2: 1950 → value: 249,187
+
+So it seems that the actual values are in the second, fourth, and sixth columns — these are the values corresponding to the years listed in the first column.
+
+But the question is about **the year with the highest increase in value between 1850 and 1870**.
+
+Let’s interpret:
+- We need to extract the values for the years 1850, 1855, 1860, 1865, 1870.
+- The values are stored in the second column (after 'Year') — e.g., for 1850, value is 369,980 (from row 1850).
+- We will extract the values for years 1850 to 1870.
+- Then compute the differences between consecutive years (i.e., the increase from one year to the next).
+- Find the year where the increase is the largest.
+
+Steps:
+1. Load the data.
+2. Extract the values in the second column (index 1) for rows where Year is between 1850 and 1870.
+3. Convert the values to integers (remove commas).
+4. Compute the differences between consecutive years.
+5. Find the maximum increase and the corresponding year.
+
+Note: The years 1850, 1855, 1860, 1865, 1870 are present in the first column.
+
+Now, write the code accordingly.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the values for years between 1850 and 1870
+# The values are in the second column (index 1), which has values like '8,385'
+values = df[df['Year'].between(1850, 1870)]['-'].str.replace(',', '').astype(int)
+
+# Extract the years corresponding to these values
+years = df[df['Year'].between(1850, 1870)]['Year'].tolist()
+
+# Compute the increases between consecutive years
+increases = []
+for i in range(len(years) - 1):
+    increase = values.iloc[i+1] - values.iloc[i]
+    increases.append(increase)
+
+# Find the maximum increase and the year when it occurs
+max_increase = max(increases)
+# The year where the increase happens is the year before the one with the max increase
+# So we find the index of the max increase in the increases list
+max_increase_index = increases.index(max_increase)
+year_with_max_increase = years[max_increase_index + 1]
+
+print(f"Final Answer: {year_with_max_increase}")
+```

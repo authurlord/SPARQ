@@ -1,0 +1,30 @@
+Step 1: Identify the year with the highest percentage of national votes.
+Step 2: Find the percentage of national votes for that year and the previous year.
+Step 3: Calculate the difference between the two percentages.
+Step 4: Return the year and the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert '% of national vote' to float by removing '%' and dividing by 100
+df['% of national vote'] = df['% of national vote'].str.replace('%', '').astype(float)
+
+# Find the row with the highest % of national vote
+max_vote_row = df.loc[df['% of national vote'].idxmax()]
+year_max = max_vote_row['election']
+max_vote = max_vote_row['% of national vote']
+
+# Find the previous year's percentage (based on sorted election years)
+sorted_df = df.sort_values('election')
+prev_year_idx = sorted_df[sorted_df['election'] == year_max].index[0] - 1
+if prev_year_idx >= 0:
+    prev_vote = sorted_df.iloc[prev_year_idx]['% of national vote']
+else:
+    prev_vote = 0  # No previous year
+
+# Calculate the difference
+difference = max_vote - prev_vote
+
+print(f"Final Answer: {year_max}, {difference:.2f}")
+```

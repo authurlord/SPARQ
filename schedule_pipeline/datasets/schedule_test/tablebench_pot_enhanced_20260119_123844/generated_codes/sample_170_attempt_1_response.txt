@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The natural change has a direct positive impact on the average population growth rate; periods with higher natural change (e.g., 1985: +504) correlate with increased growth rates, while negative natural change (e.g., 1993: +26, 1994: -27) lead to declining or negative growth rates.

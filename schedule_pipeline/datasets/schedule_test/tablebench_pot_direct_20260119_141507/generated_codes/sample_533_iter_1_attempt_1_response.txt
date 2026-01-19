@@ -1,0 +1,138 @@
+We are asked to compute the **population dependency ratio** in 2002, defined as:
+
+> (Population aged 0–10 + Population aged 60+) / (Population aged 11–59)
+
+From the table:
+- The relevant age groups are:
+  - 0–9: given in column "POPULATION (by age group in 2002)_2" (index 2)
+  - 60+: given in column "POPULATION (by age group in 2002)_9" (index 9)
+  - 11–59: this is a combination of age groups 10–19, 20–29, 30–39, 40–49, 50–59
+
+But note: the data has:
+- "0-9" → index 2 (value: 41 in total row)
+- "10-19" → index 3
+- "20-29" → index 4
+- "30-39" → index 5
+- "40-49" → index 6
+- "50-59" → index 7
+
+So the population aged 11–59 = sum of (10–19) + (20–29) + (30–39) + (40–49) + (50–59)
+
+We will extract the values from the rows where the SPECIFICATION is "I." and then pick the relevant numerical values under "POPULATION (by age group in 2002)".
+
+The total population is given as 287. We need to extract:
+- 0–9: 41
+- 60+: 14
+- 11–59: sum of 10–19 (45), 20–29 (47), 30–39 (27), 40–49 (38), 50–59 (31)
+
+Wait — the data shows:
+- Row with "I.", "TOTAL", "TOTAL", ... has:
+  - 0–9: 41
+  - 10–19: 45
+  - 20–29: 47
+  - 30–39: 27
+  - 40–49: 38
+  - 50–59: 31
+  - 60–69: 31? Wait no — let's check:
+
+Actually, looking at the row:
+["I.", "TOTAL", "TOTAL", "TOTAL", "TOTAL", "person", "287", "41", "45", "47", "27", "38", "31", "20", "24", "14"]
+
+Index mapping:
+- 0-9: index 7 → 41
+- 10-19: index 8 → 45
+- 20-29: index 9 → 47
+- 30-39: index 10 → 27
+- 40-49: index 11 → 38
+- 50-59: index 12 → 31
+- 60-69: index 13 → 20
+- 70-79: index 14 → 24
+- 80+: index 15 → 14
+
+So:
+- 0–9: 41
+- 60+: 14 (80+) + 20 (60–69) + 24 (70–79) → wait! 60+ includes 60–69, 70–79, 80+
+
+So "60+" = 60–69 + 70–79 + 80+ = 20 + 24 + 14 = 58
+
+But the table says "80 +" → 14, and "60–69" → 20, "70–79" → 24 → so total 60+ = 20 + 24 + 14 = 58
+
+Now, 11–59 = total population minus (0–10) and (60+) → but we must be careful.
+
+Actually, the definition says: **ratio of population aged 0–10 and 60+ to the population aged 11–59**
+
+So:
+- 0–10: we have 0–9 → 41 (since 10–19 starts at 10)
+- 60+: 60–69 (20) + 70–79 (24) + 80+ (14) = 58
+- So total dependent = 41 (0–9) + 58 (60+) = 99
+- 11–59: total population minus (0–9) and (60+) = 287 - 41 - 58 = 188
+
+Alternatively, we can compute 11–59 directly:
+- 10–19: 45
+- 20–29: 47
+- 30–39: 27
+- 40–49: 38
+- 50–59: 31
+→ Sum = 45 + 47 + 27 + 38 + 31 = 188
+
+Yes, matches.
+
+So dependency ratio = (0–9 + 60+) / (11–59) = (41 + 58) / 188 = 99 / 188 ≈ 0.5266
+
+But the question says "approximate", so we can round to nearest tenth or two decimals.
+
+Let’s do it step by step in code.
+
+Steps:
+1. Load the dataframe.
+2. Identify the row where "SPECIFICATION" is "I." and "SPECIFICATION_1" is "TOTAL" (or similar) — actually the first data row after header has "I.", "TOTAL", etc.
+3. Extract the values for:
+   - 0–9 → column index 7
+   - 10–19 → index 8
+   - 20–29 → index 9
+   - 30–39 → index 10
+   - 40–49 → index 11
+   - 50–59 → index 12
+   - 60–69 → index 13
+   - 70–79 → index 14
+   - 80+ → index 15
+4. Compute:
+   - 0–10: only 0–9 → value at index 7
+   - 60+: sum of 60–69, 70–79, 80+ → indices 13, 14, 15
+   - 11–59: sum of 10–19 to 50–59 → indices 8 to 12
+5. Dependency ratio = (0–9 + 60+) / (11–59)
+
+Note: There's a row with "I.", "1.", "A.", "Males" — that's sex breakdown, not needed.
+
+Only the total row (with "TOTAL") is relevant.
+
+We'll pick the row where the first value is "I." and the second is "TOTAL".
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter the row where SPECIFICATION is 'I.' and the next columns have 'TOTAL'
+# The row with total population
+total_row = df[df['SPECIFICATION'] == 'I.'].iloc[0]
+
+# Extract values from the population columns
+# The population values start at index 7 to 15
+# Index mapping:
+# 7: 0-9
+# 8: 10-19
+# 9: 20-29
+# 10: 30-39
+# 11: 40-49
+# 12: 50-59
+# 13: 60-69
+# 14: 70-79
+# 15: 80+
+
+# Extract the values
+pop_0_to_9 = total_row['POPULATION (by age group in 2002)_2']  # index 7
+pop_60_plus = total_row['POPULATION (by age group in 2002)_13'] + total_row['POPULATION (by age group in 2002)_14'] + total_row['POPULATION (by age group in 2002)_15']  # 60-69, 70-79, 80+
+pop_11_to_59 = (
+    total_row['POPULATION (by age group in 2002)_3'] + 

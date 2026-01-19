@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Draw, Artist, Song, Jury, Televote, Total, Place

@@ -1,0 +1,29 @@
+Step 1: The question asks which factors (judges, public, vote percentage) contribute most to the 'result' of each couple.  
+Step 2: We need to analyze whether there is a correlation or pattern between these factors and the 'result' (e.g., "safe" vs "bottom two").  
+Step 3: Since the data is small, we can examine the values manually to determine if any factor consistently predicts the result.  
+Step 4: Look at each couple's data:  
+   - "safe" results: high public votes, moderate judges, higher vote percentages.  
+   - "bottom two": low public votes, low judges, low vote percentage.  
+Step 5: The 'vote percentage' column shows a clear trend: couples with "bottom two" have much lower vote percentages (e.g., 4.2%) compared to those with "safe" (e.g., 25.1% to 35.7%).  
+Step 6: Judges and public votes are not perfectly correlated with result, but vote percentage strongly correlates with result.  
+Conclusion: Vote percentage has the most direct impact on the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check if 'vote percentage' correlates with 'result'
+# Group by result and compute average vote percentage
+result_vote_avg = df.groupby('result')['vote percentage'].mean()
+
+# Compare the averages
+safe_avg = result_vote_avg.get('safe', 0)
+bottom_avg = result_vote_avg.get('bottom two', 0)
+
+# If vote percentage differs significantly, it contributes most
+if abs(safe_avg - bottom_avg) > 5:
+    print("Final Answer: vote percentage")
+else:
+    print("Final Answer: no clear impact")
+```

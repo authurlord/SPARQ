@@ -1,0 +1,11 @@
+Step 1: Identify the competition where the athlete won 1st place in the "3000 m steeplechase" event.  
+Step 2: Check which venue (city) is also the capital of the Bahamas. The capital of the Bahamas is Nassau.  
+Step 3: Look for a row where the "Event" is "3000 m steeplechase" and the "Venue" is "Nassau, Bahamas".  
+Step 4: Extract the corresponding "Competition" value from that row.
+
+From the data:
+- The row with "3000 m steeplechase" and "Nassau, Bahamas" is:  
+  ['1980', 'Central American and Caribbean Junior Championships (U-20)', 'Nassau, Bahamas', '1st', '3000 m steeplechase', '9:27.8']  
+- The competition is "Central American and Caribbean Junior Championships (U-20)".
+
+Final Answer: Central American and Caribbean Junior Championships (U-20)

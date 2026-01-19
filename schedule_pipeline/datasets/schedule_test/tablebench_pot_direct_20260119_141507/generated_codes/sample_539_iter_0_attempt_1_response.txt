@@ -1,0 +1,36 @@
+Step 1: Understand the question. We are to find the year where the natural growth rate is significantly different from the average natural growth rate between 1990 and 2000. "Significantly different" implies a large deviation (e.g., more than 1 standard deviation or a clear outlier).
+
+Step 2: Filter data for years from 1990 to 2000 (inclusive). Note that the last row "1990 - 2009" is an aggregate and should be excluded.
+
+Step 3: Compute the average natural growth rate for the years 1990–2000.
+
+Step 4: For each year in 1990–2000, compute the absolute difference between its natural growth and the average. Identify the year(s) with the largest deviation.
+
+Step 5: Since the question asks for "a year", we return the year with the maximum deviation.
+
+Step 6: Handle missing values — in this dataset, "na" appears in later years, but within 1990–2000, all values are numeric.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter rows for years 1990 to 2000 (inclusive)
+df_filtered = df[df['year'].str.contains(r'199[0-9]|200[0-9]')]
+
+# Convert 'natural growth' to float and drop any na
+df_filtered['natural growth'] = pd.to_numeric(df_filtered['natural growth'], errors='coerce')
+df_filtered = df_filtered.dropna(subset=['natural growth'])
+
+# Calculate average natural growth rate from 1990 to 2000
+avg_growth = df_filtered['natural growth'].mean()
+
+# Compute absolute deviations
+df_filtered['deviation'] = abs(df_filtered['natural growth'] - avg_growth)
+
+# Find the year with the maximum deviation
+max_deviation_year = df_filtered.loc[df_filtered['deviation'].idxmax(), 'year']
+
+print(f"Final Answer: {max_deviation_year}")
+```

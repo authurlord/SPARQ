@@ -1,0 +1,94 @@
+Step 1: The user wants to identify the only player who won both men's singles and men's doubles titles in the same year.  
+Step 2: Extract the "men 's singles" and "men 's doubles" columns from the table.  
+Step 3: For each year, check if the same player appears in both "men 's singles" and "men 's doubles".  
+Step 4: Since the data shows team names for doubles (e.g., "neil cottrill john quinn"), we need to parse the names. However, the format suggests that the men's doubles entries are pairs, not single players. Therefore, a player winning both singles and doubles would have to be listed individually in both fields.  
+Step 5: Look through the data to find any instance where a player appears in both men's singles and men's doubles.  
+
+We will go year by year and compare the singles winner with the doubles partners. If a player is listed as the singles winner and also appears in the doubles pair (as a name), then that is a match.  
+
+Note: In the data, men's doubles are listed as pairs (e.g., "neil cottrill john quinn"), so we need to check if any of the names in the doubles pair matches the singles winner.
+
+Let’s write code to parse this:
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Create a list of years and check for matches
+matches = []
+
+for idx, row in df.iterrows():
+    year = row['year']
+    men_singles = row["men 's singles"]
+    men_doubles = row["men 's doubles"]
+    
+    # Split doubles into individual names
+    doubles_names = men_doubles.split()
+    
+    # Check if the men's singles winner is in the doubles pair
+    if men_singles in doubles_names:
+        matches.append((men_singles, year))
+
+# If there's a match, return it; otherwise, no one has both
+if matches:
+    final_player, final_year = matches[0]
+    print(f"Final Answer: {final_player}, {final_year}")
+else:
+    print("Final Answer: none, none")
+```
+
+This code checks whether the men's singles winner appears in the list of names in the men's doubles pair. If yes, it records that player and year. From inspection of the data, let's verify manually:
+
+- 1993: singles = jim laugesen, doubles = neil cottrill john quinn → no match
+- 1994: henrik sörensen (singles), doubles = henrik sörensen claus simonsen → Henrik Sörensen appears in both!
+- 1995: thomas soegaard, doubles = thomas stavngaard janek roos → no match
+- 1996: daniel ericsson, doubles = johan tholinsson henrik andersson → no match
+- 1997: martin hagberg, doubles = james anderson ian sullivan → no match
+- 1998: robert nock, doubles = graham hurrell paul jeffrey → no match
+- 1999: robert nock, doubles = svetoslav stojanov michal popov → no match
+- 2000: gerben bruystens, doubles = thomas hovgaard jesper mikla → no match
+- 2001: bobby milroy, doubles = michael popov manuel dubrulle → no match
+- 2002: przemysław wacha, doubles = svetoslav stoyanov vincent laigle → no match
+- 2003: michael christensen, doubles = michael popov manuel dubrulle → no match
+- 2004: per - henrik croona, doubles = mike beres william milroy → no match
+- 2005: przemysław wacha, doubles = chris langridge chris tonks → no match
+- 2006: jan o jorgensen, doubles = robert adcock robin middleton → no match
+- 2007: arvind bhat, doubles = kasper henriksen rasmus bonde → no match
+- 2008: chetan anand, doubles = kasper henriksen christian skovgaard → no match
+- 2009: petr koukal, doubles = mads conrad - petersen mads pieler kolding → no match
+- 2010: ajay jayaram, doubles = chris langridge robin middleton → no match
+- 2011: przemyslaw wacha, doubles = adam cwalina michal logosz → no match
+- 2012: joachim persson, doubles = chris langridge peter mills → no match
+
+Only in 1994: Henrik Sörensen appears in both singles and doubles.
+
+So the answer is Henrik Sörensen in 1994.
+
+Final Answer: Henrik Sörensen, 1994
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+matches = []
+
+for idx, row in df.iterrows():
+    year = row['year']
+    men_singles = row["men 's singles"]
+    men_doubles = row["men 's doubles"]
+    
+    # Split doubles into individual names
+    doubles_names = men_doubles.split()
+    
+    # Check if the men's singles winner is in the doubles pair
+    if men_singles in doubles_names:
+        matches.append((men_singles, year))
+
+if matches:
+    final_player, final_year = matches[0]
+    print(f"Final Answer: {final_player}, {final_year}")
+else:
+    print("Final Answer: none, none")
+```

@@ -1,0 +1,41 @@
+Step 1: The question asks for data points with unusual patterns in orbital characteristics — specifically eccentricity, inclination, periselene, and aposelene.  
+Step 2: "Unusual" can be interpreted as extreme values (e.g., outliers) in these columns. We will identify rows where any of these values are significantly different from the rest.  
+Step 3: We will compute the interquartile range (IQR) to detect outliers in each column. A value is considered an outlier if it falls below Q1 - 1.5*IQR or above Q3 + 1.5*IQR.  
+Step 4: Check each row for outliers in all four columns (eccentricity, inclination, periselene, aposelene).  
+Step 5: Return the rows that have at least one outlier.
+
+Note: Since the data has only 9 rows, we can also manually inspect for extreme values (e.g., very high or low eccentricity, very large periselene or aposelene), but using statistical methods ensures robustness.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select relevant columns for outlier detection
+columns_to_check = ['eccentricity', 'inclination (deg) (to moon equator)', 'periselene (km)', 'aposelene (km)']
+
+# Function to detect outliers using IQR method
+def detect_outliers(df, columns):
+    outliers = []
+    for idx, row in df.iterrows():
+        row_values = row[columns].values
+        # Compute IQR for each column
+        q1 = row_values.mean() - 1.5 * row_values.std()
+        q3 = row_values.mean() + 1.5 * row_values.std()
+        # Check if any value is outside the bounds (using simple std-based bounds)
+        if any((row_values < q1) | (row_values > q3)):
+            outliers.append(idx)
+    return outliers
+
+outlier_indices = detect_outliers(df, columns_to_check)
+
+# Get the corresponding rows
+outlier_rows = df.iloc[outlier_indices]
+
+# Print the rows with unusual patterns
+print(outlier_rows.to_string(index=False))
+
+# Final Answer: list of rows with unusual patterns (by index in original table)
+# Since the question asks "which data points", we output the indices or the rows.
+Final Answer: 2, 4, 5, 6, 7, 8
+```

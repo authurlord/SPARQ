@@ -1,0 +1,20 @@
+Step 1: The user wants to find the year in which the number of tropical storms increased the most compared to the previous year.
+Step 2: Load the dataframe.
+Step 3: Calculate the difference in the number of tropical storms between consecutive years.
+Step 4: Identify the year with the maximum increase.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'year' to integer for proper sorting
+df['year'] = pd.to_numeric(df['year'])
+# Calculate the difference in tropical storms from the previous year
+df['increase'] = df['number of tropical storms'].diff()
+# Find the row with the maximum increase (excluding the first year)
+max_increase_row = df.loc[df['increase'].idxmax()]
+# Extract the year with the maximum increase
+year_with_max_increase = max_increase_row['year']
+print(f"Final Answer: {year_with_max_increase}")
+```

@@ -1,0 +1,26 @@
+Step 1: The user wants to find the manager with the highest winning percentage (wins/games).
+Step 2: Load the dataframe.
+Step 3: Calculate the winning percentage for each manager by dividing 'wins' by 'games'.
+Step 4: Exclude the 'totals' row as it's not a manager.
+Step 5: Find the manager with the maximum winning percentage.
+Step 6: Print the name of the manager with the highest winning percentage.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'wins' and 'games' columns to numeric, handling potential non-numeric values
+df['wins'] = pd.to_numeric(df['wins'], errors='coerce')
+df['games'] = pd.to_numeric(df['games'], errors='coerce')
+
+# Calculate winning percentage
+df['winning_percentage'] = df['wins'] / df['games']
+
+# Exclude the 'totals' row
+df = df[df['manager'] != 'totals']
+
+# Find the manager with the highest winning percentage
+max_win_pct_manager = df.loc[df['winning_percentage'].idxmax(), 'manager']
+
+print(f"Final Answer: {max_win_pct_manager}")
+```

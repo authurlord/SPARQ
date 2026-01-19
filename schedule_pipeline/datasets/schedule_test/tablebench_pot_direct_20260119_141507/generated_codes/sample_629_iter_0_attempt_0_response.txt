@@ -1,0 +1,13 @@
+Step 1: The user wants the total sales of the top 5 albums (i.e., the first 5 rows in the table based on position).
+Step 2: Load the dataframe.
+Step 3: Select the 'sales' column and take the first 5 rows.
+Step 4: Sum the sales values and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Get the sales of the top 5 albums (first 5 rows)
+top_5_sales = df['sales'].head(5).sum()
+print(f"Final Answer: {top_5_sales}")
+```

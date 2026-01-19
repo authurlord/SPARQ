@@ -1,0 +1,24 @@
+Step 1: The user wants to determine if there is a correlation between the number of major hurricanes and the number of deaths.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'number of major hurricanes' and 'deaths' columns.  
+Step 4: Convert 'deaths' to numeric (handling non-numeric values like 'not known', 'none', etc. as NaN).  
+Step 5: Calculate the correlation coefficient between the two variables.  
+Step 6: Interpret the result: if the correlation is high and positive, it suggests a possible relationship.  
+Step 7: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'deaths' to numeric, coercing errors to NaN
+df['deaths'] = pd.to_numeric(df['deaths'], errors='coerce')
+
+# Drop rows where deaths or major hurricanes are missing
+df_clean = df.dropna(subset=['number of major hurricanes', 'deaths'])
+
+# Calculate correlation
+correlation = df_clean['number of major hurricanes'].corr(df_clean['deaths'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

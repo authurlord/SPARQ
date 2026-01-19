@@ -1,0 +1,15 @@
+Step 1: The user wants to count how many countries have at least one semifinalist.
+Step 2: Load the dataframe.
+Step 3: Select the 'semifinalists' column and convert it to integers.
+Step 4: Count the number of rows where 'semifinalists' is greater than 0.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'semifinalists' column to integer type to avoid comparison errors
+df['semifinalists'] = pd.to_numeric(df['semifinalists'], errors='coerce')
+# Count countries with at least one semifinalist
+count_countries = (df['semifinalists'] > 0).sum()
+print(f"Final Answer: {count_countries}")
+```

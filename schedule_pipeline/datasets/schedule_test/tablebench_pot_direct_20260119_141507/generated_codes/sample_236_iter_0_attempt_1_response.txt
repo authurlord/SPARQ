@@ -1,0 +1,34 @@
+Step 1: The question asks which factor — number of candidates nominated or total number of votes — has a greater causal impact on the number of seats won. This requires analyzing the correlation between these variables.
+
+Step 2: Since "causal impact" is not directly measurable from correlation alone, we interpret it as which variable shows a stronger statistical relationship (correlation) with the number of seats won.
+
+Step 3: Load the dataframe and compute the correlation between:
+- "of candidates nominated" and "of seats won"
+- "of total votes" and "of seats won"
+
+Step 4: Compare the absolute values of the correlations. The higher absolute correlation indicates a stronger relationship.
+
+Step 5: Print the result accordingly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract numeric columns for correlation
+candidates = df['of candidates nominated'].astype(float)
+seats_won = df['of seats won'].astype(float)
+total_votes = df['of total votes'].astype(float)
+
+# Compute correlation with seats won
+corr_candidates = candidates.corr(seats_won)
+corr_votes = total_votes.corr(seats_won)
+
+# Determine which has greater causal impact (higher absolute correlation)
+if abs(corr_candidates) > abs(corr_votes):
+    final_answer = "number of candidates nominated"
+else:
+    final_answer = "total number of votes received"
+
+print(f"Final Answer: {final_answer}")
+```

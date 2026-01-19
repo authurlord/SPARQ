@@ -1,0 +1,20 @@
+Step 1: Filter the data to include only regions with GDP (% of national total) above 5%.  
+Step 2: Extract the 'GDP (€, billions)' and 'GDP per capita (€)' columns for these regions.  
+Step 3: Analyze the relationship between GDP and GDP per capita. Since the question asks how GDP per capita changes with increasing GDP, we can observe the trend by examining the values.  
+Step 4: Present the relevant data in a concise format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where GDP (% of national total) > 5
+filtered_df = df[df['GDP (% of national total)'] != '–']
+filtered_df['GDP (% of national total)'] = pd.to_numeric(filtered_df['GDP (% of national total)'])
+filtered_df = filtered_df[filtered_df['GDP (% of national total)'] > 5]
+
+# Select relevant columns and sort by GDP (€, billions) for clarity
+result = filtered_df[['Region', 'GDP (€, billions)', 'GDP per capita (€)']].sort_values(by='GDP (€, billions)', ascending=False)
+
+print(result)
+```

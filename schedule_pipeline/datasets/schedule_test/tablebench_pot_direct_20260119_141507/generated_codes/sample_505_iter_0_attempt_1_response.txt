@@ -1,0 +1,25 @@
+Step 1: Understand the Hurricane Severity Index (HSI). It is calculated as:
+   HSI = (number of hurricanes + number of major hurricanes) / (number of tropical storms)
+
+Step 2: For each year, compute the HSI using the given columns:
+   - "number of hurricanes"
+   - "number of major hurricanes"
+   - "number of tropical storms"
+
+Step 3: Identify the year with the highest HSI value.
+
+Step 4: Return that year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Calculate Hurricane Severity Index (HSI) for each year
+df['hs_index'] = (df['number of hurricanes'] + df['number of major hurricanes']) / df['number of tropical storms']
+
+# Find the year with the highest HSI
+max_hsi_year = df.loc[df['hs_index'].idxmax(), 'year']
+
+print(f"Final Answer: {max_hsi_year}")
+```

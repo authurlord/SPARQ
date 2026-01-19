@@ -1,0 +1,40 @@
+Step 1: The user wants the standard deviation of metabolic rates for female animals and identifies which animal has a metabolic rate more than one standard deviation away from the mean.  
+Step 2: Extract the "Metabolic rate" values for female animals (rows where Sex is "Female").  
+Step 3: Calculate the standard deviation of these values.  
+Step 4: Compare each female animal's metabolic rate to the mean and check if it is more than one standard deviation away.  
+
+Note: The mean is already given as 1285.5. The standard deviation can be derived from the sum of squared differences divided by the number of data points (n-1 for sample standard deviation, but here we treat it as population since all data is provided).  
+
+We will:
+- Filter rows where Sex is "Female"
+- Extract metabolic rates
+- Compute standard deviation
+- Identify which animal(s) have metabolic rates > mean + std or < mean - std
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter only female animals
+female_data = df[df['Sex'] == 'Female']
+
+# Extract metabolic rates
+metabolic_rates = female_data['Metabolic rate'].astype(float)
+
+# Calculate standard deviation
+std_dev = metabolic_rates.std()
+
+# Mean is already given in the table as 1285.5
+mean_rate = 1285.5
+
+# Find animals with metabolic rate more than one standard deviation from mean
+outliers = []
+for idx, row in female_data.iterrows():
+    rate = row['Metabolic rate']
+    if abs(rate - mean_rate) > std_dev:
+        outliers.append(row['Animal'])
+
+# Final answer: standard deviation and the animal(s) that are more than one std away
+print(f"Final Answer: {std_dev:.2f}, {', '.join(outliers) if outliers else 'none'}")
+```

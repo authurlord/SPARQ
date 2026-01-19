@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table displays annual data for various countries and the world, showing values from 2002 to 2011. Notable trends include consistent growth in total values for "world" and "china", with "world" increasing from 13,600 to 16,100. China shows a steady rise from 585 to 1,190. Chile and Peru also show upward trends. Some countries like Indonesia and Kazakhstan show declines after initial peaks.

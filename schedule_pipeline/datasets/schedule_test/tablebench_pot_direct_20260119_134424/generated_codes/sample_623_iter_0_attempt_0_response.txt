@@ -1,0 +1,23 @@
+Step 1: The user wants the difference in depth (km) between the earthquake with the highest magnitude and the one with the lowest magnitude.
+Step 2: Load the dataframe.
+Step 3: Identify the row with the highest magnitude and the row with the lowest magnitude.
+Step 4: Extract their respective depths and compute the difference.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Magnitude' and 'Depth (km)' to float for numerical operations
+df['Magnitude'] = pd.to_numeric(df['Magnitude'])
+df['Depth (km)'] = pd.to_numeric(df['Depth (km)'])
+
+# Find the max and min magnitude values
+max_magnitude_row = df.loc[df['Magnitude'].idxmax()]
+min_magnitude_row = df.loc[df['Magnitude'].idxmin()]
+
+# Calculate the difference in depth
+depth_difference = abs(max_magnitude_row['Depth (km)'] - min_magnitude_row['Depth (km)'])
+
+print(f"Final Answer: {depth_difference}")
+```

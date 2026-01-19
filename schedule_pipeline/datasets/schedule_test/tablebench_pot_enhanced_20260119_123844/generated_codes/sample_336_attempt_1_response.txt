@@ -1,0 +1,33 @@
+Step 1: The user wants to find the year when an athlete won both the Senior PGA Championship and the Senior Players Championship.
+Step 2: Load the dataframe.
+Step 3: Filter rows where both 'senior pga championship' and 'senior players championship' are not empty (i.e., valid winners).
+Step 4: Identify the year(s) where the same person won both titles. Since the data is structured with one winner per event per year, we need to check for duplicate winners across both columns.
+Step 5: Extract the year when this overlap occurs and return it.
+
+Note: Some entries have multiple wins listed (e.g., "kenny perry (2 / 2)"), but we only care about the athlete's name. We will extract the base name (before the parentheses) for comparison.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Function to extract the athlete name (before parentheses)
+def extract_winner(winner):
+    if pd.isna(winner):
+        return ""
+    return winner.split(' (')[0].strip()
+
+# Apply the function to both columns
+df['senior pga champion'] = df['senior pga championship'].apply(extract_winner)
+df['senior players champ'] = df['senior players championship'].apply(extract_winner)
+
+# Find rows where the same athlete won both titles
+matched_rows = df[df['senior pga champion'] == df['senior players champ']]
+
+# Extract the year
+if not matched_rows.empty:
+    year = matched_rows['year'].iloc[0]
+    print(f"Final Answer: {year}")
+else:
+    print("Final Answer: None")
+```

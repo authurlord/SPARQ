@@ -1,0 +1,21 @@
+Step 1: The user wants the total number of years served by all mayors.
+Step 2: Load the dataframe.
+Step 3: Convert 'Taking Office' and 'Leaving' columns to integers.
+Step 4: Calculate the difference between 'Leaving' and 'Taking Office' for each mayor.
+Step 5: Sum all the years served.
+Step 6: Print the total.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Taking Office' and 'Leaving' to integers
+df['Taking Office'] = pd.to_numeric(df['Taking Office'])
+df['Leaving'] = pd.to_numeric(df['Leaving'])
+
+# Calculate years served for each mayor
+df['Years Served'] = df['Leaving'] - df['Taking Office']
+
+# Sum the total years served
+total_years = df['Years Served'].sum()
+print(f"Final Answer: {total_years}")
+```

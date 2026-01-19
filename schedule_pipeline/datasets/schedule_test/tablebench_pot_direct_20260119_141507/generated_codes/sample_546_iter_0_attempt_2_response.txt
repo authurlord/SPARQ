@@ -1,0 +1,23 @@
+Step 1: The user wants to find the year with the highest increase in total s ton from the previous year between 2000 and 2006.  
+Step 2: Load the dataframe and extract the 'total s ton' column.  
+Step 3: Calculate the year-over-year increase (difference between consecutive years).  
+Step 4: Identify the maximum increase and return the corresponding year.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'year' to integer and sort by year
+df['year'] = df['year'].astype(int)
+df = df.sort_values('year')
+
+# Extract total s ton and calculate year-over-year differences
+total_s_ton = df['total s ton'].astype(int)
+yearly_increase = total_s_ton.iloc[1:] - total_s_ton.iloc[:-1]
+
+# Find the year with the highest increase
+max_increase_index = yearly_increase.idxmax()
+max_increase_year = df.loc[yearly_increase.idxmax(), 'year']
+
+print(f"Final Answer: {max_increase_year}")
+```

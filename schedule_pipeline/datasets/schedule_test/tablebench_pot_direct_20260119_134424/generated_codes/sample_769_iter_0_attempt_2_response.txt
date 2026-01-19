@@ -1,0 +1,7 @@
+Step 1: Analyze the data for trends in fuel propulsion and quantity over time.
+Step 2: Observe that newer buses (from 2010 onward) increasingly use hybrid or more environmentally friendly fuel propulsion (e.g., diesel-electric hybrid).
+Step 3: The quantity of buses produced has also increased in recent years (e.g., 80, 55, 10), suggesting a trend toward larger production runs.
+Step 4: Since 2025 is in the future and no direct data exists, extrapolate based on the most recent models (e.g., MCI D4500CT and New Flyer D60LF).
+Step 5: Predict that by 2025, fuel propulsion will likely be electric or hybrid, and quantity will be high (similar to or exceeding recent large orders).
+
+Final Answer: electric, 70

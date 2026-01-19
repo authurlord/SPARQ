@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 5000, 3300, 2600

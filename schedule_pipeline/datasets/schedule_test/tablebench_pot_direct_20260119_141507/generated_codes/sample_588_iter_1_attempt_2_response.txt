@@ -1,0 +1,28 @@
+The error occurred because the "of national votes" column contains string values with percentages (e.g., "39.7%"), not numerical values. We need to extract the numeric part of the string and convert it to a float before performing calculations.
+
+Step 1: Parse the "of national votes" column to extract the numeric value (removing the '%' sign).
+Step 2: Convert the string values to floats.
+Step 3: Multiply the value from 1965 by 1.10 (10% increase).
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the numeric value from 'of national votes' column (remove % and convert to float)
+def parse_votes(vote_str):
+    return float(vote_str.strip('%'))
+
+# Apply the parsing function to the 'of national votes' column
+df['of national votes'] = df['of national votes'].apply(parse_votes)
+
+# Get the national votes for 1965
+votes_1965 = df[df['election'] == '1965']['of national votes'].values[0]
+
+# Increase by 10%
+increased_votes = votes_1965 * 1.10
+
+print(f"Final Answer: {increased_votes:.0f}")
+```

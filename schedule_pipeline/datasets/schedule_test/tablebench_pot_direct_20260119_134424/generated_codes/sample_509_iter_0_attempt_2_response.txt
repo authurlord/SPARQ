@@ -1,0 +1,19 @@
+Step 1: The user wants to find the series with the highest win rate, where win rate is calculated as (wins / races) * 100.
+Step 2: Load the dataframe.
+Step 3: Filter out rows where races is 0 to avoid division by zero.
+Step 4: Calculate win rate for each series.
+Step 5: Identify the series with the maximum win rate.
+Step 6: Print the series with the highest win rate.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove rows where races is 0 to avoid division by zero
+df = df[df['races'] > 0]
+# Calculate win rate
+df['win_rate'] = (df['wins'] / df['races']) * 100
+# Find the series with the highest win rate
+max_win_rate_series = df.loc[df['win_rate'].idxmax()]['series']
+print(f"Final Answer: {max_win_rate_series}")
+```

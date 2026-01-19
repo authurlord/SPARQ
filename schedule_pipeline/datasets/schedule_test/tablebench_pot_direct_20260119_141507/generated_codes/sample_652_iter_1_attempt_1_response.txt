@@ -1,0 +1,40 @@
+The error occurred because the 'pop density (/ km square)' and 'gdp per capita usd (2009 - 2011)' columns contain string values, which cannot be directly used in numerical calculations. We need to convert them to numeric types before computing the correlation.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'pop density (/ km square)' and 'gdp per capita usd (2009 - 2011)' columns to numeric, handling any non-numeric values (e.g., whitespace or missing data).
+Step 3: Compute the correlation coefficient between these two columns.
+Step 4: Identify outliers using a simple method (e.g., points that are more than 2 standard deviations from the mean in either direction).
+Step 5: Print the correlation coefficient and list any outliers.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert population density and GDP per capita to numeric, coercing errors to NaN
+df['pop density ( / km square)'] = pd.to_numeric(df['pop density ( / km square)'], errors='coerce')
+df['gdp per capita usd (2009 - 2011)'] = pd.to_numeric(df['gdp per capita usd (2009 - 2011)'], errors='coerce')
+
+# Drop rows with missing values in either column
+df_clean = df.dropna(subset=['pop density ( / km square)', 'gdp per capita usd (2009 - 2011)'])
+
+# Compute correlation coefficient
+correlation = df_clean['pop density ( / km square)'].corr(df_clean['gdp per capita usd (2009 - 2011)'])
+
+# Identify outliers: points more than 2 standard deviations from the mean
+mean_pop_density = df_clean['pop density ( / km square)'].mean()
+std_pop_density = df_clean['pop density ( / km square)'].std()
+mean_gdp_per_capita = df_clean['gdp per capita usd (2009 - 2011)'].mean()
+std_gdp_per_capita = df_clean['gdp per capita usd (2009 - 2011)'].std()
+
+outliers = []
+for idx, row in df_clean.iterrows():
+    pop_density = row['pop density ( / km square)']
+    gdp_per_capita = row['gdp per capita usd (2009 - 2011)']
+    if (abs(pop_density - mean_pop_density) > 2 * std_pop_density) or \
+       (abs(gdp_per_capita - mean_gdp_per_capita) > 2 * std_gdp_per_capita):
+        outliers.append(row['country / territory'])
+
+print(f"Final Answer: {correlation:.3f}, {'; '.join(outliers) if outliers else 'none'}")
+```

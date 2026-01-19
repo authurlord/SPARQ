@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The human development index (2000) shows a positive correlation with population density (/ km²) across municipalities, particularly in areas with larger land areas, indicating that higher human development is associated with higher population density.

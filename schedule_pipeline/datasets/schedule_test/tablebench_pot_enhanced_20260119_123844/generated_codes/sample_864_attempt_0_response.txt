@@ -1,0 +1,32 @@
+Step 1: The user wants to calculate the difference in years between the service duration of 'Empress of Austria' and 'Cyclops'.
+Step 2: Load the dataframe.
+Step 3: Filter rows for 'Empress of Austria' and 'Cyclops' based on the 'Name' column.
+Step 4: Extract the 'Introduced' and 'Withdrawn' values for both locomotives.
+Step 5: Calculate the service duration (Withdrawn - Introduced) for each.
+Step 6: Compute the difference between their durations.
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for the two locomotives
+empress = df[df['Name'] == 'Empress of Austria']
+cyclops = df[df['Name'] == 'Cyclops']
+
+# Extract introduced and withdrawn years
+empress_intro = int(empress['Introduced'].values[0])
+empress_withdraw = int(empress['Withdrawn'].values[0])
+cyclops_intro = int(cyclops['Introduced'].values[0])
+cyclops_withdraw = int(cyclops['Withdrawn'].values[0])
+
+# Calculate service duration
+empress_duration = empress_withdraw - empress_intro
+cyclops_duration = cyclops_withdraw - cyclops_intro
+
+# Find the difference
+difference = empress_duration - cyclops_duration
+
+print(f"Final Answer: {difference}")
+```

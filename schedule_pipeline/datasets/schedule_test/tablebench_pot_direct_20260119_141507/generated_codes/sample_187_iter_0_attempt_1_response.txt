@@ -1,0 +1,14 @@
+Step 1: The user is asking which factors (wins, draws, losses) significantly contribute to the 'points' total for each team.  
+Step 2: In football (soccer), points are typically awarded as follows:  
+- Win = 3 points  
+- Draw = 1 point  
+- Loss = 0 points  
+Thus, points = (wins × 3) + (draws × 1) + (losses × 0)  
+So, wins and draws directly contribute, while losses do not.  
+Step 3: Confirm this by checking the data:  
+For example, Olimpia: 4 wins → 4×3 = 12, 4 draws → 4×1 = 4, total = 16 → matches points.  
+Similarly, 12 de Octubre: 3 wins → 9, 6 draws → 6, total = 15 → matches points.  
+This confirms that wins and draws contribute, and losses do not.  
+Step 4: Therefore, the factors that significantly contribute are 'wins' and 'draws'.  
+
+Final Answer: wins, draws

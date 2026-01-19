@@ -1,0 +1,23 @@
+Step 1: The user wants the correlation coefficient between 'sunshine (hrs / year)' and 'storms (days / year)'.
+Step 2: Load the dataframe.
+Step 3: Extract the two columns of interest: 'sunshine (hrs / year)' and 'storms (days / year)'.
+Step 4: Compute the Pearson correlation coefficient between these two columns.
+Step 5: Print the correlation coefficient.
+
+Note: The data contains some non-numeric entries (e.g., '1 630' with spaces), so we need to clean them by removing spaces before converting to numeric.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'sunshine (hrs / year)' and 'storms (days / year)' columns by removing spaces
+df['sunshine (hrs / year)'] = df['sunshine (hrs / year)'].str.replace(' ', '').astype(float)
+df['storms (days / year)'] = df['storms (days / year)'].str.replace(' ', '').astype(float)
+
+# Calculate the correlation coefficient
+correlation = df['sunshine (hrs / year)'].corr(df['storms (days / year)'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

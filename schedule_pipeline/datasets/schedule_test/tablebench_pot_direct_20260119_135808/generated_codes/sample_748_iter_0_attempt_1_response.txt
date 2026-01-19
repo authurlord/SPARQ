@@ -1,0 +1,23 @@
+Step 1: The user wants to forecast the qualifying speed for 1960 based on the trend in 'qual' from 1951 to 1957.  
+Step 2: Load the dataframe and convert 'qual' to numeric for analysis.  
+Step 3: Perform a simple linear regression to model the trend over time.  
+Step 4: Use the fitted model to predict the 'qual' value for the year 1960.  
+Step 5: Print the forecasted value.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+df['qual'] = pd.to_numeric(df['qual'], errors='coerce')
+
+# Prepare data for linear regression
+X = df['year'].astype(int).values.reshape(-1, 1)
+y = df['qual'].values
+
+# Fit linear regression model
+model = np.polyfit(X.flatten(), y, 1)
+predicted_qual_1960 = np.polyval(model, 1960)
+
+print(f"Final Answer: {predicted_qual_1960:.3f}")
+```

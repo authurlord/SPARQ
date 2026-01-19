@@ -1,0 +1,17 @@
+Step 1: The user wants the difference in performance (COP values) between two heat pump types at 35°C.
+Step 2: Load the dataframe.
+Step 3: Filter rows for "High-efficiency air source heat pump (ASHP), air at 0 °C" and "Ground source heat pump (GSHP), water at 0 °C" since both are relevant to 35°C output.
+Step 4: Extract the COP value at 35°C (column index 3) for each.
+Step 5: Compute the difference and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract COP values at 35°C for High-efficiency ASHP and GSHP
+ashp_35c = df[df['Pump type and source'] == 'High efficiency ASHP, air at 0 °C']['35 °C (e.g. heated screed floor)'].values[0]
+gshp_35c = df[df['Pump type and source'] == 'Ground source heat pump (GSHP), water at 0 °C']['35 °C (e.g. heated screed floor)'].values[0]
+
+# Convert to float and compute difference
+difference = float(ashp_35c) - float(gshp_35c)
+print(f"Final Answer: {difference:.1f}")
+```

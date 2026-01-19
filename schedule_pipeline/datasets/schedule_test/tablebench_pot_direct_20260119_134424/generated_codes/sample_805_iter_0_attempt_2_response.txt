@@ -1,0 +1,33 @@
+Step 1: The user wants the standard deviation of metabolic rates for female animals and identification of any animal with a metabolic rate more than one standard deviation away from the mean.
+
+Step 2: Load the dataframe and extract the 'Metabolic rate' column for female animals (excluding the row with '-' and the summary row).
+
+Step 3: Convert the 'Metabolic rate' column to numeric.
+
+Step 4: Calculate the standard deviation using the formula or pandas method.
+
+Step 5: Identify which female animals have metabolic rates more than one standard deviation above or below the mean.
+
+Step 6: Print the standard deviation and the animal(s) meeting the condition.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter female animals (exclude '-' and summary row)
+female_data = df[df['Sex'] == 'Female']
+female_metabolic_rates = pd.to_numeric(female_data['Metabolic rate'], errors='coerce')
+
+# Calculate mean and standard deviation
+mean_rate = female_metabolic_rates.mean()
+std_dev = female_metabolic_rates.std()
+
+# Find animals more than one standard deviation away from the mean
+outliers = female_data[abs(female_data['Metabolic rate'].astype(float) - mean_rate) > std_dev]
+
+# Extract animal IDs (first column)
+outlier_animals = outliers['Animal'].tolist()
+
+print(f"Final Answer: {std_dev:.2f}, {', '.join(outlier_animals)}")
+```

@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of delegates from Metro Manila who won a pageant title.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'hometown' contains 'metro manila' and 'result' is 'winner'.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for delegates from Metro Manila and winners
+metro_manila_winners = df[(df['hometown'].str.contains('metro manila', case=False, na=False)) & (df['result'] == 'winner')]
+count = len(metro_manila_winners)
+print(f"Final Answer: {count}")
+```

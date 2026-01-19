@@ -1,0 +1,39 @@
+We are asked to find:
+
+1. The year with the highest average issue price.
+2. The difference between that year's average issue price and the average issue price of the lowest year (i.e., the year with the lowest average issue price).
+
+However, note: the "issue price" is given per coin (each row), not per year. So we need to compute the average issue price **per year**, then compare the maximum and minimum of those yearly averages.
+
+Step-by-step approach:
+- Load the data.
+- Group by 'year' and calculate the average issue price for each year.
+- Find the year with the highest average issue price.
+- Find the year with the lowest average issue price.
+- Compute the difference between the highest and lowest.
+
+Note: There are only 6 rows, so we can group by year and compute mean issue price per year.
+
+Potential error in previous attempt: trying to apply `.mean()` on a column with non-numeric values or misinterpreting the grouping.
+
+Let’s fix it by ensuring proper grouping and numeric calculation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Group by 'year' and compute average issue price per year
+yearly_avg_price = df.groupby('year')['issue price'].mean()
+
+# Find the year with highest and lowest average issue price
+max_price_year = yearly_avg_price.idxmax()
+min_price_year = yearly_avg_price.idxmin()
+
+max_avg_price = yearly_avg_price.max()
+min_avg_price = yearly_avg_price.min()
+
+difference = max_avg_price - min_avg_price
+
+print(f"Final Answer: {max_price_year}, {difference:.2f}")
+```

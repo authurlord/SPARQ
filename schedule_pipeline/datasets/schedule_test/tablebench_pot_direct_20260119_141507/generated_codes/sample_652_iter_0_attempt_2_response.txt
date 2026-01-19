@@ -1,0 +1,41 @@
+Step 1: The user wants to find the correlation between 'pop density ( / km square)' and 'gdp per capita usd (2009 - 2011)'.  
+Step 2: Load the dataframe.  
+Step 3: Extract the two columns of interest: 'pop density' and 'gdp per capita'.  
+Step 4: Compute the Pearson correlation coefficient between these two variables.  
+Step 5: Identify potential outliers using the IQR method (interquartile range) to detect values that lie outside 1.5 * IQR from the first and third quartiles.  
+Step 6: Print the correlation coefficient and list any outliers.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Extract the columns of interest
+pop_density = df['pop density ( / km square)']
+gdp_per_capita = df['gdp per capita usd (2009 - 2011)']
+
+# Calculate correlation coefficient
+correlation = pop_density.corr(gdp_per_capita)
+
+# Detect outliers using IQR method
+Q1 = pop_density.quantile(0.25)
+Q3 = pop_density.quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+outliers_pop_density = pop_density[(pop_density < lower_bound) | (pop_density > upper_bound)]
+
+# Check if any outlier exists in gdp_per_capita with corresponding pop_density
+outlier_indices = []
+for idx, row in df.iterrows():
+    if (row['pop density ( / km square)'] < lower_bound) or (row['pop density ( / km square)'] > upper_bound):
+        outlier_indices.append(idx)
+
+# If there are outliers, print them; otherwise, indicate none
+outliers_present = len(outlier_indices) > 0
+outlier_info = f"Outliers present: {outliers_present}, Correlation coefficient: {correlation:.3f}"
+
+print(f"Final Answer: {correlation:.3f}, {outliers_present}")
+```

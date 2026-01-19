@@ -1,0 +1,31 @@
+We are asked to find how many hand combinations have a payout of 100 or more for 1 credit.
+
+Step-by-step:
+1. The table has a row for each hand (e.g., "royal flush", "straight flush", etc.), and each row has a column for "1 credit" payout.
+2. We need to identify which rows (hands) have a payout of 100 or more in the "1 credit" column.
+3. Since the "1 credit" column contains strings like '250', '50', etc., we must convert them to integers to compare.
+4. We will filter the rows where the value in the "1 credit" column is ≥ 100.
+5. Count how many such rows exist.
+
+Note: The last row ("theoretical return") has values like '98.9%', which are percentages and not payouts — they should be ignored since they don't represent a payout for a hand.
+
+So, we exclude the last row (theoretical return), and only consider the first 14 rows (each representing a hand).
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert '1 credit' column to numeric, handling any non-numeric values
+df['1 credit'] = pd.to_numeric(df['1 credit'], errors='coerce')
+
+# Filter rows where '1 credit' >= 100 and exclude the last row (theoretical return)
+# The last row is 'theoretical return', so we slice up to that row
+filtered_rows = df.iloc[:-1][df['1 credit'] >= 100]
+
+# Count the number of such rows
+count = len(filtered_rows)
+
+print(f"Final Answer: {count}")
+```

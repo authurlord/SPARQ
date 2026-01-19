@@ -1,0 +1,13 @@
+Step 1: The user wants to identify the team with the lowest points.  
+Step 2: Load the dataframe.  
+Step 3: Look at the 'points' column and find the team with the minimum value.  
+Step 4: Print the name of that team.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the team with the least points
+least_points_team = df.loc[df['points'].idxmin(), 'team']
+print(f"Final Answer: {least_points_team}")
+```

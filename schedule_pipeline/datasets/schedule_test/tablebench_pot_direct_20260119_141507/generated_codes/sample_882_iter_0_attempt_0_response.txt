@@ -1,0 +1,29 @@
+Step 1: The user wants to find the season in which Liverpool scored the highest total number of goals in the Premier League.  
+Step 2: Identify relevant columns: "Season" and "Total" (which includes goals from all competitions), but specifically focus on "Goals" under "League" (Premier League).  
+Step 3: Filter rows where the "League" is "Premier League" and the "Club" is "Liverpool".  
+Step 4: Extract the "Goals" value for each such season and find the season with the maximum goals.  
+Step 5: Return the corresponding season.
+
+Note: The "Total" column is not directly the Premier League goals. The "Goals" under "League" (i.e., "League_2" in the column list) corresponds to the Premier League goals, as "League_1" is labeled as "League", and the data shows "Premier League" in the "League" column. However, the actual "Goals" values are in the "League_2" column (e.g., "Goals" in "League_2"). But looking at the data, the "League_2" column appears to contain goals for the league, and in the case of Liverpool, it matches the "Goals" in the row. For example, in "1991–92", "League_2" has 3 goals, but the total goals are 11 — this suggests that "League_2" may not be correct.
+
+Looking at the structure:
+- "League_1" and "League_2" both have "Apps" and "Goals".
+- The first row of data is the header: ['Club', 'Season', 'Division', 'Apps', 'Goals', 'Apps', 'Goals', 'Apps', 'Goals', ...]
+- So "Goals" under "League_1" is for the main league (e.g., Premier League).
+- For Liverpool, in 1991–92: "League_1" Goals = 3 → but total goals = 11 → so likely "League_1" is for the league, and we want that.
+
+So we will extract the "Goals" from "League_1" (which is the second "Goals" column) for Liverpool seasons in the Premier League.
+
+Step 6: Filter rows where Club == 'Liverpool' and League == 'Premier League', then find the season with maximum "Goals" in "League_1".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Liverpool and Premier League
+filtered_df = df[(df['Club'] == 'Liverpool') & (df['League'] == 'Premier League')]
+# Get the season with maximum goals in League_1 (Premier League goals)
+max_goals_row = filtered_df.loc[filtered_df['League_1'].idxmax()]
+final_season = max_goals_row['Season']
+print(f"Final Answer: {final_season}")
+```

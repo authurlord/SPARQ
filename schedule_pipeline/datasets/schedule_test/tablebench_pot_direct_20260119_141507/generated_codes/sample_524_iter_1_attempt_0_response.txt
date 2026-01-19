@@ -1,0 +1,106 @@
+We are given a table of aircraft with their introduction, retirement, seating, and notes. The question asks for the **change in total seating capacity** of the airline's fleet from 2004 to 2008.
+
+Step-by-step analysis:
+
+1. The "seating" column contains the seating capacity of each aircraft model.
+2. We need to identify which aircraft were in service during the period 2004–2008.
+3. The "introduced" and "retired" columns indicate when an aircraft entered or left service.
+4. Only aircraft that were introduced **before or in 2004** and retired **after or in 2008** contribute to the fleet during that period.
+5. However, the question is asking for the **total seating capacity change** from 2004 to 2008. This means:
+   - Total seating capacity in 2004 (fleet at start)
+   - Total seating capacity in 2008 (fleet at end)
+   - Then compute the difference: (capacity in 2008) - (capacity in 2004)
+
+But note: some aircraft were retired before 2008, and new ones introduced after 2004.
+
+So we need to:
+- Extract all aircraft with 'introduced' ≤ 2008 (i.e., available by 2008)
+- Exclude those retired before 2004 (i.e., not in service in 2004)
+- For 2004: only aircraft introduced before or in 2004 and retired after or in 2004
+- For 2008: only aircraft introduced before or in 2008 and retired after or in 2008
+
+However, since the data doesn't specify exact years of retirement beyond that, and many have "-" (no retirement), we interpret:
+- If retired is "-", it means still in service (in service until now).
+- So for 2004: include aircraft introduced ≤ 2004 and retired ≥ 2004 (or retired is "-")
+- For 2008: include aircraft introduced ≤ 2008 and retired ≥ 2008 (or retired is "-")
+
+But note: the aircraft introduced in 2004 or later are only available from their introduction year onward.
+
+Therefore:
+- In 2004: only aircraft introduced ≤ 2004 and not retired before 2004 → so retired ≥ 2004 or retired is "-"
+- In 2008: only aircraft introduced ≤ 2008 and not retired before 2008 → retired ≥ 2008 or retired is "-"
+
+Let’s define:
+- Total seating in 2004 = sum of seating where introduced ≤ 2004 and (retired ≥ 2004 or retired == '-')
+- Total seating in 2008 = sum of seating where introduced ≤ 2008 and (retired ≥ 2008 or retired == '-')
+
+Then:
+Change = total_seating_2008 - total_seating_2004
+
+Now, let's process the data.
+
+Note: The aircraft "airbus a319-100" was introduced in 2004 → included in 2004 and still in service (retired is "-") → valid for both 2004 and 2008.
+"airbus a320-200" introduced in 2008 → included in 2008 only (not in 2004).
+
+Let’s go through each row:
+
+1. airbus a319-100: introduced 2004, retired "-", seating 156 → in both 2004 and 2008
+2. airbus a320-200: introduced 2008 → in 2008 only
+3. airbus a321-200: introduced 2008, retired 2010 → in 2008 only
+4. boeing 737-204: introduced 1995, retired 1996 → retired before 2004 → not in 2004 or 2008
+5. boeing 737-300: introduced 1996, retired 2007 → retired before 2008 → not in 2008
+6. boeing 737-700: introduced 2000, retired 2011 → in service from 2000 to 2011 → so in both 2004 and 2008
+
+So:
+- In 2004: a319-100 (156), a320-200 (not in 2004), a321-200 (not in 2004), 737-300 (retired 2007 → not in 2004), 737-700 (in service → yes) → 149
+Wait: 737-300 retired in 2007 → not in 2004? Actually, retired in 2007 → so it was retired *after* 2004 → so it was in service in 2004? Yes — but retired in 2007 → so it was in service until 2007 → so it was in service in 2004.
+
+But the condition is: retired ≥ 2004 → no, retired must be after or equal to 2004 to be in service in 2004? No.
+
+Actually, if an aircraft is retired *after* 2004, it was in service in 2004.
+
+So for an aircraft to be in service in 2004:
+- introduced ≤ 2004
+- retired ≥ 2004 OR retired == "-"
+
+Similarly, for 2008:
+- introduced ≤ 2008
+- retired ≥ 2008 OR retired == "-"
+
+So let's re-evaluate:
+
+1. airbus a319-100: introduced 2004 → ≤2004 → yes; retired "-" → so in both 2004 and 2008 → add 156
+2. airbus a320-200: introduced 2008 → ≤2008 → yes; retired not specified → in 2008 → add 180
+3. airbus a321-200: introduced 2008 → ≤2008 → yes; retired 2010 → ≥2008 → so in 2008 → add 220
+4. boeing 737-204: introduced 1995 → ≤2004 → yes; retired 1996 → <2004 → not in service in 2004 → exclude
+5. boeing 737-300: introduced 1996 → ≤2004 → yes; retired 2007 → ≥2004 → yes → in 2004 and 2008 → add 148
+6. boeing 737-700: introduced 2000 → ≤2004 → yes; retired 2011 → ≥2004 → yes → in both 2004 and 2008 → add 149
+
+Now, for 2004:
+- a319-100: 156
+- a320-200: introduced 2008 → not in 2004 → exclude
+- a321-200: introduced 2008 → not in 2004 → exclude
+- 737-300: 148
+- 737-700: 149
+→ Total 2004 = 156 + 148 + 149 = 453
+
+For 2008:
+- a319-100: 156
+- a320-200: 180
+- a321-200: 220
+- 737-300: retired 2007 → <2008 → not in 2008 → exclude
+- 737-700: 149
+→ Total 2008 = 156 + 180 + 220 + 149 = 705
+
+Change = 705 - 453 = 252
+
+Thus, the total seating capacity increased by 252.
+
+Now write the code accordingly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert

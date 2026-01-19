@@ -1,0 +1,38 @@
+Step 1: The question asks whether the natural change per year is more closely related to live births or deaths. Natural change is calculated as live births minus deaths. To determine the primary driver, we can analyze the correlation between natural change and live births, and between natural change and deaths.
+
+Step 2: Load the dataframe.
+
+Step 3: Convert 'live births per year' and 'deaths per year' from string with spaces to integers (e.g., "2 572 000" → 2572000).
+
+Step 4: Calculate natural change (already provided in the data), then compute the correlation between natural change and live births, and natural change and deaths.
+
+Step 5: Compare the absolute values of the correlations to determine which one is stronger.
+
+Step 6: Output the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert 'live births per year' and 'deaths per year' to integers
+df['live births per year'] = df['live births per year'].str.replace(' ', '').astype(int)
+df['deaths per year'] = df['deaths per year'].str.replace(' ', '').astype(int)
+
+# Extract natural change per year (already given)
+natural_change = df['natural change per year'].str.replace(' ', '').astype(int)
+
+# Compute correlation between natural change and live births
+corr_births = natural_change.corr(df['live births per year'])
+
+# Compute correlation between natural change and deaths
+corr_deaths = natural_change.corr(df['deaths per year'])
+
+# Determine which correlation is stronger (in absolute terms)
+if abs(corr_births) > abs(corr_deaths):
+    driver = "live births per year"
+else:
+    driver = "deaths per year"
+
+print(f"Final Answer: {driver}")
+```

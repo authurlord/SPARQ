@@ -1,0 +1,21 @@
+Step 1: Identify the rows corresponding to 'j17' and 'e4' classes from the table.  
+Step 2: For each of these rows, extract the values for "number at doncaster" and "number at pyewipe".  
+Step 3: Sum the values for both locations across the two classes.  
+Step 4: Output the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows for 'j17' and 'e4' classes
+filtered_rows = df[(df['class'] == 'j17') | (df['class'] == 'e4')]
+
+# Calculate total number of locomotives at Doncaster and Pyewipe
+total_locomotives = (
+    filtered_rows['number at doncaster'].sum() +
+    filtered_rows['number at pyewipe'].sum()
+)
+
+print(f"Final Answer: {total_locomotives}")
+```

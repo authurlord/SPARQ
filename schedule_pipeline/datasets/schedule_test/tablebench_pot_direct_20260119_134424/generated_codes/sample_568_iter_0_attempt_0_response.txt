@@ -1,0 +1,25 @@
+Step 1: The user wants to compare the total energy production of the European Union and the United States across different years.
+Step 2: Load the dataframe.
+Step 3: Filter rows for 'european union' and 'united states'.
+Step 4: Compare their 'total' values by year.
+Step 5: Identify the year where EU's total exceeds US's total.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for European Union and United States
+eu_data = df[df['country'] == 'european union']
+us_data = df[df['country'] == 'united states']
+
+# Compare total energy production by year
+eu_total = eu_data['total'].values[0]
+us_total = us_data['total'].values[0]
+
+# Check if EU's total exceeds US's total
+if eu_total > us_total:
+    print(f"Final Answer: {eu_data['year'].values[0]}")
+else:
+    print("Final Answer: None")
+```

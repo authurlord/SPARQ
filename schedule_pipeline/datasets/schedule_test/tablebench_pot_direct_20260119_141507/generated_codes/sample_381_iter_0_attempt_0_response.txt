@@ -1,0 +1,22 @@
+Step 1: The user wants to count the number of hurricanes that occurred in the month of September.  
+Step 2: The 'Month' column contains values like "August, September", "September", etc. We need to identify entries where "September" appears.  
+Step 3: Filter rows where the 'Month' value includes "September".  
+Step 4: Count the number of such rows.  
+
+Note: The first row is a header, so we skip it. Only rows with actual hurricane names (not source rows) are considered.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the header row (first row)
+df = df.iloc[1:]
+
+# Filter rows where 'Month' contains 'September'
+september_hurricanes = df[df['Month'].str.contains('September', case=False)]
+
+# Count the number of such hurricanes
+count_september = len(september_hurricanes)
+
+print(f"Final Answer: {count_september}")
+```

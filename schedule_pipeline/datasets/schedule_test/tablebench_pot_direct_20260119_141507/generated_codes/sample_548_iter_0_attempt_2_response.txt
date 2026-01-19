@@ -1,0 +1,26 @@
+Step 1: The user wants to find the maximum increase in average issue price from one year to the next (i.e., the largest year-over-year increase).  
+Step 2: Load the dataframe and group by 'year' to compute the average issue price per year.  
+Step 3: Calculate the difference in average issue price between consecutive years.  
+Step 4: Find the maximum of these differences.  
+
+Note: The data has only 6 rows, spanning from 2008 to 2010. We will compute the average issue price for each year, then compute year-over-year differences.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Compute average issue price per year
+df['avg_issue_price'] = df['issue price'].astype(float)
+df['year'] = df['year'].astype(int)
+
+# Group by year and compute average issue price
+annual_avg_price = df.groupby('year')['avg_issue_price'].mean()
+
+# Compute year-over-year differences
+diffs = annual_avg_price.diff().dropna()
+
+# Find the maximum increase
+max_increase = diffs.max()
+
+print(f"Final Answer: {max_increase:.2f}")
+```

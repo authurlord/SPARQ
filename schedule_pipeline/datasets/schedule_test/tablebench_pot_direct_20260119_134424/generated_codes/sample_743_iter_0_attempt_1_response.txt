@@ -1,0 +1,29 @@
+Step 1: The user is asking for a prediction of viewership and 18-49 average rating for season 9 based on the trend from season 1 to season 8.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'viewers (in millions)' and '18 - 49 average' columns.  
+Step 4: Perform a linear regression to model the trend over seasons.  
+Step 5: Predict values for season 9 (i.e., season = 9).  
+Step 6: Output the predicted viewership and 18-49 average.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Prepare data for linear regression
+X = df['season'].values.reshape(-1, 1)  # Season number
+y_viewers = df['viewers (in millions)'].astype(float).values
+y_18_49 = df['18 - 49 average'].astype(float).values
+
+# Fit linear regression models
+model_viewers = np.polyfit(X.flatten(), y_viewers, 1)
+model_18_49 = np.polyfit(X.flatten(), y_18_49, 1)
+
+# Predict for season 9
+season_9 = np.array([[9]])
+predicted_viewers = np.polyval(model_viewers, 9)
+predicted_18_49 = np.polyval(model_18_49, 9)
+
+print(f"Final Answer: {predicted_viewers:.2f}, {predicted_18_49:.2f}")
+```

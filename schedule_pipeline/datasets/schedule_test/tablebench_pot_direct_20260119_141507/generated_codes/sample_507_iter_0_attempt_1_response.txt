@@ -1,0 +1,30 @@
+Step 1: The user wants to find the event with the highest Event Score Average in the 2008 Olympic Trials.  
+Step 2: Filter the data for the '2008 Olympic Trials' competition.  
+Step 3: For each event, calculate the average of 'final - score' and 'qualifying score'.  
+Step 4: Identify the event with the highest average.  
+
+Note: We must exclude rows where 'final - score' or 'qualifying score' is 'dnq' or 'n / a' since those are invalid for averaging.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for 2008 Olympic Trials
+trial_data = df[df['competition'] == 'olympic trials']
+
+# Remove rows where final-score or qualifying-score is 'dnq' or 'n / a'
+trial_data = trial_data[~(trial_data['final - score'].isin(['dnq', 'n / a']))]
+
+# Convert scores to float
+trial_data['final - score'] = pd.to_numeric(trial_data['final - score'], errors='coerce')
+trial_data['qualifying score'] = pd.to_numeric(trial_data['qualifying score'], errors='coerce')
+
+# Calculate event score average
+trial_data['event_score_average'] = (trial_data['final - score'] + trial_data['qualifying score']) / 2
+
+# Find the event with the highest average
+highest_avg_event = trial_data.loc[trial_data['event_score_average'].idxmax(), 'event']
+
+print(f"Final Answer: {highest_avg_event}")
+```

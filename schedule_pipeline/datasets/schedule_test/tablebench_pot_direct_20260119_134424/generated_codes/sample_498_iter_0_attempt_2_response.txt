@@ -1,0 +1,19 @@
+Step 1: The user wants to find the metropolitan ring with the highest Arab demographic proportion, defined as (Arabs / Total population) * 100.
+Step 2: Load the dataframe.
+Step 3: Calculate the Arab demographic proportion for each row using the 'arabs' and 'total' columns.
+Step 4: Identify the row with the maximum proportion and return the corresponding 'metropolitan ring'.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'total' and 'arabs' to numeric for calculation
+df['total'] = pd.to_numeric(df['total'])
+df['arabs'] = pd.to_numeric(df['arabs'])
+
+# Calculate Arab demographic proportion
+df['arab_proportion'] = (df['arabs'] / df['total']) * 100
+
+# Find the metropolitan ring with the highest Arab demographic proportion
+max_proportion_ring = df.loc[df['arab_proportion'].idxmax(), 'metropolitan ring']
+print(f"Final Answer: {max_proportion_ring}")
+```

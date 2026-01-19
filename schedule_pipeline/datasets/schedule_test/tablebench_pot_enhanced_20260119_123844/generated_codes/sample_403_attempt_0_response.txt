@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: country, tourist arrivals (2011) (millions), tourism receipts (2011) (millions of us), tourism receipts (2011) (us per arrival), tourism receipts (2011) (us per capita), tourism receipts (2003) (as % of gdp), tourism receipts (2003) (as % of exports), tourism competitiveness (2011) (ttci)

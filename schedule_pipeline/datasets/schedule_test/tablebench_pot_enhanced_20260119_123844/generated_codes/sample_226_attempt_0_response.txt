@@ -1,0 +1,36 @@
+Step 1: The question asks whether live births or deaths are the primary driver of natural change per year. Natural change is calculated as live births minus deaths. To determine the primary driver, we can analyze the correlation between natural change and live births vs. natural change and deaths.
+
+Step 2: Load the dataframe.
+
+Step 3: Convert 'live births per year' and 'deaths per year' from strings with spaces to integers for numerical analysis.
+
+Step 4: Calculate the correlation between natural change and live births, and between natural change and deaths.
+
+Step 5: Compare the absolute values of the correlations to determine which variable is more closely related to natural change.
+
+Step 6: Print the result indicating which factor is the primary driver.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert columns to numeric
+df['live births per year'] = df['live births per year'].str.replace(' ', '').astype(int)
+df['deaths per year'] = df['deaths per year'].str.replace(' ', '').astype(int)
+df['natural change per year'] = df['natural change per year'].str.replace(' ', '').astype(int)
+
+# Calculate correlation between natural change and live births
+corr_births = df['natural change per year'].corr(df['live births per year'])
+
+# Calculate correlation between natural change and deaths
+corr_deaths = df['natural change per year'].corr(df['deaths per year'])
+
+# Determine which correlation is stronger (closer to 1 in absolute value)
+if abs(corr_births) > abs(corr_deaths):
+    primary_driver = "live births per year"
+else:
+    primary_driver = "deaths per year"
+
+print(f"Final Answer: {primary_driver}")
+```

@@ -1,0 +1,16 @@
+Step 1: The user wants to analyze how the urban percentage changes with increasing population size between 1959 and 1989.  
+Step 2: Load the dataframe.  
+Step 3: Filter the data for years between 1959 and 1989 (inclusive).  
+Step 4: Extract 'population (000)' and 'urban , %' columns.  
+Step 5: Since the question asks about the trend, we can compute the correlation between population and urban percentage or simply observe the values.  
+Step 6: Print the filtered data to show the trend.  
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years between 1959 and 1989
+filtered_df = df[(df['year (january)'] >= '1959') & (df['year (january)'] <= '1989')]
+# Display the relevant columns to observe the trend
+print("Urban percentage vs Population (1959-1989):")
+print(filtered_df[['year (january)', 'population (000)', 'urban , %']])
+```

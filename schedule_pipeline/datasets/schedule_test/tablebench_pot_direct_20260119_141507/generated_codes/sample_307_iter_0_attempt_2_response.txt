@@ -1,0 +1,14 @@
+Step 1: The user is asking for the event in which the athlete achieved a position of 2nd in the 2008 Asian Junior Championships.  
+Step 2: Locate the row where "Year" is "2008", "Competition" is "Asian Junior Championships", and "Position" is "2nd".  
+Step 3: Extract the value in the "Event" column for that row.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where Year is '2008', Competition is 'Asian Junior Championships', and Position is '2nd'
+result = df[(df['Year'] == '2008') & (df['Competition'] == 'Asian Junior Championships') & (df['Position'] == '2nd')]
+# Extract the 'Event' value
+event = result['Event'].values[0]
+print(f"Final Answer: {event}")
+```

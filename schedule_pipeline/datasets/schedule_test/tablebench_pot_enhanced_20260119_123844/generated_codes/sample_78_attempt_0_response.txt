@@ -1,0 +1,13 @@
+Step 1: The user wants the average relative annual growth rate for Saudi Arabia.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'country (or dependent territory)' is 'saudi arabia'.
+Step 4: Extract the value from the 'average relative annual growth (%)' column.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for Saudi Arabia
+saudi_arabia_growth = df[df['country (or dependent territory)'] == 'saudi arabia']['average relative annual growth (%)'].values[0]
+print(f"Final Answer: {saudi_arabia_growth}")
+```

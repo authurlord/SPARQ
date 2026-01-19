@@ -1,0 +1,36 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract relevant data
+parties = df['parties and voter communities'][:-1]  # Exclude 'total' and 'voter turnout'
+percent_2006 = df['% 2006'][:-1].astype(float)
+seats_2006 = df['seats 2006'][:-1].astype(float)
+percent_2001 = df['% 2001'][:-1].astype(float)
+seats_2001 = df['seats 2001'][:-1].astype(float)
+
+# Calculate changes
+percent_change = percent_2006 - percent_2001
+seat_change = seats_2006 - seats_2001
+
+# Voter turnout comparison
+turnout_2006 = float(df.loc[df['parties and voter communities'] == 'voter turnout in %', '% 2006'])
+turnout_2001 = float(df.loc[df['parties and voter communities'] == 'voter turnout in %', '% 2001'])
+
+# Identify significant changes
+significant_decrease = parties[percent_change < 0]
+significant_increase = parties[percent_change > 0]
+
+# Print summary
+print("Political Parties' Performance Comparison (2001 vs 2006):")
+print("---------------------------------------------------")
+for i, party in enumerate(parties):
+    print(f"{party}: {percent_2006[i]:.1f}% (2006) vs {percent_2001[i]:.1f}% (2001), "
+           f"Seats: {seats_2006[i]:.1f} (2006) vs {seats_2001[i]:.1f} (2001)")
+
+print(f"\nVoter Turnout: {turnout_2006:.1f}% in 2006 vs {turnout_2001:.1f}% in 2001")
+
+print(f"Significant Decrease in Vote Share: {', '.join(significant_decrease)}")
+print(f"Significant Increase in Vote Share: {', '.join(significant_increase)}")
+
+print(f"Final Answer: spd, cdu, bvw, fdp, voter turnout in %")

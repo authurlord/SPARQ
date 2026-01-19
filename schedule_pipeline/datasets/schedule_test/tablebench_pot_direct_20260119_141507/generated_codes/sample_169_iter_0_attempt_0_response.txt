@@ -1,0 +1,30 @@
+Step 1: The question asks which factor (e.g., 'year ended', 'revenue (million)') significantly influences 'earnings per share (p)'.
+
+Step 2: To determine the influence, we can analyze the correlation between 'earnings per share (p)' and each of the other variables:
+- Correlation with 'year ended' (which is categorical, so we cannot compute a numeric correlation directly).
+- Correlation with 'revenue (million)' (numerical).
+- Correlation with 'profit / (loss) before tax (m)' (numerical).
+- Correlation with 'net profit (m)' (numerical).
+
+Since 'year ended' is a categorical variable, it does not have a meaningful correlation coefficient. We will instead compute the correlation between 'earnings per share (p)' and the numerical variables.
+
+Step 3: Compute Pearson correlation coefficients between 'earnings per share (p)' and each of the other columns. The column with the highest absolute correlation value is the most influential.
+
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select only numerical columns for correlation
+numeric_columns = df.select_dtypes(include=['number'])
+
+# Compute correlation with 'earnings per share (p)'
+correlation_with_eps = df['earnings per share (p)'].corr(numeric_columns.drop(columns=['earnings per share (p)']))
+
+# Find the column with the highest absolute correlation
+most_influential = correlation_with_eps.abs().idxmax()
+
+print(f"Final Answer: {most_influential}")
+```

@@ -1,0 +1,19 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Sort by points in descending order to get top 5 teams
+top_5 = df.sort_values(by='points', ascending=False).head(5)
+# Extract team names and goal differences
+teams = top_5['club']
+goal_diff = top_5['goal difference']
+
+# Create bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(teams, goal_diff, color='skyblue')
+plt.title('Goal Difference of Top 5 Teams')
+plt.xlabel('Team')
+plt.ylabel('Goal Difference')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()

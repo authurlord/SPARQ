@@ -1,0 +1,61 @@
+Step 1: The question asks to identify data points that significantly deviate from the expected pattern.  
+Step 2: The table describes decimal floating-point formats with various fields (sign, exponent, coefficient, etc.) and their bit counts or sizes.  
+Step 3: A "deviation" might occur if a value in a formula-based column (e.g., total size, exponent range) does not follow its defined mathematical relationship.  
+Step 4: For example, check if the "Total size (bits)" matches the sum of other fields (e.g., sign + combination + exponent continuation + coefficient continuation).  
+Step 5: Verify whether the "Coefficient size (decimal digits)" follows the formula p = 9×k − 2.  
+Step 6: Check if the "Exponent range" (192, 768, 12288) matches 3×2^w, where w = 2×k + 4.  
+
+Let’s validate the consistency of key formulas:
+
+- For "Total size (bits)": Should be sum of Sign + Combination + Exponent continuation + Coefficient continuation.
+- For "Coefficient size": Should be p = 9×k − 2.
+- For "Exponent range": Should be 3×2^w, where w = 2×k + 4.
+
+We will compute expected values and compare them with actual values to find deviations.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns
+df = df.dropna()  # Remove any missing values
+
+# Check if "Total size (bits)" matches sum of other fields
+df['total_calc'] = (
+    df['Sign field (bits)'] +
+    df['Combination field (bits)'] +
+    df['Exponent continuation field (bits)'] +
+    df['Coefficient continuation field (bits)']
+)
+
+# Check deviation in total size
+total_deviation = df[df['Total size (bits)'] != df['total_calc']].copy()
+
+# Check coefficient size formula: p = 9×k − 2
+# k is from 'decimal32', 'decimal64', 'decimal128'
+df['k'] = df['decimal32'].apply(lambda x: int(x))
+df['p_expected'] = 9 * df['k'] - 2
+df['p_deviation'] = df['Coefficient size (decimal digits)'] != df['p_expected']
+
+# Find rows where coefficient size deviates
+coeff_deviation = df[df['p_deviation']].copy()
+
+# Check exponent range: 3×2^w, w = 2×k + 4
+df['w'] = 2 * df['k'] + 4
+df['exp_range_expected'] = 3 * (2 ** df['w'])
+df['exp_range_deviation'] = df['Exponent range'] != df['exp_range_expected']
+
+# Find rows where exponent range deviates
+exp_deviation = df[df['exp_range_deviation']].copy()
+
+# Combine all deviations
+deviations = total_deviation.append(coeff_deviation, ignore_index=True)
+deviations = deviations.append(exp_deviation, ignore_index=True)
+
+# Final answer: list the rows with deviations (by index or key)
+if deviations.empty:
+    print("Final Answer: no deviations")
+else:
+    print(f"Final Answer: {deviations[['decimal32', 'decimal64', 'decimal128']].to_string(index=False)}")
+```

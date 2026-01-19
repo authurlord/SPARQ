@@ -1,0 +1,25 @@
+We are given a table of nations and their medal counts (Gold, Silver, Bronze, Total). The question asks: **Which nation ranked with a total of 8 medals, including 3 gold medals?**
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Filter rows where the 'Total' is 8 and 'Gold' is 3.
+3. Extract the 'Nation' from that row.
+4. Print the result.
+
+Note: The table has a column "Rank" with values like "1.", "2.", "7=", etc. However, we only need the nation name when the total is 8 and gold is 3.
+
+Looking at the data:
+- France has: Gold=3, Silver=3, Bronze=2, Total=8 → matches the condition.
+
+So, the nation is France.
+
+Now, write the correct Python code to extract this:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for nations with total = 8 and gold = 3
+result = df[(df['Total'] == 8) & (df['Gold'] == 3)]['Nation'].values
+print(f"Final Answer: {result[0]}")
+```

@@ -1,0 +1,21 @@
+Step 1: Identify the relevant rows where the event is "100 m" and the competition is "African Junior Championships".
+Step 2: Among those rows, check for a "1st" position (which indicates a gold medal).
+Step 3: Extract the corresponding year from that row.
+
+From the table:
+- In 1997, the athlete achieved 1st place in the 100 m at the African Junior Championships in Ibadan, Nigeria.
+
+Thus, the year is 1997.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Event is '100 m' and Competition is 'African Junior Championships'
+filtered_rows = df[(df['Event'] == '100 m') & (df['Competition'] == 'African Junior Championships')]
+# Find the row with '1st' position
+gold_medal_row = filtered_rows[filtered_rows['Position'] == '1st']
+# Extract the year
+year = gold_medal_row.iloc[0]['Year']
+print(f"Final Answer: {year}")
+```

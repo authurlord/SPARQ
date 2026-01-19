@@ -1,0 +1,19 @@
+Step 1: The user wants the percentage increase in the total number of trailers from 1923 to 1927.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'year' is '1923' and '1927'.  
+Step 4: Sum the 'trailers' column for these years.  
+Step 5: Calculate the percentage increase using the formula: ((new - old) / old) * 100.  
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for 1923 and 1927
+trailers_1923 = df[df['year'] == '1923']['trailers'].astype(int).sum()
+trailers_1927 = df[df['year'] == '1927']['trailers'].astype(int).sum()
+
+# Calculate percentage increase
+percentage_increase = ((trailers_1927 - trailers_1923) / trailers_1923) * 100
+print(f"Final Answer: {percentage_increase:.1f}")
+```

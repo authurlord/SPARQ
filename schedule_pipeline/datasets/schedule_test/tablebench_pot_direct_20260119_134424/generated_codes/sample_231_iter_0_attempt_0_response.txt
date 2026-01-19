@@ -1,0 +1,14 @@
+Step 1: The user wants to understand the relationship between GDP (PPP) per capita and metropolitan population. This requires analyzing how GDP per capita changes as population increases.
+Step 2: Load the dataframe.
+Step 3: Extract the 'metropolitan population (2006) millions' and 'gdp (ppp) us per capita' columns.
+Step 4: Sort the data by population to observe trends.
+Step 5: Print the sorted data to show the change in GDP per capita with increasing population.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by metropolitan population to analyze the trend
+sorted_df = df.sort_values(by='metropolitan population (2006) millions')
+print(sorted_df[['metropolitan population (2006) millions', 'gdp (ppp) us per capita']])
+```

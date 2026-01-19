@@ -1,0 +1,24 @@
+Step 1: The user wants to find the total number of seats held by parties that have at least 2 seats in the agricultural panel, and the percentage of the total seats they represent.
+
+Step 2: Load the dataframe.
+
+Step 3: Filter rows where 'agricultural panel' >= 2.
+
+Step 4: Sum the 'total' column for these rows to get the total seats.
+
+Step 5: Calculate the percentage of total seats (60) represented by these parties.
+
+Step 6: Print both the total seats and the percentage.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter parties with at least 2 seats in the agricultural panel
+filtered_parties = df[df['agricultural panel'] >= 2]
+# Sum the total seats for these parties
+total_seats = filtered_parties['total'].sum()
+# Calculate percentage of total seats (60)
+percentage = (total_seats / 60) * 100
+print(f"Final Answer: {total_seats}, {percentage:.1f}")
+```

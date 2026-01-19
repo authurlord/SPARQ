@@ -1,0 +1,14 @@
+Step 1: The user wants the correlation coefficient between 'km from kingston' and 'length meters'.
+Step 2: Load the dataframe.
+Step 3: Select the two columns: 'km from kingston' and 'length meters'.
+Step 4: Compute the Pearson correlation coefficient using pandas' `corr()` method.
+Step 5: Print the correlation coefficient.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'km from kingston' and 'length meters'
+correlation = df['km from kingston'].corr(df['length meters'])
+print(f"Final Answer: {correlation:.3f}")
+```

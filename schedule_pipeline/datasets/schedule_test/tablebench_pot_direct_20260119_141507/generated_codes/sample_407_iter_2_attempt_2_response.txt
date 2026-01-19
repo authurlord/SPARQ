@@ -1,0 +1,21 @@
+The table is provided in JSON format, not as a CSV file. Therefore, we do not need to load from 'table.csv'. Instead, we can directly parse the JSON data into a pandas DataFrame.
+
+Step-by-step approach:
+1. Parse the given table data (in JSON format) into a pandas DataFrame.
+2. Describe the structure: each row represents a category (e.g., Applications, Offer Rate, etc.), and each column represents a year from 2017 to 2013.
+3. Provide a clear explanation of each main column and highlight notable trends:
+   - "Applications": Total number of applicants per year; shows a slight decline from 2016 to 2017.
+   - "Offer Rate (%)": Percentage of applicants offered admission; slightly fluctuates but generally stable around 86–91%.
+   - "Enrols": Number of students who enrolled; shows a slight downward trend after 2015.
+   - "Yield (%)": Percentage of offers accepted; increases from 2013 to 2014, then drops slightly.
+   - "Applicant/Enrolled Ratio": Indicates applicant competitiveness; decreases slightly over time, suggesting better selection.
+   - "Average Entry Tariff": Entry fee; remains stable except in 2016 when it jumps to 176, possibly due to policy or market changes.
+
+Notable insights:
+- The applicant pool has decreased slightly from 2016 to 2017 (42,335 → 41,000).
+- Offer rate remains high (~86–90%), indicating strong selection.
+- Yield (%) peaked in 2013 (18.7%) and declined to 16.5% in 2017, suggesting a drop in student acceptance.
+- Applicant/Enrolled Ratio improved from 7.10 (2016) to 6.76 (2017), meaning fewer applicants per enrolment — possibly due to increased selectivity or higher quality applicants.
+- Tariff increased in 2016, which may indicate cost adjustments or new entry policies.
+
+Final Answer: Applications declined slightly, offer rate remained stable, yield decreased, applicant-to-enrolled ratio improved, and entry tariff rose in 2016.

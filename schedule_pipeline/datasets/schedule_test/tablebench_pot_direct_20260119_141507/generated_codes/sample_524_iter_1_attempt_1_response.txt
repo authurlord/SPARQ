@@ -1,0 +1,111 @@
+Step 1: The user is asking for the change in total seating capacity of the airline's fleet from 2004 to 2008.  
+Step 2: We need to identify aircraft models introduced before or during 2004 and those introduced after or during 2008.  
+Step 3: Extract the seating capacity for each aircraft model, but only consider those with a retirement date (i.e., active in service during the period).  
+Step 4: Note that the "seating" column contains integers, but some entries have a range (e.g., "148 / 9"), which we must interpret correctly.  
+Step 5: Since the question is about fleet capacity change from 2004 to 2008, we assume:
+- Before 2004: aircraft introduced before 2004 (e.g., Boeing 737-204, 1995)
+- After 2004: aircraft introduced from 2004 onward (e.g., Airbus A319-100, 2004; A320-200, 2008)
+
+However, the definition says "variation in total seating capacity", so we need to sum seating capacity for all aircraft in service during the two years.
+
+But note: Some aircraft are retired (e.g., A321-200 retired in 2010), so they are not in service during 2004–2008?  
+Wait — the A321-200 was introduced in 2008, so it is in service from 2008 onward.  
+Similarly, A319-100 introduced in 2004 — in service from 2004 onward.
+
+So, the fleet in 2004 includes:
+- A319-100 (2004) → in service
+- A320-200 (2008) → introduced in 2008 → not in service before 2008
+
+Fleet in 2008 includes:
+- A319-100 (2004) → still in service
+- A320-200 (2008) → introduced in 2008 → in service
+- A321-200 (2008) → introduced in 2008 → in service
+
+But the A321-200 is retired in 2010 → so it is in service during 2008–2009? Yes.
+
+So, in 2004:
+- Only A319-100 and older aircraft (like 737-204, 737-300) were in service?
+
+But the table says:
+- Boeing 737-204: introduced 1995, retired 1996 → not in service after 1996
+- Boeing 737-300: introduced 1996, retired 2007 → so not in service after 2007
+- Boeing 737-700: introduced 2000, retired 2011 → in service from 2000 onward
+
+So, in 2004:
+- In service: A319-100 (2004), A320-200 (2008) → not yet introduced, so not included
+- So only A319-100 (156), A320-200 (not yet), A321-200 (not yet), 737-700 (2000) → introduced in 2000 → in service
+
+Thus, in 2004: A319-100 (156), 737-700 (149), 737-300 (retired 2007 → in service until 2007 → so in 2004)
+
+Wait — 737-300: introduced 1996, retired 2007 → in service in 2004 → valid
+
+So total seating in 2004:
+- A319-100: 156
+- 737-300: 148 (or 148/9 → we take 148 as primary)
+- 737-700: 149
+
+In 2008:
+- A319-100: 156
+- A320-200: 180
+- A321-200: 220
+- 737-300: retired 2007 → not in service
+- 737-700: still in service → 149
+
+So total seating in 2008:
+- 156 + 180 + 220 + 149 = 705
+
+Total seating in 2004:
+- 156 (A319-100) + 148 (737-300) + 149 (737-700) = 453
+
+Change = 705 - 453 = 252
+
+But the question says "from 2004 to 2008", so we compute difference.
+
+We must be cautious: some entries have "148 / 9" — this likely means 148 for economy, 9 for business, but total capacity is probably 148.
+
+So we extract seating as integer, and if it's a string with '/', split and take first value.
+
+Step-by-step plan:
+1. Load the data.
+2. Clean the 'seating' column: convert to int, if it has '/', take first part.
+3. Identify which aircraft are in service in 2004 and in 2008.
+   - In 2004: introduced ≤ 2004 and retired ≥ 2004 (or retired not before 2004)
+   - In 2008: introduced ≤ 2008 and retired ≥ 2008 (or retired not before 2008)
+4. Sum seating for each year.
+5. Compute the difference.
+
+Note: A321-200 introduced in 2008 → in service from 2008 → included in 2008.
+A320-200 introduced in 2008 → same.
+
+But 737-300 retired in 2007 → not in service in 2008 → exclude.
+
+737-700 introduced 2000 → in service in both years.
+
+A319-100 introduced 2004 → in service in 2004 and 2008.
+
+So let's go through each row:
+
+| Aircraft | Introduced | Retired | Seating | In 2004? | In 2008? |
+|--------|------------|---------|--------|--------|--------|
+| A319-100 | 2004 | - | 156 | yes (introduced 2004) | yes |
+| A320-200 | 2008 | - | 180 | no (2008+) | yes |
+| A321-200 | 2008 | 2010 | 220 | no | yes |
+| 737-204 | 1995 | 1996 | 115 | yes (before 2004) | no (retired 1996) |
+| 737-300 | 1996 | 2007 | 148 | yes | no (retired 2007) |
+| 737-700 | 2000 | 2011 | 149 | yes | yes |
+
+So in 2004:
+- A319-100: 156
+- 737-204: 115
+- 737-300: 148
+- 737-700: 149
+→ Total = 156+115+148+149 = 568
+
+In 2008:
+- A319-100: 156
+- A320-200: 180
+- A321-200: 220
+- 737-700: 149
+→ Total = 156+180+220+149 = 705
+
+Change = 705 -

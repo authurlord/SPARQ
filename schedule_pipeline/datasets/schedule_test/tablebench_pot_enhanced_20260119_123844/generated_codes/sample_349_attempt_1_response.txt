@@ -1,0 +1,13 @@
+Step 1: The user wants to count how many conferences had occurrences in the year 1996.
+Step 2: Load the dataframe.
+Step 3: Focus on the columns corresponding to the years, particularly '1996'.
+Step 4: Count the number of non-null entries in the '1996' column.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count non-null entries in the '1996' column
+count_1996 = df['1996'].notna().sum()
+print(f"Final Answer: {count_1996}")
+```

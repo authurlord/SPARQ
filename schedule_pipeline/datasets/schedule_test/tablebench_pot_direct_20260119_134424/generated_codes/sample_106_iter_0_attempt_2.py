@@ -1,0 +1,48 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Filter the row for English
+english_data = df[df['Unnamed: 0'] == 'English'].iloc[0]
+
+# Define the features
+features = ['agglutination', 'synthesis', 'compounding', 'derivation', 'inflection', 'prefixing', 'suffixing']
+values = [float(english_data[feat]) for feat in features]
+
+# Number of variables
+num_vars = len(features)
+
+# Compute angle for each axis
+angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False)
+
+# Close the circular graph
+values += values[:1]
+angles += angles[:1]
+
+# Initialize the radar plot
+fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
+
+# Draw ylabels
+ax.set_rlabel_position(0)
+ax.set_ylim(0, max(values))
+
+# Draw yticks
+ax.set_yticks([0.5, 1.0, 1.5, 2.0, 2.5, 3.0])
+ax.set_yticklabels(['0.5', '1.0', '1.5', '2.0', '2.5', '3.0'])
+
+# Draw ytick labels
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(features)
+
+# Draw the plot
+ax.plot(angles, values, linewidth=2, linestyle='solid', label='English')
+ax.fill(angles, values, color='blue', alpha=0.25)
+
+# Add a legend
+ax.legend(loc='upper right', bbox_to_anchor=(0.1, 0.1))
+
+# Show the plot
+plt.title("Language Features in English", size=16, color='blue', pad=20)
+plt.show()

@@ -1,0 +1,39 @@
+Step 1: The question asks to compare the difference between 'Displacement (l)' and 'Weight (kg)' for two models: Model 8Ab and Model 8B.  
+Step 2: Extract the values for 'Displacement (l)' and 'Weight (kg)' for Model 8Ab and Model 8B.  
+Step 3: Calculate the absolute difference for each model.  
+Step 4: Compare the differences and determine which model has a greater one.
+
+Note: In the table, "Displacement (l)" for Model 8Ab is 11.76 L, and for Model 8B it is 18.47 L.  
+"Weight (kg)" for Model 8Ab is 230 kg, and for Model 8B it is 236 kg.
+
+Calculate:
+- Model 8Ab: |11.76 - 230| = 218.24
+- Model 8B: |18.47 - 236| = 217.53
+
+Model 8Ab has a greater difference.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract values for Model 8Ab and Model 8B
+displacement_8Ab = float(df[df['Model'] == '8Ab']['Displacement (l)'].iloc[2])  # Row index 2 is displacement
+weight_8Ab = int(df[df['Model'] == '8Ab']['Weight(kg)'].iloc[2])
+
+displacement_8B = float(df[df['Model'] == '8B']['Displacement (l)'].iloc[2])
+weight_8B = int(df[df['Model'] == '8B']['Weight(kg)'].iloc[2])
+
+# Calculate differences
+diff_8Ab = abs(displacement_8Ab - weight_8Ab)
+diff_8B = abs(displacement_8B - weight_8B)
+
+# Compare and answer
+if diff_8Ab > diff_8B:
+    final_answer = "8Ab"
+else:
+    final_answer = "8B"
+
+print(f"Final Answer: {final_answer}")
+```

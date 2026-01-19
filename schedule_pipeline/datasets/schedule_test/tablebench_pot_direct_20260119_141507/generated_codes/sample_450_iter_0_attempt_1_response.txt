@@ -1,0 +1,29 @@
+Step 1: The user wants to identify years where the success rate is unusually high or low compared to the overall success rate (60.2%).  
+Step 2: The overall success rate is given in the last row as "60.2%".  
+Step 3: We will calculate the success rate for each year (excluding the "total" row) and compare it to 60.2%.  
+Step 4: A year is considered unusually high if the success rate > 60.2%, and unusually low if < 60.2%.  
+Step 5: Extract the relevant years and their success rates, then filter accordingly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the total row (last row) since it's not a year
+df_filtered = df[df['year'] != 'total']
+
+# Convert success rate to float for comparison
+df_filtered['success rate'] = df_filtered['success rate'].str.rstrip('%').astype(float)
+
+# Overall success rate
+overall_rate = 60.2
+
+# Identify years with unusually high or low success rates
+high_years = df_filtered[df_filtered['success rate'] > overall_rate]['year']
+low_years = df_filtered[df_filtered['success rate'] < overall_rate]['year']
+
+# Combine results
+unusual_years = list(high_years) + list(low_years)
+unusual_years = list(set(unusual_years))  # Remove duplicates
+
+print(f"Final Answer: {', '.join(unusual_years)}")
+```

@@ -1,0 +1,30 @@
+The error occurred because the "agricultural panel" column contains string values (like '4', '3', etc.), but Python is trying to compare them directly with integers. However, in this context, the values are actually numeric strings — we need to convert them to integers before performing comparisons.
+
+Step 1: Identify parties that have at least 2 seats in the "agricultural panel".
+Step 2: Convert the "agricultural panel" column to integers.
+Step 3: Filter rows where agricultural panel ≥ 2.
+Step 4: Sum the "total" column for those filtered parties.
+Step 5: Calculate the percentage of total seats they represent.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert agricultural panel column to integers
+df['agricultural panel'] = df['agricultural panel'].astype(int)
+
+# Filter parties with at least 2 seats in agricultural panel
+filtered_parties = df[df['agricultural panel'] >= 2]
+
+# Total seats held by these parties
+total_seats_filtered = filtered_parties['total'].sum()
+
+# Total seats across all parties
+total_seats_all = df.loc[df['party'] != 'total', 'total'].sum()
+
+# Calculate percentage
+percentage = (total_seats_filtered / total_seats_all) * 100
+
+print(f"Final Answer: {total_seats_filtered}, {percentage:.1f}")
+```

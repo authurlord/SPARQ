@@ -1,0 +1,25 @@
+Step 1: The user wants to find the team that has a goal difference of exactly 16.  
+Step 2: Load the dataframe.  
+Step 3: Locate the row where 'Goal Difference' is 16.  
+Step 4: Extract the 'Club' name from that row.  
+
+Note: The "Goal Difference" column contains values like "36", "20", "18", etc., and in some cases, it is written as "36+19" or "36-2". However, the question specifically asks for a goal difference of **16**, so we look for the exact value 16.  
+
+From the table, we see:
+- Real Betis: Goal Difference = 16
+- Real Madrid B: Goal Difference = 16  
+- Barcelona B: Goal Difference = 4  
+- CD Castellón: Goal Difference = -5  
+
+So two teams have a goal difference of 16: Real Betis and Real Madrid B.
+
+But the question says "Which team", implying possibly one. However, there are two teams with exactly 16. So we list both.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'Goal Difference' is exactly 16
+teams_with_diff_16 = df[df['Goal Difference'] == 16]['Club']
+print(f"Final Answer: {', '.join(teams_with_diff_16.tolist())}")
+```

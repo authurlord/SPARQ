@@ -1,0 +1,11 @@
+Step 1: Identify the 'dp / da' values for the 2003 floor-crossing event and the 1999 election event.  
+- The 'dp / da' value for the 2003 floor-crossing event is 7.  
+- The 'dp / da' value for the 1999 election event is 5.  
+
+Step 2: Determine how much more is needed for the 2003 event to surpass the 1999 event.  
+- Since the average 'dp / da' value remains the same, we only need to find the difference: 5 (1999) + 1 = 6 (to surpass), so 7 is already greater than 5.  
+- However, the question asks for the *minimum number of additional* 'dp / da' values needed to *surpass* the 1999 event. Since 7 > 5, no additional value is needed.  
+
+Step 3: Confirm that "surpass" means strictly greater than. Since 7 > 5, it already surpasses. Therefore, the minimum additional value is 0.
+
+Final Answer: 0

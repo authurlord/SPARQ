@@ -1,0 +1,16 @@
+Step 1: The user wants the mean height of buildings in Winnipeg with more than 10 floors.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'floors' > 10.  
+Step 4: Select the 'height' column for these filtered buildings.  
+Step 5: Calculate the mean of the 'height' values and print it.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter buildings with more than 10 floors
+filtered_buildings = df[df['floors'] > 10]
+# Calculate the mean height of these buildings
+mean_height = filtered_buildings['height'].mean()
+print(f"Final Answer: {mean_height:.1f}")
+```

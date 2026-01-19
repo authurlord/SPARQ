@@ -1,0 +1,19 @@
+Step 1: Identify the student populations for Karolinska Institutet and Swedish University of Agricultural Sciences from the 'student population (fte, 2009)' column.
+Step 2: Sum these two values to get the combined student population.
+Step 3: Increase the combined total by 18% (multiply by 1.18).
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract student populations for Karolinska Institutet and Swedish University of Agricultural Sciences
+karolinska_population = df[df['university'] == 'karolinska institutet']['student population ( fte , 2009)'].values[0]
+swedish_population = df[df['university'] == 'swedish university of agricultural sciences']['student population ( fte , 2009)'].values[0]
+
+# Convert to integers and calculate combined population with 18% increase
+combined_population = int(karolinska_population) + int(swedish_population)
+new_combined_population = combined_population * 1.18
+
+print(f"Final Answer: {int(new_combined_population)}")
+```

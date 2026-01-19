@@ -1,0 +1,19 @@
+Step 1: The user wants the average number of locomotives withdrawn per year from 1935 to 1943.
+Step 2: Load the dataframe.
+Step 3: Filter rows where Year is between 1935 and 1943 (inclusive).
+Step 4: Convert 'Quantity withdrawn' column to numeric, handling any non-numeric values.
+Step 5: Calculate the mean of the 'Quantity withdrawn' column for the filtered years.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows from 1935 to 1943
+filtered_df = df[(df['Year'] >= '1935') & (df['Year'] <= '1943')]
+# Convert 'Quantity withdrawn' to numeric, coercing errors to NaN
+filtered_df['Quantity withdrawn'] = pd.to_numeric(filtered_df['Quantity withdrawn'], errors='coerce')
+# Calculate the mean of the 'Quantity withdrawn' column
+mean_withdrawn = filtered_df['Quantity withdrawn'].mean()
+print(f"Final Answer: {mean_withdrawn:.1f}")
+```

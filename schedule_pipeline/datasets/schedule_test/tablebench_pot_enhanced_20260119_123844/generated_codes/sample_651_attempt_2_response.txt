@@ -1,0 +1,19 @@
+Step 1: The user wants to find the correlation coefficient between 'elevation (m)' and 'prominence (m)' of mountains.
+Step 2: Load the dataframe.
+Step 3: Convert 'elevation (m)' and 'prominence (m)' columns to numeric type.
+Step 4: Calculate the correlation coefficient using pandas corr() method.
+Step 5: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert elevation and prominence to numeric
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'])
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'])
+
+# Calculate correlation coefficient
+correlation = df['elevation (m)'].corr(df['prominence (m)'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

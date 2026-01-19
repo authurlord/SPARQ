@@ -1,0 +1,31 @@
+Step 1: The user wants to forecast viewership for an episode directed by 'Kyle Dunlevy' airing in March 2013 based on trends from September 2012 to February 2013.
+
+Step 2: Load the dataframe and filter episodes aired between September 2012 and February 2013.
+
+Step 3: Extract episodes directed by 'Kyle Dunlevy' during this period and analyze their viewership trend (e.g., calculate average, check for patterns like increasing/decreasing).
+
+Step 4: Use the trend (e.g., average or linear trend) to forecast the viewership for a hypothetical episode airing in March 2013.
+
+Step 5: Since no clear linear trend is evident, use the average viewership of Kyle Dunlevy's episodes in the given timeframe as the forecast.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'original air date' to datetime
+df['original air date'] = pd.to_datetime(df['original air date'], format='%B %d , %Y')
+
+# Filter episodes from September 2012 to February 2013
+start_date = pd.to_datetime('2012-09-01')
+end_date = pd.to_datetime('2013-02-28')
+filtered_df = df[(df['original air date'] >= start_date) & (df['original air date'] <= end_date)]
+
+# Filter episodes directed by 'Kyle Dunlevy'
+kyle_dunlevy_episodes = filtered_df[filtered_df['directed by'] == 'kyle dunlevy']
+
+# Calculate average viewership for Kyle Dunlevy's episodes
+avg_viewership = kyle_dunlevy_episodes['us viewers (million)'].mean()
+
+print(f"Final Answer: {avg_viewership:.2f}")
+```

@@ -1,0 +1,17 @@
+Step 1: The user wants to find the year in which the builder that produced the most works with the "10BR" class had the highest number of works.  
+Step 2: Filter the data for rows where the 'Class' is "10BR".  
+Step 3: Group by 'Year' and count the number of works (i.e., 'Works No.') for each year.  
+Step 4: Find the year with the maximum count.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Class is '10BR'
+br_filtered = df[df['Class'] == '10BR']
+# Group by 'Year' and count the number of works
+year_works_count = br_filtered.groupby('Year').size()
+# Find the year with the maximum number of works
+max_year = year_works_count.idxmax()
+print(f"Final Answer: {max_year}")
+```

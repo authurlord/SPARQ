@@ -1,0 +1,17 @@
+Step 1: The user wants to calculate the total passengers at Glasgow International Airport after a 15% increase in 2008.  
+Step 2: Locate the row for "glasgow international" in the table.  
+Step 3: Extract the "total passengers" value (which is given as 8,795,727).  
+Step 4: Increase this value by 15% and compute the result.  
+Step 5: Print the final number.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row for Glasgow International
+glasgow_row = df[df['airport'] == 'glasgow international']
+total_passengers = glasgow_row['total passengers'].values[0]
+# Increase by 15%
+new_passengers = total_passengers * 1.15
+print(f"Final Answer: {int(new_passengers)}")
+```

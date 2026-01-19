@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The data provided only includes historical performance from 2004 to 2010, and no clear trend (e.g., linear growth or decline) can be reliably extrapolated for forecasting future performance without additional assumptions or statistical modeling. Therefore, a forecast cannot be accurately generated from the given data.

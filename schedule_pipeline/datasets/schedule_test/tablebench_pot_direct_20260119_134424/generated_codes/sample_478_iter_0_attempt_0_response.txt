@@ -1,0 +1,39 @@
+Step 1: The user wants to identify the city with an unusually high total passengers and annual change.  
+Step 2: Load the dataframe.  
+Step 3: Convert 'total passengers' and 'annual change' to numeric types (note: 'annual change' contains '%' signs, so it needs cleaning).  
+Step 4: Identify outliers using a heuristic (e.g., top 1% in both metrics).  
+Step 5: Return the city with the highest values in both categories.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert 'total passengers' and 'annual change'
+df['total passengers'] = pd.to_numeric(df['total passengers'], errors='coerce')
+df['annual change'] = pd.to_numeric(df['annual change'].str.replace('%', ''), errors='coerce')
+
+# Filter out invalid entries
+df_clean = df.dropna(subset=['total passengers', 'annual change'])
+
+# Find the city with the highest total passengers and highest annual change
+max_passengers_city = df_clean.loc[df_clean['total passengers'].idxmax(), 'location']
+max_change_city = df_clean.loc[df_clean['annual change'].idxmax(), 'location']
+
+# Check if they are the same city
+if max_passengers_city == max_change_city:
+    print(f"Final Answer: {max_passengers_city}")
+else:
+    # Since the question asks for a city with both unusually high values, we check for combined outlier
+    # Use z-score or percentiles to find outliers
+    from scipy import stats
+    z_scores = abs(stats.zscore(df_clean[['total passengers', 'annual change']]))
+    outliers = df_clean[(z_scores['total passengers'] > 3) & (z_scores['annual change'] > 3)]
+    if not outliers.empty:
+        print(f"Final Answer: {outliers.iloc[0]['location']}")
+    else:
+        # Fall back to top city by combined score
+        df_clean['combined_score'] = df_clean['total passengers'] + df_clean['annual change']
+        top_city = df_clean.loc[df_clean['combined_score'].idxmax(), 'location']
+        print(f"Final Answer: {top_city}")
+```

@@ -1,0 +1,19 @@
+Step 1: The user wants the average annual change in the 'district-wide' budget from 2001-2002 to 2006-2007.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'district - wide' column and convert values to integers.  
+Step 4: Calculate the year-over-year changes between consecutive years.  
+Step 5: Compute the average of these changes.  
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'district - wide' to integers
+df['district - wide'] = df['district - wide'].astype(int)
+# Calculate year-over-year changes
+changes = df['district - wide'].diff().dropna()
+# Calculate average annual change
+avg_change = changes.mean()
+print(f"Final Answer: {avg_change:.1f}")
+```

@@ -1,0 +1,27 @@
+Step 1: The user wants to forecast the issue price of a coin in 2013 based on the historical trend from 2002 to 2012.  
+Step 2: Extract the 'issue price' column for years 2002 to 2012.  
+Step 3: Assume a linear trend (simple linear regression) to predict the issue price for 2013.  
+Step 4: Use the last known data point and compute the trend (slope) to project the next year's price.  
+
+Note: Since the data shows a steady increase in issue prices over time, we can fit a linear model and extrapolate.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert year to numeric and extract issue price
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+df['issue price'] = df['issue price'].str.replace('$', '').astype(float)
+
+# Prepare data for linear regression
+years = df['year'].values
+prices = df['issue price'].values
+
+# Fit a linear regression model: price = a * year + b
+coeffs = np.polyfit(years, prices, 1)
+forecast_price = coeffs[0] * 2013 + coeffs[1]
+
+print(f"Final Answer: {forecast_price:.2f}")
+```

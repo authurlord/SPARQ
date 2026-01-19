@@ -1,0 +1,11 @@
+id,question,gold_answer,prediction,answer_source,sql_success,total_attempts,successful_attempts,timeout_count,iterations_used
+29ba53ce7ca43a979263ed36798f62a3,What is the average number of tropical cyclones per season?,10.6,"0.0, 10.6",direct_sql,True,3,3,0,1
+1aba704991b72a8107475d7fea800b42,What is the total average daily flights of all routes combined?,115.7,"0, 1157",direct_sql,True,3,3,0,1
+39c3b24be6bcb3e279ecccea6b641efc,What is the total GDP (nominal) of all countries with a UN budget greater than 2%?,7700143,"0.0, 7700143.0",direct_sql,True,3,3,0,1
+e067a40ab6736ac5a004d9dc69f2d5c0,What is the average age of the executives listed in the table?,51.44,"0.0, 51.44444444444444",direct_sql,True,3,3,0,1
+b71bb2ae2d5e19e17c816355f55ec3d8,What is the total number of goals scored by Liverpool in the Premier League?,55,"3, 240",direct_sql,True,3,3,0,1
+f19e3c32d88171eb59e66dc31967bf2d,What is the average value of the 2001 general election across all regions in Italy?,6.16,"0.0, 0.0",direct_sql,True,3,2,0,1
+06cf0ed5987ea6984c584de1d8eda280,What is the total number of years served by all mayors listed in the table?,108,"0, 123",direct_sql,True,3,3,0,1
+9a6f45b58f3230e8a11f4f7cd5afa465,"What is the total length of all rivers that flow into the left side of the main river, in kilometers?",468.3,"0.0, 468.3",direct_sql,True,3,3,0,1
+463ca07b585e49a35a8e1e657c4b9cf2,What is the average percentage of national votes won by all leaders in the table?,37.64%,"0.0, 37.635000000000005",direct_sql,True,3,3,0,1
+1feeafc0b774633c4b7070d7295d0b2a,What is the average number of podiums achieved by a team in a single season?,1.57,"0.0, 1.5714285714285714",direct_sql,True,3,3,0,1

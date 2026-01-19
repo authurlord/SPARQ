@@ -1,0 +1,52 @@
+Step 1: Understand the question. We are to calculate "pick efficiency" for each college, defined as (total number of players drafted from that college) / (total number of players drafted in the round). However, note that the "round" column shows the round number, and all entries with the same "pick" value (e.g., "10") are in different rounds. But the key is that we are only considering the first 10 rounds.
+
+Step 2: Identify which rounds are in the first 10 rounds. The "round" column ranges from 1 to 22, but we only consider rounds 1 to 10 (i.e., round <= 10).
+
+Step 3: Group by college and count how many players were drafted from each college in rounds 1 to 10.
+
+Step 4: Since the total number of players drafted in a round is not directly given, but we know each row represents one draft pick, and each pick is in a specific round, we can assume that in each round, the total number of picks is equal to the number of rows in that round. However, since multiple players may be picked from the same college in different rounds, we group by college and sum the counts.
+
+But note: the "pick" column does not represent the total picks per round — it's the pick number in the draft (e.g., pick 10). However, the round and pick are independent. For example, "round=1", "pick=10" means the 10th pick in round 1. So each row is a single pick.
+
+Therefore, the total number of players drafted in a round is simply the number of rows in that round. But since we are calculating efficiency per college, and the total number of players drafted in a round is not fixed, we interpret "pick efficiency" as:
+
+Efficiency = (number of players drafted from a college in rounds 1–10) / (number of picks in those rounds)
+
+But note: the total number of picks in rounds 1–10 is the total number of rows where round <= 10.
+
+So:
+- Count total number of players (rows) in rounds 1–10 → total picks.
+- For each college, count how many players were drafted in those rounds.
+- Then compute efficiency = count_per_college / total_picks_in_rounds_1_to_10.
+
+We want the college with the highest efficiency.
+
+Step 5: Filter data for rounds <= 10.
+Step 6: Group by college and count players.
+Step 7: Calculate efficiency for each college.
+Step 8: Find the college with the highest efficiency.
+
+Note: All entries with round > 10 are excluded.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows for rounds 1 to 10 (inclusive)
+df_filtered = df[df['round'].astype(int) <= 10]
+
+# Group by college and count number of players
+college_counts = df_filtered['college'].value_counts()
+
+# Total number of players drafted in rounds 1-10
+total_players = len(df_filtered)
+
+# Calculate efficiency for each college: count / total_players
+efficiency = college_counts / total_players
+
+# Find the college with the highest efficiency
+max_efficiency_college = efficiency.idxmax()
+
+print(f"Final Answer: {max_efficiency_college}")
+```

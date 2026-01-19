@@ -1,0 +1,20 @@
+Step 1: The question asks to detect anomalies in the demographic data. Anomalies could include inconsistent or impossible values (e.g., negative population, total less than sum of parts, or logical inconsistencies like negative workers).
+
+Step 2: Check for logical inconsistencies:
+- Total Population = Male + Female → 25 + 30 = 55 → valid.
+- Total No. of Houses = 14 → no issue with male/female breakdown.
+- Child (0–6): 3 (male) + 4 (female) = 7 → valid.
+- Schedule Caste: 500 + 500 = 1000 → valid.
+- Schedule Tribe: 0 + 0 = 0 → valid.
+- Literacy: percentages are reasonable.
+- Total Workers: 12 (male) + 3 (female) = 15 → valid.
+- Main Worker: "-10", "-5", "-5" → these are negative values, which is impossible.
+
+Step 3: Identify the anomaly: "Main Worker" has negative values (-10, -5, -5), which is logically invalid. This suggests data entry errors or misclassification.
+
+Step 4: Possible explanations:
+- Typo: "-10" might be a typo for "10" or "0".
+- Mislabeling: "Main Worker" may have been incorrectly recorded as negative.
+- Data entry error: Negative values do not make sense in this context.
+
+Final Answer: negative_main_worker_anomaly, data_entry_error

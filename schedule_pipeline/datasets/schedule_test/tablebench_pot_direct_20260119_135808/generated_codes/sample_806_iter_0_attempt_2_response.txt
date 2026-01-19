@@ -1,0 +1,27 @@
+Step 1: The user wants to calculate the mean, median, and standard deviation of boiling points for the five noble gases (helium, neon, argon, krypton, xenon). Additionally, identify the gas with the most extreme boiling point relative to the mean.
+
+Step 2: Load the dataframe.
+Step 3: Extract the boiling point values from the 'boiling point (degree)' row.
+Step 4: Convert the values to float for numerical computation.
+Step 5: Compute mean, median, and standard deviation.
+Step 6: Calculate the absolute difference between each boiling point and the mean to determine the most extreme value.
+Step 7: Identify the gas with the maximum deviation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract boiling point values
+boiling_points = df[df['physical property'] == 'boiling point (degree)'].iloc[0, 1:].astype(float)
+
+# Calculate mean, median, and standard deviation
+mean_bp = boiling_points.mean()
+median_bp = boiling_points.median()
+std_bp = boiling_points.std()
+
+# Find the gas with the most extreme boiling point (largest deviation from mean)
+deviations = abs(boiling_points - mean_bp)
+most_extreme_gas = deviations.idxmax()
+
+print(f"Final Answer: {mean_bp:.1f}, {median_bp:.1f}, {std_bp:.1f}, {most_extreme_gas}")
+```

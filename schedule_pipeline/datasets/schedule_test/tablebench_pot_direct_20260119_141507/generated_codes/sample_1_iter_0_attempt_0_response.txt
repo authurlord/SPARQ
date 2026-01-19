@@ -1,0 +1,15 @@
+Step 1: The user wants the total average daily flights across all routes.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'avg daily flts' column, which contains the average daily flights for each route.  
+Step 4: Sum all values in this column to get the total.  
+
+Note: The values in the 'avg daily flts' column are strings, so we need to convert them to integers before summing.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'avg daily flts' to integer and sum
+total_flights = df['avg daily flts'].astype(int).sum()
+print(f"Final Answer: {total_flights}")
+```

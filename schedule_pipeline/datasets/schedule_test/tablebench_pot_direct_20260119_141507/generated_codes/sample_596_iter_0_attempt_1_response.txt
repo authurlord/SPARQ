@@ -1,0 +1,25 @@
+Step 1: The user wants the average profit of the top 5 companies based on revenue.  
+Step 2: Identify the top 5 companies by revenue (highest to lowest).  
+Step 3: Extract the 'profit (us billion)' values for these companies.  
+Step 4: Calculate the mean of these profit values.  
+Step 5: Handle missing or negative profit values (e.g., "-16" should be interpreted as -16).  
+
+Note: The 'profit' column contains values like "- 16", which needs to be cleaned to convert to numeric.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'profit (us billion)' column by removing spaces and converting to float
+df['profit (us billion)'] = df['profit (us billion)'].str.replace(' - ', '-').astype(float)
+
+# Sort by 'revenues (us billion)' in descending order and take top 5
+top_5 = df.sort_values(by='revenues (us billion)', ascending=False).head(5)
+
+# Calculate the average profit of the top 5
+avg_profit = top_5['profit (us billion)'].mean()
+
+print(f"Final Answer: {avg_profit:.1f}")
+```

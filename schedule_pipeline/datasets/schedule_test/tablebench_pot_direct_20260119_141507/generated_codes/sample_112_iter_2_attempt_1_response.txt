@@ -1,0 +1,32 @@
+Step 1: The user wants a line chart showing the trend in the number of attacks (Att) over the years.  
+Step 2: Identify the relevant column "Att" and the "Year" column to plot the trend.  
+Step 3: Filter out the row with "Career Totals" since it's not a season-specific data point.  
+Step 4: Convert "Year" to integer for proper plotting.  
+Step 5: Use matplotlib to create a line chart of "Att" vs "Year".  
+
+Note: The data has a typo ("San Digeo Chargers" → "San Diego Chargers"), but we don't need to fix names as long as we extract correct numeric values.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter out the 'Career Totals' row
+df_filtered = df[df['Team'] != 'Career Totals']
+
+# Convert 'Year' to integer
+df_filtered['Year'] = df_filtered['Year'].astype(int)
+
+# Plot the trend in number of attacks (Att) over the years
+plt.figure(figsize=(10, 6))
+plt.plot(df_filtered['Year'], df_filtered['Att'], marker='o', linestyle='-', color='b')
+plt.title('Trend in Number of Attacks Over Years')
+plt.xlabel('Year')
+plt.ylabel('Number of Attacks (Att)')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+# Final Answer: The line chart has been plotted successfully.
+Final Answer: chart
+```

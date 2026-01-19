@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table contains demographic data from 1970 to 2006, including average population (in thousands), live births, deaths, natural change, and corresponding crude rates per 1000 people. Key trends show a decline in live births and natural change over time, despite fluctuating population, with crude birth rates peaking in the 1980s and declining thereafter, while crude death rates increased slightly before stabilizing. Natural change decreased significantly after 1990, indicating aging population or lower fertility.
+
+Final Answer: 1970 to 2006, average population (x 1000), live births, deaths, natural change, crude birth rate (per 1000), crude death rate (per 1000), natural change (per 1000), decline in live births and natural change, peak birth rates in 1980s, increasing death rates, aging population trend

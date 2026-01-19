@@ -1,0 +1,16 @@
+Step 1: The user wants the difference between the average score of the top-ranked couple (rank 1) and the bottom-ranked couple (rank 12).
+Step 2: Load the dataframe.
+Step 3: Extract the 'average' column values for the first (top) and last (bottom) rows.
+Step 4: Calculate the difference and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Get the average score of the top-ranked couple (first row)
+top_average = df['average'].iloc[0]
+# Get the average score of the bottom-ranked couple (last row)
+bottom_average = df['average'].iloc[-1]
+# Calculate the difference
+difference = top_average - bottom_average
+print(f"Final Answer: {difference:.1f}")
+```

@@ -1,0 +1,32 @@
+Step 1: The user wants the total cost of systems that produce at least 2000 kwh/kwp/year and have a cost per kwp of at most $1400.  
+Step 2: The "cost" column represents the cost per kwp (e.g., "200 / kwp", "600 / kwp"). We need to extract the numeric value from this string.  
+Step 3: The rows where the production capacity is at least 2000 kwh/kwp/year are those with columns starting from "2000 kwh / kwp y" onwards.  
+Step 4: Filter rows where the cost is ≤ $1400 (i.e., cost value ≤ 1400).  
+Step 5: Sum the cost values of the filtered rows.  
+
+Note: The cost values in the table are given as strings like "200 / kwp". We extract the numeric part (e.g., 200) and convert to int.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert cost column to numeric by extracting the number before '/ kwp'
+df['cost_numeric'] = df['cost'].str.extract(r'(\d+)').astype(float)
+
+# Identify rows where production capacity is at least 2000 kwh/kwp/year
+# These are columns from '2000 kwh / kwp y' onwards
+threshold_columns = [col for col in df.columns if col.startswith('2000') or col.startswith('2200') or col.startswith('2400')]
+# Since all entries from '2000 kwh / kwp y' onwards meet the "at least 2000" condition, we filter only those rows
+# But note: each row corresponds to a different cost level (e.g., 200/kwp, 600/kwp, etc.), so we consider each row
+# We want rows where cost <= 1400 and production >= 2000 kwh/kwp/year
+
+# Filter rows where cost <= 1400
+filtered_rows = df[df['cost_numeric'] <= 1400]
+
+# Now sum the cost values (already extracted as numeric)
+total_cost = filtered_rows['cost_numeric'].sum()
+
+print(f"Final Answer: {total_cost}")
+```

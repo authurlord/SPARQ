@@ -1,0 +1,32 @@
+Step 1: The user wants to compare the impact of the boiling points of the 2nd and 3rd components on the boiling point of the azeotrope.
+Step 2: Load the dataframe.
+Step 3: Extract the boiling points of the 2nd and 3rd components and the azeotrope boiling point.
+Step 4: Calculate the absolute difference between the azeotrope boiling point and each component's boiling point.
+Step 5: Compare the average differences to determine which component has a greater impact.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert boiling point columns to float for calculation
+df['bp 2nd comp (˚c)'] = pd.to_numeric(df['bp 2nd comp (˚c)'])
+df['bp 3rd comp (˚c)'] = pd.to_numeric(df['bp 3rd comp (˚c)'])
+df['bp azeo (˚c)'] = pd.to_numeric(df['bp azeo (˚c)'])
+
+# Calculate absolute differences
+df['diff_2nd'] = (df['bp azeo (˚c)'] - df['bp 2nd comp (˚c)']).abs()
+df['diff_3rd'] = (df['bp azeo (˚c)'] - df['bp 3rd comp (˚c)']).abs()
+
+# Average differences
+avg_diff_2nd = df['diff_2nd'].mean()
+avg_diff_3rd = df['diff_3rd'].mean()
+
+# Determine which has greater impact
+if avg_diff_2nd > avg_diff_3rd:
+    impact = '2nd component'
+else:
+    impact = '3rd component'
+
+print(f"Final Answer: {impact}")
+```

@@ -1,0 +1,29 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'CPSC toy safety funding (US$ Millions)' to numeric, coercing errors
+df['CPSC toy safety funding (US$ Millions)'] = pd.to_numeric(df['CPSC toy safety funding (US$ Millions)'], errors='coerce')
+
+# Drop rows where funding is missing
+funding_data = df.dropna(subset=['CPSC toy safety funding (US$ Millions)'])
+
+# Extract years and funding values
+years = funding_data['Year'].tolist()
+funding = funding_data['CPSC toy safety funding (US$ Millions)'].tolist()
+
+# Calculate average funding for each possible 3-year consecutive period
+max_avg_funding = -1
+best_period_injuries = 0
+
+for i in range(len(funding) - 2):
+    avg_funding = sum(funding[i:i+3]) / 3
+    if avg_funding > max_avg_funding:
+        max_avg_funding = avg_funding
+        # Get injuries for this 3-year period
+        injuries = df.iloc[i:i+3]['Injuries (US $000)']
+        # Convert injuries to numeric, handling 'no data' and 'estimate'
+        injuries = pd.to_numeric(injuries, errors='coerce')
+        best_period_injuries = injuries.sum()
+
+print(f"Final Answer: {best_period_injuries:.0f}")

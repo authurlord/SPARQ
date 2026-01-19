@@ -1,0 +1,34 @@
+Step 1: The question asks for the total estimated exposure (mrem/hr) when combining two specimens, assuming that the calculated activity (Bq) is directly proportional to the specimen weight. This means we can scale the exposure based on the weight ratio.
+
+Step 2: Identify the relevant rows:
+- Specimen 1: 0.1 g / 4.08 mm → exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → exposure = 0.03 mrem/hr
+
+Step 3: Since the exposure is assumed to be proportional to the weight, and the first specimen has a weight of 0.1 g and exposure 0.0, we can infer that the exposure value given (0.0) is likely due to rounding or negligible contribution.
+
+Step 4: The second specimen (10 g) already has an exposure of 0.03 mrem/hr. The first specimen (0.1 g) is 1/100th of the second in weight, so its contribution would be 1/100th of the activity and thus 1/100th of the exposure.
+
+Step 5: Calculate the exposure from the 0.1 g specimen:
+- Exposure ∝ weight → (0.1 / 10) × 0.03 = 0.0003 mrem/hr
+
+Step 6: Add both contributions:
+- Total exposure = 0.0003 + 0.03 = 0.0303 mrem/hr
+
+Step 7: Round to a reasonable precision and present.
+
+```python
+# Given data
+weight_01g = 0.1
+exposure_01g = 0.0
+
+weight_10g = 10
+exposure_10g = 0.03
+
+# Proportional exposure for 0.1g specimen based on 10g specimen
+proportional_exposure_01g = (weight_01g / weight_10g) * exposure_10g
+
+# Total estimated exposure
+total_exposure = proportional_exposure_01g + exposure_01g
+
+print(f"Final Answer: {total_exposure:.4f}")
+```

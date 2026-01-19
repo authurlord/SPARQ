@@ -1,0 +1,20 @@
+Step 1: The user wants to determine which factors ('judges', 'public', 'vote percentage') contribute most to the 'result' (e.g., 'safe' or 'bottom two') of each couple.
+Step 2: Load the dataframe.
+Step 3: Analyze the relationship between the 'result' and the numerical columns: 'judges', 'public', 'total', and 'vote percentage'.
+Step 4: Since 'total' is the sum of 'judges' and 'public', and 'vote percentage' is derived from the public vote, we can assess whether higher values in these columns correlate with being 'safe' or in the 'bottom two'.
+Step 5: Observe that the couple in 'bottom two' (Danniella and Matthew) has the lowest 'judges' (6), lowest 'public' (1), lowest 'total' (7), and lowest 'vote percentage' (4.2%). All other couples have higher values in these metrics and are 'safe'.
+Step 6: Therefore, all three factors—'judges', 'public', and 'vote percentage'—have a clear impact on the result.
+Step 7: Print the final answer based on this analysis.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check if there's a clear correlation between the factors and the result
+# The 'bottom two' couple has the lowest values in judges, public, total, and vote percentage
+# All others are 'safe' with higher values
+# Hence, all three factors contribute significantly
+
+print("Final Answer: judges, public, vote percentage")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The wind power generation positively correlates with the percentage of renewable energy in the total electricity demand of an autonomous community, as higher wind power values are associated with higher renewable percentages.

@@ -1,0 +1,6 @@
+Step 1: The user is asking for the nation that ranked 4th in terms of gold medals won.  
+Step 2: Look at the 'rank' column to identify the 4th-ranked nation.  
+Step 3: From the data, the nation at rank 4 is "united states".  
+Step 4: Verify that this nation has the 4th highest number of gold medals (12), which matches the data.  
+
+Final Answer: united states

@@ -1,0 +1,23 @@
+The error occurred because the "enrollment" column contains string values (e.g., '1042') instead of numeric values, so we need to convert them to integers before performing arithmetic operations.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'enrollment' column to numeric (to handle strings properly).
+Step 3: Find the maximum and minimum enrollment values.
+Step 4: Calculate the difference between the highest and lowest enrollment.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'enrollment' to integer type to enable numerical operations
+df['enrollment'] = pd.to_numeric(df['enrollment'], errors='coerce')
+
+# Find max and min enrollment
+max_enrollment = df['enrollment'].max()
+min_enrollment = df['enrollment'].min()
+
+# Calculate the difference
+difference = max_enrollment - min_enrollment
+print(f"Final Answer: {difference}")
+```

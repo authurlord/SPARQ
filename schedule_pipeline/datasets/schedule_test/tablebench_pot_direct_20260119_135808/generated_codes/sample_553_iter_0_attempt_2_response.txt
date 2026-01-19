@@ -1,0 +1,22 @@
+Step 1: The user wants the average annual increase in 'property taxes' from 2000 to 2005.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'property taxes' values for the years 2000 to 2005.  
+Step 4: Convert the values to integers (since they are stored as strings).  
+Step 5: Calculate the total increase over the period (from 2000 to 2005).  
+Step 6: Divide by the number of years (5 years) to get the average annual increase.  
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'property taxes' column to integers
+df['property taxes'] = df['property taxes'].astype(int)
+# Extract values for 2000 and 2005
+property_taxes_2000 = df[df['year'] == '2000']['property taxes'].values[0]
+property_taxes_2005 = df[df['year'] == '2005']['property taxes'].values[0]
+# Calculate total increase and average annual increase
+total_increase = property_taxes_2005 - property_taxes_2000
+average_annual_increase = total_increase / 5
+print(f"Final Answer: {average_annual_increase:.0f}")
+```

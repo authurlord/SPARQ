@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The maximum speed increases with higher horsepower, but not linearly; for example, from 220 hp (90 km/h) to 285 hp (120 km/h), the speed increases by 30 km/h, and further increase to 298 hp maintains the same max speed of 120 km/h.

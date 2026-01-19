@@ -1,0 +1,16 @@
+Step 1: The user wants the correlation coefficient between 'Average population (x 1000)' and 'Natural change (per 1000)'.
+Step 2: Load the dataframe.
+Step 3: Select the two columns and compute their correlation using pandas corr() method.
+Step 4: Print the correlation coefficient.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric, handling any non-numeric values like '1 104'
+df['Average population (x 1000)'] = pd.to_numeric(df['Average population (x 1000)'], errors='coerce')
+df['Natural change (per 1000)'] = pd.to_numeric(df['Natural change (per 1000)'], errors='coerce')
+
+# Calculate correlation
+correlation = df['Average population (x 1000)'].corr(df['Natural change (per 1000)'])
+print(f"Final Answer: {correlation:.3f}")
+```

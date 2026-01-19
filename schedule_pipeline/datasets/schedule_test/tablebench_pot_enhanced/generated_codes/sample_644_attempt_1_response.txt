@@ -1,0 +1,21 @@
+Step 1: The user wants the correlation coefficient between boiling point and critical temperature of noble gases.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'physical property' is 'boiling point (degree)' and 'critical temperature (k)'.
+Step 4: Extract the corresponding values for helium, neon, argon, krypton, and xenon.
+Step 5: Convert values to float and calculate the correlation coefficient using pandas.
+Step 6: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows for boiling point and critical temperature
+boiling_point = df[df['physical property'] == 'boiling point (degree)'].iloc[0, 1:].astype(float)
+critical_temp = df[df['physical property'] == 'critical temperature (k)'].iloc[0, 1:].astype(float)
+
+# Calculate correlation coefficient
+correlation = boiling_point.corr(critical_temp)
+
+print(f"Final Answer: {correlation:.3f}")
+```

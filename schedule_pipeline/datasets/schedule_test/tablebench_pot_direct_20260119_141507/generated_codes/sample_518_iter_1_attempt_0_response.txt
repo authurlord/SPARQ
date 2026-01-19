@@ -1,0 +1,24 @@
+The error occurred because the GDP (nominal) and population columns contain strings (e.g., '2198730'), not numerical values. We need to convert them to integers before performing division.
+
+Step 1: Load the dataframe.
+Step 2: Convert 'gdp (nominal) (millions of usd) 2011' and 'population' columns to numeric (integers).
+Step 3: Calculate GDP per capita as nominal GDP divided by population for each country.
+Step 4: Find the country with the highest value and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert the GDP (nominal) and population columns to numeric
+df['gdp (nominal) (millions of usd) 2011'] = pd.to_numeric(df['gdp (nominal) (millions of usd) 2011'], errors='coerce')
+df['population'] = pd.to_numeric(df['population'], errors='coerce')
+
+# Calculate GDP per capita
+df['gdp_per_capita'] = df['gdp (nominal) (millions of usd) 2011'] / df['population']
+
+# Find the country with the highest GDP per capita
+highest_gdp_per_capita_country = df.loc[df['gdp_per_capita'].idxmax(), 'country']
+
+print(f"Final Answer: {highest_gdp_per_capita_country}")
+```

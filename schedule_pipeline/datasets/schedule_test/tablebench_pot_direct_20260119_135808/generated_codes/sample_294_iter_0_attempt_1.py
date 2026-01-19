@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 100 m event and 1st position
+gold_medal_100m = df[(df['event'] == '100 m') & (df['position'] == '1st')]
+# Extract the year
+year = gold_medal_100m['year'].iloc[0]
+print(f"Final Answer: {year}")

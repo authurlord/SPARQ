@@ -1,0 +1,28 @@
+Step 1: Identify the teams that played in the Third Division North. From the data, these are:
+- Bournemouth & Boscombe Athletic (1946–47)
+- Lincoln City (1946–47, 1947–48, 1948–49)
+- Oldham Athletic (1948–49, 1949–50)
+
+Step 2: Extract the 'Goals' column values for these teams from the 'Second Division' or 'Third Division North' rows. The relevant 'Goals' values are under the 'Goals' column (which corresponds to 'Goals' in the 'Division' row).
+
+Step 3: Collect all goals scored by these teams in the Third Division North across seasons.
+
+Step 4: Calculate the variance of these goal values using the `var()` function in pandas.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Division is 'Third Division North'
+third_division_north = df[df['Division'] == 'Third Division North']
+
+# Extract the 'Goals' column for these rows
+goals = third_division_north['Goals'].astype(int)
+
+# Calculate variance
+variance = goals.var()
+
+print(f"Final Answer: {variance:.1f}")
+```

@@ -1,0 +1,18 @@
+Step 1: The user wants to find the year when the athlete achieved their personal best time in the 400m event.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'Event' is '400 m'.  
+Step 4: Identify the row with the minimum time (personal best).  
+Step 5: Extract and print the corresponding 'Year'.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 400m events
+four_hundred_m = df[df['Event'] == '400 m']
+# Find the row with the minimum time (personal best)
+best_time_row = four_hundred_m.loc[four_hundred_m['Notes'].idxmin()]
+# Extract the year
+year_best_time = best_time_row['Year']
+print(f"Final Answer: {year_best_time}")
+```

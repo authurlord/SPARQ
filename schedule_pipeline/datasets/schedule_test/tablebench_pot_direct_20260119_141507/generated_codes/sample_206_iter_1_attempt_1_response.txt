@@ -1,0 +1,61 @@
+We are asked whether an increase in eccentricity causes a corresponding increase in periselene or inclination. To analyze this, we need to examine the relationship between these variables:
+
+- "eccentricity" (how elliptical the orbit is)
+- "periselene" (distance at closest point to the moon)
+- "inclination" (angle of orbit relative to the moon's equator)
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Check if there's a positive correlation between eccentricity and periselene (i.e., as eccentricity increases, does periselene increase?).
+3. Check if there's a positive correlation between eccentricity and inclination.
+4. Since both periselene and inclination are measured in different units and represent different physical properties, we will compute the correlation coefficients (Pearson) between eccentricity and each of the two.
+
+Note: In orbital mechanics, eccentricity and periselene are not directly proportional — higher eccentricity means more elongated orbit, but periselene can vary independently. Inclination is independent of eccentricity.
+
+We will calculate the Pearson correlation coefficient between:
+- eccentricity and periselene
+- eccentricity and inclination
+
+If either correlation is positive and strong (e.g., > 0.7), then we say there is a corresponding increase.
+
+However, from the data:
+- Eccentricity values range from ~0.326 to ~0.776
+- Periselene ranges from ~2200 to ~53215 km → actually, it's decreasing as eccentricity increases (e.g., high eccentricity has lower periselene)
+- Inclination ranges from ~81° to ~90.3° → increases slightly with eccentricity
+
+But let's verify with actual correlation.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert columns to numeric (in case of string issues)
+df['eccentricity'] = pd.to_numeric(df['eccentricity'], errors='coerce')
+df['periselene'] = pd.to_numeric(df['periselene'], errors='coerce')
+df['inclination'] = pd.to_numeric(df['inclination (deg) (to moon equator)'], errors='coerce')
+
+# Drop any rows with NaN due to conversion errors
+df = df.dropna()
+
+# Compute correlation between eccentricity and periselene
+corr_periselene = df['eccentricity'].corr(df['periselene'])
+
+# Compute correlation between eccentricity and inclination
+corr_inclination = df['eccentricity'].corr(df['inclination'])
+
+print(f"Correlation between eccentricity and periselene: {corr_periselene:.3f}")
+print(f"Correlation between eccentricity and inclination: {corr_inclination:.3f}")
+
+# Final answer: Based on the correlation values, determine if there is a corresponding increase
+# If correlation is positive and significant, then yes; otherwise no.
+# From the data, periselene decreases when eccentricity increases → negative correlation
+# Inclination increases slightly → positive but weak
+
+# Since the question asks whether an increase in eccentricity causes a corresponding increase,
+# only positive and meaningful correlation counts.
+
+# Final Answer: None of them show a corresponding increase (periselene decreases, inclination increases weakly)
+Final Answer: no, no
+```

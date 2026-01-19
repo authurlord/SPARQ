@@ -1,0 +1,21 @@
+Step 1: The user wants to determine if there is a significant correlation between elevation (m) and prominence (m).  
+Step 2: Load the dataframe.  
+Step 3: Convert 'elevation (m)' and 'prominence (m)' columns to numeric type.  
+Step 4: Calculate the Pearson correlation coefficient between the two columns.  
+Step 5: Interpret the correlation coefficient (values close to 1 or -1 indicate strong correlation, near 0 indicates weak).  
+Step 6: Print the correlation coefficient and a conclusion.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'])
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'])
+
+# Calculate correlation coefficient
+correlation = df['elevation (m)'].corr(df['prominence (m)'])
+
+# Output result
+print(f"Final Answer: {correlation:.3f}")
+```

@@ -1,0 +1,13 @@
+Step 1: The user wants to find the episode with the lowest rating.  
+Step 2: Load the dataframe.  
+Step 3: Identify the 'rating' column and find the minimum value, along with its corresponding episode.  
+Step 4: Print the episode name that has the lowest rating.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the episode with the lowest rating
+lowest_rating_episode = df.loc[df['rating'].idxmin(), 'episode']
+print(f"Final Answer: {lowest_rating_episode}")
+```

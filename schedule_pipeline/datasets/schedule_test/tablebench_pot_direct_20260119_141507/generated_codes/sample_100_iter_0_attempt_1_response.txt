@@ -1,0 +1,29 @@
+Step 1: The user wants a pie chart showing the proportions of all species in Costa Rica.  
+Step 2: Extract the relevant columns for Costa Rica from the table (Amphibians, Birds, Mammals, Reptile, and Total terrestrial vertebrates).  
+Step 3: Since the total terrestrial vertebrates is already the sum of the others, we will use the individual species counts to create the pie chart.  
+Step 4: Use matplotlib to draw the pie chart with labeled slices.  
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter data for Costa Rica
+costa_rica_data = df[df['Country'] == 'Costa Rica']
+
+# Extract species counts
+species = {
+    'Amphibians': int(costa_rica_data['Amphibians'].values[0]),
+    'Birds': int(costa_rica_data['Birds'].values[0]),
+    'Mammals': int(costa_rica_data['Mammals'].values[0]),
+    'Reptile': int(costa_rica_data['Reptile'].values[0])
+}
+
+# Create pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(species.values(), labels=species.keys(), autopct='%1.1f%%', startangle=90)
+plt.title('Proportions of Species in Costa Rica')
+plt.show()
+```
+
+Final Answer: Costa Rica Amphibians, Birds, Mammals, Reptile

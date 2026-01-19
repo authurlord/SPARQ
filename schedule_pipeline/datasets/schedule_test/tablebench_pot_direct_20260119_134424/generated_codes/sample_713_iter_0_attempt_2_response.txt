@@ -1,0 +1,14 @@
+Step 1: The user wants to identify the player with the highest total goals.
+Step 2: Load the dataframe.
+Step 3: Select the 'total goals' column and find the maximum value.
+Step 4: Identify the corresponding player name from the 'name' column.
+Step 5: Print the result in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the player with the highest total goals
+max_goals_player = df.loc[df['total goals'].idxmax(), 'name']
+print(f"Final Answer: {max_goals_player}")
+```

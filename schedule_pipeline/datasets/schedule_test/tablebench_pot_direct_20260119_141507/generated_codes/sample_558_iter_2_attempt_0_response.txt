@@ -1,0 +1,21 @@
+The error occurred because the years in the data (e.g., '1931', '1932') are strings, and we cannot directly compare them using `>=` with integers. We need to filter the rows where the 'Year' is between 1935 and 1943 inclusive, treating the year as a string and converting it to integer for comparison.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the 'Year' column to integer type to enable numerical comparison.
+3. Filter rows where the year is between 1935 and 1943 (inclusive).
+4. Calculate the average of the 'Quantity withdrawn' column for those filtered rows.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year' to integer for proper filtering
+df['Year'] = df['Year'].astype(int)
+# Filter rows from 1935 to 1943 inclusive
+filtered_df = df[(df['Year'] >= 1935) & (df['Year'] <= 1943)]
+# Calculate the average number of locomotives withdrawn
+average_withdrawn = filtered_df['Quantity withdrawn'].mean()
+print(f"Final Answer: {average_withdrawn:.1f}")
+```

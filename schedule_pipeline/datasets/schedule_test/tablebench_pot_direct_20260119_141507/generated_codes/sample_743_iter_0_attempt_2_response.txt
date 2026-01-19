@@ -1,0 +1,31 @@
+Step 1: The question asks for an estimation of viewership and 18-49 average rating for season 9 based on the trend from season 1 to season 8.  
+Step 2: We observe that both "viewers (in millions)" and "18 - 49 average" are decreasing over time, suggesting a clear downward trend.  
+Step 3: To estimate season 9, we can calculate the average change per season in viewership and 18-49 ratings and apply it to season 8.  
+Step 4: Since the data is small (only 8 seasons), we will compute the linear trend using simple arithmetic mean of differences.  
+
+We will:
+- Extract the viewership and 18-49 average values from season 1 to season 8.
+- Compute the average decrease per season.
+- Project season 9 by subtracting the average decrease from season 8's values.
+
+Note: This is a simple linear projection and assumes a constant rate of decline.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract viewership and 18-49 average ratings from season 1 to 8
+viewership = df['viewers (in millions)'].head(8).values
+avg_18_49 = df['18 - 49 average'].head(8).values
+
+# Calculate average decrease per season
+avg_decrease_viewership = (viewership[0] - viewership[-1]) / 7
+avg_decrease_18_49 = (avg_18_49[0] - avg_18_49[-1]) / 7
+
+# Project season 9 values
+projected_viewership = viewership[-1] - avg_decrease_viewership
+projected_avg_18_49 = avg_18_49[-1] - avg_decrease_18_49
+
+print(f"Final Answer: {projected_viewership:.2f}, {projected_avg_18_49:.2f}")
+```

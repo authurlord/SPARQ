@@ -1,0 +1,13 @@
+Step 1: Identify the artists who made it to the 'final' by checking the 'result' column for "final".  
+Step 2: Filter the rows where 'result' is "final".  
+Step 3: Sum the 'jury votes' from those filtered rows.  
+Step 4: Print the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where result is 'final' and sum jury votes
+total_jury_votes_final = df[df['result'] == 'final']['jury votes'].sum()
+print(f"Final Answer: {total_jury_votes_final}")
+```

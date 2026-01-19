@@ -1,0 +1,23 @@
+The error occurred because the "Political Rights" column contains string values (like '6', '7') that are not properly converted to numeric when performing arithmetic operations. We need to ensure the column is converted to numeric before computing the standard deviation.
+
+Step 1: Load the dataframe.
+Step 2: Convert the "Political Rights" column to numeric (to handle string values like '6', '7').
+Step 3: Filter rows from 1975 to 1990 (inclusive).
+Step 4: Compute the standard deviation of the filtered "Political Rights" scores.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Political Rights' to numeric, coercing errors to NaN if any
+df['Political Rights'] = pd.to_numeric(df['Political Rights'], errors='coerce')
+
+# Filter rows from 1975 to 1990 inclusive
+filtered_df = df[(df['Year'] >= '1975') & (df['Year'] <= '1990')]
+
+# Compute standard deviation of 'Political Rights' in the filtered data
+std_political_rights = filtered_df['Political Rights'].std()
+
+print(f"Final Answer: {std_political_rights:.2f}")
+```

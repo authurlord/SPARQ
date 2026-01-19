@@ -1,0 +1,18 @@
+Step 1: Identify intervals with a "just ratio" that involves the number 11.  
+Looking at the "just ratio" column, we need to find entries where the ratio includes "11", such as "11:8", "15:11", "14:11", or "11:9".  
+Step 2: Extract the corresponding "size (cents)" values for these intervals.  
+Step 3: Calculate the average of these values.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where 'just ratio' contains '11'
+filtered_rows = df[df['just ratio'].str.contains('11', na=False)]
+
+# Calculate the average of 'size (cents)' for these filtered rows
+average_cents = filtered_rows['size (cents)'].mean()
+
+print(f"Final Answer: {average_cents:.2f}")
+```

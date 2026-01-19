@@ -1,0 +1,7 @@
+Step 1: The user is asking about the trend of points scored per year by the Castleford Tigers in the next 5 years. However, the provided data only contains historical data from 2004 to 2010, and there is no information or basis to predict future trends. Therefore, it is not possible to determine or project a trend for the next 5 years based on the given data.
+
+Step 2: Since the question cannot be answered with the available data, I will politely refuse.
+
+```python
+print("Final Answer: Cannot be determined")
+```

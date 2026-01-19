@@ -1,0 +1,27 @@
+The error occurred because the GDP per capita values in the table include some entries like "n / a" (which cannot be converted to numeric), and possibly misaligned data. In this case, we need to:
+
+1. Filter the top 20 countries by world rank (i.e., the first 20 rows where `world rank` is available).
+2. Extract only the valid GDP per capita values (convert strings to numeric, skipping invalid entries like "n / a").
+3. Compute the median of these numeric values.
+
+Step-by-step approach:
+- Load the dataframe.
+- Filter the top 20 countries by world rank (order by `gdp world rank` ascending).
+- Convert the 'gdp per capita' column to numeric, handling invalid entries (e.g., "n / a") by dropping them.
+- Compute the median.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Sort by 'gdp world rank' to get top 20 countries
+df_sorted = df.sort_values(by='gdp world rank').head(20)
+# Convert 'gdp per capita' to numeric, coercing errors to NaN, then drop NaN
+df_sorted['gdp per capita'] = pd.to_numeric(df_sorted['gdp per capita'], errors='coerce')
+# Drop rows with NaN values (invalid entries like 'n / a')
+df_sorted = df_sorted.dropna(subset=['gdp per capita'])
+# Calculate median of GDP per capita
+median_gdp = np.median(df_sorted['gdp per capita'])
+print(f"Final Answer: {median_gdp:.0f}")
+```

@@ -1,0 +1,45 @@
+We are tasked with creating a waterfall chart to show the trend in the team's attendance over time. The data includes a "Date" column and an "Attendance" column, which we can use to plot the attendance trend.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Extract the "Date" and "Attendance" columns.
+3. Convert the "Date" column to a datetime format for proper time ordering.
+4. Sort the data by date to ensure chronological order.
+5. Create a waterfall chart (also known as a sequence chart) that shows how attendance changes from one game to the next — this will visually represent the cumulative trend.
+6. Use matplotlib to draw the waterfall chart.
+
+Note: A waterfall chart typically shows changes in values over time. Since attendance is not cumulative, we interpret it as a sequence of individual values over time. We will plot the attendance values on the y-axis with dates on the x-axis, and use a line or bar chart to show the trend. However, since the term "waterfall" implies cumulative change, we may instead create a line chart showing the trend.
+
+But given the context — "trend in the team's attendance over time" — a simple line chart would be more appropriate than a traditional waterfall chart (which is usually used for financial changes). If a true waterfall chart is required (with vertical bars showing additions/subtractions), we would need cumulative changes — but there's no such data provided.
+
+Therefore, we will create a **line chart** to show the trend in attendance over time, which is the most suitable interpretation of "trend".
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert Date to datetime
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Sort by date
+df = df.sort_values('Date')
+
+# Extract attendance values
+attendance = df['Attendance'].astype(int)
+
+# Plot the trend
+plt.figure(figsize=(12, 6))
+plt.plot(df['Date'], attendance, marker='o', linestyle='-', color='b')
+plt.title('Trend in Team Attendance Over Time')
+plt.xlabel('Date')
+plt.ylabel('Attendance')
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: line chart of attendance over time

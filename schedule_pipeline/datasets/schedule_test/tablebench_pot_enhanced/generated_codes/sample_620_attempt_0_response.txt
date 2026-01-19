@@ -1,0 +1,17 @@
+Step 1: The user wants to calculate how many coins each person would receive if the total mintage from 2002 to 2005 is divided equally among 5 people.
+Step 2: Load the dataframe.
+Step 3: Filter the data for years 2002 to 2005.
+Step 4: Sum the 'mintage' values for these years.
+Step 5: Divide the total mintage by 5 and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years 2002 to 2005
+filtered_df = df[(df['year'] >= '2002') & (df['year'] <= '2005')]
+# Sum the mintage
+total_mintage = filtered_df['mintage'].sum()
+# Divide by 5 people
+coins_per_person = total_mintage / 5
+print(f"Final Answer: {int(coins_per_person)}")
+```

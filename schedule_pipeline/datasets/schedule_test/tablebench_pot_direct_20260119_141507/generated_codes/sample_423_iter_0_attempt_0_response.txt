@@ -1,0 +1,33 @@
+Step 1: Understand the structure of the table. The table contains information about various cities or municipalities, including their administrative divisions, geographic area, population, and population density.  
+Step 2: Identify the main columns:  
+- "city / municipality": Name of the city or municipality.  
+- "no of barangays": Number of barangays (administrative divisions) in the city.  
+- "area (km square)": Geographic area in square kilometers.  
+- "population (2010 census)": Population as per the 2010 census.  
+- "pop density (per km square)": Population density calculated as population divided by area.  
+
+Step 3: Initial insights:  
+- The population density varies significantly across cities, with Taytay having the highest density (7447.32 per km²), while Antipolo has a moderate density (2214.12 per km²).  
+- Larger areas (e.g., Antipolo with 306.1 km²) tend to have lower population densities, while smaller areas (e.g., Cainta with 42.99 km²) have higher densities.  
+- Cities with more barangays (e.g., Binangonan with 40) may indicate larger administrative complexity or population spread.  
+
+This table provides a snapshot of urban characteristics, useful for demographic or regional planning analysis.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Display a brief description of the table and initial insights
+print("Main Columns:")
+print(" - city / municipality: Names of the cities or municipalities.")
+print(" - no of barangays: Number of administrative divisions (barangays).")
+print(" - area (km square): Geographic size in square kilometers.")
+print(" - population (2010 census): Population recorded in 2010.")
+print(" - pop density (per km square): Population per square kilometer.")
+print("\nInitial Insights:")
+print(" - Taytay has the highest population density (7447.32 per km²).")
+print(" - Antipolo has the largest area (306.1 km²) and moderate density (2214.12 per km²).")
+print(" - Smaller areas generally have higher population densities.")
+print(" - Binangonan has the most barangays (40), indicating a larger administrative structure.")
+```

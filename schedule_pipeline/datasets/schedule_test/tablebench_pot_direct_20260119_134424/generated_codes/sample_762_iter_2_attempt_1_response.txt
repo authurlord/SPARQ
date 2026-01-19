@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The data provided is historical and limited to only 9 years (1850–1858), which is insufficient for making reliable forecasts or identifying clear trends over the next 5 years. Additionally, the variables "deaths" and "strongest storm" are non-numeric or qualitative, limiting statistical modeling. Without a clear pattern or sufficient data, no valid forecast can be generated. Therefore, forecasting is not feasible with the given dataset.
+
+Final Answer: Not feasible

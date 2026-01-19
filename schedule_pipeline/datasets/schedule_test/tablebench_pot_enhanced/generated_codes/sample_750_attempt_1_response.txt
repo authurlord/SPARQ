@@ -1,0 +1,13 @@
+Step 1: The user is asking for a forecasted average finish position for the year 2005, assuming the driver participates in a similar number of races as in 2004.  
+Step 2: From the data, in 2004, the number of starts is 3 and the average finish position is 40.3.  
+Step 3: Since no trend or regression is specified, and the question asks for a forecast based on "similar number of races," the most reasonable assumption is to use the average finish from 2004 as the forecast.  
+Step 4: Extract the 'avg finish' value for 2004 and output it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for the year 2004
+avg_finish_2004 = df[df['year'] == '2004']['avg finish'].values[0]
+print(f"Final Answer: {avg_finish_2004}")
+```

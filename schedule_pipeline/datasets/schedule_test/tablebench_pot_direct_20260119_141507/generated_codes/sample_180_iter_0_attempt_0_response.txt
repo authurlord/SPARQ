@@ -1,0 +1,22 @@
+Step 1: The user is asking which factors (PSDI, PSI, PCI) significantly influence the 'DC' values. To assess this, we can compute the correlation between each factor and 'DC'.  
+Step 2: Load the dataframe.  
+Step 3: Extract the columns 'DC', 'PSDI', 'PSI', and 'PCI'.  
+Step 4: Compute the correlation coefficients between 'DC' and each of the other variables.  
+Step 5: Identify which factors have a strong correlation (absolute value > 0.3, as a reasonable threshold for "significant"). If none exceed this, reply "no clear impact".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Compute correlation between DC and each factor
+correlations = df[['DC', 'PSDI', 'PSI', 'PCI']].corr()['DC'].abs()
+
+# Find factors with significant correlation (threshold of 0.3)
+significant_factors = [col for col in correlations.index if correlations[col] > 0.3]
+
+if significant_factors:
+    print(f"Final Answer: {', '.join(significant_factors)}")
+else:
+    print("Final Answer: no clear impact")
+```

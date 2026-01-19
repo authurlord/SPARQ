@@ -1,0 +1,18 @@
+Step 1: The user wants to calculate the new average daily flights after a 28% increase on the Monte Carlo (MCM) - Nice (NCE) route.
+Step 2: Load the dataframe.
+Step 3: Filter the row corresponding to the route "monte carlo ( mcm ) - nice ( nce )".
+Step 4: Convert the 'avg daily flts' value to a float.
+Step 5: Apply a 28% increase by multiplying by 1.28.
+Step 6: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for the specific route
+route_row = df[df['route'] == 'monte carlo ( mcm ) - nice ( nce )']
+# Extract the average daily flights and convert to float
+avg_flights = float(route_row['avg daily flts'].values[0])
+# Calculate 28% increase
+new_avg_flights = avg_flights * 1.28
+print(f"Final Answer: {new_avg_flights:.1f}")
+```

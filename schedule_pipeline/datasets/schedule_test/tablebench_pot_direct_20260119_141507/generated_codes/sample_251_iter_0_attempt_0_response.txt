@@ -1,0 +1,21 @@
+Step 1: Identify the relevant data for Lincoln City in the Third Division North.  
+Step 2: Look at the rows where Club is "Lincoln City" and Division is "Third Division North".  
+Step 3: Extract the "Goals" column from those rows and sum them.  
+Step 4: Print the total.
+
+Note: The table has a row labeled "Lincoln City, 1946–47" which is in Third Division South, so we skip that. The entries for Lincoln City in Third Division North are for seasons 1946–47 (not applicable), 1947–48, and 1948–49. Only the years 1947–48 and 1948–49 are in Third Division North.  
+From the data:
+- 1947–48: Goals = 32
+- 1948–49: Goals = 8  
+Total goals = 32 + 8 = 40
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Club is 'Lincoln City' and Division is 'Third Division North'
+filtered = df[(df['Club'] == 'Lincoln City') & (df['Division'] == 'Third Division North')]
+# Sum the 'Goals' column
+total_goals = filtered['Goals'].sum()
+print(f"Final Answer: {total_goals}")
+```

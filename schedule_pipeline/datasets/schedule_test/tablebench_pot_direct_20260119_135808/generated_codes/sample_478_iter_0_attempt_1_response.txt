@@ -1,0 +1,16 @@
+Step 1: Identify the city with an unusually high total passengers and annual change.  
+Step 2: Look for extreme values in 'total passengers' and 'annual change'.  
+Step 3: The value '100000000' for total passengers and '1000.00%' for annual change in the row with rank 10 stands out as highly unusual compared to other entries.  
+Step 4: Extract the location corresponding to this row.  
+Step 5: Output the city name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row with the highest total passengers and annual change
+# The data shows that rank 10 has an unusually high total passengers (100,000,000) and annual change (1000.00%)
+unusual_row = df[df['total passengers'] == '100000000']
+city = unusual_row['location'].values[0]
+print(f"Final Answer: {city}")
+```

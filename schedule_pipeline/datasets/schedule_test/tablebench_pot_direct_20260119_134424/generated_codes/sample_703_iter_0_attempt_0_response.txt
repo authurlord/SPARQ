@@ -1,0 +1,23 @@
+Step 1: The user wants to identify the locomotive built in the earliest year and calculate the difference between its build year and the latest build year.
+Step 2: Load the dataframe.
+Step 3: Convert the 'built' column to integer for proper comparison.
+Step 4: Find the minimum and maximum values in the 'built' column.
+Step 5: Identify the locomotive with the earliest build year.
+Step 6: Calculate the difference between the latest and earliest build years.
+Step 7: Print the locomotive name and the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'built' column to integer
+df['built'] = pd.to_numeric(df['built'])
+# Find the earliest and latest build years
+earliest_year = df['built'].min()
+latest_year = df['built'].max()
+# Find the locomotive built in the earliest year
+earliest_locomotive = df[df['built'] == earliest_year]['locomotive'].iloc[0]
+# Calculate the difference
+difference = latest_year - earliest_year
+print(f"Final Answer: {earliest_locomotive}, {difference}")
+```

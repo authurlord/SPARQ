@@ -1,0 +1,26 @@
+Step 1: The user is asking for the year when the athlete achieved their personal best (PB) in the 200m event at the Asian Games.  
+Step 2: Look through the data to find rows where:
+- "Event" is "200 m"
+- "Notes" contains "PB" (personal best)
+- "Competition" is "Asian Games"
+Step 3: Extract the "Year" from such a row.
+
+From the table:
+- In 2018, under "Asian Games", the event "200 m" has a note: "SF1–1st PB" → this indicates a personal best.
+- The year is 2018.
+
+Thus, the answer is 2018.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Event is '200 m', Competition is 'Asian Games', and Notes contains 'PB'
+filtered_rows = df[(df['Event'] == '200 m') & (df['Competition'] == 'Asian Games') & (df['Notes'].str.contains('PB', case=False))]
+# Extract the year from the first match
+if not filtered_rows.empty:
+    year = filtered_rows.iloc[0]['Year']
+    print(f"Final Answer: {year}")
+else:
+    print("Final Answer: None")
+```

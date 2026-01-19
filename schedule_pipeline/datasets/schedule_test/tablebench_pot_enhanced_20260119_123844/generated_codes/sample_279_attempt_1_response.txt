@@ -1,0 +1,32 @@
+Step 1: The user wants the total estimated exposure (mrem/hr) when combining two specimens, assuming the calculated activity (Bq) is directly proportional to weight.
+
+Step 2: Identify the relevant rows:
+- Specimen 1: 0.1 g / 4.08 mm → calculated activity = 18 Bq → estimated exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → calculated activity = 1834 Bq → estimated exposure = 0.03 mrem/hr
+
+Step 3: Since exposure is assumed to be proportional to activity (and activity is proportional to weight), we can scale the exposure of the 0.1g specimen based on the 10g specimen's activity and exposure.
+
+Step 4: Calculate the scaling factor: (10g / 0.1g) = 100 → so the 0.1g specimen should have 1/100th the activity and thus 1/100th the exposure of the 10g specimen.
+
+Step 5: Use the 10g specimen’s exposure (0.03 mrem/hr) to compute expected exposure for 0.1g: 0.03 / 100 = 0.0003 mrem/hr.
+
+Step 6: Add this to the 10g specimen’s exposure: 0.0003 + 0.03 = 0.0303 mrem/hr.
+
+Step 7: Round to reasonable precision and print.
+
+```python
+# Given data
+# Specimen 1: 0.1g → activity = 18 Bq → exposure = 0.0 mrem/hr (from table)
+# Specimen 2: 10g → activity = 1834 Bq → exposure = 0.03 mrem/hr
+
+# Since activity is proportional to weight, exposure should also scale with weight
+# Scaling factor: 10g / 0.1g = 100
+
+# Expected exposure for 0.1g specimen if scaled from 10g specimen:
+expected_exposure_0_1g = 0.03 / 100  # 0.0003 mrem/hr
+
+# Total exposure when combined:
+total_exposure = expected_exposure_0_1g + 0.03
+
+print(f"Final Answer: {total_exposure:.4f}")
+```

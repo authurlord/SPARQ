@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: land area (km square) for hastings county, population rank for timiskaming district

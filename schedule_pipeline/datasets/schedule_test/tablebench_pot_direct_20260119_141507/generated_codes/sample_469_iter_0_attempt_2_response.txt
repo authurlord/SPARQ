@@ -1,0 +1,58 @@
+Step 1: Identify potential anomalies in the data. These could include:
+- Missing or inconsistent values (e.g., "unknown", "none", "0.1")
+- Extreme outliers (e.g., very high or very low values)
+- Discrepancies between total deaths and sum of military and civilian deaths
+- Inconsistent formatting (e.g., mixed strings and numbers)
+
+Step 2: Check for inconsistencies in total deaths:
+- Total deaths should approximately equal military deaths + civilian deaths.
+- If not, that may indicate an error.
+
+Step 3: Look for extreme values (e.g., unusually high or low values in any column).
+
+Step 4: Flag rows where the sum of military and civilian deaths does not match total deaths (not including foreigners), or where values are inconsistent (e.g., "unknown" with numerical totals).
+
+Step 5: Identify any rows with extreme values (e.g., 100,000+ military deaths) that might be outliers.
+
+Step 6: Print a list of anomalies found.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert all columns to numeric where possible, handling non-numeric values
+df_numeric = df.copy()
+for col in df_numeric.columns:
+    df_numeric[col] = pd.to_numeric(df_numeric[col], errors='coerce')
+
+# Check for discrepancies in total deaths (military + civilian vs total deaths)
+anomalies = []
+
+# Check if total deaths (not including foreigners) matches sum of military and civilian deaths
+for idx, row in df_numeric.iterrows():
+    military = row['military deaths']
+    civilian = row['civilian deaths']
+    total_deaths = row['total deaths (not including foreigners)']
+    
+    # Skip if any value is NaN
+    if pd.isna(military) or pd.isna(civilian) or pd.isna(total_deaths):
+        continue
+        
+    # Check if sum of military and civilian deaths is close to total deaths
+    if abs(military + civilian - total_deaths) > 100:  # Threshold for anomaly
+        anomalies.append(f"Row {idx}: Military={military}, Civilian={civilian}, Total={total_deaths} — sum mismatch")
+    
+    # Check for extreme values
+    if military > 100000 or civilian > 100000 or total_deaths > 100000:
+        anomalies.append(f"Row {idx}: High values — Military={military}, Civilian={civilian}, Total={total_deaths}")
+
+# Also check for "unknown" or inconsistent entries
+for idx, row in df.iterrows():
+    if row['military deaths'] == 'unknown' or row['civilian deaths'] == 'unknown' or row['total deaths (not including foreigners)'] == 'unknown':
+        anomalies.append(f"Row {idx}: Contains 'unknown' in key fields")
+
+# Remove duplicates and print
+unique_anomalies = list(set(anomalies))
+print(f"Final Answer: {', '.join(unique_anomalies)}")
+```

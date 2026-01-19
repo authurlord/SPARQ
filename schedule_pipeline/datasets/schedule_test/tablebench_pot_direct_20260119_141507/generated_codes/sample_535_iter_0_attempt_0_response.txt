@@ -1,0 +1,15 @@
+Step 1: The user wants to find the subregion with the highest average population density.  
+Step 2: Population density is already computed in the 'pop / area (1 / km square)' column.  
+Step 3: Group by 'subregion' and calculate the mean of 'pop / area' for each subregion.  
+Step 4: Identify the subregion with the highest mean population density.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Group by 'subregion' and compute mean population density
+density_by_subregion = df.groupby('subregion')['pop / area (1 / km square)'].mean()
+# Find the subregion with the highest average density
+highest_density_subregion = density_by_subregion.idxmax()
+print(f"Final Answer: {highest_density_subregion}")
+```

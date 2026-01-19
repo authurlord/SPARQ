@@ -1,0 +1,18 @@
+Step 1: The user wants to calculate the correlation coefficient between 'p1 diameter (mm)' and 'p max (bar)' columns.
+Step 2: Load the dataframe.
+Step 3: Convert the relevant columns to numeric type for calculation.
+Step 4: Compute the correlation coefficient using pandas corr() method.
+Step 5: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric for correlation calculation
+df['p1 diameter (mm)'] = pd.to_numeric(df['p1 diameter (mm)'])
+df['p max (bar)'] = pd.to_numeric(df['p max (bar)'])
+
+# Calculate correlation coefficient
+correlation = df['p1 diameter (mm)'].corr(df['p max (bar)'])
+print(f"Final Answer: {correlation:.4f}")
+```

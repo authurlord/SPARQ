@@ -1,0 +1,13 @@
+Step 1: The user wants to find the season when the giant slalom score was 7.  
+Step 2: Load the dataframe.  
+Step 3: Look at the 'giant slalom' column and find the row where the value is 7.  
+Step 4: Extract the corresponding 'season' from that row.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the season where 'giant slalom' is 7
+season_7 = df[df['giant slalom'] == '7']['season'].values[0]
+print(f"Final Answer: {season_7}")
+```

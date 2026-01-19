@@ -1,0 +1,19 @@
+Step 1: The user wants the median value of the 'CSAR No.' column, excluding rows with missing values.
+Step 2: Load the dataframe.
+Step 3: Select the 'CSAR No.' column and convert it to numeric, coercing errors to NaN (to handle missing values).
+Step 4: Drop rows with missing values in the 'CSAR No.' column.
+Step 5: Calculate the median of the cleaned column.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'CSAR No.' column to numeric, handling missing values
+csar_no = pd.to_numeric(df['CSAR No.'], errors='coerce')
+# Drop missing values
+csar_no_clean = csar_no.dropna()
+# Calculate median
+median_csar = csar_no_clean.median()
+print(f"Final Answer: {median_csar}")
+```

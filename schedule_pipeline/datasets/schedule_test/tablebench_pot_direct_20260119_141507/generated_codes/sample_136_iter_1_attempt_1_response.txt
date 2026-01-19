@@ -1,0 +1,45 @@
+The error occurred because the column names in the DataFrame do not match the exact strings used in the query. The "Operating revenue" and "2018 Operating revenue" are present in the data, but they are not directly accessible as headers due to how the data is structured — particularly because of the inconsistent formatting (e.g., "2018 Operating revenue" is a separate row).
+
+Step 1: Identify the correct columns for operating revenue — we need to extract values from both "Operating revenue" and "2018 Operating revenue" across the quarters.
+
+Step 2: Extract the quarterly values for both years:
+- For the main "Operating revenue" row, we take the values from March 31 to December 31.
+- For "2018 Operating revenue", we extract the corresponding quarterly values.
+
+Step 3: Create a DataFrame with quarters as index and two series (one for the base year, one for 2018) to plot them on the same line chart.
+
+Step 4: Use matplotlib to create a line chart showing both trends.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns and convert to numeric
+quarters = ['Quarter Ended March 31', 'Quarter Ended June 30', 'Quarter Ended September 30', 'Quarter Ended December 31']
+operating_revenue = df[df['Row Header'] == 'Operating revenue'][quarters].iloc[0].str.replace('$', '').astype(float)
+twenty_eight_operating_revenue = df[df['Row Header'] == '2018 Operating revenue'][quarters].iloc[0].str.replace('$', '').astype(float)
+
+# Create a DataFrame for plotting
+data = pd.DataFrame({
+    'Operating Revenue': operating_revenue,
+    '2018 Operating Revenue': twenty_eight_operating_revenue
+}, index=quarters)
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(data.index, data['Operating Revenue'], marker='o', label='Operating Revenue')
+plt.plot(data.index, data['2018 Operating Revenue'], marker='s', label='2018 Operating Revenue')
+plt.title('Company Operating Revenue by Quarter')
+plt.xlabel('Quarter')
+plt.ylabel('Operating Revenue ($)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+# Final Answer: The chart has been created and displayed
+Final Answer: chart_created
+```

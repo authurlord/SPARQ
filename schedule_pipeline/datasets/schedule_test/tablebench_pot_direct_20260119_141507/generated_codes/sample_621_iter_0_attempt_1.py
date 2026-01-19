@@ -1,0 +1,6 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the average age of executives
+average_age = df['Age'].mean()
+print(f"Final Answer: {average_age:.1f}")

@@ -1,0 +1,60 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import re
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns
+precip_col = df['Precipitation mm (inches)']
+rainfall_col = df['Rainfall mm (inches)']
+snowfall_col = df['Snowfall cm (inches)']
+
+# Helper function to extract the value in inches from string like "x (y)"
+def extract_inches(value):
+    match = re.search(r'\(([^)]+)\)', value)
+    if match:
+        return float(match.group(1))
+    return 0.0
+
+# Extract inch values
+precip_inches = [extract_inches(val) for val in precip_col]
+rainfall_inches = [extract_inches(val) for val in rainfall_col]
+snowfall_inches = [extract_inches(val) for val in snowfall_col]
+
+# Months are in the first row under 'Month'
+months = df.iloc[0, 1:13]  # Columns Jan to Dec
+
+# Prepare data for plotting
+data = {
+    'Month': months,
+    'Precipitation (in)': precip_inches,
+    'Rainfall (in)': rainfall_inches,
+    'Snowfall (in)': snowfall_inches
+}
+
+# Create a DataFrame for plotting
+plot_df = pd.DataFrame(data)
+
+# Plotting
+plt.figure(figsize=(14, 8))
+bar_width = 0.2
+index = range(len(plot_df))
+
+# Create bars for each category
+plt.bar([i - bar_width for i in index], plot_df['Precipitation (in)'], width=bar_width, label='Precipitation', edgecolor='black')
+plt.bar([i for i in index], plot_df['Rainfall (in)'], width=bar_width, label='Rainfall', edgecolor='black')
+plt.bar([i + bar_width for i in index], plot_df['Snowfall (in)'], width=bar_width, label='Snowfall', edgecolor='black')
+
+# Labels and title
+plt.xlabel('Month')
+plt.ylabel('Inches')
+plt.title('Trends in Precipitation, Rainfall, and Snowfall (in inches)')
+plt.xticks(index, plot_df['Month'], rotation=45)
+plt.legend()
+
+# Improve layout
+plt.tight_layout()
+
+# Show the plot
+plt.show()

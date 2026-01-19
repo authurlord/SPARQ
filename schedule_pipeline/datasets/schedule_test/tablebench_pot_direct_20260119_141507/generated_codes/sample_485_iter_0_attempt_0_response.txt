@@ -1,0 +1,7 @@
+Step 1: The question asks to identify train classes whose top speed or number of units deviate significantly from the patterns observed in other classes.  
+Step 2: First, observe the pattern in top speed and number of units across classes. Most classes have a top speed of 75 mph (120 km/h), 90 mph (145 km/h), or 100 mph (160 km/h). The class "156" has a top speed of 200 mph (320 km/h), which is significantly higher than others.  
+Step 3: The number of units also shows variation — most are between 6 and 27, but "323" has a future built range ("2050-2060") which may indicate a deviation in timeline, though not in number.  
+Step 4: Focus on "156" as it stands out in top speed (200 mph), which is far above the typical 75–100 mph range.  
+Step 5: Confirm that "156" is the only class with such a high top speed.  
+
+Final Answer: 156

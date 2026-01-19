@@ -1,0 +1,15 @@
+Step 1: The user wants the average number of days served by the top 5 ranked governors.  
+Step 2: The "Rank" column indicates the ranking, with lower numbers being higher. So, we need to select the first 5 rows (rank 1 to 5).  
+Step 3: Extract the "Days" column for these rows and compute the mean.  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select top 5 ranked governors (rank <= 5)
+top_5 = df[df['Rank'].astype(int) <= 5]
+# Calculate the average number of days served
+avg_days = top_5['Days'].mean()
+print(f"Final Answer: {avg_days:.0f}")
+```

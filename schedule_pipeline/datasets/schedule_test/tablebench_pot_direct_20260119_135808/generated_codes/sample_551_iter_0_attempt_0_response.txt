@@ -1,0 +1,19 @@
+Step 1: The user wants to find the year with the largest increase in wins compared to the previous year.
+Step 2: Load the dataframe.
+Step 3: Convert the 'wins' column to integers for numerical comparison.
+Step 4: Calculate the difference in wins between consecutive years.
+Step 5: Identify the year with the maximum increase.
+Step 6: Print the year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'wins' column to integer
+df['wins'] = df['wins'].astype(int)
+# Calculate the difference in wins from the previous year
+df['win_increase'] = df['wins'].diff()
+# Find the year with the maximum increase (excluding the first year)
+max_increase_year = df.loc[df['win_increase'].idxmax(), 'year']
+print(f"Final Answer: {max_increase_year}")
+```

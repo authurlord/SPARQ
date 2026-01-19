@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Filter data for English
+english_data = df[df['Unnamed: 0'] == 'English'].iloc[0]
+
+# Extract features and values
+features = ['agglutination', 'synthesis', 'compounding', 'derivation', 'inflection', 'prefixing', 'suffixing']
+values = [float(english_data[feat]) for feat in features]
+
+# Create radar chart
+angles = np.linspace(0, 2 * np.pi, len(features), endpoint=False)
+values += values[:1]  # Close the loop
+angles = np.concatenate((angles, [angles[0]]))
+
+fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+ax.plot(angles, values, linewidth=2, label='English')
+ax.fill(angles, values, alpha=0.25)
+ax.set_thetagrids(angles[:-1] * 180 / np.pi, features)
+ax.set_rlabel_position(30)
+ax.set_title("Language Features in English", va='bottom')
+plt.legend(loc='upper right', bbox_to_anchor=(1.1, 1.1))
+plt.show()

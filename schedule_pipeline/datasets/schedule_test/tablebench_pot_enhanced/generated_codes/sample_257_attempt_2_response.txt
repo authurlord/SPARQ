@@ -1,0 +1,20 @@
+Step 1: The user wants the difference in months between the earliest and latest 'Date Built' for locomotives with consecutive 'SR No.'.
+Step 2: Load the dataframe.
+Step 3: Convert 'Date Built' to datetime format.
+Step 4: Find the earliest and latest 'Date Built' dates.
+Step 5: Calculate the difference in months between these two dates.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Date Built' to datetime
+df['Date Built'] = pd.to_datetime(df['Date Built'], format='%B %Y')
+# Find earliest and latest 'Date Built'
+earliest = df['Date Built'].min()
+latest = df['Date Built'].max()
+# Calculate difference in months
+diff_months = (latest.year - earliest.year) * 12 + (latest.month - earliest.month)
+print(f"Final Answer: {diff_months}")
+```

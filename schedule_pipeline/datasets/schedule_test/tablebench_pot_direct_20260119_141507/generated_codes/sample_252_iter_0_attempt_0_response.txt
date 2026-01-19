@@ -1,0 +1,20 @@
+Step 1: Identify the artist with the highest points.  
+Step 2: Calculate the average points of the top 3 artists (by points).  
+Step 3: Find the difference between the highest points and this average.  
+
+First, sort the data by points in descending order to get the top 3 artists. Then compute the average of their points and subtract it from the highest point value.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by points in descending order and take top 3
+top_3 = df.sort_values(by='points', ascending=False).head(3)
+# Calculate average points of top 3
+avg_top_3_points = top_3['points'].mean()
+# Highest points is the first row's points
+highest_points = df['points'].max()
+# Compute the difference
+difference = highest_points - avg_top_3_points
+print(f"Final Answer: {difference}")
+```

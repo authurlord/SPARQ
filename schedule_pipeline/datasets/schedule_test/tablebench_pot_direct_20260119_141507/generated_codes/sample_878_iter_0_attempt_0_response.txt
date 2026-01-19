@@ -1,0 +1,17 @@
+Step 1: Identify the singer with the highest 'points' and the singer with the 5th highest 'points'.  
+Step 2: Extract the 'points' values, sort them in descending order, and get the top and 5th values.  
+Step 3: Compute the difference between the highest and the 5th highest points.  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by 'points' in descending order and get the highest and 5th highest
+sorted_points = df.sort_values(by='points', ascending=False)
+highest_points = sorted_points.iloc[0]['points']
+fifth_highest_points = sorted_points.iloc[4]['points']  # 5th highest (index 4)
+
+difference = highest_points - fifth_highest_points
+print(f"Final Answer: {difference}")
+```

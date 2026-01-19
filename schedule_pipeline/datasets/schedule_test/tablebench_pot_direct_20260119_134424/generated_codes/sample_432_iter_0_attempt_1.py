@@ -1,0 +1,23 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Describe the table and main columns
+print("Table Description:")
+print("This table shows data on marriages in various years, including marriages between men, marriages between women, same-sex marriages (total), total marriages, and the percentage of same-sex marriages.")
+print("Main Columns:")
+print("- year: The year of the data.")
+print("- marriages between men: Number of marriages between two men.")
+print("- marriages between women: Number of marriages between two women.")
+print("- same - sex marriages: Total number of same-sex marriages (men + women).")
+print("- total marriages: Total number of marriages (including heterosexual and same-sex).")
+print("- % same - sex marriages: Percentage of same-sex marriages relative to total marriages.")
+
+# Initial insights on trends
+print("\nInitial Insights on Same-Sex Marriages Trend:")
+print("From 2005 to 2011, the number of same-sex marriages increased from 1,275 to 3,880.")
+print("The percentage of same-sex marriages rose from 1.06% to 2.38%, indicating a growing share over time.")
+print("The highest growth rate was observed between 2006 and 2011, with a nearly doubling of same-sex marriage numbers.")
+
+# Final answer: summarize key trend
+print(f"Final Answer: 3880, 2.38")

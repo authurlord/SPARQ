@@ -1,0 +1,8 @@
+Step 1: Identify the players who have won men's singles and also won mixed doubles at least twice in the same year.  
+However, the data shows that each year has only one entry for men's singles and one for mixed doubles. Therefore, a player cannot win mixed doubles "at least twice" in the same year — it's only listed once per year.  
+
+Thus, the condition "won the mixed doubles title at least twice in the same year" is impossible based on the table structure.  
+
+Conclusion: No player meets the condition.  
+
+Final Answer: None

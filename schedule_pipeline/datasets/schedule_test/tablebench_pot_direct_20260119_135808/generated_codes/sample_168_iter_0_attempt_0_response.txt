@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The human development index (2000) does not have a direct impact on population density (/ km²) as the two variables are not correlated across municipalities with varying area (km²).

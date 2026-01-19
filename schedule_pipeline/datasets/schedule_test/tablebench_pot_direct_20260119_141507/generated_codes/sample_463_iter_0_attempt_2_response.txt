@@ -1,0 +1,42 @@
+Step 1: Analyze the "mintage (proof)" and "issue price (proof)" columns for anomalies. Anomalies could include:
+- Missing values ("n/a", "no bu exists")
+- Unusually high or low mintage or issue prices
+- Inconsistencies in data (e.g., high issue price with low mintage)
+
+Step 2: Identify rows where "mintage (proof)" or "issue price (proof)" are missing or marked as "n/a" or "no bu exists".
+
+Step 3: Check for outliers in mintage and issue price by comparing values across years.
+
+Step 4: Look for patterns such as high issue price with very low or no mintage (indicating rarity or premium pricing).
+
+Step 5: Print the identified anomalies.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify missing or abnormal entries
+anomalies = []
+
+# Check for missing values in mintage (proof) and issue price (proof)
+for idx, row in df.iterrows():
+    if pd.isna(row['mintage (proof)']) or row['mintage (proof)'] == 'n / a' or row['mintage (proof)'] == 'no bu exists':
+        anomalies.append(f"Missing or invalid mintage (proof): {row['theme']} ({row['year']})")
+    if pd.isna(row['issue price (proof)']) or row['issue price (proof)'] == 'n / a':
+        anomalies.append(f"Missing or invalid issue price (proof): {row['theme']} ({row['year']})")
+    
+    # Check for unusually high issue price relative to mintage
+    try:
+        mintage_proof = int(row['mintage (proof)'])
+        issue_price_proof = float(row['issue price (proof)'])
+        
+        # High issue price with low mintage may indicate anomaly
+        if mintage_proof < 1000 and issue_price_proof > 50:
+            anomalies.append(f"High issue price with low mintage: {row['theme']} ({row['year']})")
+    except (ValueError, TypeError):
+        pass
+
+# Print anomalies
+print(f"Final Answer: {', '.join(anomalies)}")
+```

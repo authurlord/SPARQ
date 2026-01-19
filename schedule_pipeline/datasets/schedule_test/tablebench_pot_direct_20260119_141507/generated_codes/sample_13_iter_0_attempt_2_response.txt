@@ -1,0 +1,13 @@
+Step 1: The user wants the average population density of all municipalities.
+Step 2: Load the dataframe.
+Step 3: Select the 'population density (/ km²)' column.
+Step 4: Calculate the mean of this column and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the mean of 'population density (/ km²)'
+average_density = df['population density ( / km 2 )'].mean()
+print(f"Final Answer: {average_density:.2f}")
+```

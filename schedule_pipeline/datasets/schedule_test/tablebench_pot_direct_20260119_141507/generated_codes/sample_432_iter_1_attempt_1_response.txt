@@ -1,0 +1,47 @@
+Step 1: Understand the table structure and content.  
+The table provides yearly data on marriages in a region, including:
+- Marriages between men
+- Marriages between women
+- Same-sex marriages (a combined category)
+- Total marriages
+- Percentage of same-sex marriages
+
+Step 2: Identify key columns and their relevance.  
+The main focus is on "same-sex marriages" and its trend over time. The percentage column shows the proportion of same-sex marriages among total marriages.
+
+Step 3: Analyze trends.  
+From 2005 to 2011, the number of same-sex marriages increases from 1,275 to 3,880, and the percentage of same-sex marriages rises from 1.06% to 2.38%, indicating a growing share of same-sex marriages in total marriages over the years.
+
+Step 4: Provide a clear, concise explanation with insights.  
+We will summarize the data and highlight the upward trend in both absolute numbers and percentage of same-sex marriages.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Display basic information about the table
+print("Table Columns:", df.columns.tolist())
+print("\nSample Data:")
+print(df.head())
+
+# Extract same-sex marriage data and calculate trend
+same_sex_marriages = df['same - sex marriages'].astype(int)
+percentage_same_sex = df['% same - sex marriages'].astype(float)
+
+# Show the trend in same-sex marriages and percentages
+print("\nTrend in same-sex marriages over the years:")
+for idx, row in df.iterrows():
+    print(f"{row['year']}: {row['same - sex marriages']} same-sex marriages ({row['% same - sex marriages']}%)")
+
+# Final insight summary
+final_insight = (
+    "The table tracks annual marriages, showing that the number of same-sex marriages "
+    "increased from 1,275 in 2005 to 3,880 in 2011, and the percentage of same-sex marriages "
+    "rose from 1.06% to 2.38%, indicating a growing share in total marriages over time."
+)
+
+print(final_insight)
+```
+
+Final Answer: The number of same-sex marriages increased from 1275 in 2005 to 3880 in 2011, and the percentage rose from 1.06% to 2.38%, showing a clear upward trend.

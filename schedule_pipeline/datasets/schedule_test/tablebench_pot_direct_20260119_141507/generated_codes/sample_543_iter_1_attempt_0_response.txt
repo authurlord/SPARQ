@@ -1,0 +1,23 @@
+The error occurred because the condition `>=` was applied between a string (`'2002'`) and an integer (`2004`), which is not valid. We need to ensure that the filtering is done on the correct column type — specifically, the 'year' column must be converted to numeric before comparison.
+
+Step 1: Filter rows where the 'show' is 'The Wire' and the year is between 2002 and 2004 (inclusive).  
+Step 2: Extract the episode count for those rows.  
+Step 3: Compute the average number of episodes per season for these filtered rows.  
+
+We will convert the 'year' column to integer type and then filter accordingly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'year' to integer type to enable numeric comparison
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+
+# Filter rows where show is 'The Wire' and year is between 2002 and 2004 (inclusive)
+filtered_df = df[(df['show'] == 'the wire') & (df['year'] >= 2002) & (df['year'] <= 2004)]
+
+# Calculate average number of episodes per season
+average_episodes = filtered_df['episode'].mean()
+
+print(f"Final Answer: {average_episodes:.1f}")
+```

@@ -1,0 +1,36 @@
+Step 1: The question asks for a forecast of Indian and Bangladeshi admissions in 2013 based on trends from 2000 to 2012.  
+Step 2: We will calculate the annual trend (growth rate) for Indians and Bangladeshis separately.  
+Step 3: Use the average annual growth rate to project the number for 2013.  
+Step 4: Since the data is discrete, we can compute the average change per year and apply it to 2013.
+
+Note: A simple linear regression or average growth rate is reasonable here due to lack of complex models.
+
+Approach:
+- Extract the "indians admitted" and "bangladeshis admitted" columns.
+- Compute the year-by-year differences and average the growth rates.
+- Project 2013 value using the average growth rate.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert year column to integer for proper indexing
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+
+# Extract the admission columns
+indians = df['indians admitted'].astype(int)
+bangladeshis = df['bangladeshis admitted'].astype(int)
+
+# Calculate the average annual growth rate for each group
+indian_growth = (indians.iloc[-1] - indians.iloc[0]) / (2012 - 2000)
+bangladeshian_growth = (bangladeshis.iloc[-1] - bangladeshis.iloc[0]) / (2012 - 2000)
+
+# Forecast 2013 values
+forecast_indians = indians.iloc[-1] + indian_growth
+forecast_bangladeshis = bangladeshis.iloc[-1] + bangladeshian_growth
+
+# Final answer as a combined forecast
+print(f"Final Answer: {forecast_indians:.0f}, {forecast_bangladeshis:.0f}")
+```

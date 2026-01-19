@@ -1,0 +1,38 @@
+Step 1: The user wants the difference in total days of inclement weather (snow, storms, and fog) between the year with the most sunshine and the year with the least sunshine.
+
+Step 2: Load the dataframe.
+Step 3: Parse the 'sunshine (hrs / year)' column to numeric values (note: some entries have spaces like '1 630', which need to be cleaned).
+Step 4: Identify the year with the most sunshine and the year with the least sunshine.
+Step 5: For those two years, sum the values of snow, storms, and fog (in days/year).
+Step 6: Compute the difference between the two totals.
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert 'sunshine (hrs / year)' to numeric, handling spaces in numbers
+df['sunshine (hrs / year)'] = df['sunshine (hrs / year)'].str.replace(' ', '').astype(int)
+
+# Convert other columns to numeric
+df['snow (days / year)'] = df['snow (days / year)'].astype(int)
+df['storms (days / year)'] = df['storms (days / year)'].astype(int)
+df['fog (days / year)'] = df['fog (days / year)'].astype(int)
+
+# Calculate total inclement weather days for each year
+df['inclement_days'] = df['snow (days / year)'] + df['storms (days / year)'] + df['fog (days / year)']
+
+# Find the year with most and least sunshine
+max_sunshine_year = df.loc[df['sunshine (hrs / year)'].idxmax()]
+min_sunshine_year = df.loc[df['sunshine (hrs / year)'].idxmin()]
+
+# Get the inclement days for both years
+max_sunshine_inclement = max_sunshine_year['inclement_days']
+min_sunshine_inclement = min_sunshine_year['inclement_days']
+
+# Calculate the difference
+difference = abs(max_sunshine_inclement - min_sunshine_inclement)
+
+print(f"Final Answer: {difference}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: No, increase in eccentricity does not cause a corresponding increase in periselene or inclination

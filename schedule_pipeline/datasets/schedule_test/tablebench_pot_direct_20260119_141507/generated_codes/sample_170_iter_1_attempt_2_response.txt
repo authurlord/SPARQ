@@ -1,0 +1,38 @@
+We are asked: "How does a significant increase in natural change impact the average population growth rate over time?"
+
+Step-by-step analysis:
+
+1. Understand the meaning of "natural change":
+   - Natural change = Live births - Deaths
+   - It represents the net population change due to births and deaths (excluding migration).
+
+2. The question is asking about the relationship between a significant increase in natural change and the average population growth rate.
+   - However, the "Average population (x 1000)" column is not directly the growth rate — it's the total population size.
+   - The "Natural change (per 1000)" column already represents the annual natural change per 1000 people, which is essentially the growth rate due to births and deaths.
+
+3. Therefore, a significant increase in natural change implies a higher net population growth rate (positive or negative).
+   - We can observe trends over time by analyzing how "Natural change (per 1000)" evolves.
+   - Since the "Average population" is given, we can also consider whether the population is growing or shrinking.
+
+4. Analytical approach:
+   - Compute the trend of "Natural change (per 1000)" over time.
+   - Identify when there are significant increases (e.g., large positive jumps).
+   - Correlate with the overall population trend.
+
+5. However, the question is not asking for a specific value or calculation but rather a qualitative interpretation: "How does a significant increase in natural change impact the average population growth rate?"
+
+6. From the data:
+   - Natural change (per 1000) is already the growth rate due to births and deaths.
+   - So, a significant increase in natural change directly leads to a higher population growth rate.
+   - For example:
+     - In 1985: natural change jumps to 13.6 (up from 10.1 in 1980), indicating a faster growth.
+     - In 1993–1994: natural change drops sharply to 0.8 and then to -0.8, showing decline.
+     - In 2003–2005: natural change becomes negative and large in magnitude, indicating population decline.
+
+7. Conclusion:
+   - A significant increase in natural change leads to a higher population growth rate.
+   - A significant decrease leads to population decline.
+
+Since the question is interpretive and not asking for a numerical output, we can summarize the answer as:
+
+Final Answer: higher population growth rate

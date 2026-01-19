@@ -1,0 +1,24 @@
+Step 1: Identify the relevant columns for executions — "Executions in persona" and "Executions in effigie".  
+Step 2: Find the total executions for Córdoba and Valencia by summing the respective values from the rows.  
+Step 3: Compute the difference between the two totals.  
+
+From the table:
+- Córdoba: Executions in persona = 17, Executions in effigie = 19 → Total = 17 + 19 = 36  
+- Valencia: Executions in persona = 2, Executions in effigie = 0 → Total = 2 + 0 = 2  
+
+Difference = 36 - 2 = 34  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the relevant values for Córdoba and Valencia
+cordoba_executions = df.loc[df['Tribunal'] == 'Córdoba', ['Executions in persona', 'Executions in effigie']].values[0]
+valencia_executions = df.loc[df['Tribunal'] == 'Valencia', ['Executions in persona', 'Executions in effigie']].values[0]
+
+total_cordoba = cordoba_executions[0] + cordoba_executions[1]
+total_valencia = valencia_executions[0] + valencia_executions[1]
+
+difference = total_cordoba - total_valencia
+print(f"Final Answer: {difference}")
+```

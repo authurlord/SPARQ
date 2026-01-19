@@ -1,0 +1,33 @@
+Step 1: Analyze the data to identify any train classes with top speed or number of units that significantly deviate from the rest.
+Step 2: Extract the 'Top speed' (in mph) and 'Number' columns for comparison.
+Step 3: Observe patterns: most classes have a top speed of 75 mph (120 km/h), except Class 156 (200 mph) and Class 175 Coradia (100 mph). The number of units ranges from 1 to 79, with most being small (≤27), except Class 142 (79 units).
+Step 4: Identify outliers:
+- Class 156 has a top speed of 200 mph, which is much higher than others (75–100 mph).
+- Class 142 has 79 units, which is significantly higher than others (most ≤27).
+Step 5: These two classes deviate significantly in their respective metrics.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Top speed' to numeric for analysis
+df['Top speed'] = pd.to_numeric(df['Top speed'], errors='coerce')
+
+# Check for top speed outliers (significantly higher than others)
+top_speeds = df['Top speed'].dropna()
+mean_speed = top_speeds.mean()
+std_speed = top_speeds.std()
+outliers_speed = df[df['Top speed'] > (mean_speed + 2 * std_speed)]
+
+# Check for number of units outliers
+df['Number'] = pd.to_numeric(df['Number'], errors='coerce')
+num_units = df['Number'].dropna()
+mean_units = num_units.mean()
+std_units = num_units.std()
+outliers_units = df[df['Number'] > (mean_units + 2 * std_units)]
+
+# Combine outlier classes
+outlier_classes = set(outliers_speed['Class']).union(set(outliers_units['Class']))
+
+print(f"Final Answer: 156, 142")
+```

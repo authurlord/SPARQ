@@ -1,0 +1,31 @@
+The error occurred because the data contains strings (like '4', '5') instead of integers, and we need to convert them to numeric values before computing standard deviation.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Select all columns except the last two ('total', 'points') — these are the scores from each judge.
+3. Convert each judge's score column from string to integer.
+4. Compute the standard deviation for each judge's scores.
+5. Identify which judge has the highest standard deviation (most variation).
+
+Note: Since the question asks for "which judge's scores have the most variation", we need to return the name of the judge with the maximum standard deviation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Select only the judge columns (excluding 'total' and 'points')
+judge_columns = df.columns[1:-2]  # All columns except 'total' and 'points'
+
+# Convert the score columns to numeric (handle string values)
+df_numeric = df[judge_columns].apply(pd.to_numeric, errors='coerce')
+
+# Calculate standard deviation for each judge
+std_deviation = df_numeric.std()
+
+# Find the judge with the highest standard deviation
+max_std_judge = std_deviation.idxmax()
+
+print(f"Final Answer: {max_std_judge}")
+```

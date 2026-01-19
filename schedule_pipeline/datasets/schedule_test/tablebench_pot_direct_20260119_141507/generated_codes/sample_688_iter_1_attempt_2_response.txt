@@ -1,0 +1,38 @@
+We are tasked with finding the manager who had the highest winning percentage, defined as (wins / games). 
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Identify rows that are not summary rows (i.e., exclude the "totals" row, as it's not a manager).
+3. Convert the "wins" and "games" columns to numeric types (since they might be strings).
+4. Calculate the winning percentage for each manager: wins / games.
+5. Find the manager with the maximum winning percentage.
+6. Return that manager's name.
+
+Note: The last row is labeled "totals", so we will skip it. Also, some entries like "1985" or "1980 - 1981" are in the "years" column — we don’t need that for this calculation.
+
+Potential issue in previous attempt: "wins" and "games" were strings, leading to division error. We must ensure they are converted to numeric.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Remove the "totals" row
+df = df[df['manager'] != 'totals']
+
+# Convert 'wins' and 'games' to numeric, coercing errors to NaN if any
+df['wins'] = pd.to_numeric(df['wins'], errors='coerce')
+df['games'] = pd.to_numeric(df['games'], errors='coerce')
+
+# Filter out any rows where games is 0 or NaN (to avoid division by zero)
+df = df[(df['games'] > 0) & (df['wins'].notna()) & (df['games'].notna())]
+
+# Calculate winning percentage
+df['win_percentage'] = df['wins'] / df['games']
+
+# Find the manager with the highest winning percentage
+best_manager = df.loc[df['win_percentage'].idxmax(), 'manager']
+
+print(f"Final Answer: {best_manager}")
+```

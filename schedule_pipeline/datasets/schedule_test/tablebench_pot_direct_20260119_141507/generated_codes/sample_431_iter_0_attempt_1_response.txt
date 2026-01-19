@@ -1,0 +1,22 @@
+Step 1: The user is asking for a detailed description of the table, including main columns and notable trends or patterns.  
+Step 2: Identify the columns and their meanings.  
+Step 3: Analyze trends such as changes in viewership, duration, or number of camp mates across series.  
+Step 4: Summarize observations based on the data.
+
+Main columns:
+- series: The sequence of the show (e.g., one, two, ..., twelve).
+- presenters: Always "ant & dec", indicating consistent hosting.
+- start date and end date: Show the duration of each series.
+- days in camp: Duration of the camp, increasing from 15 to 21 days.
+- camp mates: Number of participants, ranging from 8 to 13.
+- winner: Names of winners, varying across series.
+- viewership: Highest, lowest, and average viewers (in millions).
+
+Notable trends:
+- Days in camp increase gradually from 15 to 21, suggesting a growing duration over time.
+- Average viewership increases from ~7.58 million to ~13.48 million, peaking in Series Ten.
+- Highest viewership peaks at 14.99 million (Series Three) and 13.48 million (Series Ten), with a general upward trend.
+- The number of camp mates increases slightly over time, from 8 to 13.
+- Viewership seems to be positively correlated with the series number, especially after Series Five.
+
+Final Answer: series, presenters, start date, end date, days in camp, camp mates, winner, highest viewers (millions), lowest viewers (millions), average viewers (millions), days in camp increases, average viewership increases, camp mates increase, highest viewers peak in series three and ten

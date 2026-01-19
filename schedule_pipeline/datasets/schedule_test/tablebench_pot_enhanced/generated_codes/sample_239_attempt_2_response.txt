@@ -1,0 +1,25 @@
+Step 1: The user wants to determine if there is a positive relationship between typhus and typhoid fever cases in the same year.  
+Step 2: Load the dataframe.  
+Step 3: Convert 'typhus' and 'typhoid fever' columns to numeric (handling non-numeric values like '2940 (avg)' in 191822).  
+Step 4: Exclude the row with '191822' as it appears to be a range or average, not a single year.  
+Step 5: Compute the correlation coefficient between typhus and typhoid fever.  
+Step 6: If the correlation is positive and significant, conclude that an increase in typhus is associated with an increase in typhoid fever.  
+Step 7: Print the correlation value as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert columns to numeric, coercing errors to NaN
+df['typhus'] = pd.to_numeric(df['typhus'], errors='coerce')
+df['typhoid fever'] = pd.to_numeric(df['typhoid fever'], errors='coerce')
+
+# Drop rows with missing values (e.g., the '191822' row)
+df_clean = df.dropna()
+
+# Calculate correlation between typhus and typhoid fever
+correlation = df_clean['typhus'].corr(df_clean['typhoid fever'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

@@ -1,0 +1,32 @@
+Step 1: Analyze the trend in the number of candidates fielded and the percentage of popular vote from 1983 to 2009.  
+Step 2: Use linear regression to model the trend for both variables.  
+Step 3: Predict the next election cycle (2013) based on the fitted models.  
+Step 4: Output the predicted values.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'election' to numeric for modeling
+df['election'] = pd.to_numeric(df['election'])
+
+# Prepare features (election year) and target variables
+X = df['election'].values.reshape(-1, 1)
+y_candidates = df['candidates fielded'].values
+y_votes = df['% of popular vote'].str.rstrip('%').astype(float).values  # Remove % and convert to float
+
+# Fit linear regression models
+model_candidates = LinearRegression().fit(X, y_candidates)
+model_votes = LinearRegression().fit(X, y_votes)
+
+# Predict for the next election cycle (2013)
+next_election = np.array([[2013]])
+predicted_candidates = model_candidates.predict(next_election)[0]
+predicted_votes = model_votes.predict(next_election)[0]
+
+print(f"Final Answer: {predicted_candidates:.0f}, {predicted_votes:.2f}%")
+```

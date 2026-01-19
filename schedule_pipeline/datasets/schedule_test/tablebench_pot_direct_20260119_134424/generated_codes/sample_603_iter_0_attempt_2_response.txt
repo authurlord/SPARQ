@@ -1,0 +1,16 @@
+Step 1: The user wants the average score of Francisco Bravo Medical Magnet High School from 2007 to 2011.
+Step 2: Load the dataframe.
+Step 3: Filter the row corresponding to "Francisco Bravo Medical Magnet High School".
+Step 4: Select the columns '2007' to '2011', convert them to float, and calculate the mean.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for Francisco Bravo Medical Magnet High School
+school_row = df[df['School'] == 'Francisco Bravo Medical Magnet High School']
+# Select the years 2007 to 2011 and convert to float
+scores = school_row[['2007', '2008', '2009', '2010', '2011']].astype(float).mean()
+print(f"Final Answer: {scores:.1f}")
+```

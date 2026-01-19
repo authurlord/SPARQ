@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table lists hydroelectric power plants in India with key details such as serial number (sno), plant name (power plant), state, commissioned capacity in megawatts (MW), and year of commission. Key insights include: Himachal Pradesh has the most power plants (4), Madhya Pradesh has the highest capacity plant (Indira Sagar at 1000 MW), and the majority of plants were commissioned after 2000. The largest capacity plant is Indira Sagar (1000 MW), while the smallest is Rangit (60 MW).

@@ -1,0 +1,18 @@
+Step 1: The user wants the Duma Seat Share Change for the Constitutional Democratic Party (Kadets) from the First Duma to the Second Duma.
+Step 2: Load the dataframe.
+Step 3: Extract the number of seats for the Kadets in the First Duma and Second Duma.
+Step 4: Calculate the percentage change using the formula: ((Second - First) / First) * 100.
+Step 5: Print the result as a number.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract seats for Kadets in First and Second Duma
+first_duma_kadets = int(df[df['Party'] == 'Constitutional Democratic Party (Kadets)']['First Duma'].values[0])
+second_duma_kadets = int(df[df['Party'] == 'Constitutional Democratic Party (Kadets)']['Second Duma'].values[0])
+
+# Calculate percentage change
+seat_share_change = ((second_duma_kadets - first_duma_kadets) / first_duma_kadets) * 100
+print(f"Final Answer: {seat_share_change:.1f}")
+```

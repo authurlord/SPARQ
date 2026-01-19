@@ -1,0 +1,32 @@
+Step 1: Understand the table structure and content.  
+The table contains information about power plants, including their name, location (state), commissioned capacity in megawatts (MW), and the year they were commissioned.
+
+Step 2: Identify the main columns:  
+- `sno`: Serial number for each power plant  
+- `power plant`: Name of the power plant  
+- `state`: State where the power plant is located  
+- `commissioned capacity (mw)`: Total power generation capacity in megawatts  
+- `year of commission`: Year when the plant was commissioned  
+
+Step 3: Provide basic insights:  
+- The data spans from 1981 to 2012, showing a long-term development of power infrastructure.  
+- The maximum capacity is 1000 MW (Indira Sagar), while the minimum is 60 MW (Rangit).  
+- Himachal Pradesh has the most power plants (5), followed by Jammu & Kashmir (5), Madhya Pradesh (3), Uttarakhand (2), and Sikkim (2).  
+- Commissioning years show a gradual increase over time, with newer plants built in the 2000s and 2010s.
+
+Step 4: Since the question asks for a descriptive explanation, we will summarize this in plain language without performing calculations or generating charts.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Descriptive explanation of the table
+print("The table provides details on various power plants across India, including their name, state, commissioned capacity (in MW), and year of commissioning. Key insights include:")
+print("- The data covers 16 power plants from 1981 to 2012.")
+print("- The highest capacity is 1000 MW (Indira Sagar in Madhya Pradesh), while the lowest is 60 MW (Rangit in Sikkim).")
+print("- Himachal Pradesh has the most power plants (5), followed by Jammu & Kashmir (5).")
+print("- Most plants were commissioned between 1980 and 2012, with a noticeable increase in new installations in the 2000s and 2010s.")
+Final Answer: descriptive explanation
+```

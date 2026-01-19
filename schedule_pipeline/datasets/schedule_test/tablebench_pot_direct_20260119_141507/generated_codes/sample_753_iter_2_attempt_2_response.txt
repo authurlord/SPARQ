@@ -1,0 +1,21 @@
+The question asks for a prediction about the status of freedom and scores for political rights and civil liberties in 2015, based on historical data from 1972 to 2011. However, this involves extrapolation and assumptions about future trends, which cannot be reliably determined from a simple statistical analysis of past data without additional context (e.g., trend lines, regression models, or external factors).
+
+Moreover, the provided data shows a clear pattern: political rights and civil liberties scores generally decrease over time until around 1980–1985, then gradually increase, with the status transitioning from "not free" to "partly free" and eventually to "free" by 2011.
+
+While we can analyze the trend, predicting exact values for 2015 requires modeling (e.g., linear regression), which is not straightforward and may not be accurate without validation.
+
+However, since the question assumes "similar political and social conditions continue," and given that the data shows a steady improvement toward "free" status by 2011, it is reasonable to assume that the status in 2015 would remain "free" or possibly slightly improve.
+
+We can examine the trend in political rights and civil liberties scores:
+
+- Political rights: starts at 7 (1972), drops to 4 (1980), then increases to 6 (2011).
+- Civil liberties: starts at 7, drops to 4, then increases to 5 (2011).
+- Status: transitions from "not free" to "partly free" to "free" by 2011.
+
+Thus, if the trend continues, the expected status in 2015 would likely be "free", with political rights and civil liberties scores around 5–6.
+
+But note: this is a projection, not a direct calculation from the data.
+
+Since the question asks for an expected status and scores, and we have no actual model, we can only make a reasonable inference based on the observed trend.
+
+Final Answer: free, 5, 5

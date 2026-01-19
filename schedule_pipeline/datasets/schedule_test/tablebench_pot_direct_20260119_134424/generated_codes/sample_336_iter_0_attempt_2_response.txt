@@ -1,0 +1,19 @@
+Step 1: The user wants to find the year when an athlete won both the Senior PGA Championship and the Senior Players Championship titles.
+Step 2: Load the dataframe.
+Step 3: Iterate through each row to check if the same athlete appears in both 'senior pga championship' and 'senior players championship' columns.
+Step 4: Extract and return the year when this condition is met.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Find the year where the same athlete won both championships
+for index, row in df.iterrows():
+    senior_pga_winner = row['senior pga championship']
+    senior_players_winner = row['senior players championship']
+    
+    # Check if the winners are the same (ignoring the "(x/x)" part for comparison)
+    if (senior_pga_winner.split(' ')[0] == senior_players_winner.split(' ')[0]):
+        print(f"Final Answer: {row['year']}")
+        break
+```

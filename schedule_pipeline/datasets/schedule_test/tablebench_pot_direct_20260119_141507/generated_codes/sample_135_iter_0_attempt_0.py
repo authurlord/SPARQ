@@ -1,0 +1,45 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to integers
+df[['mobiles', 'northern ireland', 'northern england', 'scotland', 'southern england', 'wales', 'total']] = df[['mobiles', 'northern ireland', 'northern england', 'scotland', 'southern england', 'wales', 'total']].apply(pd.to_numeric, errors='coerce')
+
+# Calculate percentage of each region's sales relative to the song's total
+df['northern ireland %'] = df['northern ireland'] / df['total'] * 100
+df['northern england %'] = df['northern england'] / df['total'] * 100
+df['scotland %'] = df['scotland'] / df['total'] * 100
+df['southern england %'] = df['southern england'] / df['total'] * 100
+df['wales %'] = df['wales'] / df['total'] * 100
+
+# Prepare data for plotting: each song has 5 bars (one per region)
+songs = df['song']
+regions = ['northern ireland %', 'northern england %', 'scotland %', 'southern england %', 'wales %']
+
+# Create a figure and axis
+plt.figure(figsize=(12, 8))
+
+# Create bar chart with grouped bars
+bar_width = 0.15
+index = range(len(songs))
+colors = ['skyblue', 'lightgreen', 'salmon', 'gold', 'plum']
+
+for i, region in enumerate(regions):
+    y_values = df[region]
+    plt.bar([x + i * bar_width for x in index], y_values, width=bar_width, label=region, color=colors[i])
+
+# Customize plot
+plt.xlabel('Song')
+plt.ylabel('Percentage of Total Sales')
+plt.title('Percentage of Total Sales for Each Song by Region')
+plt.xticks([x + bar_width*2.5 for x in index], songs, rotation=45)
+plt.legend(title='Region')
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+
+# Final Answer: The bar chart is generated as requested.
+Final Answer: chart

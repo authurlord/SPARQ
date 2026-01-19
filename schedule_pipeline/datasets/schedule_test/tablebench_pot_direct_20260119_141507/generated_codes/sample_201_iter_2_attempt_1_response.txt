@@ -1,0 +1,9 @@
+The question asks whether an increase in the number of appearances ("Apps") causally influences the number of goals scored ("Goals"). 
+
+However, this question involves a causal relationship, which cannot be established solely from observational data (like a table of appearances and goals). Correlation does not imply causation. Without experimental data or control variables (e.g., player skill, position, team strength), we cannot determine a causal link.
+
+Moreover, the provided table contains individual player statistics across seasons, but it does not provide enough information to establish causality — such as time-series data, confounding factors, or controlled experiments.
+
+Therefore, the correct response is that **causal influence cannot be determined from the given data**.
+
+Final Answer: no

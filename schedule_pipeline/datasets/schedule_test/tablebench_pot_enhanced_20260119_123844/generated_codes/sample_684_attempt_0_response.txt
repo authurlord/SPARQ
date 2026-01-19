@@ -1,0 +1,21 @@
+Step 1: The user wants the correlation coefficient between typhus and smallpox cases over the years.
+Step 2: Load the dataframe.
+Step 3: Extract the 'typhus' and 'smallpox' columns.
+Step 4: Convert the values to numeric (note: '2940 (avg)' in 191822 is not numeric, so we need to handle it carefully).
+Step 5: Drop the row with non-numeric smallpox data ('2940 (avg)').
+Step 6: Calculate the correlation coefficient using pandas corr method.
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Drop the row with non-numeric smallpox data
+df = df[df['smallpox'] != '2940 (avg)']
+# Convert 'typhus' and 'smallpox' to numeric
+df['typhus'] = pd.to_numeric(df['typhus'])
+df['smallpox'] = pd.to_numeric(df['smallpox'])
+# Calculate correlation coefficient
+correlation = df['typhus'].corr(df['smallpox'])
+print(f"Final Answer: {correlation:.4f}")
+```

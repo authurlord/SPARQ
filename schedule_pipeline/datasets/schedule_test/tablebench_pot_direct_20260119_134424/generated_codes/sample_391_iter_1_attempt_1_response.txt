@@ -1,0 +1,16 @@
+Step 1: The user wants to count how many transcription factors have an occurrence count greater than 1.
+Step 2: Load the dataframe.
+Step 3: Convert the 'occurrence' column to integer type to avoid comparison errors.
+Step 4: Filter rows where 'occurrence' > 1.
+Step 5: Count the number of such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'occurrence' column to integer
+df['occurrence'] = pd.to_numeric(df['occurrence'], errors='coerce')
+# Filter rows where occurrence > 1
+count = df[df['occurrence'] > 1].shape[0]
+print(f"Final Answer: {count}")
+```

@@ -1,0 +1,20 @@
+Step 1: The user wants to forecast the issue price for 2008 based on the pattern of issue prices from 2002 to 2007.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'issue price' column and observe the trend.  
+Step 4: Since the issue price increased from $24.95 in 2002 to $38.95 in 2007, and the increase appears to be non-linear (with a jump in 2003 and gradual rise afterward), we can analyze the trend.  
+Step 5: The prices are: 24.95, 34.95, 34.95, 34.95, 34.95, 38.95. There is no clear linear or exponential pattern. However, the last two years show an increase of $4.00 from $34.95 to $38.95. Assuming a similar incremental increase, the forecasted price for 2008 could be $42.95.  
+Step 6: Output the forecasted issue price.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract issue prices
+issue_prices = df['issue price'].astype(float)
+
+# Last known price is 38.95 in 2007
+# The last increase was +4.00 from 2006 to 2007
+# Forecast next price by adding same increment
+forecasted_price = issue_prices.iloc[-1] + 4.00
+print(f"Final Answer: {forecasted_price:.2f}")
+```

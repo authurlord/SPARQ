@@ -1,0 +1,41 @@
+Step 1: The user wants to determine which factors—'judges', 'public', 'vote percentage'—contribute most to the 'result' of each couple.  
+Step 2: Since 'result' is categorical (e.g., 'safe', 'bottom two'), we need to analyze how each factor correlates with the result.  
+Step 3: We can examine the total score ('total') and vote percentage, as these are derived from 'judges' and 'public'.  
+Step 4: The lowest total (7) and lowest vote percentage (4.2%) correspond to the 'bottom two' result.  
+Step 5: Compare the 'judges' and 'public' scores across couples:  
+- The couple in 'bottom two' has the lowest 'public' score (1) and a relatively low 'judges' score (6).  
+- Other couples have higher public scores (up to 7), and judges scores range from 3 to 7.  
+- 'Vote percentage' is highest for 'mikey and melanie' (35.7%), who are safe, and lowest for 'danniella and matthew' (4.2%), who are in the bottom two.  
+Step 6: Thus, 'public' and 'vote percentage' show strong correlation with the result.  
+Step 7: 'Judges' also contributes but less consistently.  
+Step 8: Conclude that 'public' and 'vote percentage' are the most significant contributors.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Analyze contribution of 'public', 'judges', and 'vote percentage' to 'result'
+# Convert vote percentage to numeric for comparison
+df['vote_percentage'] = df['vote percentage'].str.replace('%', '').astype(float)
+
+# Identify the couple in 'bottom two'
+bottom_two = df[df['result'] == 'bottom two']
+
+# Check their scores
+public_score_bottom = bottom_two['public'].values[0]
+vote_percentage_bottom = bottom_two['vote percentage'].values[0]
+
+# Compare with others
+max_public = df['public'].max()
+min_public = df['public'].min()
+
+max_vote_percentage = df['vote percentage'].max()
+min_vote_percentage = df['vote percentage'].min()
+
+# Determine if 'public' or 'vote percentage' are key drivers
+if min_public == public_score_bottom and min_vote_percentage == vote_percentage_bottom:
+    print("Final Answer: public, vote percentage")
+else:
+    print("Final Answer: no clear impact")
+```

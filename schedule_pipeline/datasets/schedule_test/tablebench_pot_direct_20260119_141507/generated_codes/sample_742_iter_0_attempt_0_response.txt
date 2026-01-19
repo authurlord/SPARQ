@@ -1,0 +1,35 @@
+Step 1: The user wants to forecast the percentage of the popular vote in the next election year (2012 or beyond) based on historical trends from 1963 to 2011.  
+Step 2: We analyze the trend in the "% of popular vote" column over time.  
+Step 3: Since the data is limited and the values are not strictly linear, we can fit a simple linear regression model to predict the next value.  
+Step 4: We will use the years as the independent variable and the "% of popular vote" as the dependent variable.  
+Step 5: Predict the value for the next year (2012), assuming the trend continues.
+
+Note: The data has some fluctuations, but we will proceed with a linear regression fit for simplicity.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Year of election' to numeric
+df['Year of election'] = pd.to_numeric(df['Year of election'], errors='coerce')
+
+# Drop rows with missing % of popular vote
+df = df.dropna(subset=['% of popular vote'])
+
+# Extract year and popular vote percentage
+X = df[['Year of election']].values.reshape(-1, 1)
+y = df['% of popular vote'].astype(float).values
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict for the next year (2012)
+next_year = 2012
+predicted_vote = model.predict([[next_year]])[0]
+
+print(f"Final Answer: {predicted_vote:.2f}")
+```

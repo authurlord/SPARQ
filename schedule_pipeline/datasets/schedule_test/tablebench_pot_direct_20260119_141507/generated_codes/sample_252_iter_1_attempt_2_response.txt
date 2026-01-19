@@ -1,0 +1,36 @@
+We need to calculate the difference in points between the artist with the highest points and the average points of the top 3 artists.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the 'points' column to numeric (to avoid string-to-number conversion errors).
+3. Identify the artist with the highest points.
+4. Select the top 3 artists by points (based on descending order).
+5. Compute the average of their points.
+6. Subtract this average from the highest point value to get the difference.
+
+Note: The original data has a string like '797567' which is clearly an error — likely a formatting issue or typo. But looking at the data, the 'points' values are small (e.g., 118, 54, 75, etc.), so we assume the actual values are correct and the string is just malformed. We will parse them safely using pd.to_numeric with errors='coerce' to handle any invalid entries.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'points' to numeric, coercing errors to NaN
+df['points'] = pd.to_numeric(df['points'], errors='coerce')
+
+# Remove any rows with invalid points (if any)
+df = df.dropna(subset=['points'])
+
+# Sort by points in descending order and get top 3
+top_3 = df.nlargest(3, 'points')
+
+# Calculate average points of top 3
+avg_top_3 = top_3['points'].mean()
+
+# Find the highest point value
+max_points = df['points'].max()
+
+# Compute the difference
+difference = max_points - avg_top_3
+
+print(f"Final Answer: {difference:.0f}")
+```

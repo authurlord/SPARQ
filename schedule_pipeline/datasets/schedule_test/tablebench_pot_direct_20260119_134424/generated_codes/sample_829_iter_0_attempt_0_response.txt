@@ -1,0 +1,17 @@
+Step 1: The user wants to calculate the mean and standard deviation of the 'bello' column.
+Step 2: Load the dataframe.
+Step 3: Select the 'bello' column and convert it to numeric type (in case of string values).
+Step 4: Calculate the mean and standard deviation using pandas methods.
+Step 5: Print both values in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'bello' column to numeric, errors='coerce' will handle non-numeric values
+bello_column = pd.to_numeric(df['bello'], errors='coerce')
+# Calculate mean and standard deviation
+mean_bello = bello_column.mean()
+std_bello = bello_column.std()
+print(f"Final Answer: {mean_bello:.1f}, {std_bello:.1f}")
+```

@@ -1,0 +1,13 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate median points
+median_points = df['points'].median()
+
+# Filter non-English songs with points > median
+non_english_high_points = df[(df['language'] != 'english') & (df['points'] > median_points)]
+
+# Calculate average points for these songs
+average_points = non_english_high_points['points'].mean()
+
+print(f"Final Answer: {average_points:.1f}")

@@ -1,0 +1,15 @@
+Step 1: The user wants the average number of Jews in the top 3 metro areas, given that the total is approximately 2,200,000.
+Step 2: Load the dataframe.
+Step 3: Extract the 'number of jews (wjc)' values for the top 3 metro areas (rank 1 to 3).
+Step 4: Calculate the average by dividing the total by 3.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the top 3 metro areas based on rank (wjc)
+top_3_jews = df['number of jews (wjc)'].head(3).astype(int)
+# Calculate average
+average_jews = top_3_jews.sum() / 3
+print(f"Final Answer: {average_jews:.0f}")
+```

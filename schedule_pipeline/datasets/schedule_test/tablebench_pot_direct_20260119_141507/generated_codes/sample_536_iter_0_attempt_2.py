@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate Tele Efficiency (total_votes / televotes)
+df['tele_efficiency'] = df['total votes'] / df['televotes']
+# Find the artist with the highest Tele Efficiency
+highest_efficiency_artist = df.loc[df['tele_efficiency'].idxmax(), 'artist']
+print(f"Final Answer: {highest_efficiency_artist}")

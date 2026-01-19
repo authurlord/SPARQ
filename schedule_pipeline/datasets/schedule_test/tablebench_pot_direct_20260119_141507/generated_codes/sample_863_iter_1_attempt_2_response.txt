@@ -1,0 +1,29 @@
+Step 1: The user wants to find the year with the highest average issue price and compare it to the average issue price of the lowest year.  
+Step 2: Group the data by 'year' and calculate the average issue price for each year.  
+Step 3: Identify the year with the highest average issue price and the year with the lowest average issue price.  
+Step 4: Compute the difference between the highest and lowest average issue prices.  
+Step 5: Ensure that the 'issue price' column is numeric (no object type issues).  
+
+Note: The error occurred because pandas tried to apply `mean` on a column with non-numeric values or incorrect dtype. We must ensure the 'issue price' column is properly parsed as numeric.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'issue price' to numeric, coercing errors to NaN if any
+df['issue price'] = pd.to_numeric(df['issue price'], errors='coerce')
+
+# Group by 'year' and calculate mean issue price per year
+year_avg_price = df.groupby('year')['issue price'].mean()
+
+# Find the year with highest and lowest average issue price
+max_year = year_avg_price.idxmax()
+min_year = year_avg_price.idxmin()
+max_price = year_avg_price.max()
+min_price = year_avg_price.min()
+
+# Calculate the difference
+difference = max_price - min_price
+
+print(f"Final Answer: {max_year}, {difference:.2f}")
+```

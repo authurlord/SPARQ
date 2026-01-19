@@ -1,0 +1,26 @@
+Step 1: The user wants the correlation coefficient between the number of typhus cases and smallpox cases over the years.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'typhus' and 'smallpox' columns.  
+Step 4: Compute the Pearson correlation coefficient between these two columns.  
+Step 5: Print the result.
+
+Note: The data includes one row with "191822" and "2940 (avg)" which may not be numeric. We will clean the data by converting to numeric, handling non-numeric entries appropriately.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'typhus' and 'smallpox' to numeric, coercing errors to NaN
+df['typhus'] = pd.to_numeric(df['typhus'], errors='coerce')
+df['smallpox'] = pd.to_numeric(df['smallpox'], errors='coerce')
+
+# Drop rows with NaN values (due to invalid entries)
+df_clean = df.dropna(subset=['typhus', 'smallpox'])
+
+# Compute the correlation coefficient
+correlation = df_clean['typhus'].corr(df_clean['smallpox'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

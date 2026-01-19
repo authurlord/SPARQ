@@ -1,0 +1,136 @@
+Step 1: Identify the books where the narrator is "Katherine Kellgren".  
+Step 2: Among those books, find the author.  
+Step 3: Check if that author also wrote a book that won the award in 2013 (i.e., has "winner" in the "citation" column).  
+Step 4: Return the author's name.
+
+From the table:
+- Katherine Kellgren is the narrator in:
+  - "Monstrous Beauty" (2013) → author: Elizabeth Fama
+  - "Alchemy and Meggy Swann" (2011) → author: Karen Cushman
+
+Now check if either of these authors wrote a book with "winner" in 2013:
+- "The Fault in Our Stars" (2013) → author: John Green → citation: "winner"
+- "Artémis Fowl: The Last Guardian" → author: Eoin Colfer → citation: "honor"
+- "Ghost Knight" → author: Cornelia Funke → citation: "honor"
+- "Monstrous Beauty" → author: Elizabeth Fama → citation: "honor"
+
+So, Elizabeth Fama did not write a 2013 winner.  
+Karen Cushman wrote "Alchemy and Meggy Swann" in 2011, which is not in 2013, and no other book by her is listed.
+
+Wait — is there any book authored by Katherine Kellgren? No. She is only a narrator.
+
+So we are looking for an author who:
+- Wrote a book with narrator "Katherine Kellgren"
+- Also wrote a book that won in 2013
+
+Only author associated with Katherine Kellgren is Elizabeth Fama (Monstrous Beauty) and Karen Cushman (Alchemy and Meggy Swann).
+
+Neither of them has a book with "winner" in 2013.
+
+But wait — check again:  
+In 2013, the book "The Fault in Our Stars" has narrator Kate Rudd → not Katherine Kellgren.  
+"Artémis Fowl" → Nathaniel Parker → not Katherine Kellgren.
+
+So no author with Katherine Kellgren also has a "winner" in 2013?
+
+Wait — look at "Monstrous Beauty":  
+- Narrator: Katherine Kellgren  
+- Author: Elizabeth Fama  
+- Citation: "honor" → not "winner"
+
+"Alchemy and Meggy Swann":  
+- Narrator: Katherine Kellgren  
+- Author: Karen Cushman  
+- Citation: "honor"
+
+No book by either of these authors has "winner" in 2013.
+
+Therefore, there is no such author.
+
+But let's double-check: Is there any book where Katherine Kellgren is a narrator and the citation is "winner" in 2013?
+
+Looking through the data:
+- 2013 entries:
+  - "The Fault in Our Stars" → narrator: Kate Rudd → no
+  - "Artemis Fowl" → Nathaniel Parker → no
+  - "Ghost Knight" → Elliot Hill → no
+  - "Monstrous Beauty" → Katherine Kellgren → author: Elizabeth Fama → citation: honor → no
+
+So no match.
+
+Final answer: There is no such author.
+
+But the question asks: "Which author... also wrote a book that won the award in 2013?"
+
+Since none satisfies both conditions, perhaps we missed one.
+
+Wait — check if Katherine Kellgren appears elsewhere.
+
+Only in:
+- Monstrous Beauty (2013) → author: Elizabeth Fama → citation: honor
+- Alchemy and Meggy Swann (2011) → author: Karen Cushman → citation: honor
+
+No book by either has "winner" in 2013.
+
+So no such author.
+
+Final Answer: None
+
+But since the question implies there is one, recheck the data.
+
+Wait — is "Katherine Kellgren" the same as "Katherine Kellgren"? Yes.
+
+Is there a book in 2013 with "winner" and narrator Katherine Kellgren? No.
+
+Thus, no author meets both criteria.
+
+Final Answer: None
+
+But the format must be "Final Answer: AnswerName"
+
+We need to output a name or "none".
+
+Perhaps the intended answer is Elizabeth Fama, but she didn't write a winner in 2013.
+
+Alternatively, maybe the question means: among authors who have written a book narrated by Katherine Kellgren, which one also has a book that won in 2013.
+
+Answer: none.
+
+But let's verify if any author has a book with "winner" in 2013:
+
+- 2013: "The Fault in Our Stars" → citation: "winner" → author: John Green → narrator: Kate Rudd → not Katherine Kellgren
+- All others in 2013: "honor"
+
+So no book in 2013 with "winner" and narrator Katherine Kellgren.
+
+Therefore, no such author.
+
+Final Answer: none
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter books where narrator is 'Katherine Kellgren'
+kellgren_books = df[df['narrator'] == 'Katherine Kellgren']
+
+# Get the authors of those books
+kellgren_authors = kellgren_books['author'].tolist()
+
+# Filter books from 2013 with citation 'winner'
+winning_2013 = df[(df['year'] == '2013') & (df['citation'] == 'winner')]
+
+# Get authors of winning 2013 books
+winning_2013_authors = winning_2013['author'].tolist()
+
+# Find intersection
+common_authors = set(kellgren_authors) & set(winning_2013_authors)
+
+if common_authors:
+    final_answer = list(common_authors)[0]
+else:
+    final_answer = "none"
+
+print(f"Final Answer: {final_answer}")
+```

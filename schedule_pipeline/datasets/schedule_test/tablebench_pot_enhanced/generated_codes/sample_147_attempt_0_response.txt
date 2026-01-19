@@ -1,0 +1,30 @@
+Step 1: The user wants to analyze how the number of examinees affects the pass percentage over the years.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'number of examinees' and 'pass percentage' columns.  
+Step 4: Convert 'pass percentage' from string to float for numerical analysis.  
+Step 5: Plot a scatter plot to visualize the relationship between the number of examinees and pass percentage.  
+Step 6: Use correlation coefficient to quantify the relationship.  
+Step 7: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Convert pass percentage to float by removing the '%' sign and converting to float
+df['pass percentage'] = df['pass percentage'].str.replace('%', '').astype(float)
+
+# Calculate correlation between number of examinees and pass percentage
+correlation = df['number of examinees'].astype(int).corr(df['pass percentage'])
+
+# Optional: Plot scatter plot to visualize the relationship
+plt.scatter(df['number of examinees'].astype(int), df['pass percentage'])
+plt.title('Pass Percentage vs Number of Examinees')
+plt.xlabel('Number of Examinees')
+plt.ylabel('Pass Percentage (%)')
+plt.grid(True)
+plt.show()
+
+print(f"Final Answer: {correlation:.2f}")
+```

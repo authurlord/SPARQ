@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: total, total (in all 31 provincial regions), northeast, north, east, south central, northwest, southwest, liaoning, hebei, jilin, heilongjiang, inner mongolia, beijing, tianjin, henan, shandong, guangdong, shanghai, ningxia, guizhou, xinjiang, jiangsu, shaanxi, sichuan, gansu, yunnan, hubei, shanxi, zhejiang, guangxi, anhui, fujian, qinghai, hunan, jiangxi, chongqing, hainan, tibet, active servicemen

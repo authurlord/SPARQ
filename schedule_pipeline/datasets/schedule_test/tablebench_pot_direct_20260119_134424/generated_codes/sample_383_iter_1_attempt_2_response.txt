@@ -1,0 +1,22 @@
+Step 1: The user wants to count how many dates in the table fall in the year 1990 or later.
+Step 2: Load the dataframe.
+Step 3: Extract all date entries from the table (each row contains dates across columns).
+Step 4: Parse each date string to extract the year and check if it is 1990 or later.
+Step 5: Count such dates and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+count = 0
+
+# Iterate through each cell in the DataFrame
+for col in df.columns:
+    for date_str in df[col]:
+        # Extract year from the date string (last 4 characters)
+        year = int(date_str[-4:])
+        if year >= 1990:
+            count += 1
+
+print(f"Final Answer: {count}")
+```

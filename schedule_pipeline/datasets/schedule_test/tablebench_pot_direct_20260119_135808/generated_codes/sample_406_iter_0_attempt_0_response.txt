@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table categorizes BMI levels and their corresponding BMI Prime values, with main columns being BMI ranges (kg/m²), BMI Prime ranges, and health categories. Notable patterns include a direct proportionality between BMI and BMI Prime, where BMI Prime = BMI / 25 (ideal weight). The classification shows increasing severity of underweight and obesity as values rise, with BMI Prime providing a normalized measure relative to ideal weight.

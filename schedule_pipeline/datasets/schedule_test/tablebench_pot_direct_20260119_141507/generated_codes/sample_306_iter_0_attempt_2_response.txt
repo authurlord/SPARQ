@@ -1,0 +1,16 @@
+Step 1: Identify the relevant rows where the event is "Triple jump".
+Step 2: Filter the data to include only entries from "Asian Championships" and "World Championships".
+Step 3: Extract the "Year" and "Position" for these events.
+Step 4: Compare the positions in the Asian Championships and World Championships for each year to find if the athlete achieved a better (i.e., higher) position in Asian Championships than in World Championships.
+
+From the table:
+- Asian Championships: 2013, Position = 4th
+- World Championships: 2015, Position = 21st (q)
+
+Note: "Higher position" means a better rank (e.g., 4th is better than 21st).
+
+In 2013, the athlete was 4th in Asian Championships and did not compete in World Championships that year. In 2015, the athlete competed in World Championships but not in Asian Championships.
+
+Thus, there is no year where the athlete achieved a higher position in Asian Championships compared to World Championships, because the athlete only participated in Asian Championships in 2013 and World Championships in 2015 — and there's no overlap of years with both events.
+
+Final Answer: None

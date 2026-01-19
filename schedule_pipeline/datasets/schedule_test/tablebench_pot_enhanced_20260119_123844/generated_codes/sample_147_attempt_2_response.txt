@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The number of examinees increased from 314 in 2005 to 364 in 2010, while the pass percentage rose from 67.75% to 79.68%, indicating a positive correlation between the number of examinees and pass percentage.

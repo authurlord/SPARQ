@@ -1,0 +1,14 @@
+Step 1: The user wants the correlation coefficient between two numerical columns: 'troops per one million population' and 'troops per 1 billion (USD) GDP'.  
+Step 2: Load the dataframe.  
+Step 3: Select the two columns of interest.  
+Step 4: Compute the Pearson correlation coefficient using pandas' `corr()` method.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between the two specified columns
+correlation = df['troops per one million population'].corr(df['troops per 1 billion ( usd ) gdp'])
+print(f"Final Answer: {correlation:.3f}")
+```

@@ -1,0 +1,12 @@
+{
+  "total_samples": 886,
+  "total_attempts": 2658,
+  "successful_executions": 1409,
+  "failed_executions": 344,
+  "parse_failures": 905,
+  "samples_with_all_failures": 327,
+  "samples_with_partial_success": 185,
+  "samples_with_all_success": 374,
+  "success_rate": 0.5300978179082017,
+  "parse_failure_rate": 0.3404815650865312
+}

@@ -1,0 +1,47 @@
+Step 1: Understand the question. We need to calculate "pick efficiency" for each college, defined as (number of players drafted from that college) / (total number of players drafted in the round). However, note that the data shows multiple players picked in the same round and pick (e.g., all with "pick" = 10), but the "round" varies.
+
+But observe: the "pick" column shows values like 10, 5, etc., and the "round" column shows the round number. The key is that players are drafted in different rounds, and we are only considering the first 10 rounds (rounds 1 to 10).
+
+Step 2: Identify which colleges appear in rounds 1 to 10. The rounds go from 1 to 22, but we are only interested in rounds 1 to 10.
+
+Step 3: Group by college and count how many players were drafted from each college in rounds 1 to 10.
+
+Step 4: Count total number of players drafted in rounds 1 to 10 (i.e., total rows where round <= 10).
+
+Step 5: Calculate pick efficiency = (players from college) / (total players in rounds 1–10).
+
+Step 6: Find the college with the highest efficiency.
+
+Step 7: Since the "pick" column has values like '10' and '5', and the "round" is separate, we need to filter rows where round <= 10.
+
+Note: In the table, the "pick" value is not the same as the round. For example, "round=1" has pick=10, "round=3" has pick=10, etc. So the "pick" value is not directly tied to round — it's just a draft pick number. But since we are grouping by college, we can just count how many times each college appears in rounds 1–10.
+
+So we will:
+- Filter rows where round <= 10
+- Group by college
+- Count the number of players per college
+- Divide by total number of players in rounds 1–10
+- Find the college with the maximum efficiency
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for rounds 1 to 10 (inclusive)
+df_filtered = df[df['round'].astype(int) <= 10]
+
+# Group by college and count players
+college_counts = df_filtered['college'].value_counts()
+
+# Total number of players in rounds 1–10
+total_players = len(df_filtered)
+
+# Calculate pick efficiency for each college
+efficiency = college_counts / total_players
+
+# Find college with highest efficiency
+max_efficiency_college = efficiency.idxmax()
+
+print(f"Final Answer: {max_efficiency_college}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants the correlation coefficient between 'Magnitude' and 'Depth' of earthquakes.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'Magnitude' and 'Depth (km)' columns.  
+Step 4: Compute the Pearson correlation coefficient between these two columns.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'Magnitude' and 'Depth (km)'
+correlation = df['Magnitude'].corr(df['Depth (km)'])
+print(f"Final Answer: {correlation:.3f}")
+```

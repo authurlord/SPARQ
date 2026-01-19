@@ -1,0 +1,33 @@
+Step 1: The user wants a waterfall chart to visualize the trend in viewership over the years.  
+Step 2: Extract the "Viewers" column from the table, which contains the viewership data for each year.  
+Step 3: Handle missing values (e.g., the last row has no viewership data). We will exclude the last row since it has all NaN values.  
+Step 4: Create a waterfall chart using matplotlib, where each year is a step with the change in viewership.  
+Step 5: Plot the trend clearly with labels and a title.
+
+Note: Since the viewership data is not cumulative, we treat it as a simple sequence of values. A waterfall chart here will show the individual yearly viewership values as steps.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter out the last row (2014) which has no viewership data
+df_filtered = df.dropna(subset=['Viewers']).copy()
+
+# Extract years and viewership
+years = df_filtered['Year'].astype(str)
+viewership = df_filtered['Viewers'].astype(float)
+
+# Create waterfall chart
+plt.figure(figsize=(10, 6))
+plt.bar(years, viewership, color='skyblue', edgecolor='black')
+plt.title('Trend in Viewership of the Program')
+plt.xlabel('Year')
+plt.ylabel('Viewers (in millions)')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: viewership trend

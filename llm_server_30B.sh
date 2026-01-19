@@ -1,10 +1,10 @@
 #!/bin/bash
 
-export CUDA_VISIBLE_DEVICES=0,1,2,3
-N_GPU=4
+export CUDA_VISIBLE_DEVICES=0,1
+N_GPU=2
 export VLLM_ATTENTION_BACKEND=FLASHINFER
 # 必须添加这一行，否则 /sleep 和 /wake_up 接口会报 404
-export VLLM_SERVER_DEV_MODE=1 
+# export VLLM_SERVER_DEV_MODE=1 
 
 MODEL_PATH="../models/Qwen3-30B-A3B-Instruct-2507-FP8"
 MODEL_NAME="qwen3-4b"
@@ -28,5 +28,4 @@ python -m vllm.entrypoints.openai.api_server \
   --max_num_seqs 256 \
   --kv-cache-dtype fp8 \
   --async-scheduling \
-  --enable-expert-parallel \
-  --enable-sleep-mode  # 确保这个参数也在
+  --enable-expert-parallel

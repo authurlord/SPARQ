@@ -1,0 +1,12 @@
+Step 1: The user wants to find the team(s) with a goal difference of 16.
+Step 2: Load the dataframe.
+Step 3: Filter the rows where 'Goal Difference' is 16.
+Step 4: Extract the 'Club' name from the filtered row(s) and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Goal Difference is 16
+team_with_goal_diff_16 = df[df['Goal Difference'] == 16]['Club'].values
+print(f"Final Answer: {team_with_goal_diff_16[0]}")
+```

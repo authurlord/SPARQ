@@ -1,0 +1,21 @@
+The error occurred because the "Year built" column contains repeated values (e.g., '1909' for multiple rows), but in the data, it appears that all entries are the same or there's a misinterpretation of the data structure. However, upon closer inspection, each row has a single year built value — either 1909 or 1910 — and these are correctly formatted as strings.
+
+We need to convert the "Year built" column from string to numeric (int) before computing mean and standard deviation.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the "Year built" column to integer type.
+3. Compute the mean and standard deviation of the converted column.
+4. Print the results.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year built' to integer type
+df['Year built'] = pd.to_numeric(df['Year built'], errors='coerce')
+# Calculate mean and standard deviation
+mean_year = df['Year built'].mean()
+std_year = df['Year built'].std()
+print(f"Final Answer: {mean_year:.1f}, {std_year:.1f}")
+```

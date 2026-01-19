@@ -1,0 +1,13 @@
+Step 1: The user wants the total number of "Outright Titles" won by schools located in Belfast.  
+Step 2: Identify schools in Belfast from the "Location" column.  
+Step 3: Filter the dataframe to include only rows where "Location" is "Belfast".  
+Step 4: Sum the "Outright Titles" column for these filtered rows.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter schools located in Belfast and sum their Outright Titles
+believe_outright_titles = df[df['Location'] == 'Belfast']['Outright Titles'].sum()
+print(f"Final Answer: {believe_outright_titles}")
+```

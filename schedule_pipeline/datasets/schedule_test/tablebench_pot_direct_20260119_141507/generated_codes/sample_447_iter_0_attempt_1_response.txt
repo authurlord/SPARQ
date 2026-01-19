@@ -1,0 +1,14 @@
+Step 1: The user is asking to identify abnormal values in the 'Class' column. Abnormal values (outliers) can be detected by analyzing the frequency distribution or identifying values that do not follow a clear pattern.  
+Step 2: In this dataset, the 'Class' column contains values like '10CR', '10C', and 'ABC', 'XYZ'. Most entries are '10CR' or '10C', which appear to be consistent codes. However, 'ABC' and 'XYZ' appear only once each, suggesting they might be outliers or anomalies compared to the majority of the data.  
+Step 3: We will count the frequency of each value in the 'Class' column and identify those with low frequency (e.g., appearing only once).  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count frequency of each value in the 'Class' column
+class_counts = df['Class'].value_counts()
+# Identify values that appear only once (potential outliers)
+abnormal_values = class_counts[class_counts == 1].index.tolist()
+print(f"Final Answer: {abnormal_values}")
+```

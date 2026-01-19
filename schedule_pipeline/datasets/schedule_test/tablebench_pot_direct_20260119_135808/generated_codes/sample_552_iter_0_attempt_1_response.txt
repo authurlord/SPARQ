@@ -1,0 +1,16 @@
+Step 1: The user wants the average number of Indians admitted per year from 2000 to 2010 (excluding the 'total' row).
+Step 2: Load the dataframe.
+Step 3: Select the 'indians admitted' column and convert values to integers.
+Step 4: Exclude the last row (which contains the total).
+Step 5: Calculate the mean of the 'indians admitted' column for years 2000 to 2010.
+Step 6: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'indians admitted' to integer, excluding the 'total' row
+indians_admitted = df['indians admitted'].iloc[:-1].astype(int)
+# Calculate average
+average_indians = indians_admitted.mean()
+print(f"Final Answer: {average_indians:.1f}")
+```

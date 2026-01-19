@@ -1,0 +1,20 @@
+Step 1: The question asks about the impact of a significant increase in total external debt in 2010 on the debt service ratio in subsequent years.  
+Step 2: First, we need to verify if there is a significant increase in total external debt in 2010.  
+Step 3: Then, examine the debt service ratio from 2011 onwards to see if it changed in any notable way.  
+Step 4: Note that the debt service ratio is given as a percentage and includes a "-" for 2015, 2016, and 2017, which may indicate missing or not applicable data.  
+Step 5: From the data:  
+- Total external debt in 2010 is $73,594 million (up from $77,474 in 2015 — actually, it's a slight decrease).  
+- Wait: 2010 debt is $73,594, and 2011 is $75,569 — so it increases slightly.  
+- But the debt service ratio in 2010 is 9.9%, and in 2011 it is 9.9% — same.  
+- In 2012, it drops to 7.3%, then stays low (8.2%, 6.2%, etc.).  
+- There is no clear upward trend in debt service ratio after 2010.  
+
+Conclusion: The increase in external debt in 2010 did not lead to an increase in the debt service ratio; instead, the ratio decreased in the following years. This suggests that the debt burden became more manageable relative to GDP.
+
+However, since the question is asking for "impact", and the data shows a slight increase in debt but a decreasing debt service ratio, the impact appears to be a stabilizing or improving debt service ratio despite rising debt.
+
+But note: 2010 debt ($73,594) is less than 2011 ($75,569), so it's not a significant increase. Also, the debt service ratio remains stable or decreases afterward.
+
+Therefore, the impact is that the debt service ratio remained stable or decreased after 2010, indicating that the increase in debt did not worsen the debt servicing burden.
+
+Final Answer: stable or decreasing debt service ratio

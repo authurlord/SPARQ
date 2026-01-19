@@ -1,0 +1,44 @@
+Step 1: The user wants to determine which factors—'judges', 'public', 'vote percentage'—contribute most to the 'result' of each couple.  
+Step 2: The 'result' column indicates whether a couple is 'safe' or 'bottom two'.  
+Step 3: To assess contribution, we can analyze correlations between the 'judges', 'public', and 'vote percentage' scores and the 'result'. Since 'result' is categorical (binary: safe vs bottom two), we can compare average values of the three factors between 'safe' and 'bottom two' groups.  
+Step 4: Calculate the mean of 'judges', 'public', and 'vote percentage' for couples who are 'safe' and those in 'bottom two'.  
+Step 5: Compare the differences to identify which factor shows the most significant divergence between the two groups.  
+Step 6: If no clear pattern exists, return 'no clear impact'.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Separate data into safe and bottom two groups
+safe_group = df[df['result'] == 'safe']
+bottom_two_group = df[df['result'] == 'bottom two']
+
+# Calculate average values for each factor in both groups
+avg_judges_safe = safe_group['judges'].mean()
+avg_judges_bottom = bottom_two_group['judges'].mean()
+
+avg_public_safe = safe_group['public'].mean()
+avg_public_bottom = bottom_two_group['public'].mean()
+
+avg_vote_percentage_safe = safe_group['vote percentage'].str.replace('%', '').astype(float).mean()
+avg_vote_percentage_bottom = bottom_two_group['vote percentage'].str.replace('%', '').astype(float).mean()
+
+# Compare differences
+diff_judges = abs(avg_judges_safe - avg_judges_bottom)
+diff_public = abs(avg_public_safe - avg_public_bottom)
+diff_vote_percentage = abs(avg_vote_percentage_safe - avg_vote_percentage_bottom)
+
+# Determine which factor has the largest difference
+max_diff = max(diff_judges, diff_public, diff_vote_percentage)
+if max_diff == diff_judges:
+    result_factor = 'judges'
+elif max_diff == diff_public:
+    result_factor = 'public'
+elif max_diff == diff_vote_percentage:
+    result_factor = 'vote percentage'
+else:
+    result_factor = 'no clear impact'
+
+print(f"Final Answer: {result_factor}")
+```

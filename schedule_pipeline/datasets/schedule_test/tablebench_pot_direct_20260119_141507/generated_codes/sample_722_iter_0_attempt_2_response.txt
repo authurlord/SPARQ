@@ -1,0 +1,15 @@
+Step 1: The user wants to find the state with the highest HIV awareness percentage among females.  
+Step 2: Load the dataframe.  
+Step 3: Identify the column 'females (%)' which contains the female HIV awareness percentages.  
+Step 4: Find the row with the maximum value in 'females (%)' and retrieve the corresponding 'state'.  
+Step 5: Print the state name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the state with the highest female HIV awareness percentage
+max_females_awareness = df['females (%)'].max()
+state_with_max_females = df[df['females (%)'] == max_females_awareness]['state'].values[0]
+print(f"Final Answer: {state_with_max_females}")
+```

@@ -1,0 +1,16 @@
+Step 1: The question asks which of the listed factors (e.g., 'played', 'drawn', 'lost', etc.) significantly contribute to the 'points' total for each club.  
+Step 2: Since the table includes all these variables and 'points' is the final outcome, we need to analyze the correlation between each factor and the 'points' column.  
+Step 3: We will compute the correlation coefficient between each factor and 'points'.  
+Step 4: Identify the top 3 factors with the highest absolute correlation values.  
+Step 5: Print those top 3 factors.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Compute correlation between each factor and 'points'
+correlations = df.drop(columns=['club', 'played', 'drawn', 'lost', 'tries for', 'tries against', 'try bonus', 'losing bonus']).corrwith(df['points'])
+# Get top 3 factors by absolute correlation
+top_3_factors = correlations.abs().sort_values(ascending=False).head(3).index.tolist()
+print(f"Final Answer: {', '.join(top_3_factors)}")
+```

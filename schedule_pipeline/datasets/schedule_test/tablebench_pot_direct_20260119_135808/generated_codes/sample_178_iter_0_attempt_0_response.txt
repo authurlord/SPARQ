@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The maximum speed increases with higher horsepower, but not linearly; for example, from 220 to 235 horsepower (RHN to THN), max speed increases from 90 to 105 km/h, and from 235 to 298 horsepower (THN to APD 60), max speed remains at 120 km/h.

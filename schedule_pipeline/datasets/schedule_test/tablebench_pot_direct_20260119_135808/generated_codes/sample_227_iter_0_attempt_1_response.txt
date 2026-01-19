@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The population density (/mi²) generally decreases as land area (mi²) increases, indicating an inverse relationship between the two variables.

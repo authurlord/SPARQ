@@ -1,0 +1,20 @@
+Step 1: Filter the data to include only mountains in Tanzania.
+Step 2: Among those, select mountains with elevation > 3000 meters and prominence < 3000 meters.
+Step 3: Count the number of such mountains.
+Step 4: Print the count as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for mountains in Tanzania
+tanzania_mountains = df[df['country'] == 'tanzania']
+# Apply conditions: elevation > 3000 and prominence < 3000
+filtered_mountains = tanzania_mountains[
+    (tanzania_mountains['elevation (m)'].astype(int) > 3000) &
+    (tanzania_mountains['prominence (m)'].astype(int) < 3000)
+]
+# Count the number of such mountains
+count = len(filtered_mountains)
+print(f"Final Answer: {count}")
+```

@@ -1,0 +1,15 @@
+Step 1: The user wants to calculate the new viewership after a 10% increase from 9.2 million.
+Step 2: Load the dataframe.
+Step 3: Identify the viewership value of 9.2 million from the 'viewers (millions)' column.
+Step 4: Calculate 10% increase: new viewership = 9.2 * (1 + 0.10).
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the viewership value
+viewers = 9.2
+# Calculate 10% increase
+new_viewership = viewers * 1.10
+print(f"Final Answer: {new_viewership:.2f}")
+```

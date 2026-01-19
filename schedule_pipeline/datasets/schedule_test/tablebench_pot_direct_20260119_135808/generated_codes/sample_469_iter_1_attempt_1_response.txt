@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 100000, 13002267, 0.1, 10 (4 by friendly fire)

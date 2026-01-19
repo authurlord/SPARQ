@@ -1,0 +1,17 @@
+Step 1: Filter the data to include only rows where the 'car' column is 'chevrolet'.
+Step 2: Calculate the total winnings for these drivers by summing the 'winnings' column.
+Step 3: Find the driver with the highest winnings among those who drove a Chevrolet car.
+Step 4: Print the total winnings and the top driver.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'car' is 'chevrolet'
+chevrolet_drivers = df[df['car'] == 'chevrolet']
+# Calculate total winnings for Chevrolet drivers
+total_winnings = chevrolet_drivers['winnings'].sum()
+# Find the driver with the highest winnings
+top_driver = chevrolet_drivers.loc[chevrolet_drivers['winnings'].idxmax(), 'driver']
+print(f"Final Answer: {total_winnings}, {top_driver}")
+```

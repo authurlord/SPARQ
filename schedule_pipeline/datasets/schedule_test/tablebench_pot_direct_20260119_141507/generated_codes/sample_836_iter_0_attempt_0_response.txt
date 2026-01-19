@@ -1,0 +1,18 @@
+Step 1: The user wants to identify the municipality with the highest number of Spanish speakers.  
+Step 2: The "Spanish" column contains the population values for Spanish speakers in each municipality.  
+Step 3: We need to find the municipality with the maximum value in the "Spanish" column.  
+Step 4: Since the data is structured by rows (language) and columns (municipality), we will locate the maximum value under the "Spanish" language and identify the corresponding municipality.
+
+Note: The "Spanish" row corresponds to the values for Spanish speakers, and each column represents a municipality.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the municipality with the highest Spanish speakers
+spanish_speakers = df['Spanish']
+max_population = spanish_speakers.max()
+# Get the corresponding municipality name
+municipality_with_max_spanish = df.columns[spanish_speakers.idxmax()]
+print(f"Final Answer: {municipality_with_max_population}")
+```

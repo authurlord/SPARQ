@@ -1,0 +1,18 @@
+The error occurred because the 'year' column is not being used in the condition — we are comparing the number of Indians admitted to 25000, which is a numerical value. The issue is not with the year column itself, but rather ensuring that we correctly access the 'indians admitted' column and compare it numerically.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Extract the 'indians admitted' column.
+3. Count how many rows have values greater than 25000.
+4. Print the count.
+
+Corrected code:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count the number of years where 'indians admitted' > 25000
+count_years = df[df['indians admitted'] > 25000].shape[0]
+print(f"Final Answer: {count_years}")
+```

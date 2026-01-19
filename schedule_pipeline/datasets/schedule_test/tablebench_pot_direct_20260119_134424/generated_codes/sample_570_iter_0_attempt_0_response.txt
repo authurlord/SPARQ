@@ -1,0 +1,24 @@
+Step 1: The user wants to find the year in which the average speed of the vessels increased the most compared to the previous year.
+Step 2: Load the dataframe.
+Step 3: Convert the 'year' and 'speed' columns to appropriate data types (int for year, float for speed).
+Step 4: Sort the data by year.
+Step 5: Calculate the difference in speed between consecutive years.
+Step 6: Find the year with the maximum speed increase.
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean and convert 'speed' column to float
+df['speed'] = df['speed'].str.replace(',', '.').astype(float)
+# Convert 'year' to int
+df['year'] = df['year'].astype(int)
+# Sort by year
+df = df.sort_values('year')
+# Calculate the difference in speed between consecutive years
+df['speed_diff'] = df['speed'].diff()
+# Find the year with the maximum speed increase
+max_increase_year = df.loc[df['speed_diff'].idxmax(), 'year']
+print(f"Final Answer: {max_increase_year}")
+```

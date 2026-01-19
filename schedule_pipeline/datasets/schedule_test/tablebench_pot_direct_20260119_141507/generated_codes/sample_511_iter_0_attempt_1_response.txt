@@ -1,0 +1,16 @@
+Step 1: Understand the "Dance Efficiency" metric — it is defined as total points divided by number of dances.  
+Step 2: Identify the relevant columns: "total points" and "number of dances".  
+Step 3: Calculate the Dance Efficiency for each couple.  
+Step 4: Find the couple with the highest value.  
+Step 5: Return the name of that couple.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate Dance Efficiency: total points / number of dances
+df['dance_efficiency'] = df['total points'].astype(float) / df['number of dances'].astype(int)
+# Find the couple with the highest efficiency
+top_couple = df.loc[df['dance_efficiency'].idxmax(), 'couple']
+print(f"Final Answer: {top_couple}")
+```

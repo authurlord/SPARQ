@@ -1,0 +1,18 @@
+Step 1: The user wants the difference between the upper index (in kcal/nm³) and the lower index (in kcal/nm³) for propane.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'fuel gas' is 'propane'.
+Step 4: Extract the 'upper index kcal / nm 3' and 'lower index kcal / nm 3' values.
+Step 5: Calculate the difference and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for propane
+propane_row = df[df['fuel gas'] == 'propane']
+# Extract upper and lower index values
+upper_index = float(propane_row['upper index kcal / nm 3'].values[0])
+lower_index = float(propane_row['lower index kcal / nm 3'].values[0])
+# Calculate difference
+difference = upper_index - lower_index
+print(f"Final Answer: {difference}")
+```

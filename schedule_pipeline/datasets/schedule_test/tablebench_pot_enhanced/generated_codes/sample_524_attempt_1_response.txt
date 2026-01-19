@@ -1,0 +1,13 @@
+Step 1: Understand the question. We need to calculate the change in total seating capacity from 2004 to 2008. This means we consider only aircraft that were introduced or retired during this period (2004 to 2008), and sum their seating capacities at the time of introduction, then subtract any aircraft retired during this period.
+
+Step 2: Identify relevant data:
+- Aircraft introduced between 2004 and 2008: 'airbus a319 - 100' (2004), 'airbus a320 - 200' (2008)
+- Aircraft retired between 2004 and 2008: 'boeing 737 - 204' (1995–1996, not in range), 'boeing 737 - 300' (1996–2007, so retired in 2007 → within range), 'boeing 737 - 700' (2000–2011, retired after 2008 → not counted)
+
+So only 'boeing 737 - 300' was retired during 2004–2008.
+
+Step 3: Sum the seating capacity of aircraft introduced (2004 and 2008): 156 (A319) + 180 (A320) = 336  
+Step 4: Subtract the seating capacity of aircraft retired during the period: 148 (B737-300)  
+Step 5: Net change = 336 - 148 = 188
+
+Final Answer: 188

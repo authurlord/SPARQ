@@ -1,0 +1,19 @@
+The error occurred because the condition `>=` was applied between a string (`'2002'`) and an integer (`2004`), which is not valid. We need to ensure that the filtering is done on the correct column type — specifically, the 'year' column should be converted to numeric before comparison.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Filter rows where the 'show' is 'The Wire' and the 'year' is between 2002 and 2004 (inclusive).
+3. Extract the 'episode' values from the filtered rows.
+4. Calculate the average of these episode counts.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 'The Wire' show and years between 2002 and 2004 (inclusive)
+filtered_df = df[(df['show'] == 'The Wire') & (df['year'].astype(int) >= 2002) & (df['year'].astype(int) <= 2004)]
+# Calculate average number of episodes
+average_episodes = filtered_df['episode'].mean()
+print(f"Final Answer: {average_episodes:.1f}")
+```

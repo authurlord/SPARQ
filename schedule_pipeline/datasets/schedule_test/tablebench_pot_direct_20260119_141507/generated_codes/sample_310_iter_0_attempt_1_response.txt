@@ -1,0 +1,22 @@
+Step 1: Identify the relevant row where Barbara Stanwyck won an Emmy Award for a TV series.  
+Step 2: Look for the row where "Work" is "The Barbara Stanwyck Show" and "Category" is "Outstanding Performance by an Actress in a Series" or similar.  
+Step 3: Check the "Year" column for that row.  
+
+From the data, we see:
+- In 1961, "Work" is "The Barbara Stanwyck Show", "Category" is "Outstanding Performance by an Actress in a Series", and "Result" is "Won".
+
+Thus, the year is 1961.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Work is 'The Barbara Stanwyck Show' and Category contains 'Outstanding Performance by an Actress in a Series'
+filtered_row = df[(df['Work'] == 'The Barbara Stanwyck Show') & (df['Category'].str.contains('Outstanding Performance', case=False))]
+
+if not filtered_row.empty:
+    year = filtered_row.iloc[0]['Year']
+    print(f"Final Answer: {year}")
+else:
+    print("Final Answer: Not found")
+```

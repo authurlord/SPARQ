@@ -1,0 +1,33 @@
+Step 1: The user wants to find the district with the highest population density and calculate the percentage difference between that value and the average population density of all districts.
+
+Step 2: Load the dataframe and extract the 'pop density (per km2)' column.
+
+Step 3: Find the maximum population density and identify the corresponding district.
+
+Step 4: Compute the average population density across all districts.
+
+Step 5: Calculate the percentage difference using the formula:  
+   % difference = ((max_density - avg_density) / avg_density) * 100
+
+Step 6: Print the district name and the percentage difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract population density column
+pop_density = df['pop density (per km2)']
+
+# Find the district with the highest population density
+max_density = pop_density.max()
+max_district = df[df['pop density (per km2)'] == max_density]['district'].values[0]
+
+# Calculate average population density
+avg_density = pop_density.mean()
+
+# Calculate percentage difference
+percentage_diff = ((max_density - avg_density) / avg_density) * 100
+
+print(f"Final Answer: {max_district}, {percentage_diff:.2f}")
+```

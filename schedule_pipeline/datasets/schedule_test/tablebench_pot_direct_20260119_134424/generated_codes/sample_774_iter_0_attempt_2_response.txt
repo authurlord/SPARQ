@@ -1,0 +1,7 @@
+Step 1: The user is asking for a prediction of the points scored per year trend for the Castleford Tigers in the next 5 years. However, the data only contains historical points from 2004 to 2010, and no information about future trends or external factors (e.g., team performance changes, player transfers, etc.) is provided.
+
+Step 2: Since there is no basis for forecasting future trends without additional assumptions or models, we cannot make an accurate prediction.
+
+Step 3: Therefore, the answer must be that there is insufficient data to determine the future trend.
+
+Final Answer: insufficient data

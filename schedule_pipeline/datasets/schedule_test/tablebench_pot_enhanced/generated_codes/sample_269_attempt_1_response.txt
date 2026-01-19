@@ -1,0 +1,23 @@
+Step 1: The question asks for the percentage change in 'l (mh / km)' when frequency increases from 1 Hz to 100k Hz. We will calculate the percentage change using the formula:  
+Percentage Change = ((New Value - Old Value) / Old Value) * 100
+
+Step 2: Extract the values of 'l (mh / km)' at frequency 1 Hz and 100k Hz from the table.
+
+Step 3: Compute the percentage change.
+
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the value of 'l (mh / km)' at frequency 1 Hz
+l_at_1hz = df[df['frequency (hz)'] == '1']['l (mh / km)'].values[0]
+# Find the value of 'l (mh / km)' at frequency 100k Hz
+l_at_100k = df[df['frequency (hz)'] == '100k']['l (mh / km)'].values[0]
+
+# Calculate percentage change
+percentage_change = ((float(l_at_100k) - float(l_at_1hz)) / float(l_at_1hz)) * 100
+
+print(f"Final Answer: {percentage_change:.2f}")
+```

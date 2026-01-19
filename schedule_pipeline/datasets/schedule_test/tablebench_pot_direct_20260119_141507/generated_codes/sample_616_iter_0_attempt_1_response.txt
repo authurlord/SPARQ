@@ -1,0 +1,13 @@
+Step 1: The user wants the total average viewership of the top 5 TV shows.  
+Step 2: The "hk viewers" column contains the viewership data in millions.  
+Step 3: We need to sum the "hk viewers" values for the top 5 shows (rank 1 to 5).  
+Step 4: Load the dataframe and extract the relevant values.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sum the 'hk viewers' for the top 5 shows (rank 1 to 5)
+total_viewership = df.head(5)['hk viewers'].sum()
+print(f"Final Answer: {total_viewership}")
+```

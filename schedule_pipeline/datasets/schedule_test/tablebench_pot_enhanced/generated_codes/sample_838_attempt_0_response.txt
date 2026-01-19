@@ -1,0 +1,22 @@
+Step 1: The user wants to compare the total number of medals between Ayala High School and Franklin Central HS.
+Step 2: Load the dataframe.
+Step 3: Filter the rows for 'ayala high school' and 'franklin central hs'.
+Step 4: Extract the 'total medals' for both schools.
+Step 5: Compare and determine which has a higher total.
+Step 6: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the two schools
+ayala_medals = df[df['ensemble'] == 'ayala high school']['total medals'].values[0]
+franklin_medals = df[df['ensemble'] == 'franklin central hs']['total medals'].values[0]
+
+# Compare and determine the higher one
+if ayala_medals > franklin_medals:
+    winner = 'ayala high school'
+else:
+    winner = 'franklin central hs'
+
+print(f"Final Answer: {winner}")
+```

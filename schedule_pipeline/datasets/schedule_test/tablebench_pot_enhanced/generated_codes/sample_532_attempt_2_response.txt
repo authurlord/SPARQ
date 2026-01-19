@@ -1,0 +1,17 @@
+Step 1: Identify rivers that converge with the Lahn river at a confluence point below 100 km. This means filtering rows where 'Confluence [by Lahn-km]' is less than 100.
+Step 2: Extract the 'Length [km]' values for these rivers.
+Step 3: Calculate the average of these lengths.
+Step 4: Print the result.
+
+Note: The 'Confluence [by Lahn-km]' column contains numeric values, but some entries are None (missing data). We need to filter out None values and only consider valid numeric entries.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Confluence [by Lahn-km] is less than 100 and not null
+valid_rivers = df[df['Confluence [by Lahn-km]'] < 100]
+# Convert Length [km] to numeric and calculate mean
+average_length = valid_rivers['Length [km]'].astype(float).mean()
+print(f"Final Answer: {average_length:.1f}")
+```

@@ -1,0 +1,15 @@
+Step 1: Identify which hurricanes occurred in the month of September.  
+Step 2: Look at the "Month" column and check for entries that include "September".  
+Step 3: Count the number of rows where the Month value contains "September".  
+Note: Some entries have multiple months (e.g., "August, September"), so we need to check if "September" appears in the string.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'Month' contains 'September'
+september_hurricanes = df[df['Month'].str.contains('September', case=False)]
+# Count the number of such hurricanes
+count_september = len(september_hurricanes)
+print(f"Final Answer: {count_september}")
+```

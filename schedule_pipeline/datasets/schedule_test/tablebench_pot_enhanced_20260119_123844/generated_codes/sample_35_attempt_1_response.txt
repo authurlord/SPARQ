@@ -1,0 +1,17 @@
+Step 1: Filter the data for locomotives introduced between 1867 and 1873 (inclusive).
+Step 2: Further filter for only the '2 - 4 - 0' and '0 - 6 - 0' types.
+Step 3: Sum the 'total' column for the filtered rows.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where introduced is between 1867 and 1873 (inclusive)
+filtered_df = df[(df['introduced'].astype(int) >= 1867) & (df['introduced'].astype(int) <= 1873)]
+# Filter for '2 - 4 - 0' and '0 - 6 - 0' types
+filtered_df = filtered_df[filtered_df['type'].isin(['2 - 4 - 0', '0 - 6 - 0'])]
+# Sum the 'total' column
+total_locomotives = filtered_df['total'].sum()
+print(f"Final Answer: {total_locomotives}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of counties with per capita income between $18,000 and $27,000 (inclusive).  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'per capita income' column and filter values in the range [$18,000, $27,000].  
+Step 4: Count the number of such entries and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter counties where per capita income is between 18000 and 27000 (inclusive)
+filtered_counties = df[(df['per capita income'].between(18000, 27000))]
+count = filtered_counties.shape[0]
+print(f"Final Answer: {count}")
+```

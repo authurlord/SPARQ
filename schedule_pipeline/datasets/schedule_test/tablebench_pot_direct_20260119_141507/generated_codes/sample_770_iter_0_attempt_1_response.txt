@@ -1,0 +1,12 @@
+Step 1: The question asks for a trend in the issue price of coins based on historical data. However, the provided data only includes issue prices from 2002 to 2012, and there is no clear pattern or trend that can be reliably inferred over a 5-year projection without assumptions or external data.
+
+Step 2: Observing the issue price column:
+- From 2002 to 2005: $39.95
+- From 2006 to 2009: $44.95, $45.95, $47.95, $47.95
+- From 2010 to 2012: $49.95
+
+The issue price appears to be increasing gradually over time.
+
+Step 3: Based on this historical trend, we can reasonably infer that the issue price is rising slowly and consistently.
+
+Final Answer: increasing

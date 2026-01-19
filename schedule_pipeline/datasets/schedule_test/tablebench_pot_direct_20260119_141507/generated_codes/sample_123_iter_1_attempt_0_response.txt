@@ -1,0 +1,49 @@
+We are tasked with creating a stacked bar chart showing match statistics for each team. However, the data provided includes multiple columns such as "Played", "Points", "Wins", "Draws", "Losses", "Goals for", "Goals against", and "Goal Difference". A "stacked bar chart" typically represents parts of a whole — for example, wins, draws, and losses making up total matches.
+
+Since the question asks for a stacked bar chart of "match statistics", the most logical interpretation is to show the breakdown of match results (Wins, Draws, Losses) per team in a stacked format.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Extract relevant columns: "Wins", "Draws", "Losses" — these represent the components of match outcomes.
+3. Create a stacked bar chart where each bar represents a team, and the segments represent Wins, Draws, and Losses.
+4. Use matplotlib to plot the chart.
+
+Note: The "Played" column is fixed at 38 for all teams, so we don’t need it in the chart. We focus on the breakdown of results.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Select relevant columns for the stacked bar chart
+# We will use Wins, Draws, Losses as the components
+data = df[['Wins', 'Draws', 'Losses']].copy()
+teams = df['Club']
+
+# Create a stacked bar chart
+plt.figure(figsize=(12, 8))
+bar_width = 0.25
+index = range(len(teams))
+
+# Plot each component (Wins, Draws, Losses) as a separate segment
+bars = plt.bar(index, data['Wins'], bar_width, label='Wins', color='skyblue')
+plt.bar([i + bar_width for i in index], data['Draws'], bar_width, label='Draws', color='lightgreen')
+plt.bar([i + 2*bar_width for i in index], data['Losses'], bar_width, label='Losses', color='salmon')
+
+# Customize the chart
+plt.xlabel('Team')
+plt.ylabel('Number of Matches')
+plt.title('Stacked Bar Chart of Match Results (Wins, Draws, Losses)')
+plt.xticks([i + bar_width for i in index], teams, rotation=45)
+plt.legend()
+
+# Improve layout to prevent label cutoff
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```
+
+Final Answer: None

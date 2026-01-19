@@ -1,0 +1,18 @@
+Step 1: The user wants the average annual increase in issue price from 2007 to 2011.  
+Step 2: Extract the "issue price" values for each year from 2007 to 2011.  
+Step 3: Calculate the yearly differences in issue price and then compute the average of those differences.  
+Step 4: Since the data is per year, we can directly extract the issue prices by year and compute the average change per year.
+
+Note: The issue price increases from 94.95 (2007) to 114.95 (2011). We will calculate the total increase over 4 years and divide by 4.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract issue price by year
+issue_prices = df.groupby('year')['issue price'].first()
+# Convert to numeric and calculate average annual increase
+prices_list = issue_prices.values
+average_increase = (prices_list[-1] - prices_list[0]) / (2011 - 2007)
+print(f"Final Answer: {average_increase:.2f}")
+```

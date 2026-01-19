@@ -1,0 +1,21 @@
+Step 1: The user is asking for a city that has unusually high total passengers and annual change. "Unusually high" implies extreme values, so we should look for outliers in both "total passengers" and "annual change".  
+Step 2: We will identify the city with the highest total passengers and the highest annual change. Since both metrics are important, we can check the top values in each column and see if any city stands out in both.  
+Step 3: However, note that "annual change" includes negative values (like -100.00%), so "unusually high" likely refers to high positive values. We will focus on positive and large values.  
+Step 4: Find the city with the maximum total passengers and the maximum positive annual change.  
+
+We will:
+- Filter out negative annual changes.
+- Find the city with the highest total passengers among those with high positive annual change.
+- Alternatively, find the city with the highest combined value of total passengers and annual change.
+
+But since the question says "unusually high", we interpret this as extreme in both dimensions. We will check the city with the highest total passengers and the highest positive annual change.
+
+Note: The city "curitiba" has total passengers = 100,000,000 and annual change = 1000.00%, which is extremely high in both magnitude and positive growth.
+
+Let’s verify:
+- Total passengers: 100,000,000 — far higher than others.
+- Annual change: 1000.00% — extremely high positive growth.
+
+This is clearly an outlier.
+
+Final Answer: curitiba

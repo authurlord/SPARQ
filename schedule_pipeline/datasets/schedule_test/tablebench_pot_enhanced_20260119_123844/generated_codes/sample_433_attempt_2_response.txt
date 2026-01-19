@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table lists council areas in Scotland ranked by the number of Gaelic speakers, showing speaker counts, population, and percentage of speakers relative to population. The highest number of speakers is in Na h-Eileanan Siar (15,811), with a high percentage (59.7%), indicating strong Gaelic preservation. Highland has the largest population but a low percentage (6.1%). Glasgow and Edinburgh have significant populations but very low speaker percentages (1.0% and 0.7%, respectively), suggesting limited Gaelic usage. Smaller areas like Shetland and Orkney have low speaker numbers but similar percentages (~0.4–0.5%), indicating sparse but consistent usage. Overall, Gaelic speakers are concentrated in rural and island areas, with urban centers showing minimal representation.
+
+Final Answer: na h - eileanan siar, highland, city of glasgow, argyll and bute, city of edinburgh

@@ -1,0 +1,28 @@
+Step 1: Understand the question — we need to calculate "Points Per Lap" for each driver, which is total points divided by total laps.  
+Step 2: Identify the relevant columns: 'points' and 'laps'.  
+Step 3: Compute the ratio (points / laps) for each driver.  
+Step 4: Find the driver with the highest value of Points Per Lap.  
+Step 5: Return the driver's name.
+
+Note: Some entries have "pe" (possibly a typo or missing value) in the 'points' column (e.g., derrike cope). We will skip or handle invalid values (e.g., convert "pe" to NaN and exclude it).
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'points' and 'laps' to numeric, handling invalid entries like 'pe'
+df['points'] = pd.to_numeric(df['points'], errors='coerce')
+df['laps'] = pd.to_numeric(df['laps'], errors='coerce')
+
+# Filter out rows where either points or laps are NaN
+df_filtered = df.dropna(subset=['points', 'laps'])
+
+# Calculate Points Per Lap
+df_filtered['points_per_lap'] = df_filtered['points'] / df_filtered['laps']
+
+# Find the driver with the highest Points Per Lap
+top_driver = df_filtered.loc[df_filtered['points_per_lap'].idxmax(), 'driver']
+
+print(f"Final Answer: {top_driver}")
+```

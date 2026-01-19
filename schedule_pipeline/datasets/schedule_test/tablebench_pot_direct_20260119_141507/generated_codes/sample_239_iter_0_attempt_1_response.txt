@@ -1,0 +1,20 @@
+Step 1: The user is asking whether there is a positive correlation between typhus and typhoid fever cases in the same year. This requires analyzing the relationship between the two variables across years.
+
+Step 2: Load the dataframe and extract the 'typhus' and 'typhoid fever' columns.
+
+Step 3: Calculate the correlation coefficient between typhus and typhoid fever cases. A positive correlation (close to 1) would suggest that as typhus increases, typhoid fever also tends to increase.
+
+Step 4: Print the correlation value as the answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the relevant columns
+typhus = df['typhus']
+typhoid_fever = df['typhoid fever']
+
+# Calculate the correlation coefficient
+correlation = typhus.corr(typhoid_fever)
+print(f"Final Answer: {correlation:.2f}")
+```

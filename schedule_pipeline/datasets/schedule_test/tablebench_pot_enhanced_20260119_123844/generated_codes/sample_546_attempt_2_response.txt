@@ -1,0 +1,24 @@
+Step 1: The user wants to find the total s ton value that has the highest increase from the previous year between 2000 and 2006.
+Step 2: Load the dataframe.
+Step 3: Convert 'total s ton' column to numeric for calculation.
+Step 4: Calculate the year-on-year increase in 'total s ton'.
+Step 5: Identify the maximum increase and return the corresponding 'total s ton' value (the value in the year with the highest increase).
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'total s ton' to numeric
+df['total s ton'] = pd.to_numeric(df['total s ton'])
+
+# Calculate the year-on-year increase
+df['increase'] = df['total s ton'].diff()
+
+# Find the row with the highest increase
+max_increase_row = df.loc[df['increase'].idxmax()]
+
+# Get the 'total s ton' value corresponding to the highest increase
+final_value = max_increase_row['total s ton']
+print(f"Final Answer: {final_value}")
+```

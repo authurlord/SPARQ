@@ -1,0 +1,12 @@
+Step 1: Understand the question — The user is asking about the relationship between a significant increase in natural change and the average population growth rate over time.  
+Step 2: Natural change is defined as Live births - Deaths, and it directly reflects population growth.  
+Step 3: The "Average population (x 1000)" column represents the total population, and the "Natural change (per 1000)" reflects the annual change in population.  
+Step 4: We need to analyze how the natural change affects population growth. Since natural change is already the rate of population change per 1000 people, we can examine its trend over time and correlate it with population changes.  
+Step 5: Identify periods where natural change increases significantly (e.g., from negative to positive or large positive values).  
+Step 6: Observe if such increases correspond with changes in the average population growth rate.  
+
+However, note that the "Natural change (per 1000)" is already the growth rate. So, a significant increase in natural change means a higher growth rate. Therefore, a significant increase in natural change directly implies a higher average population growth rate.  
+
+Thus, the answer is that a significant increase in natural change leads to a higher average population growth rate over time.
+
+Final Answer: direct positive impact

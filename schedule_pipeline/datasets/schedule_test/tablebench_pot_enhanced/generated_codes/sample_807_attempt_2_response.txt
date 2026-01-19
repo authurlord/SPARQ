@@ -1,0 +1,19 @@
+Step 1: Identify the teams and seasons that belong to the "Third Division North".
+Step 2: Extract the 'Goals' column for these rows, specifically from the 'Second Division' and 'Third Division North' entries.
+Step 3: Convert the 'Goals' values to integers.
+Step 4: Calculate the variance of these goal values using numpy.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Filter rows where Division is 'Third Division North'
+third_division_north = df[df['Division'] == 'Third Division North']
+# Extract goals scored in the 'Goals' column (from 'Apps' and 'Goals' columns)
+goals = third_division_north['Goals'].astype(int)
+# Calculate variance
+variance = np.var(goals, ddof=1)  # Using sample variance
+print(f"Final Answer: {variance:.2f}")
+```

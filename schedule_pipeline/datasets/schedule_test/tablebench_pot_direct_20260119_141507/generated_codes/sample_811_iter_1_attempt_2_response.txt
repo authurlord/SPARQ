@@ -1,0 +1,17 @@
+The error occurred because the 'size (cents)' column contains string values (like '702.44', '585.37') that need to be converted to numeric before computing the standard deviation. We must ensure all entries are properly parsed as floats.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'size (cents)' column to numeric, handling any parsing issues (e.g., strings with commas or non-numeric characters).
+Step 3: Compute the standard deviation of the cleaned numeric column.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'size (cents)' to float, coercing errors to NaN and then dropping invalid entries
+df['size (cents)'] = pd.to_numeric(df['size (cents)'], errors='coerce')
+# Calculate standard deviation of the cleaned column
+std_size_cents = df['size (cents)'].std()
+print(f"Final Answer: {std_size_cents:.2f}")
+```

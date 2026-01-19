@@ -1,0 +1,15 @@
+Step 1: The user wants the total commissioned capacity of power plants located in Himachal Pradesh.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'state' is 'himachal pradesh'.
+Step 4: Sum the 'commissioned capacity (mw)' column for these rows.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for Himachal Pradesh
+himachal_pradesh_plants = df[df['state'] == 'himachal pradesh']
+# Calculate total commissioned capacity
+total_capacity = himachal_pradesh_plants['commissioned capacity (mw)'].sum()
+print(f"Final Answer: {total_capacity}")
+```

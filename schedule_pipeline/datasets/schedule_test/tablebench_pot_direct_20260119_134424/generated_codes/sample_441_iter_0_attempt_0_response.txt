@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: royal flush, straight flush, four aces w / 2 , 3 , or 4, four 2 , 3 , or 4 w / a - 4, four aces, four 2 , 3 , or 4, four 5 - k, full house, flush, straight, three of a kind, two pair, jacks or better, theoretical return

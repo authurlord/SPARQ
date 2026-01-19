@@ -1,0 +1,43 @@
+The error occurred because the 'prominence' values were concatenated as strings (e.g., "3951331215921570") instead of being separate values. This suggests a data parsing issue in the input — likely due to incorrect JSON formatting or misaligned columns.
+
+Looking at the table again:
+- The rows are correctly structured, but the 'prominence' column appears to have values like '3951', '3312', etc., which should be numeric.
+- However, the error implies that during parsing, the values were merged incorrectly.
+
+Let’s verify: each row has 5 columns: peak, country, elevation (m), prominence (m), col (m). All values appear to be properly separated. So the issue might stem from how the data was parsed — possibly due to malformed string concatenation in the raw input.
+
+But in the given JSON, each row is correctly formatted with individual values. Therefore, the error is likely due to a misinterpretation of the data structure or a bug in the parsing logic.
+
+Let’s fix the approach:
+
+Step-by-step:
+1. Load the DataFrame.
+2. Filter rows where the country contains "Democratic Republic of the Congo" (since multiple peaks are listed under it).
+3. Ensure the 'elevation (m)' is at least 3000 meters.
+4. Extract the 'prominence (m)' column and compute its average.
+
+We must ensure that the 'elevation (m)' and 'prominence (m)' are properly parsed as numeric.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, handling any parsing issues
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'], errors='coerce')
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'], errors='coerce')
+
+# Filter peaks in Democratic Republic of the Congo with elevation >= 3000
+filtered_df = df[
+    (df['country'].str.contains('Democratic Republic of the congo', case=False, na=False)) &
+    (df['elevation (m)'] >= 3000)
+]
+
+# Calculate average prominence
+if not filtered_df.empty:
+    avg_prominence = filtered_df['prominence (m)'].mean()
+else:
+    avg_prominence = 0
+
+print(f"Final Answer: {avg_prominence:.1f}")
+```

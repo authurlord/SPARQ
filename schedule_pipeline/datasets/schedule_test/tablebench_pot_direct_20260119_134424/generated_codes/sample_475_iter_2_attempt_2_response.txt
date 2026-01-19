@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: land area (km square) in row with name 'hastings county', population rank in row with name 'timiskaming district'

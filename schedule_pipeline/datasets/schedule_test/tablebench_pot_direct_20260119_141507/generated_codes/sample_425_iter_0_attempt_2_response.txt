@@ -1,0 +1,20 @@
+Step 1: The question asks for a description of the main features of the table, including the significance of each column and any notable trends or patterns. This is not a numerical computation but a qualitative analysis.
+
+Step 2: Analyze each column:
+- "year": Indicates the year of the hurricane data, allowing temporal comparison.
+- "number of tropical storms": Total count of tropical storms per year; a baseline measure of storm activity.
+- "number of hurricanes": Subset of tropical storms that reach hurricane strength; shows intensity levels.
+- "number of major hurricanes": Hurricanes with sustained winds ≥111 mph (Category 3 or higher); indicates extreme events.
+- "deaths": Number of fatalities associated with storms; reflects human impact.
+- "strongest storm": Name of the most intense storm in that year; provides context on peak intensity.
+
+Step 3: Identify trends:
+- The number of tropical storms and hurricanes varies significantly across years (e.g., 1870 has 11 storms, 1872 has only 5).
+- Major hurricanes are rare (only 2 in 1870, 1 in 1875, etc.), suggesting low frequency of extreme events.
+- Deaths vary widely: 1870 has 2052 deaths (very high), while 1872 has "unknown" — indicating data gaps.
+- The highest death toll (2052) occurs in 1870, which also had the highest number of storms and hurricanes.
+- 1874 and 1875 have high death counts (626, 800), possibly linked to storm intensity or poor records.
+
+Step 4: Note limitations: "unknown" values in "deaths" limit reliability of trend analysis. Also, the strongest storm names may not reflect actual severity due to outdated naming systems.
+
+Final Answer: year, number of tropical storms, number of hurricanes, number of major hurricanes, deaths, strongest storm

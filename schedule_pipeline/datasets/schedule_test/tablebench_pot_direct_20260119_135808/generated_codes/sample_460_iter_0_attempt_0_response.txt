@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 12, 13, 11.51, 7.81, 9.81

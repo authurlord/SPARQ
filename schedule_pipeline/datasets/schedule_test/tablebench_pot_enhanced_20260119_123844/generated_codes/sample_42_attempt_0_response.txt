@@ -1,0 +1,18 @@
+Step 1: The user wants the average value of wheat production from 2002-03 to 2005-06.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'commodity' is 'wheat'.
+Step 4: Select the columns '2002 - 03', '2003 - 04', '2004 - 05', '2005 - 06'.
+Step 5: Convert these values to integers, calculate the mean, and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for 'wheat'
+wheat_data = df[df['commodity'] == 'wheat']
+# Select the required years and convert to integers
+years = ['2002 - 03', '2003 - 04', '2004 - 05', '2005 - 06']
+wheat_values = wheat_data[years].astype(int).values.flatten()
+# Calculate the average
+average_wheat = wheat_values.mean()
+print(f"Final Answer: {average_wheat:.1f}")
+```

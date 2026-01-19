@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The data from 1850 to 1858 is too limited (only 9 years) and lacks consistent numerical patterns or trends for reliable forecasting. Additionally, the "deaths" column contains non-numeric entries (e.g., "not known", "none"), which limits statistical analysis. No clear correlation between tropical storms, hurricanes, and major hurricanes is evident. Therefore, forecasting future values is not feasible with this dataset.

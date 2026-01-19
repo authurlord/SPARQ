@@ -1,0 +1,14 @@
+Step 1: The user wants the total average viewership of the top 5 TV shows.  
+Step 2: Load the dataframe.  
+Step 3: Select the 'average' column, which contains the average viewership values.  
+Step 4: Sum the values for the top 5 shows (first 5 rows).  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the 'average' column and sum the top 5 values
+total_average_viewership = df['average'].astype(int).head(5).sum()
+print(f"Final Answer: {total_average_viewership}")
+```

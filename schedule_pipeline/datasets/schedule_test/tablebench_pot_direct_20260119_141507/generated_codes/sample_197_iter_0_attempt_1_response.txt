@@ -1,0 +1,20 @@
+Step 1: The question asks about the relationship between international tourism receipts and international tourist arrivals. This implies we need to analyze the correlation or trend between these two variables.
+
+Step 2: Extract the relevant columns: 'internl tourist arrivals 2011 (x1000)' and 'internl tourism receipts 2011 (million usd)'.
+
+Step 3: Compute the correlation coefficient between these two variables to determine the strength and direction of the relationship.
+
+Step 4: Print the correlation value as the answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select the relevant columns
+arrivals = df['internl tourist arrivals 2011 (x1000)']
+receipts = df['internl tourism receipts 2011 (million usd)']
+
+# Calculate the correlation coefficient
+correlation = arrivals.corr(receipts)
+print(f"Final Answer: {correlation:.2f}")
+```

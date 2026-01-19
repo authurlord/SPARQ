@@ -1,0 +1,23 @@
+Step 1: The user wants to find the high school with the greatest increase in numerical value from 2007 to 2011.  
+Step 2: Load the dataframe.  
+Step 3: Convert the columns '2007' and '2011' to numeric, handling missing values (None) as NaN.  
+Step 4: Calculate the difference between 2011 and 2007 for each school.  
+Step 5: Identify the school with the maximum increase.  
+Step 6: Print the name of the school.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert '2007' and '2011' columns to numeric, coercing errors to NaN
+df['2007'] = pd.to_numeric(df['2007'], errors='coerce')
+df['2011'] = pd.to_numeric(df['2011'], errors='coerce')
+
+# Calculate the increase from 2007 to 2011
+df['increase'] = df['2011'] - df['2007']
+
+# Find the school with the maximum increase
+max_increase_school = df.loc[df['increase'].idxmax()]['School']
+
+print(f"Final Answer: {max_increase_school}")
+```

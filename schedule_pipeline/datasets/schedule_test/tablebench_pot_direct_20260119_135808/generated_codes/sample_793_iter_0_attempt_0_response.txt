@@ -1,0 +1,17 @@
+Step 1: The user wants the standard deviation of the percentage of national votes across all elections.
+Step 2: Load the dataframe.
+Step 3: Extract the 'percentage of national vote' column, which is in the format 'X.X%'.
+Step 4: Convert the percentage strings to floats by removing the '%' sign and dividing by 100.
+Step 5: Calculate the standard deviation of the cleaned values.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean the '% of national vote' column by removing '%' and converting to float
+df['% of national vote'] = df['% of national vote'].str.replace('%', '').astype(float)
+# Calculate standard deviation
+std_dev = df['% of national vote'].std()
+print(f"Final Answer: {std_dev:.2f}")
+```

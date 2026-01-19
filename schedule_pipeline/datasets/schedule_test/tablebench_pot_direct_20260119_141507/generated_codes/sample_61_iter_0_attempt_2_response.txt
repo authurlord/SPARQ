@@ -1,0 +1,12 @@
+Step 1: The user is asking which nation has a total of 57 medals.  
+Step 2: Look at the "Total" column in the table and find the row where the total is 57.  
+Step 3: The corresponding "Nation" in that row is the answer.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the nation with total medals equal to 57
+nation_with_57 = df[df['Total'] == 57]['Nation'].values[0]
+print(f"Final Answer: {nation_with_57}")
+```

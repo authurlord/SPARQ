@@ -1,0 +1,44 @@
+Step 1: Identify the team with the most titles in the period from 1968 to 1983.  
+Step 2: Find the year when that team won their first title.  
+Step 3: Retrieve the winning coach for that specific year.  
+
+From the data:
+- The "winner (number of titles)" column shows the number of titles won by each team.
+- We need to find the team with the highest value in "winner (number of titles)".
+- Then, locate the first occurrence (earliest year) of that team's win to determine the year they won their first title.
+- From that year, extract the "winning coach".
+
+Observing the data:
+- "New York Cosmos" has titles: 1 (1969), 2 (1977), 3 (1978), 4 (1980), 5 (1982) → total of 5 titles.
+- "Atlanta Chiefs" has 1 title (1968).
+- "Rochester Lancers" has 1 title (1970).
+- Others have only 1 title.
+
+So, New York Cosmos has the most titles (5).
+
+Their first title was in 1969.  
+In 1969, the winning coach is listed as "phil woosnam".
+
+Final Answer: New York Cosmos, phil woosnam
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Find the team with the most titles
+max_titles = df['winner (number of titles)'].str.extract(r'(\w+ \w+)', expand=False).dropna()
+title_counts = df['winner (number of titles)'].str.count(r'\(')  # Count parentheses to get title count
+# Parse the winner name and count
+df['title_count'] = df['winner (number of titles)'].str.extract(r'\((\d+)\)').astype(float)
+df['winner_name'] = df['winner (number of titles)'].str.extract(r'(\w+ \w+)').str.strip()
+
+# Find the team with the maximum titles
+max_title_team = df.loc[df['title_count'].idxmax(), 'winner_name']
+first_win_year = df[df['winner_name'] == max_title_team].iloc[0]['year']
+
+# Get the winning coach in the year of their first title
+coach_in_first_win = df[df['year'] == first_win_year]['winning coach'].values[0]
+
+print(f"Final Answer: {max_title_team}, {coach_in_first_win}")
+```

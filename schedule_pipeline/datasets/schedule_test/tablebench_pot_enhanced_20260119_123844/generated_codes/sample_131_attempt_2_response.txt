@@ -1,0 +1,27 @@
+Step 1: The user wants a stacked bar chart showing the number of wins and losses for each season.
+Step 2: Load the dataframe.
+Step 3: Use the 'Win' and 'Lose' columns to create a stacked bar chart with 'League.1' on the x-axis.
+Step 4: Use matplotlib to plot the stacked bar chart.
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Set the league season as index for plotting
+df.set_index('League.1', inplace=True)
+
+# Create a stacked bar chart
+df[['Win', 'Lose']].plot(kind='bar', stacked=True, figsize=(10, 6))
+
+# Add labels and title
+plt.xlabel('Season')
+plt.ylabel('Number of Matches')
+plt.title('Wins and Losses by Season')
+plt.xticks(rotation=45)
+plt.legend(['Wins', 'Losses'])
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+```

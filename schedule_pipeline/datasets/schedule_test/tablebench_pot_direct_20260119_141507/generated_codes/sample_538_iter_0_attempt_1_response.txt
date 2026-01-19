@@ -1,0 +1,19 @@
+Step 1: Understand the question. Medal Efficiency = (Gold Medals / Total Medals). We need to compute this for each nation and find the one with the highest value.  
+Step 2: Exclude the "total" row since it represents aggregate data, not a nation.  
+Step 3: For each nation, calculate Gold / Total.  
+Step 4: Identify the nation with the maximum efficiency.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the 'total' row
+df = df[df['nation'] != 'total']
+
+# Calculate medal efficiency for each nation
+df['efficiency'] = df['gold'] / df['total']
+
+# Find the nation with the highest efficiency
+highest_efficiency_nation = df.loc[df['efficiency'].idxmax(), 'nation']
+print(f"Final Answer: {highest_efficiency_nation}")
+```

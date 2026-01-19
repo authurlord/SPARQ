@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: There is a positive correlation between the number of branches and total assets, as banks with more branches tend to have higher total assets.

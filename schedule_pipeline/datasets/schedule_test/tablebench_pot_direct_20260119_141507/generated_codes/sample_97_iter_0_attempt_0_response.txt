@@ -1,0 +1,46 @@
+Step 1: Identify the top 8 ranked teams from the table (ranked by rank column).
+Step 2: Extract the number of wins, draws, and losses for these teams.
+Step 3: Create a stacked bar chart to visualize the distribution of wins, draws, and losses.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Select top 8 teams (first 8 rows)
+top_8_teams = df.head(8)
+
+# Extract wins, draws, and losses
+wins = top_8_teams['Won'].astype(int)
+draws = top_8_teams['Drawn'].astype(int)
+losses = top_8_teams['Lost'].astype(int)
+
+# Create a list of team names
+teams = top_8_teams['Club']
+
+# Create a stacked bar chart
+plt.figure(figsize=(12, 6))
+bar_width = 0.25
+index = range(len(teams))
+
+plt.bar(index, wins, bar_width, label='Wins', color='skyblue')
+plt.bar([i + bar_width for i in index], draws, bar_width, label='Draws', color='lightgreen')
+plt.bar([i + 2*bar_width for i in index], losses, bar_width, label='Losses', color='salmon')
+
+# Labels and title
+plt.xlabel('Team')
+plt.ylabel('Number of Matches')
+plt.title('Stacked Bar Chart of Wins, Draws, and Losses for Top 8 Ranked Teams')
+plt.xticks([i + bar_width for i in index], teams, rotation=45)
+plt.legend()
+
+# Improve layout
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```
+
+Final Answer: None

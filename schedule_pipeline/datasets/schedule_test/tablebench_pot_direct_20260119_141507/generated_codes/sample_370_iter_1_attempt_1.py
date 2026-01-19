@@ -1,0 +1,17 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert elevation and prominence to integers
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'], errors='coerce')
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'], errors='coerce')
+
+# Filter mountains in Tanzania with elevation > 3000 and prominence < 3000
+filtered_mountains = df[
+    (df['country'] == 'tanzania') &
+    (df['elevation (m)'] > 3000) &
+    (df['prominence (m)'] < 3000)
+]
+
+# Count the number of such mountains
+count = len(filtered_mountains)
+print(f"Final Answer: {count}")

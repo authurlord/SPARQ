@@ -1,0 +1,17 @@
+Step 1: The user wants to identify the year with the highest crude birth rate per 1000.
+Step 2: Load the dataframe.
+Step 3: Convert the 'Crude birth rate (per 1000)' column to numeric, handling any potential formatting issues (e.g., spaces in numbers).
+Step 4: Find the row with the maximum value in this column.
+Step 5: Extract and print the corresponding year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Crude birth rate (per 1000)' to numeric, handling any non-numeric values (like spaces)
+df['Crude birth rate (per 1000)'] = pd.to_numeric(df['Crude birth rate (per 1000)'], errors='coerce')
+
+# Find the year with the highest crude birth rate
+max_birth_rate_year = df.loc[df['Crude birth rate (per 1000)'].idxmax(), 'Unnamed: 0']
+print(f"Final Answer: {max_birth_rate_year}")
+```

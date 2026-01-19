@@ -1,0 +1,14 @@
+Step 1: The user wants to know how many seasons Liverpool played in the Premier League.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Club' is 'Liverpool' and 'League' is 'Premier League'.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Liverpool and Premier League seasons
+liverpool_premier_league = df[(df['Club'] == 'Liverpool') & (df['League'] == 'Premier League')]
+# Count the number of seasons
+num_seasons = len(liverpool_premier_league)
+print(f"Final Answer: {num_seasons}")
+```

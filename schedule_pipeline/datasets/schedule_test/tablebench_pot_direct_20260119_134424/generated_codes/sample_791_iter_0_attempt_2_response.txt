@@ -1,0 +1,19 @@
+Step 1: The user wants the median number of aircraft movements for the top 10 busiest airports.
+Step 2: Load the dataframe.
+Step 3: Select the 'aircraft movements' column and convert it to integers.
+Step 4: Extract the first 10 rows (top 10 busiest airports by passengers).
+Step 5: Calculate the median of 'aircraft movements' for these 10 airports.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'aircraft movements' to integer
+df['aircraft movements'] = pd.to_numeric(df['aircraft movements'])
+# Get the top 10 airports by passengers
+top_10 = df.head(10)
+# Calculate median of aircraft movements for top 10
+median_movements = top_10['aircraft movements'].median()
+print(f"Final Answer: {median_movements}")
+```

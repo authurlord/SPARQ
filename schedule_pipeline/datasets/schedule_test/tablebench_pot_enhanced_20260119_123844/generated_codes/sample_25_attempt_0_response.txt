@@ -1,0 +1,13 @@
+Step 1: The user wants the average percentage of males across all states.
+Step 2: Load the dataframe.
+Step 3: Select the 'males (%)' column, convert it to numeric, and calculate the mean.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'males (%)' column to numeric and calculate mean
+average_males = df['males (%)'].astype(float).mean()
+print(f"Final Answer: {average_males:.1f}")
+```

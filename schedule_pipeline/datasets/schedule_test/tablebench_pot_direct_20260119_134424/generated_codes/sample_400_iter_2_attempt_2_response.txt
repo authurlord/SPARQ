@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: seasonal data on tropical disturbances, tropical cyclones, severe tropical cyclones, strongest storm of the season, and number of deaths; trends show variability in storm frequency with peak activity in 2002-03 and highest fatalities in 2002-03; overall increasing pattern in total storms over seasons

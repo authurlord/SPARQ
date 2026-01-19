@@ -1,0 +1,14 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert the relevant columns to numeric, forcing errors to be coerced to NaN
+emissions_per_person = pd.to_numeric(df['carbon dioxide emissions per year (tons per person) (2007)'], errors='coerce')
+avg_emission_per_km2 = pd.to_numeric(df['avg emission per km 2 of its land (tons)'], errors='coerce')
+
+# Drop rows with missing values after conversion
+clean_data = pd.concat([emissions_per_person, avg_emission_per_km2], axis=1).dropna()
+
+# Calculate the correlation coefficient
+correlation = clean_data.iloc[:, 0].corr(clean_data.iloc[:, 1])
+
+print(f"Final Answer: {correlation:.3f}")

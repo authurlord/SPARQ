@@ -1,0 +1,15 @@
+Step 1: The user wants the difference between the average relative annual growth rate of Egypt and Morocco.
+Step 2: Load the dataframe.
+Step 3: Extract the 'average relative annual growth (%)' values for Egypt and Morocco.
+Step 4: Calculate the difference and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for Egypt and Morocco
+egypt_growth = df[df['country (or dependent territory)'] == 'egypt']['average relative annual growth (%)'].values[0]
+morocco_growth = df[df['country (or dependent territory)'] == 'morocco']['average relative annual growth (%)'].values[0]
+# Calculate the difference
+difference = float(egypt_growth) - float(morocco_growth)
+print(f"Final Answer: {difference:.2f}")
+```

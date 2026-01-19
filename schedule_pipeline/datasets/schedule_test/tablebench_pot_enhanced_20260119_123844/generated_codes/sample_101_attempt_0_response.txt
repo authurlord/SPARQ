@@ -1,0 +1,25 @@
+Step 1: The user wants a pie chart showing the vote share of candidates from various political parties.
+Step 2: Load the dataframe.
+Step 3: Filter out rows that are not actual candidates (e.g., 'Total valid votes', 'Total rejected ballots', etc.).
+Step 4: Convert the '%', column to float for plotting.
+Step 5: Use matplotlib to draw a pie chart.
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter out non-candidate rows
+candidates = df[df['Party'] != 'Total valid votes']
+candidates = candidates[candidates['Party'] != 'Total rejected ballots']
+candidates = candidates[candidates['Party'] != 'Turnout']
+candidates = candidates[candidates['Party'] != 'Eligible voters']
+
+# Convert percentage to float
+candidates['%'] = candidates['%'].astype(float)
+
+# Plot pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(candidates['%'], labels=candidates['Party'], autopct='%1.1f%%', startangle=140)
+plt.title('Vote Share by Political Party')
+plt.show()
+```

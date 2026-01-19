@@ -1,0 +1,13 @@
+Step 1: The user is asking for a detailed description of the table and initial observations about trends in political party support over time. This is not a quantitative analysis request (e.g., average, sum), but rather a descriptive and interpretive one.
+
+Step 2: The table contains data on polling results across different dates, with columns for polling firm, date, link, and support percentages for three political parties: Progressive Conservative, Liberal, and New Democratic.
+
+Step 3: To provide a detailed description:
+- List the columns and their meaning.
+- Summarize key observations such as trends in support over time, especially focusing on the Progressive Conservative party, which appears to have a dominant trend from early 2008 to late 2011.
+
+Step 4: Since the question asks for a detailed description and observations, we will write a clear, concise explanation and then present it as the final answer.
+
+Note: The data spans from 2007 to 2011, with most entries from Corporate Research Associates. The Progressive Conservative party shows a general decline in support from 82% in November 2007 to 59% in late 2011, while the Liberal party shows fluctuation, and the New Democratic party remains relatively stable or slightly increasing.
+
+Final Answer: columns: polling firm, date of polling, link, progressive conservative, liberal, new democratic; trend: progressive conservative support declines from 82% (2007) to 59% (2011), liberal support fluctuates, new democratic support remains stable or slightly increases

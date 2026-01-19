@@ -1,0 +1,27 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter provinces with PCI > 12
+filtered_df = df[df['PCI'].astype(float) > 12]
+
+# Convert DC and PSI to float for plotting
+filtered_df['DC'] = filtered_df['DC'].astype(float)
+filtered_df['PSI'] = filtered_df['PSI'].astype(float)
+
+# Plot DC vs PSI
+plt.figure(figsize=(8, 5))
+plt.scatter(filtered_df['DC'], filtered_df['PSI'])
+plt.title('PSI vs DC for Provinces with PCI > 12')
+plt.xlabel('DC')
+plt.ylabel('PSI')
+plt.grid(True)
+plt.show()
+
+# Analyze the trend: As DC increases, does PSI increase or decrease?
+# From data: Verona (44.3, 14.2), Vicenza (49.1, 10.1), Padua (46.1, 10.7), Treviso (44.5, 14.1), Belluno (39.3, 23.8), Venice (31.7, 15.9), Rovigo (35.2, 15.5), Veneto (42.3, 13.7)
+# No clear monotonic trend; PSI fluctuates with DC.
+
+# Final answer: Based on the data, PSI does not consistently increase or decrease with DC. 
+# However, since the question asks "how" PSI changes, and no single pattern is evident, the answer reflects the lack of a consistent trend.
+print("Final Answer: No consistent trend")

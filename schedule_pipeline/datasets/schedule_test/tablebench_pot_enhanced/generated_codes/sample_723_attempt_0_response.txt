@@ -1,0 +1,13 @@
+Step 1: The user wants to identify the make and model of buses with the highest quantity.
+Step 2: Load the dataframe.
+Step 3: Find the row with the maximum value in the 'quantity' column.
+Step 4: Extract the 'make and model' from that row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row with the maximum quantity
+max_quantity_row = df.loc[df['quantity'].idxmax()]
+make_and_model = max_quantity_row['make and model']
+print(f"Final Answer: {make_and_model}")
+```

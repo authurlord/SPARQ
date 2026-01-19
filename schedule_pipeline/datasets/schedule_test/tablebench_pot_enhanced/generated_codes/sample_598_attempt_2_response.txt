@@ -1,0 +1,12 @@
+Step 1: The user wants to calculate the new viewership after a 10% increase from 9.2 million.
+Step 2: Use the formula: new viewership = original viewership * (1 + 0.10).
+Step 3: Perform the calculation and print the result.
+```python
+# Original viewership in millions
+original_viewership = 9.2
+
+# Calculate 10% increase
+new_viewership = original_viewership * 1.10
+
+print(f"Final Answer: {new_viewership:.1f}")
+```

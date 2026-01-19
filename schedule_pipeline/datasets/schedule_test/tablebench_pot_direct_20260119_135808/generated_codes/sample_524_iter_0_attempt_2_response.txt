@@ -1,0 +1,26 @@
+Step 1: The question asks for the change in total seating capacity from 2004 to 2008. We need to calculate the total seating capacity in 2004 (when the first aircraft was introduced) and in 2008 (when newer aircraft were introduced), then compute the difference.
+
+Step 2: Load the dataframe.
+
+Step 3: Filter rows where 'introduced' is 2004 or earlier (for 2004 capacity) and where 'introduced' is 2008 or earlier (for 2008 capacity). Note that aircraft retired before 2008 are not included in 2008 fleet.
+
+Step 4: Sum the 'seating' values for each year, then compute the difference.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter aircraft introduced in or before 2004
+capacity_2004 = df[df['introduced'] == '2004']['seating'].sum()
+
+# Filter aircraft introduced in or before 2008
+capacity_2008 = df[df['introduced'].isin(['2004', '2008'])]['seating'].sum()
+
+# Calculate change in capacity
+change = capacity_2008 - capacity_2004
+
+print(f"Final Answer: {change}")
+```

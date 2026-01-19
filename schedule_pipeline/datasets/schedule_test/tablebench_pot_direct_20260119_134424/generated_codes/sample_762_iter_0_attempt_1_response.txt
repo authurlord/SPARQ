@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The data from 1850 to 1858 is too limited (only 9 years) and lacks consistent numerical patterns or clear trends in tropical storms, hurricanes, or major hurricanes. Additionally, death counts are inconsistently recorded (e.g., "not known", "100 +"). With such sparse and unreliable historical data, no reliable forecast can be made for the next 5 years.

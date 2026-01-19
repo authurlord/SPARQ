@@ -1,0 +1,18 @@
+Step 1: The user wants the average US Chart position for songs released in 1944.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Year' is '1944'.
+Step 4: Convert 'US Chart position' to numeric, handling any non-numeric values (like '8 (R&B)') by skipping or replacing them.
+Step 5: Calculate the mean of the valid US Chart positions and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for year 1944
+df_1944 = df[df['Year'] == '1944']
+# Convert 'US Chart position' to numeric, coercing errors to NaN
+df_1944['US Chart position'] = pd.to_numeric(df_1944['US Chart position'], errors='coerce')
+# Calculate the mean of valid positions
+mean_position = df_1944['US Chart position'].mean()
+print(f"Final Answer: {mean_position:.1f}")
+```

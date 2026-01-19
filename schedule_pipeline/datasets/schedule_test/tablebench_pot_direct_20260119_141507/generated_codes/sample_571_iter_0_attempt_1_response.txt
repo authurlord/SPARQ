@@ -1,0 +1,27 @@
+Step 1: The user wants the average change in qualifying score for the 'all around' event from 'olympic trials' to 'us championships' in 2008.  
+Step 2: Filter the rows where the event is 'all around' and the competition is either 'olympic trials' or 'us championships'.  
+Step 3: Extract the qualifying score for these rows.  
+Step 4: Calculate the difference (change) in qualifying score between 'olympic trials' and 'us championships'.  
+Step 5: Compute the average of these changes.  
+
+Note: Only two rows have 'all around' event: one from 'olympic trials' (qualifying rank 4, qualifying score 61.4) and one from 'us championships' (qualifying rank 4, qualifying score 60.75).  
+Change = qualifying score at 'us championships' - qualifying score at 'olympic trials'  
+Average change = that single difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where event is 'all around' and year is 2008
+filtered_df = df[(df['event'] == 'all around') & (df['year'] == '2008')]
+
+# Extract qualifying scores for 'olympic trials' and 'us championships'
+olympic_qualifying = filtered_df[filtered_df['competition'] == 'olympic trials']['qualifying score'].iloc[0]
+us_championships_qualifying = filtered_df[filtered_df['competition'] == 'us championships']['qualifying score'].iloc[0]
+
+# Calculate the change
+change = us_championships_qualifying - olympic_qualifying
+
+# Since there's only one such pair, the average change is just this value
+print(f"Final Answer: {change:.3f}")
+```

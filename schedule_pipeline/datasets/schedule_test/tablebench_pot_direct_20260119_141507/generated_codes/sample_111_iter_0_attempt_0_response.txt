@@ -1,0 +1,26 @@
+Step 1: The user wants a line chart showing the relationship between the number of spectators and the dates of the matches.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'Date' and 'Spectators' columns.  
+Step 4: Convert 'Date' to datetime for proper plotting.  
+Step 5: Use matplotlib to create a line chart with dates on the x-axis and spectators on the y-axis.  
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Convert Date column to datetime
+df['Date'] = pd.to_datetime(df['Date'])
+# Plot spectators over time
+plt.figure(figsize=(10, 6))
+plt.plot(df['Date'], df['Spectators'], marker='o', linestyle='-', color='b')
+plt.title('Spectators Over Match Dates')
+plt.xlabel('Date')
+plt.ylabel('Number of Spectators')
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: None

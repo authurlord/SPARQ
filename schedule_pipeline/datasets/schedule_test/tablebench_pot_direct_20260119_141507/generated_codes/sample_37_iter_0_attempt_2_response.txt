@@ -1,0 +1,17 @@
+Step 1: The user wants the total average rating of all TV dramas.  
+Step 2: The 'average' column contains the average ratings.  
+Step 3: We need to sum all values in the 'average' column and divide by the number of rows to get the mean (average rating).  
+Step 4: Since the question asks for "total average rating", it is likely a misphrasing and should be interpreted as the mean average rating per drama.  
+
+However, if "total average rating" means summing all average values (not mean), that would be unusual. Given context, it's more logical to interpret it as the mean average rating.
+
+We will compute the mean of the 'average' column.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the mean of the 'average' column
+mean_average_rating = df['average'].mean()
+print(f"Final Answer: {mean_average_rating}")
+```

@@ -1,0 +1,16 @@
+Step 1: The user wants the average number of viewers for the first 5 episodes.
+Step 2: Load the dataframe.
+Step 3: Select the 'viewers (millions)' column and convert it to numeric.
+Step 4: Take the first 5 rows and calculate the mean.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'viewers (millions)' to float
+df['viewers (millions)'] = pd.to_numeric(df['viewers (millions)'], errors='coerce')
+# Calculate average viewers for the first 5 episodes
+average_viewers = df['viewers (millions)'].head(5).mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

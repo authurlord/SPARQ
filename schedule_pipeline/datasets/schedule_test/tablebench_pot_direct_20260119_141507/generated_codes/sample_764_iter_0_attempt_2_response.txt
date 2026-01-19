@@ -1,0 +1,33 @@
+Step 1: The user wants to forecast the issue price for 2012 based on the trend from 2000 to 2011.  
+Step 2: Observe that all coins have the same composition ("75% gold, 25% silver") and artist ("Harvey Chan"), so we can ignore those variables.  
+Step 3: Extract the "issue price" column for years 2000 to 2011 and analyze the trend.  
+Step 4: Since the prices show a clear increasing pattern, we can fit a linear trend and project it to 2012.  
+
+We will:
+- Load the data.
+- Extract issue prices from 2000 to 2011.
+- Fit a linear regression model to predict the price for 2012.
+- Output the forecasted price.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+# Extract year and issue price
+years = df['year'].astype(int)
+prices = df['issue price'].astype(float)
+
+# Prepare data for linear regression: year as feature, price as target
+X = years.values.reshape(-1, 1)
+y = prices.values
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict price for 2012
+forecast_2012 = model.predict([[2012]])[0]
+print(f"Final Answer: {forecast_2012:.2f}")
+```

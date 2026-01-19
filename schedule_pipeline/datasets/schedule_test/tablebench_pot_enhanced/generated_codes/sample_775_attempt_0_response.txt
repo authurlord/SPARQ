@@ -1,0 +1,35 @@
+Step 1: The user is asking for a forecast of the team's performance trend for the next five years based on historical data from 2008 to 2013. However, forecasting requires modeling assumptions (e.g., linear trend, growth rate), and the dataset only provides summary statistics.
+
+Step 2: Since no explicit forecasting method is specified, we can analyze the trend in "success rate" over time and extrapolate it linearly as a simple forecast.
+
+Step 3: Extract the "success rate" values for each year (excluding the "total" row) and convert them to numeric by removing the '%' sign.
+
+Step 4: Fit a linear regression model to the success rate over the years to predict future success rates.
+
+Step 5: Predict the success rate for the next five years (2014–2018) and print the forecasted values.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Remove the 'total' row
+df = df[df['year'] != 'total']
+
+# Convert success rate to float
+df['success rate'] = df['success rate'].str.replace('%', '').astype(float)
+
+# Define years and success rates
+years = df['year'].astype(int)
+success_rates = df['success rate'].values
+
+# Fit a linear regression model
+slope, intercept = np.polyfit(years, success_rates, 1)
+
+# Predict success rates for next 5 years
+future_years = np.arange(2014, 2019)
+predicted_success_rates = slope * future_years + intercept
+
+# Print the forecasted success rates
+print(f"Final Answer: {predicted_success_rates[0]:.2f}%, {predicted_success_rates[1]:.2f}%, {predicted_success_rates[2]:.2f}%, {predicted_success_rates[3]:.2f}%, {predicted_success_rates[4]:.2f}%")
+```

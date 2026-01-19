@@ -1,0 +1,15 @@
+Step 1: Identify the relevant rows where the event is "Heptathlon" and the competition is "South American Championships" held in "Lima, Peru".  
+Step 2: Check the "Year" and "Notes" columns to find the year and corresponding points score.  
+Step 3: From the data, we see that in 2009, the athlete achieved 1st position in Heptathlon at South American Championships in Lima, Peru, with 5578 points.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Event is 'Heptathlon' and Competition is 'South American Championships' and Venue is 'Lima, Peru'
+filtered_df = df[(df['Event'] == 'Heptathlon') & (df['Competition'] == 'South American Championships') & (df['Venue'] == 'Lima, Peru')]
+# Extract the year and points score
+year = filtered_df.iloc[0]['Year']
+points = filtered_df.iloc[0]['Notes']
+print(f"Final Answer: {year}, {points}")
+```

@@ -1,0 +1,6 @@
+Step 1: The user is asking for a detailed description of the table, including the main columns and observations about trends in political party support over time.  
+Step 2: Identify the columns: "polling firm", "date of polling", "link", "progressive conservative", "liberal", "new democratic".  
+Step 3: Observe trends in party support by analyzing the values across different polling dates. Note that the "progressive conservative" support appears to be highest at the beginning (e.g., 82% in 2007) and gradually decreases over time, while "liberal" support shows a slight increase from 12% in 2007 to 22% in 2009, and then fluctuates. "New Democratic" support remains relatively stable but slightly decreases over time.  
+Step 4: Since the question asks for a description and initial observations, we will summarize key points in plain language.
+
+Final Answer: polling firm, date of polling, link, progressive conservative, liberal, new democratic, progressive conservative support peaks early and declines, liberal support increases slightly, new democratic support remains stable with minor fluctuations

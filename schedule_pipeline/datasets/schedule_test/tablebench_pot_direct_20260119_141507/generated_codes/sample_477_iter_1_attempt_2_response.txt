@@ -1,0 +1,37 @@
+The issue arises because the "points" column contains some non-numeric values (like "-" or "-20"), which cannot be directly converted to numbers for analysis. We need to identify songs where the points significantly deviate from the general pattern — particularly those with unusually high or low point values.
+
+Step-by-step approach:
+1. Load the data.
+2. Convert the "points" column to numeric, treating non-numeric entries (like "-" or text) as NaN.
+3. Exclude invalid entries or focus only on valid numeric points.
+4. Compute the mean and standard deviation of points to understand the normal range.
+5. Identify songs whose points are more than 2 standard deviations away from the mean (outliers).
+6. Return the song names associated with such outliers.
+
+Note: The value "-20" in the last row is likely intended as a negative number (e.g., -20), so we treat it as such.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'points' to numeric, coercing errors to NaN
+df['points'] = pd.to_numeric(df['points'], errors='coerce')
+
+# Remove rows where points are NaN
+df_clean = df.dropna(subset=['points'])
+
+# Calculate mean and standard deviation of points
+mean_points = df_clean['points'].mean()
+std_points = df_clean['points'].std()
+
+# Identify outliers using 2 standard deviations rule
+threshold = 2 * std_points
+outliers = df_clean[(df_clean['points'] > mean_points + threshold) | (df_clean['points'] < mean_points - threshold)]
+
+# Extract song names of outliers
+outlier_songs = outliers['song'].tolist()
+
+print(f"Final Answer: {', '.join(outlier_songs)}")
+```

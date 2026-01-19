@@ -1,0 +1,24 @@
+Step 1: The user wants a pie chart showing the proportions of cases for various infectious diseases in the year 1933.
+Step 2: Load the dataframe.
+Step 3: Filter the data for the year 1933.
+Step 4: Select the columns corresponding to diseases (typhus, typhoid fever, relapsing fever, smallpox, malaria).
+Step 5: Use matplotlib to create a pie chart with these values.
+Step 6: Display the pie chart.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Filter data for the year 1933
+data_1933 = df[df['year'] == '1933']
+# Select disease columns
+diseases = data_1933[['typhus', 'typhoid fever', 'relapsing fever', 'smallpox', 'malaria']].values.flatten()
+# Disease names
+labels = ['Typhus', 'Typhoid Fever', 'Relapsing Fever', 'Smallpox', 'Malaria']
+# Create pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(diseases, labels=labels, autopct='%1.1f%%', startangle=140)
+plt.title('Proportions of Infectious Disease Cases in 1933')
+plt.show()
+```

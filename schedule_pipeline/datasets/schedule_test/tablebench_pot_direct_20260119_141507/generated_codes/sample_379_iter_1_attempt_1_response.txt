@@ -1,0 +1,26 @@
+The error occurred because the "Deaths" column contains string values (e.g., '360', '370') that are not properly parsed as integers. We need to ensure that the column is converted to numeric before comparing.
+
+Step 1: Load the dataframe.
+Step 2: Convert the "Deaths" and "Natural change" columns to numeric (to handle any formatting issues like spaces or non-numeric strings).
+Step 3: Filter rows where:
+   - Natural change > 150
+   - Deaths < 350
+Step 4: Count the number of such years.
+Step 5: Print the count.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Deaths' and 'Natural change' to numeric, coercing errors to NaN if needed
+df['Deaths'] = pd.to_numeric(df['Deaths'], errors='coerce')
+df['Natural change'] = pd.to_numeric(df['Natural change'], errors='coerce')
+
+# Filter rows where natural change > 150 and deaths < 350
+filtered_rows = df[(df['Natural change'] > 150) & (df['Deaths'] < 350)]
+
+# Count the number of such years
+count = len(filtered_rows)
+print(f"Final Answer: {count}")
+```

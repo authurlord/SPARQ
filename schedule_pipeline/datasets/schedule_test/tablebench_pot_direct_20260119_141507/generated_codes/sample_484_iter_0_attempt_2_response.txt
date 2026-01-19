@@ -1,0 +1,41 @@
+Step 1: The user is asking to identify mountain peaks whose elevation and prominence significantly deviate from the general pattern.  
+Step 2: "Significant deviation" can be interpreted as outliers — values that are much higher or lower than the majority of the data.  
+Step 3: We will calculate the mean and standard deviation of elevation and prominence, then identify peaks where elevation or prominence are more than 2 standard deviations away from the mean (common outlier detection method).  
+Step 4: Filter the data for such outliers and return their names.
+
+Note: Since the data is small, we can also visually inspect extreme values (e.g., very high or very low elevation/prominence).
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert elevation and prominence to numeric
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'], errors='coerce')
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'], errors='coerce')
+
+# Remove rows with NaN due to conversion errors
+df = df.dropna(subset=['elevation (m)', 'prominence (m)'])
+
+# Calculate mean and std for elevation and prominence
+mean_elev = df['elevation (m)'].mean()
+std_elev = df['elevation (m)'].std()
+
+mean_prom = df['prominence (m)'].mean()
+std_prom = df['prominence (m)'].std()
+
+# Identify outliers using 2 standard deviations rule
+outliers_elev = df[(df['elevation (m)'] > mean_elev + 2 * std_elev) | (df['elevation (m)'] < mean_elev - 2 * std_elev)]
+outliers_prom = df[(df['prominence (m)'] > mean_prom + 2 * std_prom) | (df['prominence (m)'] < mean_prom - 2 * std_prom)]
+
+# Combine and get unique peak names
+outlier_peaks = set()
+for idx, row in outliers_elev.iterrows():
+    outlier_peaks.add(row['peak'])
+for idx, row in outliers_prom.iterrows():
+    outlier_peaks.add(row['peak'])
+
+# Return the peak names
+outlier_names = list(outlier_peaks)
+print(f"Final Answer: {', '.join(outlier_names)}")
+```

@@ -1,0 +1,11 @@
+Step 1: The question asks for an estimate of the percentage of students learning in Russian for the school year 2009–2010, based on the historical trend of increasing percentages of students learning in Latvian from 1995 to 2007.
+
+Step 2: However, the data provided only includes percentages for "learning in Latvian" and does not provide any direct data on the percentage of students learning in Russian. The "Russian" row shows a decreasing trend over time, which may suggest a decline rather than an increase.
+
+Step 3: Since there is no explicit trend or model provided for Russian language learning, and the data ends at 2006–2007, we cannot reliably extrapolate the percentage for 2009–2010 without assumptions.
+
+Step 4: Given the lack of sufficient data and clear trend information for Russian, a valid prediction cannot be made with confidence.
+
+Therefore, the question cannot be answered with certainty based on the given data.
+
+Final Answer: none

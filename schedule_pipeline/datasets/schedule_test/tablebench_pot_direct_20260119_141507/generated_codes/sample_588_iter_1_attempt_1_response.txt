@@ -1,0 +1,28 @@
+The error occurred because the value "47.2%" was treated as a string and not converted to a float for calculation. We need to extract the numeric value from the "% of national vote" column, convert it to a decimal, and then apply the 10% increase to the actual number of national votes in 1965.
+
+Step-by-step approach:
+1. Locate the row for the year 1965.
+2. Extract the number of national votes (which is "17583490").
+3. Convert the percentage ("47.2%") to a decimal (47.2 / 100).
+4. Calculate 10% increase on the national votes by multiplying the original value by 1.10.
+5. Output the result.
+
+Note: The percentage value is not needed for the increase since we are only increasing the raw vote count, not scaling it.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Find the row for 1965
+row_1965 = df[df['election'] == '1965']
+
+# Extract the number of national votes for 1965
+national_votes_1965 = int(row_1965['of national votes'].values[0])
+
+# Increase by 10%
+increased_votes = national_votes_1965 * 1.10
+
+print(f"Final Answer: {int(increased_votes)}")
+```

@@ -1,0 +1,30 @@
+Step 1: The user wants to find the maximum number of years a locomotive built in 1938 could have been in service, assuming it was withdrawn in the latest possible year.
+
+Step 2: Filter the data for locomotives built in 1938 (i.e., 'Date Built' contains '1938').
+
+Step 3: For each such locomotive, calculate the number of years it was in service by converting the 'Date Built' and 'Date Withdrawn' into years.
+
+Step 4: Extract the maximum value of this duration.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where 'Date Built' contains '1938'
+df_1938 = df[df['Date Built'].str.contains('1938', na=False)]
+
+# Convert 'Date Built' and 'Date Withdrawn' to year only
+df_1938['Year Built'] = df_1938['Date Built'].str.extract(r'(\d{4})').astype(int)
+df_1938['Year Withdrawn'] = df_1938['Date Withdrawn'].str.extract(r'(\d{4})').astype(int)
+
+# Calculate years in service
+df_1938['Years in Service'] = df_1938['Year Withdrawn'] - df_1938['Year Built']
+
+# Find maximum years in service
+max_years = df_1938['Years in Service'].max()
+
+print(f"Final Answer: {max_years}")
+```

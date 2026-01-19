@@ -1,0 +1,34 @@
+Step 1: The user wants to identify the year(s) where the natural growth rate was significantly different from the average natural growth rate between 1990 and 2000.
+
+Step 2: Load the dataframe.
+
+Step 3: Filter data for years 1990 to 2000 (inclusive).
+
+Step 4: Calculate the average natural growth rate for this period.
+
+Step 5: Compare each year's natural growth rate to the average, and flag any year with a significant deviation (e.g., more than 0.5 units away from the average).
+
+Step 6: Output the year(s) that meet the condition.
+
+Note: Since "significantly different" is subjective, we'll define it as a difference greater than 0.5 from the average.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter data for years 1990 to 2000
+df_1990_2000 = df[(df['year'] >= '1990') & (df['year'] <= '2000')]
+
+# Convert 'natural growth' to float
+df_1990_2000['natural growth'] = pd.to_numeric(df_1990_2000['natural growth'])
+
+# Calculate average natural growth rate from 1990 to 2000
+avg_natural_growth = df_1990_2000['natural growth'].mean()
+
+# Identify years with significant deviation (>0.5 from average)
+significant_years = df_1990_2000[abs(df_1990_2000['natural growth'] - avg_natural_growth) > 0.5]['year']
+
+# Print the result
+print(f"Final Answer: {', '.join(significant_years)}")
+```

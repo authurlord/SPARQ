@@ -1,0 +1,30 @@
+The error occurred because the "viewers (millions)" column contains values concatenated across multiple rows (e.g., "11.9912.7311.8810.6910.29"), which is not valid data. Looking at the table, each row has a separate "viewers (millions)" value, so we must correctly parse each row's viewers value as a numeric value.
+
+Step-by-step:
+1. Load the dataframe.
+2. Extract the "viewers (millions)" column, which is in string format but should be parsed as float.
+3. Filter episodes where the "rating" is 6.0 or higher.
+4. Compute the average of the filtered viewers values.
+
+Note: The original data shows that "viewers (millions)" is properly listed per row, so we don't need to concatenate. The issue was likely due to misreading the data structure. Each row has its own viewers value.
+
+Corrected approach:
+- Use `df['viewers (millions)']` directly and convert to float.
+- Filter rows where 'rating' >= 6.0.
+- Compute mean of filtered viewers.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert viewers (millions) to numeric, handling any parsing issues
+df['viewers (millions)'] = pd.to_numeric(df['viewers (millions)'], errors='coerce')
+
+# Filter episodes with rating >= 6.0
+filtered_episodes = df[df['rating'].astype(float) >= 6.0]
+
+# Calculate average viewers for these episodes
+average_viewers = filtered_episodes['viewers (millions)'].mean()
+
+print(f"Final Answer: {average_viewers:.2f}")
+```

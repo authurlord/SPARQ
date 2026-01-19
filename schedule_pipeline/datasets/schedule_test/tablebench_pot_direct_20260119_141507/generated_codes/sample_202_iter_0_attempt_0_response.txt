@@ -1,0 +1,34 @@
+Step 1: The question asks which component (2nd or 3rd) has a greater impact on the boiling point of the azeotrope. The boiling point of the azeotrope (bp azeo) is given, and we need to determine whether it is more closely related to the 2nd component's boiling point (bp 2nd comp) or the 3rd component's boiling point (bp 3rd comp).
+
+Step 2: For each row, compute the absolute difference between the azeotrope boiling point and the 2nd component's boiling point, and between the azeotrope boiling point and the 3rd component's boiling point.
+
+Step 3: Compare the average of these differences for both components. If the average difference to the 2nd component is smaller, then the 2nd component has a greater impact. Otherwise, the 3rd component has a greater impact.
+
+Step 4: Perform the calculation and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert boiling point columns to float
+df['bp 2nd comp (˚c)'] = pd.to_numeric(df['bp 2nd comp (˚c)'], errors='coerce')
+df['bp 3rd comp (˚c)'] = pd.to_numeric(df['bp 3rd comp (˚c)'], errors='coerce')
+df['bp azeo (˚c)'] = pd.to_numeric(df['bp azeo (˚c)'], errors='coerce')
+
+# Calculate absolute differences
+diff_2nd = abs(df['bp azeo (˚c)'] - df['bp 2nd comp (˚c)'])
+diff_3rd = abs(df['bp azeo (˚c)'] - df['bp 3rd comp (˚c)'])
+
+# Compute average differences
+avg_diff_2nd = diff_2nd.mean()
+avg_diff_3rd = diff_3rd.mean()
+
+# Determine which has greater impact
+if avg_diff_2nd < avg_diff_3rd:
+    result = "2nd component"
+else:
+    result = "3rd component"
+
+print(f"Final Answer: {result}")
+```

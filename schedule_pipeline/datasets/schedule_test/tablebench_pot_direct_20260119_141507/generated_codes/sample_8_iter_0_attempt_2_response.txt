@@ -1,0 +1,16 @@
+Step 1: The user wants the average of the "% of national vote" column across all leaders.
+Step 2: Load the dataframe.
+Step 3: Extract the "% of national vote" column, which contains values like "39.7%", "41.2%", etc.
+Step 4: Convert these percentage strings to numeric values (removing the % sign and converting to float).
+Step 5: Compute the mean of these values and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the '% of national vote' column and convert to float (remove %)
+national_vote_percent = df['% of national vote'].str.replace('%', '').astype(float)
+# Calculate the mean
+mean_national_vote = national_vote_percent.mean()
+print(f"Final Answer: {mean_national_vote:.2f}")
+```

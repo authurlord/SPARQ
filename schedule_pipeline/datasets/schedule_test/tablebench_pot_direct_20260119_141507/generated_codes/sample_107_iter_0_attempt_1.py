@@ -1,0 +1,38 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter data for ATL team from 1997 to 2003
+atl_data = df[(df['Team'] == 'ATL') & (df['Year'].between(1997, 2003))]
+
+# Extract the relevant columns
+wins = atl_data['Regular Season Won']
+losses = atl_data['Regular Season Lost']
+ties = atl_data['Regular Season Ties']
+years = atl_data['Year']
+
+# Create a stacked bar chart
+plt.figure(figsize=(10, 6))
+bar_width = 0.25
+index = range(len(years))
+
+# Plot wins, losses, and ties in a stacked manner
+plt.bar(index, wins, bar_width, label='Wins', color='skyblue')
+plt.bar([i + bar_width for i in index], losses, bar_width, label='Losses', color='salmon')
+plt.bar([i + 2*bar_width for i in index], ties, bar_width, label='Ties', color='lightgreen')
+
+# Add labels and title
+plt.xlabel('Year')
+plt.ylabel('Number of Games')
+plt.title('Regular Season Results for ATL Team (1997-2003)')
+plt.xticks([i + bar_width for i in index], years)
+plt.legend()
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+
+# Final Answer: The chart has been generated as requested.
+Final Answer: chart_generated

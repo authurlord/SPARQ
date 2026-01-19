@@ -1,0 +1,18 @@
+Step 1: Filter the data to include only songs written by Glen Campbell.
+Step 2: Among those, filter songs released in the 1980s (Year between 1980 and 1989).
+Step 3: Count the number of such songs.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for songs by Glen Campbell
+glen_campbell_songs = df[df['Artist'] == 'Glen Campbell']
+# Filter for songs released in the 1980s
+eighties_songs = glen_campbell_songs[glen_campbell_songs['Year'].astype(int) >= 1980]
+eighties_songs = eighties_songs[eighties_songs['Year'].astype(int) <= 1989]
+# Count the number of songs
+count = len(eighties_songs)
+print(f"Final Answer: {count}")
+```

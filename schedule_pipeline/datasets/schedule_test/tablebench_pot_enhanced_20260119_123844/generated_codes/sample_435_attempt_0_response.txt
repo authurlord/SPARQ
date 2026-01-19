@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Rank, Nation, Gold, Silver, Bronze, Total, Japan, 18, 8, 8, 34, India, 4, 5, 6, 15, Philippines, 4, 3, 3, 10, Taiwan, 2, 6, 7, 15, South Korea, 2, 3, 1, 6, Thailand, 2, 2, 0, 4, Pakistan, 2, 1, 0, 3, Iran, 2, 0, 2, 4, Israel, 1, 0, 1, 2, Singapore, 0, 4, 4, 8, Malaysia, 0, 3, 1, 4, Iraq, 0, 2, 0, 2, Kampuchea, 0, 0, 2, 2, Nepal, 0, 0, 1, 1

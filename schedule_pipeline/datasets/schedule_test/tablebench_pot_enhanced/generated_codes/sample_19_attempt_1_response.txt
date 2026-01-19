@@ -1,0 +1,15 @@
+Step 1: The user wants the total revenue of companies in the 'oil' industry.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'industry' column is 'oil'.
+Step 4: Sum the 'revenue (millions)' column for these filtered rows.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where industry is 'oil'
+oil_companies = df[df['industry'] == 'oil']
+# Sum the revenue for oil companies
+total_revenue_oil = oil_companies['revenue (millions)'].sum()
+print(f"Final Answer: {total_revenue_oil}")
+```

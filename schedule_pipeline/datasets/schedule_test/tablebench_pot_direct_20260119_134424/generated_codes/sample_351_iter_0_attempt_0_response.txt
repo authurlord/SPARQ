@@ -1,0 +1,18 @@
+Step 1: The user wants to count how many parties have more than 10% of the total votes.
+Step 2: Load the dataframe.
+Step 3: Convert the '%' column to float for comparison.
+Step 4: Filter parties where '%' > 10.
+Step 5: Count the number of such parties and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert '%' column to float
+df['%'] = df['%'].astype(float)
+# Filter parties with more than 10% votes
+high_vote_parties = df[df['%'] > 10]
+# Count the number of such parties
+count = len(high_vote_parties)
+print(f"Final Answer: {count}")
+```

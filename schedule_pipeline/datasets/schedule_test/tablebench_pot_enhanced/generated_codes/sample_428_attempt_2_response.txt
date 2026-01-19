@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Total No. of Houses, Population, Child (0-6), Schedule Caste, Schedule Tribe, Literacy, Total Workers, Main Worker, Marginal Worker

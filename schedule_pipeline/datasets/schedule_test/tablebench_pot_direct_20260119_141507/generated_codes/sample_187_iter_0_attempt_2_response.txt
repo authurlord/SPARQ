@@ -1,0 +1,33 @@
+Step 1: The user is asking which factors (wins, draws, losses) significantly contribute to the 'points' total. In football (soccer), points are typically awarded as follows: 3 points for a win, 1 point for a draw, and 0 points for a loss.
+
+Step 2: We can verify this by checking the relationship between wins, draws, and points. For each team:
+- Points = 3 × wins + 1 × draws + 0 × losses
+
+We will compute the expected points from wins and draws and compare it with the actual points to check consistency.
+
+Step 3: If the calculated points match the actual points, then wins and draws have a significant impact. If not, then there may be no clear impact.
+
+Step 4: Perform the calculation and check if the values align.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Calculate expected points based on wins and draws
+df['expected_points'] = 3 * df['wins'] + df['draws']
+
+# Compare expected points with actual points
+point_difference = df['expected_points'] - df['points']
+
+# Check if the difference is close to zero (within a small tolerance)
+tolerance = 1e-5
+is_consistent = point_difference.abs().min() < tolerance
+
+if is_consistent:
+    final_answer = "wins, draws"
+else:
+    final_answer = "no clear impact"
+
+print(f"Final Answer: {final_answer}")
+```

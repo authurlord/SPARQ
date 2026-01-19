@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The international tourism receipts generally increase with increasing international tourist arrivals, but the relationship varies by country due to differences in receipts per arrival and other factors.

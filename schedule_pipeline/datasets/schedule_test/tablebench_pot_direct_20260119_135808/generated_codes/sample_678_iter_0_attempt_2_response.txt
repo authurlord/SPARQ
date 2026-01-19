@@ -1,0 +1,19 @@
+Step 1: The user wants to calculate the correlation coefficient between 'density (pop / km square)' and '% change' in population.
+Step 2: Load the dataframe.
+Step 3: Convert the '% change' column to numeric, handling the '-' sign and string format.
+Step 4: Convert 'density (pop / km square)' to numeric.
+Step 5: Calculate the correlation coefficient using pandas corr() method.
+Step 6: Print the result as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean and convert '% change' column to numeric, removing the '-' sign and converting to float
+df['% change'] = df['% change'].str.replace(' - ', '-').astype(float)
+# Convert 'density (pop / km square)' to numeric
+df['density (pop / km square)'] = pd.to_numeric(df['density (pop / km square)'])
+# Calculate correlation coefficient
+correlation = df['density (pop / km square)'].corr(df['% change'])
+print(f"Final Answer: {correlation:.4f}")
+```

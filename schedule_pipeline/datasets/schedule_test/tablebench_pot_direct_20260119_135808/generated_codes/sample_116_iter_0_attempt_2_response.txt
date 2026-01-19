@@ -1,0 +1,33 @@
+Step 1: The user wants a line chart showing the trend in maximum building height over time periods.
+Step 2: Load the dataframe.
+Step 3: Extract the 'Years as tallest' column and parse the start year (first year in the range).
+Step 4: Extract the 'Height ft (m)' column and convert the height to float (using the numeric value before parentheses).
+Step 5: Create a line chart with years (start of each period) on the x-axis and height in feet on the y-axis.
+Step 6: Use matplotlib to plot the line chart.
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Parse the start year from 'Years as tallest'
+df['start_year'] = df['Years as tallest'].str.split('–').str[0].astype(int)
+
+# Extract numeric height in feet (from the first number in parentheses)
+df['height_ft'] = df['Height ft (m)'].str.extract('(\d+)').astype(float)
+
+# Sort by start year to ensure chronological order
+df = df.sort_values('start_year')
+
+# Plot the line chart
+plt.figure(figsize=(10, 6))
+plt.plot(df['start_year'], df['height_ft'], marker='o', linestyle='-', color='b')
+plt.title('Trend in Maximum Building Height Over Time')
+plt.xlabel('Year Building Became Tallest')
+plt.ylabel('Height (ft)')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+print("Final Answer: Line chart displayed")
+```

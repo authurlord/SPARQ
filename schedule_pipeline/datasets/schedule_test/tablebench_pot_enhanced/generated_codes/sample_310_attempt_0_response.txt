@@ -1,0 +1,20 @@
+Step 1: The user wants to find the year Barbara Stanwyck won an Emmy Award for a TV series.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Association' is 'Emmy Awards' and 'Category' contains 'Series' or 'Outstanding Performance by an Actress in a Series'.
+Step 4: Check if the 'Work' is related to a TV series (e.g., "The Barbara Stanwyck Show" or "The Big Valley").
+Step 5: Extract the corresponding 'Year' when both conditions are met.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Emmy Awards and TV series-related work
+emmy_series_win = df[(df['Association'] == 'Emmy Awards') & 
+                     (df['Category'].str.contains('Series', na=False)) & 
+                     (df['Result'] == 'Won')]
+
+# Extract the year of the win
+year = emmy_series_win['Year'].iloc[0] if not emmy_series_win.empty else None
+print(f"Final Answer: {year}")
+```

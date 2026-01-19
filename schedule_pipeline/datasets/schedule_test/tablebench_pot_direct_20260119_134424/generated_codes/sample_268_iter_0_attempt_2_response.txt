@@ -1,0 +1,28 @@
+Step 1: The user wants the average rating of episodes that meet two conditions:
+- Viewership (in millions) is at least 10 million.
+- Timeslot rank is within the top 3 (i.e., timeslot rank <= 3).
+
+Step 2: Load the dataframe.
+
+Step 3: Filter rows where 'viewers (m)' >= 10.0 and 'timeslot rank' <= 3.
+
+Step 4: Calculate the mean of the 'rating' column for the filtered rows.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'viewers (m)' to float and 'timeslot rank' to int for comparison
+df['viewers (m)'] = pd.to_numeric(df['viewers (m)'])
+df['timeslot rank'] = pd.to_numeric(df['timeslot rank'])
+
+# Filter episodes with viewership >= 10 million and timeslot rank <= 3
+filtered_episodes = df[(df['viewers (m)'] >= 10.0) & (df['timeslot rank'] <= 3)]
+
+# Calculate average rating
+avg_rating = filtered_episodes['rating'].mean()
+
+print(f"Final Answer: {avg_rating:.2f}")
+```

@@ -1,0 +1,17 @@
+Step 1: The user wants the mean and standard deviation of the 'Year built' column.
+Step 2: Load the dataframe.
+Step 3: Convert 'Year built' to numeric (in case it's not already).
+Step 4: Calculate the mean and standard deviation.
+Step 5: Print both values in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year built' to numeric
+df['Year built'] = pd.to_numeric(df['Year built'])
+# Calculate mean and standard deviation
+mean_year = df['Year built'].mean()
+std_year = df['Year built'].std()
+print(f"Final Answer: {mean_year:.1f}, {std_year:.1f}")
+```

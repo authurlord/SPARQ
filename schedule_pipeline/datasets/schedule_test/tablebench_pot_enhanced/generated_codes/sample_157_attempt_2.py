@@ -1,0 +1,35 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert numeric columns to float
+df['revenue (millions)'] = pd.to_numeric(df['revenue (millions)'], errors='coerce')
+df['profit (millions)'] = pd.to_numeric(df['profit (millions)'], errors='coerce')
+df['employees'] = pd.to_numeric(df['employees'], errors='coerce')
+
+# Drop rows with missing values in key columns
+df_clean = df.dropna(subset=['profit (millions)', 'revenue (millions)', 'employees'])
+
+# Encode 'industry' as dummy variables for correlation
+df_encoded = pd.get_dummies(df_clean, columns=['industry'], drop_first=True)
+
+# Compute correlation matrix
+corr_matrix = df_encoded.corr()
+
+# Extract correlations of 'profit (millions)' with other variables
+profit_corr = corr_matrix['profit (millions)'].abs().sort_values(ascending=False)
+
+# Check for significant correlations (threshold: 0.5)
+significant_factors = profit_corr[profit_corr > 0.5].index.tolist()
+
+# If revenue or employees are in significant factors, they are influential
+if 'revenue (millions)' in significant_factors or 'employees' in significant_factors:
+    # Check if industry dummies have any significant correlation
+    industry_cols = [col for col in significant_factors if col.startswith('industry_')]
+    if len(industry_cols) > 0:
+        print("Final Answer: industry, revenue (millions)")
+    else:
+        print("Final Answer: revenue (millions)")
+else:
+    print("Final Answer: no clear impact")

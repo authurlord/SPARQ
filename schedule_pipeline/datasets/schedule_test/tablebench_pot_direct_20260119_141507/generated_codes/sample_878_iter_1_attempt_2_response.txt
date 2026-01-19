@@ -1,0 +1,25 @@
+The error occurred because the 'points' column contains string values (like '27', '3', '11') instead of numeric values. We need to convert them to integers before performing arithmetic operations.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the 'points' column from string to integer.
+3. Sort the singers by points in descending order.
+4. Find the highest points and the 5th highest points.
+5. Compute the difference between them.
+6. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'points' column to integer
+df['points'] = df['points'].astype(int)
+# Sort by points in descending order
+df_sorted = df.sort_values(by='points', ascending=False)
+# Get the highest points (1st) and 5th highest points
+highest_points = df_sorted.iloc[0]['points']
+fifth_highest_points = df_sorted.iloc[4]['points']
+# Calculate the difference
+difference = highest_points - fifth_highest_points
+print(f"Final Answer: {difference}")
+```

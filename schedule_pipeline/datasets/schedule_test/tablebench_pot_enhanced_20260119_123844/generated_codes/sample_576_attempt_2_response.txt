@@ -1,0 +1,16 @@
+Step 1: The user wants the average number of tropical storms per year from 1850 to 1855.
+Step 2: Load the dataframe.
+Step 3: Filter the data for years 1850 to 1855 (inclusive).
+Step 4: Select the 'number of tropical storms' column and calculate the mean.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years 1850 to 1855
+filtered_df = df[(df['year'] >= '1850') & (df['year'] <= '1855')]
+# Calculate the average number of tropical storms
+avg_storms = filtered_df['number of tropical storms'].astype(int).mean()
+print(f"Final Answer: {avg_storms:.1f}")
+```

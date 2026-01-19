@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: increasing, consistent, high try rate, stable points per game

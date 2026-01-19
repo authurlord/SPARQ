@@ -1,0 +1,5 @@
+The question asks for a forecast of the Castleford Tigers' performance trend for the next five years based on historical data from 2004 to 2010. However, the provided data only includes past performance metrics (apps, tries, goals, points) and does not include any trend analysis, external factors, or predictive modeling capabilities. Without additional assumptions, statistical models, or time-series forecasting tools, a reliable forecast cannot be generated from this limited and static dataset.
+
+Moreover, the data ends with a "total" row that aggregates the entire period, which makes it unsuitable for deriving a clear trend over time. Therefore, a meaningful forecast cannot be made with the given information.
+
+Final Answer: none

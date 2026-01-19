@@ -1,0 +1,29 @@
+Step 1: Identify the relevant data for the year 2001.  
+Step 2: Filter rows where the 'year' is 2001.  
+Step 3: Among those, find matches where the 'result' is 'win'.  
+Step 4: Group by 'location' to count wins per city.  
+Step 5: Determine the city with the most wins.  
+Step 6: Find the score of the first win (earliest date) in that city during 2001.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter data for year 2001
+df_2001 = df[df['year'] == '2001']
+
+# Filter only wins
+wins_2001 = df_2001[df_2001['result'] == 'win']
+
+# Group by location and count wins
+win_counts = wins_2001.groupby('location').size().reset_index(name='win_count')
+
+# Find the city with the most wins
+top_city = win_counts.loc[win_counts['win_count'].idxmax(), 'location']
+
+# Find the first win (by date) in that city
+first_win_in_top_city = wins_2001[wins_2001['location'] == top_city].sort_values(by='date').iloc[0]['score']
+
+print(f"Final Answer: {top_city}, {first_win_in_top_city}")
+```

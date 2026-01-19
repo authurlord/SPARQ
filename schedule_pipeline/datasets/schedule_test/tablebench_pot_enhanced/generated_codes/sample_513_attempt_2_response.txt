@@ -1,0 +1,33 @@
+Step 1: The user wants to find the country with the highest Renewable Energy Share in 2011, where Renewable Energy Share is defined as (wind power + biomass and waste + solar) / total energy production.
+
+Step 2: Load the dataframe.
+
+Step 3: Filter data for the year 2011.
+
+Step 4: For each country in 2011, calculate the Renewable Energy Share as (wind power + biomass and waste + solar) / total.
+
+Step 5: Identify the country with the highest share.
+
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for year 2011
+df_2011 = df[df['year'] == '2011']
+
+# Convert relevant columns to numeric, handling potential non-numeric entries
+df_2011['wind power'] = pd.to_numeric(df_2011['wind power'], errors='coerce')
+df_2011['biomass and waste'] = pd.to_numeric(df_2011['biomass and waste'], errors='coerce')
+df_2011['solar'] = pd.to_numeric(df_2011['solar'], errors='coerce')
+df_2011['total'] = pd.to_numeric(df_2011['total'], errors='coerce')
+
+# Calculate Renewable Energy Share
+df_2011['renewable_share'] = (df_2011['wind power'] + df_2011['biomass and waste'] + df_2011['solar']) / df_2011['total']
+
+# Find the country with the highest renewable share
+max_share_country = df_2011.loc[df_2011['renewable_share'].idxmax()]['country']
+
+print(f"Final Answer: {max_share_country}")
+```

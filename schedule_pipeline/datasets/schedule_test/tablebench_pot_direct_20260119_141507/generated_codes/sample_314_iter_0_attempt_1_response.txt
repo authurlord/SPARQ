@@ -1,0 +1,7 @@
+Step 1: The user is asking for the year when a work won an award for a song that was nominated for "Song of the Year" at the Grammy Awards.  
+Step 2: Look through the data to find any row where the "Result" is "Won" and the "Nominated work" is associated with a song that was nominated for "Song of the Year" at the Grammy Awards.  
+Step 3: From the table, we see that in 2009, the song "Love Song" was nominated for "Song of the Year" at the Grammy Awards. However, the result for that entry is "Nominated", not "Won".  
+Step 4: There is no row where a song was both nominated for "Song of the Year" and won an award.  
+Step 5: Therefore, no such year exists where a work won an award for a song that was nominated for "Song of the Year" at the Grammy Awards.  
+
+Final Answer: None

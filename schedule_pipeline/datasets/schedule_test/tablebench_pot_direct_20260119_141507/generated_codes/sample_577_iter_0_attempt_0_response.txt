@@ -1,0 +1,18 @@
+Step 1: The user wants the average mintage (proof) of coins issued from 2000 to 2004 (first 5 years of the 2000s).  
+Step 2: Filter the data for years 2000 to 2004.  
+Step 3: Extract the 'mintage (proof)' column from the filtered rows.  
+Step 4: Compute the mean of the filtered 'mintage (proof)' values.  
+Step 5: Print the result.
+
+Note: The table includes "n / a" values, which should be treated as missing (NaN), so we skip them during the mean calculation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for years 2000 to 2004
+filtered_df = df[df['year'].between(2000, 2004)]
+# Extract mintage (proof) and compute mean, ignoring NaN
+mean_mintage_proof = filtered_df['mintage (proof)'].dropna().mean()
+print(f"Final Answer: {mean_mintage_proof:.1f}")
+```

@@ -1,0 +1,15 @@
+Step 1: The user wants the average number of Indians admitted per year from 2000 to 2010.  
+Step 2: The table includes a "total" row at the end, which we need to exclude since it represents the overall sum, not yearly data.  
+Step 3: Extract the "indians admitted" column for years 2000 to 2010 (rows 0 to 10).  
+Step 4: Calculate the mean of these values and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Exclude the 'total' row and filter years from 2000 to 2010
+indian_admitted = df[df['year'].str.startswith('200')]['indians admitted'].dropna()
+# Calculate the average
+average_indians = indian_admitted.mean()
+print(f"Final Answer: {average_indians:.0f}")
+```

@@ -1,0 +1,13 @@
+Step 1: The user wants the payout for a specific hand ("four of a kind, 2-4") when betting 3 credits.  
+Step 2: Locate the row corresponding to "four of a kind, 2-4" in the table.  
+Step 3: Find the value in the "3 credits" column for that row.  
+Step 4: Output the value directly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the payout for "four of a kind, 2-4" when betting 3 credits
+payout = df.loc[df['hand'] == 'four of a kind , 2 - 4', '3 credits'].values[0]
+print(f"Final Answer: {payout}")
+```

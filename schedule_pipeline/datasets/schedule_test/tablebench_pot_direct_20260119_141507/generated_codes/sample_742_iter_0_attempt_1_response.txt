@@ -1,0 +1,41 @@
+Step 1: The user is asking for a forecasted percentage of the popular vote in the next election year based on historical trends from 1963 to 2011.  
+Step 2: Since the data includes the "% of popular vote" column, we can analyze the trend over time.  
+Step 3: We will calculate the average annual change (trend) in the percentage of popular vote and project it forward to the next year (2012).  
+Step 4: However, note that the data has gaps (e.g., "n.a."), and the values are not strictly linear. We will exclude "n.a." entries and fit a simple linear trend.  
+
+We will:
+- Filter out rows where "% of popular vote" is "n.a."
+- Convert the percentage values to float
+- Extract years and fit a linear regression model to predict the next year (2012)
+- Use the trend to forecast the value
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Filter out rows with "n.a." in % of popular vote
+df_clean = df[df['% of popular vote'] != 'n.a.']
+
+# Convert percentage column to float
+df_clean['% of popular vote'] = df_clean['% of popular vote'].str.replace('%', '').astype(float)
+
+# Extract years and vote percentages
+years = pd.to_numeric(df_clean['Year of election'], errors='coerce')
+votes = df_clean['% of popular vote']
+
+# Remove any NaN values
+years = years.dropna()
+votes = votes.dropna()
+
+# Fit linear regression model
+X = years.values.reshape(-1, 1)
+y = votes.values
+model = LinearRegression().fit(X, y)
+next_year = 2012
+forecasted_vote = model.predict([[next_year]])[0]
+
+print(f"Final Answer: {forecasted_vote:.2f}%")
+```

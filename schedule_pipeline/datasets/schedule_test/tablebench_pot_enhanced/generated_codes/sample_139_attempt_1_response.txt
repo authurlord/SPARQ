@@ -1,0 +1,23 @@
+Step 1: The user wants a horizontal bar chart showing the lifespan of each locomotive, with the x-axis representing the years and the y-axis representing the locomotive names.
+Step 2: Load the dataframe.
+Step 3: Calculate the lifespan for each locomotive by subtracting 'Introduced' from 'Withdrawn'.
+Step 4: Create a horizontal bar chart using matplotlib with locomotive names on the y-axis and lifespan on the x-axis.
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Convert 'Introduced' and 'Withdrawn' to integers
+df['Introduced'] = pd.to_numeric(df['Introduced'])
+df['Withdrawn'] = pd.to_numeric(df['Withdrawn'])
+# Calculate lifespan
+df['Lifespan'] = df['Withdrawn'] - df['Introduced']
+# Create horizontal bar chart
+plt.figure(figsize=(10, 6))
+plt.barh(df['Name'], df['Lifespan'], color='skyblue')
+plt.xlabel('Lifespan (Years)')
+plt.ylabel('Locomotive Name')
+plt.title('Lifespan of Each Locomotive')
+plt.gca().invert_yaxis()  # To show the longest lifespan at the top
+plt.show()
+```

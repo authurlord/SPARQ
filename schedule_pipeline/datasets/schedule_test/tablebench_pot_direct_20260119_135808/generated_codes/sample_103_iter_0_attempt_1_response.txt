@@ -1,0 +1,47 @@
+[Answer Format]
+Final Answer: None
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean the data: Remove percentage signs and convert to numeric
+# We'll focus on the ethnic groups (excluding 'All') and extract the numeric values from each year
+ethnicities = df['Ethnicity'].tolist()
+years = df.columns[1:]  # Exclude the first column 'Ethnicity'
+
+# Create a dictionary to store the data for plotting
+data = {}
+for ethnicity in ethnicities:
+    if ethnicity == 'All':
+        continue
+    values = []
+    for year in years:
+        # Extract the numeric part from the string (e.g., '43,671 (31%)' -> 43671)
+        value_str = df[df['Ethnicity'] == ethnicity][year].values[0]
+        # Remove commas and extract number before parentheses
+        num_part = ''.join(filter(str.isdigit, value_str))
+        values.append(int(num_part) if num_part else 0)
+    data[ethnicity] = values
+
+# Convert to DataFrame for easier handling
+data_df = pd.DataFrame(data, index=years)
+
+# Plot the stacked bar chart
+plt.figure(figsize=(12, 8))
+data_df.plot(kind='bar', stacked=True, figsize=(12, 8), width=0.8)
+
+# Customize the plot
+plt.title('Proportion of Different Ethnic Populations Over Time (Stacked Bar Chart)')
+plt.xlabel('Year')
+plt.ylabel('Population (Number)')
+plt.xticks(rotation=45)
+plt.legend(title='Ethnicity', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```

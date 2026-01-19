@@ -1,0 +1,16 @@
+Step 1: The user wants to find the first year when the urbanization rate (percentage of population living in urban areas) surpassed 50%.
+Step 2: Load the dataframe.
+Step 3: Convert the 'urban , %' column to numeric, as it might be read as string.
+Step 4: Find the first year where 'urban , %' > 50.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'urban , %' column to numeric
+df['urban , %'] = pd.to_numeric(df['urban , %'])
+# Find the first year where urban percentage exceeds 50%
+first_year_above_50 = df[df['urban , %'] > 50]['year (january)'].iloc[0]
+print(f"Final Answer: {first_year_above_50}")
+```

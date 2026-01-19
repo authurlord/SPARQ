@@ -1,0 +1,22 @@
+Step 1: The user wants to count how many cost categories have a percentage increase greater than 5% from 2017 to 2018.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'Percent Increase (Decrease) (In cents, except percentage changes)' column.  
+Step 4: Filter rows where the percentage increase is greater than 5%.  
+Step 5: Handle the "nm (1)" value (which means "not meaningful") by excluding it or treating it as invalid.  
+Step 6: Count the number of valid entries with increase > 5%.  
+
+Note: "nm (1)" cannot be converted to float, so we need to skip or filter it out before conversion.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out rows where 'Percent Increase (Decrease) (In cents, except percentage changes)' is 'nm (1)'
+# Convert the percentage column to numeric, ignoring errors (to skip 'nm (1)')
+percent_increase = pd.to_numeric(df['Percent Increase (Decrease) (In cents, except percentage changes)'], errors='coerce')
+# Filter values greater than 5 and drop NaNs
+valid_increases = percent_increase[percent_increase > 5]
+# Count the number of such entries
+count = valid_increases.count()
+print(f"Final Answer: {count}")
+```

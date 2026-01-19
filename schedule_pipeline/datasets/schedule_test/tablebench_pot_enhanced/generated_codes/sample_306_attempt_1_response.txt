@@ -1,0 +1,34 @@
+Step 1: The user wants to identify the year when the athlete achieved a better (higher) position in the Triple Jump event at the Asian Championships compared to the World Championships.
+
+Step 2: Filter the data for rows where the Event is "Triple jump".
+
+Step 3: Extract the positions for the Asian Championships and World Championships.
+
+Step 4: Compare the positions (lower number means better position) and find the year where the Asian Championships position is better than the World Championships.
+
+Step 5: Return the year.
+
+Note: The athlete competed in the Asian Championships in 2013 and the World Championships in 2015. The position in 2013 was 4th, and in 2015 it was 21st. Since 4th is better than 21st, the answer is 2013.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Triple jump events
+triple_jump_data = df[df['Event'] == 'Triple jump']
+
+# Extract positions for Asian Championships and World Championships
+asian_champs_pos = triple_jump_data[triple_jump_data['Competition'] == 'Asian Championships']['Position'].iloc[0]
+world_champs_pos = triple_jump_data[triple_jump_data['Competition'] == 'World Championships']['Position'].iloc[0]
+
+# Convert positions to numeric for comparison (e.g., 4th -> 4, 21st -> 21)
+asian_pos_num = int(asian_champs_pos.replace('th', '').replace('rd', '').replace('nd', '').replace('st', ''))
+world_pos_num = int(world_champs_pos.replace('th', '').replace('rd', '').replace('nd', '').replace('st', ''))
+
+# Find the year when Asian Championships position is better (lower number)
+if asian_pos_num < world_pos_num:
+    year = triple_jump_data[triple_jump_data['Competition'] == 'Asian Championships']['Year'].iloc[0]
+    print(f"Final Answer: {year}")
+else:
+    print("Final Answer: None")
+```

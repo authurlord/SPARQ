@@ -1,0 +1,40 @@
+Step 1: The user wants a horizontal bar chart showing the lifespan of each locomotive.  
+Step 2: Lifespan is calculated as (Withdrawn - Introduced).  
+Step 3: Extract the 'Introduced' and 'Withdrawn' columns, compute the lifespan for each locomotive.  
+Step 4: Create a horizontal bar chart with locomotive names on the x-axis and years (lifespan) on the y-axis.  
+
+Note: The "Introduced" and "Withdrawn" values are strings, so we need to convert them to integers. Also, some entries like '25→4' or '37→35→6' are not straightforward; however, since the data seems to represent locomotive numbers, and the "Introduced" and "Withdrawn" are clearly years, we assume that the "Introduced" and "Withdrawn" columns contain year values. In this table, they are actually strings like '1880', '1900', etc., so we can safely parse them.  
+
+We will:
+- Convert 'Introduced' and 'Withdrawn' to integers.
+- Compute lifespan = Withdrawn - Introduced.
+- Create a horizontal bar chart with locomotive names on the y-axis and lifespan on the x-axis.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Convert Introduced and Withdrawn to integers
+df['Introduced'] = pd.to_numeric(df['Introduced'], errors='coerce')
+df['Withdrawn'] = pd.to_numeric(df['Withdrawn'], errors='coerce')
+
+# Calculate lifespan
+df['lifespan'] = df['Withdrawn'] - df['Introduced']
+
+# Create horizontal bar chart
+plt.figure(figsize=(10, 6))
+plt.barh(df['Name'], df['lifespan'], color='skyblue')
+plt.xlabel('Lifespan (years)')
+plt.ylabel('Locomotive Name')
+plt.title('Lifespan of Each Locomotive')
+plt.gca().invert_yaxis()  # Optional: to have newer ones at top
+plt.tight_layout()
+plt.show()
+
+# Print the lifespan values for reference (optional)
+print(df[['Name', 'lifespan']])
+```
+
+Final Answer: None

@@ -1,0 +1,55 @@
+Step 1: The question asks to identify data points that deviate significantly from the norm. This means we need to detect outliers in the numerical values, particularly in the "Year Ended December 31, 2018 (In cents, except percentage changes)" and "Percent Increase (Decrease) (In cents, except percentage changes)" columns.
+
+Step 2: We will focus on the absolute values of the cost components (in cents) and their percentage changes. A significant deviation can be identified by:
+- Large percentage increases (e.g., >50%)
+- Very high or very low absolute values (e.g., values much higher or lower than the rest)
+
+Step 3: We will examine the data for anomalies such as:
+- "Regional expenses: Other" with a value of 100.00 when others are under 1.8
+- "Special items, net: Regional operating special items, net" with a value of "—" and a percentage change of "nm (1)"
+- Percentage changes like 5221.9%, which is extremely high
+
+Step 4: These values stand out due to their magnitude or format (like "—", "nm (1)").
+
+Step 5: Identify and list these anomalous entries.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, handling non-numeric values
+df['Year Ended December 31, 2018 (In cents, except percentage changes)'] = pd.to_numeric(
+    df['Year Ended December 31, 2018 (In cents, except percentage changes)'], errors='coerce'
+)
+df['Percent Increase (Decrease) (In cents, except percentage changes)'] = pd.to_numeric(
+    df['Percent Increase (Decrease) (In cents, except percentage changes)'], errors='coerce'
+)
+
+# Identify rows with extreme values or anomalies
+anomalies = []
+
+# Check for extremely high values (e.g., > 100 in cents)
+high_values = df[df['Year Ended December 31, 2018 (In cents, except percentage changes)'] > 100]
+if not high_values.empty:
+    anomalies.extend(high_values['Row Header'].tolist())
+
+# Check for extremely high percentage changes (> 50%)
+high_pct_changes = df[df['Percent Increase (Decrease) (In cents, except percentage changes)'] > 50]
+if not high_pct_changes.empty:
+    anomalies.extend(high_pct_changes['Row Header'].tolist())
+
+# Check for values with '—' or 'nm (1)' or missing data
+missing_or_special = df[
+    df['Year Ended December 31, 2018 (In cents, except percentage changes)'].isna() |
+    df['Row Header'].str.contains('—', case=False) |
+    df['Row Header'].str.contains('nm', case=False)
+]
+if not missing_or_special.empty:
+    anomalies.extend(missing_or_special['Row Header'].tolist())
+
+# Remove duplicates and ensure clean list
+anomalies = list(set(anomalies))
+
+print(f"Final Answer: {', '.join(anomalies)}")
+```

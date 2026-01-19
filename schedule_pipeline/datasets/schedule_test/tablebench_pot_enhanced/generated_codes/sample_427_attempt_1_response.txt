@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table contains demographic data from 1970 to 2006, including population, live births, deaths, natural change, and associated rates (birth, death, natural change per 1000). Notable trends include a peak in live births and natural change around 1980–1990, followed by a decline, and a consistent decrease in crude birth rate after 1990, while crude death rate fluctuated. Population peaked at 51,000 in 1985–1990 and declined afterward. Natural change dropped significantly after 1994, turning near-zero or negative by 2000.
+
+Final Answer: 1980-1990, decline after 1990, population peak 1985-1990, natural change near zero post-2000

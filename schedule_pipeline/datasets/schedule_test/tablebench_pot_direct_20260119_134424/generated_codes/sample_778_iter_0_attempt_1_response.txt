@@ -1,0 +1,32 @@
+Step 1: The user wants a forecast for the year 2020 based on historical data, assuming a steady increase trend.  
+Step 2: Load the dataframe and extract the data for the 'Year_2' column (which corresponds to years from 1950 to 2010) and its associated values.  
+Step 3: Fit a linear trend (simple linear regression) to the data points (year vs. value).  
+Step 4: Use the fitted model to predict the value for the year 2020.  
+Step 5: Print the forecasted value.
+
+Note: The 'Year_2' column contains the years, and '-_2' contains the corresponding values (e.g., 1950 → 249,187). We will use these pairs to model the trend.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns: Year_2 and -_2
+years = df['Year_2'].astype(int)
+values = df['-_2'].str.replace(',', '').astype(int)
+
+# Fit a linear regression model
+X = years.values.reshape(-1, 1)
+y = values.values
+
+# Use numpy to fit a line (linear trend)
+slope, intercept = np.polyfit(X.flatten(), y, 1)
+
+# Predict for year 2020
+predicted_value = slope * 2020 + intercept
+
+# Print the forecasted value
+print(f"Final Answer: {int(predicted_value)}")
+```

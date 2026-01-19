@@ -1,0 +1,18 @@
+Step 1: The user wants the difference between the average final scores in Ghent for the years 2010 and 2011.
+Step 2: Load the dataframe.
+Step 3: Filter rows where location is 'ghent' and year is either 2010 or 2011.
+Step 4: Calculate the average final score for each year.
+Step 5: Compute the difference between the two averages.
+Step 6: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for Ghent
+ghent_data = df[df['location'] == 'ghent']
+# Group by year and calculate average final score
+avg_scores = ghent_data.groupby('year')['score - final'].mean()
+# Calculate the difference between 2011 and 2010
+difference = avg_scores['2011'] - avg_scores['2010']
+print(f"Final Answer: {difference:.3f}")
+```

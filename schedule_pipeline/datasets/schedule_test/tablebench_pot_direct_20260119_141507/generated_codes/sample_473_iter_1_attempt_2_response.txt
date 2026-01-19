@@ -1,0 +1,42 @@
+Step 1: The question asks to detect anomalies in the demographic data. Since this is a qualitative analysis, we need to look for inconsistencies or implausible values in the data.
+
+Step 2: Key observations:
+- "Total No. of Houses" is 14.
+- "Population" is 55.
+- "Child (0-6)" is 7.
+- "Schedule Caste" is 1000, which is much higher than total population (55).
+- "Literacy" percentages are given as 79.17% (total), 86.36% (male), 73.08% (female). This seems plausible.
+- "Total Workers" is 15, with 12 males and 3 females — consistent.
+- "Main Worker" has "-10", "-5", "-5", which is clearly an error (negative values don't make sense for workers).
+
+Step 3: Anomalies:
+1. "Schedule Caste" value of 1000 is way above total population (55) — impossible.
+2. "Main Worker" has negative values (e.g., -10), which is logically invalid.
+
+Step 4: Possible explanations:
+- Schedule Caste data may be misreported or misaligned with the unit (e.g., should be percentage or number of people, not absolute count).
+- "Main Worker" values like "-10" likely represent errors in data entry or calculation (e.g., typo or miscalculation).
+
+Step 5: We will identify these anomalies and provide a concise explanation.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Identify anomalies
+anomalies = []
+
+# Check for Schedule Caste being higher than total population
+if df.loc[df['Particulars'] == 'Schedule Caste', 'Total'].values[0] > df.loc[df['Particulars'] == 'Population', 'Total'].values[0]:
+    anomalies.append("Schedule Caste count (1000) exceeds total population (55)")
+
+# Check for negative values in "Main Worker"
+main_worker_values = df[df['Particulars'] == 'Main Worker']['Total'].values
+if any(val < 0 for val in main_worker_values):
+    anomalies.append("Main Worker has negative values (e.g., -10, -5), which is impossible")
+
+# Final answer based on detected anomalies
+Final Answer: Schedule Caste count exceeds population, Main Worker has negative values
+```

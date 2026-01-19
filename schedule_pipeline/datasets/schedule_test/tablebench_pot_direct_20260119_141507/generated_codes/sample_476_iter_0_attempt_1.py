@@ -1,0 +1,31 @@
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean the numeric columns by removing commas and converting to int
+columns_to_clean = ['Year_1', '-_1', 'Year_2', '-_2']
+for col in columns_to_clean:
+    df[col] = df[col].str.replace(',', '').astype(int)
+
+# Extract all numerical columns for analysis
+numerical_cols = ['Year_1', '-_1', 'Year_2', '-_2']
+data = df[numerical_cols].values
+
+# Compute mean and std for each column
+means = np.mean(data, axis=0)
+stds = np.std(data, axis=0)
+
+# Define threshold: values more than 2 std above or below mean are outliers
+threshold = 2
+outliers = []
+
+for i in range(data.shape[0]):
+    row = data[i]
+    for j in range(len(row)):
+        if abs(row[j] - means[j]) > threshold * stds[j]:
+            outliers.append((df.iloc[i]['Year'], f"Column {numerical_cols[j]}"))
+
+# Print the years with significant deviations
+print("Final Answer:", ", ".join([f"{year} ({col})" for year, col in outliers]))

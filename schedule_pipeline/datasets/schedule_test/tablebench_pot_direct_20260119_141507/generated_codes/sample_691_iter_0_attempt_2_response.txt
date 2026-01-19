@@ -1,0 +1,37 @@
+Step 1: The user wants to identify the age group with the highest percentage of the population and the one with the lowest percentage, then compute the difference between them.
+
+Step 2: The "Both Gender" column contains the percentage values (e.g., '100.00', '3.24'). We need to extract these percentages from the row where "Age Group" is not "TOTAL".
+
+Step 3: Filter out the "TOTAL" row since it represents the overall sum and not a specific age group.
+
+Step 4: Extract the percentage values for each age group from the "%", "%_1", and "%_2" columns. However, the "%", column already contains the total percentage per group, so we use that directly.
+
+Step 5: Find the maximum and minimum percentage values among the non-TOTAL rows.
+
+Step 6: Compute the difference between the highest and lowest percentages.
+
+Step 7: Identify the corresponding age groups.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out the TOTAL row
+df_filtered = df[df['Age Group'] != 'TOTAL']
+
+# Extract the percentage column (the third column in the data)
+percentages = df_filtered['%'].astype(float)
+
+# Find the maximum and minimum percentages
+max_percentage = percentages.max()
+min_percentage = percentages.min()
+
+# Get the corresponding age groups
+max_age_group = df_filtered.loc[percentages.idxmax(), 'Age Group']
+min_age_group = df_filtered.loc[percentages.idxmin(), 'Age Group']
+
+# Calculate the difference
+difference = max_percentage - min_percentage
+
+print(f"Final Answer: {max_age_group}, {min_age_group}, {difference:.2f}")
+```

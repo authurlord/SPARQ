@@ -1,0 +1,23 @@
+Step 1: The user is asking about the relationship between viewers (m) and rating. To determine if an increase in viewers causes an increase in rating, we need to analyze the correlation between these two variables.
+Step 2: Load the dataframe.
+Step 3: Convert 'viewers (m)' and 'rating' columns to numeric (handling 'tba' as NaN).
+Step 4: Calculate the correlation coefficient between viewers (m) and rating.
+Step 5: Interpret the result — if the correlation is positive and significant, it suggests a potential relationship; however, correlation does not imply causation.
+Step 6: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'viewers (m)' and 'rating' to numeric, handling 'tba' as NaN
+df['viewers (m)'] = pd.to_numeric(df['viewers (m)'], errors='coerce')
+df['rating'] = pd.to_numeric(df['rating'], errors='coerce')
+
+# Drop rows with NaN values in either column
+df.dropna(subset=['viewers (m)', 'rating'], inplace=True)
+
+# Calculate correlation coefficient
+correlation = df['viewers (m)'].corr(df['rating'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

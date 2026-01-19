@@ -1,0 +1,19 @@
+Step 1: The user wants to analyze the relationship between Peak Flow (m³/s) and water Level at Trent Bridge (m).  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'Level at Trent Bridge m' and 'Peak Flow m3/s' columns.  
+Step 4: Since the data is limited and only includes 5 events (excluding the "Normal / Avg flow" row), we will compute the correlation coefficient to determine how Peak Flow changes with increasing Level.  
+Step 5: Print the correlation coefficient as the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Drop the row with None in 'Rank' (the "Normal / Avg flow" row)
+df_clean = df.dropna(subset=['Rank'])
+# Convert relevant columns to numeric
+df_clean['Level at Trent Bridge m'] = pd.to_numeric(df_clean['Level at Trent Bridge m'])
+df_clean['Peak Flow m3/s'] = pd.to_numeric(df_clean['Peak Flow m3/s'].str.replace(',', ''))
+# Calculate correlation
+correlation = df_clean['Level at Trent Bridge m'].corr(df_clean['Peak Flow m3/s'])
+print(f"Final Answer: {correlation:.3f}")
+```

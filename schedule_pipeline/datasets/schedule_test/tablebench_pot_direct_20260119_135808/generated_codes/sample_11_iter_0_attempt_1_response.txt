@@ -1,0 +1,18 @@
+Step 1: The user wants the average height in meters of the top 5 tallest buildings.
+Step 2: Load the dataframe.
+Step 3: Convert the 'height (m)' column to numeric.
+Step 4: Sort by height in descending order and select the top 5.
+Step 5: Calculate the mean of these 5 heights.
+Step 6: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'height (m)' to numeric
+df['height (m)'] = pd.to_numeric(df['height (m)'])
+# Sort by height in descending order and get top 5
+top_5_heights = df['height (m)'].sort_values(ascending=False).head(5)
+# Calculate average height
+average_height = top_5_heights.mean()
+print(f"Final Answer: {average_height:.1f}")
+```

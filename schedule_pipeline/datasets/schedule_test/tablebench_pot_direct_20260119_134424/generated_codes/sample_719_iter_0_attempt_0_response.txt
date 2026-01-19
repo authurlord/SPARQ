@@ -1,0 +1,17 @@
+Step 1: The user wants the top 3 mountains in New Zealand ranked by elevation from highest to lowest.
+Step 2: Load the dataframe.
+Step 3: Filter the data for mountains in New Zealand (all rows are already in New Zealand as per the table).
+Step 4: Sort the data by 'elevation (m)' in descending order.
+Step 5: Select the top 3 rows and extract the mountain names.
+Step 6: Print the names of the top 3 mountains.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by elevation (m) in descending order
+df_sorted = df.sort_values(by='elevation (m)', ascending=False)
+# Get the top 3 mountains
+top_3_mountains = df_sorted['peak'].head(3).tolist()
+print(f"Final Answer: {', '.join(top_3_mountains)}")
+```

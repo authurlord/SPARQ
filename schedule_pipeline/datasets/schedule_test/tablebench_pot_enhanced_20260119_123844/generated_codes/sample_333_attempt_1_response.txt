@@ -1,0 +1,15 @@
+Step 1: The user wants to find the year when the athlete achieved their highest ranking in the Javelin throw event at the Olympic Games.
+Step 2: Filter the data to include only rows where the 'Competition' is 'Olympic Games'.
+Step 3: Among these rows, identify the one with the best (lowest) 'Position' (since 1st is better than 21st).
+Step 4: Extract and return the corresponding 'Year'.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Olympic Games
+olympic_games = df[df['Competition'] == 'Olympic Games']
+# Find the row with the best position (lowest value in 'Position')
+best_olympic_year = olympic_games.loc[olympic_games['Position'].str.extract('(\d+)').astype(int).idxmin(), 'Year']
+print(f"Final Answer: {best_olympic_year}")
+```

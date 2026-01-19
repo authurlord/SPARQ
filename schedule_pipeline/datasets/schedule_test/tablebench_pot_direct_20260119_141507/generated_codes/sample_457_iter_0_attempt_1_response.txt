@@ -1,0 +1,22 @@
+Step 1: The question asks to identify a country with unusually data points, likely referring to outliers in a numerical column such as population density or area. Given the context, "unusually" might refer to extreme values — for instance, very high or very low population density.
+
+Step 2: Population density per km square is a key metric. Looking at the data:
+- Hong Kong: 6390
+- Macau: 18662
+- Mongolia: 2
+- North Korea: 198
+- Others: around 300–500
+
+Clearly, Macau has the highest population density (18,662), and Mongolia has the lowest (2). These are extreme compared to others.
+
+Step 3: Check if any of these are outliers using simple thresholds. For example, if we define "unusually" as being more than 3 standard deviations from the mean, or by comparing to the range.
+
+But given the small dataset and the obvious extreme values, Macau stands out due to its exceptionally high population density, while Mongolia stands out due to extremely low density.
+
+However, the question says "unusually data points compared to the other countries", and since both are extreme, but Macau's value is significantly higher and more surprising in context, it's more likely the intended answer.
+
+Alternatively, check if "no data" is an outlier — Hong Kong and Macau have "no data" in HDI, but the question is about data points, not missing values.
+
+Therefore, the most unusual data point in terms of numeric value is Macau's population density (18,662).
+
+Final Answer: macau

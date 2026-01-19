@@ -1,0 +1,13 @@
+Step 1: The question asks to identify data points that deviate significantly from the norm. This implies detecting outliers or unusually high/low values in the table, especially in the "Percent Increase (Decrease)" or the absolute values of costs.
+Step 2: Look for extreme percentage changes (e.g., >50% or < -10%) or extremely high/lower cost values (e.g., 100.00 cents in "Regional expenses: Other" which is much higher than others).
+Step 3: Focus on rows where the "Percent Increase (Decrease)" is exceptionally high or low (e.g., 5221.9%, nm, or negative large values), or where absolute values are unusually high (e.g., 100.00 cents in "Regional expenses: Other").
+Step 4: Highlight such entries as outliers.
+
+Notable deviations:
+- "Regional expenses: Other" has a value of 100.00 cents and a 5221.9% increase — extremely high.
+- "Aircraft fuel and related taxes - mainline" has a negative value of -2.86 cents and a 28.8% increase — but this is consistent with the mainline fuel trend.
+- "Special items, net: Regional operating special items, net" has a value of "—", which is missing, and marked as "nm (1)" — could be an outlier due to missingness.
+
+The most significant deviation is clearly "Regional expenses: Other" with 100.00 cents and 5221.9% increase.
+
+Final Answer: Regional expenses: Other

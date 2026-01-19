@@ -1,0 +1,19 @@
+Step 1: Identify the regions where 'e / vap ratio total' is greater than 105%.  
+Step 2: Filter the dataframe for those regions.  
+Step 3: Sum the 'enrolled men' and 'enrolled women' columns for those filtered rows.  
+Step 4: Print the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter regions where 'e / vap ratio total' > 105%
+filtered_df = df[df['e / vap ratio total'] > '105%']
+# Convert 'e / vap ratio total' to numeric for proper comparison (remove % sign and convert)
+df['e / vap ratio total'] = df['e / vap ratio total'].str.replace('%', '').astype(float)
+filtered_df = df[df['e / vap ratio total'] > 105]
+
+# Sum enrolled men and women in filtered regions
+total_enrolled = filtered_df['enrolled men'].sum() + filtered_df['enrolled women'].sum()
+print(f"Final Answer: {total_enrolled}")
+```

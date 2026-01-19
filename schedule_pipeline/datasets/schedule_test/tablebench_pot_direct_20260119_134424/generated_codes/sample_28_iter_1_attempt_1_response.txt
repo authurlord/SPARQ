@@ -1,0 +1,18 @@
+Step 1: The user wants the average number of days served by the top 5 ranked governors.
+Step 2: Load the dataframe.
+Step 3: Convert the 'Days' column to numeric, handling the comma-separated values.
+Step 4: Filter the top 5 ranked governors (rank 1 to 5).
+Step 5: Calculate the mean of the 'Days' column for these governors.
+Step 6: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove commas from 'Days' and convert to integer
+df['Days'] = df['Days'].str.replace(',', '').astype(int)
+# Filter top 5 ranked governors
+top_5 = df[df['Rank'].astype(int) <= 5]
+# Calculate average days served
+avg_days = top_5['Days'].mean()
+print(f"Final Answer: {avg_days:.1f}")
+```

@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Age' column to numeric
+df['Age'] = pd.to_numeric(df['Age'])
+# Calculate the average age
+average_age = df['Age'].mean()
+print(f"Final Answer: {average_age:.1f}")

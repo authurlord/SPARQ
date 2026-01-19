@@ -1,0 +1,45 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter rows for ATL team from 1997 to 2003
+atl_data = df[(df['Team'] == 'ATL') & (df['Year'].astype(int).between(1997, 2003))]
+
+# Extract the relevant columns
+wins = atl_data['Regular Season Won']
+losses = atl_data['Regular Season Lost']
+ties = atl_data['Regular Season Ties']
+
+# Create a list of years
+years = atl_data['Year'].tolist()
+
+# Prepare data for plotting
+data = {
+    'Wins': wins,
+    'Losses': losses,
+    'Ties': ties
+}
+
+# Plot stacked bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(years, wins, label='Wins', color='skyblue')
+plt.bar(years, losses, bottom=wins, label='Losses', color='salmon')
+plt.bar(years, ties, bottom=wins + losses, label='Ties', color='lightgreen')
+
+plt.xlabel('Year')
+plt.ylabel('Number of Games')
+plt.title('Regular Season Wins, Losses, and Draws for ATL Team (1997-2003)')
+plt.legend()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+
+# Show the chart
+plt.show()
+
+# Optional: Print total games played per year for verification
+print("Total games played per year (wins + losses + ties):")
+for year, w, l, t in zip(years, wins, losses, ties):
+    total = w + l + t
+    print(f"{year}: {total}")

@@ -1,0 +1,21 @@
+Step 1: The user wants to determine which factors (preliminaries, interview, swimsuit, evening gown) significantly influence the 'average' score.  
+Step 2: We can assess this by computing the correlation between each factor and the 'average' score.  
+Step 3: A high absolute correlation (close to 1 or -1) indicates a strong influence. If all correlations are low (e.g., < 0.3), then we conclude no clear impact.  
+Step 4: Calculate the correlation between each factor and the 'average' column, and identify those with significant (high) correlation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Compute correlation between each factor and 'average'
+correlations = df[['preliminaries', 'interview', 'swimsuit', 'evening gown', 'average']].corr()['average'].abs()
+
+# Identify factors with correlation > 0.3 (considered significant)
+significant_factors = correlations[correlations > 0.3].index.tolist()
+
+if not significant_factors:
+    print("Final Answer: no clear impact")
+else:
+    print(f"Final Answer: {', '.join(significant_factors)}")
+```

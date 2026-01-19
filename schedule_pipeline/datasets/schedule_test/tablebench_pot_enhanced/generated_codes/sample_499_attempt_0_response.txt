@@ -1,0 +1,21 @@
+Step 1: The user wants the Goal Percentage for Liverpool in the 1995–96 season.  
+Goal Percentage = (Goals scored / Total appearances) * 100  
+Step 2: Load the dataframe.  
+Step 3: Filter the row where Club is 'Liverpool' and Season is '1995–96'.  
+Step 4: Extract the 'Apps' (appearances) and 'Goals' columns from that row.  
+Step 5: Calculate the percentage and round to two decimal places.  
+Step 6: Print the result in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Liverpool in the 1995-96 season
+liverpool_95_96 = df[(df['Club'] == 'Liverpool') & (df['Season'] == '1995–96')]
+# Extract goals and appearances
+goals = liverpool_95_96['League'].iloc[0]  # League column contains goals
+appearances = liverpool_95_96['League_1'].iloc[0]  # League_1 column contains apps
+# Calculate goal percentage
+goal_percentage = (goals / appearances) * 100
+print(f"Final Answer: {goal_percentage:.2f}")
+```

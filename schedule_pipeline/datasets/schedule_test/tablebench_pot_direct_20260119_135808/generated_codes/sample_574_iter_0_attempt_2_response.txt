@@ -1,0 +1,19 @@
+Step 1: The user wants to find the year in which the builder with the '10BR' class had the most works (i.e., the highest number of entries for that class).
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Class' is '10BR'.
+Step 4: Group by 'Year' and count the number of works (rows) for each year.
+Step 5: Find the year with the maximum count.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for rows where Class is '10BR'
+df_10br = df[df['Class'] == '10BR']
+# Count number of works per year
+works_by_year = df_10br['Year'].value_counts()
+# Find the year with the most works
+max_year = works_by_year.idxmax()
+print(f"Final Answer: {max_year}")
+```

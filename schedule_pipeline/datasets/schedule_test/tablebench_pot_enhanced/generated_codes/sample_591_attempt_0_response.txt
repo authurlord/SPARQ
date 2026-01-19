@@ -1,0 +1,16 @@
+Step 1: The user wants the total number of live births from the period 1950-1955 to 1975-1980.
+Step 2: Load the dataframe.
+Step 3: Select the 'Live births per year' column and convert values from strings with spaces (e.g., '9 000') to integers.
+Step 4: Sum the values for the specified periods (from the first row to the sixth row, corresponding to 1950-1955 to 1975-1980).
+Step 5: Print the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean the 'Live births per year' column by removing spaces and converting to integer
+df['Live births per year'] = df['Live births per year'].str.replace(' ', '').astype(int)
+# Sum live births from 1950-1955 to 1975-1980 (first 6 rows)
+total_live_births = df['Live births per year'].iloc[:6].sum()
+print(f"Final Answer: {total_live_births}")
+```

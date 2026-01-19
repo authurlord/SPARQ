@@ -1,0 +1,47 @@
+Step 1: The user wants a percentage bar chart showing the percentage of total sales for each song across different regions.  
+Step 2: Load the dataframe.  
+Step 3: Exclude the 'total' column since we are analyzing regional contributions per song.  
+Step 4: Calculate the percentage of each region's contribution to the total sales for each song.  
+Step 5: Use matplotlib to plot a grouped bar chart where each bar represents a song, and segments represent the percentage contribution from each region.  
+Step 6: Format the chart with labels, title, and legend.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Exclude the 'total' column and convert region columns to numeric
+regions = ['mobiles', 'northern ireland', 'northern england', 'scotland', 'southern england', 'wales']
+df[regions] = df[regions].apply(pd.to_numeric)
+
+# Calculate percentage for each region per song
+df_percentage = df[regions].div(df['total'], axis=0) * 100
+
+# Set up the bar chart
+fig, ax = plt.subplots(figsize=(12, 6))
+
+# Define bar width and positions
+bar_width = 0.85
+index = range(len(df))
+
+# Plot each region as a stacked bar
+bottom = [0] * len(df)
+colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0', '#ffb3e6']
+
+for i, region in enumerate(regions):
+    ax.bar(index, df_percentage[region], bar_width, label=region, bottom=bottom, color=colors[i])
+    bottom = [b + v for b, v in zip(bottom, df_percentage[region])]
+
+# Customize the chart
+ax.set_xlabel('Song')
+ax.set_ylabel('Percentage of Total Sales (%)')
+ax.set_title('Percentage of Total Sales by Song and Region')
+ax.set_xticks(index)
+ax.set_xticklabels(df['song'], rotation=45, ha='right')
+ax.legend(loc='upper right', bbox_to_anchor=(1.15, 1))
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```

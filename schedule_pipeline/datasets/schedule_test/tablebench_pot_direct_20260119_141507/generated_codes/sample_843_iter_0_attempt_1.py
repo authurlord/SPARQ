@@ -1,0 +1,25 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Office started' and 'Office ended' to integers (if possible)
+df['Office started'] = pd.to_numeric(df['Office started'], errors='coerce')
+df['Office ended'] = pd.to_numeric(df['Office ended'], errors='coerce')
+
+# Drop rows where either office start or end is missing
+df = df.dropna(subset=['Office started', 'Office ended'])
+
+# Calculate tenure in years
+df['tenure'] = df['Office ended'] - df['Office started']
+
+# Find the bishop with the longest tenure
+longest_tenure_bishop = df.loc[df['tenure'].idxmax(), 'Name']
+
+# Calculate average tenure
+average_tenure = df['tenure'].mean()
+
+# Calculate difference
+difference = df['tenure'].max() - average_tenure
+
+print(f"Final Answer: {longest_tenure_bishop}, {difference:.1f}")

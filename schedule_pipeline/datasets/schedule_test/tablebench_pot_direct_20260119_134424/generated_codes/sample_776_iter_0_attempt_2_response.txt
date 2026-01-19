@@ -1,0 +1,27 @@
+Step 1: The user wants to project the net asset value at the end of 2012/2013 based on historical trends.  
+Step 2: Load the dataframe and extract the 'net assets at end of year' column.  
+Step 3: Fit a simple linear trend (using the last few years) to estimate the next value.  
+Step 4: Use the slope from the last few years to project forward.  
+Step 5: Print the projected value.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Convert 'net assets at end of year' to numeric
+df['net assets at end of year'] = pd.to_numeric(df['net assets at end of year'])
+
+# Extract the last few years' data for trend analysis
+years = np.arange(len(df))
+net_assets = df['net assets at end of year'].values
+
+# Fit a linear trend using the last 5 years
+last_5_years = -5
+slope, intercept = np.polyfit(years[last_5_years:], net_assets[last_5_years:], 1)
+
+# Predict for the next year (index = len(df))
+projected_value = slope * len(df) + intercept
+
+print(f"Final Answer: {int(projected_value)}")
+```

@@ -1,0 +1,15 @@
+Step 1: Identify the competition where the athlete won 1st place in the 3000 m steeplechase event.
+Step 2: Check the venue for that competition to see if it is the capital of the Bahamas (Nassau).
+Step 3: Since the data shows that the 3000 m steeplechase was held in Nassau, Bahamas, and the athlete won 1st place, the competition is "Central American and Caribbean Junior Championships (U-20)".
+Step 4: Return the competition name as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for the 3000 m steeplechase event with 1st position
+filtered_df = df[(df['Event'] == '3000 m steeplechase') & (df['Position'] == '1st')]
+# Get the competition from the filtered row
+competition = filtered_df['Competition'].values[0]
+print(f"Final Answer: {competition}")
+```

@@ -1,0 +1,40 @@
+Step 1: The user is asking for an expected prediction of total votes and percentage of popular vote for the next election cycle based on the increasing trend from 1983 to 2013.
+
+Step 2: Since the data shows a trend in both total votes and % of popular vote, we can use linear regression to model the trend and predict the next value (2017).
+
+Step 3: Extract the 'election' and 'total votes' columns, convert 'election' to numeric (e.g., 1983 → 1, 1986 → 2, etc.), then fit a linear model to predict total votes.
+
+Step 4: Similarly, fit a linear model for '% of popular vote'.
+
+Step 5: Use the model to predict values for the next election cycle (2017).
+
+Step 6: Print the predicted total votes and percentage.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the dataframe
+df = pd.read_csv('table.csv')
+
+# Convert 'election' to numeric (1983 = 1, 1986 = 2, ..., 2013 = 9)
+df['election_num'] = np.arange(1, len(df) + 1)
+
+# Prepare data for linear regression
+X = df['election_num'].values.reshape(-1, 1)
+y_votes = df['total votes'].values
+y_percentage = df['% of popular vote'].str.replace('%', '').astype(float).values
+
+# Fit linear regression models
+model_votes = LinearRegression().fit(X, y_votes)
+model_percentage = LinearRegression().fit(X, y_percentage)
+
+# Predict for the next election (10th cycle)
+next_election = np.array([[10]])
+predicted_votes = model_votes.predict(next_election)[0]
+predicted_percentage = model_percentage.predict(next_election)[0]
+
+# Format the percentage with %
+print(f"Final Answer: {predicted_votes:.0f}, {predicted_percentage:.2f}%")
+```

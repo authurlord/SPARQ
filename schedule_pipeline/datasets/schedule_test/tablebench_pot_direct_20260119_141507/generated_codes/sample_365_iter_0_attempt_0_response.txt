@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of jurisdictions where the percentage of votes in favor of prohibition is greater than 70%.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'percent for' > 70.  
+Step 4: Count the number of such rows.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count jurisdictions where percent for is greater than 70%
+count_high_for = df[df['percent for'] > 70.0]['percent for'].count()
+print(f"Final Answer: {count_high_for}")
+```

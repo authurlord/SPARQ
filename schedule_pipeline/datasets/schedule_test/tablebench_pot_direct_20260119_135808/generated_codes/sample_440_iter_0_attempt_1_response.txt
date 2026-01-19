@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: rank, company, headquarters, industry, sales (billion ), profits (billion ), assets (billion ), market value (billion ), banking, oil and gas, diversified financials, insurance, conglomerate, automotive, retailing, usa, uk, netherlands, switzerland, germany, japan, france, 19, 348.65, 410.65, 179.02, 153.44

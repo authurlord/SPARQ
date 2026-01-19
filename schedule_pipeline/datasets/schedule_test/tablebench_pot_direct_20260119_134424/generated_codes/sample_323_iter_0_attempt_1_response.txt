@@ -1,0 +1,15 @@
+Step 1: Identify the row where the athlete achieved a personal best (PB) time. From the data, the "Notes" column contains "PB" in one entry.
+Step 2: Extract the "Year" and "Venue" from that specific row.
+Step 3: Output the year and venue as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where Notes contain 'PB'
+pb_row = df[df['Notes'] == '2:12:19 PB']
+# Extract the Year and Venue
+year_pb = pb_row['Year'].values[0]
+venue_pb = pb_row['Venue'].values[0]
+print(f"Final Answer: {year_pb}, {venue_pb}")
+```

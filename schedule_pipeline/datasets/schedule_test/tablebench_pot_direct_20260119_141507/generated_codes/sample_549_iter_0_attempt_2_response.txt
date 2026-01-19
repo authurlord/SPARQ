@@ -1,0 +1,23 @@
+Step 1: The user wants the average annual change in the 'district-wide' budget from 2001-2002 to 2006-2007.  
+Step 2: Extract the 'district-wide' values for each year.  
+Step 3: Calculate the total change over the period and divide by the number of years (5 years: 2001-2002 to 2006-2007).  
+Step 4: Since it's an average annual change, we compute the difference between the final and initial values and divide by the number of years.
+
+Note: The years span from 2001-2002 to 2006-2007, which is 6 years apart (i.e., 5 intervals), so we compute the average change per year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the 'district - wide' column and convert to numeric
+district_wide = df['district - wide'].astype(float)
+
+# Calculate the total change from 2001-2002 to 2006-2007
+initial = district_wide.iloc[0]  # 2001-2002
+final = district_wide.iloc[-1]   # 2006-2007
+total_change = final - initial
+num_years = 5  # from 2001-2002 to 2006-2007 is 5 years of change
+
+average_annual_change = total_change / num_years
+print(f"Final Answer: {average_annual_change:.1f}")
+```

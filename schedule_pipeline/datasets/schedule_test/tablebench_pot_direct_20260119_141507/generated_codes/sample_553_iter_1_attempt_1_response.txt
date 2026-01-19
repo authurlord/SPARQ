@@ -1,0 +1,28 @@
+The error occurred because the 'year' column contains strings (e.g., '2000'), and we need to convert them to integers before performing arithmetic operations like calculating differences.
+
+Step 1: Extract the 'property taxes' column.
+Step 2: Convert the year column to integers to enable proper sorting and calculation of annual increases.
+Step 3: Sort the data by year to ensure chronological order.
+Step 4: Calculate the difference in property taxes from year to year, then compute the average increase per year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'year' to integer for proper numerical operations
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+
+# Sort by year to ensure chronological order
+df = df.sort_values('year').reset_index(drop=True)
+
+# Extract property taxes values as a series
+property_taxes = df['property taxes'].astype(float)
+
+# Calculate the differences between consecutive years
+annual_increases = property_taxes.diff()
+
+# Compute the average annual increase
+average_increase = annual_increases.mean()
+
+print(f"Final Answer: {average_increase:.0f}")
+```

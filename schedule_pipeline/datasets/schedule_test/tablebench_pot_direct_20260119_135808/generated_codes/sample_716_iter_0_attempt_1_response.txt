@@ -1,0 +1,15 @@
+Step 1: The user wants to identify the episode with the highest number of viewers.
+Step 2: Load the dataframe.
+Step 3: Convert the 'viewers' column to integer for proper comparison.
+Step 4: Find the row with the maximum viewers.
+Step 5: Extract and print the title of that episode.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'viewers' column to integer
+df['viewers'] = df['viewers'].astype(int)
+# Find the episode with the highest viewers
+max_viewers_episode = df.loc[df['viewers'].idxmax()]
+print(f"Final Answer: {max_viewers_episode['title']}")
+```

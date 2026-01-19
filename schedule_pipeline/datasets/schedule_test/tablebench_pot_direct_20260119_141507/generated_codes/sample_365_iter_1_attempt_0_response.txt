@@ -1,0 +1,16 @@
+The error occurred because the 'percent for' column contains string values (like '68.8'), not floats. We need to convert them to numeric before comparing.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'percent for' column to float.
+Step 3: Filter jurisdictions where 'percent for' > 70.
+Step 4: Count how many such jurisdictions exist.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'percent for' to float and filter where it's greater than 70%
+df['percent for'] = pd.to_numeric(df['percent for'], errors='coerce')
+count_above_70 = df[df['percent for'] > 70]['percent for'].count()
+print(f"Final Answer: {count_above_70}")
+```

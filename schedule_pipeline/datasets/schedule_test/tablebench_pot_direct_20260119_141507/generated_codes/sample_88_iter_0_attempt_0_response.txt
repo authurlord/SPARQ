@@ -1,0 +1,12 @@
+Step 1: The user is asking for the nation that ranked 4th in terms of gold medals won.  
+Step 2: The "rank" column indicates the order, and the "gold" column shows the number of gold medals.  
+Step 3: We need to find the row where the rank is 4 and extract the corresponding nation.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the nation with rank 4
+nation_rank_4 = df[df['rank'] == '4']['nation'].values[0]
+print(f"Final Answer: {nation_rank_4}")
+```

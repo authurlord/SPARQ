@@ -1,0 +1,48 @@
+Step 1: The user wants to identify any train classes with top speed or number of units that deviate significantly from the pattern.  
+Step 2: Load the dataframe.  
+Step 3: Examine the 'Top speed' (mph) and 'Number' columns for outliers.  
+Step 4: Use statistical methods (e.g., Z-score or IQR) to detect outliers. Since the dataset is small, we can manually inspect values that are clearly different.  
+Step 5: Focus on 'Top speed' and 'Number' columns.  
+- Most classes have a top speed of 75 mph (120 km/h), except Class 156 (200 mph), Class 175 Coradia (100 mph), and Class 323 (90 mph).  
+- Class 156 (200 mph) is an outlier in speed.  
+- Number of units: Most are between 6 and 80, but Class 323 has a built date of "2050-2060", which is likely a typo, and only 17 units. However, the number itself isn't extreme.  
+- Class 323's built date is suspicious and may indicate data error.  
+Step 6: Flag Class 156 (top speed 200 mph) as a significant deviation.  
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Top speed' to numeric for analysis
+df['Top speed'] = pd.to_numeric(df['Top speed'], errors='coerce')
+
+# Identify outliers in 'Top speed' using IQR method
+Q1 = df['Top speed'].quantile(0.25)
+Q3 = df['Top speed'].quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+outliers_speed = df[(df['Top speed'] < lower_bound) | (df['Top speed'] > upper_bound)]
+
+# Check for unusual 'Built' dates (e.g., future years)
+df['Built'] = df['Built'].astype(str)
+future_years = df[df['Built'].str.contains('20[5-9][0-9]|21[0-9][0-9]', na=False)]
+
+# Combine findings
+outliers = outliers_speed['Class'].tolist()
+if not outliers:
+    outliers = []
+
+# Add class with future built date if any
+if not future_years.empty:
+    future_classes = future_years['Class'].tolist()
+    outliers.extend(future_classes)
+
+# Remove duplicates and ensure output is clean
+outliers = list(set(outliers))
+
+print(f"Final Answer: {', '.join(outliers)}")
+```

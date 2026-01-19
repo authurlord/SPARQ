@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table contains shipping tonnage data from 2000 to 2006, with columns representing year, US rank in global shipping, total shipping tonnage (s ton), domestic shipping tonnage, foreign total shipping tonnage, foreign imports, and foreign exports. The data shows fluctuations in total and domestic tonnage over time, with a peak in 2005. Foreign imports and exports show variability, indicating shifts in international trade patterns. The US rank fluctuates between 94 and 108, suggesting changing competitiveness in global shipping.
+
+Final Answer: year, us rank, total s ton, domestic s ton, foreign total s ton, foreign imports s ton, foreign exports s ton

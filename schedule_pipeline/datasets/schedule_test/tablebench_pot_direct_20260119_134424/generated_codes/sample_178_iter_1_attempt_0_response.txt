@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The increase in power (horsepower) generally correlates with higher maximum speed (km/h), as seen in the progression from 220 horsepower (90 km/h) to 298 horsepower (120 km/h) across different years.

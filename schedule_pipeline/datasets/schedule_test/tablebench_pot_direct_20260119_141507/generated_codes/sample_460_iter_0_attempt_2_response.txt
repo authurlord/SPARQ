@@ -1,0 +1,47 @@
+The question asks for the "anomaly data point" in the table. However, the term "anomaly" is not clearly defined in this context. Without a specific criterion (e.g., outlier based on viewership, days in camp, or other metrics), it's not possible to definitively identify an anomaly.
+
+Given the data, one reasonable interpretation is to detect outliers in the "average viewers (millions)" column, as it is a continuous numerical variable and may have extreme values compared to others. We can consider a data point as an anomaly if its average viewers are significantly different from the rest—either much higher or lower—using statistical methods like Z-score or interquartile range (IQR).
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Extract the "average viewers (millions)" column.
+3. Compute the IQR to identify outliers.
+4. Identify any data point that falls outside the IQR range.
+5. Return the row with the anomaly (e.g., the series name).
+
+We will use IQR method:
+- Q1 = 25th percentile
+- Q3 = 75th percentile
+- IQR = Q3 - Q1
+- Lower bound = Q1 - 1.5 * IQR
+- Upper bound = Q3 + 1.5 * IQR
+- Any value outside this range is considered an anomaly.
+
+Let’s implement this:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract average viewers column
+avg_viewers = df['average viewers (millions)'].astype(float)
+
+# Calculate Q1, Q3, and IQR
+Q1 = avg_viewers.quantile(0.25)
+Q3 = avg_viewers.quantile(0.75)
+IQR = Q3 - Q1
+
+# Define bounds
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+# Find outliers
+outliers = avg_viewers[(avg_viewers < lower_bound) | (avg_viewers > upper_bound)]
+
+# If any outliers exist, return the corresponding series name
+if not outliers.empty:
+    anomaly_series = df[df['average viewers (millions)'].astype(float).isin(outliers)].iloc[0]['series']
+    print(f"Final Answer: {anomaly_series}")
+else:
+    print("Final Answer: no anomaly")
+```

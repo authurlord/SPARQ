@@ -1,0 +1,32 @@
+Step 1: Understand the table structure. The table has columns: region, total population, manchu, percentage in manchu population, and regional percentage of population.  
+Step 2: Identify key insights:
+- The "manchu" column shows the absolute number of Manchu people per region.
+- The "percentage in manchu population" column shows the proportion of Manchu people within that region's total population.
+- The "regional percentage of population" shows how much each region contributes to the overall population.
+Step 3: Focus on the distribution of the Manchu population — which regions have the highest numbers, and how it compares across regions.
+Step 4: Filter out rows with invalid or negligible data (e.g., "<0.01" or very small values) and analyze top regions by Manchu population.
+
+We will:
+- Load the dataframe.
+- Filter out rows where "percentage in manchu population" is "<0.01" or invalid.
+- Sort by "manchu" in descending order.
+- Display the top few entries to show the main components of the Manchu population distribution.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter out rows with invalid or negligible 'percentage in manchu population'
+df_filtered = df[df['percentage in manchu population'].str.contains('<0.01', case=False, na=False) == False]
+
+# Sort by 'manchu' in descending order to see the largest populations first
+df_sorted = df_filtered.sort_values(by='manchu', ascending=False)
+
+# Display the top 10 entries for insight
+print(df_sorted[['region', 'manchu', 'total population']].head(10))
+
+# Final Answer: The main components of the table are the regional breakdown of total population and Manchu population. 
+# The highest Manchu populations are in Liaoning (5.3M), Hebei (2.1M), Jilin (866K), and Heilongjiang (748K).
+Final Answer: Liaoning, Hebei, Jilin, Heilongjiang
+```

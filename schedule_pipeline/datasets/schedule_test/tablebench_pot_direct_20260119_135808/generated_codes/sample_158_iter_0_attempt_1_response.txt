@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 305.72, 285.39, 253.09, 232.19, 212.91

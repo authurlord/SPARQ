@@ -1,0 +1,18 @@
+Step 1: The user wants the total number of live births from the period 1950-1955 to 1975-1980.
+Step 2: Load the dataframe.
+Step 3: Filter the rows where the 'Period' is between '1950-1955' and '1975-1980' (inclusive).
+Step 4: Extract the 'Live births per year' column, remove the space in the numbers (e.g., '9 000' → 9000), convert to integers, and sum them.
+Step 5: Print the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for the required period
+filtered_df = df[(df['Period'] >= '1950-1955') & (df['Period'] <= '1975-1980')]
+# Remove spaces in 'Live births per year' and convert to integer
+filtered_df['Live births per year'] = filtered_df['Live births per year'].str.replace(' ', '').astype(int)
+# Sum the live births
+total_live_births = filtered_df['Live births per year'].sum()
+print(f"Final Answer: {total_live_births}")
+```

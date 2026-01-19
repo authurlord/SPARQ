@@ -1,0 +1,18 @@
+Step 1: The user wants to find the demographic category with the highest percentage value of males.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Male' column has a percentage value (contains '%' sign).
+Step 4: Convert the 'Male' column to float after removing '%' and find the maximum.
+Step 5: Return the corresponding 'Particulars' for that row.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Male column contains percentage (i.e., literacy)
+literacy_row = df[df['Male'].str.contains('%', na=False)]
+# Convert Male percentage to float and find max
+max_male_percentage = literacy_row['Male'].str.replace('%', '').astype(float).max()
+# Get the corresponding Particulars
+category = literacy_row[literacy_row['Male'].str.replace('%', '').astype(float) == max_male_percentage]['Particulars'].iloc[0]
+print(f"Final Answer: {category}")
+```

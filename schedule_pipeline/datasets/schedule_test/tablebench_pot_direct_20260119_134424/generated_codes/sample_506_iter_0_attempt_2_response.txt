@@ -1,0 +1,23 @@
+Step 1: The user wants to calculate the Title Winning Percentage for each school and identify the school with the highest percentage.
+Step 2: Load the dataframe.
+Step 3: Convert 'Outright Titles' and 'Total Finals' to numeric (handling missing values in 'Total Finals').
+Step 4: Calculate the Title Winning Percentage as (Outright Titles / Total Finals) * 100.
+Step 5: Identify the school with the maximum percentage.
+Step 6: Print the school name with the highest percentage.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric, handling missing values
+df['Outright Titles'] = pd.to_numeric(df['Outright Titles'], errors='coerce')
+df['Total Finals'] = pd.to_numeric(df['Total Finals'], errors='coerce')
+
+# Calculate Title Winning Percentage
+df['Title Winning Percentage'] = (df['Outright Titles'] / df['Total Finals']) * 100
+
+# Find the school with the highest Title Winning Percentage
+max_percentage_school = df.loc[df['Title Winning Percentage'].idxmax(), 'School']
+
+print(f"Final Answer: {max_percentage_school}")
+```

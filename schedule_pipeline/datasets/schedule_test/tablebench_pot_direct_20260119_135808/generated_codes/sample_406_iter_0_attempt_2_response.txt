@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table categorizes BMI levels and their corresponding BMI Prime values, with BMI (kg/m²) indicating body mass index ranges and BMI Prime being the ratio of actual BMI to the upper limit of normal BMI (25). Notable patterns include a linear progression of BMI Prime from 0.60 to 2.4 across categories, reflecting increasing weight severity. The normal weight range is defined as BMI 18.5–25 and BMI Prime 0.74–1.0, serving as a health benchmark.

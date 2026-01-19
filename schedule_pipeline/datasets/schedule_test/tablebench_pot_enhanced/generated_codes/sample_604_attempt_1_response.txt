@@ -1,0 +1,15 @@
+Step 1: The user wants the total number of locomotives at Doncaster and Pyewipe combined for the 'j17' and 'e4' classes.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'class' is either 'j17' or 'e4'.
+Step 4: Sum the values in the 'number at doncaster' and 'number at pyewipe' columns for these filtered rows.
+Step 5: Print the total.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for 'j17' and 'e4' classes
+filtered_df = df[df['class'].isin(['j17', 'e4'])]
+# Calculate total locomotives at Doncaster and Pyewipe
+total_locomotives = filtered_df['number at doncaster'].sum() + filtered_df['number at pyewipe'].sum()
+print(f"Final Answer: {total_locomotives}")
+```

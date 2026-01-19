@@ -1,0 +1,16 @@
+Step 1: The user wants the median number of executions in persona across all tribunals.
+Step 2: Load the dataframe.
+Step 3: Extract the 'executions in persona' column, which contains numerical values (excluding the percentage entries).
+Step 4: Convert the values to integers and compute the median.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract 'executions in persona' column and convert to integers
+executions_persona = df['executions in persona'].str.replace(r'\(.*\)', '', regex=True).astype(int)
+# Calculate median
+median_executions = executions_persona.median()
+print(f"Final Answer: {median_executions}")
+```

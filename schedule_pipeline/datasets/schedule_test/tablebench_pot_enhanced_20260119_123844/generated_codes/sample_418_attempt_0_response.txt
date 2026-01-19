@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The points per game trend shows a peak in 2006 (9.7), followed by a decline to a low of 2.6 in 2011, then a slight increase to 4.5 in 2012.

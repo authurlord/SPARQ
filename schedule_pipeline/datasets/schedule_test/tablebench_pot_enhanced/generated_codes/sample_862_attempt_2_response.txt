@@ -1,0 +1,24 @@
+Step 1: The user wants to find the year where the absolute difference between typhus and smallpox cases is the smallest.
+Step 2: Load the dataframe.
+Step 3: Convert 'typhus' and 'smallpox' columns to integers (note: some values are strings like '3600', '2940 (avg)', etc., so we need to clean them).
+Step 4: Calculate the absolute difference between typhus and smallpox for each year.
+Step 5: Find the year with the minimum difference.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean 'typhus' and 'smallpox' columns: remove non-numeric characters and convert to int
+df['typhus'] = df['typhus'].astype(str).str.replace(r'[^0-9]', '', regex=True).astype(int)
+df['smallpox'] = df['smallpox'].astype(str).str.replace(r'[^0-9]', '', regex=True).astype(int)
+
+# Calculate absolute difference between typhus and smallpox
+df['diff'] = (df['typhus'] - df['smallpox']).abs()
+
+# Find the year with the minimum difference
+min_diff_year = df.loc[df['diff'].idxmin(), 'year']
+
+print(f"Final Answer: {min_diff_year}")
+```

@@ -1,0 +1,12 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'property taxes' column to integers
+df['property taxes'] = df['property taxes'].astype(int)
+# Extract values for 2000 and 2005
+property_taxes_2000 = df[df['year'] == '2000']['property taxes'].values[0]
+property_taxes_2005 = df[df['year'] == '2005']['property taxes'].values[0]
+# Calculate total increase and average annual increase
+total_increase = property_taxes_2005 - property_taxes_2000
+average_annual_increase = total_increase / 5
+print(f"Final Answer: {average_annual_increase:.0f}")

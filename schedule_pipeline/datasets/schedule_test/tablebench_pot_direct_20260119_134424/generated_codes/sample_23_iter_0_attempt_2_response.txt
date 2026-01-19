@@ -1,0 +1,16 @@
+Step 1: Identify the indices published by Transparency International from the 'organization' column.
+Step 2: Filter the rows where 'organization' is 'transparency international'.
+Step 3: Extract the 'rank' values for these rows.
+Step 4: Calculate the average of these ranks.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where organization is 'transparency international'
+transparency_data = df[df['organization'] == 'transparency international']
+# Calculate the average rank
+average_rank = transparency_data['rank'].astype(int).mean()
+print(f"Final Answer: {average_rank:.1f}")
+```

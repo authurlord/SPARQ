@@ -1,0 +1,30 @@
+Step 1: The user wants to find the year when the athlete achieved their personal best time in the 20 km walk event at the African Championships.  
+Step 2: Filter the data to include only rows where the 'Competition' is 'African Championships' and the 'Event' is '20 km walk'.  
+Step 3: Among these rows, identify the one with the fastest (minimum) time.  
+Step 4: Extract the 'Year' corresponding to that time and print it.  
+Step 5: Note that times are in format 'mm:ss', so we need to convert them to seconds for comparison.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for African Championships and 20 km walk
+african_champs_20km = df[(df['Competition'] == 'African Championships') & (df['Event'] == '20 km walk')]
+
+# Convert time to seconds for comparison
+def time_to_seconds(time_str):
+    if pd.isna(time_str) or time_str == 'DNF' or time_str == 'DQ':
+        return float('inf')
+    minutes, seconds = map(int, time_str.split(':'))
+    return minutes * 60 + seconds
+
+african_champs_20km['time_seconds'] = african_champs_20km['Notes'].apply(time_to_seconds)
+
+# Find the row with the minimum time (personal best)
+best_time_row = african_champs_20km.loc[african_champs_20km['time_seconds'].idxmin()]
+
+# Extract the year
+best_year = best_time_row['Year']
+print(f"Final Answer: {best_year}")
+```

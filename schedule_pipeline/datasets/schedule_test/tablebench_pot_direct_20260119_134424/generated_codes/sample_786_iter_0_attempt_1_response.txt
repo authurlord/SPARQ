@@ -1,0 +1,18 @@
+Step 1: Filter the data to include only drivers who have driven a Chevrolet car.
+Step 2: Extract the 'winnings' column for these drivers.
+Step 3: Convert the winnings to numeric (since it's stored as strings).
+Step 4: Calculate the median of the winnings.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'car' is 'chevrolet'
+chevrolet_drivers = df[df['car'] == 'chevrolet']
+# Convert 'winnings' to numeric, handling any non-numeric values
+chevrolet_drivers['winnings'] = pd.to_numeric(chevrolet_drivers['winnings'], errors='coerce')
+# Calculate median winnings
+median_winnings = chevrolet_drivers['winnings'].median()
+print(f"Final Answer: {median_winnings}")
+```

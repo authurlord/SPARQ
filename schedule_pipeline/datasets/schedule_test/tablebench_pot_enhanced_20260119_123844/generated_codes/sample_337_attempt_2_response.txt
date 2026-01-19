@@ -1,0 +1,15 @@
+Step 1: The user wants to find the year when the athlete achieved their personal best (PB) in the 200m event at the Asian Games.
+Step 2: Filter the data for rows where the 'Event' is '200 m' and 'Competition' is 'Asian Games'.
+Step 3: Among those rows, identify the one with 'Position' containing 'PB' (personal best).
+Step 4: Extract the 'Year' from that row and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Asian Games and 200m event with PB
+pb_row = df[(df['Event'] == '200 m') & (df['Competition'] == 'Asian Games') & (df['Position'].str.contains('PB', na=False))]
+# Extract the year
+year_pb = pb_row['Year'].iloc[0]
+print(f"Final Answer: {year_pb}")
+```

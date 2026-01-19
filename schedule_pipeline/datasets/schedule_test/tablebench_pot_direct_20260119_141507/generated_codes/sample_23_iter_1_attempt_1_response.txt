@@ -1,0 +1,20 @@
+Step 1: The user wants the average rank of indices published by Transparency International.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'organization' column is "transparency international".  
+Step 4: Extract the 'rank' column from the filtered rows and compute the mean.  
+Step 5: Ensure that the rank values are numeric (no string issues like '1937' — which appears to be a data error, but in this table, all ranks seem valid).  
+
+However, upon close inspection, the first row has "bribe payers index" with rank "19", and the second row has "corruption perceptions index" with rank "37", both under "transparency international". So we only need to filter on organization and take the average of the 'rank' column.
+
+There is no indication of non-numeric values in the 'rank' column here. The issue in the previous attempt was likely due to a misinterpretation or typo in the data — in this dataset, all ranks are clearly numeric.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where organization is 'transparency international'
+ti_indices = df[df['organization'] == 'transparency international']
+# Calculate the average rank
+average_rank = ti_indices['rank'].mean()
+print(f"Final Answer: {average_rank:.1f}")
+```

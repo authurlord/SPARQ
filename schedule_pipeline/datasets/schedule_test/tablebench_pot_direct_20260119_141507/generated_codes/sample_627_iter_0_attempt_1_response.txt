@@ -1,0 +1,27 @@
+Step 1: The user wants to calculate the total winnings from two separate games:
+- One with "natural royal flush" and a 3-credit bet.
+- One with "four of a kind" and a 3-credit bet.
+
+Step 2: From the table, find the payout for each hand at 3 credits:
+- "natural royal flush" at 3 credits = 900
+- "four of a kind" at 3 credits = 15
+
+Step 3: Multiply each payout by the bet amount (3 credits), since the payout is already given per credit.
+
+Step 4: Sum the two winnings.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract payouts for "natural royal flush" and "four of a kind" at 3 credits
+natural_royal_flush_3_credit = df.loc[df['hand'] == 'natural royal flush', '3 credits'].values[0]
+four_of_a_kind_3_credit = df.loc[df['hand'] == 'four of a kind', '3 credits'].values[0]
+
+# Calculate total winnings for two separate games with 3-credit bets
+total_winnings = (natural_royal_flush_3_credit + four_of_a_kind_3_credit) * 3
+
+print(f"Final Answer: {total_winnings}")
+```

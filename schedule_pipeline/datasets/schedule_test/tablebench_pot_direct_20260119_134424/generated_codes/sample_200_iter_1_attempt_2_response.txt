@@ -1,0 +1,20 @@
+The question asks about a causal relationship between the height of a mountain peak (in metres) and its prominence (in metres). However, causality cannot be determined from data alone without additional domain knowledge or experimental design. What can be analyzed is the correlation between these two variables.
+
+Step 1: Load the dataframe.
+Step 2: Extract the 'metres' (height) and 'prominence (m)' columns.
+Step 3: Calculate the correlation coefficient between height and prominence.
+Step 4: Interpret the result — a high correlation might suggest a relationship, but not causation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'metres' and 'prominence (m)' to numeric
+df['metres'] = pd.to_numeric(df['metres'])
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'])
+
+# Calculate correlation
+correlation = df['metres'].corr(df['prominence (m)'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

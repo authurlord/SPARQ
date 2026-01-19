@@ -1,0 +1,27 @@
+Step 1: The user wants to identify countries with values that deviate significantly from the norm. This requires analyzing the data for outliers in the columns '2011 (imf)' and '2008 (cia factbook)'.  
+Step 2: Load the dataframe.  
+Step 3: Calculate the mean and standard deviation for both '2011 (imf)' and '2008 (cia factbook)'.  
+Step 4: Identify countries where values are more than 2 standard deviations away from the mean (a common threshold for outliers).  
+Step 5: Print the list of such countries.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Calculate mean and std for both columns
+mean_imf = df['2011 (imf)'].astype(float).mean()
+std_imf = df['2011 (imf)'].astype(float).std()
+
+mean_cia = df['2008 (cia factbook)'].astype(float).mean()
+std_cia = df['2008 (cia factbook)'].astype(float).std()
+
+# Identify outliers (more than 2 std away from mean)
+outliers_imf = df[abs(df['2011 (imf)'].astype(float) - mean_imf) > 2 * std_imf]
+outliers_cia = df[abs(df['2008 (cia factbook)'].astype(float) - mean_cia) > 2 * std_cia]
+
+# Combine unique country names from both sets
+outlier_countries = set(outliers_imf['nation']).union(set(outliers_cia['nation']))
+
+print(f"Final Answer: {', '.join(outlier_countries)}")
+```

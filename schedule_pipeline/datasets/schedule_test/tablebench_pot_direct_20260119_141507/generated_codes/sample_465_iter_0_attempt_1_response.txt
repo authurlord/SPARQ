@@ -1,0 +1,28 @@
+Step 1: The user is asking to identify airports with total passenger counts that deviate significantly from the norm. This implies detecting outliers in the "total passengers" column.
+
+Step 2: We will calculate the mean and standard deviation of total passengers. Then, we will define a threshold (e.g., more than 2 standard deviations above or below the mean) to identify outliers.
+
+Step 3: Filter the airports whose total passenger count falls outside this range and return their names.
+
+Step 4: Print the names of such airports.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'total passengers' to numeric (in case of formatting issues)
+df['total passengers'] = pd.to_numeric(df['total passengers'], errors='coerce')
+
+# Calculate mean and std
+mean_passengers = df['total passengers'].mean()
+std_passengers = df['total passengers'].std()
+
+# Define threshold for significant deviation (2 standard deviations)
+threshold = 2 * std_passengers
+outliers = df[(df['total passengers'] > mean_passengers + threshold) | 
+              (df['total passengers'] < mean_passengers - threshold)]
+
+# Extract airport names
+outlier_airports = outliers['airport'].tolist()
+print(f"Final Answer: {', '.join(outlier_airports)}")
+```

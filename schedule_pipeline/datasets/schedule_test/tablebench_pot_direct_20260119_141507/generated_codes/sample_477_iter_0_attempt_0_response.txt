@@ -1,0 +1,31 @@
+Step 1: The user is asking to identify songs whose values (especially "points") significantly deviate from the general pattern.  
+Step 2: Focus on the "points" column, as it is likely to show variation and outliers.  
+Step 3: Calculate the mean and standard deviation of the "points" column to define what is "normal".  
+Step 4: Identify points that are more than 2 standard deviations away from the mean (common outlier detection rule).  
+Step 5: Retrieve the corresponding song names for those outliers.  
+
+Note: The value "-20" in the last row is negative, which is unusual in a points context, so it may be a strong outlier.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate mean and std of points
+mean_points = df['points'].mean()
+std_points = df['points'].std()
+
+# Identify outliers using 2 standard deviations rule
+outlier_threshold = 2 * std_points
+outliers = df[(df['points'] > mean_points + outlier_threshold) | (df['points'] < mean_points - outlier_threshold)]
+
+# Extract the song names of outliers
+outlier_songs = outliers['song'].tolist()
+
+# Also check for negative points (which may indicate an anomaly)
+negative_points = df[df['points'] < 0]['song'].tolist()
+
+# Combine both types of anomalies
+all_outlier_songs = list(set(outlier_songs + negative_points))
+
+print(f"Final Answer: {', '.join(all_outlier_songs)}")
+```

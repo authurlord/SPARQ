@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table contains data on tourism statistics for 20 countries in 2011, including tourist arrivals, tourism receipts (in millions of USD), per-arrival and per-capita receipts, and tourism competitiveness index (TTCI). Notable trends include Mexico having the highest tourist arrivals (23.4 million) and tourism receipts ($11.9 billion), while Venezuela has the highest per-arrival receipts ($1,449). Costa Rica and the Dominican Republic show high tourism competitiveness (4.43), and Haiti has the lowest per-capita receipts ($17). Several countries, like Cuba and Haiti, have missing data for 2003 GDP and export percentages. Overall, tourism is a major economic driver in Latin American countries, especially in Mexico, Costa Rica, and the Dominican Republic.
+
+Final Answer: tourist arrivals, tourism receipts, per-arrival receipts, per-capita receipts, tourism competitiveness index

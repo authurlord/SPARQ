@@ -1,0 +1,26 @@
+We need to analyze how the percentage of votes for McCain (`mccain %`) changes with increasing total votes (`total`). However, the column `mccain %` contains string values with percentage signs (e.g., '55.19%'), which cannot be directly used in numerical analysis.
+
+Step 1: Clean the `mccain %` column by removing the '%' symbol and converting to float.
+Step 2: Similarly, convert the `total` column to numeric (it's already numbers, but ensure proper type).
+Step 3: Compute the correlation between `mccain %` (as a percentage) and `total` votes to understand the relationship.
+Step 4: Print the correlation coefficient as a measure of how the percentage changes with total votes.
+
+Note: Since we're looking for a trend, correlation is appropriate here.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'mccain %' from string with '%' to float
+df['mccain %'] = df['mccain %'].str.replace('%', '').astype(float)
+
+# Ensure 'total' is numeric
+df['total'] = pd.to_numeric(df['total'], errors='coerce')
+
+# Calculate the correlation between mccain % and total
+correlation = df['mccain %'].corr(df['total'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

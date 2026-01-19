@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The provided table does not contain a column named "attacks" or any equivalent metric that can be interpreted as "number of attacks." Therefore, it is not possible to generate a line chart for the trend in the athlete's number of attacks based on the given data.

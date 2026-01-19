@@ -1,0 +1,17 @@
+The error occurred because the "year" column is not being used in the condition — we need to check the "indians admitted" column for values greater than 25000. The issue was likely a misreading of the data structure, but the actual data is numeric in the "indians admitted" column.
+
+Step 1: Identify the column "indians admitted" which contains the number of Indians admitted each year.
+Step 2: Filter rows where "indians admitted" > 25000.
+Step 3: Count the number of such years.
+
+Corrected code:
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'indians admitted' is greater than 25000
+years_above_25000 = df[df['indians admitted'] > 25000]
+# Count the number of such years
+count_years = len(years_above_25000)
+print(f"Final Answer: {count_years}")
+```

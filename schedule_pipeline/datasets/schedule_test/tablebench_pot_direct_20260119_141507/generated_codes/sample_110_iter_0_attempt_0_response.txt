@@ -1,0 +1,107 @@
+We are asked to draw a scatter plot showing the relationship between the **length of the event** and the **time taken by the winning athletes** for all **running events** in the competition.
+
+Step 1: Identify which events are running events.
+From the table, the events listed are:
+- 60 metres
+- 200 metres
+- 400 metres
+- 800 metres
+- 1500 metres
+- 3000 metres
+- 60 metres hurdles
+- 3000 metres walk
+- High jump
+- Long jump
+- Triple jump
+- Shot put
+- Pentathlon
+
+Among these, the running events (i.e., track events involving running) are:
+- 60 metres
+- 200 metres
+- 400 metres
+- 800 metres
+- 1500 metres
+- 3000 metres
+
+Note: "60 metres hurdles" is a hurdle event, not pure running. "3000 metres walk" is a walking event. So we exclude those.
+
+So, we will include only:
+- 60 metres
+- 200 metres
+- 400 metres
+- 800 metres
+- 1500 metres
+- 3000 metres
+
+Step 2: Extract the event name and the winning time (Gold column) for these events.
+
+Note: The time values are in different formats:
+- For short distances (e.g., 60m), times are in seconds (like '7.17')
+- For longer distances (e.g., 800m, 1500m), times are in minutes:seconds format (e.g., '2:00.42')
+
+We need to convert these into seconds for consistent plotting.
+
+Step 3: Convert the time values to seconds:
+- For 'x.y' format (e.g., '7.17'), it's x + y/100
+- For 'x:y.z' format (e.g., '2:00.42'), it's (x*60 + y) + z/100
+
+Step 4: Create a scatter plot with:
+- X-axis: length of event (in meters)
+- Y-axis: winning time (in seconds)
+
+Step 5: Plot using matplotlib.
+
+Let's write the code accordingly.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter only running events (track running events)
+running_events = ['60 metres', '200 metres', '400 metres', '800 metres', '1500 metres', '3000 metres']
+
+# Filter rows for running events
+filtered_df = df[df['Event'].isin(running_events)]
+
+# Convert winning times to seconds
+def time_to_seconds(time_str):
+    if isinstance(time_str, str):
+        if ':' in time_str:
+            parts = time_str.split(':')
+            minutes = int(parts[0])
+            seconds_part = parts[1]
+            seconds = float(seconds_part.split('.')[0]) + float(seconds_part.split('.')[1]) / 100
+            return minutes * 60 + seconds
+        else:
+            # e.g., '7.17'
+            return float(time_str)
+    return 0
+
+filtered_df['winning_time_seconds'] = filtered_df['Gold'].apply(time_to_seconds)
+
+# Extract event length in meters
+event_lengths = {
+    '60 metres': 60,
+    '200 metres': 200,
+    '400 metres': 400,
+    '800 metres': 800,
+    '1500 metres': 1500,
+    '3000 metres': 3000
+}
+
+# Map event to length
+filtered_df['length_meters'] = filtered_df['Event'].map(event_lengths)
+
+# Create scatter plot
+plt.figure(figsize=(10, 6))
+plt.scatter(filtered_df['length_meters'], filtered_df['winning_time_seconds'], alpha=0.8)
+plt.title('Scatter Plot of Event Length vs Winning Time (Running Events)')
+plt.xlabel('Length of Event (meters)')
+plt.ylabel('Winning Time (seconds)')
+plt.grid(True)
+plt.show()
+```

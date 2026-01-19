@@ -1,0 +1,20 @@
+Step 1: The user wants the standard deviation of horse-power for warships built before 1870.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'built year' is less than 1870.  
+Step 4: Extract the 'horse - power' column from the filtered data.  
+Step 5: Calculate the standard deviation of the filtered 'horse - power' values.  
+Step 6: Print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Filter warships built before 1870
+filtered_df = df[df['built year'] < 1870]
+# Extract horse-power values
+horse_power = filtered_df['horse - power'].astype(float)
+# Calculate standard deviation
+std_horse_power = np.std(horse_power)
+print(f"Final Answer: {std_horse_power:.1f}")
+```

@@ -1,0 +1,32 @@
+Step 1: Identify the top 5 companies in the oil and gas industry from the table.
+Step 2: Filter the data to include only companies in the "oil and gas" industry.
+Step 3: Select the top 5 companies by market value (or rank, if available), but since the table does not have a clear ranking for market value, we take the first 5 companies in the oil and gas industry based on their order in the table.
+Step 4: Extract the "market value (billion )" for these companies.
+Step 5: Calculate the average of these market values.
+
+Note: The table lists companies in order of rank, and "oil and gas" companies are listed from rank 4 onwards. The oil and gas companies in the dataset are:
+- ExxonMobil (rank 4)
+- Royal Dutch Shell (rank 5)
+- PetroChina (rank 6)
+- Petrobras (rank 8)
+- Chevron (rank 16)
+- Total (rank 19)
+
+We take the first 5 oil and gas companies as per their order in the table.
+
+Step 6: Compute the average market value.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter companies in the oil and gas industry
+oil_gas_df = df[df['industry'] == 'oil and gas']
+
+# Take the first 5 companies (by row order)
+top_5_oil_gas = oil_gas_df.head(5)
+
+# Calculate average market value
+average_market_value = top_5_oil_gas['market value (billion )'].mean()
+print(f"Final Answer: {average_market_value:.1f}")
+```

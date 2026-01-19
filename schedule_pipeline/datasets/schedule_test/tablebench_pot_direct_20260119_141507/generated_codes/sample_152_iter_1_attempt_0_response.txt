@@ -1,0 +1,58 @@
+We are asked to determine which factors — 'judges', 'public', 'vote percentage' — have the most impact on the 'result' of each couple in the competition. The possible outcomes are "safe" or "bottom two".
+
+Step-by-step approach:
+1. We need to analyze whether there is a correlation between the values in 'judges', 'public', and 'vote percentage' and the 'result'.
+2. Since the 'result' is categorical (safe or bottom two), we cannot directly use correlation (like Pearson) because it's not numerical in a continuous sense. Instead, we can examine patterns:
+   - For example, do higher vote percentages correlate with "safe"?
+   - Do more judges or public votes lead to a "safe" result?
+3. We will group by 'result' and compute summary statistics (mean of 'judges', 'public', and 'vote percentage') for each group.
+4. Then compare the averages to see if any factor shows a clear trend.
+5. If one factor consistently differs between "safe" and "bottom two", it may have a significant impact.
+
+Note: "vote percentage" is given as text (e.g., "25.1%"), so we need to extract the numeric value.
+
+Let’s proceed:
+
+- Convert 'vote percentage' to numeric by removing the '%' and converting to float.
+- Group by 'result' and compute mean of 'judges', 'public', and the numeric vote percentage.
+- Compare the means to see which factor shows the largest difference.
+
+If any factor has a large difference between safe and bottom two, we say that factor contributes most. Otherwise, we say "no clear impact".
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'vote percentage' to numeric (remove % and convert)
+df['vote_percentage_numeric'] = df['vote percentage'].str.replace('%', '').astype(float)
+
+# Group by 'result' and compute mean for judges, public, and vote_percentage_numeric
+grouped = df.groupby('result').agg({
+    'judges': 'mean',
+    'public': 'mean',
+    'vote_percentage_numeric': 'mean'
+}).round(2)
+
+# Check differences between safe and bottom two
+safe_group = grouped.loc['safe']
+bottom_group = grouped.loc['bottom two']
+
+# Compute differences
+diff_judges = safe_group['judges'] - bottom_group['judges']
+diff_public = safe_group['public'] - bottom_group['public']
+diff_vote = safe_group['vote_percentage_numeric'] - bottom_group['vote_percentage_numeric']
+
+# Determine which factor has the largest difference
+if diff_vote.abs().max() > diff_judges.abs().max() and diff_vote.abs().max() > diff_public.abs().max():
+    final_factor = 'vote percentage'
+elif diff_judges.abs().max() > diff_vote.abs().max() and diff_judges.abs().max() > diff_public.abs().max():
+    final_factor = 'judges'
+elif diff_public.abs().max() > diff_vote.abs().max() and diff_public.abs().max() > diff_judges.abs().max():
+    final_factor = 'public'
+else:
+    final_factor = 'no clear impact'
+
+print(f"Final Answer: {final_factor}")
+```

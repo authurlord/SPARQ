@@ -1,0 +1,31 @@
+Step 1: The user wants to identify the year when the athlete achieved a better (higher) position in the Triple Jump event at the Asian Championships compared to the World Championships.
+
+Step 2: Filter the data for rows where the 'Event' is 'Triple jump' and the 'Competition' is either 'Asian Championships' or 'World Championships'.
+
+Step 3: Extract the 'Year' and 'Position' for these two competitions.
+
+Step 4: Compare the positions (lower number means better position) between the two events and return the year when the position at the Asian Championships was better than at the World Championships.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for Triple jump events at Asian Championships and World Championships
+asi_champs = df[(df['Event'] == 'Triple jump') & (df['Competition'] == 'Asian Championships')]
+world_champs = df[(df['Event'] == 'Triple jump') & (df['Competition'] == 'World Championships')]
+
+# Extract positions and years
+asi_year = asi_champs['Year'].values[0]
+asi_position = int(asi_champs['Position'].values[0])
+world_year = world_champs['Year'].values[0]
+world_position = int(world_champs['Position'].values[0])
+
+# Compare positions (lower number is better)
+if asi_position < world_position:
+    print(f"Final Answer: {asi_year}")
+else:
+    print(f"Final Answer: None")
+```

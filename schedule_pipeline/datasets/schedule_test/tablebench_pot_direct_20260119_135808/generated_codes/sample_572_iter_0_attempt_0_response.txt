@@ -1,0 +1,22 @@
+Step 1: The user wants to find the year with the maximum decrease in typhus cases compared to the previous year.
+Step 2: Load the dataframe.
+Step 3: Convert 'typhus' column to numeric, handling any non-numeric values (like '1300' in '191822' which seems like a typo).
+Step 4: Calculate the year-on-year change in typhus cases.
+Step 5: Identify the year with the most negative change (i.e., largest decrease).
+Step 6: Print the year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'typhus' column to numeric, coercing errors to NaN
+df['typhus'] = pd.to_numeric(df['typhus'], errors='coerce')
+
+# Calculate the year-on-year change in typhus cases
+df['change'] = df['typhus'].diff()
+
+# Find the year with the maximum decrease (most negative change)
+min_change_year = df.loc[df['change'].idxmin(), 'year']
+
+print(f"Final Answer: {min_change_year}")
+```

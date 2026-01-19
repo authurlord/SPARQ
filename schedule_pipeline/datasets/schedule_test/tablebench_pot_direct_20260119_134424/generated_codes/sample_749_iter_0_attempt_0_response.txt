@@ -1,0 +1,32 @@
+Step 1: The user wants to forecast viewership for 2013 based on the trend from 2005 to 2011.  
+Step 2: Load the dataframe and extract the 'broadcast date' and 'viewers (millions)' columns.  
+Step 3: Convert 'broadcast date' to integer years and 'viewers (millions)' to float.  
+Step 4: Fit a linear regression model to the data to capture the trend.  
+Step 5: Predict the viewership for 2013 using the model.  
+Step 6: Print the forecasted value.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Extract and convert relevant columns
+df['broadcast date'] = pd.to_numeric(df['broadcast date'])
+df['viewers (millions)'] = pd.to_numeric(df['viewers (millions)'])
+
+# Prepare data for linear regression
+X = df['broadcast date'].values.reshape(-1, 1)
+y = df['viewers (millions)'].values
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict viewership for 2013
+forecast_year = 2013
+predicted_viewers = model.predict([[forecast_year]])[0]
+
+print(f"Final Answer: {predicted_viewers:.2f}")
+```

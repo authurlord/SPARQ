@@ -1,0 +1,21 @@
+Step 1: The user wants the difference between the average score of the top-ranked couple (rank 1) and the bottom-ranked couple (rank 12).
+Step 2: Load the dataframe.
+Step 3: Extract the 'average' column, which contains float values.
+Step 4: Convert the 'average' column to numeric to avoid string-related errors.
+Step 5: Get the average score for the top-ranked couple (first row) and the bottom-ranked couple (last row).
+Step 6: Compute the difference and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'average' column to numeric to ensure proper arithmetic operations
+df['average'] = pd.to_numeric(df['average'], errors='coerce')
+# Get the average score of the top-ranked couple (first row)
+top_average = df.iloc[0]['average']
+# Get the average score of the bottom-ranked couple (last row)
+bottom_average = df.iloc[-1]['average']
+# Calculate the difference
+difference = top_average - bottom_average
+print(f"Final Answer: {difference:.1f}")
+```

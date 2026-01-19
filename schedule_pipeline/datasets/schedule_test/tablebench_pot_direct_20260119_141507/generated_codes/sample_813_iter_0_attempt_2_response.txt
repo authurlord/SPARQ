@@ -1,0 +1,30 @@
+Step 1: The user wants to find the party with the highest percentage increase in seats from the First Duma to the Fourth Duma.  
+Step 2: Extract the seat counts for each party in the First and Fourth Duma columns.  
+Step 3: Calculate the percentage increase using the formula: `((Fourth Duma - First Duma) / First Duma) * 100`.  
+Step 4: Handle cases where First Duma is "–" (missing) or zero, as these would cause division by zero.  
+Step 5: Identify the party with the maximum percentage increase.  
+
+Note: For parties with "–" in First Duma, we skip them since we can't compute percentage increase.  
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, replacing '–' with NaN
+df['First Duma'] = df['First Duma'].replace('–', np.nan).astype(float)
+df['Fourth Duma'] = df['Fourth Duma'].replace('–', np.nan).astype(float)
+
+# Filter out rows where First Duma is NaN (i.e., missing data)
+valid_rows = df.dropna(subset=['First Duma', 'Fourth Duma'])
+
+# Calculate percentage increase
+valid_rows['increase'] = ((valid_rows['Fourth Duma'] - valid_rows['First Duma']) / valid_rows['First Duma']) * 100
+
+# Find the party with the highest increase
+max_increase_row = valid_rows.loc[valid_rows['increase'].idxmax()]
+final_party = max_increase_row['Party']
+
+print(f"Final Answer: {final_party}")
+```

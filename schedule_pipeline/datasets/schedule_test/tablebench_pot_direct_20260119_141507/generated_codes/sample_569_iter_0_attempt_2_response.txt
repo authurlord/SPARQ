@@ -1,0 +1,80 @@
+Step 1: The user is asking for the total number of injuries (in thousands of US dollars) during the three-year period that has the highest average CPSC toy safety funding.
+
+Step 2: First, identify the years with CPSC toy safety funding data (non-null values in the 'CPSC toy safety funding (US$ Millions)' column). Then, calculate the average CPSC funding for those years.
+
+Step 3: Among the years with the highest average CPSC funding, select the three-year period (i.e., consecutive or grouped years) that achieves this maximum average.
+
+Step 4: Sum the "Injuries (US $000)" for those three years.
+
+Step 5: Since there are only a few years with actual funding data, we will compute the average CPSC funding per year with data, then pick the years with the highest average, and sum their injuries.
+
+Note: There are only 5 years with non-null CPSC funding: 1999, 2000, 2001, 2002, 2003, 2004, 2005. We will compute the average CPSC funding across these years and then sum injuries for those years.
+
+But note: The question says "the three-year period with the highest average CPSC toy safety funding". However, since the funding is given per year, and no explicit "period" is defined, it's likely asking for the total injuries in the years that have the highest average CPSC funding — possibly implying we group the years with data and find which subset of three years has the highest average funding.
+
+But due to limited data and lack of clear grouping (e.g., consecutive years), the most reasonable interpretation is that we consider all years with CPSC funding and compute the average, then sum injuries for those years.
+
+Alternatively, if we interpret "three-year period" as a consecutive block, we can check all possible 3-year consecutive blocks among the years with data.
+
+Let’s proceed with the following:
+
+- Extract years with non-null CPSC funding.
+- Compute the average CPSC funding per year.
+- Since all years have data (except 2006–2009), we take all years with data (1999–2005).
+- The average CPSC funding over these years is calculated.
+- Then, sum injuries for those years.
+
+But the question says "the three-year period with the highest average", so we must find the 3-year consecutive window (in time) that has the highest average CPSC funding.
+
+Step-by-step:
+1. Filter rows where CPSC funding is not null.
+2. Extract years and funding values.
+3. Identify all possible 3-year consecutive windows (in chronological order).
+4. Compute average funding for each window.
+5. Find the window with the highest average.
+6. Sum the injuries for the years in that window.
+
+Now, let's write the code accordingly.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'Year' to integer for proper sorting
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
+
+# Filter rows where CPSC toy safety funding is not null
+df_filtered = df.dropna(subset=['CPSC toy safety funding (US$ Millions)'])
+
+# Sort by Year
+df_filtered = df_filtered.sort_values('Year').reset_index(drop=True)
+
+# Extract years and funding values
+years = df_filtered['Year'].values
+funding = df_filtered['CPSC toy safety funding (US$ Millions)'].values
+
+# Create list of possible 3-year consecutive windows
+window_funding_avg = []
+for i in range(len(years) - 2):
+    window_years = years[i:i+3]
+    window_funding = funding[i:i+3]
+    avg_funding = np.mean(window_funding)
+    window_funding_avg.append((avg_funding, window_years))
+
+# Find the window with the highest average funding
+max_avg = max(window_funding_avg, key=lambda x: x[0])[0]
+best_window_years = [int(y) for y in max(window_funding_avg, key=lambda x: x[0])[1]]
+
+# Now get the injuries for those years from original data
+injury_sum = 0
+for year in best_window_years:
+    row = df[df['Year'] == year]
+    if not row.empty:
+        injuries = row['Injuries (US $000)'].values[0]
+        injury_sum += injuries
+
+print(f"Final Answer: {injury_sum}")
+```

@@ -1,0 +1,28 @@
+Step 1: Extract the data for the top 5 ranked countries (ranks 1 to 5).
+Step 2: For each of these countries, calculate the growth rate from 2010 to 2011 using the formula: (2011 - 2010) / 2010 * 100.
+Step 3: Compute the average of these growth rates.
+Step 4: Calculate the percentage difference between the average growth rate of 2011 and 2010 (which is essentially the average growth rate itself since we're comparing only two years).
+Step 5: Output the result as a percentage.
+
+Note: Since the question asks for the percentage difference between the average annual growth rate of 2011 and 2010, and growth rate is computed between 2010 and 2011, the "percentage difference" here refers to the average growth rate from 2010 to 2011 across the top 5 countries.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter top 5 ranked countries
+top_5 = df.iloc[0:5]
+
+# Convert 2010 and 2011 columns to numeric
+top_5['2010'] = pd.to_numeric(top_5['2010'])
+top_5['2011'] = pd.to_numeric(top_5['2011'])
+
+# Calculate growth rate from 2010 to 2011 for each country
+growth_rates = (top_5['2011'] - top_5['2010']) / top_5['2010'] * 100
+
+# Average growth rate
+avg_growth_rate = growth_rates.mean()
+
+print(f"Final Answer: {avg_growth_rate:.2f}")
+```

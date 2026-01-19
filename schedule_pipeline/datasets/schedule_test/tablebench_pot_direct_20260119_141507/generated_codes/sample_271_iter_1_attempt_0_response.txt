@@ -1,0 +1,33 @@
+We need to calculate the average number of episodes per season for seasons that meet two conditions:
+1. Have at least 40 episodes.
+2. Premiered between October and December (inclusive).
+
+Step 1: Load the dataframe.
+Step 2: Extract the 'Episodes' and 'Season Premiere' columns.
+Step 3: Filter rows where:
+   - Episodes >= 40
+   - Season Premiere is in the range of October to December (we need to parse the string date).
+Step 4: Calculate the mean of 'Episodes' for the filtered rows.
+
+Note: The 'Season Premiere' column contains strings like "March 4, 2006". We need to extract the month from this string and check if it is between October and December.
+
+We can use string slicing to extract the month name and compare it to 'October', 'November', or 'December'.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where episodes >= 40 and premiere month is between October and December
+df_filtered = df[
+    (df['Episodes'] >= 40) &
+    (df['Season Premiere'].str.startswith('October') | 
+     df['Season Premiere'].str.startswith('November') | 
+     df['Season Premiere'].str.startswith('December'))
+]
+
+# Calculate the average number of episodes for the filtered seasons
+average_episodes = df_filtered['Episodes'].mean()
+
+print(f"Final Answer: {average_episodes:.1f}")
+```

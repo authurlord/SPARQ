@@ -1,0 +1,36 @@
+Step 1: The user wants to calculate the mean, median, and standard deviation of the boiling points for helium, neon, argon, krypton, and xenon. Additionally, they want to identify which gas has the most extreme boiling point relative to the mean.
+
+Step 2: Load the dataframe and extract the boiling point values from the 'boiling point (degree)' row.
+
+Step 3: Convert the boiling point values to numeric type for calculations.
+
+Step 4: Compute the mean, median, and standard deviation of the boiling points.
+
+Step 5: Calculate the absolute difference between each gas's boiling point and the mean to determine the most extreme value.
+
+Step 6: Identify the gas with the largest difference (most extreme boiling point).
+
+Step 7: Print the required statistics and the gas with the most extreme boiling point.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract boiling point values
+boiling_points = df[df['physical property'] == 'boiling point (degree)'].iloc[0, 1:].astype(float)
+
+# Calculate mean, median, and standard deviation
+mean_bp = boiling_points.mean()
+median_bp = boiling_points.median()
+std_bp = boiling_points.std()
+
+# Find the gas with the most extreme boiling point relative to the mean
+deviations = abs(boiling_points - mean_bp)
+most_extreme_gas = boiling_points.idxmax() if deviations.max() == deviations.max() else boiling_points.idxmin()
+
+# Print results
+print(f"Mean: {mean_bp:.2f}")
+print(f"Median: {median_bp:.2f}")
+print(f"Standard Deviation: {std_bp:.2f}")
+print(f"Final Answer: {most_extreme_gas}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The number of candidates nominated has a positive correlation with the percentage of popular vote over time, as the percentage of popular vote increased from 0.21% in 1984 to 6.80% in 2008.

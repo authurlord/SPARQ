@@ -1,0 +1,22 @@
+Step 1: The user wants to calculate the correlation coefficient between 'density (pop / km square)' and '% change' in population.  
+Step 2: Load the dataframe.  
+Step 3: Extract the two columns: 'density (pop / km square)' and '% change'.  
+Step 4: Convert '% change' from string (e.g., '-1.4') to numeric, removing the percent sign and converting to float.  
+Step 5: Compute the Pearson correlation coefficient between the two columns.  
+Step 6: Print the correlation coefficient.
+
+Note: The '% change' column contains values like '-1.4', '8.7', etc. We need to strip the '%' and convert to float.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert '% change' to numeric by removing the '%' and converting to float
+df['% change'] = df['% change'].str.replace('%', '').astype(float)
+
+# Calculate the correlation between 'density (pop / km square)' and '% change'
+correlation = df['density (pop / km square)'].corr(df['% change'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of districts where the 2008 GDP per capita (USD) is above 6700.  
+Step 2: Load the dataframe.  
+Step 3: Select the '2008 gdp per capita (usd)' column and filter rows where the value is greater than 6700.  
+Step 4: Count the number of such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter districts with 2008 GDP per capita above 6700
+filtered = df[df['2008 gdp per capita (usd) a'] > 6700]
+count_above_6700 = len(filtered)
+print(f"Final Answer: {count_above_6700}")
+```

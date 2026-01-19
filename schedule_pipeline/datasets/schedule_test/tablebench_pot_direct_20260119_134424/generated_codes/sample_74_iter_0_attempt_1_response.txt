@@ -1,0 +1,12 @@
+Step 1: The user wants to find the nation that has a total of 8 medals and 3 gold medals.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Total' is 8 and 'Gold' is 3.
+Step 4: Extract the 'Nation' column from the filtered result and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for nations with Total=8 and Gold=3
+filtered_nation = df[(df['Total'] == 8) & (df['Gold'] == 3)]['Nation']
+print(f"Final Answer: {filtered_nation.values[0]}")
+```

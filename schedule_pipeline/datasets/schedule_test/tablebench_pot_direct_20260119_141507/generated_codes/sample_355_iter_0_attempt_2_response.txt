@@ -1,0 +1,15 @@
+Step 1: The user wants to count how many banks have total assets greater than 10,000 million TL.  
+Step 2: Load the dataframe.  
+Step 3: Select the 'Total Assets (million TL) As of 30 September 2012' column.  
+Step 4: Filter rows where total assets > 10,000 and count the number of such banks.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter banks with total assets > 10,000 million TL
+filtered_banks = df[df['Total Assets (million TL) As of 30 September 2012'] > 10000]
+count = len(filtered_banks)
+print(f"Final Answer: {count}")
+```

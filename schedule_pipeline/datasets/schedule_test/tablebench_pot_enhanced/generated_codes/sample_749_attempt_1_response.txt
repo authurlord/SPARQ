@@ -1,0 +1,28 @@
+Step 1: The user wants to forecast viewership for 2013 based on the trend from 2005 to 2011.  
+Step 2: Load the dataframe and extract the relevant data (broadcast date and viewers).  
+Step 3: Convert broadcast date to a numerical year (e.g., 2005 → 2005) and ensure viewers are numeric.  
+Step 4: Fit a linear trend (simple linear regression) to predict viewership in 2013.  
+Step 5: Use the model to predict viewership for 2013 and print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert broadcast date to integer year
+df['broadcast date'] = pd.to_numeric(df['broadcast date'])
+
+# Extract year and viewers
+years = df['broadcast date'].values
+viewers = df['viewers (millions)'].astype(float).values
+
+# Fit a linear model: viewers ~ year
+# Using numpy's polyfit to get slope and intercept
+slope, intercept = np.polyfit(years, viewers, 1)
+
+# Predict viewership for 2013
+predicted_2013 = slope * 2013 + intercept
+
+print(f"Final Answer: {predicted_2013:.2f}")
+```

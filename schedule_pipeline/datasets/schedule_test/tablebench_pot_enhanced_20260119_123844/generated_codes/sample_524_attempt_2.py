@@ -1,0 +1,20 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'introduced' and 'retired' to numeric for comparison
+df['introduced'] = pd.to_numeric(df['introduced'], errors='coerce')
+df['retired'] = pd.to_numeric(df['retired'], errors='coerce')
+
+# Filter aircraft in service in 2004 (introduced <= 2004 and retired >= 2004 or not retired)
+in_service_2004 = df[(df['introduced'] <= 2004) & ((df['retired'] >= 2004) | (df['retired'] == '-'))]
+capacity_2004 = in_service_2004['seating'].sum()
+
+# Filter aircraft in service in 2008 (introduced <= 2008 and retired >= 2008 or not retired)
+in_service_2008 = df[(df['introduced'] <= 2008) & ((df['retired'] >= 2008) | (df['retired'] == '-'))]
+capacity_2008 = in_service_2008['seating'].sum()
+
+# Calculate change in total seating capacity
+change = capacity_2008 - capacity_2004
+
+print(f"Final Answer: {change}")

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: series, presenters, start date, end date, days in camp, camp mates, winner, highest viewers (millions), lowest viewers (millions), average viewers (millions), notable trends: increasing number of camp mates over time, fluctuating viewership with peak in series 3 (14.99 million), average viewers stabilizing around 9-10 million in later series

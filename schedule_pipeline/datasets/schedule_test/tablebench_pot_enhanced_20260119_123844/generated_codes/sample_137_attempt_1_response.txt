@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: bar chart created for Obama vs McCain votes by county in New Mexico

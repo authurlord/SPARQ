@@ -1,0 +1,27 @@
+Step 1: The user wants to project the population of Tabriz in 2026 based on historical growth from 1956 to 2006.  
+Step 2: Extract the population data for Tabriz from the table (row where city is 'tabriz').  
+Step 3: Calculate the average annual growth rate between 1956 and 2006.  
+Step 4: Use the compound growth formula to project the population for 2026.  
+Step 5: Print the projected population.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter row for Tabriz
+tabriz_row = df[df['city'] == 'tabriz']
+# Extract populations for 1956 and 2006
+pop_1956 = int(tabriz_row['1956'].values[0])
+pop_2006 = int(tabriz_row['2006'].values[0])
+
+# Calculate average annual growth rate (r) using compound growth formula
+# P = P0 * (1 + r)^t => r = (P/P0)^(1/t) - 1
+t = 2006 - 1956  # 50 years
+growth_rate = (pop_2006 / pop_1956) ** (1/t) - 1
+
+# Project population for 2026 (20 years after 2006)
+t_project = 2026 - 2006
+projected_pop = pop_2006 * (1 + growth_rate) ** t_project
+
+print(f"Final Answer: {int(projected_pop)}")
+```

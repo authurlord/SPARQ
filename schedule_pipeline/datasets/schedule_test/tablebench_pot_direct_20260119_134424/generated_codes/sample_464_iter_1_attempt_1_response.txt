@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: decimal(32k), 3×k+4, 3×2w = 48×4k

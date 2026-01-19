@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: department, micro (10ha), small (100ha), medium (500ha), big (>500ha), total

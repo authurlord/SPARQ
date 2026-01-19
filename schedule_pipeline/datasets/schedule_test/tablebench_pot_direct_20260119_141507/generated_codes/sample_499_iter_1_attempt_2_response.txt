@@ -1,0 +1,58 @@
+We are asked to calculate the **Goal Percentage** for Liverpool in the **1995–1996 season**. Goal percentage is defined as:
+
+$$
+\text{Goal Percentage} = \frac{\text{Goals}}{\text{Total Appearances}} \times 100
+$$
+
+From the table:
+- For Liverpool in the 1995–1996 season, we can find:
+  - Goals: 6 (from "Goals" column under "League" or "Total")
+  - Total appearances: 38 (from "Apps" column under "League")
+
+Note: The row for Liverpool in 1995–96 is:
+`['Liverpool', '1995–96', 'Premier League', '40', '7', '7', '2', '4', '1', '4', '1', '53', '10']`
+
+Breakdown:
+- Apps (League): 40
+- Goals (League): 7
+- Apps (National Cup): 7
+- Goals (National Cup): 2
+- Apps (League Cup): 4
+- Goals (League Cup): 1
+- Apps (Europe): 4
+- Goals (Europe): 1
+- Total Apps: 53
+- Total Goals: 10
+
+But the question says: "Goal Percentage is defined as the ratio of goals scored to the total number of appearances made by a player or a team in a specific season or overall career."
+
+It does not specify whether it's per competition or total. However, since it says "in a specific season", and the data includes a "Total" column, we should use the **total goals and total appearances**.
+
+From the row:
+- Total Apps: 53
+- Total Goals: 10
+
+So Goal Percentage = 10 / 53
+
+We will compute this value.
+
+Step-by-step:
+1. Load the DataFrame.
+2. Filter the row for Liverpool in the 1995–96 season.
+3. Extract total goals and total appearances from the "Total" column (which is the last two columns: "Total" and "Total_1").
+4. Compute the ratio.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for Liverpool in 1995–96 season
+filtered_row = df[(df['Club'] == 'Liverpool') & (df['Season'] == '1995–96')]
+# Extract total goals and total appearances
+total_goals = filtered_row['Total_1'].values[0]
+total_apps = filtered_row['Total'].values[0]
+# Calculate goal percentage
+goal_percentage = (total_goals / total_apps) * 100
+print(f"Final Answer: {goal_percentage:.2f}")
+```

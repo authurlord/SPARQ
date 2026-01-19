@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: wind power generation positively correlates with higher % renewable of total electricity demand, as seen in communities like Galicia and Castile and León where higher wind power contributes to higher renewable percentages.

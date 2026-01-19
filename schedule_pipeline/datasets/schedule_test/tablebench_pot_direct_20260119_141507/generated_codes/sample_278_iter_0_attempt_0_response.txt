@@ -1,0 +1,23 @@
+Step 1: The user wants the average magnitude of earthquakes that satisfy two conditions:
+- Death toll ≥ 1,000
+- Depth < 30 km
+
+Step 2: Load the dataframe and filter rows based on the conditions.
+
+Step 3: Extract the 'Magnitude' column from the filtered rows and compute the mean.
+
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Death toll' to numeric and filter by death toll >= 1000 and depth < 30
+df_filtered = df[(df['Death toll'].str.replace(',', '').astype(float) >= 1000) & (df['Depth (km)'].astype(float) < 30)]
+
+# Calculate the average magnitude of filtered earthquakes
+average_magnitude = df_filtered['Magnitude'].mean()
+
+print(f"Final Answer: {average_magnitude:.1f}")
+```

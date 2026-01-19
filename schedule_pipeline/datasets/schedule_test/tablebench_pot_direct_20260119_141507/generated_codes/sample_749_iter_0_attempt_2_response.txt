@@ -1,0 +1,30 @@
+Step 1: The user wants to forecast viewership for 2013 based on the trend from 2005 to 2011.  
+Step 2: Extract viewership data from 2005 to 2011 (years 2005, 2006, 2007, 2009, 2010, 2011).  
+Step 3: Since the data is not continuous (missing 2008 and 2009 is listed as episode 5), we assume the trend is linear and use only the available years with viewership.  
+Step 4: Fit a linear regression model to the years and viewership values to predict viewership in 2013.  
+Step 5: Use the model to predict the viewership for 2013.
+
+Note: The years in the data are not fully consecutive (e.g., 2005, 2006, 2007, then 2009, 2010, 2011). We will include all available years and fit a linear trend.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+# Extract years and viewership
+years = [int(row['broadcast date']) for row in df.to_dict('records') if row['broadcast date'] != 'n / a']
+viewership = [float(row['viewers (millions)']) for row in df.to_dict('records') if row['broadcast date'] != 'n / a']
+
+# Convert to numpy arrays
+X = np.array(years).reshape(-1, 1)
+y = np.array(viewership)
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict viewership for 2013
+predicted_2013 = model.predict([[2013]])[0]
+print(f"Final Answer: {predicted_2013:.2f}")
+```

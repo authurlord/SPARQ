@@ -1,0 +1,27 @@
+Step 1: The user wants to identify surnames that deviate significantly from the norm. Given the context, "deviate significantly" likely refers to unusual patterns in the number of bearers, especially considering the large variation between surnames and potential outliers in the data.
+
+Step 2: We observe that the "number of bearers 1971" and "number of bearers 2009" columns contain numerical values. A deviation could be identified by looking for extreme values — such as a surname with a very high or very low number of bearers compared to others.
+
+Step 3: We can consider using z-scores or percentiles to detect outliers. However, given the simplicity and clarity, we can first examine the largest and smallest values in both years to identify potential anomalies.
+
+Step 4: Specifically, note that "madsen" has 1000 bearers in 1971, which is unusually high compared to others (e.g., jensen has 368.631). Also, "møller" has 0.001 bearers in 2009, which is extremely low. These values stand out.
+
+Step 5: Therefore, we will identify surnames with either:
+- The highest value in "number of bearers 1971"
+- The lowest value in "number of bearers 2009"
+
+We will print these surnames as they deviate significantly from the norm.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify the surname with the highest number of bearers in 1971
+max_1971 = df.loc[df['number of bearers 1971'].idxmax(), 'surname']
+
+# Identify the surname with the lowest number of bearers in 2009
+min_2009 = df.loc[df['number of bearers 2009'].idxmin(), 'surname']
+
+print(f"Final Answer: {max_1971}, {min_2009}")
+```

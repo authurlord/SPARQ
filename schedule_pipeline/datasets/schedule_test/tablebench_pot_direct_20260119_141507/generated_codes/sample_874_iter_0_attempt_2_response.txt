@@ -1,0 +1,32 @@
+Step 1: Identify the relevant data from the table. We need the number of males in the 10–29 age group and the number of males in the 60+ age group.  
+Step 2: From the table, the "POPULATION (by age group in 2002)" column has values for each age group. The row labeled "I. 1. A. Males" contains the population by age group.  
+Step 3: Find the values:
+- 10–19: 21 (from "10–19" under "Males")
+- 20–29: 12 (from "20–29" under "Males")
+- So, total males in 10–29 = 21 + 12 = 33
+- 60+: 3 (from "80 +" under "Males")
+Step 4: Compute the difference: 33 - 3 = 30
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the relevant row for males
+males_data = df[df['SPECIFICATION'] == 'I. 1. A. Males']
+
+# Get values for 10–19 and 20–29 (10–29 age group)
+males_10_19 = males_data['POPULATION (by age group in 2002)_1']
+males_20_29 = males_data['POPULATION (by age group in 2002)_2']
+
+# Get value for 60+ (80 +)
+males_80_plus = males_data['POPULATION (by age group in 2002)_9']
+
+# Total males in 10–29
+males_10_29 = males_10_19 + males_20_29
+
+# Difference
+difference = males_10_29 - males_80_plus
+
+print(f"Final Answer: {difference}")
+```

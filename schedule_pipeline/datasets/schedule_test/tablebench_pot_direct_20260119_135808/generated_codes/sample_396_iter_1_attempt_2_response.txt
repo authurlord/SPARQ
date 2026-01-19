@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table lists buildings ranked by height, with columns including rank, name, height in feet and meters, number of floors, and year of completion. Key insights include: the tallest building is One America Plaza at 500 feet (152 meters) with 34 floors, completed in 1991; several buildings share the same rank due to equal height (e.g., ranks 5=, 8=, 10=, 22=); the most recent building listed was completed in 2012 (US Federal Courthouse); and the oldest building is El Cortez Apartment Hotel, completed in 1927.

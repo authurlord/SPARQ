@@ -1,0 +1,6 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count rows where 'pōlô' starts with 'ə'
+count_ending_with_ə = df[df['pōlô'].str.startswith('ə')].shape[0]
+print(f"Final Answer: {count_ending_with_ə}")

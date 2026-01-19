@@ -1,0 +1,22 @@
+The error occurred because one of the values in the "winnings" column is 'pe' (likely a typo or missing value), which cannot be converted to a numeric type. To fix this, we need to handle the non-numeric value by replacing it with NaN or another valid value before computing the median.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter rows where the 'make' is 'chevrolet'.
+3. Convert the 'winnings' column to numeric, handling invalid entries (like 'pe') by setting them to NaN.
+4. Compute the median of the winnings for those rows.
+5. Print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Filter drivers who drove a Chevrolet car
+chevy_drivers = df[df['make'] == 'chevrolet']
+# Convert 'winnings' to numeric, coercing errors to NaN
+chevy_drivers['winnings'] = pd.to_numeric(chevy_drivers['winnings'], errors='coerce')
+# Calculate the median of winnings
+median_winnings = chevy_drivers['winnings'].median()
+print(f"Final Answer: {median_winnings:.0f}")
+```

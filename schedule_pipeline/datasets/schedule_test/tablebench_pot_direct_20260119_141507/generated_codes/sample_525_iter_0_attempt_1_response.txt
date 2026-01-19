@@ -1,0 +1,17 @@
+Step 1: The user wants to find the township with the highest population density.  
+Population density = pop (2010) / land (sqmi).  
+Step 2: Load the dataframe.  
+Step 3: Extract 'pop (2010)' and 'land (sqmi)' columns.  
+Step 4: Calculate the density for each township and find the one with the maximum value.  
+Step 5: Return the name of that township.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate population density: pop / land
+df['density'] = df['pop (2010)'].astype(float) / df['land ( sqmi )'].astype(float)
+# Find the township with the highest density
+max_density_township = df.loc[df['density'].idxmax(), 'township']
+print(f"Final Answer: {max_density_township}")
+```

@@ -1,0 +1,18 @@
+Step 1: The user is asking about the relationship between GDP (PPP) per capita and metropolitan population. Specifically, they want to know how GDP per capita changes as population increases.
+
+Step 2: We need to analyze the trend — whether GDP per capita increases, decreases, or remains stable as metropolitan population increases.
+
+Step 3: Load the data and examine the correlation between "metropolitan population (2006) millions" and "gdp (ppp) us per capita".
+
+Step 4: Since the question is about a trend (how it changes), we can compute the correlation coefficient to determine the nature of the relationship.
+
+Step 5: Print the correlation value to indicate the strength and direction of the relationship.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between metropolitan population and GDP per capita
+correlation = df['metropolitan population (2006) millions'].corr(df['gdp (ppp) us per capita'])
+print(f"Final Answer: {correlation:.3f}")
+```

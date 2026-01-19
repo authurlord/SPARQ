@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table lists 32 council areas in Scotland ranked by the number of Gaelic speakers, with data on speakers, population, and percentage of speakers relative to population. The highest number of speakers is in Na h-Eileanan Siar (15,811), which also has the highest percentage (59.7%). Speakers are highly concentrated in a few areas, particularly the Western Isles and Highland regions, while most other areas have fewer than 1,000 speakers and low percentages (<1.1%). The distribution shows a strong regional pattern, with the majority of speakers located in remote island and rural council areas.
+
+Final Answer: na h - eileanan siar, highland, city of glasgow, argyll and bute, city of edinburgh

@@ -1,0 +1,18 @@
+Step 1: The user wants to calculate the new total excise tax after a 20% increase in the federal excise tax for Canada (average).
+Step 2: Load the dataframe.
+Step 3: Identify the row for 'canada (average)' and extract the current total excise tax.
+Step 4: Increase the total excise tax by 20%.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for Canada (average)
+canada_row = df[df['government'] == 'canada (average)']
+# Extract the current total excise tax
+current_total_tax = float(canada_row['total excise tax (cad / l)'].values[0])
+# Calculate new total excise tax after 20% increase
+new_total_tax = current_total_tax * 1.20
+print(f"Final Answer: {new_total_tax:.2f}")
+```

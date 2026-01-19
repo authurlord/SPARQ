@@ -1,0 +1,20 @@
+Step 1: The user wants to find the correlation between 'area in sqkm' and 'population density 2012 (km²)'.  
+Step 2: Load the dataframe.  
+Step 3: Extract the two columns of interest: 'area in sqkm' and 'population density 2012 (km 2)'.  
+Step 4: Compute the Pearson correlation coefficient between these two columns.  
+Step 5: Print the correlation coefficient as the answer.
+
+Note: Since both columns are numerical, Pearson correlation is appropriate.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the relevant columns
+area_sqkm = df['area in sqkm']
+density_2012 = df['population density 2012 (km 2)']
+
+# Calculate the correlation coefficient
+correlation = area_sqkm.corr(density_2012)
+print(f"Final Answer: {correlation:.3f}")
+```

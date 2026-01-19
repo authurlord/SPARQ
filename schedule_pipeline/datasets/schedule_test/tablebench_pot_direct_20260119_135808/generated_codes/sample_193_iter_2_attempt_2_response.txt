@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The higher the wind power generation, the higher the percentage of renewable energy in the total electricity demand, as seen in communities like Galicia and Aragón where significant wind power contributes to high renewable percentages.

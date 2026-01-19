@@ -1,0 +1,35 @@
+Step 1: The user wants to count how many dates in the table fall in the year 1990 or later.  
+Step 2: The table contains date strings in the format "month day, year". We need to extract the year from each date string and filter those with year >= 1990.  
+Step 3: Parse the date strings to extract the year, then count how many of them are from 1990 or later.  
+
+Note: The dates in the table are listed row-wise, with each row representing a date and a value. We only care about the date part.  
+
+We will:
+- Extract the year from each date string (e.g., "june 10 , 1964" → 1964).
+- Filter rows where the year is >= 1990.
+- Count such entries.
+
+```python
+import pandas as pd
+import re
+
+df = pd.read_csv('table.csv')
+
+# Extract year from date strings using regex
+def extract_year(date_str):
+    match = re.search(r'\d{4}', date_str)
+    return int(match.group()) if match else None
+
+# Apply the function to each cell in the date columns
+years = []
+for col in df.columns:
+    for date_str in df[col]:
+        year = extract_year(str(date_str))
+        if year is not None:
+            years.append(year)
+
+# Count how many years are 1990 or later
+count_1990_or_later = sum(1 for year in years if year >= 1990)
+
+print(f"Final Answer: {count_1990_or_later}")
+```

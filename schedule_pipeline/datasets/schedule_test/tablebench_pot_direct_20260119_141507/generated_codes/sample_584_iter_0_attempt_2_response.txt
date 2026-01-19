@@ -1,0 +1,16 @@
+Step 1: The user wants the average issue price of coins released between 2002 and 2005.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'year' is between 2002 and 2005 (inclusive).  
+Step 4: Extract the 'issue price' column from the filtered data.  
+Step 5: Calculate the mean of the 'issue price' values and print it.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for years between 2002 and 2005 inclusive
+filtered_df = df[(df['year'] >= 2002) & (df['year'] <= 2005)]
+# Calculate the mean of 'issue price' column
+average_issue_price = filtered_df['issue price'].mean()
+print(f"Final Answer: {average_issue_price:.2f}")
+```

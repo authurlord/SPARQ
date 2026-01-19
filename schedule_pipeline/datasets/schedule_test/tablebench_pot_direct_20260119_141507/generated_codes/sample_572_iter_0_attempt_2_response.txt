@@ -1,0 +1,32 @@
+Step 1: The user wants to find the year when the number of typhus cases decreased the most compared to the previous year. This means we need to calculate the year-over-year decrease in typhus cases and identify the largest (most negative) drop.
+
+Step 2: Load the dataframe and extract the 'typhus' column.
+
+Step 3: Compute the difference in typhus cases between consecutive years (i.e., current year minus previous year).
+
+Step 4: Identify the year where the decrease is the largest (i.e., the minimum value in the differences, since a negative value indicates a drop).
+
+Step 5: Print that year.
+
+Note: The data has a row for "191822" which seems like an error (likely meant to be 1918–1922), but since it's a single entry, we will treat it as a year and proceed with the calculation based on the given data.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert year column to integer and sort by year
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+df = df.sort_values('year').dropna()
+
+# Extract typhus cases
+typhus_cases = df['typhus'].astype(float)
+
+# Compute year-over-year differences
+differences = typhus_cases[1:] - typhus_cases[:-1]
+
+# Find the year with the largest decrease (most negative difference)
+decrease_idx = differences.argmin()
+target_year = df['year'].iloc[decrease_idx + 1]  # The year after the previous one
+
+print(f"Final Answer: {target_year}")
+```

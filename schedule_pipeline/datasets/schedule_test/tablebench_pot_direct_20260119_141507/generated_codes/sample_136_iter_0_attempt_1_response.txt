@@ -1,0 +1,31 @@
+Step 1: The user wants a line chart showing operating revenue for each quarter, with separate lines for the regular years and 2018.  
+Step 2: Extract the relevant data: "Operating revenue" and "2018 Operating revenue" across the four quarters.  
+Step 3: Convert the revenue values from string (with dollar signs) to numeric.  
+Step 4: Use matplotlib to plot two lines: one for the non-2018 years and one for 2018, with quarters on the x-axis.  
+Step 5: Label axes and add a legend for clarity.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns
+quarters = ['Quarter Ended March 31', 'Quarter Ended June 30', 'Quarter Ended September 30', 'Quarter Ended December 31']
+revenue_2018 = df.loc[df['Row Header'] == '2018 Operating revenue', quarters].iloc[0].str.replace('$', '').astype(float)
+revenue_other = df.loc[df['Row Header'] == 'Operating revenue', quarters].astype(str).str.replace('$', '').astype(float)
+
+# Create the line chart
+plt.figure(figsize=(10, 6))
+plt.plot(quarters, revenue_other, marker='o', label='Operating Revenue (Non-2018)', color='blue')
+plt.plot(quarters, revenue_2018, marker='s', label='2018 Operating Revenue', color='red')
+
+plt.title('Operating Revenue Trend by Quarter')
+plt.xlabel('Quarter Ended')
+plt.ylabel('Operating Revenue ($)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+```

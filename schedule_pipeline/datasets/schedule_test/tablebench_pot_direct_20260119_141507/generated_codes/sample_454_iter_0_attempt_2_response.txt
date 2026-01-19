@@ -1,0 +1,32 @@
+Step 1: The user is asking for unusual patterns or outliers in the table. We need to analyze viewer numbers and timeslots to identify anomalies.
+Step 2: Look at the "viewers" column for unusually high or low values. For example, a viewer count of 2,000,000 is extremely high compared to others (which are mostly in the 300,000–500,000 range).
+Step 3: Check the "timeslot" column for unusual entries. Most episodes air from 8:30 PM to 9:30 PM, but one episode ("the glamorous life") airs at 3:00 AM to 4:00 AM — this is an outlier in terms of timing.
+Step 4: Identify these patterns and present them clearly.
+
+Unusual pattern:
+- One episode, "the glamorous life", has an unusually low viewership (375,620) compared to others, but more notably, it airs at 3:00 AM to 4:00 AM, which is outside the normal evening timeslot.
+- Another episode, "don't walk on the grass", has a viewer count of 2,000,000, which is significantly higher than all others — this could be an outlier due to special events or a mistake in data entry.
+
+We will check for extreme values in viewers and timeslot deviations.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify outliers in viewers
+viewers = df['viewers'].astype(int)
+normal_viewers = viewers[(viewers >= 300000) & (viewers <= 500000)]
+outlier_high = viewers[viewers > 2000000]
+outlier_low = viewers[viewers < 300000]
+
+# Check for unusual timeslot
+normal_timeslot = df[df['timeslot'].str.contains('8:30 pm - 9:30 pm', case=False)]
+unusual_timeslot = df[~df['timeslot'].str.contains('8:30 pm - 9:30 pm', case=False)]
+
+print(f"Outliers in viewers: {outlier_high.tolist()}")
+print(f"Low viewers: {outlier_low.tolist()}")
+print(f"Unusual timeslot: {unusual_timeslot['title'].tolist()}")
+
+Final Answer: 2000000, the glamorous life
+```

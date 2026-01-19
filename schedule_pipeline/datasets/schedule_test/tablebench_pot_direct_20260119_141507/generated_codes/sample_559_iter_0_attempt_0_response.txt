@@ -1,0 +1,23 @@
+Step 1: The user wants the average number of floors for buildings constructed between 1895 and 1980 (inclusive).  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'year' is between 1895 and 1980 (inclusive).  
+Step 4: Extract the 'floors' column from the filtered data.  
+Step 5: Calculate the mean of the 'floors' values and print it.  
+
+Note: Some entries have '-' in the 'floors' column, which indicates missing data. We will treat these as NaN and exclude them from the calculation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Filter rows where year is between 1895 and 1980 inclusive
+filtered_df = df[(df['year'] >= 1895) & (df['year'] <= 1980)]
+# Remove rows where 'floors' is missing (i.e., '-')
+filtered_df['floors'] = filtered_df['floors'].replace('-', np.nan)
+# Drop rows with NaN in 'floors'
+filtered_df = filtered_df.dropna(subset=['floors'])
+# Calculate the mean of floors
+avg_floors = filtered_df['floors'].mean()
+print(f"Final Answer: {avg_floors:.1f}")
+```

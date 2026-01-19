@@ -1,0 +1,19 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Length (miles)' and 'Locks' to numeric, coercing errors to NaN
+df['Length (miles)'] = pd.to_numeric(df['Length (miles)'], errors='coerce')
+df['Locks'] = pd.to_numeric(df['Locks'], errors='coerce')
+
+# Calculate lock density
+df['Lock Density'] = df['Locks'] / df['Length (miles)']
+
+# Drop rows where length is zero or missing to avoid division by zero or NaN
+df = df.dropna(subset=['Length (miles)', 'Locks'])
+
+# Find the canal with the highest lock density
+max_density_index = df['Lock Density'].idxmax()
+canal_with_highest_density = df.loc[max_density_index, 'Canal']
+
+print(f"Final Answer: {canal_with_highest_density}")

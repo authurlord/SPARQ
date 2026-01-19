@@ -1,0 +1,34 @@
+Step 1: Identify the three-year period with the highest average CPSC toy safety funding.
+Step 2: Extract the years where CPSC toy safety funding data is available and calculate the average funding for each consecutive three-year period.
+Step 3: Find the three-year period with the maximum average funding.
+Step 4: Sum the injuries (in thousands of US dollars) for that period.
+Step 5: Print the total injuries.
+
+Note: Since 'no data' entries are present, we need to filter out rows with missing funding data. Also, convert '202 (estimate)' to numeric for calculation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'CPSC toy safety funding (US$ Millions)' to numeric, handling 'no data' and '13.6' etc.
+df['CPSC toy safety funding (US$ Millions)'] = pd.to_numeric(df['CPSC toy safety funding (US$ Millions)'], errors='coerce')
+
+# Filter rows with valid funding data
+valid_funding = df.dropna(subset=['CPSC toy safety funding (US$ Millions)'])
+
+# Calculate average funding for each consecutive 3-year period
+max_avg_funding = 0
+best_period_injuries = 0
+
+for i in range(len(valid_funding) - 2):
+    subset = valid_funding.iloc[i:i+3]
+    avg_funding = subset['CPSC toy safety funding (US$ Millions)'].mean()
+    if avg_funding > max_avg_funding:
+        max_avg_funding = avg_funding
+        # Get the injuries for this period
+        injuries = subset['Injuries (US $000)'].replace('no data', None).astype(float).sum()
+        best_period_injuries = injuries
+
+print(f"Final Answer: {best_period_injuries}")
+```

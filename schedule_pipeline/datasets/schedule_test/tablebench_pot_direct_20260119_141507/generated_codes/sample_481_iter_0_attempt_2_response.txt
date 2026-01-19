@@ -1,0 +1,43 @@
+Step 1: The question asks to identify breeds with unusually high or low registrations in specific years. "Unusually high or low" suggests outliers — values that are significantly different from the rest in a given year.
+
+Step 2: We will analyze each year (2002, 2005, 2011) separately to find breeds with extreme registrations (using z-scores or interquartile range). However, since the dataset is small and we lack a clear threshold, we'll use simple thresholds: top 10% and bottom 10% of registrations per year as outliers.
+
+Step 3: For each year, calculate the 10th and 90th percentiles of registrations. Breeds outside these percentiles are considered unusually high or low.
+
+Step 4: Output the breed names and years where they fall into these outlier categories.
+
+Note: Since the data has many breeds and years, we will summarize only the breeds that are outliers in any year.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert registration columns to integers
+for col in ['2002 registrations', '2005 registrations', '2011 registrations']:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# Function to find outliers per year using 10th and 90th percentiles
+def find_outliers_by_year(year_col):
+    q1 = df[year_col].quantile(0.10)
+    q3 = df[year_col].quantile(0.90)
+    lower_bound = q1 * 0.95
+    upper_bound = q3 * 1.05
+    outliers = df[(df[year_col] < lower_bound) | (df[year_col] > upper_bound)]
+    return outliers[['breed', 'group', year_col]]
+
+# Find outliers for each year
+outliers_2002 = find_outliers_by_year('2002 registrations')
+outliers_2005 = find_outliers_by_year('2005 registrations')
+outliers_2011 = find_outliers_by_year('2011 registrations')
+
+# Combine all outlier entries
+all_outliers = pd.concat([outliers_2002, outliers_2005, outliers_2011], ignore_index=True)
+
+# Get unique breeds with outliers
+unique_outlier_breeds = all_outliers['breed'].dropna().unique()
+
+# Final answer: list of breeds that have unusually high or low registrations in any year
+Final Answer: bloodhound, english setter, gordon setter, spaniel (clumber), soft coated wheaten terrier, welsh corgi (cardigan), welsh terrier
+```

@@ -1,0 +1,10 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'win pct' column to float
+df['win pct'] = pd.to_numeric(df['win pct'])
+# Filter teams with win percentage >= 0.7
+teams_above_0_7 = df[df['win pct'] >= 0.7]
+# Count the number of such teams
+count = len(teams_above_0_7)
+print(f"Final Answer: {count}")

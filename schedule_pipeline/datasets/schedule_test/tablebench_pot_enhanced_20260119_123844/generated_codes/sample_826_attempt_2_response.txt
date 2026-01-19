@@ -1,0 +1,12 @@
+Step 1: The user wants to calculate the standard deviation of the 'total' points across all countries.
+Step 2: Load the dataframe.
+Step 3: Select the 'total' column.
+Step 4: Calculate the standard deviation using the std() method and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate standard deviation of the 'total' column
+std_total = df['total'].std()
+print(f"Final Answer: {std_total:.2f}")
+```

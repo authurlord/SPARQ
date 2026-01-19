@@ -1,0 +1,23 @@
+The error occurred because the "episodes" column contains string values (e.g., '10', '17'), not integers. We need to convert them to integers before comparing.
+
+Step 1: Load the dataframe.
+Step 2: Convert the "episodes" column to integer type.
+Step 3: Filter rows where the number of episodes is greater than 20.
+Step 4: Calculate the average of the "viewers (in millions)" for those filtered rows.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'episodes' to integer type
+df['episodes'] = pd.to_numeric(df['episodes'], errors='coerce')
+
+# Filter seasons with more than 20 episodes
+filtered_df = df[df['episodes'] > 20]
+
+# Calculate the average viewers for those seasons
+average_viewers = filtered_df['viewers (in millions)'].mean()
+
+print(f"Final Answer: {average_viewers:.2f}")
+```

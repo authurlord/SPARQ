@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Kr, Mo

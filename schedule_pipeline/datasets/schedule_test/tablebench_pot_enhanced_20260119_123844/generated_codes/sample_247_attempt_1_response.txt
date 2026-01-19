@@ -1,0 +1,23 @@
+Step 1: The user wants the average percentage weight loss of the top 3 contestants who lost the most weight in kilograms.
+Step 2: Load the dataframe.
+Step 3: Convert 'weight lost (kg)' to numeric and sort by it in descending order.
+Step 4: Select the top 3 contestants based on weight lost.
+Step 5: Extract their 'percentage lost' values, convert to numeric (removing % sign), and calculate the average.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'weight lost (kg)' to numeric for sorting
+df['weight lost (kg)'] = pd.to_numeric(df['weight lost (kg)'])
+# Sort by weight lost in descending order
+df_sorted = df.sort_values(by='weight lost (kg)', ascending=False)
+# Select top 3 contestants
+top_3 = df_sorted.head(3)
+# Convert 'percentage lost' to numeric (remove % and convert to float)
+top_3['percentage lost'] = top_3['percentage lost'].str.replace('%', '').astype(float)
+# Calculate average percentage lost
+avg_percentage_lost = top_3['percentage lost'].mean()
+print(f"Final Answer: {avg_percentage_lost:.2f}")
+```

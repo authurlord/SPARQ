@@ -1,0 +1,9 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the agricultural panel seats for Fianna Fáil and Fine Gael
+fianna_fail_agricultural = df[df['party'] == 'fianna fáil']['agricultural panel'].values[0]
+fine_gael_agricultural = df[df['party'] == 'fine gael']['agricultural panel'].values[0]
+# Calculate the difference
+difference = int(fianna_fail_agricultural) - int(fine_gael_agricultural)
+print(f"Final Answer: {difference}")

@@ -1,0 +1,104 @@
+Step 1: The question asks to forecast the value in the year 2020 based on the growth pattern from 1820 to 2010.  
+Step 2: The table has three columns: Year_1, Year_2, and Year_3 (Year_1 corresponds to 1885, Year_2 to 1950, Year_3 to 1990, etc.). However, the values are not clearly aligned with a single variable. Looking at the data, it seems like there are three time series: one from 1820 onward, one from 1890 onward, and one from 1950 onward. But the last column (Year_2) is labeled as "-_2", and the values seem to be growing over time.
+
+Step 3: We observe that the values for each year increase over time. For example, Year_1 (1885) increases from 395,346 to 1,042,625 by 2010. Similarly, Year_2 (1950) grows from 249,187 to 1,042,625. We can assume that the trend is consistent across years and use linear regression to model the growth from 1820 to 2010 and then extrapolate to 2020.
+
+Step 4: Since the data is not clearly one variable per year, we will take the last available value (2010) and assume a linear trend. We will extract the value for 2010 (which is 1,042,625) and use the known growth pattern to project forward.
+
+However, note that the data appears to have multiple parallel time series. To simplify, we will focus on the last column (Year_2, which is 1950 to 2010), since it covers a longer period and shows a clear upward trend. We will fit a linear regression model to the years from 1820 to 2010 and project to 2020.
+
+But wait — the table does not have a clear single column for values over time. Instead, it has three separate time points. So we should consider whether there's a consistent pattern.
+
+Looking closely:
+- The values in the first column (Year) go from 1820 to 1880, then skip to 1900, 1905, etc.
+- The values in Year_1 (1885) grow from ~395k to ~1M
+- Year_2 (1950) grows from ~250k to ~1M
+- Year_3 (1990) grows from ~150k to ~1.5M
+
+We can see that the values increase significantly over time. The last value (2010) is 1,042,625. We can fit a linear trend from 1820 to 2010 using the values in Year_1 or Year_2 or Year_3.
+
+Since the most recent data point is 2010, and we want to forecast 2020, we can use the last column (Year_2) which ends at 2010, and assume linear growth.
+
+But the data does not have a single value per year. Instead, it has three different time points. So we will take the value for 2010 (1,042,625) and assume a linear trend based on the years.
+
+Let’s extract the years and corresponding values for the last row (2010), and fit a linear model from 1820 to 2010. However, we don’t have a full sequence of values per year.
+
+Alternative approach: Use the values from 1820 to 2010 in the first column (Year) and the corresponding values in the first row (Year_1) or Year_2? But the data is not aligned.
+
+Wait — actually, the table is structured such that each row represents a year, and the columns represent different time periods. So we can treat each column as a time series.
+
+We will extract the values for each time period and compute the average growth rate. Then, we can project the value for 2020.
+
+But the user wants a forecast for 2020. Since the data ends at 2010, and the values are increasing, we can use linear interpolation between 2010 and 2020.
+
+We will take the value at 2010 (1,042,625) and assume a constant growth rate. But we need to determine the trend.
+
+Looking at the last few years:
+- 1990: 1,535,872
+- 2000: 841,002 → this is a drop!
+- 2005: 1,122,257 → up
+- 2010: 1,042,625 → down
+
+So it's not a smooth trend.
+
+Alternatively, perhaps the data is not about one variable but multiple. Let's instead look at the last column (Year_2, 1950 to 2010). Values:
+- 1950: 249,187
+- 1955: 237,790 → down
+- 1960: 265,398 → up
+- 1965: 296,697 → up
+- 1970: 373,326 → up
+- 1975: 385,378 → up
+- 1980: 524,295 → up
+- 1985: 568,149 → up
+- 1990: 1,535,872 → huge jump
+- 1995: 720,177 → down
+- 2000: 841,002 → up
+- 2005: 1,122,257 → up
+- 2010: 1,042,625 → down
+
+It's volatile.
+
+Alternatively, the value in the first column (Year) might be the base, and the others are derived. But no clear pattern.
+
+Given the ambiguity and lack of a clear trend, and since the user asks for a "forecast", we can use the most recent value (2010: 1,042,625) and assume a linear trend from 1820 to 2010, but we don’t have enough data points.
+
+Alternatively, we can use the last value (2010) and assume the trend continues with a slight increase. But without clear growth, it's speculative.
+
+Best approach: Since the data is fragmented, and no clear monotonic trend exists, we cannot confidently forecast. However, if forced, we can take the value at 2010 and assume a linear extrapolation based on the average annual growth.
+
+But let's do a simple linear regression using the years and the values from the last column (Year_2, 1950 to 2010). We will extract only the rows where Year_2 is defined (i.e., from 1950 to 2010).
+
+We will:
+1. Extract the years and values for Year_2 (1950 to 2010)
+2. Fit a linear regression model
+3. Predict the value for 2020
+
+Note: The table has a row for each year from 1820 to 1880, then jumps to 1900, etc. So we will extract all years from 1820 to 2010 and match them with the corresponding Year_2 value.
+
+But the Year_2 column is not directly aligned with the Year column. For example, the row with Year=1820 has Year_2=249,187 (for 1950). So it seems that the data is structured as:
+
+For each year, we have:
+- Year (e.g., 1820)
+- Value for 1885 (Year_1)
+- Value for 1950 (Year_2)
+- Value for 1990 (Year_3)
+
+So we can treat Year_2 as a time series from 1950 to 2010.
+
+We will extract the years from 1950 to 2010 and their corresponding values in Year_2.
+
+Then, we will fit a linear model and predict for 2020.
+
+Step-by-step:
+- Extract all rows where the year is >= 1950
+- Extract the Year_2 values (which are the values for 1950, 1955, ..., 2010)
+- Fit linear regression on years vs Year_2 values
+- Predict value at year 2020
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the data
+df =

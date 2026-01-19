@@ -1,0 +1,23 @@
+Step 1: Filter the data for songs released between 1942 and 1946 (inclusive).
+Step 2: Extract the 'US Chart position' column.
+Step 3: Convert the values to numeric, handling any non-numeric entries (like '17 (R&B)') by removing the text part or treating them as invalid.
+Step 4: Calculate the average of valid US Chart positions.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years 1942 to 1946
+df_filtered = df[df['Year'].astype(int).between(1942, 1946)]
+
+# Extract and clean 'US Chart position' column
+# Remove non-numeric characters from the string and convert to float
+df_filtered['US Chart position'] = df_filtered['US Chart position'].str.replace(r'[^(0-9)]', '', regex=True)
+df_filtered['US Chart position'] = pd.to_numeric(df_filtered['US Chart position'], errors='coerce')
+
+# Calculate average, ignoring NaN values
+average_position = df_filtered['US Chart position'].mean()
+
+print(f"Final Answer: {average_position:.1f}")
+```

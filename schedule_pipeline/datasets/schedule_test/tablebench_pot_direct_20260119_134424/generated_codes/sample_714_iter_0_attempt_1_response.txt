@@ -1,0 +1,25 @@
+Step 1: The user wants to identify the election with the highest share of votes and calculate the difference between the highest and lowest share of votes.
+Step 2: Load the dataframe.
+Step 3: Extract the 'share of votes' column, convert percentages to float for comparison.
+Step 4: Find the maximum and minimum values in the 'share of votes' column.
+Step 5: Identify the corresponding election for the highest share of votes.
+Step 6: Calculate the difference between the highest and lowest shares.
+Step 7: Print the result in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'share of votes' to float by removing the '%' sign and converting to float
+df['share of votes'] = df['share of votes'].str.replace('%', '').astype(float)
+
+# Find the election with the highest share of votes
+max_vote_election = df.loc[df['share of votes'].idxmax(), 'election']
+# Find the lowest share of votes
+min_vote_election = df.loc[df['share of votes'].idxmin(), 'election']
+
+# Calculate the difference
+difference = df['share of votes'].max() - df['share of votes'].min()
+
+print(f"Final Answer: {max_vote_election}, {difference:.1f}")
+```

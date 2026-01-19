@@ -1,0 +1,15 @@
+Step 1: Identify universities located in London from the 'location' column.  
+Step 2: Filter the dataframe to include only rows where 'location' is 'london'.  
+Step 3: Sum the 'research funding (000)' column for these filtered rows.  
+Step 4: Print the total research funding.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter universities located in London
+london_universities = df[df['location'] == 'london']
+# Sum the research funding for these universities
+total_funding = london_universities['research funding (000)'].sum()
+print(f"Final Answer: {total_funding}")
+```

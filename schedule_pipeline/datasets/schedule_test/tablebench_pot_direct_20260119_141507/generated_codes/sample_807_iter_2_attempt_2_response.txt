@@ -1,0 +1,81 @@
+We are tasked with finding the **variance of goals scored by teams in the Third Division North**.
+
+Step-by-step analysis:
+1. Identify relevant rows: Only rows where the "Division" is "Third Division North".
+2. Extract the "Goals" column from those rows.
+3. Compute the variance of the "Goals" values.
+
+Note: The data has a row labeled "Lincoln City, 1946–47" with Division = "Third Division South", so we need to filter only those with "Third Division North".
+Also, there are entries for Lincoln City in multiple seasons, and Oldham Athletic also played in Third Division North.
+
+Looking at the data:
+- Lincoln City: 1946–47 → Third Division North → Goals = 15
+- Lincoln City: 1947–48 → Third Division North → Goals = 32
+- Lincoln City: 1948–49 → Second Division → skip
+- Oldham Athletic: 1948–49 → Third Division North → Goals = 3
+- Oldham Athletic: 1949–50 → Third Division North → Goals = 0
+
+So valid "Goals" entries for Third Division North:
+- 15 (Lincoln 1946–47)
+- 32 (Lincoln 1947–48)
+- 3 (Oldham 1948–49)
+- 0 (Oldham 1949–50)
+
+But wait — in the table, the "Goals" column appears as part of the data. However, the header row says:
+['Club', 'Season', 'Division', 'Apps', 'Goals', 'Apps', 'Goals', 'Apps', 'Goals']
+
+So the "Goals" column is actually at index 5 (second "Goals") or index 8? Let's check:
+
+Index mapping:
+0: Club
+1: Season
+2: Division
+3: Apps
+4: Goals (first Goals)
+5: Apps (second Apps)
+6: Goals (second Goals)
+7: Apps (third Apps)
+8: Goals (third Goals)
+
+But the question is about "goals scored by teams", and in context, likely refers to the total goals per team per season.
+
+Looking at the data:
+- For Lincoln City in 1946–47: Division = Third Division North → Goals = 15
+- For Lincoln City in 1947–48: Division = Third Division North → Goals = 32
+- For Oldham Athletic in 1948–49: Division = Third Division North → Goals = 3
+- For Oldham Athletic in 1949–50: Division = Third Division North → Goals = 0
+
+So the "Goals" column we want is the one at index 4 (first Goals), because it corresponds to the primary league goals.
+
+But note: the row "Lincoln City, 1946–47" has:
+- Division: Third Division North
+- Goals: 15 → this is the first "Goals"
+
+Similarly, "Oldham Athletic, 1948–49": Goals = 3
+
+Thus, we extract the "Goals" column (index 4) from rows where Division == "Third Division North".
+
+We must exclude the summary rows like "Total" or "Career Total".
+
+Final plan:
+- Filter rows where Division == "Third Division North"
+- Exclude rows that are summaries (e.g., "Total", "Career Total")
+- Extract the "Goals" column (index 4)
+- Compute variance of these goals
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where Division is "Third Division North" and not summary rows
+filtered_df = df[(df['Division'] == 'Third Division North') & (~df['Season'].str.contains('Total|Career'))]
+
+# Extract the 'Goals' column (index 4)
+goals = filtered_df.iloc[:, 4].dropna()
+
+# Calculate variance
+variance = goals.var()
+
+print(f"Final Answer: {variance:.2f}")
+```

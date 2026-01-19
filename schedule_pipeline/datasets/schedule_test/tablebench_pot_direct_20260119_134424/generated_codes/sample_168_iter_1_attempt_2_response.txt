@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The human development index (2000) generally shows a positive correlation with population density, especially in municipalities with larger areas. For example, Querétaro (area: 759.9 km², HDI: 0.856, density: 966.1/km²) has both high HDI and high population density, while smaller municipalities like Arroyo Seco (area: 731.17 km², HDI: 0.7029, density: 17.1/km²) have lower density despite moderate HDI. This suggests that higher HDI may support denser populations, particularly in larger areas where infrastructure and services can sustain growth.

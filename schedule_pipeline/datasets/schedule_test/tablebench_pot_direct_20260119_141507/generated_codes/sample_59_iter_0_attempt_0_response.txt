@@ -1,0 +1,16 @@
+Step 1: The question asks for a nation that has 4 gold medals and is ranked 4th in the table.  
+Step 2: Look at the "Rank" column to find the 4th row (index 3, since it starts at 0).  
+Step 3: Check the "Gold" value in that row. If it is 4, then match it with the corresponding "Nation".  
+Step 4: From the data, the 4th row (rank 4) is "Chile", which has 4 gold medals.  
+
+Thus, the nation that has 4 gold medals and is ranked 4th is Chile.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where rank is 4 (index 3)
+row = df[df['Rank'] == '4']
+nation = row['Nation'].values[0]
+print(f"Final Answer: {nation}")
+```

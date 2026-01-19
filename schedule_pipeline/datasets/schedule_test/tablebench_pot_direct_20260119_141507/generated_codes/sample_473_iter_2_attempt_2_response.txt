@@ -1,0 +1,37 @@
+Step 1: The question asks for an anomaly in the demographic data and possible explanations. This requires identifying inconsistencies or impossible values in the table.
+
+Step 2: Key observations:
+- "Total No. of Houses" is 14.
+- "Population" is 55.
+- "Child (0-6)" is 7, with 3 males and 4 females → total 7, which is consistent.
+- "Schedule Caste" is 1000, with 500 males and 500 females → total 1000.
+- "Literacy" is given as percentages: 86.36% for male, 73.08% for female.
+- "Total Workers" is 15 (12 males, 3 females).
+- "Main Worker" has a value of "-10" and "-5", which is negative and clearly invalid.
+
+Step 3: Identify anomalies:
+- "Main Worker" has negative values (-10 and -5), which is impossible since number of workers cannot be negative.
+- "Total Workers" is 15, but "Main Worker" is -10 and -5, which sum to -15 — this contradicts the total.
+- Also, "Total Workers" = "Main Worker" + "Marginal Worker". Marginal worker is 0, so Main Worker should be non-negative.
+
+Step 4: Possible explanations:
+- Typo or data entry error in "Main Worker" values (likely meant to be positive).
+- The negative values are erroneous and should be corrected to positive numbers, possibly indicating a misreporting or formatting issue.
+
+Step 5: Python code to detect the anomaly by checking for negative values in "Main Worker".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check for negative values in "Main Worker"
+main_worker_values = df[df['Particulars'] == 'Main Worker']['Total'].values[0]
+if main_worker_values < 0:
+    print("Anomaly detected: Negative value in 'Main Worker' column ('-10' and '-5').")
+    print("Possible explanation: Data entry error or typo; number of workers cannot be negative.")
+else:
+    print("No anomaly found in 'Main Worker'.")
+
+Final Answer: Negative value in Main Worker, data entry error
+```

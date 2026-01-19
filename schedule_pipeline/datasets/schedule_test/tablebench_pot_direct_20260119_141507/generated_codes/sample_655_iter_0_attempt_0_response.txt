@@ -1,0 +1,14 @@
+Step 1: The user wants the correlation coefficient between 'p1 diameter (mm)' and 'p max (bar)'.
+Step 2: Load the dataframe.
+Step 3: Extract the two columns of interest.
+Step 4: Compute the Pearson correlation coefficient using pandas' `corr()` method.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'p1 diameter (mm)' and 'p max (bar)'
+correlation = df['p1 diameter (mm)'].corr(df['p max ( bar )'])
+print(f"Final Answer: {correlation:.3f}")
+```

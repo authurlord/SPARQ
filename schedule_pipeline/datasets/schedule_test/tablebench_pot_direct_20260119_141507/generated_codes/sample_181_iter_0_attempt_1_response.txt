@@ -1,0 +1,39 @@
+Step 1: The question asks which of the factors — 'Swimsuit', 'Interview', or 'Evening Gown' — significantly influence the 'Finalists' scores.  
+Step 2: We need to analyze the correlation between each of these three columns and the 'Finalists' column.  
+Step 3: If any of the correlations is strong (e.g., absolute value > 0.7), we can say that factor has a significant influence. Otherwise, we conclude "no clear impact".  
+Step 4: Since the data contains some missing values (None in 'Finalists' for several rows), we will drop those rows before computing correlation.  
+Step 5: Compute pairwise correlation between 'Finalists' and each of the three factors.  
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Drop rows where 'Finalists' is None (missing)
+df_clean = df.dropna(subset=['Finalists'])
+
+# Convert 'Finalists' and other score columns to numeric (in case of string formatting issues)
+df_clean['Finalists'] = pd.to_numeric(df_clean['Finalists'], errors='coerce')
+df_clean['Swimsuit'] = pd.to_numeric(df_clean['Swimsuit'], errors='coerce')
+df_clean['Interview'] = pd.to_numeric(df_clean['Interview'], errors='coerce')
+df_clean['Evening Gown'] = pd.to_numeric(df_clean['Evening Gown'], errors='coerce')
+
+# Compute correlation with 'Finalists'
+correlations = {
+    'Swimsuit': df_clean['Finalists'].corr(df_clean['Swimsuit']),
+    'Interview': df_clean['Finalists'].corr(df_clean['Interview']),
+    'Evening Gown': df_clean['Finalists'].corr(df_clean['Evening Gown'])
+}
+
+# Check if any correlation has absolute value > 0.7 (considered significant)
+significant_factors = []
+for factor, corr in correlations.items():
+    if abs(corr) > 0.7:
+        significant_factors.append(factor)
+
+if significant_factors:
+    Final Answer: , '.join(significant_factors)
+else:
+    Final Answer: no clear impact
+```

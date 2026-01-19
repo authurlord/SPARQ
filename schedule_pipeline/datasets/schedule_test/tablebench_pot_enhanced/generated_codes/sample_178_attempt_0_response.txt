@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The maximum speed increases with higher horsepower, but it stabilizes at 120 km/h for trains with 285-298 horsepower built from 1991 onward.

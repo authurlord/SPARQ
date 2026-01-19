@@ -1,0 +1,37 @@
+Step 1: Identify teams with more than one driver.
+Step 2: Filter the data to include only drivers from such teams.
+Step 3: Extract the 'qual 2' column values for these drivers.
+Step 4: Convert 'qual 2' values to seconds (handling time format like '1:00.000').
+Step 5: Calculate the median of these values.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Count occurrences of each team
+team_counts = df['team'].value_counts()
+
+# Teams with more than one driver
+multi_driver_teams = team_counts[team_counts > 1].index
+
+# Filter drivers from teams with more than one driver
+filtered_df = df[df['team'].isin(multi_driver_teams)]
+
+# Function to convert time string to seconds
+def time_to_seconds(time_str):
+    if ':' in time_str:
+        minutes, seconds = time_str.split(':')
+        return int(minutes) * 60 + float(seconds)
+    else:
+        return float(time_str)
+
+# Convert 'qual 2' to seconds
+filtered_df['qual 2 seconds'] = filtered_df['qual 2'].apply(time_to_seconds)
+
+# Calculate median
+median_qual2 = filtered_df['qual 2 seconds'].median()
+
+print(f"Final Answer: {median_qual2:.3f}")
+```

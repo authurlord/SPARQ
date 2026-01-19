@@ -1,0 +1,22 @@
+Step 1: The user wants a forecasted average finish position for 2005 based on historical data from 1985 to 2004, assuming the number of starts is similar to 2004 (which is 3 starts).
+
+Step 2: Load the dataframe.
+
+Step 3: Filter the data for years 1985 to 2004.
+
+Step 4: Extract the 'avg finish' values for all rows where 'starts' is 3, since 2004 had 3 starts.
+
+Step 5: Calculate the average of these 'avg finish' values to forecast the expected average finish for a driver with 3 starts.
+
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for years 1985 to 2004 and where starts = 3 (same as 2004)
+filtered_data = df[(df['starts'] == 3) & (df['year'].astype(int) <= 2004)]
+# Calculate the average of avg finish for those rows
+forecasted_avg_finish = filtered_data['avg finish'].mean()
+print(f"Final Answer: {forecasted_avg_finish:.1f}")
+```

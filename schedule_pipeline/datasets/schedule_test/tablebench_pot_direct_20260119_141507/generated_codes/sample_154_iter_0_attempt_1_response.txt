@@ -1,0 +1,25 @@
+Step 1: The user is asking which specific factors (preliminaries, interview, swimsuit, evening gown) significantly influence the 'average' score. To assess this, we can compute the correlation between each factor and the 'average' score.  
+Step 2: Load the dataframe.  
+Step 3: Compute the correlation between each factor and the 'average' column.  
+Step 4: Identify which factor has the highest absolute correlation (closest to 1 or -1), indicating a strong influence. If all correlations are weak (e.g., below 0.3 in absolute value), then conclude "no clear impact".  
+
+Note: Since the data is numerical and the average is a combination of the other scores, we expect a strong positive correlation. We will check the absolute correlation values.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Compute correlation between each factor and 'average'
+correlations = df[['preliminaries', 'interview', 'swimsuit', 'evening gown', 'average']].corr()['average'].abs()
+
+# Find the factor with the highest correlation
+top_factor = correlations.idxmax()
+correlation_value = correlations[top_factor]
+
+# Determine if it's significant (threshold: > 0.3)
+if correlation_value >= 0.3:
+    print(f"Final Answer: {top_factor}")
+else:
+    print("Final Answer: no clear impact")
+```

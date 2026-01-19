@@ -1,0 +1,22 @@
+Step 1: The user is asking for the correlation between the '1990 - 95' and '2006 - 10' columns. These are two time periods representing values across states. We need to compute the Pearson correlation coefficient between these two columns.
+
+Step 2: Load the dataframe.
+
+Step 3: Extract the two columns: '1990 - 95' and '2006 - 10'. Note that the values are given as strings (e.g., '0.41'), so we must convert them to floats.
+
+Step 4: Compute the correlation coefficient using pandas' `corr()` method.
+
+Step 5: Print the correlation coefficient.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert string values to float
+df['1990 - 95'] = pd.to_numeric(df['1990 - 95'], errors='coerce')
+df['2006 - 10'] = pd.to_numeric(df['2006 - 10'], errors='coerce')
+
+# Compute correlation between the two columns
+correlation = df['1990 - 95'].corr(df['2006 - 10'])
+print(f"Final Answer: {correlation:.3f}")
+```

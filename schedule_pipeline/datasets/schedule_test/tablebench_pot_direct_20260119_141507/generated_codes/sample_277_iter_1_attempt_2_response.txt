@@ -1,0 +1,36 @@
+The error occurred because the points column contains string values (e.g., '91', '58') that need to be converted to numeric before computing the median or average. We must ensure proper type conversion.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the 'points' column to numeric, handling any potential parsing errors.
+3. Filter songs where:
+   - Language is not 'english' (i.e., non-English language titles)
+   - Points are greater than the median points of all songs
+4. Compute the average of the filtered points.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'points' to numeric, coercing errors to NaN and then dropping them
+df['points'] = pd.to_numeric(df['points'], errors='coerce')
+
+# Calculate the median points of all songs
+median_points = df['points'].median()
+
+# Filter non-English songs with points greater than median
+filtered_df = df[
+    (df['language'] != 'english') & 
+    (df['points'] > median_points)
+]
+
+# Compute average points of the filtered songs
+if filtered_df.empty:
+    average_points = 0
+else:
+    average_points = filtered_df['points'].mean()
+
+print(f"Final Answer: {average_points:.1f}")
+```

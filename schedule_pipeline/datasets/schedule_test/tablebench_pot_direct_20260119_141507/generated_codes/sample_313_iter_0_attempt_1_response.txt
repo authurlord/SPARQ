@@ -1,0 +1,28 @@
+Step 1: Identify the films that were nominated for Best Actor and released in 2017 or earlier.  
+From the table, the relevant years are 2015, 2016, and 2017.  
+We filter rows where "Category" is "Best Actor" and "Year" is ≤ 2017.  
+
+Step 2: Among these films, count the number of wins (where Result is "Won").  
+We group by "Nominated work" and sum the wins.  
+
+Step 3: Find the film with the highest number of wins.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for Best Actor category and years 2017 or earlier
+filtered_df = df[(df['Category'] == 'Best Actor') & (df['Year'].astype(int) <= 2017)]
+
+# Count wins (where Result is "Won")
+win_counts = filtered_df[filtered_df['Result'] == 'Won'].groupby('Nominated work').size()
+
+# Get the film with the most wins
+if not win_counts.empty:
+    film_with_most_wins = win_counts.idxmax()
+else:
+    film_with_most_wins = None
+
+print(f"Final Answer: {film_with_most_wins}")
+```

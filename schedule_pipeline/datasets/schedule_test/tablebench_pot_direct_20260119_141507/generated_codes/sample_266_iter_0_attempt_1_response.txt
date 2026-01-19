@@ -1,0 +1,24 @@
+Step 1: The user wants the total number of medals (M36 + M36B1 + M36B2) for the months from May 1944 to August 1944.  
+Step 2: Identify the relevant rows in the table: May 1944, June 1944, July 1944, and August 1944.  
+Step 3: For each of these rows, sum the values in columns M36, M36B1, and M36B2.  
+Step 4: Add up these sums to get the total.  
+
+Note: The data shows that M36B1 and M36B2 are zero for all months except October, November, December, May 1945, and Post-war. So only May 1944 to August 1944 will be considered, and their values are as follows:  
+- May 1944: 100 + 0 + 0 = 100  
+- June 1944: 120 + 0 + 0 = 120  
+- July 1944: 155 + 0 + 0 = 155  
+- August 1944: 100 + 0 + 0 = 100  
+
+Total = 100 + 120 + 155 + 100 = 475  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows from May 1944 to August 1944
+filtered_df = df[(df['Month'] >= 'May 1944') & (df['Month'] <= 'August 1944')]
+
+# Calculate total medals (sum of M36 + M36B1 + M36B2) for selected rows
+total_medals = filtered_df['M36'].sum() + filtered_df['M36B1'].sum() + filtered_df['M36B2'].sum()
+print(f"Final Answer: {total_medals}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: country with flag, area (km square), population (1 july 2005 est), population density (per km square), capital

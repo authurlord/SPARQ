@@ -1,0 +1,15 @@
+Step 1: The user wants the difference in elevation between the highest and lowest mountains in the dataset.
+Step 2: Load the dataframe.
+Step 3: Convert the 'elevation (m)' column to numeric type for accurate calculation.
+Step 4: Find the maximum and minimum elevation values.
+Step 5: Calculate the difference and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'elevation (m)' to numeric
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'])
+# Calculate the difference between max and min elevation
+elevation_diff = df['elevation (m)'].max() - df['elevation (m)'].min()
+print(f"Final Answer: {elevation_diff}")
+```

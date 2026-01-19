@@ -1,0 +1,57 @@
+Step 1: The question asks to identify data points that significantly deviate from the expected pattern.  
+Step 2: Observing the table, the rows represent different components of decimal floating-point formats (like Sign, Exponent, Coefficient, etc.) with values that follow a mathematical pattern (e.g., w = 2×k + 4, t = 30×k−10, etc.).  
+Step 3: We need to check if any row violates or breaks this expected pattern. For example, the "Total size (bits)" row should be the sum of the other fields: Sign + Combination + Exponent continuation + Coefficient continuation.  
+Step 4: Compute expected total size based on the formula and compare it with the given value. If mismatched, it's a deviation.  
+Step 5: Also check if coefficient size (p) follows p = 9×k − 2, and exponent range (t) follows t = 30×k − 10.
+
+We will:
+- Check if Total size (bits) matches the sum of the other fields.
+- Check if coefficient size (p) matches 9×k − 2.
+- Check if exponent continuation field (bits) matches w = 2×k + 4.
+
+Note: The table has multiple rows, so we loop through each row and validate the formulas.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+deviations = []
+
+# Loop through each row
+for idx, row in df.iterrows():
+    # Skip the last row (it's just descriptive)
+    if idx == len(df) - 1:
+        continue
+    
+    # Extract values
+    k = int(row['decimal32'])  # Assuming k is from decimal32 column
+    sign_bits = int(row['decimal32'])
+    combo_bits = int(row['decimal64'])
+    exp_cont_bits = int(row['decimal128'])
+    coeff_cont_bits = int(row['decimal(32k)'])
+    total_size = int(row['Total size (bits)'])
+    
+    # Expected values based on formulas
+    expected_w = 2 * k + 4
+    expected_t = 30 * k - 10
+    expected_p = 9 * k - 2
+    expected_total = sign_bits + combo_bits + exp_cont_bits + coeff_cont_bits
+    
+    # Check deviations
+    if abs(exp_cont_bits - expected_w) > 1:
+        deviations.append(f"Row {idx}: Exponent continuation ({exp_cont_bits}) deviates from w = 2k+4 ({expected_w})")
+    if abs(total_size - expected_total) > 1:
+        deviations.append(f"Row {idx}: Total size ({total_size}) deviates from sum of fields ({expected_total})")
+    if abs(int(row['Coefficient size (decimal digits)']) - expected_p) > 1:
+        deviations.append(f"Row {idx}: Coefficient size ({row['Coefficient size (decimal digits)']}) deviates from p = 9k−2 ({expected_p})")
+
+if deviations:
+    print("Deviation found:")
+    for d in deviations:
+        print(d)
+else:
+    print("No significant deviations found.")
+
+Final Answer: No significant deviations found
+```

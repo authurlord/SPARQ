@@ -1,0 +1,21 @@
+Step 1: The user wants to find the difference between the number of males in the 10–29 age group and the 60+ age group.
+Step 2: Load the dataframe.
+Step 3: Extract the relevant data for males in the 10–29 age group (columns '10–19' and '20–29') and sum them.
+Step 4: Extract the number of males in the 60+ age group (columns '60–69', '70–79', '80+') and sum them.
+Step 5: Subtract the 60+ total from the 10–29 total.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract male population data
+males_10_to_29 = df.loc[df['SPECIFICATION'] == 'I.1.A.', ['10–19', '20–29']].sum().sum()
+males_60_plus = df.loc[df['SPECIFICATION'] == 'I.1.A.', ['60–69', '70–79', '80 +']].sum().sum()
+
+# Calculate the difference
+difference = males_10_to_29 - males_60_plus
+
+print(f"Final Answer: {difference}")
+```

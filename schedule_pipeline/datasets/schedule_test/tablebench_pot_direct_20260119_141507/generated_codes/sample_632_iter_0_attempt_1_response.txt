@@ -1,0 +1,33 @@
+Step 1: Identify the top 5 buildings by height. From the table, the buildings are ranked by rank (1 to 19), and height is given in meters (e.g., "98 m (322ft)"). We need to extract the height values as numeric values.
+
+Step 2: Extract the height values for the top 5 buildings (rank 1 to 5).
+
+Step 3: Convert the height strings (like "98 m (322ft)") to numeric values (just the number before 'm').
+
+Step 4: Compute the current average height of these top 5 buildings.
+
+Step 5: Increase each of these heights by 5 meters and compute the new average.
+
+Step 6: Print the new average height.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract height values, convert string to numeric (remove 'm' and convert)
+heights = []
+for height_str in df.iloc[:5]['height']:
+    # Extract numeric value from string like "98 m (322ft)"
+    height_val = float(height_str.split('m')[0])
+    heights.append(height_val)
+
+# Current average height of top 5 buildings
+current_avg = sum(heights) / len(heights)
+
+# New average after increasing each by 5 meters
+new_avg = (current_avg + 5)
+
+print(f"Final Answer: {new_avg:.1f}")
+```

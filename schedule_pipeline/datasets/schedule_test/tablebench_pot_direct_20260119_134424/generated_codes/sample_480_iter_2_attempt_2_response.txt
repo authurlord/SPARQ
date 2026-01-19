@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 7000.0, 10000.0, 6.68, 16.029, 70.0

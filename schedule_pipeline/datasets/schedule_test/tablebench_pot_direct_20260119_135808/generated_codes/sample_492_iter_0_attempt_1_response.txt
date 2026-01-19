@@ -1,0 +1,132 @@
+Step 1: Understand the question. We are to determine in which round Miloš Zeman achieved a majority win, defined as receiving more than 50% of the total deputies and senators combined in a single round.
+
+Step 2: The data contains multiple rows per round, with results for different candidates (Václav Klaus, Jaroslava Moserová, and Miloš Zeman) across deputies and senators. Each "Round" has two entries (likely from different voting bodies or sources), so we need to combine the values for each candidate per round.
+
+Step 3: For each round, calculate the total deputies and senators for Miloš Zeman across both entries (if available). Then compute the total possible deputies and senators for that round (sum of all deputies and senators across all candidates in that round).
+
+Step 4: Check if Miloš Zeman's total (deputies + senators) exceeds 50% of the total possible (deputies + senators) for that round.
+
+Step 5: Identify the first round where this condition is met.
+
+Step 6: Return the round number (e.g., "1st", "2nd", etc.) or indicate if no majority win occurred.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Drop the header row
+df = df[df['Round'] != 'Round']
+
+# Convert Round to categorical for proper sorting
+round_order = {'1st': 1, '2nd': 2, '3rd': 3}
+df['Round_num'] = df['Round'].map(round_order)
+
+# Initialize variables to track cumulative totals per round
+round_totals = {}
+
+# Process each round
+for round_name in df['Round'].unique():
+    round_data = df[df['Round'] == round_name]
+    
+    # Extract Miloš Zeman's deputies and senators
+    mz_deputies = 0
+    mz_senators = 0
+    
+    for _, row in round_data.iterrows():
+        if row['Miloš Zeman'] != '-' and row['Miloš Zeman'] != '':
+            mz_deputies += int(row['Miloš Zeman'])
+        if row['Miloš Zeman_1'] != '-' and row['Miloš Zeman_1'] != '':
+            mz_senators += int(row['Miloš Zeman_1'])
+    
+    # Total deputies and senators in this round (from all candidates)
+    total_deputies = 0
+    total_senators = 0
+    
+    for _, row in round_data.iterrows():
+        if row['Václav Klaus'] != '-' and row['Václav Klaus'] != '':
+            total_deputies += int(row['Václav Klaus'])
+        if row['Václav Klaus_1'] != '-' and row['Václav Klaus_1'] != '':
+            total_senators += int(row['Václav Klaus_1'])
+        if row['Jaroslava Moserová'] != '-' and row['Jaroslava Moserová'] != '':
+            total_deputies += int(row['Jaroslava Moserová'])
+        if row['Jaroslava Moserová_1'] != '-' and row['Jaroslava Moserová_1'] != '':
+            total_senators += int(row['Jaroslava Moserová_1'])
+        if row['Miloš Zeman'] != '-' and row['Miloš Zeman'] != '':
+            total_deputies += int(row['Miloš Zeman'])
+        if row['Miloš Zeman_1'] != '-' and row['Miloš Zeman_1'] != '':
+            total_senators += int(row['Miloš Zeman_1'])
+    
+    # Calculate total possible seats
+    total_possible = total_deputies + total_senators
+    
+    # Calculate Miloš Zeman's total
+    mz_total = mz_deputies + mz_senators
+    
+    # Check if majority (more than 50%)
+    if mz_total > total_possible * 0.5:
+        print(f"Majority win in {round_name}")
+        print(f"Zeman: {mz_total}, Total: {total_possible}, %: {mz_total / total_possible * 100:.1f}%")
+        break
+else:
+    print("No majority win found.")
+
+# Since we are to return only the round, we can finalize it here
+# From analysis: First round (1st) has Zeman with 78 deputies and 5 senators = 83
+# Total deputies: 89+25+78 = 192; Total senators: 32+43+5 = 80 → Total: 272
+# Zeman: 83 → 83/272 ≈ 30.5% → not majority
+# Second round: Zeman has 0 deputies and 0 senators → not applicable
+# Third round: Zeman has 0 deputies and 0 senators → not applicable
+
+# But wait — in the first round, there are two entries:
+# Entry 1: Zeman: 78 deputies, 5 senators
+# Entry 2: Zeman: 83 deputies, 83 senators
+# So total: 78+83 = 161 deputies, 5+83 = 88 senators → total = 249
+
+# Total deputies across all: 89+25+78+121+68+83 = 464
+# Total senators: 32+43+5+121+68+83 = 352 → total = 816
+
+# Zeman: 161+88 = 249 → 249/816 ≈ 30.5% → still not majority
+
+# Wait — maybe the two entries are separate? Let's reconsider.
+
+# Actually, looking at the data: each round has two rows. Likely, the first row is one source (e.g., deputies), second is another (senators)? But no — the columns are split by candidate.
+
+# Actually, the structure seems to be: two rows per round, each representing a different body or vote type.
+
+# But the question says "a candidate receiving more than 50% of the total deputies and senators"
+
+# So for each round, we must sum all deputies and senators across all candidates, then check if Zeman's total exceeds 50% of that.
+
+# Let's recompute properly.
+
+# Round 1:
+# Row 1: Václav Klaus: 89 deputies, 32 senators; Jaroslava Moserová: 25 deputies, 43 senators; Miloš Zeman: 78 deputies, 5 senators
+# Row 2: Václav Klaus: 121 deputies, 121 senators; Jaroslava Moserová: 68 deputies, 68 senators; Miloš Zeman: 83 deputies, 83 senators
+# Total deputies: 89+25+78 + 121+68+83 = 464
+# Total senators: 32+43+5 + 121+68+83 = 352
+# Total seats: 464 + 352 = 816
+# Zeman: 78+83 = 161 deputies, 5+83 = 88 senators → 249 total
+# 249 / 816 ≈ 30.5% → not majority
+
+# Round 2:
+# Row 1: Zeman: 85 deputies, 33 senators
+# Row 2: Zeman: 118 deputies, 118 senators
+# So Zeman: 85+118 = 203 deputies, 33+118 = 151 senators → 354
+# Total deputies: 85+32+85 + 118+74+118 = 512
+# Total senators: 33+42+33 + 118+74+118 = 418
+# Total: 512+418 = 930
+# 354 / 930 ≈ 38.1% → not majority
+
+# Round 3:
+# Row 1: Zeman: 95 deputies, 32 senators
+# Row 2: Zeman: 127 deputies, 127 senators
+# Zeman: 95+127 = 222 deputies, 32+127 = 159 senators → 381
+# Total deputies: 95+26+95 + 127+65+127 = 535
+# Total senators: 32+39+32 + 127+65+127 = 422
+# Total: 535+422 = 957
+# 381 / 957 ≈ 39.8% → not majority
+
+# Conclusion: Miloš Zeman never achieved a majority win.
+
+# But the question asks: "in which round did Miloš Zeman achieve his first majority win, if at

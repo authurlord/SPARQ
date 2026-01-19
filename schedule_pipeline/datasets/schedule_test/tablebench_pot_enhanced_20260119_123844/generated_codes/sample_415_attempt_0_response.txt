@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table displays the number of passengers (in thousands) for various countries and the world from 2002 to 2011. Notable trends include a steady increase in passenger numbers for Chile, China, and the world, with China showing a significant rise after 2004. The United States and Australia show relatively stable numbers with minor fluctuations. Indonesia and Mexico exhibit declining trends after 2006. The world total consistently grows over time, reflecting global growth in air travel.

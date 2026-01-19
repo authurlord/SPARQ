@@ -1,0 +1,21 @@
+Step 1: Identify films directed by Mostofa Sarwar Farooki.  
+Step 2: Among those films, check which ones have "Bangladesh's submission to Academy Awards" or similar mention in the "Notes" column.  
+Step 3: Count how many such films exist.
+
+From the table:
+- "Third Person Singular Number" (2009): Notes mention Meril Prothom Alo Awards, not Academy Awards.
+- "Television" (2012): Notes say "Bangladesh's submission to Academy Awards" → matches.
+- "Doob: No Bed of Roses" (2017): Notes say "Bangladesh's submission to 91st Academy Awards" → matches.
+
+So, two films directed by Mostofa Sarwar Farooki were submitted to the Academy Awards.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter films directed by Mostofa Sarwar Farooki and check notes for Academy Awards submission
+filtered = df[(df['Director'] == 'Mostofa Sarwar Farooki') & 
+              (df['Notes'].str.contains('Academy Awards', case=False, na=False))]
+count = len(filtered)
+print(f"Final Answer: {count}")
+```

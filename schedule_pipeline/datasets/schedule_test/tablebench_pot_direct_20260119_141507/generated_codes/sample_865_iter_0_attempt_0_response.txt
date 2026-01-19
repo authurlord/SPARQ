@@ -1,0 +1,16 @@
+Step 1: Identify the school with the highest and lowest total medals.
+Step 2: Calculate the difference between the highest and lowest total medals.
+Step 3: Load the dataframe and extract the 'total medals' column.
+Step 4: Find the maximum and minimum values, then compute the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the 'total medals' column
+total_medals = df['total medals'].astype(int)
+max_medals = total_medals.max()
+min_medals = total_medals.min()
+difference = max_medals - min_medals
+print(f"Final Answer: {difference}")
+```

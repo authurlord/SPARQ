@@ -1,0 +1,20 @@
+The error occurred because the 'year' column contains string values (e.g., '1968'), and we cannot directly compare strings with integers using `>=`. We need to convert the 'year' column to integers before filtering.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'year' column to integer type.
+Step 3: Filter rows where the year is between 1960 and 1980 (inclusive).
+Step 4: Calculate the average number of floors for those buildings.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'year' to integer
+df['year'] = df['year'].astype(int)
+# Filter buildings constructed between 1960 and 1980 (inclusive)
+filtered_df = df[(df['year'] >= 1960) & (df['year'] <= 1980)]
+# Calculate average number of floors
+avg_floors = filtered_df['floors'].mean()
+print(f"Final Answer: {avg_floors:.1f}")
+```

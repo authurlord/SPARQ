@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains demographic data from 1970 to 2006, including population, live births, deaths, natural change, and associated rates (birth, death, natural change per 1000). Notable trends include a peak in live births in 1985 followed by a decline, a rising crude death rate after 1990, and a shift from positive to near-zero or negative natural change in later years.

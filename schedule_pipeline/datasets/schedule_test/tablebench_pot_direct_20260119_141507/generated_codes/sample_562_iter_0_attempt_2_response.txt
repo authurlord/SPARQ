@@ -1,0 +1,16 @@
+Step 1: The user wants the total mintage of coins issued from 2002 to 2006 (inclusive).  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'year' is between 2002 and 2006 (inclusive).  
+Step 4: Sum the 'mintage' column for the filtered rows.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for years 2002 to 2006 inclusive
+filtered_df = df[(df['year'].astype(int) >= 2002) & (df['year'].astype(int) <= 2006)]
+# Sum the mintage values
+total_mintage = filtered_df['mintage'].sum()
+print(f"Final Answer: {total_mintage}")
+```

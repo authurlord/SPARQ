@@ -1,0 +1,19 @@
+Step 1: The user wants to calculate the variance of the number of tries scored by Castleford Tigers from 2004 to 2010.
+Step 2: Load the dataframe.
+Step 3: Exclude the 'total' row since it's a summary and not part of the yearly data.
+Step 4: Select the 'tries' column and convert it to numeric.
+Step 5: Calculate the variance using the .var() method.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Exclude the 'total' row
+df_yearly = df[df['year'] != 'total']
+# Convert 'tries' to numeric
+df_yearly['tries'] = pd.to_numeric(df_yearly['tries'])
+# Calculate variance
+variance_tries = df_yearly['tries'].var()
+print(f"Final Answer: {variance_tries:.2f}")
+```

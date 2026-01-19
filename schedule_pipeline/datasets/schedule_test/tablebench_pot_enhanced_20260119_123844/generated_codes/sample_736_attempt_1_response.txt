@@ -1,0 +1,25 @@
+Step 1: The user is asking for a forecast of points for Suzuki in the 50cc and 125cc classes for upcoming years based on historical data from 1961 to 1967. Since no clear trend or predictive model is specified, we can assume a simple extrapolation based on the average points per class.
+
+Step 2: Filter the data for Suzuki in the 50cc and 125cc classes.
+
+Step 3: Calculate the average points for each class.
+
+Step 4: Use the average as a forecast for future points.
+
+Step 5: Print the forecasted points for both classes.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter data for Suzuki in 50cc and 125cc classes
+suzuki_50cc = df[(df['team'] == 'suzuki') & (df['class'] == '50cc')]
+suzuki_125cc = df[(df['team'] == 'suzuki') & (df['class'] == '125cc')]
+
+# Calculate average points for each class
+avg_50cc_points = suzuki_50cc['points'].mean()
+avg_125cc_points = suzuki_125cc['points'].mean()
+
+print(f"Final Answer: {avg_50cc_points:.1f}, {avg_125cc_points:.1f}")
+```

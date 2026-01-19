@@ -1,0 +1,37 @@
+Step 1: The question asks which factor (sales, profits, assets) most significantly contributes to market value. This implies a correlation analysis between each of these variables and market value.
+
+Step 2: Load the dataframe and extract the relevant columns: 'sales (billion)', 'profits (billion)', 'assets (billion)', and 'market value (billion)'.
+
+Step 3: Compute the Pearson correlation coefficient between each of the three factors and market value.
+
+Step 4: Identify the factor with the highest absolute correlation value.
+
+Step 5: Print the name of the factor with the strongest correlation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select relevant columns
+sales = df['sales (billion )']
+profits = df['profits (billion )']
+assets = df['assets (billion )']
+market_value = df['market value (billion )']
+
+# Calculate correlation with market value
+correlation_sales = sales.corr(market_value)
+correlation_profits = profits.corr(market_value)
+correlation_assets = assets.corr(market_value)
+
+# Find the factor with the highest absolute correlation
+max_corr = max(correlation_sales, correlation_profits, correlation_assets, key=abs)
+if max_corr == correlation_sales:
+    final_factor = 'sales (billion )'
+elif max_corr == correlation_profits:
+    final_factor = 'profits (billion )'
+else:
+    final_factor = 'assets (billion )'
+
+print(f"Final Answer: {final_factor}")
+```

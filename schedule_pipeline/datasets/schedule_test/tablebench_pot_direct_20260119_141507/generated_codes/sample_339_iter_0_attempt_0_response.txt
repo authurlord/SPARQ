@@ -1,0 +1,17 @@
+Step 1: The user is asking for the year when the athlete won their first gold medal in the 100 m hurdles event.  
+Step 2: In the table, "Position" indicates performance ranking. A "1st" position in the "100 m hurdles" event would represent a gold medal.  
+Step 3: We need to filter rows where the "Event" is "100 m hurdles" and "Position" is "1st".  
+Step 4: Among those rows, find the earliest (first) year.  
+
+Note: The first row with "1st" in "100 m hurdles" is from 2010, which is the earliest.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Event is '100 m hurdles' and Position is '1st'
+gold_medals = df[(df['Event'] == '100 m hurdles') & (df['Position'] == '1st')]
+# Get the first year (earliest year)
+first_gold_year = gold_medals.iloc[0]['Year']
+print(f"Final Answer: {first_gold_year}")
+```

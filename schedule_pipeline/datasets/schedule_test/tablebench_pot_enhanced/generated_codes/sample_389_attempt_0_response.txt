@@ -1,0 +1,12 @@
+Step 1: The user wants to count the number of cantons where the value in the 'separate secondary schools' column is 'yes'.
+Step 2: Load the dataframe.
+Step 3: Filter the rows where 'separate secondary schools' is 'yes'.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count the number of cantons with 'yes' in 'separate secondary schools'
+count_yes = df[df['separate secondary schools'] == 'yes'].shape[0]
+print(f"Final Answer: {count_yes}")
+```

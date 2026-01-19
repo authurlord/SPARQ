@@ -1,0 +1,19 @@
+Step 1: The user wants the total number of bills originally cosponsored in years where the legislator sponsored more than 50 bills.
+Step 2: Load the dataframe.
+Step 3: Convert the 'all bills sponsored' column to integer (since it's currently a string).
+Step 4: Filter rows where 'all bills sponsored' > 50.
+Step 5: Sum the 'bills originally cosponsored' column for these filtered rows.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'all bills sponsored' to integer for comparison
+df['all bills sponsored'] = pd.to_numeric(df['all bills sponsored'])
+# Filter rows where bills sponsored > 50
+filtered_df = df[df['all bills sponsored'] > 50]
+# Sum the 'bills originally cosponsored' column
+total_cosponsored = filtered_df['bills originally cosponsored'].sum()
+print(f"Final Answer: {total_cosponsored}")
+```

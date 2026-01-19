@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter universities located in London
+london_universities = df[df['location'] == 'london']
+# Sum the total number of students
+total_students_london = london_universities['total number of students'].sum()
+print(f"Final Answer: {total_students_london}")

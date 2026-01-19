@@ -1,0 +1,16 @@
+Step 1: The user wants the average number of US viewers for episodes in Season 1.
+Step 2: Load the dataframe.
+Step 3: Filter the data to include only rows where 'season' is 1.
+Step 4: Calculate the mean of the 'us viewers (million)' column for these rows.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for Season 1
+season_1_data = df[df['season'] == 1]
+# Calculate average US viewers for Season 1
+avg_viewers_season_1 = season_1_data['us viewers (million)'].mean()
+print(f"Final Answer: {avg_viewers_season_1:.2f}")
+```

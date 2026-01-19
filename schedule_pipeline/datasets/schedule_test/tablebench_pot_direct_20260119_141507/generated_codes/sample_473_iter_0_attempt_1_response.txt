@@ -1,0 +1,20 @@
+The question asks for an anomaly in the demographic data and possible explanations. Let's analyze the table step by step.
+
+Step 1: Identify potential anomalies.
+- The "Total No. of Houses" is 14, and "Population" is 55. Average household size = 55 / 14 ≈ 3.93. This is plausible.
+- "Child (0–6)" is 7, with 3 males and 4 females — this is consistent with the total population.
+- "Schedule Caste" has 1000 individuals, with 500 males and 500 females. However, the total population is only 55. This is clearly inconsistent.
+- Similarly, "Schedule Tribe" is 0, which is fine.
+- Literacy rates are 86.36% for males and 73.08% for females — plausible.
+- "Total Workers" is 15, with 12 males and 3 females — plausible.
+- "Main Worker" has values "-10", "-5", "-5". These are negative numbers, which are not meaningful in context of worker counts.
+
+Step 2: Identify the most significant anomaly.
+- The "Schedule Caste" count (1000) is vastly larger than the total population (55). This is a clear data inconsistency or error.
+- The "Main Worker" values being negative (-10, -5, -5) are also impossible and likely represent errors in data entry or formatting.
+
+Step 3: Possible explanations:
+- "Schedule Caste" value might be a typo; it should be in the hundreds or thousands, but not 1000 when total population is only 55. It may have been misreported or misaligned with the row.
+- "Main Worker" values being negative suggest incorrect data entry or a formatting issue (e.g., a sign error or misplacement of digits).
+
+Final Answer: Schedule Caste, Main Worker

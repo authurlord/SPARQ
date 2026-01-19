@@ -1,0 +1,66 @@
+The error occurred because the "Win" and "Lose" columns contain string values (e.g., "Champion", "Runner-up") in some rows, which cannot be directly converted to numeric for plotting. We need to extract only the numeric values for "Win" and "Lose" — these are the match outcomes, not positions or league names.
+
+Step-by-step approach:
+1. Identify that "Win" and "Lose" columns contain numeric values for matches (e.g., 9, 14, 12, etc.), except in rows where the Position is "Champion", "Runner-up", etc. — those are categorical labels, not numbers.
+2. Filter out rows where "Position" is "Champion", "Runner-up", or similar non-numeric labels — but actually, the "Win" and "Lose" values are still present and numeric in all rows.
+3. The issue arises when trying to convert the entire column to float — the data seems correct, so likely the error is due to misinterpretation of data types.
+
+Looking at the data:
+- All rows have "Win" and "Lose" as integers (e.g., 9, 14, 12, etc.) — even in rows like "Champion" or "Runner-up", the Win/Lose values are numeric.
+- So the problem may be in how the DataFrame is parsed — the "Win" and "Lose" columns are already numeric.
+
+But the error says: "only length-1 arrays can be converted to Python scalars" — this suggests that somewhere in the code, a non-scalar value is being used.
+
+Possibility: The "Position" column contains strings like "Champion", "Runner-up", which might be misinterpreted as values to be processed — but we only need wins and losses.
+
+Corrected plan:
+- Extract only the numeric "Win" and "Lose" columns.
+- Convert them to integers (if needed).
+- Create a stacked bar chart showing wins and losses per season (grouped by the "League" and year).
+
+We'll group by the season (from "League.1" or position), and plot wins and losses.
+
+Note: "League.1" has format like "7th (2000-01)", so we can extract year from it.
+
+Steps:
+1. Parse the "League.1" column to extract the year (e.g., 2000-01 → 2001).
+2. Group by year.
+3. Create a stacked bar chart with wins and losses per year.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'League.1' column to extract year
+df['year'] = df['League.1'].str.extract(r'\((\d{4})\)', expand=False).fillna(0).astype(int)
+
+# Drop rows where 'Win' or 'Lose' are not numeric (though they are)
+# Convert 'Win' and 'Lose' to integers
+df['Win'] = pd.to_numeric(df['Win'], errors='coerce')
+df['Lose'] = pd.to_numeric(df['Lose'], errors='coerce')
+
+# Drop rows with NaN in Win or Lose
+df = df.dropna(subset=['Win', 'Lose'])
+
+# Group by year and aggregate wins and losses
+yearly_stats = df.groupby('year')[['Win', 'Lose']].sum().reset_index()
+
+# Create stacked bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(yearly_stats['year'], yearly_stats['Win'], label='Wins', color='skyblue')
+plt.bar(yearly_stats['year'], yearly_stats['Lose'], bottom=yearly_stats['Win'], label='Losses', color='lightcoral')
+plt.xlabel('Year')
+plt.ylabel('Number of Matches')
+plt.title('Stacked Bar Chart of Wins and Losses by Year')
+plt.legend()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+
+# Print summary for clarity
+print(f"Final Answer: Stacked bar chart generated for wins and losses by year")
+```
+
+Final Answer: Stacked bar chart generated for wins and losses by year

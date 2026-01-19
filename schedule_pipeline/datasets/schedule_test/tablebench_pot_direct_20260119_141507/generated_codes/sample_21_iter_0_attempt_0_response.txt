@@ -1,0 +1,13 @@
+Step 1: The user wants the total population of the top 5 cities (ranked 1st to 5th).  
+Step 2: Load the dataframe.  
+Step 3: Select the 'population' column and filter the first 5 rows (rank 1st to 5th).  
+Step 4: Sum the population values and print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select the top 5 cities by rank and sum their populations
+total_population = df.head(5)['population'].sum()
+print(f"Final Answer: {total_population}")
+```

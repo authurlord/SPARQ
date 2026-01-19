@@ -1,0 +1,19 @@
+Step 1: The user wants to find the season in which Liverpool scored the highest total number of goals in the Premier League.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where Club is 'Liverpool' and Season is not a total row (i.e., exclude 'Liverpool Total').  
+Step 4: Focus on the 'League_2' column (Premier League goals) and find the maximum value.  
+Step 5: Identify the corresponding season for that maximum value.  
+Step 6: Print the season with the highest Premier League goals.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Liverpool and exclude the total row
+liverpool_data = df[df['Club'] == 'Liverpool']
+liverpool_data = liverpool_data[liverpool_data['Season'] != 'Liverpool Total']
+
+# Find the season with the highest goals in Premier League (League_2)
+max_goals_season = liverpool_data.loc[liverpool_data['League_2'].idxmax()]['Season']
+print(f"Final Answer: {max_goals_season}")
+```

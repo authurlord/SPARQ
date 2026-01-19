@@ -1,0 +1,33 @@
+Step 1: The user wants to find the trainer who has trained the most winners with a winning time less than 2:02 minutes.  
+Step 2: Filter the data for races with time less than 2:02 minutes.  
+Step 3: Group by "trainer" and count the number of such winners.  
+Step 4: Identify the trainer with the highest count.  
+
+Note: Time is given in format like "2:03.57". We need to convert it to minutes for comparison.  
+"2:03.57" = 2 + 3.57/60 = 2.0595 minutes.  
+So, we compare if time < 2:02 → time < (2 + 2/60) = 2.0333 minutes.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert time to minutes for comparison
+def time_to_minutes(time_str):
+    hours, minutes_seconds = time_str.split(':')
+    minutes_part = float(minutes_seconds.split('.')[0])
+    seconds_part = float(minutes_seconds.split('.')[1]) / 60
+    return float(hours) + minutes_part + seconds_part / 60
+
+# Filter rows where time is less than 2:02 (i.e., < 2.0333 minutes)
+df['time_minutes'] = df['time'].apply(time_to_minutes)
+filtered_df = df[df['time_minutes'] < 2.0333]
+
+# Group by trainer and count the number of winners
+trainer_count = filtered_df.groupby('trainer').size().reset_index(name='count')
+
+# Find the trainer with the maximum count
+top_trainer = trainer_count.loc[trainer_count['count'].idxmax(), 'trainer']
+
+print(f"Final Answer: {top_trainer}")
+```

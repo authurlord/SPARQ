@@ -1,0 +1,19 @@
+Step 1: Identify the city with an unusually high total passengers and annual change.  
+Step 2: Look for extreme values in both "total passengers" and "annual change" columns.  
+Step 3: The value "100000000" for total passengers and "1000.00%" for annual change in rank 10 stands out as highly unusual compared to other entries.  
+Step 4: The corresponding city is "curitiba".  
+Step 5: Output the city name as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row with the highest total passengers and highest annual change
+max_passengers = df['total passengers'].max()
+max_change = df['annual change'].max()
+
+# Filter the row where both are at their peak
+unusual_row = df[(df['total passengers'] == max_passengers) & (df['annual change'] == max_change)]
+city = unusual_row['location'].values[0]
+print(f"Final Answer: {city}")
+```

@@ -1,0 +1,15 @@
+Step 1: The user wants to find the place with the lowest population density, which is calculated as population divided by area.
+Step 2: Load the dataframe.
+Step 3: Create a new column for population density by dividing 'population' by 'area (km 2 )'.
+Step 4: Find the place with the minimum population density.
+Step 5: Return the name of that place.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate population density
+df['population_density'] = df['population'] / df['area (km 2 )']
+# Find the place with the lowest population density
+lowest_density_place = df.loc[df['population_density'].idxmin(), 'place']
+print(f"Final Answer: {lowest_density_place}")
+```

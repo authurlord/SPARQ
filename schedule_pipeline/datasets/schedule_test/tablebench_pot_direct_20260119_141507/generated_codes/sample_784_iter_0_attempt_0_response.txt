@@ -1,0 +1,24 @@
+Step 1: The user wants to forecast the issue price of a coin in 2013 based on the historical trend from 2002 to 2012.  
+Step 2: Extract the 'issue price' column for years 2002 to 2012.  
+Step 3: Assume a linear trend (simple linear regression) to predict the issue price for 2013.  
+Step 4: Use the average increase per year to project the value.  
+
+Note: Since the data is small and shows a steady increase, we can calculate the average annual increase and apply it to 2013.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert year to numeric and extract issue price
+df['year'] = pd.to_numeric(df['year'])
+issue_prices = df['issue price'].astype(float)
+
+# Calculate the trend: average increase per year
+years = df['year']
+prices = issue_prices
+annual_increase = (prices.iloc[-1] - prices.iloc[0]) / (years.iloc[-1] - years.iloc[0])
+
+# Forecast for 2013
+forecast_2013 = prices.iloc[-1] + annual_increase
+print(f"Final Answer: {forecast_2013:.2f}")
+```

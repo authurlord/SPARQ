@@ -1,0 +1,17 @@
+Step 1: The user wants the total number of individuals in the age groups between 10 and 35, inclusive.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the 'Age Group' is one of '10 - 14', '15 - 17', '18 - 21', or '22 - 35'.  
+Step 4: Sum the 'Both Gender' column for these rows.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for age groups between 10 and 35
+age_groups_10_to_35 = ['10 - 14', '15 - 17', '18 - 21', '22 - 35']
+filtered_df = df[df['Age Group'].isin(age_groups_10_to_35)]
+# Sum the 'Both Gender' values
+total_individuals = filtered_df['Both Gender'].sum()
+print(f"Final Answer: {total_individuals}")
+```

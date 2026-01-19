@@ -1,0 +1,37 @@
+We are asked to compare the total number of executions (in persona and in effigie) in Córdoba and Valencia, and find how much greater the value is for Córdoba compared to Valencia.
+
+Step-by-step:
+1. Identify the relevant rows: "Córdoba" and "Valencia" from the "Tribunal" column.
+2. Extract the values for "Executions in persona" and "Executions in effigie" for each.
+3. Sum these two columns for both cities to get the total executions.
+4. Compute the difference: (Total executions in Córdoba) - (Total executions in Valencia).
+5. Ensure that the values are numeric — the table has some question marks ("?" or missing values), so we need to handle them properly. In this case, "1?" and "0?" are likely meant to be treated as missing or zero. But looking at the data:
+   - For Logroño: "1?" and "1?" — we'll treat "?" as missing, but since the total is 1, and "Executions in persona" is 1, it's safe to assume the rest is 0.
+   - However, for Córdoba and Valencia, the values are clearly numeric and not marked with "?".
+6. So we can safely extract and sum the "Executions in persona" and "Executions in effigie" for Córdoba and Valencia.
+
+From the table:
+- Córdoba: Executions in persona = 17, Executions in effigie = 19 → total = 17 + 19 = 36
+- Valencia: Executions in persona = 2, Executions in effigie = 0 → total = 2 + 0 = 2
+
+Difference = 36 - 2 = 34
+
+Now, write the code accordingly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows for Córdoba and Valencia
+cordoba_row = df[df['Tribunal'] == 'Córdoba']
+valencia_row = df[df['Tribunal'] == 'Valencia']
+
+# Extract execution totals (in persona and in effigie)
+cordoba_executions = cordoba_row['Executions in persona'].values[0] + cordoba_row['Executions in effigie'].values[0]
+valencia_executions = valencia_row['Executions in persona'].values[0] + valencia_row['Executions in effigie'].values[0]
+
+# Calculate the difference
+difference = cordoba_executions - valencia_executions
+print(f"Final Answer: {difference}")
+```

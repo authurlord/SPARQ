@@ -1,0 +1,18 @@
+The error occurred because the "seats won" column contains string values (e.g., '0', '1') that are being compared with integers directly. However, in the data, the values are actually strings, so we must convert them to integers before comparing.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'seats won' column to integer type to allow numerical comparison.
+Step 3: Filter rows where 'seats won' is 10 or fewer (i.e., ≤ 10).
+Step 4: Count the number of such parties.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'seats won' to integer type
+df['seats won'] = pd.to_numeric(df['seats won'], errors='coerce')
+# Count parties where seats won is 10 or fewer
+count_parties = df[df['seats won'] <= 10].shape[0]
+print(f"Final Answer: {count_parties}")
+```

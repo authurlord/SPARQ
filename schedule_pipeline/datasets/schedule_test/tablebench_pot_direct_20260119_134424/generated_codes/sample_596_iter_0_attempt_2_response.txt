@@ -1,0 +1,17 @@
+Step 1: The user wants the average profit of the top 5 companies, which are ranked 1 to 5.
+Step 2: Load the dataframe.
+Step 3: Filter the data for the top 5 companies (first 5 rows).
+Step 4: Select the 'profit (us billion)' column and convert it to numeric (handling negative values and strings).
+Step 5: Calculate the mean of the profit column and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract top 5 companies
+top_5 = df.head(5)
+# Convert profit column to numeric, handling negative signs and strings
+top_5['profit (us billion)'] = pd.to_numeric(top_5['profit (us billion)'], errors='coerce')
+# Calculate average profit
+avg_profit = top_5['profit (us billion)'].mean()
+print(f"Final Answer: {avg_profit:.1f}")
+```

@@ -1,0 +1,12 @@
+Step 1: The user wants the average score of the contestant from Texas.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'country' is 'texas'.
+Step 4: Extract the 'average' column value for Texas and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for Texas and get the average score
+texas_average = df[df['country'] == 'texas']['average'].values[0]
+print(f"Final Answer: {texas_average}")
+```

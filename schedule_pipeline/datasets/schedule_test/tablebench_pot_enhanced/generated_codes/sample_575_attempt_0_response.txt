@@ -1,0 +1,16 @@
+Step 1: The user wants to find the rank of the highest-rated indicator in the year 2005.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'year' is 2005.
+Step 4: Among these rows, find the one with the lowest rank (since lower rank number means higher rating).
+Step 5: Extract and print the rank.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for year 2005
+df_2005 = df[df['year'] == '2005']
+# Find the minimum rank (highest rating) in 2005
+highest_rank = df_2005['rank'].min()
+print(f"Final Answer: {highest_rank}")
+```

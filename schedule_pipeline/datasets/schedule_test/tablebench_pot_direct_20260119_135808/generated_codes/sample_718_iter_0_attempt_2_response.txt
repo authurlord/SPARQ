@@ -1,0 +1,23 @@
+Step 1: The user wants to identify the university with the highest research funding and calculate the difference between the highest and lowest research funding.
+Step 2: Load the dataframe.
+Step 3: Extract the 'research funding (000)' column and find the maximum and minimum values.
+Step 4: Identify the institution corresponding to the maximum funding.
+Step 5: Calculate the difference and print both the university name and the difference.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the university with the highest research funding
+max_funding_row = df.loc[df['research funding (000)'].idxmax()]
+max_institution = max_funding_row['institution']
+max_funding = max_funding_row['research funding (000)']
+
+# Find the university with the lowest research funding
+min_funding_row = df.loc[df['research funding (000)'].idxmin()]
+min_funding = min_funding_row['research funding (000)']
+
+# Calculate the difference
+difference = max_funding - min_funding
+
+print(f"Final Answer: {max_institution}, {difference}")
+```

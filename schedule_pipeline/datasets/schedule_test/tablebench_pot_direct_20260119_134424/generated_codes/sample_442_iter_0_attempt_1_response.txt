@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: polling firm, date of polling, link, progressive conservative, liberal, new democratic, 2007 to 2011, progressive conservative support declined from 82% to 59%, liberal support increased from 12% to 16%, new democratic support fluctuated between 6% and 25%

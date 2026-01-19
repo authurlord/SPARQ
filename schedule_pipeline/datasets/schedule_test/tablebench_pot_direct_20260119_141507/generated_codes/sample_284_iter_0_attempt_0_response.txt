@@ -1,0 +1,38 @@
+Step 1: The user wants the average percentage increase in total mintage from one year to the next for coins with an issue price of $34.95.  
+Step 2: Filter the data to include only rows where "issue price" is $34.95.  
+Step 3: Extract the "total mintage" values for these filtered rows and compute the year-on-year percentage increase.  
+Step 4: Calculate the average of these percentage increases.  
+
+Note: Percentage increase between consecutive years is calculated as:  
+((mintage_year2 - mintage_year1) / mintage_year1) * 100.  
+
+We will first filter the rows with issue price = 34.95, then sort by year, compute the percentage increase between consecutive years, and take the mean.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where issue price is 34.95
+filtered_df = df[df['issue price'] == '34.95'].copy()
+# Sort by year to ensure chronological order
+filtered_df = filtered_df.sort_values('year').reset_index(drop=True)
+# Extract total mintage values
+mintage_values = filtered_df['total mintage'].astype(int)
+# Compute percentage increase between consecutive years
+if len(mintage_values) <= 1:
+    # If less than 2 years, no percentage increase can be calculated
+    percentage_increases = [0]
+else:
+    # Calculate percentage increase from year to year
+    increases = []
+    for i in range(1, len(mintage_values)):
+        prev = mintage_values[i-1]
+        curr = mintage_values[i]
+        increase = ((curr - prev) / prev) * 100
+        increases.append(increase)
+    percentage_increases = increases
+
+# Average of the percentage increases
+avg_increase = sum(percentage_increases) / len(percentage_increases) if percentage_increases else 0
+print(f"Final Answer: {avg_increase:.1f}")
+```

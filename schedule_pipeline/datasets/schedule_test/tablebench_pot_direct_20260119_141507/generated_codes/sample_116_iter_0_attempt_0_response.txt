@@ -1,0 +1,50 @@
+Step 1: The user wants a line chart showing the trend in maximum building height over time.  
+Step 2: Extract the "Years as tallest" and "Height ft (m)" columns.  
+Step 3: Parse the "Years as tallest" to extract start and end years, then determine the midpoint (representing the period) for plotting.  
+Step 4: Convert height values to numeric and plot them against the midpoint of each period.  
+Step 5: Use matplotlib to create a line chart with appropriate labels.
+
+Note: Since the "Years as tallest" is in format like "1882–1886", we will extract the start year and compute the midpoint as the x-axis value.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import re
+
+df = pd.read_csv('table.csv')
+
+# Parse 'Years as tallest' to extract start and end years, then compute midpoint
+def extract_midpoint(year_str):
+    match = re.search(r'(\d{4})–(\d{4})', year_str)
+    if match:
+        start, end = int(match.group(1)), int(match.group(2))
+        return (start + end) / 2
+    else:
+        # Fallback if no match
+        return pd.NA
+
+df['midpoint'] = df['Years as tallest'].apply(extract_midpoint)
+
+# Convert height to numeric (remove parentheses and extract number)
+def parse_height(height_str):
+    match = re.search(r'(\d+)', height_str)
+    if match:
+        return int(match.group(1))
+    return 0
+
+df['height_ft'] = df['Height ft (m)'].apply(parse_height)
+
+# Plot line chart
+plt.figure(figsize=(10, 6))
+plt.plot(df['midpoint'], df['height_ft'], marker='o', linestyle='-', color='b')
+plt.title('Trend in Maximum Building Height Over Time')
+plt.xlabel('Year (Midpoint)')
+plt.ylabel('Height (feet)')
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Final Answer: The line chart has been generated as requested.
+Final Answer: chart
+```

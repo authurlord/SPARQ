@@ -1,0 +1,15 @@
+Step 1: The user wants the standard deviation of the number of screens for the top 5 movie theater chains.  
+Step 2: Load the dataframe.  
+Step 3: Select the 'screens' column and take the first 5 rows (top 5 chains).  
+Step 4: Calculate the standard deviation of these values and print it.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the 'screens' column for the top 5 chains (first 5 rows)
+screens_top_5 = df['screens'].head(5)
+# Calculate the standard deviation
+std_screens = screens_top_5.std()
+print(f"Final Answer: {std_screens:.1f}")
+```

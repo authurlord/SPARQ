@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: banking, oil and gas, diversified financials, conglomerate, insurance, retailing, sales (billion ), profits (billion ), assets (billion ), market value (billion )

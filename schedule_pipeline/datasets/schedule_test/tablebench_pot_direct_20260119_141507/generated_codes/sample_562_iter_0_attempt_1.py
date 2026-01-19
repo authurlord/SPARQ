@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for years 2002 to 2006 inclusive
+filtered_df = df[(df['year'].astype(int) >= 2002) & (df['year'].astype(int) <= 2006)]
+# Sum the mintage values
+total_mintage = filtered_df['mintage'].sum()
+print(f"Final Answer: {total_mintage}")

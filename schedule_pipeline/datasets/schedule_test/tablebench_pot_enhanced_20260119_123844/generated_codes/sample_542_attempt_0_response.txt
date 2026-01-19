@@ -1,0 +1,14 @@
+Step 1: The user wants the total mintage of coins issued in 2004.  
+Step 2: Load the dataframe.  
+Step 3: Filter the rows where the 'year' column is '2004'.  
+Step 4: Sum the 'mintage' column for these filtered rows.  
+Step 5: Print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for year 2004 and sum the mintage
+total_mintage_2004 = df[df['year'] == '2004']['mintage'].astype(int).sum()
+print(f"Final Answer: {total_mintage_2004}")
+```

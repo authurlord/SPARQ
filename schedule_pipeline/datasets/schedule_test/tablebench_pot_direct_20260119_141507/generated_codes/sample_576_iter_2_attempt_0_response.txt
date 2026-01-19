@@ -1,0 +1,25 @@
+The error occurred because the "number of tropical storms" column contains string values like '0', '6', '5', '8', etc., which are correctly numeric but might be misinterpreted if not properly parsed. However, in this case, the data is already in a valid format — the values are either integers or strings that represent integers. The issue likely arises from how pandas interprets the data during loading, especially when there are mixed formats.
+
+To avoid conversion errors, we ensure that the column is properly converted to numeric type before computing the mean.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the 'number of tropical storms' column to numeric (to handle any possible string-to-number conversion issues).
+3. Filter the years from 1850 to 1855 (inclusive).
+4. Compute the average number of tropical storms for these years.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'number of tropical storms' to numeric, coercing errors to NaN (if any)
+df['number of tropical storms'] = pd.to_numeric(df['number of tropical storms'], errors='coerce')
+
+# Filter years from 1850 to 1855 inclusive
+filtered_df = df[df['year'].between(1850, 1855)]
+
+# Calculate the average number of tropical storms
+average_storms = filtered_df['number of tropical storms'].mean()
+
+print(f"Final Answer: {average_storms:.1f}")
+```

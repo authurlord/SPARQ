@@ -1,0 +1,16 @@
+Step 1: The user wants the percentage increase in the number of passed students from 2005 to 2010.
+Step 2: Load the dataframe.
+Step 3: Extract the 'number of passed students' for 2005 and 2010.
+Step 4: Calculate the percentage increase using the formula: ((new - old) / old) * 100.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract passed students for 2005 and 2010
+passed_2005 = int(df[df['year'] == '2005']['number of passed students'].iloc[0])
+passed_2010 = int(df[df['year'] == '2010']['number of passed students'].iloc[0])
+# Calculate percentage increase
+percentage_increase = ((passed_2010 - passed_2005) / passed_2005) * 100
+print(f"Final Answer: {percentage_increase:.2f}")
+```

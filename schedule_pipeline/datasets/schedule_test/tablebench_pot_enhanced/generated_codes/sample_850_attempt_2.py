@@ -1,0 +1,23 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert '% of national vote' to float by removing '%' and dividing by 100
+df['% of national vote'] = df['% of national vote'].str.replace('%', '').astype(float)
+
+# Find the year with the highest % of national vote
+max_vote_year = df.loc[df['% of national vote'].idxmax()]
+year = max_vote_year['election']
+max_percentage = max_vote_year['% of national vote']
+
+# Find the previous year's percentage
+previous_year_row = df[df['election'] == str(int(year) - 1)]
+if not previous_year_row.empty:
+    prev_percentage = previous_year_row.iloc[0]['% of national vote']
+else:
+    prev_percentage = 0  # In case no previous data exists
+
+# Calculate the difference
+difference = max_percentage - prev_percentage
+
+print(f"Final Answer: {year}, {difference:.2f}")

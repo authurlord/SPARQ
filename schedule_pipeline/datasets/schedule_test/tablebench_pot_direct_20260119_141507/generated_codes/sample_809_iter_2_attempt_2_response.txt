@@ -1,0 +1,21 @@
+The error occurred because the "height" column contains string values (like '46', '48') that need to be converted to numeric before computing the mean. We must ensure proper type conversion.
+
+Step 1: Filter buildings with more than 10 floors.
+Step 2: Convert the "height" column to numeric (to avoid string-to-number conversion errors).
+Step 3: Compute the mean height of the filtered buildings.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert height to numeric, coercing errors to NaN (in case of invalid entries)
+df['height'] = pd.to_numeric(df['height'], errors='coerce')
+
+# Filter buildings with more than 10 floors
+filtered_buildings = df[df['floors'] > 10]
+
+# Calculate mean height of filtered buildings
+mean_height = filtered_buildings['height'].mean()
+print(f"Final Answer: {mean_height:.1f}")
+```

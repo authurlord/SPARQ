@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: city / municipality, no of barangays, area (km square), population (2010 census), pop density (per km square)

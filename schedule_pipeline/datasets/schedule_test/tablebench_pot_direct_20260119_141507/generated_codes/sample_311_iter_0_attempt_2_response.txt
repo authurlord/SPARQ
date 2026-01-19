@@ -1,0 +1,49 @@
+Step 1: The user wants to identify a player who won both the men's singles and men's doubles titles in the same year.  
+Step 2: Extract the "men 's singles" and "men 's doubles" columns from the table.  
+Step 3: For each year, check if the same player appears in both "men 's singles" and "men 's doubles".  
+Step 4: Look for a player who appears in both categories in the same year.  
+
+Note: In the data, "men 's doubles" entries are listed as pairs (e.g., "neil cottrill john quinn"), so we need to parse them to extract individual names. However, since the question asks for a player who won both titles, and only one such instance is expected, we will check if any player's name appears in both fields in the same year.
+
+We'll loop through each row, extract the men's singles winner and the men's doubles team, then check if any individual name from the doubles pair matches the singles winner.
+
+Python code:
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns
+men_singles = df["men 's singles"]
+men_doubles = df["men 's doubles"]
+
+# Function to extract individual names from a doubles pair (split by space)
+def get_doubles_names(doubles):
+    if pd.isna(doubles) or doubles == '':
+        return []
+    names = [name.strip() for name in doubles.split(' ') if name.strip()]
+    return names
+
+# Dictionary to store matches of singles winners in doubles teams
+matches = []
+
+for idx, row in df.iterrows():
+    singles_winner = row["men 's singles"]
+    doubles_team = row["men 's doubles"]
+    doubles_names = get_doubles_names(doubles_team)
+    
+    # Check if singles winner is in the doubles team
+    if singles_winner in doubles_names:
+        matches.append({
+            "year": row["year"],
+            "player": singles_winner
+        })
+
+# If there's a match, output the first (only) one
+if matches:
+    final_match = matches[0]
+    print(f"Final Answer: {final_match['player']}, {final_match['year']}")
+else:
+    print("Final Answer: none")
+```

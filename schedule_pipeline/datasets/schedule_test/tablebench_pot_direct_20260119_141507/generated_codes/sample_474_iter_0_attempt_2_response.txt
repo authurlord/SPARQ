@@ -1,0 +1,19 @@
+Step 1: The question asks to identify demographic categories where values significantly deviate from expected patterns.  
+Step 2: First, we analyze the data for inconsistencies or anomalies. For example:
+- "Total Workers" is listed as 194, but "Male" has 143 and "Female" has 1000 — this is clearly inconsistent (1000 is impossible for female workers in a total of 194).
+- Literacy rate is given as percentages, but "Male" is listed as "150 %", which exceeds 100%, which is impossible.
+- "Total Workers" is 194, but "Main Worker" is 0 for both genders, and "Marginal Worker" is 0 — this may be logically consistent, but the worker count doesn't align with gender breakdown.
+- "Child (0-6)" has 46 males and 49 females, totaling 95 — this is consistent.
+- "Schedule Caste" has 137 males and 138 females — consistent.
+- "Population" totals 261 + 263 = 524 — matches "Total Population".
+
+Key deviations:
+- "Male" literacy rate is "150 %" — impossible (cannot exceed 100%).
+- "Female" literacy rate is "55.14 %" — plausible.
+- "Total Workers" is 194, but "Female" value is listed as "1000" — likely a typo or data entry error.
+
+Thus, the categories with significant deviations are:
+- Literacy (Male: 150%) — invalid percentage
+- Total Workers (Female: 1000) — inconsistent with total
+
+Final Answer: Literacy, Total Workers

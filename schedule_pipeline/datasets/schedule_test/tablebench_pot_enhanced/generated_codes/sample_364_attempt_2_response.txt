@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of saints who were martyred in the 19th century (i.e., between 1800 and 1899).
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'martyred' column value is between 1800 and 1899.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter saints martyred in the 19th century (1800-1899)
+nineteenth_century_martyrs = df[df['martyred'].astype(int).between(1800, 1899)]
+count = len(nineteenth_century_martyrs)
+print(f"Final Answer: {count}")
+```

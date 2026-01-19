@@ -1,0 +1,15 @@
+Step 1: Identify the relevant rows for mathematics tests (Level 1 and Level 2).  
+Step 2: Extract the "number of students" for both "mathematics level 1" and "mathematics level 2".  
+Step 3: Sum these values to get the total number of students.  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where subject is 'mathematics' and match Level 1 or Level 2
+math_rows = df[df['subject'].str.contains('mathematics', case=False)]
+# Extract number of students for math level 1 and level 2
+total_students = math_rows['number of students'].sum()
+print(f"Final Answer: {total_students}")
+```

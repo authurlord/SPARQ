@@ -1,0 +1,12 @@
+Step 1: The user wants to find the nation that ranked 3rd in the competition.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'rank' is '3'.
+Step 4: Extract the 'nation' column value from that row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where rank is 3
+third_rank_nation = df[df['rank'] == '3']['nation'].values[0]
+print(f"Final Answer: {third_rank_nation}")
+```

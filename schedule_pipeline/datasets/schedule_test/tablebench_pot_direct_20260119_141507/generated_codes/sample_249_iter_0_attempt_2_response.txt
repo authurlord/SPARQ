@@ -1,0 +1,16 @@
+Step 1: Identify the relevant subset of data — companies in the "oil and gas" industry with sales at least 300 billion.  
+Step 2: Filter the dataframe for rows where 'industry' is "oil and gas" and 'sales (billion )' >= 300.  
+Step 3: Extract the 'market value (billion )' column from the filtered rows.  
+Step 4: Compute the mean of the 'market value (billion )' values.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter companies in 'oil and gas' industry with sales >= 300 billion
+filtered_df = df[(df['industry'] == 'oil and gas') & (df['sales (billion )'].astype(float) >= 300)]
+# Calculate average market value of the filtered companies
+avg_market_value = filtered_df['market value (billion )'].mean()
+print(f"Final Answer: {avg_market_value:.1f}")
+```

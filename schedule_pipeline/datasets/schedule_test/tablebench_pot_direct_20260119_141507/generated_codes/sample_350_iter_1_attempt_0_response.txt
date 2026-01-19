@@ -1,0 +1,34 @@
+The error occurred because the "total goals" column contains values like "3", "1", and also entries such as "3 (12)" which include parentheses and text. These are not pure integers, so comparing them directly with `>` will fail.
+
+Step 1: Identify that the "total goals" column has mixed data — some are plain integers (e.g., "3"), others are in format "X (Y)" where X is the total goals and Y is something else (like appearances).
+
+Step 2: Extract only the numeric part of the "total goals" field. For example, "3" → 3, "11 (3)" → 11.
+
+Step 3: Convert the string values to integers after parsing.
+
+Step 4: Count how many players have a total goals value greater than 3.
+
+We will parse each entry in the "total goals" column by removing any text in parentheses and converting to integer.
+
+```python
+import pandas as pd
+import re
+
+df = pd.read_csv('table.csv')
+
+# Parse 'total goals' column: extract numeric value before parentheses
+def parse_goals(goals):
+    # Remove anything in parentheses and convert to int
+    match = re.search(r'^(\d+)', goals)
+    if match:
+        return int(match.group(1))
+    return 0
+
+# Apply the parsing function to the 'total goals' column
+df['total_goals_numeric'] = df['total goals'].apply(parse_goals)
+
+# Count players with total goals > 3
+count = df[df['total_goals_numeric'] > 3].shape[0]
+
+print(f"Final Answer: {count}")
+```

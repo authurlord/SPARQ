@@ -1,0 +1,15 @@
+Step 1: The user wants the average mintage (proof) of coins issued from 2000 to 2004 (first 5 years of the 2000s).  
+Step 2: Filter the data for years 2000 to 2004.  
+Step 3: Extract the 'mintage (proof)' column for those rows.  
+Step 4: Calculate the mean of the filtered values and print it.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for years 2000 to 2004
+filtered_df = df[df['year'].between(2000, 2004)]
+# Calculate the mean of 'mintage (proof)'
+average_mintage_proof = filtered_df['mintage (proof)'].mean()
+print(f"Final Answer: {average_mintage_proof:.1f}")
+```

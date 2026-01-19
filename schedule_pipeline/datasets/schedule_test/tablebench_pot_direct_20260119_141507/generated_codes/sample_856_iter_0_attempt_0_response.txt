@@ -1,0 +1,15 @@
+Step 1: Identify the relevant rows for the 2004 election and the 1999 election from the table.  
+Step 2: Extract the 'dp / da' values for these two events.  
+Step 3: Calculate the difference between the two values.  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the 'dp / da' value for the 2004 election and 1999 election
+dp_da_2004 = df[df['event'] == '2004 election']['dp / da'].values[0]
+dp_da_1999 = df[df['event'] == '1999 election']['dp / da'].values[0]
+difference = dp_da_2004 - dp_da_1999
+print(f"Final Answer: {difference}")
+```

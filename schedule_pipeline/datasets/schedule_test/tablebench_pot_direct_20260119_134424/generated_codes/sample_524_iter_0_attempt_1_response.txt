@@ -1,0 +1,35 @@
+Step 1: Understand the question. We need to calculate the change in total seating capacity from 2004 to 2008. This means we consider only aircraft introduced on or before 2008 and not retired by 2008.
+
+Step 2: Identify relevant aircraft:
+- Aircraft introduced in 2004: Airbus A319-100 (156 seats)
+- Aircraft introduced in 2008: Airbus A320-200 (180 seats), Airbus A321-200 (220 seats)
+
+Note: The Airbus A321-200 was retired in 2010, so it is still active in 2008.
+
+Step 3: Sum the seating capacities of all aircraft that were in service by 2008.
+
+Step 4: Since no aircraft were retired before 2008 (except A321-200 which was retired in 2010), all aircraft introduced in 2004 and 2008 are included.
+
+Step 5: Calculate the total seating capacity in 2008 and compare with 2004 (only A319-100 was in service in 2004).
+
+Step 6: Compute the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter aircraft introduced on or before 2008 and not retired before 2008
+# Retired value is '-' or after 2008
+in_service_2004 = df[df['introduced'] == '2004']
+in_service_2008 = df[(df['introduced'] <= '2008') & (df['retired'] == '-')]
+
+# Get seating capacities
+capacity_2004 = in_service_2004['seating'].sum()
+capacity_2008 = in_service_2008['seating'].sum()
+
+# Calculate change
+change = capacity_2008 - capacity_2004
+
+print(f"Final Answer: {change}")
+```

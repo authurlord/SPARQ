@@ -1,0 +1,28 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Filter data for the year 1948
+year_1948 = df[df['Year'] == '1948']
+
+# Extract the ethnic groups and their values
+ethnic_groups = ['Serbs', 'Hungarians', 'Germans', 'Romanians', 'Slovaks']
+values = []
+
+for group in ethnic_groups:
+    value_str = year_1948[group].iloc[0]
+    if pd.isna(value_str):
+        values.append(0)
+    else:
+        # Extract numeric value from string like '358,067 (59,6%)'
+        numeric_value = int(value_str.split(' ')[0].replace(',', ''))
+        values.append(numeric_value)
+
+# Create pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(values, labels=ethnic_groups, autopct='%1.1f%%', startangle=90)
+plt.title('Racial Composition in 1948')
+plt.show()
+
+print("Final Answer: Serbs, Hungarians, Germans, Romanians, Slovaks")

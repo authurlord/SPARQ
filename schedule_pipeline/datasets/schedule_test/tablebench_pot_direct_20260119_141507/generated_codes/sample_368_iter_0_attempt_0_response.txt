@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of craters with a diameter greater than 33 km.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'diameter (km)' is greater than 33.  
+Step 4: Count the number of such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter craters with diameter > 33 km and count them
+count_large_craters = df[df['diameter (km)'] > 33].shape[0]
+print(f"Final Answer: {count_large_craters}")
+```

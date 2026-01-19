@@ -1,0 +1,19 @@
+Step 1: The user wants to identify the staple food with the highest amount of Copper (mg) per 100g portion.
+Step 2: Load the dataframe.
+Step 3: Filter the row corresponding to 'Copper (mg)' and extract the values for each staple food.
+Step 4: Find the maximum value and the corresponding staple food.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the row where the component is 'Copper (mg)'
+copper_row = df[df['STAPLE:'] == 'Copper (mg)']
+# Get the values for each staple food (excluding the first column which is 'STAPLE:')
+staples = df.columns[1:]
+copper_values = copper_row.iloc[0, 1:].astype(float)
+# Find the staple with the highest copper content
+max_copper_staple = staples[copper_values.idxmax()]
+print(f"Final Answer: {max_copper_staple}")
+```

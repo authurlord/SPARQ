@@ -1,0 +1,14 @@
+Step 1: The user wants to find the nation that has a total of 13 medals.  
+Step 2: Look at the 'total' column in the table. The row with 'total' in the 'nation' column has a total of 64 medals, so we need to check which nation has exactly 13 medals in the 'total' column.  
+Step 3: Filter the rows where 'total' is 13 and extract the corresponding nation.  
+
+Note: The 'total' column includes a row labeled "total" at the end with value 64. The actual nations are listed above this row. We need to find the row where 'total' is 13.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where 'total' is 13
+nation_with_13_medals = df[df['total'] == 13]['nation'].values[0]
+print(f"Final Answer: {nation_with_13_medals}")
+```

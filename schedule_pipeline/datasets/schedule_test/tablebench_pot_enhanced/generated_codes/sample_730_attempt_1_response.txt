@@ -1,0 +1,15 @@
+Step 1: The user wants to identify the mountain with the highest elevation among those located in Greece.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'country' column contains 'greece' (case-insensitive).
+Step 4: Find the row with the maximum value in the 'elevation (m)' column.
+Step 5: Extract and print the name of the mountain.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where country contains 'greece' (case-insensitive)
+greece_mountains = df[df['country'].str.contains('greece', case=False, na=False)]
+# Find the mountain with the highest elevation
+highest_elevation_mountain = greece_mountains.loc[greece_mountains['elevation (m)'].idxmax()]['peak']
+print(f"Final Answer: {highest_elevation_mountain}")
+```

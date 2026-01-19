@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the nation that won 18 gold medals.
+Step 2: Load the dataframe.
+Step 3: Filter the row where the 'gold' column equals 18.
+Step 4: Extract and print the corresponding 'nation' value.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where gold medals are 18
+nation_with_18_gold = df[df['gold'] == '18']['nation'].values[0]
+print(f"Final Answer: {nation_with_18_gold}")
+```

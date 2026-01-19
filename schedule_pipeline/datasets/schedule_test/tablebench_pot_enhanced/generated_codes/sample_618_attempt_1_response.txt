@@ -1,0 +1,15 @@
+Step 1: The user wants the total population of the top 5 counties in 1948 based on population size.
+Step 2: Load the dataframe.
+Step 3: Select the '1948' column and convert it to integer type for numerical operations.
+Step 4: Sort the values in descending order and take the top 5.
+Step 5: Sum these top 5 values and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert '1948' column to integers
+df['1948'] = df['1948'].astype(int)
+# Sort by '1948' in descending order and get top 5
+top_5_1948 = df.nlargest(5, '1948')['1948'].sum()
+print(f"Final Answer: {top_5_1948}")
+```

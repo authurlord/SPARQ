@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: total number of votes received

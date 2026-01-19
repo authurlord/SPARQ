@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The latitude of a township does not have a direct impact on its population density, as population density depends on multiple factors including land area, water area, and human settlement patterns.

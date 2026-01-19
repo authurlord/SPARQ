@@ -1,0 +1,19 @@
+Step 1: The user wants to identify the year when the athlete achieved their personal best time in the 400m event.  
+Step 2: Look at the "Event" column to find entries where the event is "400 m".  
+Step 3: Among those, identify the time and determine which one is the fastest (personal best).  
+Step 4: Match that time with the corresponding "Year" from the row.  
+
+Note: The "Notes" column contains the times (e.g., '54.12'), so we will extract and compare these values. The lowest time (fastest) is the personal best.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where the event is "400 m"
+filtered_df = df[df['Event'] == '400 m']
+# Convert Notes to float for comparison and find the minimum time
+best_time = filtered_df['Notes'].astype(float).min()
+# Find the corresponding year where this best time occurred
+best_year = filtered_df[filtered_df['Notes'] == str(best_time)].iloc[0]['Year']
+print(f"Final Answer: {best_year}")
+```

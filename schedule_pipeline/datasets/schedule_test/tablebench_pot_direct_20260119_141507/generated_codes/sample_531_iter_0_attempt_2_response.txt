@@ -1,0 +1,29 @@
+Step 1: The user wants to find the team with the highest "Average Skill Score", which is the average of the scores in the categories: basic elements, tumbling, stunts, and tosses/pyramids.  
+Step 2: Load the dataframe.  
+Step 3: Select the relevant columns (basic elements, tumbling, stunts, tosses/pyramids).  
+Step 4: Calculate the average score for each team across these four categories.  
+Step 5: Identify the team with the highest average score.  
+
+Note: The "deductions" and "total" columns are not needed for this calculation. Also, values like "(13)" are likely deductions and should be ignored — we only take the numeric values for the scores.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select only the relevant columns for skill scores
+columns_to_average = ['basic elements', 'tumbling', 'stunts', 'tosses / pyramids']
+# Convert the string values to float (removing any parentheses or non-numeric parts)
+df_clean = df.copy()
+for col in columns_to_average:
+    # Remove any text like '(13)' and convert to float
+    df_clean[col] = df_clean[col].str.extract(r'(\d+\.?\d*)').astype(float)
+
+# Calculate average skill score per team
+df_clean['average_skill_score'] = df_clean[columns_to_average].mean(axis=1)
+
+# Find the team with the highest average skill score
+top_team = df_clean.loc[df_clean['average_skill_score'].idxmax(), 'team name']
+
+print(f"Final Answer: {top_team}")
+```

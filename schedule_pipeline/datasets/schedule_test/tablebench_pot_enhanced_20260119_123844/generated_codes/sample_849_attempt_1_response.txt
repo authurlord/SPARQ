@@ -1,0 +1,18 @@
+Step 1: The user wants to find the difference in enrollment between the school with the highest enrollment and the school with the lowest enrollment.
+Step 2: Load the dataframe.
+Step 3: Convert the 'enrollment' column to integer type for numerical operations.
+Step 4: Find the maximum and minimum enrollment values.
+Step 5: Calculate the difference and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'enrollment' column to integer
+df['enrollment'] = pd.to_numeric(df['enrollment'])
+# Find max and min enrollment
+max_enrollment = df['enrollment'].max()
+min_enrollment = df['enrollment'].min()
+# Calculate difference
+difference = max_enrollment - min_enrollment
+print(f"Final Answer: {difference}")
+```

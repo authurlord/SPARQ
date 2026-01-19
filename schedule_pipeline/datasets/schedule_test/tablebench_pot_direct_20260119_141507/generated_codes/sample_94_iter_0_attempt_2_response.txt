@@ -1,0 +1,16 @@
+Step 1: The user wants to find the number of league goals scored by George McLean during his career from 1930 - 1934.  
+Step 2: Locate the row where the name is "george mclean" in the table.  
+Step 3: Extract the value in the "league goals" column for that row.  
+
+The data shows that George McLean scored 43 league goals during his career from 1930 - 1934.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where name is 'george mclean'
+george_mclean = df[df['name'] == 'george mclean']
+# Extract league goals
+league_goals = george_mclean['league goals'].values[0]
+print(f"Final Answer: {league_goals}")
+```

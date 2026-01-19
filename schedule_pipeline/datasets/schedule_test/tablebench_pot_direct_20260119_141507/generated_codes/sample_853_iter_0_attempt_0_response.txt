@@ -1,0 +1,30 @@
+Step 1: The user wants to find the year of the song with the highest US chart position and the year of the song with the lowest US chart position.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'US Chart position' column, convert it to numeric (to handle possible text like '17 (R&B)') by taking only digits.  
+Step 4: Identify the maximum and minimum US chart positions and their corresponding years.  
+Step 5: Return the years for both the highest and lowest positions.
+
+Note: The "US Chart position" values include some with "(R&B)" — we only care about the numeric part. We'll extract the number using string operations.
+
+```python
+import pandas as pd
+import re
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'US Chart position' column to extract numeric values
+def extract_position(pos):
+    match = re.search(r'\d+', pos)
+    return int(match.group()) if match else None
+
+df['US Chart position'] = df['US Chart position'].apply(extract_position)
+
+# Find the year with the highest and lowest chart positions
+max_pos_row = df.loc[df['US Chart position'].idxmax()]
+min_pos_row = df.loc[df['US Chart position'].idxmin()]
+
+highest_year = max_pos_row['Year']
+lowest_year = min_pos_row['Year']
+
+print(f"Final Answer: {highest_year}, {lowest_year}")
+```

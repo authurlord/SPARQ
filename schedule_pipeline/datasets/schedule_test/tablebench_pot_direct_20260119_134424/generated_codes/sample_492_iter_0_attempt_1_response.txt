@@ -1,0 +1,56 @@
+Step 1: The user wants to determine in which round Miloš Zeman achieved his first majority win, defined as receiving more than 50% of the total deputies and senators combined.
+
+Step 2: Load the dataframe.
+
+Step 3: For each round, calculate the total number of deputies and senators for Miloš Zeman (from columns 'Miloš Zeman' and 'Miloš Zeman_1').
+
+Step 4: Calculate the total possible deputies and senators (sum of all deputies and senators across all candidates) for that round.
+
+Step 5: Check if Miloš Zeman's combined total exceeds 50% of the total possible deputies and senators.
+
+Step 6: Identify the first round where this condition is met.
+
+Step 7: Return the round number.
+
+Note: Some rows have '-' indicating missing data. We need to handle these by skipping or treating as 0.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Define a function to check if a value is numeric or not
+def safe_int(x):
+    try:
+        return int(x)
+    except:
+        return 0
+
+# Iterate through rounds to find the first majority win for Miloš Zeman
+for index, row in df.iterrows():
+    round_name = row['Round']
+    if round_name == 'Round':
+        continue  # Skip header row
+
+    # Extract deputies and senators for Miloš Zeman
+    mz_deputies = safe_int(row['Miloš Zeman'])
+    mz_senators = safe_int(row['Miloš Zeman_1'])
+
+    # Total deputies and senators for Miloš Zeman
+    mz_total = mz_deputies + mz_senators
+
+    # Total possible deputies and senators in the round
+    # Sum all deputies and senators from all candidates
+    total_deputies = sum(safe_int(row[col]) for col in ['Václav Klaus', 'Václav Klaus_1', 'Jaroslava Moserová', 'Jaroslava Moserová_1', 'Miloš Zeman', 'Miloš Zeman_1'])
+    total_senators = sum(safe_int(row[col]) for col in ['Václav Klaus', 'Václav Klaus_1', 'Jaroslava Moserová', 'Jaroslava Moserová_1', 'Miloš Zeman', 'Miloš Zeman_1'] if col.endswith('_1'))
+    
+    # Total possible votes
+    total_possible = total_deputies + total_senators
+
+    # Check if Miloš Zeman has a majority (>50%)
+    if total_possible > 0 and mz_total > total_possible * 0.5:
+        print(f"Final Answer: {round_name}")
+        break
+else:
+    print("Final Answer: None")
+```

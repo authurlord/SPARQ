@@ -1,0 +1,20 @@
+Step 1: The question asks about the relationship between elevation and prominence of mountains in Papua New Guinea. We need to analyze whether there is a trend (e.g., positive correlation) as elevation increases.
+
+Step 2: Load the data into a DataFrame and extract the 'elevation (m)' and 'prominence (m)' columns.
+
+Step 3: Calculate the correlation between elevation and prominence to determine if they change together.
+
+Step 4: Interpret the correlation coefficient: a positive value indicates that as elevation increases, prominence tends to increase as well.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract elevation and prominence columns
+elevation = df['elevation (m)'].astype(float)
+prominence = df['prominence (m)'].astype(float)
+
+# Calculate the correlation between elevation and prominence
+correlation = elevation.corr(prominence)
+print(f"Final Answer: {correlation:.3f}")
+```

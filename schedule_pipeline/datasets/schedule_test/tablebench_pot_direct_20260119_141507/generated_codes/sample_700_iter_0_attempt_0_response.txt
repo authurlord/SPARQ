@@ -1,0 +1,22 @@
+Step 1: The user wants to identify the year with the highest success rate.  
+Step 2: Load the dataframe.  
+Step 3: Focus on the 'success rate' column, which contains percentage values.  
+Step 4: Find the row with the maximum success rate and extract the corresponding year.  
+
+Note: The 'success rate' column has values like "56.25%", so we need to convert them to float for comparison. The last row is a total, so we exclude it since it's not a specific year.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the total row (last row) as it's not a year
+df = df[df['year'] != 'total']
+
+# Convert success rate to float by removing the '%' sign
+df['success rate'] = df['success rate'].str.rstrip('%').astype(float)
+
+# Find the year with the highest success rate
+max_rate_row = df.loc[df['success rate'].idxmax()]
+highest_success_year = max_rate_row['year']
+print(f"Final Answer: {highest_success_year}")
+```

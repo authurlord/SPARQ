@@ -1,0 +1,28 @@
+Step 1: The user wants to predict the percentage of Catholics in the population by 2025 based on the historical trend.  
+Step 2: The "Percentage (based on registration by the church itself)" column shows a clear downward trend over time.  
+Step 3: We will fit a linear regression model to the data (year vs. percentage) and extrapolate the trend to 2025.  
+Step 4: Use the model to predict the percentage for year 2025.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Convert year to numeric
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+
+# Prepare features and target
+X = df[['year']]
+y = df['Percentage (based on registration by the church itself)']
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict percentage for year 2025
+predicted_percentage_2025 = model.predict([[2025]])[0]
+
+print(f"Final Answer: {predicted_percentage_2025:.1f}")
+```

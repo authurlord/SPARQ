@@ -1,0 +1,23 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'wins' and 'races' to numeric, coercing errors to 0
+df['wins'] = pd.to_numeric(df['wins'], errors='coerce')
+df['races'] = pd.to_numeric(df['races'], errors='coerce')
+
+# Fill NaN values with 0 (in case of invalid entries)
+df['wins'] = df['wins'].fillna(0)
+df['races'] = df['races'].fillna(0)
+
+# Calculate win rate per series
+df['win_rate'] = (df['wins'] / df['races']) * 100
+
+# Group by series and compute mean win rate (since each row is a series entry)
+grouped = df.groupby('series').agg({'win_rate': 'mean', 'wins': 'sum', 'races': 'sum'}).reset_index()
+
+# Sort by win rate descending and get top series
+top_series = grouped.sort_values(by='win_rate', ascending=False).iloc[0]['series']
+
+print(f"Final Answer: {top_series}")

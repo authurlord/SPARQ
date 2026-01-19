@@ -1,0 +1,17 @@
+Step 1: The user wants to find the difference between the highest and second-highest points scored by artists.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'points' column and sort in descending order.  
+Step 4: Get the top two values and compute their difference.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by points in descending order and get the top two values
+points_sorted = df['points'].sort_values(ascending=False)
+highest_points = points_sorted.iloc[0]
+second_highest_points = points_sorted.iloc[1]
+difference = highest_points - second_highest_points
+print(f"Final Answer: {difference}")
+```

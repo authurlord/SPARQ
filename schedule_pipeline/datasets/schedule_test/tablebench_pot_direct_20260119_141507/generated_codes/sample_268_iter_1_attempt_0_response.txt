@@ -1,0 +1,29 @@
+The error occurred because the "viewers (m)" column contains string values (e.g., '13.47'), not numeric values. We need to convert this column to numeric before comparing it with 10.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert "viewers (m)" to numeric, handling any parsing errors (e.g., non-numeric entries).
+3. Filter episodes where:
+   - viewership ≥ 10 million (after conversion)
+   - timeslot rank is within top 3 (i.e., ≤ 3)
+4. Compute the average rating of the filtered episodes.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert viewers (m) to numeric, coercing errors to NaN
+df['viewers (m)'] = pd.to_numeric(df['viewers (m)'], errors='coerce')
+
+# Filter episodes with at least 10 million viewers and timeslot rank ≤ 3
+filtered_episodes = df[
+    (df['viewers (m)'] >= 10) & 
+    (df['timeslot rank'].astype(int) <= 3)
+]
+
+# Calculate average rating of filtered episodes
+average_rating = filtered_episodes['rating'].mean()
+
+print(f"Final Answer: {average_rating:.1f}")
+```

@@ -1,0 +1,59 @@
+Step 1: Identify the relevant data for the ATL team from 1997 to 2003.  
+Step 2: Extract the "Regular Season Won", "Regular Season Lost", and "Regular Season Ties" columns for those years.  
+Step 3: The total games played is the sum of wins, losses, and ties.  
+Step 4: Create a stacked bar chart showing wins, losses, and draws (ties), with the total games as a reference.  
+
+Note: The data includes rows for each year and a "Total" row. We need to filter only the ATL team entries from 1997 to 2003, excluding the "ATL Total" row.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter rows for ATL team from 1997 to 2003 (excluding the total row)
+atl_data = df[(df['Team'] == 'ATL') & (df['Year'].astype(int).between(1997, 2003))]
+
+# Extract the relevant columns
+wins = atl_data['Regular Season Won'].astype(int)
+losses = atl_data['Regular Season Lost'].astype(int)
+ties = atl_data['Regular Season Ties'].astype(int)
+
+# Create a list of years for x-axis
+years = atl_data['Year'].tolist()
+
+# Create a stacked bar chart
+plt.figure(figsize=(10, 6))
+bar_width = 0.25
+index = range(len(years))
+
+# Plot wins, losses, and ties in a stacked manner
+bars1 = plt.bar(index, wins, bar_width, label='Wins', color='skyblue')
+bars2 = plt.bar([i + bar_width for i in index], losses, bar_width, label='Losses', color='salmon')
+bars3 = plt.bar([i + 2*bar_width for i in index], ties, bar_width, label='Ties', color='lightgreen')
+
+# Add total games (wins + losses + ties) as a separate line for clarity
+total_games = wins + losses + ties
+plt.plot(index, total_games, marker='o', color='black', linestyle='--', label='Total Games', linewidth=2)
+
+# Customize the chart
+plt.xlabel('Year')
+plt.ylabel('Number of Games')
+plt.title('ATL Team Regular Season: Wins, Losses, and Draws (1997–2003)')
+plt.xticks([i + bar_width for i in index], years, rotation=45)
+plt.legend()
+
+# Improve layout
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+
+# Print the total games played per year for verification
+print("Total games per year (wins + losses + ties):")
+for year, total in zip(years, total_games):
+    print(f"{year}: {total}")
+```
+
+Final Answer: None

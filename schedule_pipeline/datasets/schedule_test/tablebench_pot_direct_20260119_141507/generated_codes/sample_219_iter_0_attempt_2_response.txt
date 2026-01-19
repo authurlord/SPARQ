@@ -1,0 +1,13 @@
+Step 1: The user is asking whether there is a positive correlation between the total number of USAAF personnel and the number of personnel stationed overseas.  
+Step 2: We need to examine the relationship between "total usaaf" and "overseas" across the years.  
+Step 3: Calculate the correlation coefficient between these two columns. A positive correlation coefficient indicates that as total personnel increase, the number of personnel overseas also tends to increase.  
+Step 4: Print the correlation value to answer the question.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between total usaaf and overseas personnel
+correlation = df['total usaaf'].corr(df['overseas'])
+print(f"Final Answer: {correlation:.3f}")
+```

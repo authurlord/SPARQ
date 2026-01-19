@@ -1,0 +1,15 @@
+Step 1: Identify the current average daily flights for the route "monte carlo (mcm) - nice (nce)".
+Step 2: Calculate a 28% increase on this value.
+Step 3: Output the result as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where the route is 'monte carlo ( mcm ) - nice ( nce )'
+route_row = df[df['route'] == 'monte carlo ( mcm ) - nice ( nce )']
+current_flights = int(route_row['avg daily flts'].values[0])
+# Calculate 28% increase
+increased_flights = current_flights * 1.28
+print(f"Final Answer: {increased_flights:.0f}")
+```

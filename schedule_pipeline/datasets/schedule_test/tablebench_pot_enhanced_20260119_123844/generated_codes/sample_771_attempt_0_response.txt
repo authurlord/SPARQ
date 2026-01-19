@@ -1,0 +1,32 @@
+Step 1: The user wants to forecast the pass percentage and obtained GPA for 2011 based on the trend from 2005 to 2010.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'pass percentage' and 'obtained gpa - 5' columns, converting them to numeric values (removing '%' from pass percentage).  
+Step 4: Perform a linear regression or simple trend extrapolation using the year as the independent variable.  
+Step 5: Predict the values for 2011 and print the results.  
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'pass percentage' to float by removing '%' and converting to float
+df['pass percentage'] = df['pass percentage'].str.replace('%', '').astype(float)
+
+# Extract year and target variables
+years = df['year'].astype(int)
+pass_percentages = df['pass percentage']
+gpa_values = df['obtained gpa - 5']
+
+# Fit linear models for both metrics
+# For pass percentage
+slope_pass, intercept_pass = np.polyfit(years, pass_percentages, 1)
+predicted_pass_2011 = slope_pass * 2011 + intercept_pass
+
+# For GPA
+slope_gpa, intercept_gpa = np.polyfit(years, gpa_values, 1)
+predicted_gpa_2011 = slope_gpa * 2011 + intercept_gpa
+
+# Output the forecasted values
+print(f"Final Answer: {predicted_pass_2011:.2f}, {predicted_gpa_2011:.2f}")
+```

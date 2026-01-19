@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the episode with the highest audience share, which is represented by the 'share (%)' column.
+Step 2: Load the dataframe.
+Step 3: Find the row with the maximum value in the 'share (%)' column.
+Step 4: Extract and print the corresponding 'episode' value.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the episode with the highest share (%)
+max_share_episode = df.loc[df['share (%)'].idxmax(), 'episode']
+print(f"Final Answer: {max_share_episode}")
+```

@@ -1,0 +1,10 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for gold medals (Position = '1st')
+gold_medals = df[df['Position'] == '1st']
+# Group by Year and count gold medals
+gold_counts = gold_medals['Year'].value_counts()
+# Find the year with the maximum gold medals
+max_gold_year = gold_counts.idxmax()
+print(f"Final Answer: {max_gold_year}")

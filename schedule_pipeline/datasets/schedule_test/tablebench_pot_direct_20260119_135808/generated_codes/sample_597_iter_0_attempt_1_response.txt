@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 15.4, 13.6, 16.51, 16.15, 16.05

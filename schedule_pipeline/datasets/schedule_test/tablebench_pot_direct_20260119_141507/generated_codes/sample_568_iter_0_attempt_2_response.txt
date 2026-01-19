@@ -1,0 +1,22 @@
+Step 1: The question asks for the year when the European Union's total energy production exceeded that of the United States.  
+Step 2: Identify the relevant rows: European Union and United States.  
+Step 3: Extract the 'total' values for both entities and their corresponding years.  
+Step 4: Compare the totals year by year and find when EU > US.  
+
+From the table:
+- European Union: 2010 (699.3), 2012 (136.1)
+- United States: 2011 (520.1)
+
+In 2010: EU = 699.3 > US (no data for US in 2010) → not comparable.  
+In 2011: EU has no data, US has 520.1 → EU not available.  
+In 2012: EU = 136.1 < US (no US data) → not comparable.
+
+Thus, there is no year where EU total exceeds US total, because:
+- US only has data for 2011.
+- EU has data for 2010 and 2012.
+- In 2010: US data missing → cannot compare.
+- In 2012: EU total (136.1) < US (520.1) → not exceeding.
+
+Therefore, the EU never exceeded the US in total energy production based on the given data.
+
+Final Answer: none

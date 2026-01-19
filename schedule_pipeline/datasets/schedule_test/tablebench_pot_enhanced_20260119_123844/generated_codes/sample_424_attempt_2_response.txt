@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains shipping tonnage data for the United States from 2000 to 2006, with columns representing year, US global ranking in shipping, total shipping tons, domestic shipping tons, foreign total shipping tons, foreign imports, and foreign exports. The data shows fluctuating rankings and increasing total shipping tons over time, with domestic tonnage consistently higher than foreign, and foreign imports generally exceeding foreign exports.

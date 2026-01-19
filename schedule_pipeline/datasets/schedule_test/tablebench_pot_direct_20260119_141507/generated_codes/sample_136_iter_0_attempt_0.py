@@ -1,0 +1,36 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns and convert to numeric
+quarters = ['Quarter Ended March 31', 'Quarter Ended June 30', 'Quarter Ended September 30', 'Quarter Ended December 31']
+operating_revenue = df[['Operating revenue', '2018 Operating revenue']].iloc[0:2].values.tolist()
+
+# Parse the values (remove $ and convert to float)
+revenue_data = []
+for row in operating_revenue:
+    revenue_data.append([float(x.replace('$', '')) for x in row])
+
+# Create a DataFrame for easier plotting
+quarters_list = ['Q1', 'Q2', 'Q3', 'Q4']
+data = {
+    'Year': ['Regular', '2018'],
+    'Revenue': [revenue_data[0], revenue_data[1]]
+}
+df_plot = pd.DataFrame(data)
+df_plot['Revenue'] = df_plot['Revenue'].apply(lambda x: [float(i) for i in x])
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(quarters_list, df_plot.loc[0, 'Revenue'], marker='o', label='Regular Year', linewidth=2)
+plt.plot(quarters_list, df_plot.loc[1, 'Revenue'], marker='s', label='2018', linewidth=2)
+
+plt.title('Operating Revenue Trend by Quarter')
+plt.xlabel('Quarter')
+plt.ylabel('Operating Revenue ($)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()

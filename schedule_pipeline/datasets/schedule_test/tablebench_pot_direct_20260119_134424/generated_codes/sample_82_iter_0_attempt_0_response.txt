@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the team with 13 points and a goal difference of 17.
+Step 2: Load the dataframe.
+Step 3: Filter the rows where 'points' is 13 and 'difference' is 17.
+Step 4: Extract the 'team' name from the filtered row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the team with 13 points and goal difference of 17
+team = df[(df['points'] == '13') & (df['difference'] == '17')]['team'].iloc[0]
+print(f"Final Answer: {team}")
+```

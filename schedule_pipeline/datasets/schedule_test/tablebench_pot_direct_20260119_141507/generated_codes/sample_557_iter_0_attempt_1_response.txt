@@ -1,0 +1,31 @@
+Step 1: The user wants to find the year when the number of Conservative councillors increased the most compared to the previous year. This requires calculating the year-over-year difference in Conservative councillors.
+
+Step 2: Load the dataframe and extract the 'Conservative councillors' column.
+
+Step 3: Compute the difference between consecutive years (i.e., current year minus previous year) for Conservative councillors.
+
+Step 4: Identify the year with the maximum increase.
+
+Step 5: Print that year as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert Year to integer and sort by Year
+df['Year'] = df['Year'].astype(int)
+df = df.sort_values(by='Year')
+
+# Extract Conservative councillors values
+conservative_councillors = df['Conservative councillors']
+
+# Calculate year-over-year differences
+differences = conservative_councillors.diff().dropna()
+
+# Find the index of the maximum increase
+max_increase_index = differences.idxmax()
+# Get the corresponding year
+year_with_max_increase = df.loc[max_increase_index, 'Year']
+
+print(f"Final Answer: {year_with_max_increase}")
+```

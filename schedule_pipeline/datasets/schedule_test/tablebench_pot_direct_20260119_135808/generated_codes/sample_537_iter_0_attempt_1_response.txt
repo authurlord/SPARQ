@@ -1,0 +1,14 @@
+Step 1: The user wants to find the first year when the urbanization rate (urban %) surpassed 50%.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'urban , %' > 50.
+Step 4: Select the earliest (first) year from the filtered results.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the first year where urban percentage exceeds 50%
+urban_surpass = df[df['urban , %'] > 50]['year (january)'].iloc[0]
+print(f"Final Answer: {urban_surpass}")
+```

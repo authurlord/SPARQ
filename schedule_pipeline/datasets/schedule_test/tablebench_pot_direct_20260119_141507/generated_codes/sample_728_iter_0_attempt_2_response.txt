@@ -1,0 +1,13 @@
+Step 1: The user wants to identify the episode with the lowest number of US viewers (in millions).  
+Step 2: Load the dataframe.  
+Step 3: Select the 'us viewers (millions)' column.  
+Step 4: Find the row with the minimum value in this column and retrieve the corresponding 'title' (episode name).  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the episode with the lowest US viewers
+lowest_viewers_episode = df.loc[df['us viewers (millions)'].idxmin(), 'title']
+print(f"Final Answer: {lowest_viewers_episode}")
+```

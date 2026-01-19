@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: polling firm, date of polling, link, progressive conservative, liberal, new democratic, 2007, 2011, corporate research associates, 82, 5, 16, 7

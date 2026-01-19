@@ -1,0 +1,15 @@
+Step 1: The user wants to find the year when a work won an award for a song that was nominated for Song of the Year at the Grammy Awards.
+Step 2: Filter the rows where 'Association' is 'Grammy Awards' and 'Category' is 'Song of the Year'.
+Step 3: Check if the 'Result' is 'Won' for that row.
+Step 4: Return the corresponding 'Year'.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Association is 'Grammy Awards', Category is 'Song of the Year', and Result is 'Won'
+winning_year = df[(df['Association'] == 'Grammy Awards') & 
+                  (df['Category'] == 'Song of the Year') & 
+                  (df['Result'] == 'Won')]['Year'].iloc[0]
+print(f"Final Answer: {winning_year}")
+```

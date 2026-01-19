@@ -1,0 +1,15 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out the last row (total) and rows with '-' in State/Region Hluttaws
+df_filtered = df[df['State/Region Hluttaws'] != '-']
+
+# Calculate proportion of Military MPs to total MPs
+df_filtered['proportion'] = df_filtered['Military MPs'] / df_filtered['Total']
+
+# Find the row with the highest proportion
+max_proportion_row = df_filtered.loc[df_filtered['proportion'].idxmax()]
+state_or_region = max_proportion_row['State/Region Hluttaws']
+percentage = max_proportion_row['proportion'] * 100
+
+print(f"Final Answer: {state_or_region}, {percentage:.1f}")

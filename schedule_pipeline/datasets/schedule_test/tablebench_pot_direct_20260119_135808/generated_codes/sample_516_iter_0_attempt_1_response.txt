@@ -1,0 +1,18 @@
+Step 1: The user wants to calculate the longest locomotive service life, defined as the difference between 'entered service' and 'withdrawn' dates.
+Step 2: Load the dataframe.
+Step 3: Convert 'entered service' and 'withdrawn' columns to integers (since they represent years).
+Step 4: Calculate the service life for each locomotive by subtracting 'entered service' from 'withdrawn'.
+Step 5: Find the maximum service life and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'entered service' and 'withdrawn' to integers
+df['entered service'] = pd.to_numeric(df['entered service'])
+df['withdrawn'] = pd.to_numeric(df['withdrawn'])
+# Calculate service life
+df['service life'] = df['withdrawn'] - df['entered service']
+# Find the maximum service life
+max_service_life = df['service life'].max()
+print(f"Final Answer: {max_service_life}")
+```

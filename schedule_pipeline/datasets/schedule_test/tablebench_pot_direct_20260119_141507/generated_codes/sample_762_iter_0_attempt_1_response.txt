@@ -1,0 +1,7 @@
+The question asks for a forecast of tropical storms and hurricanes for the next 5 years based on historical data from 1850 to 1858. However, the dataset is extremely limited (only 9 years), and there is no clear or statistically significant trend or correlation between the number of tropical storms, hurricanes, or major hurricanes and deaths that would allow for a reliable predictive model—especially over a 5-year horizon.
+
+Additionally, the data contains non-numeric values (e.g., "not known", "none", "one", "two & four") and lacks sufficient variability or time-series structure to support forecasting using standard regression or time-series models.
+
+Therefore, without proper modeling assumptions, statistical validation, or additional context (e.g., climate trends, external variables), any forecast would be speculative and not grounded in data analysis.
+
+Final Answer: None

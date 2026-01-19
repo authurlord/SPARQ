@@ -1,0 +1,22 @@
+We need to find the difference in length (in km) between the longest and shortest road that passes through the 'sirmour' district.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter rows where 'passes through - district (s)' contains 'sirmour' (note: the column name has a typo — it's actually "passes through - district (s)").
+3. Extract the 'length (in km)' values from the filtered rows.
+4. Find the maximum and minimum lengths.
+5. Compute the difference between the longest and shortest road lengths.
+
+Note: The column name is slightly malformed in the JSON, but we can safely access it as "passes through - district (s)".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter roads that pass through 'sirmour'
+sirmour_roads = df[df['passes through - district (s)'].str.contains('sirmour', case=False, na=False)]
+# Extract lengths and compute difference between max and min
+lengths = sirmour_roads['length (in km)'].astype(float)
+difference = lengths.max() - lengths.min()
+print(f"Final Answer: {difference:.2f}")
+```

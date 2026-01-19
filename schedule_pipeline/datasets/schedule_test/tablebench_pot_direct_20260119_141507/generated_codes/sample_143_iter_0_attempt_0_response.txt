@@ -1,0 +1,31 @@
+Step 1: The user wants to visualize the relationship between periselene and aposelene distances over time using epoch (UTC) as the x-axis.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'epoch (utc)' column for the x-axis, 'periselene (km)' and 'aposelene (km)' for y-axes.  
+Step 4: Convert the epoch string to datetime for proper time ordering.  
+Step 5: Use matplotlib to create a line chart with two lines (periselene and aposelene) over time.  
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Parse the epoch (utc) column to datetime
+df['epoch (utc)'] = pd.to_datetime(df['epoch (utc)'], format='%b %d, %Y %H:%M:%S.%f', errors='coerce')
+
+# Set the x-axis to epoch (utc), and y-axes to periselene and aposelene
+plt.figure(figsize=(10, 6))
+plt.plot(df['epoch (utc)'], df['periselene (km)'], label='Periselene (km)', marker='o')
+plt.plot(df['epoch (utc)'], df['aposelene (km)'], label='Aposelene (km)', marker='s')
+
+plt.title('Periselene and Aposelene Distances Over Time')
+plt.xlabel('Epoch (UTC)')
+plt.ylabel('Distance (km)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: None

@@ -1,0 +1,12 @@
+Step 1: The user wants to calculate the average weight (kg/m) of all the ismb beams.
+Step 2: Load the dataframe.
+Step 3: Select the 'weight (kg / m)' column.
+Step 4: Calculate the mean of this column and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# The column 'weight (kg / m)' contains numerical values
+mean_weight = df['weight (kg / m)'].mean()
+print(f"Final Answer: {mean_weight:.1f}")
+```

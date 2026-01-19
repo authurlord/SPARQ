@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The data provided is insufficient to make a reliable forecast for the next 5 years. Historical trends from 1850 to 1858 show variability in tropical storms and hurricanes, but with only 9 years of data and limited consistency in patterns (e.g., no clear increasing or decreasing trend), statistical forecasting cannot be reliably performed. Additionally, the "deaths" column contains non-numeric or incomplete values (e.g., "not known", "100 +"), which further limits analysis. Without more extensive and consistent historical data, no meaningful forecast can be generated.
+
+Final Answer: Cannot forecast

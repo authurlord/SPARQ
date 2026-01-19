@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: increasing, 3.05

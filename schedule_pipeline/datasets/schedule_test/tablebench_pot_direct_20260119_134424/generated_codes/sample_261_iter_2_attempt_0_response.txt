@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 268.7, 238.8, 212.9, 200.6, 172.9

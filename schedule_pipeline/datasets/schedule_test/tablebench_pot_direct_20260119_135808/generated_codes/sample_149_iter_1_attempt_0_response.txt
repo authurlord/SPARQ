@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Latitude does not have a direct impact on population density; population density is influenced by land area and population size, not latitude alone.

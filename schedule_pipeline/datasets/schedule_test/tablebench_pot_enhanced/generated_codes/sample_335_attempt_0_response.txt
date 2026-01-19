@@ -1,0 +1,15 @@
+Step 1: Filter the data for rows where the 'Event' is 'Heptathlon' and the 'Venue' is 'Lima, Peru' (South American Championships).
+Step 2: Identify the year and the corresponding points score from the filtered row.
+Step 3: Print the year and points score as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Heptathlon events at South American Championships in Lima, Peru
+filtered_data = df[(df['Event'] == 'Heptathlon') & (df['Venue'] == 'Lima, Peru')]
+# Extract the year and points score
+year = filtered_data['Year'].values[0]
+points = filtered_data['Notes'].values[0]
+print(f"Final Answer: {year}, {points}")
+```

@@ -1,0 +1,21 @@
+Step 1: The user is asking about the relationship between viewers (m) and rating, specifically whether an increase in viewers causes an increase in rating.
+Step 2: Load the dataframe.
+Step 3: Check for a correlation between 'viewers (m)' and 'rating' by computing the correlation coefficient.
+Step 4: Since 'rating' contains 'tba' values, which are not numeric, we need to filter out rows where 'rating' is 'tba'.
+Step 5: Convert 'viewers (m)' and 'rating' to numeric types.
+Step 6: Compute the correlation and interpret the result.
+Step 7: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Drop rows where rating is 'tba'
+df = df[df['rating'] != 'tba']
+# Convert 'viewers (m)' and 'rating' to numeric
+df['viewers (m)'] = pd.to_numeric(df['viewers (m)'])
+df['rating'] = pd.to_numeric(df['rating'])
+# Calculate correlation
+correlation = df['viewers (m)'].corr(df['rating'])
+print(f"Final Answer: {correlation:.2f}")
+```

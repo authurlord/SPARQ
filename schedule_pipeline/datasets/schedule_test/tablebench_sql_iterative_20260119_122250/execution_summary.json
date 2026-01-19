@@ -1,0 +1,22 @@
+{
+  "total_samples": 886,
+  "total_attempts": 886,
+  "successful_attempts": 480,
+  "final_success_count": 480,
+  "total_timeouts": 0,
+  "sql_execution_success_rate": 0.5417607223476298,
+  "sample_success_rate": 0.5417607223476298,
+  "timeout_rate": 0.0,
+  "samples_success_iteration_0": 480,
+  "samples_success_iteration_1": 0,
+  "samples_success_iteration_2": 0,
+  "avg_attempts_per_sample": 1.0,
+  "config": {
+    "sql_sample_num": 1,
+    "max_iterations": 1,
+    "sql_timeout": 30,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "llm_concurrency": 32
+  }
+}

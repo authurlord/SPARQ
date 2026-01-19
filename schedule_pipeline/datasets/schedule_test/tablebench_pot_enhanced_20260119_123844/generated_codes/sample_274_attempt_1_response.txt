@@ -1,0 +1,50 @@
+Step 1: The user wants the total cost for systems that meet two conditions:
+- Production ≥ 2000 kWh/kwp/year
+- Cost per kwp ≤ $1400
+
+Step 2: Load the dataframe from the provided JSON table.
+
+Step 3: Filter rows where 'cost' is ≤ '1400 / kwp'.
+
+Step 4: For the filtered rows, check if any of the production columns (from '2400 kwh / kwp y' to '800 kwh / kwp y') have values ≥ 2000. Since the column names represent the production output, we need to check if any of these values in the row are ≥ 2000.
+
+However, note that the data in the columns are the payback periods (in years), not the production. So the actual production is represented by the column headers. Therefore, we should check whether the column header (e.g., '2400 kwh / kwp y') is ≥ 2000.
+
+But since the data is structured such that each column represents a different production level, and the values in the cells are the payback times, we need to identify which rows (costs) have at least one column with a production value ≥ 2000 kwh/kwp/y.
+
+So for each row (cost), check if any of the column headers (production levels) are ≥ 2000. If yes, and the cost is ≤ 1400/kwp, include that cost in the total.
+
+Step 5: Sum the costs that satisfy both conditions.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert the column headers to numeric for comparison
+# Extract the production values from column headers (e.g., '2400 kwh / kwp y' → 2400)
+production_columns = [int(col.split()[0]) for col in df.columns[1:]]  # Skip 'cost' column
+
+# Filter rows where cost <= 1400 / kwp
+filtered_df = df[df['cost'] == '1400 / kwp']  # Only rows with cost <= 1400/kwp
+
+# For each row, check if any production value (column header) is >= 2000
+# But note: the cost values are strings like '200 / kwp', etc.
+# We need to convert 'cost' to numeric for filtering
+df['cost_numeric'] = df['cost'].str.replace('/ kwp', '').astype(int)
+
+# Now filter cost <= 1400
+filtered_df = df[df['cost_numeric'] <= 1400]
+
+# Now, for each row, check if any of the production columns (headers) >= 2000
+total_cost = 0
+for _, row in filtered_df.iterrows():
+    for col in df.columns[1:]:
+        production_value = int(col.split()[0])
+        if production_value >= 2000:
+            total_cost += row['cost_numeric']
+            break  # One qualifying production level is enough
+
+print(f"Final Answer: {total_cost}")
+```

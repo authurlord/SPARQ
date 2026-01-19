@@ -1,0 +1,26 @@
+Step 1: Identify the regional county municipality "la haute - côte - nord" from the table.  
+Step 2: Filter the data to include only rows where "regional county municipality" is "la haute - côte - nord".  
+Step 3: Extract the population of each municipality in this region.  
+Step 4: Compute the average population of all municipalities in "la haute - côte - nord".  
+Step 5: Find the municipality with the smallest population in this region.  
+Step 6: Calculate the difference between the average population and the smallest population. This difference is the number of people that need to be added.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter for "la haute - côte - nord" region
+filtered_df = df[df['regional county municipality'] == 'la haute - côte - nord']
+
+# Calculate average population of the region
+average_population = filtered_df['population'].mean()
+
+# Find the minimum population in the region
+min_population = filtered_df['population'].min()
+
+# Number of people to add
+people_to_add = average_population - min_population
+
+print(f"Final Answer: {people_to_add:.0f}")
+```

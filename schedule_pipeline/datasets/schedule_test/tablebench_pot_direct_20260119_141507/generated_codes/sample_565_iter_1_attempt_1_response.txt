@@ -1,0 +1,78 @@
+We are asked to find the value in the year with the highest increase in value between 1850 and 1870.
+
+Step-by-step approach:
+
+1. Identify the relevant column: The table has three columns: Year_1, Year_2, and Year_3 (labeled as Year_1, -_1, Year_2, -_2). But from the structure:
+   - The first column is "Year", and the values for Year_1, Year_2 are given in the next columns.
+   - Looking at the data:
+     - Year_1 corresponds to the value in the second column (e.g., '1885', '1890', etc.)
+     - But we need to map the years correctly.
+
+2. We are only interested in the period from 1850 to 1870. From the data:
+   - Row for 1850: Year = 1850, Year_1 = 369,980
+   - Row for 1855: Year = 1855, Year_1 = 200,877
+   - Row for 1860: Year = 1860, Year_1 = 153,640
+   - Row for 1865: Year = 1865, Year_1 = 248,120
+   - Row for 1870: Year = 1870, Year_1 = 387,203
+
+3. However, note that the value for each year is in the second column (labeled as "-"). So we extract the value in the second column for each year between 1850 and 1870.
+
+4. Compute the increase from one year to the next (i.e., difference between consecutive years in the period).
+
+5. Find the year with the highest increase (i.e., maximum difference between consecutive values).
+
+6. Return the value (i.e., the value of the year that had the highest increase).
+
+Let’s extract the values for years 1850 to 1870 from the second column (which is labeled as '-' but contains the values).
+
+Note: The row for 1850 has value 369,980 → this is the value for 1850.
+Then 1855: 200,877
+1860: 153,640
+1865: 248,120
+1870: 387,203
+
+Now compute differences:
+- 1855 - 1850: 200,877 - 369,980 = -169,103
+- 1860 - 1855: 153,640 - 200,877 = -47,237
+- 1865 - 1860: 248,120 - 153,640 = +94,480
+- 1870 - 1865: 387,203 - 248,120 = +139,083
+
+The highest increase is 139,083, which occurs between 1865 and 1870.
+
+So the value in the year with the highest increase is the value in **1870**, which is **387,203**.
+
+But wait — the question says: "the value in the year with the highest increase". That means the value of the year that experienced the largest increase from the previous year.
+
+So it's the value at the end of the increase — i.e., the value in 1870.
+
+Final Answer: 387203
+
+Now write the Python code accordingly.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the values for the years between 1850 and 1870 from the second column (index 1)
+# The second column is labeled as '-' and contains the values
+values = df[df['Year'].between(1850, 1870)]['-'].astype(int)
+
+# Convert to list for easier processing
+values_list = values.tolist()
+
+# Compute differences between consecutive years
+differences = []
+for i in range(1, len(values_list)):
+    diff = values_list[i] - values_list[i-1]
+    differences.append(diff)
+
+# Find the index of the maximum difference
+max_diff_index = differences.index(max(differences))
+
+# The value in the year with the highest increase is the value at max_diff_index + 1 (since we start from 1850)
+year_with_max_increase_value = values_list[max_diff_index + 1]
+
+print(f"Final Answer: {year_with_max_increase_value}")
+```

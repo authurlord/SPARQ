@@ -1,0 +1,31 @@
+Step 1: The user wants to find the year when an athlete won both the Senior PGA Championship and Senior Players Championship titles.
+Step 2: Load the dataframe.
+Step 3: Filter rows where both 'senior pga championship' and 'senior players championship' have valid entries (not "not held" or "founded in").
+Step 4: Check for years where the same athlete won both titles.
+Step 5: Identify the year and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter out invalid entries
+valid_rows = df[
+    (df['senior pga championship'] != 'not held') &
+    (df['senior pga championship'] != 'founded in') &
+    (df['senior players championship'] != 'not held') &
+    (df['senior players championship'] != 'founded in')
+]
+
+# Check for rows where the same athlete won both titles
+matching_rows = valid_rows[
+    valid_rows['senior pga championship'] == valid_rows['senior players championship']
+]
+
+# Extract the year
+if not matching_rows.empty:
+    year = matching_rows['year'].values[0]
+    print(f"Final Answer: {year}")
+else:
+    print("Final Answer: None")
+```

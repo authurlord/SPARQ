@@ -1,0 +1,31 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract displacement and weight values for Model 8Ab and Model 8B
+# Find the row index where the model name is in the first column
+displacement_col = 'Displacement (l)'
+weight_col = 'Weight (kg)'
+
+# Get the row index for each model
+model_8Ab_index = df[df['Model'] == '8Ab'].index[0]
+model_8B_index = df[df['Model'] == '8B'].index[0]
+
+# Extract values
+displacement_8Ab = df.loc[model_8Ab_index, displacement_col]
+weight_8Ab = df.loc[model_8Ab_index, weight_col]
+
+displacement_8B = df.loc[model_8B_index, displacement_col]
+weight_8B = df.loc[model_8B_index, weight_col]
+
+# Calculate differences
+diff_8Ab = abs(float(displacement_8Ab) - float(weight_8Ab))
+diff_8B = abs(float(displacement_8B) - float(weight_8B))
+
+# Compare and output the model with greater difference
+if diff_8Ab > diff_8B:
+    final_answer = "8Ab"
+else:
+    final_answer = "8B"
+
+print(f"Final Answer: {final_answer}")

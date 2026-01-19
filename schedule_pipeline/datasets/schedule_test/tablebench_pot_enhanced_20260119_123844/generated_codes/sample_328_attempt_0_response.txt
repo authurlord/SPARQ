@@ -1,0 +1,20 @@
+Step 1: The user wants to count the number of films directed by Mostofa Sarwar Farooki that were submitted to the Academy Awards.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'Director' is 'Mostofa Sarwar Farooki'.
+Step 4: Among those, check for films with 'Notes' containing 'Academy Awards' or 'submission to Academy Awards'.
+Step 5: Count such films and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter films directed by Mostofa Sarwar Farooki
+farooki_films = df[df['Director'] == 'Mostofa Sarwar Farooki']
+
+# Check for submissions to Academy Awards
+academy_submissions = farooki_films[farooki_films['Notes'].str.contains('Academy Awards|submission to Academy Awards', na=False)]
+
+# Count the number of such films
+count = len(academy_submissions)
+print(f"Final Answer: {count}")
+```

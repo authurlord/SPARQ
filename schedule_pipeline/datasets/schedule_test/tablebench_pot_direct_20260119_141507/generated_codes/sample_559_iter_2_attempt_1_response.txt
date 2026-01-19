@@ -1,0 +1,22 @@
+The error occurred because the "floors" column contains string values (like '-', '33', '28') and some values were incorrectly concatenated when processed. We need to filter only the buildings constructed between 1895 and 1980, and then compute the average number of floors, ensuring that only numeric floor values are considered.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter rows where the 'year' is between 1895 and 1980 (inclusive).
+3. Convert the 'floors' column to numeric, replacing any non-numeric or missing values (like '-' or NaN) with NaN.
+4. Compute the mean of the numeric 'floors' values for the filtered rows.
+5. Print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Filter rows where year is between 1895 and 1980 inclusive
+filtered_df = df[(df['year'] >= 1895) & (df['year'] <= 1980)]
+# Convert 'floors' to numeric, coercing errors to NaN
+filtered_df['floors'] = pd.to_numeric(filtered_df['floors'], errors='coerce')
+# Calculate the mean of floors, ignoring NaN values
+average_floors = filtered_df['floors'].mean()
+print(f"Final Answer: {average_floors:.1f}")
+```

@@ -1,0 +1,42 @@
+We need to filter the seasons based on two conditions:
+1. Number of episodes is at least 40.
+2. The season premiered between October and December (inclusive).
+
+The error occurred because we compared a string (e.g., "October 4, 2006") with an integer using `>=`, which is invalid. We must extract the month from the "Season Premiere" date string and compare it to the months of October, November, and December.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Extract the month from the "Season Premiere" column (e.g., "October 4, 2006" → "October").
+3. Convert the month name to a standardized format (e.g., "October" → 10).
+4. Filter rows where:
+   - Episodes >= 40
+   - Month is in October, November, or December (i.e., month >= 10)
+5. Compute the average number of episodes for the filtered rows.
+
+```python
+import pandas as pd
+from datetime import datetime
+
+df = pd.read_csv('table.csv')
+
+# Extract month from Season Premiere (e.g., "October 4, 2006")
+def get_month(date_str):
+    month_map = {
+        'January': 1, 'February': 2, 'March': 3, 'April': 4,
+        'May': 5, 'June': 6, 'July': 7, 'August': 8,
+        'September': 9, 'October': 10, 'November': 11, 'December': 12
+    }
+    month_name = date_str.split()[0]
+    return month_map[month_name]
+
+# Apply the function to create a month column
+df['premiere_month'] = df['Season Premiere'].apply(get_month)
+
+# Filter: episodes >= 40 AND premiere month between October and December (10 to 12)
+filtered_df = df[(df['Episodes'] >= 40) & (df['premiere_month'] >= 10)]
+
+# Calculate average episodes for the filtered seasons
+average_episodes = filtered_df['Episodes'].mean()
+
+print(f"Final Answer: {average_episodes:.1f}")
+```

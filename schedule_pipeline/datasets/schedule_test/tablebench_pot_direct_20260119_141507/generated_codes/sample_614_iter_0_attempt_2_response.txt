@@ -1,0 +1,20 @@
+Step 1: The user wants to find how many more regular season games Harold Snepsts played compared to the average number of regular season games (300).  
+Step 2: Extract the 'reg gp' column from the dataframe.  
+Step 3: Calculate the average of 'reg gp'.  
+Step 4: Find Harold Snepsts' 'reg gp' value (from the row where player is "harold snepsts").  
+Step 5: Subtract the average from Harold Snepsts' value to get the difference.  
+
+Note: The question states that the average is 300, but we will verify it from the data to ensure accuracy.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find Harold Snepsts' regular season games
+harold_snepsts_reg_gp = df[df['player'] == 'harold snepsts']['reg gp'].values[0]
+# Calculate average regular season games
+avg_reg_gp = df['reg gp'].mean()
+# Compute difference
+difference = harold_snepsts_reg_gp - avg_reg_gp
+print(f"Final Answer: {difference}")
+```

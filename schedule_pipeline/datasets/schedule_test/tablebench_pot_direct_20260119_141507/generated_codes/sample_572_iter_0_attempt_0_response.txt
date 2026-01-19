@@ -1,0 +1,41 @@
+Step 1: The user wants to find the year where the number of typhus cases decreased the most compared to the previous year. This means we need to calculate the difference (decrease) in typhus cases from one year to the next and identify the year with the largest decrease.
+
+Step 2: Load the dataframe and extract the 'typhus' column.
+
+Step 3: Compute the year-on-year differences in typhus cases. Since the data starts in 1913 and goes up to 1935, we will compare each year's typhus value with the previous year's.
+
+Step 4: Identify the year with the maximum decrease (i.e., the largest negative difference).
+
+Step 5: Print that year as the answer.
+
+Note: The row for 191822 appears to be a typo or misformatting (likely meant to be 1918–1922). We will treat it as a single entry for 191822, which is not a valid year. We will skip this row or consider only valid years (1913, 1929, 1930, ..., 1935). However, since the question asks for a decrease compared to the previous year, we must ensure the sequence is valid.
+
+We will exclude 191822 due to invalid formatting and work with the valid years: 1913, 1929, 1930, 1931, 1932, 1933, 1934, 1935.
+
+Now, compute the year-on-year changes in typhus cases.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean the data: remove or handle invalid entries
+# The row with '191822' is invalid; we'll drop it or skip it
+df_clean = df[df['year'].str.contains(r'\d{4}')].copy()  # Keep only rows with valid 4-digit years
+
+# Convert 'year' to integer and 'typhus' to integer
+df_clean['year'] = pd.to_numeric(df_clean['year'], errors='coerce')
+df_clean['typhus'] = pd.to_numeric(df_clean['typhus'], errors='coerce')
+
+# Sort by year
+df_clean = df_clean.sort_values('year').dropna()
+
+# Calculate the year-on-year change in typhus cases
+df_clean['typhus_diff'] = df_clean['typhus'].diff()
+
+# Find the year with the maximum decrease (most negative)
+max_decrease_year = df_clean.loc[df_clean['typhus_diff'].idxmin(), 'year']
+
+print(f"Final Answer: {max_decrease_year}")
+```

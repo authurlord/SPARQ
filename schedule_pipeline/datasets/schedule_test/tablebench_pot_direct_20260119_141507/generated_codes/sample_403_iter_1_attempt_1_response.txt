@@ -1,0 +1,24 @@
+The question asks for a description of the table's contents, explanation of each column's significance, and identification of notable trends or patterns. This is a qualitative analysis, not a numerical computation, so we should focus on interpreting the data rather than performing calculations.
+
+Step 1: Understand the structure of the table.
+- The table contains data on 21 countries' tourism performance in 2011.
+- Each row represents a country with metrics related to tourist arrivals, tourism receipts, and economic indicators.
+
+Step 2: Explain each column:
+- "tourist arrivals (2011) (millions)": Number of tourists visiting the country.
+- "tourism receipts (2011) (millions of us)": Total revenue generated from tourism.
+- "tourism receipts (2011) (us per arrival)": Average revenue per tourist.
+- "tourism receipts (2011) (us per capita)": Revenue per person in the country.
+- "tourism receipts (2003) (as % of gdp)": Proportion of tourism revenue to GDP in 2003.
+- "tourism receipts (2003) (as % of exports)": Proportion of tourism revenue to total exports.
+- "tourism competitiveness (2011) (ttci)": A measure of how competitive the country's tourism sector is.
+
+Step 3: Identify notable trends:
+- Mexico has the highest tourist arrivals (23.4 million), followed by Argentina and Brazil.
+- Costa Rica and Panama have high per-capita tourism receipts, indicating strong economic returns per visitor.
+- Countries like Cuba and Haiti have low tourist arrivals but high per-capita tourism receipts (e.g., Cuba: $194 per capita), suggesting tourism may be concentrated among a small group of visitors.
+- Costa Rica leads in per-capita tourism receipts ($459), while Peru and Uruguay also perform well.
+- Tourism as a percentage of GDP varies widely: Dominican Republic (36.2%) and Costa Rica (17.5%) show high dependence on tourism, whereas Venezuela and Bolivia have lower percentages.
+- The TTCI (competitiveness) scores are generally between 3.2 and 4.4, with higher values indicating better performance.
+
+Final Answer: tourist arrivals, tourism receipts, per arrival, per capita, GDP share, export share, competitiveness, Mexico highest arrivals, Costa Rica highest per capita, Dominican Republic highest tourism GDP share, Cuba high per capita despite low arrivals

@@ -1,0 +1,28 @@
+Step 1: The user wants the top 3 countries with the most improvement from 2009 to 2011.  
+Step 2: Load the dataframe.  
+Step 3: Calculate the improvement (2011 value - 2009 value) for each country.  
+Step 4: Exclude the 'world' row since it's not a country.  
+Step 5: Sort by improvement in descending order.  
+Step 6: Select the top 3 countries and print their names.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert the 2009 and 2011 columns to integers
+df['2009'] = df['2009'].astype(int)
+df['2011'] = df['2011'].astype(int)
+
+# Calculate improvement from 2009 to 2011
+df['improvement'] = df['2011'] - df['2009']
+
+# Exclude the 'world' row (where rank is None)
+countries = df[df['rank'].notna()]
+
+# Sort by improvement in descending order
+top_countries = countries.sort_values(by='improvement', ascending=False).head(3)
+
+# Extract country names
+top_country_names = top_countries['country'].tolist()
+print(f"Final Answer: {', '.join(top_country_names)}")
+```

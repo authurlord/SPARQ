@@ -1,0 +1,32 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'speakers' and 'population' to integers for analysis
+df['speakers'] = pd.to_numeric(df['speakers'])
+df['population'] = pd.to_numeric(df['population'])
+df['percentage (%)'] = pd.to_numeric(df['percentage (%)'])
+
+# Basic insights
+total_speakers = df['speakers'].sum()
+max_speakers = df['speakers'].max()
+min_speakers = df['speakers'].min()
+avg_percentage = df['percentage (%)'].mean()
+
+print(f"Total speakers across all council areas: {total_speakers}")
+print(f"Maximum speakers in one area: {max_speakers} (Na h-Eileanan Siar)")
+print(f"Minimum speakers in one area: {min_speakers} (Shetland)")
+print(f"Average percentage of speakers: {avg_percentage:.2f}%")
+
+# Top 5 areas by number of speakers
+top_5_speakers = df.nlargest(5, 'speakers')[['council area', 'speakers', 'percentage (%)']]
+print("\nTop 5 council areas by number of speakers:")
+print(top_5_speakers)
+
+# Areas with highest percentage of speakers
+top_5_percentage = df.nlargest(5, 'percentage (%)')[['council area', 'speakers', 'percentage (%)']]
+print("\nTop 5 council areas by percentage of speakers:")
+print(top_5_percentage)
+
+# Final Answer: Summary of key insights
+print("Final Answer: Na h-Eileanan Siar, Highland, City of Glasgow, Argyll and Bute, City of Edinburgh")

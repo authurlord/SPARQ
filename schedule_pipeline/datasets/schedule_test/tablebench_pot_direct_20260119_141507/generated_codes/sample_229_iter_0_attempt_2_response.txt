@@ -1,0 +1,35 @@
+Step 1: The question asks which of the variables — mean mark, lowest mark, or highest mark — has a greater causal influence on the percentage of students passing in a given subject. However, "causal influence" implies a cause-effect relationship, which cannot be established solely from observational data without experimental design or statistical modeling (e.g., correlation analysis, regression). 
+
+Step 2: Since we do not have a clear way to determine causality from the given data (only correlations), we can analyze the correlation between each of these variables and the "% pass" column to assess which one is most strongly associated with pass rates.
+
+Step 3: Compute the correlation between "% pass" and each of the following: mean, lowest, and highest marks. The variable with the highest absolute correlation coefficient would suggest the strongest statistical association.
+
+Step 4: Use pandas to calculate the correlation and identify the most strongly related variable.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric
+df['% pass'] = pd.to_numeric(df['% pass'], errors='coerce')
+df['mean'] = pd.to_numeric(df['mean'], errors='coerce')
+df['lowest mark'] = pd.to_numeric(df['lowest mark'], errors='coerce')
+df['highest mark'] = pd.to_numeric(df['highest mark'], errors='coerce')
+
+# Calculate correlation with % pass
+correlation_mean = df['% pass'].corr(df['mean'])
+correlation_lowest = df['% pass'].corr(df['lowest mark'])
+correlation_highest = df['% pass'].corr(df['highest mark'])
+
+# Find the variable with the highest absolute correlation
+max_corr = max(abs(correlation_mean), abs(correlation_lowest), abs(correlation_highest))
+if max_corr == abs(correlation_mean):
+    result = 'mean'
+elif max_corr == abs(correlation_lowest):
+    result = 'lowest mark'
+else:
+    result = 'highest mark'
+
+print(f"Final Answer: {result}")
+```

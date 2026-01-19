@@ -1,0 +1,21 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Column explanations
+print("Column Explanations:")
+print("- 'election': The year of the election.")
+print("- 'candidates fielded': Number of candidates the party ran in the election.")
+print("- 'of seats won': Number of parliamentary seats won by the party.")
+print("- 'total votes': Total number of votes received by the party.")
+print("- '% of popular vote': Percentage of total votes the party received.")
+print("- 'place': The ranking of the party in the election (e.g., 3rd place).")
+
+print("\nInitial Insights:")
+print(f"- The party fielded the most candidates in 2009 ({df['candidates fielded'].max()}), and the fewest in 1983 ({df['candidates fielded'].min()}).")
+print(f"- The highest number of votes was received in 2001 ({df['total votes'].max()}), which also corresponds to their best result with 12.39% of the vote and 3rd place.")
+print(f"- The party won its only seat in 2013, despite having fewer candidates than in previous years.")
+print(f"- The percentage of popular vote peaked in 2001 (12.39%) and has declined since, with the lowest in 1983 (0.19%).")
+print(f"- The party never won more than one seat, and their best placement was 3rd, achieved in 2001, 2005, 2009, and 2013.")
+
+print(f"Final Answer: election, candidates fielded, of seats won, total votes, % of popular vote, place")

@@ -1,0 +1,18 @@
+Step 1: The user wants to calculate the average US chart position of all songs.
+Step 2: Load the dataframe.
+Step 3: Select the 'US Chart position' column.
+Step 4: Convert the values to numeric, handling any non-numeric entries (like 'R&B' labels) by skipping or replacing them.
+Step 5: Calculate the mean of the valid numeric values and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'US Chart position' to numeric, coercing errors to NaN
+df['US Chart position'] = pd.to_numeric(df['US Chart position'], errors='coerce')
+# Drop rows where the chart position is NaN
+valid_positions = df['US Chart position'].dropna()
+# Calculate the average
+average_position = valid_positions.mean()
+print(f"Final Answer: {average_position:.1f}")
+```

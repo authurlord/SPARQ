@@ -1,0 +1,82 @@
+Step 1: Analyze the pattern of issue prices from 2000 to 2011.  
+The issue price increases over time, and the composition and artist remain constant across all years.  
+Step 2: Observe the trend in issue prices:  
+- 2000: 388.88  
+- 2001: 388.88  
+- 2002: 388.88  
+- 2003: 398.88  
+- 2004: 398.88  
+- 2005: 398.88  
+- 2006: 448.88  
+- 2007: 498.95  
+- 2008: 508.95  
+- 2009: 638.88  
+- 2010: 555.55  
+- 2011: 638.88  
+
+Note: There is a fluctuation, but a general upward trend is visible. However, there's no strictly linear pattern.  
+But notice that from 2006 onward, prices increase gradually.  
+From 2006 to 2011:  
+- 2006: 448.88  
+- 2007: 498.95 (+50.07)  
+- 2008: 508.95 (+10.00)  
+- 2009: 638.88 (+129.93)  
+- 2010: 555.55 (decrease)  
+- 2011: 638.88 (increase)  
+
+There's a volatility. But if we take the average of the last three years (2009, 2010, 2011):  
+(638.88 + 555.55 + 638.88) / 3 ≈ 611.10  
+
+Alternatively, observe the increasing trend after 2006:  
+From 2006 to 2011, the values are rising, with a jump in 2009. A reasonable forecast could be based on the last known value (2011: 638.88) and a slight increase.  
+
+Assuming a steady increase of about 10–15 per year, and considering the latest value, a reasonable forecast for 2012 could be around 650–670.  
+
+But since the data has irregularities, and the most recent value is 638.88, and there's no clear trend, a simple extrapolation may not be reliable.  
+
+However, if we assume a linear trend from 2000 to 2011, we can compute the average annual increase.  
+
+Total change from 2000 to 2011:  
+638.88 - 388.88 = 250.00 over 11 years → average increase ≈ 22.73 per year.  
+2012 would be 638.88 + 22.73 ≈ 661.61  
+
+But note: the price dropped in 2010, so this might not be accurate.  
+
+Alternatively, take the last three years:  
+2009: 638.88  
+2010: 555.55  
+2011: 638.88  
+Average: (638.88 + 555.55 + 638.88)/3 = 611.10  
+
+Forecast 2012 as 611.10 + (average increase) — but no consistent increase.  
+
+Given the lack of a clear trend, and only a few data points, the best approach is to use the most recent value and assume a small increase.  
+
+Thus, a reasonable forecast is slightly above 638.88, say 640.  
+
+But let's stick to a simple average of the last three years and add a small increment.  
+
+Final decision: Use the average of the last three years (2009, 2010, 2011) and add 10 to account for a slight upward trend.  
+
+Average of last three: (638.88 + 555.55 + 638.88) / 3 = 611.10  
+Forecast 2012: 611.10 + 10 = 621.10  
+
+Alternatively, if we just take the last value and assume it continues: 638.88  
+
+But given the inconsistency, a more robust forecast is the average of the recent years.  
+
+Best choice: average of 2009, 2010, 2011 → 611.10  
+
+Final Answer: 611.10
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the issue price column and filter the last three years (2009, 2010, 2011)
+last_three_prices = df[df['year'].isin(['2009', '2010', '2011'])]['issue price'].astype(float)
+average_last_three = last_three_prices.mean()
+# Forecast 2012 by adding a small increment (e.g., 10) to account for slight upward trend
+forecast_2012 = average_last_three + 10
+print(f"Final Answer: {forecast_2012:.2f}")
+```

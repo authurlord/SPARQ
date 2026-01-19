@@ -1,0 +1,12 @@
+Step 1: The user wants the total average rating of all TV dramas, which means summing up the 'average' column.
+Step 2: Load the dataframe.
+Step 3: Select the 'average' column and convert it to numeric.
+Step 4: Calculate the sum of the 'average' column and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'average' column to numeric and calculate total
+total_average = df['average'].astype(int).sum()
+print(f"Final Answer: {total_average}")
+```

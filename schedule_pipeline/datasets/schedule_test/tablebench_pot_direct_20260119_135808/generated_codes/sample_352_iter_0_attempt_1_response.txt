@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of universities located in London.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'location' column is 'london'.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where location is 'london'
+london_universities = df[df['location'] == 'london']
+# Count the number of universities in London
+count_london = len(london_universities)
+print(f"Final Answer: {count_london}")
+```

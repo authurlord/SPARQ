@@ -1,0 +1,24 @@
+Step 1: Understand that "AIDS-related orphans" is represented by the column "total orphans (aids related)" in the table. We need to find the year with the highest value in this column.
+
+Step 2: The data is grouped by country and year (e.g., "botswana (1990)", "malawi (2001)"). We will extract the year from each row (e.g., "1990", "2001") and match it with the corresponding "total orphans (aids related)" value.
+
+Step 3: Identify the maximum value of "total orphans (aids related)" and the corresponding year.
+
+Step 4: Return the year that has the highest number of AIDS-related orphans.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract year from the 'country' column (e.g., 'botswana (1990)' -> 1990)
+df['year'] = df['country'].str.extract(r'\((\d{4})\)$')[0].astype(int)
+
+# Select the column for AIDS-related orphans
+aids_orphans = df['total orphans (aids related)']
+
+# Find the year with the maximum AIDS-related orphans
+max_year = df.loc[aids_orphans.idxmax(), 'year']
+print(f"Final Answer: {max_year}")
+```

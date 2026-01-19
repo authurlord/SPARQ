@@ -1,0 +1,38 @@
+The error occurred because the "Executions in persona" and "Executions in effigie" values for some rows (like Logroño) contain question marks ("?" or "?"), which are treated as strings and cannot be used in arithmetic operations. We need to ensure that only numeric values are used in the calculation.
+
+Step 1: Identify the rows for Córdoba and Valencia.
+Step 2: Extract the numeric values for "Executions in persona" and "Executions in effigie" from those rows, ignoring non-numeric entries (e.g., "?" or "1?").
+Step 3: Sum the executions for both cities.
+Step 4: Compute the difference between Córdoba and Valencia.
+
+We'll clean the data by converting values to integers, skipping any non-numeric entries.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows for Córdoba and Valencia
+cordoba_row = df[df['Tribunal'] == 'Córdoba']
+valencia_row = df[df['Tribunal'] == 'Valencia']
+
+# Extract execution values, handling non-numeric entries
+def safe_numeric(value):
+    if isinstance(value, str):
+        # Remove any question marks or non-numeric characters
+        cleaned = value.replace('?', '').replace('?', '')
+        if cleaned.strip():
+            return int(cleaned)
+    return 0
+
+# Calculate total executions for Córdoba
+cordoba_executions = safe_numeric(cordoba_row['Executions in persona'].iloc[0]) + safe_numeric(cordoba_row['Executions in effigie'].iloc[0])
+
+# Calculate total executions for Valencia
+valencia_executions = safe_numeric(valencia_row['Executions in persona'].iloc[0]) + safe_numeric(valencia_row['Executions in effigie'].iloc[0])
+
+# Compute the difference
+difference = cordoba_executions - valencia_executions
+
+print(f"Final Answer: {difference}")
+```

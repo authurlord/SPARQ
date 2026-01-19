@@ -1,0 +1,36 @@
+Step 1: The user is asking which factors (passengers flown, employees, basic eps) significantly impact net profit/loss. This requires analyzing the correlation between each factor and net profit/loss.
+
+Step 2: Load the data into a DataFrame.
+
+Step 3: Compute the correlation matrix between the numeric columns: 'passengers flown', 'employees (average / year)', 'basic eps', and 'net profit / loss (sek)'.
+
+Step 4: Check the absolute correlation values. If any correlation is above a threshold (e.g., 0.3), it indicates a significant impact. Otherwise, conclude "no clear impact".
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select only numeric columns for correlation
+numeric_columns = ['passengers flown', 'employees (average / year)', 'basic eps', 'net profit / loss (sek)']
+df_numeric = df[numeric_columns]
+
+# Compute correlation matrix
+correlation_matrix = df_numeric.corr()
+
+# Extract correlations between each factor and net profit/loss (excluding itself)
+correlations = correlation_matrix['net profit / loss (sek)'].abs().drop('net profit / loss (sek)')
+
+# Identify factors with significant correlation (> 0.3)
+significant_factors = []
+for factor, corr in correlations.items():
+    if corr > 0.3:
+        significant_factors.append(factor)
+
+if significant_factors:
+    print(f"Final Answer: {', '.join(significant_factors)}")
+else:
+    print("Final Answer: no clear impact")
+```

@@ -1,0 +1,17 @@
+The error occurred because the "specific impulse (s)" column contains string values (e.g., '331', '453') instead of integers. We need to convert the column to numeric before comparing it with 1000.
+
+Step 1: Load the dataframe.
+Step 2: Convert the "specific impulse (s)" column to numeric (to handle strings properly).
+Step 3: Filter rows where the specific impulse is greater than 1000.
+Step 4: Count the number of such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'specific impulse (s)' to numeric, coercing errors to NaN
+df['specific impulse (s)'] = pd.to_numeric(df['specific impulse (s)'], errors='coerce')
+# Count how many engines have specific impulse > 1000
+count_high_impulse = df[df['specific impulse (s)'] > 1000].shape[0]
+print(f"Final Answer: {count_high_impulse}")
+```

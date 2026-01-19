@@ -1,0 +1,27 @@
+The error occurs because the "capacity in use" column contains values like "126 , 06%" (with a space and comma instead of a decimal point), which cannot be directly converted to float. We need to clean this column before computing any analysis.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Clean the "capacity in use" column: remove the space and comma, replace " %" with empty string, and convert to float.
+3. Analyze the relationship between "annual change" and "capacity in use". Since the question asks about the impact, we can compute the correlation between these two numerical columns.
+4. Print the correlation coefficient as a measure of the impact.
+
+Note: The "annual change" is already in percentage format (e.g., "9.24%"), so we extract the numeric part and convert to float.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean 'annual change' column: extract numeric value from string like '9.24%'
+df['annual change'] = df['annual change'].str.replace('%', '').astype(float)
+
+# Clean 'capacity in use' column: remove space and comma, then convert to float
+df['capacity in use'] = df['capacity in use'].str.replace(' , ', '.').str.replace(' %', '').str.replace(',', '.').astype(float)
+
+# Compute the correlation between annual change and capacity in use
+correlation = df['annual change'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

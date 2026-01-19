@@ -1,0 +1,18 @@
+Step 1: The user wants to find the year when the athlete achieved their best position in the 1500 m event at the Olympic Games.  
+Step 2: Filter the data for rows where the 'Competition' is 'Olympic Games'.  
+Step 3: Among these rows, identify the one with the best (lowest) 'Position' (since lower position number means better performance).  
+Step 4: Return the corresponding 'Year' for that row.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Olympic Games
+olympic_data = df[df['Competition'] == 'Olympic Games']
+# Find the row with the best (lowest) position
+best_position_row = olympic_data.loc[olympic_data['Position'].str.extract('(\d+)', expand=False).astype(int).idxmin()]
+# Extract the year
+best_year = best_position_row['Year']
+print(f"Final Answer: {best_year}")
+```

@@ -1,0 +1,23 @@
+We are asked to predict the expected viewership for the next episode based on the viewership trends from the listed episodes.
+
+Step-by-step approach:
+1. The data shows viewership (in millions) for a sequence of episodes.
+2. We can observe the trend in viewership over time (from episode 1 to 6).
+3. Since there's no clear pattern (e.g., increasing, decreasing, or cyclical), we consider computing the average viewership as a simple baseline prediction.
+4. Alternatively, we might look at the trend: the viewership increases from 1.45 to 1.88 and then dips slightly. However, without more context, the safest and most reasonable assumption is to use the average viewership as a prediction for the next episode.
+
+So, we will:
+- Extract the "viewers (in millions)" column.
+- Compute the mean of these values.
+- Use that mean as the predicted viewership for the next episode.
+
+Note: This is a simple extrapolation based on historical average and does not involve complex modeling due to lack of additional information.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract viewership values and compute their average
+average_viewership = df['viewers (in millions)'].mean()
+print(f"Final Answer: {average_viewership:.2f}")
+```

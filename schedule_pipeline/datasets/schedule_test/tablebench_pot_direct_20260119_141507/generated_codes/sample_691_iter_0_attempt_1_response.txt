@@ -1,0 +1,35 @@
+Step 1: The user wants to identify the age group with the highest percentage and the one with the lowest percentage, then compute the difference between them.  
+Step 2: The "Both Gender" column has a "%", but the percentages are listed in the "Male" and "Female" columns under "%_1" and "%_2". However, the "Both Gender" column's "%" is already given as 100.00 for all rows except the total. The actual percentages of the population by age group are already in the "%_1" and "%_2" columns, but since they are split by gender, we interpret the "Both Gender" column as the overall percentage of the group.  
+Step 3: We will extract the percentage values from the "Both Gender" column (which is 100.00 for all groups except the total).  
+Step 4: Since the value in the "Both Gender" column is always 100.00 for each age group, the percentage of the population is already normalized. Thus, the highest and lowest percentages are not varying — all are 100.00.  
+But wait — the question asks for the age group with the highest percentage and the lowest percentage. Since every age group has exactly 100.00% in the "Both Gender" column, there is no variation.  
+
+However, looking at the data again: the "Both Gender" column shows values like 3.24, 3.94, etc., which are the percentages of that group relative to the total. So, these are the actual percentages of the population in each age group.  
+So, we need to find:
+- The age group with the highest percentage (max value in the "%" column)
+- The age group with the lowest percentage (min value in the "%" column)
+- Compute the difference
+
+Step 5: Extract the "%” column (excluding the last row, which is "TOTAL") and find max and min.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the last row (TOTAL) since it's not an age group
+df_filtered = df[df['Age Group'] != 'TOTAL']
+
+# Extract the percentage column (%)
+percentages = df_filtered['%'].astype(float)
+
+# Find the maximum and minimum percentages
+max_percentage = percentages.max()
+min_percentage = percentages.min()
+difference = max_percentage - min_percentage
+
+# Find the corresponding age group with max and min
+max_age_group = df_filtered.loc[percentages.idxmax(), 'Age Group']
+min_age_group = df_filtered.loc[percentages.idxmin(), 'Age Group']
+
+print(f"Final Answer: {max_age_group}, {min_age_group}, {difference:.2f}")
+```

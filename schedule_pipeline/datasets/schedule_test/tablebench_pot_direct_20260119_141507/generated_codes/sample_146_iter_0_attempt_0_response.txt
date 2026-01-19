@@ -1,0 +1,18 @@
+Step 1: The question asks which of the listed factors (e.g., 'played', 'drawn', 'lost', etc.) significantly contribute to the 'points' total. This requires analyzing the correlation between each factor and the 'points' column.
+
+Step 2: We will compute the correlation coefficient between each factor and the 'points' column. Factors with high absolute correlation (close to 1 or -1) are considered significant contributors.
+
+Step 3: Select only the top 3 factors with the highest absolute correlation values.
+
+Step 4: Output these top 3 factors.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Compute correlation between each factor and 'points'
+correlations = df[['played', 'drawn', 'lost', 'points for', 'points against', 'tries for', 'tries against', 'try bonus', 'losing bonus']].corrwith(df['points'])
+# Get top 3 factors by absolute correlation
+top_3_factors = correlations.abs().sort_values(ascending=False).head(3).index.tolist()
+print(f"Final Answer: {', '.join(top_3_factors)}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The number of candidates nominated has a positive correlation with the percentage of popular vote over time, as the increase in nominations is associated with a rise in the percentage of popular vote.

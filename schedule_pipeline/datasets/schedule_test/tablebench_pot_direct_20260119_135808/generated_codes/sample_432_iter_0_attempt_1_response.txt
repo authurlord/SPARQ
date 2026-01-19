@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains data on marriages in various years, with columns for year, marriages between men, marriages between women, same-sex marriages (sum of men and women), total marriages, and the percentage of same-sex marriages. Over the years, the number of same-sex marriages increased from 1,275 in 2005 to 3,880 in 2011, and the percentage of same-sex marriages rose from 1.06% to 2.38%, indicating a growing trend in same-sex marriages.

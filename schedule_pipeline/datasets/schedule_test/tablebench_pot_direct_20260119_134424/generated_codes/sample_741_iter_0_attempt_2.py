@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert year to numeric for regression
+df['year'] = pd.to_numeric(df['year'])
+
+# Extract data for Indians and Bangladeshis
+indians = df['indians admitted'].astype(int)
+bangladeshis = df['bangladeshis admitted'].astype(int)
+years = df['year']
+
+# Fit linear regression model for Indians
+slope_indians, intercept_indians = np.polyfit(years, indians, 1)
+forecast_indians = slope_indians * 2013 + intercept_indians
+
+# Fit linear regression model for Bangladeshis
+slope_bangladeshis, intercept_bangladeshis = np.polyfit(years, bangladeshis, 1)
+forecast_bangladeshis = slope_bangladeshis * 2013 + intercept_bangladeshis
+
+# Round to nearest integer
+forecast_indians = round(forecast_indians)
+forecast_bangladeshis = round(forecast_bangladeshis)
+
+print(f"Final Answer: {forecast_indians}, {forecast_bangladeshis}")

@@ -1,0 +1,12 @@
+Step 1: The user wants to find the city with the lowest GDP per capita in thousands of ID.
+Step 2: Load the dataframe.
+Step 3: Select the 'gdp per capita id k' column and find the minimum value.
+Step 4: Identify the corresponding city and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the city with the minimum GDP per capita
+min_gdp_per_capita_city = df.loc[df['gdp per capita id k'].idxmin(), 'city']
+print(f"Final Answer: {min_gdp_per_capita_city}")
+```

@@ -1,0 +1,25 @@
+Step 1: Understand the question — we are to calculate the percentage change in 'l (mh / km)' when frequency increases from 1 Hz to 100k Hz, under the assumption that the ratio of 'g (î¼s / km)' to 'c (nf / km)' remains constant. However, note that in the data, the ratio 'g / c' is constant (0.0 / 51.57 = 0.0, and all other rows have g/c = 0.072/51.57 ≈ 0.0014, etc.), so the ratio does not remain constant across all rows — but the problem says "assuming it remains constant", which implies we should ignore variation in g/c and focus only on the change in 'l' with frequency.
+
+But since the question specifies "assuming the ratio of g to c remains constant", and in reality the ratio varies, we interpret this as a hypothetical condition — however, since the value of 'c' is constant (51.57 in all rows), and 'g' changes, the ratio is not constant. Therefore, the assumption is not valid in actual data.
+
+But the question asks for the percentage change in 'l' from frequency 1 Hz to 100k Hz. So we can compute the actual values from the table and calculate the percentage change directly, ignoring the invalid assumption because no such constraint is used in calculation.
+
+Step 2: Extract the values of 'l (mh / km)' at frequency 1 Hz and 100k Hz.
+- At 1 Hz: l = 0.6129
+- At 100k Hz: l = 0.5807
+
+Step 3: Compute percentage change:
+Percentage change = ((new - old) / old) * 100
+
+Step 4: Output the result.
+
+```python
+# Extract the values of 'l (mh / km)' at frequency 1 Hz and 100k Hz
+l_1_hz = 0.6129
+l_100k_hz = 0.5807
+
+# Calculate percentage change
+percentage_change = ((l_100k_hz - l_1_hz) / l_1_hz) * 100
+
+print(f"Final Answer: {percentage_change:.2f}%")
+```

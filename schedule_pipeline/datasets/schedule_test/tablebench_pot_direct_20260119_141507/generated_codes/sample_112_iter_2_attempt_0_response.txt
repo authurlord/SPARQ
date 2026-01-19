@@ -1,0 +1,38 @@
+Step 1: The user wants a line chart showing the trend in the number of attacks (Att) over the years.  
+Step 2: Identify the relevant column: "Att" represents the number of attacks.  
+Step 3: Filter out the "Career Totals" row since it is not a season-specific data point.  
+Step 4: Extract the "Year" and "Att" columns, ensuring only valid season data is used.  
+Step 5: Plot a line chart with years on the x-axis and attacks on the y-axis.  
+
+Note: There is a typo in the data ("San Digeo Chargers" → "San Diego Chargers"), but we don't need to fix names as long as we extract correct values. We focus on the "Att" column and corresponding years.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter out the 'Career Totals' row
+df_filtered = df[df['Team'] != 'Career Totals']
+
+# Convert 'Year' to integer for proper plotting
+df_filtered['Year'] = pd.to_numeric(df_filtered['Year'], errors='coerce')
+df_filtered = df_filtered.dropna(subset=['Year'])
+
+# Extract year and attacks
+years = df_filtered['Year']
+attacks = df_filtered['Att']
+
+# Create line chart
+plt.figure(figsize=(10, 6))
+plt.plot(years, attacks, marker='o', linestyle='-', color='b')
+plt.title('Trend in Number of Attacks Over Years')
+plt.xlabel('Year')
+plt.ylabel('Number of Attacks (Att)')
+plt.grid(True)
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```

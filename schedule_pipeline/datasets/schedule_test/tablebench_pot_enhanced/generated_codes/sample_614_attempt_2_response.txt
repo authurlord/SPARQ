@@ -1,0 +1,15 @@
+Step 1: The user wants to calculate how many more games Harold Snepsts played compared to the average of 300 regular season games.
+Step 2: Load the dataframe.
+Step 3: Filter the row where the player is 'harold snepsts' and extract his 'reg gp' value.
+Step 4: Subtract the average (300) from Harold Snepsts' games played.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Harold Snepsts and get his reg gp
+harold_games = df[df['player'] == 'harold snepsts']['reg gp'].values[0]
+# Calculate difference from average
+difference = int(harold_games) - 300
+print(f"Final Answer: {difference}")
+```

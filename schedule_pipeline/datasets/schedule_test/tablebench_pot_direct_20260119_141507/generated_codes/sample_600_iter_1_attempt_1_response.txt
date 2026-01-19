@@ -1,0 +1,32 @@
+The error occurred because the "height ft / m" column contains values like "443 / 135", which are strings with both feet and meters. We need to extract just the numeric value for feet (or meters) and convert it to a number before computing the average floors.
+
+However, the question asks for the **average number of floors among the top 5 tallest buildings**. So we must:
+1. Determine the "tallest" building based on height (in feet or meters).
+2. Extract the numeric height value from "height ft / m".
+3. Select the top 5 buildings by height.
+4. Compute the average number of floors for those buildings.
+
+Step-by-step approach:
+- Parse the "height ft / m" column to extract the feet value (first number).
+- Convert it to float.
+- Sort buildings by height (descending).
+- Take top 5.
+- Compute the average of their "floors".
+
+```python
+import pandas as pd
+
+# Load the dataframe
+df = pd.read_csv('table.csv')
+
+# Parse height column to extract feet value
+df['height_ft'] = df['height ft / m'].str.split('/').str[0].astype(float)
+
+# Sort by height (descending) and get top 5
+top_5 = df.sort_values(by='height_ft', ascending=False).head(5)
+
+# Calculate average floors among these top 5
+avg_floors = top_5['floors'].mean()
+
+print(f"Final Answer: {avg_floors:.1f}")
+```

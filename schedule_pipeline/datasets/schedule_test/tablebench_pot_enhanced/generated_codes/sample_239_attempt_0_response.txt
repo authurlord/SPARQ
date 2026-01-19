@@ -1,0 +1,31 @@
+Step 1: The user wants to determine if there is a relationship between typhus and typhoid fever cases in the same year. This requires analyzing the correlation between the 'typhus' and 'typhoid fever' columns.
+Step 2: Load the dataframe.
+Step 3: Convert the 'typhus' and 'typhoid fever' columns to numeric values (handling any non-numeric entries like 'avg' in the data).
+Step 4: Calculate the correlation coefficient between the two variables.
+Step 5: Interpret the result — if the correlation is positive and significant, it suggests that an increase in typhus cases may be associated with an increase in typhoid fever cases.
+
+Note: The row with '191822' appears to be a typo or misformatted year. It will be excluded from analysis as it cannot be treated as a valid year for time-series correlation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Drop the row with invalid year '191822'
+df = df[df['year'] != '191822']
+
+# Convert 'typhus' and 'typhoid fever' to numeric, coercing errors to NaN
+df['typhus'] = pd.to_numeric(df['typhus'], errors='coerce')
+df['typhoid fever'] = pd.to_numeric(df['typhoid fever'], errors='coerce')
+
+# Drop rows with NaN values in either column
+df.dropna(subset=['typhus', 'typhoid fever'], inplace=True)
+
+# Calculate correlation coefficient
+correlation = df['typhus'].corr(df['typhoid fever'])
+
+# Output result
+if correlation > 0:
+    print("Final Answer: Yes")
+else:
+    print("Final Answer: No")
+```

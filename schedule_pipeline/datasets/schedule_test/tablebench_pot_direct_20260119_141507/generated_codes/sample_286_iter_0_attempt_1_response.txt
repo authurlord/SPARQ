@@ -1,0 +1,22 @@
+Step 1: The user wants the total viewers (in millions) for episodes that meet two conditions:
+- Rating/share is 3.0 or higher
+- Rank (timeslot) is 1
+
+Step 2: Load the dataframe.
+
+Step 3: Filter rows where 'rating / share (1849)' is >= '3.0' and 'rank (timeslot)' is '1'.
+
+Step 4: Sum the 'viewers (millions)' column from the filtered rows.
+
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter episodes with rating/share >= 3.0 and rank (timeslot) == 1
+filtered_episodes = df[(df['rating / share (1849)'] >= '3.0') & (df['rank (timeslot)'] == '1')]
+# Sum the viewers (in millions)
+total_viewers = filtered_episodes['viewers (millions)'].sum()
+print(f"Final Answer: {total_viewers}")
+```

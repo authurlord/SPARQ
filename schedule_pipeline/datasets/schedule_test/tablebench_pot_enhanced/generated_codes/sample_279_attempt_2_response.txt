@@ -1,0 +1,30 @@
+Step 1: The question asks for the total estimated exposure (mrem/hr) when combining two specimens, assuming that the calculated activity (Bq) is directly proportional to the specimen weight.
+
+Step 2: From the table:
+- For a specimen of 0.1 g / 4.08 mm, the estimated exposure is 0.0 mrem/hr.
+- For a specimen of 10 g / 1.89 cm, the estimated exposure is 0.03 mrem/hr.
+
+Step 3: Since the exposure is assumed to be directly proportional to the calculated activity (Bq), and the activity is proportional to weight, we can sum the exposures directly as they are already provided per specimen.
+
+Step 4: Add the two exposure values: 0.0 + 0.03 = 0.03 mrem/hr.
+
+Step 5: Output the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Find the rows for the two specimens
+specimen_1 = df[df['specimen weight / size'] == '0.1 g / 4.08 mm']
+specimen_2 = df[df['specimen weight / size'] == '10 g / 1.89 cm']
+
+# Extract estimated exposure values
+exposure_1 = float(specimen_1['estimated exposure ( mrem ) / hr'].values[0])
+exposure_2 = float(specimen_2['estimated exposure ( mrem ) / hr'].values[0])
+
+# Total exposure
+total_exposure = exposure_1 + exposure_2
+
+print(f"Final Answer: {total_exposure}")
+```

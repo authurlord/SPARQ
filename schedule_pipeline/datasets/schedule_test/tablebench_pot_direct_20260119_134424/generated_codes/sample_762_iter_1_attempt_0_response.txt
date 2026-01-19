@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Cannot forecast trend without clear pattern or model, data insufficient for prediction.

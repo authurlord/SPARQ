@@ -1,0 +1,41 @@
+Step 1: The user wants to find the country with the highest GDP per square kilometer.  
+Step 2: GDP per square kilometer is calculated as GDP (in billion USD) divided by area (in km²).  
+Step 3: Load the dataframe and extract relevant columns: 'gdp (billion us)' and 'area (km square)'.  
+Step 4: Convert GDP and area to numeric values (some entries like 'ec9 (1973)' have text with percentages, so we need to handle them).  
+Step 5: For rows where GDP or area contains text (e.g., with percentages), skip or clean them. Only consider valid numeric values.  
+Step 6: Compute GDP per km² for each country and find the maximum.  
+Step 7: Return the country name corresponding to the highest value.
+
+Note: The row "ec9 (1973)" has GDP and area with percentages (e.g., "3148.472 ( + 32.21%)"). We only take the base number (3148.472) and similarly for area.  
+We will parse these correctly.
+
+```python
+import pandas as pd
+import re
+
+df = pd.read_csv('table.csv')
+
+# Clean the data: remove percentage text and convert to numeric
+def clean_numeric(value):
+    # Extract the numeric part before parentheses or space
+    match = re.search(r'(-?\d+\.?\d*)', str(value))
+    if match:
+        return float(match.group(1))
+    return None
+
+# Apply cleaning to GDP and area
+df['gdp_billion'] = df['gdp (billion us)'].apply(clean_numeric)
+df['area_km2'] = df['area (km square)'].apply(clean_numeric)
+
+# Filter out rows with invalid values
+valid_rows = df[(df['gdp_billion'].notna()) & (df['area_km2'].notna())]
+
+# Calculate GDP per km²
+valid_rows['gdp_per_km2'] = valid_rows['gdp_billion'] / valid_rows['area_km2']
+
+# Find the country with the highest GDP per km²
+max_gdp_per_km2 = valid_rows.loc[valid_rows['gdp_per_km2'].idxmax()]
+highest_country = max_gdp_per_km2['member countries']
+
+print(f"Final Answer: {highest_country}")
+```

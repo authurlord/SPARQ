@@ -1,0 +1,32 @@
+Step 1: The user wants to count the number of delegates whose hometown is "Metro Manila" and who won a pageant title (i.e., result is "winner" or "top 5 finalist" or "first runner - up / virreina" or similar winning/placing titles like "second runner - up" might be considered, but only "winner" is explicitly a win).  
+Step 2: Filter rows where "hometown" contains "metro manila" or is "manila , metro manila" (common variations).  
+Step 3: Check if the "result" is a winning result (e.g., "winner", "top 5 finalist", "first runner - up / virreina", etc.).  
+Step 4: Count such rows.
+
+Note: From the data, "winner" is the only clear win. "Top 5 finalist" is not a win, so we exclude it. "Second runner-up" is not a win. Only "winner" counts as a win.
+
+So, we filter:
+- Hometown contains "metro manila" or "manila , metro manila"
+- Result is "winner"
+
+Now write the code accordingly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter delegates from Metro Manila (including "manila , metro manila")
+df_metro = df[df['hometown'].str.contains('metro manila', case=False, na=False) | 
+              df['hometown'].str.contains('manila', case=False, na=False)]
+
+# Further filter for those with winning results
+winning_results = ['winner', 'top 5 finalist', 'first runner - up / virreina', 'second runner - up']
+
+# But only count "winner" as a win
+df_winning = df_metro[df_metro['result'].str.contains('winner', case=False, na=False)]
+
+count_winning_delegates = len(df_winning)
+
+print(f"Final Answer: {count_winning_delegates}")
+```

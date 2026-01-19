@@ -1,0 +1,30 @@
+Step 1: Understand the question — we are to estimate the urban population percentage in 2015 based on the historical trend from 1939 to 2008.  
+Step 2: The "urban, %" column shows the urban population percentage over time. We will fit a linear trend to this data and project it to 2015.  
+Step 3: Extract the years and urban percentages, then perform linear regression to model the trend.  
+Step 4: Use the model to predict the urban percentage in 2015.  
+
+Note: The data spans from 1939 to 2008, and we assume a linear trend for extrapolation.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+# Extract year and urban percentage
+years = df['year (january)'].astype(int)
+urban_percent = df['urban , %'].astype(float)
+
+# Prepare data for linear regression
+X = years.values.reshape(-1, 1)
+y = urban_percent.values
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict urban percentage in 2015
+predicted_urban_2015 = model.predict([[2015]])[0]
+
+print(f"Final Answer: {predicted_urban_2015:.1f}")
+```

@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The data provided is limited to only 9 years (1850–1858), which is insufficient for reliable forecasting of trends over the next 5 years. Additionally, there are no clear numerical patterns or correlations between the number of tropical storms, hurricanes, and major hurricanes across the years. The "deaths" column contains non-numeric values (e.g., "not known", "none"), making statistical modeling infeasible. Therefore, no meaningful forecast can be generated from this dataset.
+
+Final Answer: Cannot be determined

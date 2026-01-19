@@ -1,0 +1,17 @@
+Step 1: The user is asking which award the individual won in 2003 for their performance in the movie "Road to Perdition".  
+Step 2: Look through the table for rows where the Year is 2003 and the Work is "Road to Perdition".  
+Step 3: Among those rows, identify the one where the Result is "Won" — that will be the award the individual won.  
+
+From the data:
+- In 2003, there are multiple nominations for "Road to Perdition", but only one has "Won": the "Young Artist Award" under "Best Performance in a Feature Film – Leading Young Actor".
+
+Thus, the answer is "Young Artist Award".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Year is 2003 and Work is 'Road to Perdition' and Result is 'Won'
+award = df[(df['Year'] == '2003') & (df['Work'] == 'Road to Perdition') & (df['Result'] == 'Won')]['Award'].values[0]
+print(f"Final Answer: {award}")
+```

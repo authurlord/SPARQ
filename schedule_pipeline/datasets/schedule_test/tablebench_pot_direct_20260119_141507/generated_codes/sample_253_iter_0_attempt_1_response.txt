@@ -1,0 +1,20 @@
+Step 1: The user wants the difference between the highest and lowest PSI values across provinces.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'PSI' column, convert it to numeric (handling missing values like '-').  
+Step 4: Find the maximum and minimum PSI values, then compute their difference.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'PSI' column to numeric, replacing '-' with NaN and then dropping NaN
+df['PSI'] = pd.to_numeric(df['PSI'], errors='coerce')
+# Remove any rows where PSI is NaN
+df = df.dropna(subset=['PSI'])
+# Find max and min PSI values
+max_psi = df['PSI'].max()
+min_psi = df['PSI'].min()
+difference = max_psi - min_psi
+print(f"Final Answer: {difference:.1f}")
+```

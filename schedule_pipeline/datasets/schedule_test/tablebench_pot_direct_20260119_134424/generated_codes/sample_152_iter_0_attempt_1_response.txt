@@ -1,0 +1,28 @@
+Step 1: The user wants to analyze which factors—'judges', 'public', and 'vote percentage'—contribute most to the 'result' of each couple.  
+Step 2: Since 'result' is categorical (e.g., 'safe', 'bottom two'), we need to examine how each factor correlates with the result.  
+Step 3: We can compute the correlation between each numerical factor ('judges', 'public', 'vote percentage') and the 'total' score, as 'total' is a proxy for performance and likely influences 'result'.  
+Step 4: If any factor shows a strong correlation with 'total', it contributes meaningfully to the result. Otherwise, we conclude no clear impact.  
+Step 5: Use pandas to compute correlation coefficients and interpret the results.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric
+df['judges'] = pd.to_numeric(df['judges'])
+df['public'] = pd.to_numeric(df['public'])
+df['total'] = pd.to_numeric(df['total'])
+df['vote percentage'] = df['vote percentage'].str.replace('%', '').astype(float)
+
+# Compute correlation between each factor and total score
+correlations = df[['judges', 'public', 'vote percentage', 'total']].corr()['total'].drop('total')
+
+# Check if any correlation is strong (absolute value > 0.5)
+strong_contributors = [col for col, corr in correlations.items() if abs(corr) > 0.5]
+
+if len(strong_contributors) > 0:
+    print(f"Final Answer: {', '.join(strong_contributors)}")
+else:
+    print("Final Answer: no clear impact")
+```

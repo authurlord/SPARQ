@@ -1,0 +1,23 @@
+The question asks for a description of the table's main contents, explanations of key columns, and notable trends or patterns. This requires a narrative analysis rather than a direct computation. Since no specific numerical query is asked (e.g., average, sum), we need to interpret the data qualitatively.
+
+Step-by-step approach:
+1. Understand the structure of the table:
+   - The table contains yearly demographic data from 1970 to 2006.
+   - Key columns include population, live births, deaths, natural change, and crude birth/death rates.
+2. Explain each column:
+   - "Average population (x 1000)": average population in thousands.
+   - "Live births": number of live births per year.
+   - "Deaths": number of deaths per year.
+   - "Natural change": difference between live births and deaths.
+   - "Crude birth rate" and "Crude death rate": per 1000 population.
+   - "Natural change (per 1000)": net change per 1000 population.
+3. Identify trends:
+   - Population generally increases from 1970 to 1990, then stabilizes or slightly decreases.
+   - Crude birth rate peaks in the 1970s and gradually declines.
+   - Crude death rate remains relatively stable or slightly decreases.
+   - Natural change shows a peak in the 1980s, then declines, with a rebound in the 2000s.
+   - A noticeable drop in live births and deaths around 1993–1994, followed by a rise in the 2000s.
+
+Since the task is descriptive, no code is needed to compute values — instead, we provide a clear explanation.
+
+Final Answer: Average population, live births, deaths, natural change, crude birth and death rates; population rises and stabilizes, birth rates decline, natural change peaks in 1980s then fluctuates, showing a long-term demographic shift.

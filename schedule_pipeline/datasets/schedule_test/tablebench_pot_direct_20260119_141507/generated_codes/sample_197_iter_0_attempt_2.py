@@ -1,0 +1,19 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Remove rows where 'internl tourism receipts 2011 (million usd)' is 'n / d'
+df_clean = df.dropna(subset=['internl tourism receipts 2011 (million usd)'])
+
+# Convert the numeric columns to float
+df_clean['internl tourist arrivals 2011 (x1000)'] = pd.to_numeric(df_clean['internl tourist arrivals 2011 (x1000)'], errors='coerce')
+df_clean['internl tourism receipts 2011 (million usd)'] = pd.to_numeric(df_clean['internl tourism receipts 2011 (million usd)'], errors='coerce')
+
+# Drop any remaining NaN values
+df_clean = df_clean.dropna()
+
+# Calculate correlation between tourist arrivals and receipts
+correlation = df_clean['internl tourist arrivals 2011 (x1000)'].corr(df_clean['internl tourism receipts 2011 (million usd)'])
+
+print(f"Final Answer: {correlation:.3f}")

@@ -1,0 +1,22 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Column descriptions
+print("Column Significance:")
+print("- 'year': The year the tropical cyclone season occurred.")
+print("- 'number of tropical storms': Total number of tropical storms recorded in that year.")
+print("- 'number of hurricanes': Number of storms that reached hurricane strength (sustained winds ≥ 74 mph).")
+print("- 'number of major hurricanes': Number of hurricanes that reached Category 3 or higher (sustained winds ≥ 111 mph).")
+print("- 'deaths': Estimated number of fatalities associated with storms in that year.")
+print("- 'strongest storm': Name or identifier of the most intense storm of the year.")
+
+print("\nNotable Trends and Patterns:")
+print("- The years 1870 and 1878 had the highest number of tropical storms (11 and 12 respectively).")
+print("- Both 1870 and 1878 also had the highest number of hurricanes (10 each).")
+print("- The highest number of major hurricanes was 2, occurring in 1870, 1873, and 1876.")
+print("- The deadliest year was 1870 with 2052 deaths, likely due to the intensity and impact of storms.")
+print("- The storm 'four' appears twice as the strongest storm (1870, 1871, 1877), indicating recurring significance.")
+print("- There is no clear long-term trend due to limited data, but variability in storm activity is evident across years.")
+
+print("Final Answer: year, number of tropical storms, number of hurricanes, number of major hurricanes, deaths, strongest storm")

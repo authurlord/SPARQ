@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Higher wind power generation generally correlates with a higher percentage of renewable energy in total electricity demand.

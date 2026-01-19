@@ -1,0 +1,12 @@
+Step 1: The user wants to calculate the average number of tropical cyclones per season.  
+Step 2: Load the dataframe from the provided table.  
+Step 3: Extract the 'tropical cyclones' column, which contains the number of tropical cyclones for each season.  
+Step 4: Compute the mean (average) of this column and output the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+mean_cyclones = df['tropical cyclones'].mean()
+print(f"Final Answer: {mean_cyclones:.1f}")
+```

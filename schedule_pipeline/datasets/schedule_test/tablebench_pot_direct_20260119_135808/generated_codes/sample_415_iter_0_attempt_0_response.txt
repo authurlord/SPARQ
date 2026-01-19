@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table shows the number of flights (in thousands) by country from 2002 to 2011, with the world total also included. Notable trends include a steady increase in global flight numbers, with China and the world total showing significant growth over time, while some countries like Mexico and Kazakhstan experienced declines after initial increases.

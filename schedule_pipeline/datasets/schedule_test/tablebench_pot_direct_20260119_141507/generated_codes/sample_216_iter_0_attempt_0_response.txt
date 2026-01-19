@@ -1,0 +1,25 @@
+Step 1: The question asks whether the age of the wife at marriage has a significant impact on the number of children she has. This requires analyzing the relationship between "her age" and "of children".
+
+Step 2: Load the dataframe and extract the relevant columns: "her age" and "of children".
+
+Step 3: Perform a simple correlation analysis to check if there is a linear relationship between the two variables.
+
+Step 4: Since the dataset is small, we can compute the correlation coefficient (Pearson) to assess the strength and direction of the relationship. A high absolute value (close to 1 or -1) indicates a strong relationship.
+
+Step 5: Interpret the result — if the correlation is significantly high, it suggests a meaningful impact.
+
+Note: We do not have statistical significance testing (like p-values) in this small dataset without additional assumptions, so we rely on correlation as an indicator.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the columns of interest
+wife_age = df['her age']
+children = df['of children']
+
+# Calculate the Pearson correlation coefficient
+correlation = wife_age.corr(children)
+
+print(f"Final Answer: {correlation:.2f}")
+```

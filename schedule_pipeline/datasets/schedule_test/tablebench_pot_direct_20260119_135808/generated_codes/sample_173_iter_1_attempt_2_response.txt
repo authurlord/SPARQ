@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The higher the eccentricity, the greater the difference between periselene and aposelene distances.

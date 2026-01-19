@@ -1,0 +1,48 @@
+Step 1: The question asks which macronutrient — carbohydrates, fat, or protein — is most closely related to the energy content of staple foods.  
+Step 2: Energy (in kJ) is given per 100g portion for each staple food. We will examine the correlation between energy and the amounts of carbohydrates, fat, and protein.  
+Step 3: Since the data is tabular, we will extract the values for energy, carbohydrates, fat, and protein for each food item and compute the correlation coefficients between energy and each of the three nutrients.  
+Step 4: The nutrient with the highest correlation coefficient (closest to 1) will be identified as the one most closely related to energy content.
+
+Note: The correlation will be computed using the Pearson correlation coefficient.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Select relevant columns: 'Energy (kJ)', 'Carbohydrates (g)', 'Fat (g)', 'Protein (g)'
+energy = df['Energy (kJ)'].dropna()
+carbs = df[['Carbohydrates (g)']].dropna()['Carbohydrates (g)']
+fat = df[['Fat (g)']].dropna()['Fat (g)']
+protein = df[['Protein (g)']].dropna()['Protein (g)']
+
+# Ensure all values are numeric and handle missing values (e.g., '-')
+carbs = pd.to_numeric(carbs, errors='coerce')
+fat = pd.to_numeric(fat, errors='coerce')
+protein = pd.to_numeric(protein, errors='coerce')
+energy = pd.to_numeric(energy, errors='coerce')
+
+# Drop rows with NaN after conversion
+energy = energy.dropna()
+carbs = carbs.dropna()
+fat = fat.dropna()
+protein = protein.dropna()
+
+# Compute correlation coefficients
+corr_carbs = energy.corr(carbs)
+corr_fat = energy.corr(fat)
+corr_protein = energy.corr(protein)
+
+# Find the highest correlation
+max_corr = max(corr_carbs, corr_fat, corr_protein)
+if max_corr == corr_carbs:
+    final_answer = "carbohydrates"
+elif max_corr == corr_fat:
+    final_answer = "fat"
+else:
+    final_answer = "protein"
+
+print(f"Final Answer: {final_answer}")
+```

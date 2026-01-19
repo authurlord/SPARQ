@@ -1,0 +1,16 @@
+Step 1: The user wants to identify the nation that ranked 4th in terms of gold medals won.
+Step 2: Load the dataframe.
+Step 3: Sort the data by 'gold' in descending order to determine rankings.
+Step 4: Retrieve the nation corresponding to the 4th rank (index 3 after sorting).
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by gold medals in descending order
+df_sorted = df.sort_values(by='gold', ascending=False)
+# Get the nation at 4th rank (index 3)
+fourth_nation = df_sorted.iloc[3]['nation']
+print(f"Final Answer: {fourth_nation}")
+```

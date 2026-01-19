@@ -1,0 +1,97 @@
+We are tasked with finding the aircraft type with the highest average seat density, defined as:
+
+> **Average Seat Density = (Total number of seats) / (Total number of aircraft)**
+
+However, the "Seats in Standard Configuration" column contains ranges (e.g., "267-269") and some values like "366", which are single numbers. We need to interpret these properly.
+
+Step-by-step approach:
+
+1. Identify the relevant columns:
+   - "Total": total number of aircraft for each type
+   - "Seats in Standard Configuration": total seats per aircraft (we need to extract a numeric value)
+   - For entries with ranges (like "267-269"), we take the average of the range.
+   - For single values (like 366), use that value directly.
+
+2. For each aircraft type:
+   - Parse the "Seats in Standard Configuration" field:
+     - If it's a string with a dash (e.g., "267-269"), compute the average of the two numbers.
+     - Otherwise, convert to float/int.
+   - Compute total seats = (number of aircraft) × (average seats per aircraft)
+
+3. Then compute average seat density = total seats / total aircraft → this is just the average seats per aircraft.
+
+But note: the definition says:
+> Average Seat Density = total number of seats / total number of aircraft
+
+This is equivalent to the **average number of seats per aircraft**.
+
+So we can compute:
+- For each row: `seat_density = (total aircraft * avg_seats_per_aircraft) / total aircraft = avg_seats_per_aircraft`
+
+Therefore, **the average seat density is simply the average of the seats per aircraft**, regardless of fleet size — because it cancels out.
+
+Thus, we can just compute the average of the "Seats in Standard Configuration" column, but only for rows where "Total" is not blank and the seat data is valid.
+
+Wait — no! The question asks: **which aircraft type has the highest average seat density**?
+
+Average seat density = total seats / total aircraft.
+
+So for each type:
+- Total seats = (number of aircraft) × (seats per aircraft)
+- Average seat density = (total seats) / (total aircraft) = seats per aircraft
+
+So the average seat density is exactly the "Seats in Standard Configuration" value (after parsing).
+
+Therefore, we need to:
+- For each row, parse the "Seats in Standard Configuration" column into a numeric value (average of range if needed).
+- Then compute the average seat density for that type = that parsed value.
+- Find the type with the maximum such value.
+
+Important: Some rows have "—" which means no data. We skip those.
+
+Also, the last row ("Total mainline") is a summary and not an aircraft type — we should exclude it.
+
+Steps:
+1. Filter out the "Total mainline" row.
+2. For each row, parse "Seats in Standard Configuration":
+   - If it's a string with a dash (e.g., "267-269"), split and compute average.
+   - Else, convert to float.
+3. Create a new column "avg_seats" for each row.
+4. Find the row with the maximum "avg_seats".
+5. Return the aircraft type name.
+
+Let’s write the code accordingly.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Remove the last row which is "Total mainline"
+df = df.iloc[:-1]
+
+# Function to parse seats from string
+def parse_seats(seat_str):
+    if pd.isna(seat_str) or seat_str == '—':
+        return np.nan
+    if '-' in seat_str:
+        parts = seat_str.split('-')
+        min_val, max_val = int(parts[0]), int(parts[1])
+        return (min_val + max_val) / 2
+    else:
+        return float(seat_str)
+
+# Apply parsing to the "Seats in Standard Configuration" column
+df['avg_seats'] = df['Seats in Standard Configuration'].apply(parse_seats)
+
+# Drop rows where avg_seats is NaN
+df = df.dropna(subset=['avg_seats'])
+
+# Find the row with the highest average seat density (i.e., max avg_seats)
+max_row = df.loc[df['avg_seats'].idxmax()]
+
+# Return the aircraft type name
+final_answer = max_row['Row Header']
+print(f"Final Answer: {final_answer}")
+```

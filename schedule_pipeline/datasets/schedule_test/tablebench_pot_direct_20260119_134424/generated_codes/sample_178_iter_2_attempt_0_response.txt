@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The maximum speed increases with higher horsepower, but the relationship is not strictly linear due to variations in design and technology across different years.

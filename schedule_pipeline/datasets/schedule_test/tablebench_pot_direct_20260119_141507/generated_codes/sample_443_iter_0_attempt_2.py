@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert area and population to numeric (in case of string)
+df['area (km 2 )'] = pd.to_numeric(df['area (km 2 )'], errors='coerce')
+df['population'] = pd.to_numeric(df['population'], errors='coerce')
+
+# Remove rows with NaN values
+df = df.dropna()
+
+# Calculate mean and std for area and population
+mean_area = df['area (km 2 )'].mean()
+std_area = df['area (km 2 )'].std()
+mean_pop = df['population'].mean()
+std_pop = df['population'].std()
+
+# Define threshold for outliers (2 standard deviations)
+z_area_threshold = 2
+z_pop_threshold = 2
+
+# Find outliers in area
+outlier_area = df[(np.abs((df['area (km 2 )'] - mean_area) / std_area) > z_area_threshold)]
+# Find outliers in population
+outlier_pop = df[(np.abs((df['population'] - mean_pop) / std_pop) > z_pop_threshold)]
+
+# Combine outlier locations (by place name)
+outliers = set()
+for idx, row in outlier_area.iterrows():
+    outliers.add(row['place'])
+for idx, row in outlier_pop.iterrows():
+    outliers.add(row['place'])
+
+# Convert to list and print
+outlier_list = list(outliers)
+print(f"Final Answer: {', '.join(outlier_list)}")

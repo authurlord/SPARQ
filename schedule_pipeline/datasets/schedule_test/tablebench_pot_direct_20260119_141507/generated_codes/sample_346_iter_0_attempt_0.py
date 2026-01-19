@@ -1,0 +1,7 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where language is 'spanish' and check for values >= 40000
+spanish_populations = df[df['language'] == 'spanish']
+count_40k_plus = (spanish_populations.iloc[:, 1:] >= 40000).sum(axis=1).sum()
+print(f"Final Answer: {count_40k_plus}")

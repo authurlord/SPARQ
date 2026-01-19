@@ -1,0 +1,15 @@
+Step 1: The user wants to calculate the average and standard deviation of 'us viewers (millions)'.
+Step 2: Load the dataframe.
+Step 3: Select the 'us viewers (millions)' column.
+Step 4: Calculate the mean and standard deviation using pandas methods.
+Step 5: Print both values.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate average and standard deviation of 'us viewers (millions)'
+mean_viewers = df['us viewers (millions)'].mean()
+std_viewers = df['us viewers (millions)'].std()
+
+print(f"Final Answer: {mean_viewers:.2f}, {std_viewers:.2f}")
+```

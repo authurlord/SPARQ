@@ -1,0 +1,18 @@
+Step 1: The question asks for an expected viewership of the next episode based on trends from the given data.  
+Step 2: Viewership values are provided for episodes in chronological order. We can analyze the trend by observing if viewership is increasing, decreasing, or fluctuating.  
+Step 3: Since the data only spans 6 episodes, we can calculate the average viewership or identify a pattern (e.g., increasing or decreasing trend).  
+Step 4: A simple approach is to compute the average viewership as a reasonable estimate for the next episode, assuming no significant trend change.  
+
+However, looking at the viewership values:  
+2.01, 1.45, 1.54, 1.88, 1.73, 1.58 — there is some fluctuation, but the overall trend appears slightly upward and then stabilizes. The average gives a neutral baseline.  
+
+We will compute the average of the viewership values and use that as the expected viewership for the next episode.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the average viewership
+average_viewership = df['viewers (in millions)'].mean()
+print(f"Final Answer: {average_viewership:.2f}")
+```

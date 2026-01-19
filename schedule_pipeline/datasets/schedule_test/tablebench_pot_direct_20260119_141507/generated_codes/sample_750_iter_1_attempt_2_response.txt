@@ -1,0 +1,27 @@
+We are asked to forecast the average finish position for a driver in 2005, assuming they participate in a similar number of races as in 2004.
+
+Step-by-step approach:
+1. The data includes the "starts" and "avg finish" columns for each year from 1985 to 2004.
+2. In 2004, the number of starts is 3, and the average finish position is 40.3.
+3. We are to forecast the average finish position for 2005 under the assumption that the number of starts is the same (3).
+4. However, there is no explicit trend or model provided (e.g., linear regression), so we must assume that the average finish position is not directly predictable from past data unless we assume a pattern.
+5. Since the question says "a similar number of races as in 2004", and there's no indication of a trend in average finish positions over time, the most reasonable assumption is that the average finish position remains unchanged — i.e., we simply use the 2004 value.
+
+Therefore, the forecasted average finish position for 2005 is the same as in 2004: 40.3.
+
+Note: This is a simple extrapolation based on the given data and the lack of any other information (like trends or models). Without additional assumptions or data (like a regression model), we cannot perform a more sophisticated forecast.
+
+Final Answer: 40.3
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the average finish position for 2004
+avg_finish_2004 = df[df['year'] == '2004']['avg finish'].iloc[0]
+
+# Forecasted average finish position for 2005 (same as 2004 due to similar race count)
+print(f"Final Answer: {avg_finish_2004}")
+```

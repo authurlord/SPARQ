@@ -1,0 +1,42 @@
+We are tasked with calculating the Hurricane Severity Index (HSI) for each year, defined as:
+
+$$
+\text{HSI} = \frac{\text{number of hurricanes} + \text{number of major hurricanes}}{\text{number of tropical storms}}
+$$
+
+However, we must be cautious: some values in the "number of tropical storms" column are given as strings like "60 +" or "none", which cannot be directly used in arithmetic operations. We need to filter out or handle these invalid entries.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Identify valid numeric values in the columns: "number of tropical storms", "number of hurricanes", "number of major hurricanes".
+3. Convert all relevant columns to numeric, handling non-numeric entries (e.g., "60 +", "none") by treating them as missing or zero.
+4. Compute HSI for each year.
+5. Find the year with the highest HSI.
+
+Note: For rows where "number of tropical storms" is a string like "60 +", we cannot compute a valid HSI. We will assume such entries are invalid and skip them or assign NaN. But since the question asks for the year with the highest HSI, we only consider rows where all values are valid numbers.
+
+Let’s process the data accordingly.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert all number columns to numeric, coercing errors to NaN
+df['number of tropical storms'] = pd.to_numeric(df['number of tropical storms'], errors='coerce')
+df['number of hurricanes'] = pd.to_numeric(df['number of hurricanes'], errors='coerce')
+df['number of major hurricanes'] = pd.to_numeric(df['number of major hurricanes'], errors='coerce')
+
+# Drop rows where tropical storms is NaN (invalid)
+df_clean = df.dropna(subset=['number of tropical storms', 'number of hurricanes', 'number of major hurricanes'])
+
+# Calculate HSI for each year
+df_clean['hs_index'] = (df_clean['number of hurricanes'] + df_clean['number of major hurricanes']) / df_clean['number of tropical storms']
+
+# Find the year with the highest HSI
+max_hsi_year = df_clean.loc[df_clean['hs_index'].idxmax(), 'year']
+
+print(f"Final Answer: {max_hsi_year}")
+```

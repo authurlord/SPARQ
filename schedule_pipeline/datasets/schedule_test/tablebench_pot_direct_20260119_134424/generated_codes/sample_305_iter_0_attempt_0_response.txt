@@ -1,0 +1,20 @@
+Step 1: The user wants to find the year when the athlete achieved their personal best (lowest time) in the 400m event.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'Event' is '400 m'.
+Step 4: Convert the 'Notes' column (which contains times) to numeric, and find the row with the minimum time.
+Step 5: Return the corresponding 'Year' value.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 400m events
+four_hundred_m = df[df['Event'] == '400 m']
+# Convert Notes to numeric (times)
+four_hundred_m['Notes'] = pd.to_numeric(four_hundred_m['Notes'], errors='coerce')
+# Find the row with the minimum time
+best_time_row = four_hundred_m.loc[four_hundred_m['Notes'].idxmin()]
+# Extract the year
+best_year = best_time_row['Year']
+print(f"Final Answer: {best_year}")
+```

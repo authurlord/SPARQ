@@ -1,0 +1,27 @@
+Step 1: Understand the question. We are to find the minimum percentage increase in the Manchu population of the "north" region such that it surpasses the Manchu population of the "liaoning" region.  
+- The Manchu population in "liaoning" is 5,336,895 (from the table).  
+- The Manchu population in "north" is 3,002,873.  
+- We need to compute the percentage increase required for "north" to exceed 5,336,895.
+
+Step 2: Formula for percentage increase:  
+$$
+\text{Percentage Increase} = \left( \frac{\text{Target} - \text{Current}}{\text{Current}} \right) \times 100
+$$  
+Where:
+- Target = Manchu population in Liaoning = 5,336,895  
+- Current = Manchu population in North = 3,002,873  
+
+Step 3: Plug in the values and compute.
+
+```python
+# Manchu population in "liaoning"
+manchu_liaoning = 5336895
+
+# Manchu population in "north"
+manchu_north = 3002873
+
+# Calculate percentage increase needed to surpass liaoning's manchu population
+percentage_increase = ((manchu_liaoning - manchu_north) / manchu_north) * 100
+
+print(f"Final Answer: {percentage_increase:.2f}")
+```

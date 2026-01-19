@@ -1,0 +1,20 @@
+Step 1: Filter the data to find rows where the narrator is "katherine kellgren".
+Step 2: Among those rows, check which author also has a book that won the award in 2013 (i.e., citation is 'winner' and year is 2013).
+Step 3: Return the author's name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where narrator is 'katherine kellgren'
+kellgren_books = df[df['narrator'] == 'katherine kellgren']
+
+# Check if any of these authors have a book that won in 2013
+winning_2013 = df[(df['citation'] == 'winner') & (df['year'] == '2013')]
+
+# Find the intersection of authors
+matching_author = set(kellgren_books['author']).intersection(set(winning_2013['author']))
+
+# Output the result
+print(f"Final Answer: {matching_author.pop()}")
+```

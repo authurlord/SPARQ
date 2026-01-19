@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the party with the highest total number of seats across all panels.
+Step 2: Load the dataframe.
+Step 3: Select the 'total' column and find the party with the maximum value.
+Step 4: Print the party name with the highest total.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the party with the maximum total
+max_party = df.loc[df['total'].idxmax(), 'party']
+print(f"Final Answer: {max_party}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants the total mintage of all coins from 2002 to 2012.  
+Step 2: Load the dataframe.  
+Step 3: Select the 'mintage' column and convert it to integers.  
+Step 4: Sum the values in the 'mintage' column.  
+Step 5: Print the total mintage as the final answer.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'mintage' column to integer and calculate total
+total_mintage = df['mintage'].astype(int).sum()
+print(f"Final Answer: {total_mintage}")
+```

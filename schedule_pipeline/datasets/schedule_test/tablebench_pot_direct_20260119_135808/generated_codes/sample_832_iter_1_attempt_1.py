@@ -1,0 +1,10 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'horse - power' to numeric, coercing errors to NaN
+df['horse - power'] = pd.to_numeric(df['horse - power'], errors='coerce')
+# Filter rows where 'built year' is less than 1870
+df_filtered = df[df['built year'] < 1870]
+# Calculate standard deviation of 'horse - power' for filtered data
+std_hp = df_filtered['horse - power'].std()
+print(f"Final Answer: {std_hp:.1f}")

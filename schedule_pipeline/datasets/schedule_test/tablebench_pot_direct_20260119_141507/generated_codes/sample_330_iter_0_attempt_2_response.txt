@@ -1,0 +1,13 @@
+Step 1: The user is asking for the specific award won in 2003 for the performance in "Road to Perdition".  
+Step 2: Filter the rows where the 'Year' is 2003 and the 'Work' is "Road to Perdition".  
+Step 3: Among those rows, identify the award where the 'Result' is "Won".  
+Step 4: Return the name of that award.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for year 2003 and work "Road to Perdition" with result "Won"
+award = df[(df['Year'] == '2003') & (df['Work'] == 'Road to Perdition') & (df['Result'] == 'Won')]['Award'].values[0]
+print(f"Final Answer: {award}")
+```

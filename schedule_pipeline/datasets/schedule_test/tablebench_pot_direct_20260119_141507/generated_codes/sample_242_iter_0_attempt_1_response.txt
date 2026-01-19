@@ -1,0 +1,21 @@
+Step 1: Identify the top-scoring forward (fw) and top-scoring midfielder (mf) based on total goals.
+Step 2: Filter rows where position is 'fw' or 'mf'.
+Step 3: Extract the 'total goals' for each group and find the maximum in each.
+Step 4: Compute the difference between the top forward and top midfielder.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter players by position
+forwards = df[df['position'] == 'fw']
+midfielders = df[df['position'] == 'mf']
+
+# Find the maximum total goals for forwards and midfielders
+top_forward_goals = forwards['total goals'].max()
+top_midfielder_goals = midfielders['total goals'].max()
+
+# Calculate the difference
+difference = top_forward_goals - top_midfielder_goals
+print(f"Final Answer: {difference}")
+```

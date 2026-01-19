@@ -1,0 +1,10 @@
+{
+  "total_samples": 886,
+  "total_attempts": 4041,
+  "successful_attempts": 1847,
+  "final_success_count": 789,
+  "direct_answer_count": 789,
+  "success_rate": 0.4570650829002722,
+  "sample_success_rate": 0.8905191873589164,
+  "direct_answer_rate": 0.8905191873589164
+}

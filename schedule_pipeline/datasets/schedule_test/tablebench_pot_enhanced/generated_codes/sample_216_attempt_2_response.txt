@@ -1,0 +1,14 @@
+Step 1: The user wants to determine if the wife's age at marriage has a significant impact on the number of children she has.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'her age' and 'of children' columns.  
+Step 4: Calculate the correlation coefficient between the two variables to assess the relationship.  
+Step 5: Print the correlation coefficient as the final answer.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate correlation between 'her age' and 'of children'
+correlation = df['her age'].astype(int).corr(df['of children'].astype(int))
+print(f"Final Answer: {correlation:.3f}")
+```

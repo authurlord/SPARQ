@@ -1,0 +1,30 @@
+Step 1: The user wants to determine which factors (columns) significantly contribute to the 'points' earned. This requires analyzing the relationship between 'points' and other numerical columns (e.g., 'wins', 'poles', 'laps', 'podiums', 'races').
+
+Step 2: Load the dataframe and check for numerical correlation between 'points' and other numerical features.
+
+Step 3: Compute correlation coefficients between 'points' and each of the numerical columns.
+
+Step 4: Identify if any column has a strong positive or negative correlation (e.g., > 0.5 or < -0.5).
+
+Step 5: If no significant correlation is found, return 'no clear impact'.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select only numerical columns for correlation analysis
+numerical_columns = ['races', 'wins', 'poles', 'laps', 'podiums', 'points']
+correlation_matrix = df[numerical_columns].corr()
+
+# Extract correlation of 'points' with other variables
+point_correlations = correlation_matrix['points'].drop('points')
+
+# Check for significant correlations (absolute value > 0.5)
+significant_factors = point_correlations[abs(point_correlations) > 0.5].index.tolist()
+
+if significant_factors:
+    print(f"Final Answer: {', '.join(significant_factors)}")
+else:
+    print("Final Answer: no clear impact")
+```

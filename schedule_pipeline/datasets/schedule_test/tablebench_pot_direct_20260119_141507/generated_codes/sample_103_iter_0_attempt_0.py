@@ -1,0 +1,51 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean the data: extract percentage values from strings
+def extract_percentage(s):
+    try:
+        # Find the part in parentheses and extract the number
+        if '(' in s:
+            pct_str = s.split('(')[1].split('%')[0]
+            return float(pct_str)
+        return 0
+    except:
+        return 0
+
+# Convert all rows to float percentages
+data = []
+years = ['1880', '1899', '1913', '19301', '1956', '1966', '1977', '1992', '2002']
+ethnicities = df['Ethnicity'].tolist()
+
+# Process each ethnicity
+for eth in ethnicities:
+    row = df[df['Ethnicity'] == eth].iloc[0]
+    percentages = []
+    for year in years:
+        val = row[year]
+        if isinstance(val, str):
+            # Extract percentage from string
+            pct = extract_percentage(val)
+            percentages.append(pct)
+        else:
+            percentages.append(0)
+    data.append(percentages)
+
+# Create a DataFrame for plotting
+df_pct = pd.DataFrame(data, index=ethnicities, columns=years)
+
+# Plot stacked bar chart with percentages
+plt.figure(figsize=(12, 8))
+df_pct.plot(kind='bar', stacked=True, color=plt.cm.viridis.colors)
+plt.title('Proportion of Different Ethnic Populations Over Time')
+plt.xlabel('Year')
+plt.ylabel('Percentage')
+plt.xticks(rotation=45)
+plt.legend(title='Ethnicity')
+plt.tight_layout()
+plt.show()
+
+print("Final Answer: Chart generated successfully")

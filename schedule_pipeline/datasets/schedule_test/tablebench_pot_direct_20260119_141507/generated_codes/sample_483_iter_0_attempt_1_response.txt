@@ -1,0 +1,24 @@
+Step 1: The user wants to identify data points in the 'whenbuilt' column that deviate significantly from the norm.  
+Step 2: "Deviate significantly" suggests outliers — values that are far from the majority of the data.  
+Step 3: We will examine the 'whenbuilt' column and look for non-standard entries (e.g., "abc", "march 1950", "april 1950", "january 1951") which are not in a consistent year format like "1948".  
+Step 4: Filter out entries that are clearly abnormal (e.g., "abc", dates with inconsistent formats).  
+
+We will check for entries that are not numeric years or do not follow the standard "YYYY" format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the 'whenbuilt' column
+whenbuilt = df['whenbuilt']
+
+# Identify non-numeric or non-standard entries
+non_standard_entries = whenbuilt[~whenbuilt.str.isdigit() & ~whenbuilt.str.contains(r'\d{4}', na=False)]
+
+# Print the non-standard entries
+print(non_standard_entries.tolist())
+
+# Final Answer: List of non-standard entries
+Final Answer: ['abc', 'march 1950', 'april 1950', 'january 1951']
+```

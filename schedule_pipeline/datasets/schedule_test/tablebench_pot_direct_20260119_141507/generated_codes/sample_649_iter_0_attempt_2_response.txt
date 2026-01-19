@@ -1,0 +1,24 @@
+Step 1: The user wants to calculate the correlation coefficient between a country's UN budget and its international trade (in millions of USD).  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'un budget' and 'international trade (millions of usd) 2011' columns.  
+Step 4: Convert the 'un budget' column from percentage to decimal (e.g., '4.999%' → 0.04999) to ensure proper numerical correlation.  
+Step 5: Compute the Pearson correlation coefficient between the two columns.  
+Step 6: Print the correlation coefficient.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'un budget' from percentage string to decimal
+df['un budget'] = df['un budget'].str.rstrip('%').astype(float) / 100.0
+
+# Extract the two columns for correlation
+un_budget = df['un budget']
+international_trade = df['international trade (millions of usd) 2011']
+
+# Calculate the correlation coefficient
+correlation_coefficient = un_budget.corr(international_trade)
+
+print(f"Final Answer: {correlation_coefficient:.3f}")
+```

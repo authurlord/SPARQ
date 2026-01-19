@@ -1,0 +1,25 @@
+Step 1: The user wants to identify surnames that deviate significantly from the norm. Since the data shows a trend in the number of bearers over time, "deviation" can be interpreted as a significant drop or rise from the overall trend.  
+Step 2: We will analyze the "number of bearers 1971" and "number of bearers 2009" columns.  
+Step 3: Compute the percentage change from 1971 to 2009 for each surname.  
+Step 4: Identify outliers — surnames with extreme changes (e.g., very large decreases or increases).  
+Step 5: Note that "møller" is the only surname with an occupational type, which might indicate a different pattern.  
+Step 6: Look for surnames with unusually high or low percentage changes.
+
+We will calculate the percentage change and flag those with absolute changes > 20% (a reasonable threshold for "significant deviation").
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Calculate percentage change from 1971 to 2009
+df['change_percent'] = ((df['number of bearers 2009'] - df['number of bearers 1971']) / df['number of bearers 1971']) * 100
+
+# Identify significant deviations (absolute change > 20%)
+deviations = df[df['change_percent'].abs() > 20]
+
+# Extract the surnames that deviate significantly
+deviant_surnames = deviations['surname'].tolist()
+
+print(f"Final Answer: {', '.join(deviant_surnames)}")
+```

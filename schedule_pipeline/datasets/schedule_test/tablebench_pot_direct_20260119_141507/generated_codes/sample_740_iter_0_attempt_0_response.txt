@@ -1,0 +1,46 @@
+Step 1: The question asks for a projection of CBR, CDR, and IMR for the period 2010–2015 based on observed trends from 1950 to 2010.  
+Step 2: Analyze the trends in each of these three indicators (CBR1, CDR1, IMR1) over time.  
+Step 3: Observe the pattern:  
+- CBR1 (Crude Birth Rate) appears to be decreasing steadily from 47.9 in 1950–1955 to 21.5 in 2005–2010.  
+- CDR1 (Crude Death Rate) is decreasing from 27.1 to 7.2.  
+- IMR1 (Infant Mortality Rate) is decreasing from 184.8 to 44.4.  
+Step 4: Assume a linear trend and project values for 2010–2015 using the last few data points.  
+Step 5: Use linear regression or simple extrapolation based on the last three data points (2005–2010, 2000–2005, 1995–2000) to estimate values for 2010–2015.  
+
+Since the data only goes up to 2010–2015, we can project using the most recent trend. We will calculate the average change per decade and extend it.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert the 'Period' column to numeric for easier analysis
+df['Period'] = df['Period'].str.extract(r'(\d{4}-\d{4})')[0].astype(int) // 1000  # Extract decade (e.g., 1950->5, 2010->10)
+
+# Select relevant columns
+columns = ['CBR1', 'CDR1', 'IMR1']
+data = df[columns].copy()
+
+# Project for 2010–2015 (which corresponds to decade 2010)
+# Since data ends at 2005–2010 (decade 10), we assume linear trend from 2005–2010 to 2010–2015
+
+# Extract the last 3 years (2005–2010, 2000–2005, 1995–2000) to fit a trend
+recent_data = data.iloc[-3:].copy()
+recent_years = [10, 9, 8]  # corresponding to 2005–2010, 2000–2005, 1995–2000
+
+# Fit linear trend for each rate
+def project_trend(x, y, future_year):
+    # x: years (as integers), y: values
+    slope = np.polyfit(x, y, 1)[0]
+    intercept = np.polyfit(x, y, 1)[1]
+    return slope * future_year + intercept
+
+# Project for 2010–2015 (year 11)
+projected_cbr = project_trend(recent_years, data['CBR1'].iloc[-3:], 11)
+projected_cdr = project_trend(recent_years, data['CDR1'].iloc[-3:], 11)
+projected_imr = project_trend(recent_years, data['IMR1'].iloc[-3:], 11)
+
+print(f"Final Answer: {projected_cbr:.2f}, {projected_cdr:.2f}, {projected_imr:.2f}")
+```

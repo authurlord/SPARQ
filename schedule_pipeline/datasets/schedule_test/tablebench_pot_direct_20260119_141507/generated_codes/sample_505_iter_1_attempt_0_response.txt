@@ -1,0 +1,59 @@
+We are tasked with calculating the Hurricane Severity Index (HSI) for each year, defined as:
+
+$$
+\text{HSI} = \frac{\text{number of hurricanes} + \text{number of major hurricanes}}{\text{number of tropical storms}}
+$$
+
+Step 1: Identify the columns:
+- "number of tropical storms"
+- "number of hurricanes"
+- "number of major hurricanes"
+
+Step 2: Convert the "number of tropical storms" and the other numeric columns to integers. Note that some values like "60 +" or "none" are strings and cannot be used in arithmetic. We must filter or handle these.
+
+But looking at the data:
+- For years 1860 to 1868, the "deaths" column has values like "60 +", "22 +", "none", etc., which are not numeric.
+- However, the "number of tropical storms", "number of hurricanes", and "number of major hurricanes" are mostly numeric, except possibly in edge cases.
+
+Wait — the issue in the previous attempt was that we tried to divide strings. So we must ensure that all values in the numerator and denominator are numeric.
+
+Looking at the table:
+- "number of tropical storms": all are numbers (e.g., 1, 2, 3, 4, 2, 4, 1, 2, 1)
+- "number of hurricanes": all are numbers (e.g., 5, 6, 3, 5, 3, 3, 5, 6, 3)
+- "number of major hurricanes": all are numbers (e.g., 1, 0, 0, 0, 0, 0, 1, 0, 0)
+
+So only the "deaths" column is problematic, but it's not used in HSI.
+
+Therefore, we can safely compute HSI for each year using the numeric columns.
+
+Step 3: For each row:
+- Compute HSI = (hurricanes + major hurricanes) / tropical storms
+
+Step 4: Find the year with the highest HSI.
+
+Step 5: Handle any missing or non-numeric values — but in this case, all values in the relevant columns are numeric.
+
+Let’s write the code accordingly.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, handling any potential string issues
+df['number of tropical storms'] = pd.to_numeric(df['number of tropical storms'], errors='coerce')
+df['number of hurricanes'] = pd.to_numeric(df['number of hurricanes'], errors='coerce')
+df['number of major hurricanes'] = pd.to_numeric(df['number of major hurricanes'], errors='coerce')
+
+# Drop rows where any of the required columns are NaN (invalid data)
+df_clean = df.dropna(subset=['number of tropical storms', 'number of hurricanes', 'number of major hurricanes'])
+
+# Calculate HSI for each year
+df_clean['hs_index'] = (df_clean['number of hurricanes'] + df_clean['number of major hurricanes']) / df_clean['number of tropical storms']
+
+# Find the year with the highest HSI
+max_hsi_year = df_clean.loc[df_clean['hs_index'].idxmax(), 'year']
+
+print(f"Final Answer: {max_hsi_year}")
+```

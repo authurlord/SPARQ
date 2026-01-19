@@ -1,0 +1,17 @@
+Step 1: The user wants the top 3 member states with the highest number of inhabitants per MEP.
+Step 2: Load the dataframe.
+Step 3: Convert 'inhabitants per mep' to numeric for proper sorting.
+Step 4: Sort the data in descending order by 'inhabitants per mep'.
+Step 5: Select the top 3 countries and extract their names.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'inhabitants per mep' to numeric for sorting
+df['inhabitants per mep'] = pd.to_numeric(df['inhabitants per mep'])
+# Sort by 'inhabitants per mep' in descending order
+top_3 = df.sort_values(by='inhabitants per mep', ascending=False).head(3)['member state']
+print(f"Final Answer: {', '.join(top_3)}")
+```

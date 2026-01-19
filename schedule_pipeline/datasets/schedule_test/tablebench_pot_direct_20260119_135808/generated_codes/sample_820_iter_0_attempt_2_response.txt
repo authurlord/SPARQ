@@ -1,0 +1,15 @@
+Step 1: The user wants the average melamine content for products where at least 5 samples were taken.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'samples taken' >= 5.
+Step 4: Calculate the mean of 'melamine content (mg / kg)' for the filtered rows.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where samples taken is at least 5
+filtered_df = df[df['samples taken'] >= 5]
+# Calculate average melamine content
+average_melamine = filtered_df['melamine content (mg / kg)'].mean()
+print(f"Final Answer: {average_melamine:.2f}")
+```

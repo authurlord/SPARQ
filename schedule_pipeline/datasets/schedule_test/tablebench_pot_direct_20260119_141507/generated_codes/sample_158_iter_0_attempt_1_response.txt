@@ -1,0 +1,31 @@
+Step 1: Understand the question — we are asked to analyze the relationship between "annual change" (a measure of growth in total passengers) and "capacity in use" (a percentage of available capacity being used). We want to assess how a high annual change affects capacity in use.
+
+Step 2: Identify relevant columns:
+- "annual change" (percentage change in total passengers)
+- "capacity in use" (percentage of capacity utilized)
+
+Step 3: Since the question is about the impact, we should look for a pattern or correlation. A high annual change may indicate strong growth, which could lead to higher utilization of capacity.
+
+Step 4: Compute the correlation between "annual change" and "capacity in use" to quantify the relationship.
+
+Step 5: Print the correlation coefficient (r), which ranges from -1 to 1. A positive value indicates that as annual change increases, capacity in use tends to increase.
+
+Note: The values in "capacity in use" are strings with commas (e.g., "126 , 06%"), so we need to clean them before converting to numeric.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'capacity in use' column: remove spaces and commas, convert to float
+df['capacity in use'] = df['capacity in use'].str.replace(',', '').str.replace('%', '').astype(float)
+
+# Convert 'annual change' to float (already in percentage format)
+df['annual change'] = df['annual change'].str.replace('%', '').astype(float)
+
+# Calculate the correlation between 'annual change' and 'capacity in use'
+correlation = df['annual change'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

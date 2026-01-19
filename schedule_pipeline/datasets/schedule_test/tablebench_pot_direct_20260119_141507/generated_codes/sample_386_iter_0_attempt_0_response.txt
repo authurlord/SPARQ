@@ -1,0 +1,13 @@
+Step 1: The user wants to count how many parties won 10 or fewer seats.  
+Step 2: Load the dataframe.  
+Step 3: Look at the 'seats won' column and filter parties where the value is ≤ 10.  
+Step 4: Count such parties and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count parties with seats won <= 10
+count_parties = df[df['seats won'] <= 10].shape[0]
+print(f"Final Answer: {count_parties}")
+```

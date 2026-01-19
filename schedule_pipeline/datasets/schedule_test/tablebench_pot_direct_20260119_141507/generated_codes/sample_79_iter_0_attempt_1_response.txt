@@ -1,0 +1,12 @@
+Step 1: The user wants to know the team that is in 3rd position in the league.  
+Step 2: The 'position' column indicates the ranking of teams.  
+Step 3: We need to find the team where the position is 3.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the team in 3rd position (index 2 since it's 0-based)
+third_place_team = df[df['position'] == '3']['team'].values[0]
+print(f"Final Answer: {third_place_team}")
+```

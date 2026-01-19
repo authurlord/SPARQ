@@ -1,0 +1,21 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out the total row and keep only rows with valid percentages
+df_filtered = df[df['%'] != '-']
+
+# Convert the '%' column to float
+df_filtered['%'] = df_filtered['%'].str.rstrip('%').astype(float)
+
+# Find the party with the highest percentage
+max_percentage_row = df_filtered.loc[df_filtered['%'].idxmax()]
+highest_percentage_party = max_percentage_row['Party']
+highest_percentage = max_percentage_row['%']
+
+# Forward Bloc (Ruikar) percentage
+forward_bloc_ruikar_percentage = 1.45  # Given in the table
+
+# Calculate the difference
+difference = highest_percentage - forward_bloc_ruikar_percentage
+
+print(f"Final Answer: {highest_percentage_party}, {difference:.2f}")

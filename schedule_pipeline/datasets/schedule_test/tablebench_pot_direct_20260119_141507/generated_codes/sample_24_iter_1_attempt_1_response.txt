@@ -1,0 +1,20 @@
+The error occurred because the year column contains strings (e.g., '2000') and we are trying to filter using a condition with `>=`, which is not valid between string and integer. We need to ensure we're filtering only on years from 2000 to 2008 inclusive, and since the years are in string format, we must convert them to integers or compare as strings properly.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the 'year' column to integer type to enable numerical comparison.
+3. Filter rows where the year is between 2000 and 2008 (inclusive).
+4. Sum all the admitted numbers across all nationalities for those years.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'year' to integer for proper comparison
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+# Filter years from 2000 to 2008 inclusive
+filtered_df = df[(df['year'] >= 2000) & (df['year'] <= 2008)]
+# Sum all admitted values across all nationalities
+total_admitted = filtered_df[['indians admitted', 'pakistanis admitted', 'sri lankans admitted', 'bangladeshis admitted', 'nepalis admitted']].sum().sum()
+print(f"Final Answer: {total_admitted}")
+```

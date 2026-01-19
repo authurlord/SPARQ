@@ -1,0 +1,44 @@
+Step 1: The question asks to identify data points that deviate significantly from the norm. This implies detecting outliers in the dataset.
+Step 2: Since the data is structured by term and years, we can analyze each column (term) for extreme values (e.g., unusually high or low values compared to others).
+Step 3: We will compute the mean and standard deviation for each term across the years, then identify values that are more than 2 standard deviations away from the mean (a common outlier detection method).
+Step 4: Print the specific data points (term, year, value) that are flagged as outliers.
+
+Note: Due to the nature of the data, some values like "50.0" in "january term" (2002/03) are extremely high compared to others, which may indicate outliers.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert all values in the columns to numeric (some might be strings)
+df = df.apply(pd.to_numeric, errors='coerce')
+
+# For each term, calculate mean and std
+outliers = []
+
+for term in df.columns[1:]:
+    values = df[term].dropna()
+    mean_val = values.mean()
+    std_val = values.std()
+    if std_val == 0:
+        continue
+    # Identify values more than 2 standard deviations from mean
+    z_scores = np.abs((values - mean_val) / std_val)
+    outlier_indices = z_scores > 2
+    for idx in values.index[outlier_indices]:
+        outliers.append({
+            'term': term,
+            'year': df.index[idx],
+            'value': values.iloc[idx]
+        })
+
+# Print the identified outliers
+if outliers:
+    for out in outliers:
+        print(f"Outlier found: {out['term']} in year {out['year']} with value {out['value']}")
+else:
+    print("No significant deviations found.")
+```
+
+Final Answer: summer term, january term, two quarters

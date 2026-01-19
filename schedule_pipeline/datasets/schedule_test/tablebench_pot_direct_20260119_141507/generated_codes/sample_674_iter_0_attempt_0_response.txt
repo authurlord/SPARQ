@@ -1,0 +1,26 @@
+Step 1: The user wants to calculate the correlation coefficient between the 'poles' and 'wins' columns.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'poles' and 'wins' columns.  
+Step 4: Compute the Pearson correlation coefficient between these two columns.  
+Step 5: Print the result.
+
+Note: Since the data contains non-numeric values like 'nc' and 'n / a', we need to handle missing values. We will drop rows where either 'poles' or 'wins' is missing or non-numeric before computing the correlation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'poles' and 'wins' to numeric, coercing errors to NaN
+df['poles'] = pd.to_numeric(df['poles'], errors='coerce')
+df['wins'] = pd.to_numeric(df['wins'], errors='coerce')
+
+# Drop rows with missing values in 'poles' or 'wins'
+df_clean = df.dropna(subset=['poles', 'wins'])
+
+# Calculate the correlation coefficient
+correlation = df_clean['poles'].corr(df_clean['wins'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

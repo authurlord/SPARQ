@@ -1,0 +1,15 @@
+The question asks for an expected number of candidates fielded and the percentage of the popular vote in the next election cycle, based on observed trends from 1983 to 2009.
+
+Step 1: Analyze the trend in "candidates fielded" and "% of popular vote" over time.
+- "Candidates fielded" increases from 4 (1983) to 85 (2009), showing a clear upward trend.
+- "% of popular vote" increases from 0.19% (1983) to 12.39% (2001), then slightly drops to 9.17% (2005) and 8.21% (2009), indicating a peak around 2001.
+
+Step 2: Since the data shows a steady increase in the number of candidates and a peak in popular vote share around 2001, we can reasonably assume that:
+- The number of candidates fielded will continue to grow, likely approaching or exceeding 85.
+- The percentage of popular vote may stabilize or decline after the peak in 2001, so we can expect it to be lower than 12.39%.
+
+Step 3: Estimate values based on the trend:
+- Candidates fielded: The last value is 85 in 2009. Assuming a linear trend, we can extrapolate. From 1983 to 2009 is 26 years. From 4 to 85 is an increase of 81. Average increase per year ≈ 81 / 26 ≈ 3.1. For the next cycle (2010+), estimate +3 to 5 → ~90–95. We'll take 95 as a reasonable estimate.
+- % of popular vote: Peaks at 12.39% in 2001, then declines. A plausible next value might be around 8–9%. We'll take 8.5% as a moderate estimate.
+
+Final Answer: 95, 8.5

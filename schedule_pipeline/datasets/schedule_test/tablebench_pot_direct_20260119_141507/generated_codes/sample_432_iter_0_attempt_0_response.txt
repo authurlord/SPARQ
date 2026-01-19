@@ -1,0 +1,18 @@
+Step 1: Understand the table content and identify the main columns.  
+The table contains data on marriages in a given year, including:  
+- Marriages between men  
+- Marriages between women  
+- Same-sex marriages (a combined category)  
+- Total marriages  
+- Percentage of same-sex marriages  
+
+Step 2: Explain the main columns.  
+Each row represents a year, and the columns show the number of marriages between different groups and the total number of marriages. The "same-sex marriages" column indicates the count of same-sex unions, while the "% same-sex marriages" shows the proportion of same-sex marriages relative to total marriages.
+
+Step 3: Provide initial insights into trends.  
+Looking at the "same-sex marriages" column:  
+- It increases from 1,275 in 2005 to 3,880 in 2011.  
+- The percentage of same-sex marriages rises from 1.06% in 2005 to 2.38% in 2011.  
+This suggests a clear upward trend in both the absolute number and the proportion of same-sex marriages over time, indicating growing recognition or participation in same-sex unions.
+
+Final Answer: The table tracks yearly marriage statistics, showing a steady increase in both the number and percentage of same-sex marriages, indicating a positive trend in their representation.

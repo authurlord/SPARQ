@@ -1,0 +1,15 @@
+Step 1: Identify the work that was nominated for "Song of the Year" at the Grammy Awards.
+Step 2: Among those nominations, find the year when the work won an award for a song.
+Step 3: The relevant row is where 'Category' is "Song of the Year" and 'Result' is "Won".
+Step 4: Extract the 'Year' from that row.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Category is 'Song of the Year' and Result is 'Won'
+winner_row = df[(df['Category'] == 'Song of the Year') & (df['Result'] == 'Won')]
+# Extract the year
+year = winner_row['Year'].iloc[0]
+print(f"Final Answer: {year}")
+```

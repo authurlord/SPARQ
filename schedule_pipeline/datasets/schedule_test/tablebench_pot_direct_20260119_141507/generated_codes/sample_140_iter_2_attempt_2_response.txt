@@ -1,0 +1,32 @@
+Step 1: The user wants a bar chart showing the top 10 surnames by number of bearers in 2009.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'number of bearers 2009' column and sort in descending order.  
+Step 4: Select the top 10 surnames and their corresponding bearer counts.  
+Step 5: Create a bar chart with surnames on the x-axis and bearer counts on the y-axis, labeled appropriately.  
+
+Note: The data contains some entries with "occupational" type (e.g., "møller"), but we only care about the surname and bearer count in 2009. We will include all rows and sort by 2009 bearer count.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Sort by number of bearers in 2009 in descending order and take top 10
+top_10_2009 = df.sort_values(by='number of bearers 2009', ascending=False).head(10)
+
+# Prepare data for bar chart
+surnames = top_10_2009['surname']
+bearers_2009 = top_10_2009['number of bearers 2009']
+
+# Create bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(surnames, bearers_2009, color='skyblue')
+plt.xlabel('Surname')
+plt.ylabel('Number of Bearers (2009)')
+plt.title('Top 10 Surnames by Number of Bearers in 2009')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: None

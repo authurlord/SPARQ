@@ -1,0 +1,32 @@
+Step 1: The user wants to forecast the issue price for 2013 based on the historical trend of issue prices from 2002 to 2012.  
+Step 2: Load the dataframe and ensure the 'issue price' column is treated as a numeric value (float).  
+Step 3: Extract the 'year' and 'issue price' columns.  
+Step 4: Use linear regression to model the trend and predict the price for 2013.  
+Step 5: Handle any data type issues (e.g., convert 'issue price' to float, handle 'n/a' in 'artist' column if needed).  
+Step 6: Print the predicted issue price for 2013.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'issue price' to float, replacing 'n/a' with NaN and dropping rows with missing values
+df['issue price'] = pd.to_numeric(df['issue price'], errors='coerce')
+df.dropna(subset=['issue price'], inplace=True)
+
+# Prepare the data for linear regression
+X = df['year'].values.reshape(-1, 1)  # Independent variable: year
+y = df['issue price'].values           # Dependent variable: issue price
+
+# Fit the linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict the issue price for 2013
+predicted_price = model.predict([[2013]])[0]
+
+print(f"Final Answer: {predicted_price:.2f}")
+```

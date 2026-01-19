@@ -1,0 +1,99 @@
+Step 1: Understand the question — We are to calculate the change in total seating capacity of the airline's fleet from 2004 to 2008.  
+Step 2: Identify relevant data — The "seating" column contains seating capacity values. However, only aircraft introduced before or in 2004 (like A319-100 in 2004) and those introduced in 2008 (like A320-200 in 2008) are relevant.  
+Step 3: Filter rows where aircraft were introduced in 2004 or before (to get the initial fleet) and in 2008 or after (to get the final fleet).  
+Step 4: Extract seating values for these filtered rows, sum them to get total capacity at each time, and compute the difference.  
+Step 5: Note that "retired" is not needed directly since we're only concerned with seating capacity during the period.  
+Step 6: Handle missing values — if "retired" is '-', it means still in service; we don't need to exclude it.  
+
+But the issue is that the "introduced" and "retired" columns have strings like '2004', '2008', '2010', etc., so we must convert them to integers. We will filter based on introduction year.
+
+However, note: the fleet capacity change is not about individual aircraft but the total seating of the fleet over time. So we want:
+- Total seating capacity in 2004 (only aircraft introduced in or before 2004)
+- Total seating capacity in 2008 (only aircraft introduced in or after 2008)
+
+But the table doesn't specify when the aircraft were retired, so we assume that aircraft introduced in 2004 are still in service in 2004, and those introduced in 2008 are in service in 2008.
+
+So:
+- For 2004: include all aircraft with "introduced" ≤ 2004
+- For 2008: include all aircraft with "introduced" ≥ 2008
+
+Then sum the seating capacity in each year.
+
+But note: the A319-100 was introduced in 2004 → included in 2004
+A320-200 in 2008 → included in 2008
+A321-200 introduced in 2008 → included in 2008
+Others: A321-200 retired in 2010, but we are not considering retirement for fleet capacity at a given year — we are assuming the fleet includes only active aircraft.
+
+But the problem says: "total seating capacity of the airline's fleet" — so we assume that only aircraft in service at that time contribute.
+
+We interpret the fleet as:
+- In 2004: all aircraft introduced before or in 2004 and not retired yet.
+- In 2008: all aircraft introduced in or after 2008 and not retired before 2008.
+
+So:
+- For 2004: filter "introduced" ≤ 2004, and "retired" is either '-' or ≥ 2004? But retired is not necessarily after 2004.
+
+Actually, to be safe, we assume that an aircraft is in service only if its retirement date is after the year in question (or if not retired, it's still in service).
+
+But the data shows:
+- A321-200 retired in 2010 → so in 2008, it would still be in service
+- A320-200 has no retirement → still in service
+- A321-200 introduced in 2008 → retired 2010 → so in 2008 it's in service
+
+So we can define:
+- For a given year Y, an aircraft contributes if:
+  - introduced ≤ Y and retired > Y (or retired is '-' meaning still in service)
+
+But the retirement value is either a year or '-'. We can treat '-' as "still in service".
+
+So for 2004:
+- Only aircraft introduced in 2004 or earlier
+- And either retired after 2004 or retired is '-'
+
+For 2008:
+- Introduced in 2008 or later
+- And retired after 2008 or retired is '-'
+
+But note: the A321-200 was introduced in 2008, retired in 2010 → so in 2008, it is in service.
+
+So let's build the logic:
+
+1. Convert "introduced" and "retired" to integers where possible.
+2. For each row, check if it contributes to 2004 or 2008 fleet.
+3. Sum seating capacity for each year.
+
+Let’s proceed.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'introduced' and 'retired' to numeric, treating '-' as NaN
+df['introduced'] = pd.to_numeric(df['introduced'], errors='coerce')
+df['retired'] = pd.to_numeric(df['retired'], errors='coerce')
+
+# Define function to check if aircraft is in service in a given year
+def in_service(year):
+    def is_active(row):
+        introduced = row['introduced']
+        retired = row['retired']
+        # If retired is NaN (i.e., '-', meaning not retired), then still in service
+        if pd.isna(retired):
+            return introduced <= year
+        else:
+            return introduced <= year and retired > year
+    return is_active
+
+# Total seating in 2004
+seating_2004 = df[df.apply(in_service(2004), axis=1)]['seating'].sum()
+
+# Total seating in 2008
+seating_2008 = df[df.apply(in_service(2008), axis=1)]['seating'].sum()
+
+# Change in total seating capacity
+change = seating_2008 - seating_2004
+
+print(f"Final Answer: {change}")
+```

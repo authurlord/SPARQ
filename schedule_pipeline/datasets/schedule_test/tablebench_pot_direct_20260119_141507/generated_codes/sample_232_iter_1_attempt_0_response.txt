@@ -1,0 +1,36 @@
+The question asks which factor — stormy days or foggy days — has a greater *causal impact* on the number of snowy days per year. However, the provided data only includes observed values for sunshine, rain, snow (days), storms (days), and fog (days) across years. There is no explicit information about causal relationships, correlations, or direct influence between stormy or foggy days and snowy days.
+
+Therefore, we can only analyze correlation or patterns in the data, but we cannot definitively conclude "causal impact" without additional assumptions or statistical modeling (e.g., regression). Since the question implies a causal relationship, and such a conclusion cannot be reliably drawn from the given data, the analysis must acknowledge the limitation.
+
+Instead, we can compute the correlation between "snow (days / year)" and both "storms (days / year)" and "fog (days / year)" to see which variable is more strongly associated with snowy days.
+
+Step 1: Load the dataframe.
+Step 2: Extract the relevant columns: 'snow', 'storms', 'fog'.
+Step 3: Compute the correlation between 'snow' and 'storms', and between 'snow' and 'fog'.
+Step 4: Compare the absolute values of these correlations to determine which has a stronger association.
+
+Note: Correlation does not imply causation, but it can indicate a stronger statistical relationship.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert all values to numeric (some entries like '1 630' need cleaning)
+df['sunshine (hrs / year)'] = df['sunshine (hrs / year)'].str.replace(' ', '').astype(int)
+df['rain (mm / year)'] = df['rain (mm / year)'].str.replace(' ', '').astype(int)
+df['snow (days / year)'] = df['snow (days / year)'].astype(int)
+df['storms (days / year)'] = df['storms (days / year)'].astype(int)
+df['fog (days / year)'] = df['fog (days / year)'].astype(int)
+
+# Compute correlation between snow and storms, and snow and fog
+corr_storms = df['snow (days / year)'].corr(df['storms (days / year)'])
+corr_fog = df['snow (days / year)'].corr(df['fog (days / year)'])
+
+# Determine which has a greater absolute correlation
+if abs(corr_storms) > abs(corr_fog):
+    final_answer = "storms (days / year)"
+else:
+    final_answer = "fog (days / year)"
+
+print(f"Final Answer: {final_answer}")
+```

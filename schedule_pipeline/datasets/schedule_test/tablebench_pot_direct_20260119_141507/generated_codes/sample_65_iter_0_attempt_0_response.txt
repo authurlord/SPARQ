@@ -1,0 +1,14 @@
+Step 1: The user wants to know the percentage of Black voters who voted in 1960.  
+Step 2: Locate the row for "Black" and the column for "1960" in the table.  
+Step 3: Extract the value (which is "68") and present it as a percentage.  
+
+Note: The value "68" is already in percentage form, so no conversion is needed.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the value for 'Black' voters in the '1960' column
+black_1960 = df.loc[df['Unnamed: 0'] == 'Black', '1960'].values[0]
+print(f"Final Answer: {black_1960}")
+```

@@ -1,0 +1,16 @@
+Step 1: The user wants the average number of performances per year between 2004 and 2013.  
+Step 2: Filter the data for years from 2004 to 2013 inclusive.  
+Step 3: Extract the "No. of performances" column for the filtered rows.  
+Step 4: Calculate the mean of the filtered "No. of performances" values.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for years between 2004 and 2013 inclusive
+filtered_df = df[(df['Year'].astype(int) >= 2004) & (df['Year'].astype(int) <= 2013)]
+# Calculate the mean of 'No. of performances'
+average_performances = filtered_df['No. of performances'].mean()
+print(f"Final Answer: {average_performances:.1f}")
+```

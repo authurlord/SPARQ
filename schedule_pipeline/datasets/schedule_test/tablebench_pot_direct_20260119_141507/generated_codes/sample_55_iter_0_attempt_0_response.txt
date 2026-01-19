@@ -1,0 +1,11 @@
+Step 1: The user is asking for the nation that won 1 gold and 4 silver medals.  
+Step 2: Look through the table for a row where 'gold' = 1 and 'silver' = 4.  
+Step 3: From the data, check each row:  
+- Italy: 5 gold, 4 silver → no  
+- France: 3 gold, 3 silver → no  
+- Egypt: 2 gold, 0 silver → no  
+- Algeria: 1 gold, 4 silver → yes  
+- Tunisia: 1 gold, 1 silver → no  
+Thus, Algeria matches the condition.  
+
+Final Answer: algeria

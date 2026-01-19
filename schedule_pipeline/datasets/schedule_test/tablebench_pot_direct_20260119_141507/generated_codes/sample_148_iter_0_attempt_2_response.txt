@@ -1,0 +1,20 @@
+Step 1: The question asks which factors significantly influence the 'total votes'. This implies identifying which columns have a strong correlation with 'total votes'.
+
+Step 2: We will compute the correlation between 'total votes' and each of the specified columns: 'candidates', 'average votes per candidate', '% of total vote', 'average % of vote per candidate', and 'saved deposits'.
+
+Step 3: The column with the highest absolute correlation value (closest to 1 or -1) is the most influential factor.
+
+Step 4: Print the name of the most influential factor.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select relevant columns for correlation analysis
+columns_to_analyze = ['candidates', 'average votes per candidate', '% of total vote', 'average % of vote per candidate', 'saved deposits']
+correlation_with_total_votes = df[columns_to_analyze].corrwith(df['total votes'])
+
+# Find the column with the highest absolute correlation
+most_influential = correlation_with_total_votes.abs().idxmax()
+print(f"Final Answer: {most_influential}")
+```

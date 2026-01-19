@@ -1,0 +1,25 @@
+The error occurred because the 'year' column contains a value "2010 , 2012" which cannot be converted to an integer when filtering for the 2000–2007 period. We need to filter only rows where the year is within 2000 to 2007, and handle any non-integer values properly.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Convert the 'year' column to string and remove any extra characters (like commas) to ensure clean parsing.
+3. Filter rows where the year is between 2000 and 2007 (inclusive).
+4. Compute the average of the 'quantity' column for those filtered rows.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'year' column by converting to string and removing any commas
+df['year'] = df['year'].astype(str).str.replace(',', '')
+
+# Filter rows where year is between 2000 and 2007 (inclusive)
+filtered_df = df[(df['year'].astype(int) >= 2000) & (df['year'].astype(int) <= 2007)]
+
+# Calculate the average quantity for the filtered rows
+average_quantity = filtered_df['quantity'].mean()
+
+print(f"Final Answer: {average_quantity:.1f}")
+```

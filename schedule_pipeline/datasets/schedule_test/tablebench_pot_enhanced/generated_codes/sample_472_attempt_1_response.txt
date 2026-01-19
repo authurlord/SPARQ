@@ -1,0 +1,15 @@
+Step 1: The user wants to identify a district with an unusually high or low data point that may indicate an error or unusual demographic pattern. We will focus on the "population (2010 census)" and "pop density (per km2)" columns, as these are most likely to reveal anomalies.
+
+Step 2: Load the dataframe.
+
+Step 3: Analyze the "pop density (per km2)" column for extreme values. A very high or very low value compared to others may indicate an anomaly.
+
+Step 4: Check for inconsistencies such as extremely high population density (e.g., over 1,000,000 per km²) or very low population with high area but low density.
+
+Step 5: Identify "san lorenzo" with a population density of 1,000,000.0 per km², which is extremely high and likely due to an error (e.g., area might be misreported as 10.0 ha instead of 10.0 km²).
+
+Step 6: Also note "sta. teresa" with only 100 people in 1000.0 hectares (10 km²), resulting in a density of 0.1 per km² — this is extremely low and may also be suspicious.
+
+Step 7: However, "san lorenzo" stands out more due to its massive population density, which is unrealistic. It's likely a data entry error (e.g., area should be larger than 10.0 ha).
+
+Final Answer: san lorenzo

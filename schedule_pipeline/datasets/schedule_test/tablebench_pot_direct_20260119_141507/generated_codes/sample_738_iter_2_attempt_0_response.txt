@@ -1,0 +1,52 @@
+The question asks to forecast the population for Goondiwindi, Waggamba, and Inglewood in 2021 based on historical trends from 1933 to 2011. However, the provided data only includes population values for these regions, not any explicit trend or growth rate information (e.g., linear, exponential). Without a clear modeling assumption (such as linear regression or trend extrapolation), a statistically valid forecast cannot be reliably generated.
+
+Moreover, the data does not include units or context (e.g., whether these are populations or counts), and there's no indication of the nature of the trend (e.g., constant growth, decay, seasonality).
+
+Thus, while we can compute the average trend or perform a simple linear regression to estimate future values, the question lacks sufficient context for a robust forecast. A reasonable assumption is to use linear regression to model each region's population over time and extrapolate to 2021.
+
+Step-by-step approach:
+1. Load the data.
+2. Convert year to numeric and align with the region columns.
+3. Fit a linear regression model for each region (Goondiwindi, Waggamba, Inglewood).
+4. Predict the value for year 2021.
+5. Output the forecasted values.
+
+Note: This is a basic linear extrapolation and may not reflect real-world dynamics.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert year column to integer
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+
+# Prepare features and target variables
+X = df[['year']]
+y_goondiwindi = df['goondiwindi']
+y_waggamba = df['waggamba']
+y_inglewood = df['inglewood']
+
+# Initialize models
+models = {
+    'goondiwindi': LinearRegression(),
+    'waggamba': LinearRegression(),
+    'inglewood': LinearRegression()
+}
+
+# Fit models
+models['goondiwindi'].fit(X, y_goondiwindi)
+models['waggamba'].fit(X, y_waggamba)
+models['inglewood'].fit(X, y_inglewood)
+
+# Predict for year 2021
+year_2021 = np.array([[2021]])
+forecast_goondiwindi = models['goondiwindi'].predict(year_2021)[0]
+forecast_waggamba = models['waggamba'].predict(year_2021)[0]
+forecast_inglewood = models['inglewood'].predict(year_2021)[0]
+
+print(f"Final Answer: {forecast_goondiwindi:.0f}, {forecast_waggamba:.0f}, {forecast_inglewood:.0f}")
+```

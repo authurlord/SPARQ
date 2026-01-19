@@ -1,0 +1,12 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for peaks in Greece (including regions like Crete, Euboea, Kefalonia, Samothrace)
+# All entries have 'greece' or 'greece (region)' in the country column
+df['country'] = df['country'].str.lower()
+greek_peaks = df[df['country'].str.contains('greece', na=False)]
+# Convert elevation to numeric
+greek_peaks['elevation (m)'] = pd.to_numeric(greek_peaks['elevation (m)'])
+# Calculate median elevation
+median_elevation = greek_peaks['elevation (m)'].median()
+print(f"Final Answer: {median_elevation}")

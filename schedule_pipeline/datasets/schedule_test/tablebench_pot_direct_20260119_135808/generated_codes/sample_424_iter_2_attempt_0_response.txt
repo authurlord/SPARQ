@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains data on U.S. shipping tonnage from 2000 to 2006, with columns representing year, U.S. rank in global shipping, total shipping tonnage (s ton), domestic shipping tonnage, foreign total shipping tonnage, foreign imports, and foreign exports. The data shows fluctuating trends in total and domestic tonnage, with a peak in 2005, while foreign trade volumes vary significantly across years.

@@ -1,0 +1,13 @@
+Step 1: The user wants to count how many countries have at least one semifinalist.  
+Step 2: The "semifinalists" column indicates the number of semifinalists per country.  
+Step 3: Filter rows where "semifinalists" is greater than 0.  
+Step 4: Count the number of such rows.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count countries with at least one semifinalist (semifinalists > 0)
+count_semi = df[df['semifinalists'] > 0].shape[0]
+print(f"Final Answer: {count_semi}")
+```

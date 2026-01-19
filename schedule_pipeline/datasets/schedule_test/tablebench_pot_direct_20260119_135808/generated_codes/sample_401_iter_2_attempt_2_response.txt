@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: township, county, pop (2010), land ( sqmi ), water (sqmi), latitude, longitude, geo id, ansi code

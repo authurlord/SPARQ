@@ -1,0 +1,20 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Convert 'number of bearers 2009' to numeric for sorting
+df['number of bearers 2009'] = pd.to_numeric(df['number of bearers 2009'], errors='coerce')
+# Sort by 'number of bearers 2009' in descending order and get top 10
+top_10 = df.nlargest(10, 'number of bearers 2009')
+# Create bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(top_10['surname'], top_10['number of bearers 2009'], color='skyblue')
+plt.xlabel('Surname')
+plt.ylabel('Number of Bearers (2009)')
+plt.title('Top 10 Surnames by Number of Bearers in 2009')
+plt.xticks(rotation=45)
+# Add labels on top of each bar
+for i, v in enumerate(top_10['number of bearers 2009']):
+    plt.text(i, v + 1000, str(int(v)), ha='center', va='bottom')
+plt.tight_layout()
+plt.show()

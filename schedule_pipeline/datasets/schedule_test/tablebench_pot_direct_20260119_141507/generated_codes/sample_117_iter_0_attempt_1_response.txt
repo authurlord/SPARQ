@@ -1,0 +1,43 @@
+Step 1: The user wants a stacked bar chart showing the trends in domestic, international (non-CIS), and CIS passenger counts from 2000 to 2013.  
+Step 2: Load the dataframe.  
+Step 3: Extract the relevant columns: 'Year', 'Domestic', 'International (non-CIS)', and 'CIS'.  
+Step 4: Convert the 'Domestic', 'International (non-CIS)', and 'CIS' columns to numeric (some values are 'None', which need to be handled).  
+Step 5: Create a stacked bar chart using matplotlib, with years on the x-axis and passenger counts on the y-axis.  
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert relevant columns to numeric, replacing None with NaN
+df['Domestic'] = pd.to_numeric(df['Domestic'], errors='coerce')
+df['International (non-CIS)'] = pd.to_numeric(df['International (non-CIS)'], errors='coerce')
+df['CIS'] = pd.to_numeric(df['CIS'], errors='coerce')
+
+# Filter out rows where any of the three passenger counts is missing
+df_clean = df.dropna(subset=['Domestic', 'International (non-CIS)', 'CIS'])
+
+# Set up the plot
+plt.figure(figsize=(12, 6))
+bar_width = 0.25
+index = range(len(df_clean))
+
+# Create stacked bar chart
+plt.bar([i - bar_width for i in index], df_clean['Domestic'], width=bar_width, label='Domestic', color='skyblue')
+plt.bar([i for i in index], df_clean['International (non-CIS)'], width=bar_width, label='International (non-CIS)', color='lightgreen')
+plt.bar([i + bar_width for i in index], df_clean['CIS'], width=bar_width, label='CIS', color='salmon')
+
+# Labels and title
+plt.xlabel('Year')
+plt.ylabel('Passenger Count')
+plt.title('Trends in Domestic, International (non-CIS), and CIS Passenger Count (2000–2013)')
+plt.xticks(index, df_clean['Year'])
+plt.legend()
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: chart

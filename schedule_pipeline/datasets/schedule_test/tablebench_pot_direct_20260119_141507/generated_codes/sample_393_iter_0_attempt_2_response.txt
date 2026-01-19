@@ -1,0 +1,37 @@
+Step 1: Understand the structure and content of the table. The table contains data on a country's external debt and debt service over fiscal years from 1999 to 2018.  
+Step 2: Identify and explain each column:
+- "Fiscal Year": The year for which the data is reported.
+- "Total External Debt in Million of US Dollars ($)": The total amount of external debt (debts owed to foreign creditors) in millions of USD.
+- "Total Debt Service in Million of US Dollars ($)": The total amount of money required to service the debt (interest and principal payments) in millions of USD.
+- "External Debt to GDP Ratio (%)": The ratio of external debt to the country's GDP, indicating the debt burden relative to economic size.
+- "Debt Service Ratio (%)": The ratio of debt service to GDP, showing how much of the economy's output is used to pay off debt.
+
+Step 3: Derive basic insights:
+- The total external debt peaked in 2012 at $79,949 million and then slightly decreased, stabilizing around $73,000–$77,000 million by 2018.
+- The external debt to GDP ratio declined significantly from 68.2% (2001) to 23.5% (2018), suggesting improved debt sustainability.
+- The debt service ratio dropped from 17.1% (2002) to under 10% (from 2008 onward), indicating reduced financial pressure on the economy.
+- From 2015 onward, the debt service ratio shows "-", indicating that the data is not available or not applicable for those years.
+
+Step 4: Present a clear and concise description with these insights.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Display a detailed description of the table
+print("Table Description:")
+print("Columns:")
+print(" - Fiscal Year: The fiscal year for which the data is reported.")
+print(" - Total External Debt in Million of US Dollars ($): Total debt owed to foreign creditors in millions of USD.")
+print(" - Total Debt Service in Million of US Dollars ($): Total amount paid annually for interest and principal repayment.")
+print(" - External Debt to GDP Ratio (%): Ratio of external debt to GDP, indicating the debt burden relative to economic size.")
+print(" - Debt Service Ratio (%): Ratio of debt service to GDP, reflecting the proportion of GDP used to repay debt.")
+
+print("\nBasic Insights:")
+print(" - Total external debt peaked in 2012 at $79,949 million and has since stabilized.")
+print(" - External debt to GDP ratio declined from 68.2% (2001) to 23.5% (2018), indicating improved debt sustainability.")
+print(" - Debt service ratio dropped from 17.1% (2002) to below 10% (from 2008 onward), suggesting reduced financial pressure.")
+print(" - Debt service ratio is marked as '-' from 2015 onwards, indicating missing or unavailable data for those years.")
+```

@@ -1,0 +1,35 @@
+Step 1: The user wants to compare the average tenure (in years) of ambassadors who served between 1956–1969 and those who served between 1981–2001.
+
+Step 2: Load the dataframe.
+
+Step 3: Filter rows where the 'Start' year is between 1956 and 1969 (inclusive) for the first group, and between 1981 and 2001 (inclusive) for the second group.
+
+Step 4: For each group, calculate the tenure as (End - Start) in years.
+
+Step 5: Compute the average tenure for both groups.
+
+Step 6: Find the difference between the two averages.
+
+Step 7: Print the result as a number.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert Start and End to integers
+df['Start'] = pd.to_numeric(df['Start'])
+df['End'] = pd.to_numeric(df['End'])
+
+# Filter for ambassadors between 1956 and 1969
+group1 = df[(df['Start'] >= 1956) & (df['End'] <= 1969)]
+avg_tenant1 = (group1['End'] - group1['Start']).mean()
+
+# Filter for ambassadors between 1981 and 2001
+group2 = df[(df['Start'] >= 1981) & (df['End'] <= 2001)]
+avg_tenant2 = (group2['End'] - group2['Start']).mean()
+
+# Calculate the difference
+difference = avg_tenant1 - avg_tenant2
+
+print(f"Final Answer: {difference:.1f}")
+```

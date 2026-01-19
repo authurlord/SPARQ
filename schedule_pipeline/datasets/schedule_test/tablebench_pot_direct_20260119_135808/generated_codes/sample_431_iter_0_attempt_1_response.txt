@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: series, presenters, start date, end date, days in camp, camp mates, winner, highest viewers (millions), lowest viewers (millions), average viewers (millions), notable trends: increasing number of camp mates over time, average viewers fluctuating with peaks in series 3 and 10, longest duration in series 12, consistent presenter duo (ant & dec), viewership generally stable around 8-10 million.

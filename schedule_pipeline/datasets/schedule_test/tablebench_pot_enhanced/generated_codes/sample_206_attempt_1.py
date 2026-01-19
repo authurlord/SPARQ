@@ -1,0 +1,28 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert relevant columns to float for numerical analysis
+df['eccentricity'] = pd.to_numeric(df['eccentricity'])
+df['periselene (km)'] = pd.to_numeric(df['periselene (km)'])
+df['inclination (deg) (to moon equator)'] = pd.to_numeric(df['inclination (deg) (to moon equator)'])
+
+# Calculate correlation coefficients
+corr_periselene = df['eccentricity'].corr(df['periselene (km)'])
+corr_inclination = df['eccentricity'].corr(df['inclination (deg) (to moon equator)'])
+
+# Print results
+print(f"Correlation between eccentricity and periselene: {corr_periselene:.3f}")
+print(f"Correlation between eccentricity and inclination: {corr_inclination:.3f}")
+
+# Based on correlation values, determine if increase in eccentricity corresponds to increase in periselene or inclination
+if abs(corr_periselene) > 0.5:
+    result_periselene = "Yes"
+else:
+    result_periselene = "No"
+
+if abs(corr_inclination) > 0.5:
+    result_inclination = "Yes"
+else:
+    result_inclination = "No"
+
+print(f"Final Answer: {result_periselene}, {result_inclination}")

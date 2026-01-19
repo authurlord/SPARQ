@@ -1,0 +1,7 @@
+Step 1: Understand the structure of the table. The table has columns: region, total population, manchu, percentage in manchu population, and regional percentage of population.  
+Step 2: Identify key insights about the Manchu population distribution. The "manchu" column shows the absolute number of Manchu people in each region. The "percentage in manchu population" column shows the proportion of the Manchu population within that region relative to the total Manchu population.  
+Step 3: Observe that the Manchu population is highest in regions like Liaoning (5.3 million), Hebei (2.1 million), and Jilin (0.87 million), with decreasing numbers in other areas.  
+Step 4: Note that the regional percentage of population (e.g., 6.35% for Northeast) indicates the share of the total population in that region.  
+Step 5: Highlight that the Manchu population is concentrated in the Northeastern provinces, especially Liaoning and Hebei, which are historically significant Manchu regions.  
+
+Final Answer: Liaoning, Hebei, Northeast

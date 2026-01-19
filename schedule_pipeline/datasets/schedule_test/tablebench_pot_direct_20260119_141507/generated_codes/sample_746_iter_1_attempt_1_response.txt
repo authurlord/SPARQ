@@ -1,0 +1,52 @@
+Step 1: The question asks for a forecast of life expectancy for males and females in the period 2010–2015 based on historical data from 1950 to 2005.  
+Step 2: The table provides life expectancy values for each 5-year period (e.g., 1950–1955, ..., 2000–2005).  
+Step 3: Since no explicit trend modeling or forecasting method is specified, and the data shows a steady increase in life expectancy over time, we can reasonably assume a linear trend.  
+Step 4: We will calculate the average life expectancy for males and females over the historical periods and project it forward using the observed trend.  
+Step 5: However, since the data ends at 2005, and we are projecting to 2010–2015, we can fit a linear regression model to the life expectancy trends and extrapolate.  
+
+But note: The question does not specify a model (e.g., linear, exponential), and the data only has 11 periods. A simple linear trend projection is reasonable and interpretable.
+
+Approach:
+- Extract life expectancy for males and females per period.
+- Fit a linear trend (slope) from 1950 to 2005.
+- Project forward 5 years (to 2010–2015) using the slope and intercept.
+
+Note: The "period" column is like "1950–1955", so we can assign a time point (e.g., mid-period: 1952.5, 1957.5, etc.).
+
+Let’s proceed:
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert period to numeric year (midpoint of period)
+df['year'] = df['period'].str.extract(r'(\d{4})').astype(int) + 2.5  # e.g., 1950-1955 -> 1952.5
+
+# Extract life expectancy for males and females
+life_expectancy_males = df['life expectancy males'].astype(float)
+life_expectancy_females = df['life expectancy females'].astype(float)
+
+# Fit linear regression for males and females
+X = df['year'].values.reshape(-1, 1)
+y_males = life_expectancy_males.values
+y_females = life_expectancy_females.values
+
+# Fit models
+model_males = LinearRegression().fit(X, y_males)
+model_females = LinearRegression().fit(X, y_females)
+
+# Project to 2010–2015 (midpoint 2012.5)
+future_year = np.array([[2012.5]])  # midpoint of 2010–2015
+
+# Predict
+predicted_males = model_males.predict(future_year)[0]
+predicted_females = model_females.predict(future_year)[0]
+
+print(f"Final Answer: {predicted_males:.1f}, {predicted_females:.1f}")
+```
+
+This code fits a linear trend to the historical data and projects the life expectancy for 2010–2015. The result is a reasonable forecast based on observed trends.

@@ -1,0 +1,19 @@
+Step 1: The user wants the median elevation of mountain peaks in Greece.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where the country is 'greece' or 'greece ( crete )' or 'greece ( euboea )' or 'greece ( kefalonia )' or 'greece ( samothrace )' — all indicate Greece.  
+Step 4: Convert 'elevation (m)' to numeric.  
+Step 5: Calculate the median of the elevation values.  
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for mountains in Greece (including regions within Greece)
+greece_mountains = df[df['country'].str.contains('greece', case=False, na=False)]
+# Convert elevation to numeric
+greece_mountains['elevation (m)'] = pd.to_numeric(greece_mountains['elevation (m)'])
+# Calculate median elevation
+median_elevation = greece_mountains['elevation (m)'].median()
+print(f"Final Answer: {median_elevation}")
+```

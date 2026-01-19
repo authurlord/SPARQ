@@ -1,0 +1,15 @@
+Step 1: The user wants the average number of episodes per season for 'The Wire' between 2002 and 2004.  
+Step 2: Filter the data to include only rows where the show is 'The Wire' and the year is between 2002 and 2004.  
+Step 3: Group by season and calculate the average number of episodes per season.  
+Step 4: Since the question asks for the average number of episodes per season, we compute the mean of the 'episode' column for the filtered rows.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for 'The Wire' between 2002 and 2004
+filtered_df = df[(df['show'] == 'the wire') & (df['year'].between(2002, 2004))]
+# Calculate the average number of episodes per season
+average_episodes = filtered_df['episode'].mean()
+print(f"Final Answer: {average_episodes:.1f}")
+```

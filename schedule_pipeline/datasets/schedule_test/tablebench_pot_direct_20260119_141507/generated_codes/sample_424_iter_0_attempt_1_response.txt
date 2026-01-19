@@ -1,0 +1,21 @@
+The table provides annual data on U.S. shipping tonnage, broken down by domestic and foreign components. Each row represents a year, and the columns describe different aspects of shipping activity:
+
+- **year**: The year of the data.
+- **us rank**: The ranking of the U.S. in total shipping tonnage relative to other countries (lower rank = higher volume).
+- **total s ton**: Total shipping tonnage (in thousands of tons) for the U.S. in that year.
+- **domestic s ton**: Shipping tonnage within the U.S. (domestic trade).
+- **foreign total s ton**: Total shipping tonnage involving foreign destinations.
+- **foreign imports s ton**: Imports of goods from abroad.
+- **foreign exports s ton**: Exports of goods to abroad.
+
+Insights:
+- The total shipping tonnage fluctuates slightly over time, with a peak in 2005 (3.5 million tons) and a low in 2001 (2.86 million tons).
+- Domestic shipping is consistently high, often exceeding 2.3 million tons annually, indicating strong internal trade.
+- Foreign trade shows a steady pattern: imports are generally lower than exports, suggesting a net outward flow of goods.
+- The U.S. rank varies between 94 and 108, indicating consistent but not dominant global shipping performance.
+
+This data reflects the U.S. as a major player in international trade, with a stable domestic market and a growing export-oriented shipping profile.
+
+Since the question asks for a description and insights, rather than a specific numerical computation, no code execution is required for a direct answer. Instead, the response is analytical.
+
+Final Answer: us rank, total s ton, domestic s ton, foreign total s ton, foreign imports s ton, foreign exports s ton

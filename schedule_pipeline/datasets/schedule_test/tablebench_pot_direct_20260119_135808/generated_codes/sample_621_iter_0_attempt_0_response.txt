@@ -1,0 +1,16 @@
+Step 1: The user wants to calculate the average age of the executives listed in the table.
+Step 2: Load the dataframe.
+Step 3: Select the 'Age' column and convert it to numeric type.
+Step 4: Calculate the mean of the 'Age' column.
+Step 5: Print the result as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Age' column to numeric, in case it's stored as string
+df['Age'] = pd.to_numeric(df['Age'])
+# Calculate the average age
+average_age = df['Age'].mean()
+print(f"Final Answer: {average_age:.1f}")
+```

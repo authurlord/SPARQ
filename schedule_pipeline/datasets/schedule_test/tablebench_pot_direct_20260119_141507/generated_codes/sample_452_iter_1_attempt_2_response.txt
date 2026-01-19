@@ -1,0 +1,54 @@
+Step 1: Identify unusual patterns or outliers in the financial data.  
+The key columns are: revenues, profit, assets, and market value.  
+Outliers can be detected by examining extreme values — for example, a company with very high revenue but low profit or very high assets with low market value.  
+
+Observations:
+- "Hellenic Telecom" has revenues of 1000 (which is extremely high compared to others, e.g., Coca-Cola HBC at 9.3).
+- "OPAP" has a market value of 100, which is unusually high compared to others (max ~100 in market value, but only one entry).
+- Negative profits (e.g., -16, -8.6) may indicate losses.
+- "Hellenic Petroleum" has relatively high revenue (13.8) and modest profit (0.1), which may be normal.
+
+Step 2: Analyze each column for extreme values or anomalies:
+- Revenues: Check if any value is much higher than others (e.g., 1000 vs others ~5–13).
+- Profit: Look for negative values (losses) and large magnitude.
+- Assets: Compare with market value — if assets are much larger than market value, it may indicate underperformance.
+- Market value: Check for extreme highs or lows.
+
+Step 3: Use simple threshold checks to identify outliers.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert all numeric columns to float, handling missing or non-numeric entries
+df['revenues (us billion)'] = pd.to_numeric(df['revenues (us billion)'].str.replace('-', ''), errors='coerce')
+df['profit (us billion)'] = pd.to_numeric(df['profit (us billion)'].str.replace('-', ''), errors='coerce')
+df['assets (us billion)'] = pd.to_numeric(df['assets (us billion)'], errors='coerce')
+df['market value (us billion)'] = pd.to_numeric(df['market value (us billion)'], errors='coerce')
+
+# Identify outliers using thresholds
+outliers = []
+
+# Revenue outlier: any > 10x the median
+median_revenue = df['revenues (us billion)'].median()
+high_revenue_outlier = df[df['revenues (us billion)'] > 10 * median_revenue]
+
+# Profit outlier: negative or very large magnitude
+negative_profit = df[df['profit (us billion)'] < 0]
+large_profit = df[df['profit (us billion)'] > 10]
+
+# Asset vs market value: if asset >> market value, possible misalignment
+asset_market_ratio = df['assets (us billion)'] / df['market value (us billion)']
+high_ratio = df[asset_market_ratio > 10]  # ratio > 10 means assets much larger than market value
+
+# Compile results
+outliers.extend(high_revenue_outlier['company'].tolist())
+outliers.extend(negative_profit['company'].tolist())
+outliers.extend(high_ratio['company'].tolist())
+
+# Remove duplicates and present unique companies
+unique_outliers = list(set(outliers))
+
+print(f"Final Answer: {', '.join(unique_outliers)}")
+```

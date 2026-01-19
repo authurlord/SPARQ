@@ -1,0 +1,27 @@
+Step 1: The user wants to forecast the issue price for the year 2012 based on the trend in issue prices from 2000 to 2011.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'year' and 'issue price' columns.  
+Step 4: Since the issue price increases over time, we can observe the pattern: the price increases in steps (e.g., 388.88 → 398.88 → 448.88 → 498.95 → 508.95 → 638.88 → 555.55 → 638.88). However, the increase is not strictly linear.  
+Step 5: To forecast, we can compute the average annual increase in issue price from 2000 to 2011.  
+Step 6: Use the last known price (2011: 638.88) and add the average annual increase to estimate 2012.  
+Step 7: Print the forecasted price.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert issue_price to float
+df['issue price'] = pd.to_numeric(df['issue price'])
+
+# Extract the years and issue prices
+years = df['year'].astype(int)
+prices = df['issue price']
+
+# Calculate the average annual increase in issue price
+avg_increase = prices.diff().mean()
+
+# Forecast the price for 2012
+forecast_2012 = prices.iloc[-1] + avg_increase
+
+print(f"Final Answer: {forecast_2012:.2f}")
+```

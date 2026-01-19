@@ -1,0 +1,15 @@
+Step 1: Filter the data to include only couples who have performed more than 7 dances (i.e., 'number of dances' > 7).
+Step 2: Extract the 'average' column for these couples.
+Step 3: Calculate the variance of the 'average' values.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter couples who performed more than 7 dances
+filtered_df = df[df['number of dances'] > 7]
+# Calculate variance of the 'average' column
+variance = filtered_df['average'].var()
+print(f"Final Answer: {variance:.2f}")
+```

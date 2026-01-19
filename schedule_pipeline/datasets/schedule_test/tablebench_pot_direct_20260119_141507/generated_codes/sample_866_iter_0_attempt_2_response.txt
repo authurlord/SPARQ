@@ -1,0 +1,48 @@
+Step 1: Understand the question — we need to calculate the average tenure of ambassadors serving between two time periods:
+- Period 1: 1956 to 1969 (inclusive)
+- Period 2: 1981 to 2001 (inclusive)
+
+Tenure is calculated as (End - Start) for each entry.
+
+Step 2: Filter the data for the two periods:
+- For 1956–1969: entries where Start ≥ 1956 and End ≤ 1969
+- For 1981–2001: entries where Start ≥ 1981 and End ≤ 2001
+
+Step 3: Compute average tenure for each group.
+
+Step 4: Subtract the average tenure of the second group from the first to get the difference.
+
+Step 5: Print the result.
+
+Note: We only consider entries where the title is "Ambassador" because "Chargé d'Affaires" may have different roles. The question compares "ambassadors", so we filter by Title == "Ambassador".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert Start and End to integers
+df['Start'] = pd.to_numeric(df['Start'], errors='coerce')
+df['End'] = pd.to_numeric(df['End'], errors='coerce')
+
+# Filter ambassador records only
+df_ambassador = df[df['Title'] == 'Ambassador'].copy()
+
+# Calculate tenure (End - Start)
+df_ambassador['tenure'] = df_ambassador['End'] - df_ambassador['Start']
+
+# Filter for period 1956 to 1969
+period1 = df_ambassador[(df_ambassador['Start'] >= 1956) & (df_ambassador['End'] <= 1969)]
+
+# Filter for period 1981 to 2001
+period2 = df_ambassador[(df_ambassador['Start'] >= 1981) & (df_ambassador['End'] <= 2001)]
+
+# Calculate average tenure for each group
+avg_tenure_period1 = period1['tenure'].mean()
+avg_tenure_period2 = period2['tenure'].mean()
+
+# Compute the difference
+difference = avg_tenure_period1 - avg_tenure_period2
+
+print(f"Final Answer: {difference:.1f}")
+```

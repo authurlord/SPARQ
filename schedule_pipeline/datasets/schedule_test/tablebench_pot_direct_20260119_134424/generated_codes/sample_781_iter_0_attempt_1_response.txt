@@ -1,0 +1,16 @@
+Step 1: The user is asking for a prediction of the number of major hurricanes in the next decade based on historical data from 1860 to 1868. However, the data only spans 9 years, and there is no clear trend or statistical model provided to make a reliable prediction. Therefore, we cannot predict future values with confidence.
+
+Step 2: Since no predictive model or trend is evident, we can only calculate the average number of major hurricanes per year over the given period as a baseline.
+
+Step 3: Load the dataframe, extract the 'number of major hurricanes' column, compute the mean, and use it as the best estimate for the next decade (though this is not a true prediction).
+
+Step 4: Print the average number of major hurricanes per year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the average number of major hurricanes per year
+avg_major_hurricanes = df['number of major hurricanes'].mean()
+print(f"Final Answer: {avg_major_hurricanes:.1f}")
+```

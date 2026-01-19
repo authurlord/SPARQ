@@ -1,0 +1,29 @@
+Step 1: The user wants to identify the country with the highest German imports in 1939 and compare it to its imports in 1934.
+Step 2: Load the dataframe.
+Step 3: Filter data for the year 1939 and find the country with the maximum import value.
+Step 4: Retrieve the import value for that country in 1934.
+Step 5: Print the country name and the comparison (difference or ratio).
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Drop the last row which contains header descriptions
+df = df.drop(df.index[-1])
+# Set the first column as index (years)
+df = df.set_index('-')
+# Convert all columns to numeric, excluding the first column
+df = df.apply(pd.to_numeric, errors='coerce')
+
+# Get the 1939 data
+year_1939 = df.loc['1939']
+max_import_country = year_1939.idxmax()
+max_import_1939 = year_1939.max()
+
+# Get the 1934 value for the same country
+max_import_1934 = df.loc['1934'][max_import_country]
+
+# Compare the values
+comparison = max_import_1939 - max_import_1934
+
+print(f"Final Answer: {max_import_country}, {comparison:.1f}")
+```

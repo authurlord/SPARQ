@@ -1,0 +1,22 @@
+Step 1: Identify the top 3 buildings by rank (i.e., ranks 1, 2, and 3).  
+Step 2: Filter these buildings to include only those completed before 1980.  
+Step 3: Calculate the average number of storeys for the filtered buildings.  
+
+From the table:
+- Rank 1: La Renaissance Apartments, completed in 1983 → not before 1980
+- Rank 2: Hallmark Place, completed in 1984 → not before 1980
+- Rank 3: Saskatoon Square, completed in 1979 → before 1980
+
+Only Saskatoon Square qualifies.  
+Average storeys = 17.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter top 3 buildings (ranks 1, 2, 3) completed before 1980
+filtered_df = df[(df['rank'].isin([1, 2, 3])) & (df['completed'].astype(int) < 1980)]
+# Calculate average storeys
+average_storeys = filtered_df['storeys'].mean()
+print(f"Final Answer: {average_storeys}")
+```

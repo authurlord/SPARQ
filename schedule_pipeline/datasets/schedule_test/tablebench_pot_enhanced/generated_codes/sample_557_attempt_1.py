@@ -1,0 +1,14 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to appropriate types
+df['Year'] = df['Year'].astype(int)
+df['Conservative councillors'] = df['Conservative councillors'].astype(int)
+
+# Calculate the difference in Conservative councillors from the previous year
+df['diff'] = df['Conservative councillors'].diff()
+
+# Find the row with the maximum positive difference (increase)
+max_increase_year = df.loc[df['diff'].idxmax()]['Year']
+
+print(f"Final Answer: {max_increase_year}")

@@ -1,0 +1,20 @@
+Step 1: The user wants the median of the 'CSAR No.' column, but only for rows where the value is not missing (i.e., not '-').  
+Step 2: Load the dataframe.  
+Step 3: Filter the 'CSAR No.' column to remove entries that are '-'.  
+Step 4: Convert the remaining values to numeric (since they are strings).  
+Step 5: Compute the median of the filtered numeric values.  
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter CSAR No. column, remove missing values ('-'), convert to numeric, and compute median
+csar_values = df['CSAR No.'].dropna().astype(str).str.replace('-', '').str.strip()
+# Convert to numeric, handling invalid entries by ignoring them
+csar_numeric = pd.to_numeric(csar_values, errors='coerce')
+# Drop NaNs from invalid conversions
+csar_numeric = csar_numeric.dropna()
+median_csar = csar_numeric.median()
+print(f"Final Answer: {median_csar}")
+```

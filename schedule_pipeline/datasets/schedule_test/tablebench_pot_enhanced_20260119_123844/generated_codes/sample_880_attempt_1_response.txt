@@ -1,0 +1,23 @@
+Step 1: The user wants to compare the number of literates between males and females.
+Step 2: Load the dataframe.
+Step 3: Extract the 'Male' and 'Female' values from the 'Literates' row.
+Step 4: Compare the two values and determine which is higher.
+Step 5: Print the result in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where the first column is 'Literates'
+literates_row = df[df['-'] == 'Literates']
+male_literates = int(literates_row['Male'].values[0])
+female_literates = int(literates_row['Female'].values[0])
+
+# Compare and determine which gender has more literates
+if male_literates > female_literates:
+    result = "Male"
+else:
+    result = "Female"
+
+print(f"Final Answer: {result}")
+```

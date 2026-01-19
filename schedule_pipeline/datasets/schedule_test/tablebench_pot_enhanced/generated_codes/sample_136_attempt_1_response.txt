@@ -1,0 +1,36 @@
+[Answer Format]
+Final Answer: 1, 2, 3, 4
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the operating revenue for both years
+quarters = ['Quarter Ended March 31', 'Quarter Ended June 30', 'Quarter Ended September 30', 'Quarter Ended December 31']
+current_year_revenue = df.loc[df['Row Header'] == 'Operating revenue', quarters].values[0]
+current_year_revenue = [float(rev.replace('$', '').replace(',', '')) for rev in current_year_revenue]
+
+# Extract 2018 operating revenue
+year_2018_revenue = df.loc[df['Row Header'] == '2018 Operating revenue', quarters].values[0]
+year_2018_revenue = [float(rev.replace('$', '').replace(',', '')) for rev in year_2018_revenue]
+
+# Plotting the line chart
+plt.figure(figsize=(10, 6))
+plt.plot(quarters, current_year_revenue, marker='o', label='Current Year')
+plt.plot(quarters, year_2018_revenue, marker='s', label='2018')
+
+plt.title('Operating Revenue Over Four Quarters (Current Year vs 2018)')
+plt.xlabel('Quarter')
+plt.ylabel('Operating Revenue (in $ thousands)')
+plt.legend()
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Final Answer: 1, 2, 3, 4
+Final Answer: 1, 2, 3, 4
+```

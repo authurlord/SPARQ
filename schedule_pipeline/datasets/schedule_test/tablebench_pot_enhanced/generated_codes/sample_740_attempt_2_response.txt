@@ -1,0 +1,41 @@
+Step 1: The user is asking for projected values of CBR (Crude Birth Rate), CDR (Crude Death Rate), and IMR (Infant Mortality Rate) for the period 2010–2015 based on trends from 1950 to 2010.
+
+Step 2: Analyze the trends in CBR, CDR, and IMR over time:
+- CBR: Decreasing from 47.9 (1950–1955) to 21.5 (2005–2010)
+- CDR: Decreasing from 27.1 to 7.2
+- IMR: Decreasing from 184.8 to 44.4
+
+Step 3: Observe that the decline in each rate is slowing down in recent years (e.g., CBR dropped by 4.3 between 2000–2005 and 2005–2010; CDR dropped by only 0.3; IMR dropped by 8.4). Assume a continuation of the recent trend with minimal further decline.
+
+Step 4: Project the values by extrapolating the most recent changes:
+- CBR: 21.5 → 21.5 - 4.3 ≈ 17.2 (but this is too aggressive; instead, use a smaller drop based on last change: ~21.5 - 3.0 = 18.5)
+- CDR: Last drop was 0.7 (from 7.9 to 7.2), so project 7.2 - 0.5 = 6.7
+- IMR: Last drop was 8.4 (from 52.8 to 44.4), so project 44.4 - 6.0 = 38.4
+
+But since the question asks for a reasonable projection based on trends, we can assume a modest further decline.
+
+Step 5: Use linear extrapolation from the last few data points to estimate values for 2010–2015.
+
+We'll calculate the average annual decrease from 2000–2005 to 2005–2010 and apply it once.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the last three periods for trend analysis
+recent_data = df.tail(3)
+
+# Calculate average annual change for CBR, CDR, IMR
+cbg_change = (recent_data['CBR1'].iloc[-1] - recent_data['CBR1'].iloc[-2]) / 5
+cdr_change = (recent_data['CDR1'].iloc[-1] - recent_data['CDR1'].iloc[-2]) / 5
+imr_change = (recent_data['IMR1'].iloc[-1] - recent_data['IMR1'].iloc[-2]) / 5
+
+# Project for 2010–2015 (next 5-year period)
+projected_cbr = float(recent_data['CBR1'].iloc[-1]) + cbg_change
+projected_cdr = float(recent_data['CDR1'].iloc[-1]) + cdr_change
+projected_imr = float(recent_data['IMR1'].iloc[-1]) + imr_change
+
+# Round to one decimal place
+print(f"Final Answer: {projected_cbr:.1f}, {projected_cdr:.1f}, {projected_imr:.1f}")
+```

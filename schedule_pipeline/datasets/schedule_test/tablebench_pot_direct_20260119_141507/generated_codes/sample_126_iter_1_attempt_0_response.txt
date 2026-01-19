@@ -1,0 +1,50 @@
+The error occurred because the "Total" and percentage columns contain strings with commas (e.g., '59,6%'), which cannot be directly converted to float. We need to clean the data before computing percentages or creating a pie chart.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. For the year 1948, extract the relevant ethnic group values (Serbs, Hungarians, Germans, Romanians, Slovaks).
+3. Clean the values: remove the percentage sign and convert string values like '59,6%' to numeric. However, since we only care about the actual counts (not percentages), we should extract the numeric part from the 'Serbs', 'Hungarians', etc. columns — but note that some entries are in percentage format (e.g., '229,568 (40.5%)').
+
+We will parse the numeric part of each group (before the parentheses) to get the actual counts.
+
+For example:
+- '229,568 (40.5%)' → extract 229,568
+- '108,622 (19.2%)' → extract 108,622
+
+We'll use string operations to extract the numbers before the parenthesis.
+
+Step:
+- Filter the row for year 1948.
+- Extract the numeric values from each ethnic group column (Serbs, Hungarians, Germans, Romanians, Slovaks).
+- Convert them to integers.
+- Create a pie chart using matplotlib.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter for year 1948
+year_1948 = df[df['Year'] == '1948']
+
+# Extract the ethnic group values by removing the text after the parenthesis
+groups = ['Serbs', 'Hungarians', 'Germans', 'Romanians', 'Slovaks']
+values = {}
+
+for group in groups:
+    value_str = year_1948[group].str.extract(r'(\d+,\d+)').fillna(0)
+    # Convert to integer, replacing commas with dots and then convert
+    value_clean = value_str.apply(lambda x: int(x[0].replace(',', '')) if pd.notna(x[0]) else 0)
+    values[group] = value_clean.iloc[0]
+
+# Create a pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(values.values(), labels=values.keys(), autopct='%1.1f%%', startangle=90)
+plt.title('Racial Composition of the Region in 1948')
+plt.show()
+
+# Final Answer: The pie chart is generated showing the racial composition
+Final Answer: pie_chart
+```

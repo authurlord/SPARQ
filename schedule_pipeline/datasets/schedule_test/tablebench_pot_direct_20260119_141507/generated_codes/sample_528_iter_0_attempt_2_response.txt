@@ -1,0 +1,33 @@
+Step 1: Understand the question. We are to compute the Duma Seat Share Change for the Constitutional Democratic Party (Kadets) from the First Duma to the Second Duma. This requires:
+- Extracting the number of seats the party held in the First Duma and Second Duma.
+- Calculating the percentage of seats they held in each.
+- Computing the difference in percentages.
+
+Step 2: Identify relevant data:
+- "Constitutional Democratic Party (Kadets)" has values: 179 (First Duma), 92 (Second Duma).
+- Total seats in First Duma: 566 (from the "TOTAL" row).
+- Total seats in Second Duma: 453 (from the "TOTAL" row).
+
+Step 3: Compute seat share percentages:
+- First Duma share = (179 / 566) * 100
+- Second Duma share = (92 / 453) * 100
+- Change = Second Duma share - First Duma share
+
+Step 4: Perform the calculation and print the result.
+
+```python
+# Extract values for Constitutional Democratic Party (Kadets)
+first_duma_seats = 179
+second_duma_seats = 92
+total_first_duma = 566
+total_second_duma = 453
+
+# Calculate seat shares as percentages
+first_share = (first_duma_seats / total_first_duma) * 100
+second_share = (second_duma_seats / total_second_duma) * 100
+
+# Compute change
+seat_share_change = second_share - first_share
+
+print(f"Final Answer: {seat_share_change:.2f}")
+```

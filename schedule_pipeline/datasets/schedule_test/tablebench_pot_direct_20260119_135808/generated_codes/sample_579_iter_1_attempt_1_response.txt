@@ -1,0 +1,26 @@
+Step 1: The user wants the average quantity of buses manufactured between 2000 and 2007 (inclusive).
+Step 2: Load the dataframe.
+Step 3: Extract the 'year' column and convert it to numeric, handling cases like "2000", "2003", "2010, 2012" by splitting and taking the first year.
+Step 4: Filter rows where the year is between 2000 and 2007.
+Step 5: Calculate the mean of the 'quantity' column for those rows.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'year' column: extract the first year if multiple years are listed
+df['year'] = df['year'].astype(str).str.split(',').str[0]
+
+# Convert 'year' to integer
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+
+# Filter rows where year is between 2000 and 2007 (inclusive)
+filtered_df = df[(df['year'] >= 2000) & (df['year'] <= 2007)]
+
+# Calculate average quantity
+avg_quantity = filtered_df['quantity'].mean()
+
+print(f"Final Answer: {avg_quantity:.1f}")
+```

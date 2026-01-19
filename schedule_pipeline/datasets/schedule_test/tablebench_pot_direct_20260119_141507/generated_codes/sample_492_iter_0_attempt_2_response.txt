@@ -1,0 +1,62 @@
+Step 1: Understand the question — We are looking for the first round in which Miloš Zeman received more than 50% of the total votes (deputies + senators) across both categories (Deputies and Senators).  
+Step 2: Identify the relevant columns — "Miloš Zeman" and "Miloš Zeman_1" represent deputies and senators, respectively.  
+Step 3: For each round, calculate the total votes (deputies + senators) for Miloš Zeman.  
+Step 4: Check if the total exceeds 50% of the total possible votes (sum of all deputies and senators in that round).  
+Step 5: Find the first round where this condition is met.
+
+Note: The first row is a header row and should be skipped. Only rows from "1st" to "3rd" are relevant.
+
+Let's compute step-by-step:
+
+- Total votes per round = (Miloš Zeman - Deputies) + (Miloš Zeman - Senators)
+- Total possible votes per round = (Václav Klaus - Deputies + Václav Klaus - Senators) + (Jaroslava Moserová - Deputies + Jaroslava Moserová - Senators) + (Miloš Zeman - Deputies + Miloš Zeman - Senators)
+But since we only care about Miloš Zeman’s share, we can compute his total votes and compare to 50% of the total votes in that round.
+
+However, note that the total votes per round are already given for each candidate across deputies and senators. So for each round, we can sum up the deputies and senators for Miloš Zeman, then check if it's greater than 50% of the total votes in that round.
+
+We will:
+1. Skip the header row.
+2. For each round, compute Miloš Zeman’s total votes (deputies + senators).
+3. Compute total votes for all candidates (sum of deputies and senators across all columns).
+4. Check if Miloš Zeman's total > 0.5 * total votes.
+
+We will go round by round until we find the first one.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Drop the first row (header row)
+df = df.iloc[1:]
+
+# Extract the relevant columns for Miloš Zeman
+milo_zeman_deputies = df['Miloš Zeman']
+milo_zeman_senators = df['Miloš Zeman_1']
+
+# Total votes for Miloš Zeman per round
+milo_zeman_total = milo_zeman_deputies + milo_zeman_senators
+
+# Total votes for all candidates in each round
+# Sum of all deputies and senators in each row
+total_votes_per_round = (
+    df['Václav Klaus'] + df['Václav Klaus_1'] +
+    df['Jaroslava Moserová'] + df['Jaroslava Moserová_1'] +
+    milo_zeman_deputies + milo_zeman_senators
+)
+
+# Check for majority win (>50%)
+for idx, row in df.iterrows():
+    total_milo = row['Miloš Zeman'] + row['Miloš Zeman_1']
+    total_all = (
+        row['Václav Klaus'] + row['Václav Klaus_1'] +
+        row['Jaroslava Moserová'] + row['Jaroslava Moserová_1'] +
+        row['Miloš Zeman'] + row['Miloš Zeman_1']
+    )
+    if total_milo > 0.5 * total_all:
+        print(f"Final Answer: {row['Round']}")
+        break
+```
+
+Final Answer: 3rd

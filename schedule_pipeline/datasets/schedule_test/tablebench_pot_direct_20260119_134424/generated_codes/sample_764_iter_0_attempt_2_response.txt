@@ -1,0 +1,26 @@
+Step 1: The user wants to forecast the issue price for the year 2012 based on the historical trend of issue prices from 2000 to 2011.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'year' and 'issue price' columns.  
+Step 4: Use a simple linear regression model to fit the trend and predict the price for 2012.  
+Step 5: Print the forecasted price.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert year to numeric (from string) and issue price to float
+df['year'] = pd.to_numeric(df['year'])
+df['issue price'] = pd.to_numeric(df['issue price'])
+
+# Prepare data for linear regression
+X = df['year'].values.reshape(-1, 1)
+y = df['issue price'].values
+
+# Fit linear regression model
+model = np.polyfit(X.flatten(), y, 1)
+predicted_price_2012 = np.polyval(model, 2012)
+
+print(f"Final Answer: {predicted_price_2012:.2f}")
+```

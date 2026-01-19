@@ -1,0 +1,45 @@
+Step 1: Understand the question — we need to calculate the average seat density for each aircraft type, defined as (total seats) / (total aircraft).  
+Step 2: The "Total" column represents the total number of aircraft for each type.  
+Step 3: The "Seats in Standard Configuration" column gives the range of seats per aircraft. We need to compute the average number of seats per aircraft.  
+Step 4: Since the seat count is given as a range (e.g., "267-269"), we take the average of the range. For example, (267 + 269)/2 = 268.  
+Step 5: For entries with "—" in "Owned" or "Leased", we skip them (or assume they have no aircraft). But in this table, only "—" appears in "Owned" and "Leased" for some rows — however, the "Total" column already gives the total number of aircraft. So we use "Total" as the aircraft count.  
+Step 6: For seat count, convert ranges into averages:  
+   - If it's a string like "267-269", split and compute average.  
+   - If it's a single number (like "366"), use that.  
+Step 7: Compute average seat density per aircraft type: total_seats / total_aircraft.  
+Step 8: Find the aircraft type with the highest value.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Function to compute average seats from a range string
+def avg_seats(seat_str):
+    if pd.isna(seat_str) or seat_str == '—':
+        return 0
+    if '-' in seat_str:
+        parts = seat_str.split('-')
+        return (int(parts[0]) + int(parts[1])) / 2
+    else:
+        return int(seat_str)
+
+# Apply the function to compute average seats per aircraft
+df['avg_seats'] = df['Seats in Standard Configuration'].apply(avg_seats)
+
+# Calculate total seats (average seats * total aircraft)
+df['total_seats'] = df['Total'] * df['avg_seats']
+
+# Calculate average seat density (total seats / total aircraft)
+df['seat_density'] = df['total_seats'] / df['Total']
+
+# Exclude rows where Total is 0 or missing
+df = df[df['Total'] != 0]
+
+# Find the row with maximum seat density
+max_density_row = df.loc[df['seat_density'].idxmax()]
+
+# Output the aircraft type with the highest average seat density
+print(f"Final Answer: {max_density_row['Row Header']}")
+```

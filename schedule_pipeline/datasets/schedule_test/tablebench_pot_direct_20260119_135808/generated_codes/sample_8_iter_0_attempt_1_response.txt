@@ -1,0 +1,17 @@
+Step 1: The user wants the average percentage of national votes won by all leaders across the elections listed in the table.  
+Step 2: Load the dataframe from the provided JSON data.  
+Step 3: Extract the '% of national vote' column, which contains percentage values as strings with a '%' sign.  
+Step 4: Clean the values by removing the '%' sign and converting them to float.  
+Step 5: Calculate the mean of the cleaned values.  
+Step 6: Print the result as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean the '% of national vote' column by removing '%' and converting to float
+df['% of national vote'] = df['% of national vote'].str.replace('%', '').astype(float)
+# Calculate the average
+avg_national_vote = df['% of national vote'].mean()
+print(f"Final Answer: {avg_national_vote:.2f}")
+```

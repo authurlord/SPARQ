@@ -1,0 +1,50 @@
+We are tasked with creating a stacked bar chart showing the trends in domestic, international (non-CIS), and CIS passenger counts from 2000 to 2013.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Clean the data: convert the "International (non-CIS)" and "CIS" columns to numeric (handle missing values like 'None' or empty strings).
+3. Extract the relevant columns: 'Year', 'Domestic', 'International (non-CIS)', 'CIS'.
+4. Pivot or structure the data so that each year has three values (domestic, non-CIS, CIS) for stacking.
+5. Use matplotlib to create a stacked bar chart with years on the x-axis and passenger counts on the y-axis.
+
+Note: In the table, some values are missing (e.g., 2013 has "None" in International (non-CIS) and CIS). We will treat those as 0 for plotting.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, handling missing values
+df['Domestic'] = pd.to_numeric(df['Domestic'].str.replace(',', ''), errors='coerce')
+df['International (non-CIS)'] = pd.to_numeric(df['International (non-CIS)'].str.replace(',', ''), errors='coerce')
+df['CIS'] = pd.to_numeric(df['CIS'].str.replace(',', ''), errors='coerce')
+
+# Fill missing values with 0
+df['Domestic'] = df['Domestic'].fillna(0)
+df['International (non-CIS)'] = df['International (non-CIS)'].fillna(0)
+df['CIS'] = df['CIS'].fillna(0)
+
+# Filter only years from 2000 to 2013
+df_filtered = df[df['Year'].between(2000, 2013)]
+
+# Prepare data for plotting
+data = df_filtered[['Year', 'Domestic', 'International (non-CIS)', 'CIS']]
+data.set_index('Year', inplace=True)
+
+# Create a stacked bar chart
+plt.figure(figsize=(12, 6))
+data.plot(kind='bar', stacked=True)
+plt.title('Trends in Domestic, International (non-CIS), and CIS Passenger Count (2000–2013)')
+plt.xlabel('Year')
+plt.ylabel('Passenger Count')
+plt.xticks(rotation=0)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```
+
+Final Answer: domestic, non_CIS, CIS

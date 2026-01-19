@@ -1,0 +1,33 @@
+Step 1: The user wants to determine which factors (columns) significantly contribute to the 'points' earned. This requires analyzing the correlation between each numerical feature and 'points'.
+Step 2: Load the dataframe.
+Step 3: Select only numerical columns (excluding 'season', 'series', 'team', 'position' as they are categorical or non-numeric).
+Step 4: Compute the correlation matrix between these features and 'points'.
+Step 5: Identify features with a high absolute correlation value (e.g., > 0.5) as significant contributors.
+Step 6: If no such features exist, return 'no clear impact'.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select only numeric columns for correlation analysis
+numeric_columns = ['races', 'wins', 'poles', 'laps', 'podiums', 'points']
+df_numeric = df[numeric_columns]
+
+# Compute correlation matrix
+correlation_matrix = df_numeric.corr()
+
+# Extract correlation of each feature with 'points'
+correlations_with_points = correlation_matrix['points'].abs().sort_values(ascending=False)
+
+# Identify features with significant correlation (> 0.5)
+significant_features = correlations_with_points[correlations_with_points > 0.5].index.tolist()
+
+# Remove 'points' itself from the list
+significant_features = [feat for feat in significant_features if feat != 'points']
+
+if significant_features:
+    print(f"Final Answer: {', '.join(significant_features)}")
+else:
+    print("Final Answer: no clear impact")
+```

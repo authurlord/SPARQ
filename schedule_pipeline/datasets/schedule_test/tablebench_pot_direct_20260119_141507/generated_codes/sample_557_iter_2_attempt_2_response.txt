@@ -1,0 +1,31 @@
+The error occurred because the 'Year' column contains string values, and we cannot directly perform arithmetic operations (like subtraction) on strings. We need to convert the year column to integers before computing differences.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Convert the 'Year' column to integer type to enable numerical operations.
+3. Extract the number of Conservative councillors for each year.
+4. Compute the difference in Conservative councillors between consecutive years.
+5. Identify the year where this difference is the highest (i.e., the largest increase).
+6. Return that year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year' to integer for proper numerical comparison
+df['Year'] = df['Year'].astype(int)
+
+# Extract the Conservative councillors column
+conservative_councillors = df['Conservative councillors']
+
+# Calculate the difference between consecutive years
+differences = conservative_councillors.diff()
+
+# Find the index of the maximum increase (largest positive difference)
+max_increase_index = differences.idxmax()
+
+# Get the corresponding year
+year_with_max_increase = df.loc[max_increase_index, 'Year']
+
+print(f"Final Answer: {year_with_max_increase}")
+```

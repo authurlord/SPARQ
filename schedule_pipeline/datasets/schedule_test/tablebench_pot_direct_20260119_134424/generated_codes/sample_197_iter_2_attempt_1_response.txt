@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The international tourism receipts generally increase with increasing international tourist arrivals, but the relationship varies by country, with some countries showing higher receipts per arrival (e.g., Barbados, Panama) and others showing lower receipts per arrival (e.g., Brazil, Mexico).

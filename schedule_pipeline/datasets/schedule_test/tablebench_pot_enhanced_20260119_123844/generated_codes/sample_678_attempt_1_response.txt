@@ -1,0 +1,21 @@
+[Answer Format]
+Final Answer: 0.07
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert columns to numeric, handling potential non-numeric values (like '- 1.4')
+df['% change'] = pd.to_numeric(df['% change'].str.replace(' ', ''), errors='coerce')
+df['density (pop / km square)'] = pd.to_numeric(df['density (pop / km square)'], errors='coerce')
+
+# Drop rows with missing values in either column
+df.dropna(subset=['% change', 'density (pop / km square)'], inplace=True)
+
+# Calculate the correlation coefficient
+correlation = df['density (pop / km square)'].corr(df['% change'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

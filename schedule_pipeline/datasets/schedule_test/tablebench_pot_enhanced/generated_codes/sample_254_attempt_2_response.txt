@@ -1,0 +1,15 @@
+Step 1: Filter the data to include only districts in the 'cusco' region.
+Step 2: Further filter to include only those with elevation above 4700 meters.
+Step 3: Calculate the average of the 'elevation (m)' column for the filtered data.
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Cusco region and elevation > 4700
+filtered_df = df[(df['region'] == 'cusco') & (df['elevation (m)'].astype(int) > 4700)]
+# Calculate average elevation
+avg_elevation = filtered_df['elevation (m)'].astype(int).mean()
+print(f"Final Answer: {avg_elevation:.1f}")
+```

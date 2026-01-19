@@ -1,0 +1,21 @@
+Step 1: Analyze the table for any inconsistencies or anomalies in the data.
+Step 2: Focus on demographic categories such as population, literacy, and workers.
+Step 3: Check for illogical values (e.g., female total workers = 1000, which is higher than total workers = 194).
+Step 4: Identify that "Total Workers" = 194, but "Female" = 1000, which is impossible.
+Step 5: Also note that "Male" = 143 and "Female" = 1000, summing to 1143, which exceeds the total workers of 194.
+Step 6: Conclude that the "Female" value for "Total Workers" is an error.
+Step 7: Output the category with the anomaly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Check for inconsistencies in 'Total Workers' and its subcategories
+total_workers = df[df['Particulars'] == 'Total Workers']['Total'].values[0]
+male_workers = df[df['Particulars'] == 'Total Workers']['Male'].values[0]
+female_workers = df[df['Particulars'] == 'Total Workers']['Female'].values[0]
+
+# Check if female workers exceed total workers
+if int(female_workers) > int(total_workers):
+    print("Final Answer: Total Workers, Female")
+```

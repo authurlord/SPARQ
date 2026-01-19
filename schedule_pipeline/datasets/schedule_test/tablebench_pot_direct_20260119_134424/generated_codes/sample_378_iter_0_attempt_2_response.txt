@@ -1,0 +1,12 @@
+Step 1: The user wants to count how many elections resulted in the party securing 75 or more seats.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'seats' is greater than or equal to 75.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count elections with 75 or more seats
+count_elections = df[df['seats'] >= 75].shape[0]
+print(f"Final Answer: {count_elections}")
+```

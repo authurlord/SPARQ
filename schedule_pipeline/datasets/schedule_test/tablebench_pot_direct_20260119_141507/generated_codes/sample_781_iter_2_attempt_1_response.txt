@@ -1,0 +1,7 @@
+The question asks for a prediction of the number of major hurricanes in the next decade based on historical data from 1860 to 1868. However, the provided data only includes past observations and does not contain any trends, patterns, or statistical models (e.g., regression, seasonality, growth rates) that would allow for a valid predictive analysis. 
+
+Furthermore, predicting future events (like the number of major hurricanes) without additional context (e.g., climate trends, environmental factors, or statistical modeling) is inherently speculative and not supported by the given data.
+
+Therefore, based solely on the available data, no reliable prediction can be made.
+
+Final Answer: cannot predict

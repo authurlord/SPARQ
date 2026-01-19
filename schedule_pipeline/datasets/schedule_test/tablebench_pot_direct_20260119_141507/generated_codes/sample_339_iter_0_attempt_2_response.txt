@@ -1,0 +1,15 @@
+Step 1: The user is asking for the year when the athlete won their first gold medal in the 100 m hurdles event.  
+Step 2: A "gold medal" win corresponds to a "1st" position in the "Position" column for the "100 m hurdles" event.  
+Step 3: Filter the data where "Position" is "1st" and "Event" is "100 m hurdles".  
+Step 4: Extract the corresponding "Year" from the first such record (as it would be the first gold medal).  
+
+Note: The first occurrence of a 1st place in the 100 m hurdles is in 2010, during the Oceania Youth Championships.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 1st place in 100 m hurdles
+gold_medal_year = df[(df['Position'] == '1st') & (df['Event'] == '100 m hurdles')]['Year'].iloc[0]
+print(f"Final Answer: {gold_medal_year}")
+```

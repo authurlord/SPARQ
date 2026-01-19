@@ -1,0 +1,31 @@
+The error occurred because the 'us viewers (millions)' column contains concatenated string values (e.g., "9.439.899.49.148.357.389.6211.47"), which are not properly separated. This suggests that the data was incorrectly parsed — each row should have a single value for US viewers, not a concatenated string.
+
+Step 1: Inspect the data to confirm that the 'us viewers (millions)' column is actually a string of concatenated values.
+Step 2: Split the string by spaces or commas and extract individual values.
+Step 3: Convert each value to float and compute the average and standard deviation.
+
+However, upon closer inspection of the data:
+- The values in the 'us viewers (millions)' column are actually correctly listed per row: e.g., "9.43", "9.89", etc.
+- The issue arises only if the values were accidentally joined during input.
+
+But in the given table, each row has a single value like "9.43", so the column is already properly structured per row.
+
+Therefore, the correct approach is:
+1. Load the dataframe.
+2. Extract the 'us viewers (millions)' column.
+3. Convert the string values to numeric (float).
+4. Compute the mean and standard deviation.
+5. Print both values.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Convert 'us viewers (millions)' to numeric, handling any parsing issues
+viewers = pd.to_numeric(df['us viewers (millions)'], errors='coerce')
+# Calculate average and standard deviation
+mean_viewers = viewers.mean()
+std_viewers = viewers.std()
+print(f"Final Answer: {mean_viewers:.2f}, {std_viewers:.2f}")
+```

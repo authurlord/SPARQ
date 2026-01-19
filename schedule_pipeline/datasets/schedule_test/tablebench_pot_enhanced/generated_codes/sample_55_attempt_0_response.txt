@@ -1,0 +1,13 @@
+Step 1: The user wants to identify the nation that won 1 gold and 4 silver medals.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'gold' is 1 and 'silver' is 4.
+Step 4: Extract the 'nation' column value from the filtered row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where gold is 1 and silver is 4
+result = df[(df['gold'] == '1') & (df['silver'] == '4')]
+nation = result['nation'].values[0]
+print(f"Final Answer: {nation}")
+```

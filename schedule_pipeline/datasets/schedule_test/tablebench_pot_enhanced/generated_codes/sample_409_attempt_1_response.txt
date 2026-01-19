@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: spd, cdu, bvw, fdp, total, voter turnout in %

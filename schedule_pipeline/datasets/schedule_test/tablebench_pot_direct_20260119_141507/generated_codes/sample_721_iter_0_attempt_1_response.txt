@@ -1,0 +1,23 @@
+Step 1: The user wants to identify the person who has served the longest in the position.  
+Step 2: The "Start" and "End" columns indicate the tenure of each person.  
+Step 3: Calculate the duration of service for each person as (End - Start).  
+Step 4: Find the person with the maximum duration.  
+Step 5: Return their name.
+
+Note: All years are strings, so we need to convert them to integers and compute the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert Start and End to integers
+df['Start'] = pd.to_numeric(df['Start'], errors='coerce')
+df['End'] = pd.to_numeric(df['End'], errors='coerce')
+
+# Calculate duration of service
+df['duration'] = df['End'] - df['Start']
+
+# Find the person with the maximum duration
+longest_serving = df.loc[df['duration'].idxmax(), 'Name']
+print(f"Final Answer: {longest_serving}")
+```

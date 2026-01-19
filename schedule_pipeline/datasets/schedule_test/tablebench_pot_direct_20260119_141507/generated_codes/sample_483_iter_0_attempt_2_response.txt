@@ -1,0 +1,22 @@
+Step 1: The user wants to identify data points in the 'whenbuilt' column that deviate significantly from the norm.  
+Step 2: "Deviate significantly" suggests outliers — values that are unusually early or late compared to the rest.  
+Step 3: The 'whenbuilt' column contains years (e.g., '1948', '1949', '1950') and one entry with 'abc' and 'march 1950', 'april 1950', 'may 1950', 'january 1951'.  
+Step 4: We need to check for non-standard or inconsistent entries (like 'abc' or dates not in YYYY format).  
+Step 5: Identify any values that are not standard years or are clearly out of range (e.g., 'abc' is not a year, and '1234' is unusually early).  
+
+We will:
+- Filter out invalid or non-numeric entries in 'whenbuilt'.
+- Check for entries like 'abc', '1234', which are not typical years.
+- Note that '1234' is an outlier as it's far earlier than the others.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Check for non-numeric or invalid entries in 'whenbuilt'
+invalid_or_outlier_entries = df[df['whenbuilt'].apply(lambda x: not str(x).isdigit() and str(x) != '1948' and str(x) != '1949' and str(x) != '1950' and str(x) != 'march 1950' and str(x) != 'april 1950' and str(x) != 'may 1950' and str(x) != 'january 1951')]
+
+# Extract the specific values that are invalid or unusual
+outliers = invalid_or_outlier_entries['whenbuilt'].tolist()
+print(f"Final Answer: {outliers}")
+```

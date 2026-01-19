@@ -1,0 +1,19 @@
+Step 1: The question asks for the total estimated exposure (mrem/hr) when combining two specimens, assuming that the calculated activity (Bq) is directly proportional to the specimen weight.
+
+Step 2: Identify the relevant rows:
+- Specimen 1: 0.1 g / 4.08 mm → Calculated activity (Bq) = 18, Estimated exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → Calculated activity (Bq) = 1834, Estimated exposure = 0.03 mrem/hr
+
+Step 3: Since the exposure is assumed to be directly proportional to the activity (Bq), and activity is already given as proportional to weight, we can scale the exposure of the first specimen based on the ratio of weights.
+
+Step 4: Weight ratio = 10 g / 0.1 g = 100. So, the exposure from the 0.1 g specimen should scale up by 100 times if we assume proportionality.
+
+Step 5: Scaled exposure from 0.1 g specimen = 0.0 * 100 = 0.0 mrem/hr (still 0.0)
+
+Step 6: Add scaled exposure of 0.1 g specimen (0.0) to exposure of 10 g specimen (0.03) → Total exposure = 0.0 + 0.03 = 0.03 mrem/hr
+
+Step 7: However, note that the exposure values in the table are already calculated based on the given activity. Since the activity (Bq) is directly proportional to weight, and exposure is also listed per specimen, we can directly sum the exposures only if they are additive. But since the exposure values are already computed for each specimen, and no indication suggests otherwise, we assume exposure is additive.
+
+But wait: the 0.1 g specimen has an estimated exposure of 0.0 mrem/hr, which likely means it's below detectable levels. The 10 g specimen has 0.03 mrem/hr. So total exposure = 0.0 + 0.03 = 0.03 mrem/hr.
+
+Final Answer: 0.03

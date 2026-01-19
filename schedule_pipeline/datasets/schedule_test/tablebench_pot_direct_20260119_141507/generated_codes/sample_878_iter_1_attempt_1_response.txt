@@ -1,0 +1,28 @@
+We are asked to find the difference in points between the singer with the highest 'points' and the singer with the 5th highest 'points' score.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Convert the 'points' column to numeric (to handle string values like '0', '3', etc.).
+3. Sort the 'points' in descending order.
+4. Extract the highest point value (1st) and the 5th highest point value.
+5. Compute the difference between them.
+6. Print the result.
+
+Note: The error in the previous attempt was due to trying to subtract strings. We must ensure the 'points' column is properly converted to numeric.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'points' to numeric, coercing errors to NaN (but data seems clean)
+df['points'] = pd.to_numeric(df['points'], errors='coerce')
+
+# Sort by points in descending order and get the top 5 values
+sorted_points = df.sort_values(by='points', ascending=False)['points']
+highest_points = sorted_points.iloc[0]
+fifth_highest_points = sorted_points.iloc[4]
+
+# Calculate the difference
+difference = highest_points - fifth_highest_points
+print(f"Final Answer: {difference}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants to count the number of years where the number of hurricanes is 3 or fewer.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'number of hurricanes' is less than or equal to 3.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where number of hurricanes is 3 or fewer
+filtered_df = df[df['number of hurricanes'] <= 3]
+# Count the number of such years
+count_years = len(filtered_df)
+print(f"Final Answer: {count_years}")
+```

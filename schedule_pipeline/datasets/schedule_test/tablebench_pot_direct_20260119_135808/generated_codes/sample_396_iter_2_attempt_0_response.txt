@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table lists skyscrapers or high-rise buildings with their rank, name, height in feet and meters, number of floors, and year of completion. Key insights include: the tallest building is One America Plaza at 500 feet (152 meters), completed in 1991; several buildings share the same rank (e.g., 5=, 8=, 10=, 22=), indicating ties; the most recent building listed was completed in 2012 (US Federal Courthouse); and the building with the most floors is Manchester Grand Hyatt Hotel with 40 floors, despite not being the tallest.

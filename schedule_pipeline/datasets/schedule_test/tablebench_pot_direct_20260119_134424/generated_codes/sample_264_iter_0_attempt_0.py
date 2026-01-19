@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where 'most spoken language' is 'afrikaans'
+afrikaans_places = df[df['most spoken language'] == 'afrikaans']
+# Calculate total population
+total_population = afrikaans_places['population'].sum()
+print(f"Final Answer: {total_population}")

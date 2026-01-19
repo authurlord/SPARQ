@@ -1,0 +1,32 @@
+Step 1: The user wants a pie chart showing the proportions of cases for various infectious diseases in the year 1933.  
+Step 2: First, identify the row corresponding to the year 1933 from the table.  
+Step 3: Extract the values for each disease (typhus, typhoid fever, relapsing fever, smallpox, malaria).  
+Step 4: Use matplotlib to create a pie chart of these proportions.  
+
+Note: The data has a typo in the second row — "191822" is likely meant to be "1918–22", but we only care about 1933. The row for 1933 is clearly present and valid.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('table.csv')
+
+# Filter the row for year 1933
+year_1933 = df[df['year'] == '1933'].iloc[0]
+
+# Extract disease case counts
+diseases = ['typhus', 'typhoid fever', 'relapsing fever', 'smallpox', 'malaria']
+cases = [year_1933['typhus'], year_1933['typhoid fever'], year_1933['relapsing fever'], 
+         year_1933['smallpox'], year_1933['malaria']]
+
+# Create a pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(cases, labels=diseases, autopct='%1.1f%%', startangle=90)
+plt.title('Proportions of Cases for Infectious Diseases in 1933')
+plt.show()
+
+# Final Answer: Since the question asks to draw the chart, no numerical answer is required.
+# However, if required to output something, we can just confirm the action.
+Final Answer: chart
+```

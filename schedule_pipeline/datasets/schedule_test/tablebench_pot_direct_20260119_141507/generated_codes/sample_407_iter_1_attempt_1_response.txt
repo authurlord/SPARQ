@@ -1,0 +1,45 @@
+The task requires a detailed description of the table, including explanations of each column and notable trends or insights. This involves analyzing the structure and content of the data rather than performing a simple calculation. Since the question asks for a descriptive analysis, we will:
+
+Step 1: Understand the structure of the table.
+- The table has rows representing different metrics (Applications, Offer Rate, Enrols, Yield, Applicant/Enrolled Ratio, Average Entry Tariff) and columns representing years from 2017 to 2013.
+- The first row is labeled "Applications", followed by other metrics.
+
+Step 2: Interpret each column.
+- Each column represents a year, showing how the metric changed over time.
+- The values are numeric except for "Average Entry Tariff" in 2017, which is marked as "n/a".
+
+Step 3: Identify trends.
+- Applications show a slight decline from 2016 to 2017 (42,335 → 41,000).
+- Offer Rate increased slightly from 2013 to 2017 (86.8% → 89.7%), indicating better offer-to-application ratio.
+- Enrolments are stable with minor fluctuations, peaking at 6,065 in 2017.
+- Yield (%) shows a downward trend from 2013 to 2017 (18.7% → 16.5%), suggesting fewer applicants are being accepted.
+- Applicant/Enrolled Ratio decreases from 2013 to 2017 (6.14 → 6.76), meaning the ratio of applicants to enrollees improved slightly — more applicants are being enrolled relative to total applicants.
+- Average Entry Tariff decreased from 2015 to 2017 (471 → 176), indicating a significant drop in entry fees, possibly due to policy changes or market shifts.
+
+Step 4: Write a clear, concise description based on these observations.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Display the table for understanding
+print("Table Description:")
+print("The table contains six main metrics across five years (2013 to 2017):")
+print("- 'Applications': Total number of applications per year, showing a slight decline from 2016 to 2017.")
+print("- 'Offer Rate (%)': Percentage of applicants offered admission; increased from 86.8% in 2013 to 89.7% in 2017, indicating improved offer rates.")
+print("- 'Enrols': Number of students enrolled; stable with a peak in 2017 (6,065).")
+print("- 'Yield (%)': Percentage of offers accepted; decreased from 18.7% in 2013 to 16.5% in 2017, suggesting lower acceptance rates.")
+print("- 'Applicant/Enrolled Ratio': Ratio of applicants to enrollees; decreased from 6.14 in 2013 to 6.76 in 2017, indicating higher enrolment efficiency.")
+print("- 'Average Entry Tariff': Entry fee per student; dropped sharply from $471 in 2015 to $176 in 2017, indicating a major cost reduction.")
+
+print("\nNotable Trends:")
+print("1. Applications slightly declined from 2016 to 2017 but were still high.")
+print("2. Offer rate improved over time, suggesting better selection processes.")
+print("3. Yield declined, possibly due to tighter admissions or reduced interest.")
+print("4. Enrolment efficiency improved, with a lower applicant-to-enrolled ratio.")
+print("5. A significant drop in average entry tariff from 2015 to 2017 suggests policy changes or cost reductions.")
+
+Final Answer: Applications declined slightly, Offer Rate increased, Yield decreased, Enrolment efficiency improved, Average Entry Tariff dropped significantly
+```

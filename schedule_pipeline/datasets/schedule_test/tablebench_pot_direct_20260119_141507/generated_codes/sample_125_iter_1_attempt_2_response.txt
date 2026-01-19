@@ -1,0 +1,74 @@
+We are tasked with creating a waterfall chart that uses the completion time of the first-place finisher as a baseline and shows the completion times of each participant in the competition.
+
+Step-by-step analysis:
+1. The table contains data about competitors in a race, including their "Time" (in format like '2:59.30').
+2. We are to use the **first-place finisher's time** (Rank 1) as the baseline.
+3. Then, we need to plot a waterfall chart where each competitor's time is shown relative to this baseline — meaning we show the difference from the baseline.
+4. The baseline will be the first row (United States, 2:59.30), and then each subsequent time will be plotted as a vertical bar showing how much longer or shorter it is.
+5. However, note that the "Time" column has values like '2:59.30', which must be converted to seconds for proper numerical comparison and plotting.
+6. Waterfall charts typically represent cumulative changes — here, we interpret each competitor's time as a deviation from the baseline (first-place time).
+7. Since the question asks for a waterfall chart showing completion times relative to the first-place finisher, we will:
+   - Extract the baseline time (first row).
+   - Convert all times to seconds.
+   - Compute the difference between each time and the baseline.
+   - Plot a waterfall chart using matplotlib, where each bar represents the difference from the baseline.
+
+Important: The data has missing entries (e.g., 'DNF', 'DSQ') — these should be excluded or handled appropriately. We will exclude any rows where time is missing or invalid.
+
+Steps in code:
+- Load the dataframe.
+- Filter out rows where 'Time' is None or 'DNF' or 'DSQ'.
+- Convert time strings (e.g., '2:59.30') to total seconds.
+- Extract baseline time (first row).
+- Compute differences from baseline.
+- Create a waterfall chart with differences.
+
+Note: Since the first-place time is used as baseline, we start at that value and then add/subtract differences.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean data: drop rows where 'Time' is missing or DNF/DSQ
+df_clean = df.dropna(subset=['Time'])
+df_clean = df_clean[df_clean['Time'].str.contains('DNF') == False]
+df_clean = df_clean[df_clean['Time'].str.contains('DSQ') == False]
+
+# Convert time string to seconds
+def time_to_seconds(time_str):
+    parts = time_str.split(':')
+    minutes = int(parts[0])
+    seconds = float(parts[1])
+    return minutes * 60 + seconds
+
+# Extract baseline time (first place, rank 1)
+baseline_time = time_to_seconds(df_clean.iloc[0]['Time'])
+
+# Compute differences from baseline
+df_clean['time_seconds'] = df_clean['Time'].apply(time_to_seconds)
+df_clean['diff_from_baseline'] = df_clean['time_seconds'] - baseline_time
+
+# Sort by rank to maintain order
+df_clean = df_clean.sort_values(by='Rank').reset_index(drop=True)
+
+# Prepare data for waterfall chart
+times = df_clean['diff_from_baseline']
+labels = df_clean['Nation']
+
+# Create waterfall chart
+plt.figure(figsize=(12, 6))
+plt.bar(labels, times, color=['skyblue' if x >= 0 else 'coral' for x in times], edgecolor='black')
+plt.axhline(y=0, color='black', linewidth=1)
+plt.title('Waterfall Chart: Completion Times Relative to First-Place Finisher')
+plt.ylabel('Time Difference (seconds)')
+plt.xlabel('Nation')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+
+# Final answer is not a number but a chart — so we just output the required format
+Final Answer: waterfall_chart
+```

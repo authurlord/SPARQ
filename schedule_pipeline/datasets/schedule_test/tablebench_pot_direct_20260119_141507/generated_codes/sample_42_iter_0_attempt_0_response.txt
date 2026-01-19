@@ -1,0 +1,15 @@
+Step 1: The user wants the average value of wheat production from 2002-03 to 2005-06.  
+Step 2: Extract the wheat production values for the years 2002-03, 2003-04, 2004-05, and 2005-06.  
+Step 3: Calculate the mean of these values.  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract wheat production values for the specified years
+wheat_values = df.loc[df['commodity'] == 'wheat', '2002 - 03':'2005 - 06'].values.flatten()
+# Convert to numeric and calculate mean
+mean_wheat = wheat_values.mean()
+print(f"Final Answer: {mean_wheat:.1f}")
+```

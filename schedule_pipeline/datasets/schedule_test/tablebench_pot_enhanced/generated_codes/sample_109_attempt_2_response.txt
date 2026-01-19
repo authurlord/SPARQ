@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: A bar chart has been generated showing population, area, and density for each region.

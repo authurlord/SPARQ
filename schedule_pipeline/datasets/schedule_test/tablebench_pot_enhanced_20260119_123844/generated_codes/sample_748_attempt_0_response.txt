@@ -1,0 +1,28 @@
+Step 1: The user wants to forecast the qualifying speed for 1960 based on the trend in 'qual' from 1951 to 1957.  
+Step 2: Load the dataframe and ensure the 'year' and 'qual' columns are numeric.  
+Step 3: Fit a linear regression model to predict 'qual' based on 'year'.  
+Step 4: Use the model to predict the qualifying speed for 1960.  
+Step 5: Output the predicted value.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+df['year'] = pd.to_numeric(df['year'])
+df['qual'] = pd.to_numeric(df['qual'])
+
+# Prepare data for regression
+X = df[['year']]
+y = df['qual']
+
+# Fit linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict for year 1960
+prediction = model.predict([[1960]])
+
+print(f"Final Answer: {prediction[0]:.3f}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants to calculate the correlation coefficient between 'revenue (millions)' and 'profit (millions)'.
+Step 2: Load the dataframe.
+Step 3: Extract the two columns of interest: 'revenue (millions)' and 'profit (millions)'.
+Step 4: Compute the Pearson correlation coefficient using pandas' `corr()` method.
+Step 5: Print the correlation coefficient.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'revenue (millions)' and 'profit (millions)'
+correlation = df['revenue (millions)'].corr(df['profit (millions)'])
+print(f"Final Answer: {correlation:.2f}")
+```

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains data on dance competition results, with columns representing rank by average, competition finish, couple name, total score, number of dances performed, and average score per dance. The highest average score is 34.0 (Darren & Lana), while the lowest is 22.5 (Rob & Dawn). Couples with more dances generally have higher total scores, but average scores vary significantly.

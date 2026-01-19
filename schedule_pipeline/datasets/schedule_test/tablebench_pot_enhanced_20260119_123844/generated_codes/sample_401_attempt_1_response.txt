@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: township, county, pop (2010), land ( sqmi ), water (sqmi), latitude, longitude, geo id, ansi code, 1954181, 1759398, 1036972, 1036977, 1036979

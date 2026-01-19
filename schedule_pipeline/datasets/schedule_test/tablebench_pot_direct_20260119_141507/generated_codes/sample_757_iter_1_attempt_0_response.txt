@@ -1,0 +1,21 @@
+The error occurred because we attempted to compare string values (like "season 1") with integers, which is not valid. To forecast viewership for season 7, we need to extract the "us viewers (millions)" values from seasons 1 to 6 and analyze the trend.
+
+Step 1: Extract the "us viewers (millions)" values for seasons 1 to 6.
+Step 2: Convert the season column to numeric and ensure we are only using rows from season 1 to 6.
+Step 3: Calculate the average viewership over these seasons as a simple forecast for season 7 (since no clear trend or model is specified).
+Step 4: Print the forecasted viewership.
+
+Note: Since there's no explicit trend (e.g., linear regression), we use the mean of seasons 1–6 as a reasonable forecast.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for seasons 1 to 6 (season column is in the 'season' column)
+filtered_df = df[df['season'].between(1, 6)]
+# Extract viewership values
+viewership_values = filtered_df['us viewers (millions)'].astype(float)
+# Calculate the average viewership
+forecasted_viewership = viewership_values.mean()
+print(f"Final Answer: {forecasted_viewership:.2f}")
+```

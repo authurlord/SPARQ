@@ -1,0 +1,22 @@
+Step 1: The user wants the new average height of the top 5 buildings after increasing each of their heights by 5 meters.
+Step 2: Load the dataframe.
+Step 3: Extract the 'height' column and convert it to numeric (removing 'm' and converting to float).
+Step 4: Select the top 5 buildings (rank 1 to 5).
+Step 5: Add 5 meters to each of their heights.
+Step 6: Calculate the new average height.
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert height to numeric by removing ' m' and converting to float
+df['height'] = df['height'].str.replace(' m \(.*\)', '', regex=True).astype(float)
+# Get top 5 buildings by rank
+top_5 = df.head(5)
+# Increase each height by 5 meters
+new_heights = top_5['height'] + 5
+# Calculate new average
+new_avg_height = new_heights.mean()
+print(f"Final Answer: {new_avg_height:.1f}")
+```

@@ -1,0 +1,10 @@
+Step 1: The user wants to identify the player who has won the most championships in the 1990s.  
+Step 2: Filter the data to include only entries from the 1990s (years between 1990 and 1999).  
+Step 3: Extract the "Outcome" column to check if it's "Winner" (only winners count).  
+Step 4: Group by the player name (which is not directly given; we need to infer from "Opponent in the final" or other context). However, the table does not explicitly list the player names. Instead, the "Outcome" and "Score" columns are present, but the actual player name is missing.  
+
+Looking at the data: In snooker, the player who wins a match is typically the one playing against the opponent listed in "Opponent in the final". Since the player who wins is not listed, we can infer that the winner is the one who defeated the opponent listed in "Opponent in the final". But since the table does not contain the winner's name, we cannot directly extract it.  
+
+Therefore, this question cannot be answered as the player names are missing from the dataset.
+
+Final Answer: None

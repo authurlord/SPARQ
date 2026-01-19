@@ -1,0 +1,52 @@
+Step 1: Understand the question — we need to find in which round Miloš Zeman achieved a majority win, defined as receiving more than 50% of the total votes (deputies + senators) across both categories.
+
+Step 2: Identify relevant columns — "Miloš Zeman" and "Miloš Zeman_1" represent deputies and senators, respectively. Since the data shows only one value per category per row, we assume that "Miloš Zeman" (first entry) is deputies and "Miloš Zeman_1" (second entry) is senators. However, in the data, "Miloš Zeman_1" has missing values (denoted by "-"), so we only consider valid entries.
+
+Step 3: For each round, compute total votes = deputies + senators (only where both values are present). Then check if Miloš Zeman's total > 50% of total votes.
+
+Step 4: Iterate through rounds (excluding header), and find the first round where he exceeds 50%.
+
+Step 5: Note that in Round 1st, "Miloš Zeman_1" is 5 (senators), and deputies are 78 → total = 78 + 5 = 83 → 78/83 ≈ 94.2% → majority.
+
+But wait — the first row is a header. We start from row 1 (index 1).
+
+Let’s process:
+- Round 1st: deputies = 78, senators = 5 → total = 83 → 78/83 ≈ 94.2% → majority
+- Round 2nd: deputies = 83, senators = - → skip (no senator data)
+- Round 3rd: deputies = 83, senators = - → skip
+
+So only Round 1st has valid data for Miloš Zeman. In that round, he has 78 deputies and 5 senators → total = 83 → 78 > 50% → majority.
+
+Thus, his first majority win is in Round 1st.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter out header row
+data = df.iloc[1:].copy()
+
+# Extract Miloš Zeman's deputies and senators
+milo_zeman_deputies = data['Miloš Zeman'].dropna()
+milo_zeman_senators = data['Miloš Zeman_1'].dropna()
+
+# Only consider rows where both values are present
+valid_rows = data[(data['Miloš Zeman'].notna()) & (data['Miloš Zeman_1'].notna())]
+
+# Calculate total votes per round and check if Miloš Zeman has majority
+majority_rounds = []
+for idx, row in valid_rows.iterrows():
+    total_votes = row['Miloš Zeman'] + row['Miloš Zeman_1']
+    milo_zeman_votes = row['Miloš Zeman']
+    if milo_zeman_votes > total_votes * 0.5:
+        majority_rounds.append(row['Round'])
+
+# If majority rounds exist, return the first one
+if majority_rounds:
+    first_majority_round = majority_rounds[0]
+else:
+    first_majority_round = None
+
+print(f"Final Answer: {first_majority_round}")
+```

@@ -1,0 +1,7 @@
+Step 1: The user is asking which factors (like area and population) significantly influence pop density.  
+Step 2: Pop density is calculated as population divided by area.  
+Step 3: We can verify that pop density is already derived from area and population — it is the ratio of "2002 population" to "area (km²)".  
+Step 4: Therefore, both "area (km²)" and "2002 population" directly influence pop density.  
+Step 5: Since the table shows that pop density is computed from these two variables, they have a clear and direct impact.  
+
+Final Answer: area (km^2), 2002 population

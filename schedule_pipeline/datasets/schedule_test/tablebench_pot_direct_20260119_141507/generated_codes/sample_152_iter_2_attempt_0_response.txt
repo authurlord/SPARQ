@@ -1,0 +1,25 @@
+We are asked to determine which factors — 'judges', 'public', 'vote percentage' — have the most impact on the 'result' of each couple. The 'result' column contains values like 'safe' or 'bottom two'.
+
+Step-by-step approach:
+1. We need to analyze whether there's a correlation or pattern between the factors (judges, public, vote percentage) and the result.
+2. Since 'result' is categorical (e.g., 'safe' or 'bottom two'), we cannot use simple numerical correlation (like Pearson). Instead, we can examine if certain values in the factors are associated with the outcome.
+3. We will group by 'result' and check the distribution of judges, public, and vote percentage.
+4. If any factor shows a clear trend (e.g., couples with high 'vote percentage' are more likely to be 'safe'), then it has an impact.
+5. Otherwise, if no consistent pattern exists, we return "no clear impact".
+
+Let’s analyze:
+- 'vote percentage' is numeric and directly reflects how much support a couple received.
+- 'judges' and 'public' are counts (integers), but they don’t directly map to a clear outcome.
+
+Observation:
+- All couples with 'safe' result have higher vote percentages (e.g., 25.1%, 35.7%, etc.).
+- The couple with 'bottom two' has only 4.2% vote percentage — the lowest.
+- This suggests that vote percentage strongly correlates with result.
+
+Thus, 'vote percentage' clearly influences the result.
+
+'judges' and 'public' show mixed values across results — no clear trend.
+
+Therefore, only 'vote percentage' has a clear impact.
+
+Final Answer: vote percentage

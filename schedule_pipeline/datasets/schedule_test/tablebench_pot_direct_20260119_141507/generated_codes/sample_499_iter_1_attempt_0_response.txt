@@ -1,0 +1,57 @@
+We are asked to calculate the **Goal Percentage** for Liverpool in the **1995–1996 season**. 
+
+Goal Percentage = (Goals scored) / (Total appearances)
+
+From the table:
+- For Liverpool in the 1995–1996 season:
+  - "League" column shows "Premier League"
+  - "Apps" (appearances) = 38
+  - "Goals" = 6
+
+Note: The data has multiple columns like "League_1", "League_2", etc., but the total goals and total appearances for a specific season are in the "Apps" and "Goals" columns under the main "League" section.
+
+Looking at the row:
+['Liverpool', '1995–96', 'Premier League', '40', '7', '7', '2', '4', '1', '4', '1', '53', '10']
+
+Breakdown:
+- League Apps = 40
+- League Goals = 7
+- National Cup Apps = 7, Goals = 2
+- League Cup Apps = 4, Goals = 1
+- Europe Apps = 4, Goals = 1
+- Total Apps = 53
+- Total Goals = 10
+
+But the question asks for **Goal Percentage**, defined as:
+> ratio of goals scored to total number of appearances
+
+So we use **Total Goals** and **Total Apps** from the last two columns: "Total" and "Total_1"
+
+In this row:
+- Total Apps = 53
+- Total Goals = 10
+
+Thus, Goal Percentage = 10 / 53
+
+We will extract this value from the row corresponding to Liverpool in 1995–96.
+
+Step-by-step plan:
+1. Load the DataFrame.
+2. Filter the row where Club is 'Liverpool' and Season is '1995–96'.
+3. Extract the "Total" column (total appearances) and "Goals" (total goals).
+4. Compute the ratio (goals / total apps).
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter row for Liverpool in 1995–96 season
+row = df[(df['Club'] == 'Liverpool') & (df['Season'] == '1995–96')]
+# Extract total goals and total appearances
+total_goals = row['Total_1'].values[0]
+total_apps = row['Total'].values[0]
+# Calculate goal percentage
+goal_percentage = total_goals / total_apps
+print(f"Final Answer: {goal_percentage:.3f}")
+```

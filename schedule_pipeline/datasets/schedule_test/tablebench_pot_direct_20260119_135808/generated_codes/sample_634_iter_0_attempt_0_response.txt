@@ -1,0 +1,16 @@
+Step 1: The user wants the average rating of episodes that aired on Tuesdays.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'timeslot' column contains 'tuesday'.
+Step 4: Convert the 'rating' column to float and calculate the mean.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter episodes that aired on Tuesdays
+tuesday_episodes = df[df['timeslot'].str.contains('tuesday', case=False, na=False)]
+# Convert 'rating' to float and calculate the mean
+average_rating_tuesday = tuesday_episodes['rating'].astype(float).mean()
+print(f"Final Answer: {average_rating_tuesday:.2f}")
+```

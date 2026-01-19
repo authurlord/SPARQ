@@ -1,0 +1,43 @@
+Step 1: The user is asking for a projection of CBR (Crude Birth Rate), CDR (Crude Death Rate), and IMR (Infant Mortality Rate) for the period 2010–2015 based on trends from 1950 to 2010.
+
+Step 2: Analyze the trend in CBR, CDR, and IMR over time:
+- CBR: Decreasing from 47.9 (1950–1955) to 21.5 (2005–2010).
+- CDR: Decreasing from 27.1 to 7.2.
+- IMR: Decreasing from 184.8 to 44.4.
+
+Step 3: Observe that the decline in these rates has been slowing down in recent decades. For example:
+- CBR dropped by ~26.4 points from 1950–1955 to 1980–1985, but only ~2.1 points from 2000–2005 to 2005–2010.
+- Similarly, CDR and IMR show diminishing rates of decline.
+
+Step 4: Assume a linear extrapolation with decreasing rate of change. Use the last few data points to estimate the next value.
+
+Step 5: Project the values using the average change from the last two periods (2000–2005 and 2005–2010):
+- CBR: (21.5 - 25.2) / 1 = -3.7 → project next drop as -3.7 → 21.5 - 3.7 = 17.8
+- CDR: (7.2 - 7.9) / 1 = -0.7 → project next drop as -0.7 → 7.2 - 0.7 = 6.5
+- IMR: (44.4 - 52.8) / 1 = -8.4 → project next drop as -8.4 → 44.4 - 8.4 = 36.0
+
+Step 6: Since the trend suggests continued decline but at a slower pace, use slightly conservative projections.
+
+Final Answer: 17.8, 6.5, 36.0
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the last two periods' values
+last_period = df.iloc[-1]  # 2005-2010
+second_last = df.iloc[-2]  # 2000-2005
+
+# Calculate average annual change
+cb_change = (last_period['CBR1'] - second_last['CBR1']) / 1
+cd_change = (last_period['CDR1'] - second_last['CDR1']) / 1
+imr_change = (last_period['IMR1'] - second_last['IMR1']) / 1
+
+# Project next period (2010-2015)
+projected_cbr = last_period['CBR1'] + cb_change
+projected_cdr = last_period['CDR1'] + cd_change
+projected_imr = last_period['IMR1'] + imr_change
+
+print(f"Final Answer: {projected_cbr:.1f}, {projected_cdr:.1f}, {projected_imr:.1f}")
+```

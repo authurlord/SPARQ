@@ -1,0 +1,19 @@
+Step 1: The user wants to find the year in which the athlete won the most gold medals (i.e., 1st place) in a single South Pacific Games.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Position' is '1st' (indicating gold medal).
+Step 4: Group by 'Year' and count the number of gold medals per year.
+Step 5: Find the year with the maximum number of gold medals.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for gold medals (Position = '1st')
+gold_medals = df[df['Position'] == '1st']
+# Count gold medals per year
+gold_counts = gold_medals['Year'].value_counts()
+# Find the year with the most gold medals
+max_gold_year = gold_counts.idxmax()
+print(f"Final Answer: {max_gold_year}")
+```

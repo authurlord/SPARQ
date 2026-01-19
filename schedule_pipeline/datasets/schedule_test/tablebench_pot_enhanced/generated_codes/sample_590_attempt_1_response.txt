@@ -1,0 +1,12 @@
+Step 1: The user wants the total number of 12-inch guns across all ships.
+Step 2: Load the dataframe.
+Step 3: Select the '12 - inch' column.
+Step 4: Sum the values in this column and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sum the '12 - inch' column to get total 12-inch guns
+total_12inch_guns = df['12 - inch'].sum()
+print(f"Final Answer: {total_12inch_guns}")
+```

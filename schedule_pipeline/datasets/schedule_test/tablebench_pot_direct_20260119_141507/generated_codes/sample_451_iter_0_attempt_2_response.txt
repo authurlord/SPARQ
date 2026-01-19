@@ -1,0 +1,36 @@
+Step 1: The user wants to identify surnames that deviate significantly from the norm. Given the context, "deviate significantly" likely refers to unusual patterns in the number of bearers (e.g., very high or very low values). We will analyze the "number of bearers 1971" and "number of bearers 2009" columns to detect outliers.
+
+Step 2: We will calculate the mean and standard deviation of the "number of bearers 1971" and "number of bearers 2009" to establish a baseline. Then, we will identify surnames where either value is more than 2 standard deviations away from the mean — a common outlier detection method.
+
+Step 3: Use the Z-score method to flag outliers in both years.
+
+Step 4: Print the surnames that are considered outliers.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert number of bearers to numeric (handle possible string issues)
+df['number of bearers 1971'] = pd.to_numeric(df['number of bearers 1971'], errors='coerce')
+df['number of bearers 2009'] = pd.to_numeric(df['number of bearers 2009'], errors='coerce')
+
+# Remove rows with NaN due to conversion errors
+df = df.dropna()
+
+# Calculate mean and std for 1971 and 2009
+mean_1971 = df['number of bearers 1971'].mean()
+std_1971 = df['number of bearers 1971'].std()
+mean_2009 = df['number of bearers 2009'].mean()
+std_2009 = df['number of bearers 2009'].std()
+
+# Identify outliers using Z-score (|Z| > 2)
+outliers_1971 = df[(np.abs((df['number of bearers 1971'] - mean_1971) / std_1971) > 2)]
+outliers_2009 = df[(np.abs((df['number of bearers 2009'] - mean_2009) / std_2009) > 2)]
+
+# Combine surnames that are outliers in either year
+outlier_surnames = set(outliers_1971['surname']).union(set(outliers_2009['surname']))
+
+print(f"Final Answer: {', '.join(sorted(outlier_surnames))}")
+```

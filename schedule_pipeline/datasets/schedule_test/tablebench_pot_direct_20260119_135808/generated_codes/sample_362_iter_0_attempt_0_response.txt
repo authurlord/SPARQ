@@ -1,0 +1,15 @@
+Step 1: The user wants to count how many agents have a melting point below 0 degrees.
+Step 2: Load the dataframe.
+Step 3: Parse the 'melting / boiling point' column to extract the melting point value (first number).
+Step 4: Convert the melting point to a numeric value and compare it to 0.
+Step 5: Count how many agents satisfy the condition and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract melting point (first number) from 'melting / boiling point' column
+df['melting_point'] = df['melting / boiling point'].str.split('/').str[0].str.strip().str.replace('-', '').astype(float)
+# Count agents with melting point below 0 degrees
+count_below_zero = (df['melting_point'] < 0).sum()
+print(f"Final Answer: {count_below_zero}")
+```

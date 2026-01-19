@@ -1,0 +1,48 @@
+Step 1: The question asks for data points with unusual patterns in orbital characteristics — specifically eccentricity, inclination, periselene, and aposelene.  
+Step 2: "Unusual" can be interpreted as extreme values (e.g., outliers) in these columns. We will identify rows where any of these values are significantly different from the rest.  
+Step 3: Use statistical methods to detect outliers — for example, using the IQR (Interquartile Range) method to find values that lie outside 1.5 × IQR from the first and third quartiles.  
+Step 4: Check each column (eccentricity, inclination, periselene, aposelene) and flag any row where a value is an outlier.  
+Step 5: Return the rows that have at least one outlier in any of these four columns.
+
+Note: Since the data is small (only 9 rows), we can also manually inspect for extreme values (e.g., very high or low eccentricity, periselene, or aposelene). For instance:
+- Eccentricity: ranges from ~0.3 to 0.99999 — values near 0.99999 are extremely high.
+- Periselene and aposelene: periselene is minimum distance, aposelene is maximum — very high aposelene (like 100000 km) is unusual.
+- Inclination: ranges from ~80° to 90° — values near 150° are unusual.
+
+We will use IQR method to detect outliers for each column and return the rows that have any outlier.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Select relevant columns for outlier detection
+columns = ['eccentricity', 'inclination (deg) (to moon equator)', 'periselene (km)', 'aposelene (km)']
+
+# Function to detect outliers using IQR
+def detect_outliers_iqr(series):
+    Q1 = series.quantile(0.25)
+    Q3 = series.quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    return (series < lower_bound) | (series > upper_bound)
+
+# Apply outlier detection to each column
+outlier_rows = []
+for idx, row in df.iterrows():
+    if (detect_outliers_iqr(df['eccentricity']).iloc[idx] or
+        detect_outliers_iqr(df['inclination (deg) (to moon equator)']).iloc[idx] or
+        detect_outliers_iqr(df['periselene (km)']).iloc[idx] or
+        detect_outliers_iqr(df['aposelene (km)']).iloc[idx]):
+        outlier_rows.append(idx)
+
+# Extract the rows with outliers
+outlier_data = df.iloc[outlier_rows]
+
+# Print the rows with unusual patterns
+print(outlier_data.to_string(index=False))
+
+Final Answer: november 15 , 2004 , 17:47:12.1, december 4 , 2004 10:37:47.3, january 1 , 2005 , 00:00:00.0
+```

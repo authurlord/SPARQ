@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The natural change has a direct positive impact on population growth, as higher natural change values correlate with increased population growth, while negative natural change leads to population decline.

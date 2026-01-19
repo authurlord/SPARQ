@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean and convert 'executions in persona' column to integers
+df['executions in persona'] = df['executions in persona'].str.replace(r'\(.*\)', '', regex=True).astype(int)
+# Calculate median
+median_executions = df['executions in persona'].median()
+print(f"Final Answer: {median_executions}")

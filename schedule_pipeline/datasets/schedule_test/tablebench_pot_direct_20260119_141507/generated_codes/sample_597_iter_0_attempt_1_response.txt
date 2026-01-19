@@ -1,0 +1,15 @@
+Step 1: The user wants the average number of viewers (in millions) for the first 5 episodes of the series.  
+Step 2: Identify the first 5 episodes by checking the 'no in series' column, which starts from 25 to 30 (episodes 1 to 5).  
+Step 3: Extract the 'viewers (millions)' values for these episodes.  
+Step 4: Calculate the mean of these values and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the first 5 episodes (no in series from 25 to 30)
+first_5_episodes = df[df['no in series'].between(25, 30)]
+# Calculate the average viewers for these episodes
+average_viewers = first_5_episodes['viewers (millions)'].mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

@@ -1,0 +1,18 @@
+Step 1: The user wants to calculate the projected number of passengers at Glasgow International Airport in 2008 after a 15% increase from 2007.
+Step 2: Load the dataframe.
+Step 3: Filter the row for 'glasgow international' and extract the 'total passengers' value.
+Step 4: Convert the total passengers from string to integer, apply a 15% increase, and round to the nearest whole number.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Glasgow International
+glasgow_row = df[df['airport'] == 'glasgow international']
+# Extract total passengers and convert to integer
+total_passengers = int(glasgow_row['total passengers'].values[0])
+# Apply 15% increase
+projected_passengers = round(total_passengers * 1.15)
+print(f"Final Answer: {projected_passengers}")
+```

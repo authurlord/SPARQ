@@ -1,0 +1,26 @@
+The error occurred because the "number of passed students" column contains string values with percentage signs (e.g., "67.75%"), which cannot be directly converted to integers or floats for arithmetic operations. We need to clean the data by removing the percentage sign and converting the values to numeric.
+
+Step 1: Load the dataframe.
+Step 2: Extract the "number of passed students" column and remove the '%' symbol to convert it to a numeric value.
+Step 3: Convert the values to float.
+Step 4: Calculate the percentage increase from 2005 to 2010 using the formula:  
+   ((value_2010 - value_2005) / value_2005) * 100
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert 'number of passed students' to numeric by removing '%'
+df['number of passed students'] = df['number of passed students'].str.replace('%', '').astype(float)
+
+# Extract values for 2005 and 2010
+passed_2005 = df.loc[df['year'] == '2005', 'number of passed students'].values[0]
+passed_2010 = df.loc[df['year'] == '2010', 'number of passed students'].values[0]
+
+# Calculate percentage increase
+percentage_increase = ((passed_2010 - passed_2005) / passed_2005) * 100
+
+print(f"Final Answer: {percentage_increase:.2f}")
+```

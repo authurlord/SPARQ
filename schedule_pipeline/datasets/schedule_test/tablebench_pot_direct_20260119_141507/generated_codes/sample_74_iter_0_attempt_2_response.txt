@@ -1,0 +1,20 @@
+Step 1: The user is asking for the nation that has a total of 8 medals, with specifically 3 gold medals.  
+Step 2: Look at the "Total" and "Gold" columns in the table.  
+Step 3: Find the row where "Gold" = 3 and "Total" = 8.  
+Step 4: Extract the corresponding "Nation" from that row.
+
+From the data:
+- France has 3 Gold, 3 Silver, 2 Bronze → Total = 8.
+
+Thus, the nation is France.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Gold == 3 and Total == 8
+result = df[(df['Gold'] == 3) & (df['Total'] == 8)]
+# Extract the Nation name
+nation = result.iloc[0]['Nation']
+print(f"Final Answer: {nation}")
+```

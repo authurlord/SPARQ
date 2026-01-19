@@ -1,0 +1,22 @@
+The error occurred because the "semifinalists" column contains some entries like '6t' or '9t', which are strings with non-numeric values, and we cannot directly compare them to integers. We need to clean the column by converting string values (like '6t') to integers, or filter out non-numeric entries.
+
+Step 1: Identify that we need to count how many countries have at least one semifinalist.
+Step 2: The "semifinalists" column may contain mixed data (e.g., '6t', '9t') — these should be parsed to numeric values.
+Step 3: Convert the "semifinalists" column to numeric, coercing errors to NaN, then filter out non-numeric entries.
+Step 4: Count the number of rows where the value is greater than 0.
+
+Corrected approach:
+- Convert 'semifinalists' to numeric, ignoring errors.
+- Filter rows where the value is greater than 0.
+- Count such rows.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'semifinalists' to numeric, coercing errors to NaN
+df['semifinalists'] = pd.to_numeric(df['semifinalists'], errors='coerce')
+# Count how many countries have at least one semifinalist (value > 0)
+count_semi = df[df['semifinalists'] > 0].shape[0]
+print(f"Final Answer: {count_semi}")
+```

@@ -1,0 +1,12 @@
+Step 1: The user is asking which nation won 18 gold medals.  
+Step 2: Look at the 'gold' column in the table and find the row where the value is 18.  
+Step 3: The corresponding 'nation' in that row is the answer.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the nation with 18 gold medals
+nation_with_18_gold = df[df['gold'] == 18]['nation'].values[0]
+print(f"Final Answer: {nation_with_18_gold}")
+```

@@ -1,0 +1,19 @@
+The error occurred because the "average" column contains some values as strings (e.g., 'n / a'), which cannot be used in numerical calculations. We need to filter out or convert these non-numeric entries before computing the standard deviation.
+
+Step 1: Load the dataframe.
+Step 2: Extract the "average" column and remove rows where the value is "n / a".
+Step 3: Convert the remaining values to float.
+Step 4: Compute the standard deviation of the cleaned average scores.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Filter out rows where 'average' is 'n / a' and convert to float
+average_scores = df['average'].astype(str).str.replace('n / a', '').dropna().astype(float)
+# Calculate standard deviation
+std_dev = np.std(average_scores)
+print(f"Final Answer: {std_dev:.2f}")
+```

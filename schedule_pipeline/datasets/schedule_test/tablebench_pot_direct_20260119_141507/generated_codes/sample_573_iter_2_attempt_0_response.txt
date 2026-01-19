@@ -1,0 +1,21 @@
+The error occurred because the "floors" column contains string values (e.g., '30', '20') that are not directly numeric, and we need to convert them properly before computing the average. Additionally, we must filter the buildings constructed between 1960 and 1980 (inclusive).
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the "floors" column from string to integer (since it's in format like "30").
+3. Filter rows where the "year" is between 1960 and 1980 (inclusive).
+4. Compute the mean of the "floors" for the filtered rows.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'floors' to integer (removes any non-numeric issues)
+df['floors'] = df['floors'].str.extract(r'(\d+)').astype(int)
+# Filter buildings constructed between 1960 and 1980 inclusive
+filtered_df = df[(df['year'] >= 1960) & (df['year'] <= 1980)]
+# Calculate average number of floors
+average_floors = filtered_df['floors'].mean()
+print(f"Final Answer: {average_floors:.1f}")
+```

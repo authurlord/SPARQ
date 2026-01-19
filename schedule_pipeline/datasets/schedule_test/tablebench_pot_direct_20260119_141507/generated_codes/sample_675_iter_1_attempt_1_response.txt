@@ -1,0 +1,22 @@
+The error occurred because the value "119 , 31%" in the 'capacity in use' column contains a comma instead of a decimal point, making it invalid for float conversion. We need to clean this value by replacing the comma with a dot and removing the percentage sign before converting to float.
+
+Step 1: Load the dataframe.
+Step 2: Clean the 'capacity in use' column by removing '%' and replacing commas with dots.
+Step 3: Convert both 'total passengers' and 'capacity in use' to numeric types.
+Step 4: Compute the correlation coefficient between these two columns.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'capacity in use' column: remove % and replace comma with dot
+df['capacity in use'] = df['capacity in use'].str.replace(',', '.').str.replace('%', '').astype(float)
+
+# Compute the correlation between 'total passengers' and 'capacity in use'
+correlation = df['total passengers'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Check correlation between Labour councillors and other variables
+correlations = df[['Conservative councillors', 'Independent councillors', 'Liberal councillors']].corrwith(df['Labour councillors'])
+print("Correlations with Labour councillors:")
+print(correlations)
+
+# Plot Labour councillors over time to see trends
+plt.figure(figsize=(10, 6))
+plt.plot(df['Year'], df['Labour councillors'], marker='o')
+plt.title('Labour Councillors Over the Years')
+plt.xlabel('Year')
+plt.ylabel('Number of Labour Councillors')
+plt.grid(True)
+plt.show()
+
+# Determine if any factor has a clear impact
+# Correlation thresholds: >0.3 or < -0.3 considered significant
+significant_correlations = correlations[abs(correlations) > 0.3]
+if len(significant_correlations) == 0:
+    final_answer = "no clear impact"
+else:
+    # Identify the factor(s) with significant correlation
+    significant_factors = list(significant_correlations.index)
+    final_answer = ", ".join(significant_factors)
+
+print(f"Final Answer: {final_answer}")

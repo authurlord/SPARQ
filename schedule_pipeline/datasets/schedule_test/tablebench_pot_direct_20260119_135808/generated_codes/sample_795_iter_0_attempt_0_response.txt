@@ -1,0 +1,25 @@
+Step 1: The user wants to determine which year has the highest average passenger traffic across all airports and the standard deviation of passenger traffic for that year.
+Step 2: Load the dataframe.
+Step 3: Select the columns '2008', '2009', '2010' and convert them to numeric type.
+Step 4: Calculate the mean passenger traffic for each year.
+Step 5: Identify the year with the highest average.
+Step 6: Compute the standard deviation of passenger traffic for that year.
+Step 7: Print both the year and the standard deviation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert the years to numeric
+years = ['2008', '2009', '2010']
+df[years] = df[years].apply(pd.to_numeric)
+
+# Calculate the average passenger traffic per year
+avg_traffic = df[years].mean(axis=0)
+max_avg_year = avg_traffic.idxmax()
+
+# Calculate standard deviation for the year with highest average
+std_dev = df[max_avg_year].std()
+
+print(f"Final Answer: {max_avg_year}, {std_dev:.2f}")
+```

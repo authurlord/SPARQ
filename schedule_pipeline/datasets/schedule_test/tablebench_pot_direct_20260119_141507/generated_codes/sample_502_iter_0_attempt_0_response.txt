@@ -1,0 +1,18 @@
+Step 1: The user wants the revenue growth rate from 2001 to 2002.  
+Step 2: Revenue growth rate is calculated as:  
+    ((Revenue in 2002 - Revenue in 2001) / Revenue in 2001) * 100  
+Step 3: Extract total revenue for 2001 and 2002 from the table.  
+Step 4: Apply the formula and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract total revenue for 2001 and 2002
+revenue_2001 = df.loc[df['year'] == '2001', 'total revenue'].values[0]
+revenue_2002 = df.loc[df['year'] == '2002', 'total revenue'].values[0]
+
+# Calculate revenue growth rate
+growth_rate = ((revenue_2002 - revenue_2001) / revenue_2001) * 100
+print(f"Final Answer: {growth_rate:.2f}")
+```

@@ -1,0 +1,52 @@
+The error occurred because the "% of popular vote" column contains values like '0.19%', which are strings with percentage symbols. We need to strip the '%' and convert them to floats before performing any numerical analysis.
+
+Step 1: Load the dataframe.
+Step 2: Clean the "% of popular vote" column by removing the '%' symbol and converting to float.
+Step 3: Similarly, clean and convert "total votes" to numeric (it's already numbers but might have formatting issues).
+Step 4: Check if there's a clear trend in total votes and % of popular vote from 1983 to 2013.
+Step 5: Since the data shows increasing total votes and increasing % of popular vote (though not strictly linear), we can perform a simple linear regression or observe the pattern to estimate future values.
+
+However, the question asks for an *expected* value based on trends — but no specific model (e.g., linear, exponential) is given. Given the simplicity and lack of explicit modeling instructions, we can approximate using linear interpolation or just observe the trend.
+
+From the data:
+- Total votes: 3078 → 197231 → increasing significantly
+- % of popular vote: 0.19% → 12.39% → increasing sharply
+
+We can fit a linear model to both columns to predict the next election (say 2024) based on the trend.
+
+Let’s do:
+- Fit linear regression on years (1983 to 2013) vs total votes and % of popular vote.
+- Predict the values for 2024.
+
+Note: We assume the year is the index and can be used directly.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Convert year column to numeric
+df['election'] = df['election'].astype(str).str.strip()
+df['year'] = df['election'].str.extract('(\d{4})')[0].astype(int)
+
+# Clean % of popular vote
+df['% of popular vote'] = df['% of popular vote'].str.replace('%', '').astype(float)
+
+# Prepare features and target
+X = df[['year']]  # independent variable
+y1 = df['total votes']  # total votes
+y2 = df['% of popular vote']  # popular vote percentage
+
+# Fit models
+model1 = LinearRegression().fit(X, y1)
+model2 = LinearRegression().fit(X, y2)
+
+# Predict for next election cycle (2024)
+next_year = 2024
+predicted_votes = model1.predict([[next_year]])[0]
+predicted_pop_vote = model2.predict([[next_year]])[0]
+
+print(f"Final Answer: {predicted_votes:.0f}, {predicted_pop_vote:.2f}%")
+```

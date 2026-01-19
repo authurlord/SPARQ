@@ -1,0 +1,22 @@
+Step 1: Understand the table structure and content.  
+The table contains demographic and population-related data over time, with yearly observations from 1970 to 2006.  
+
+Step 2: Identify key columns and their meanings:  
+- "Average population (x 1000)": Average population in thousands.  
+- "Live births": Number of live births in a year.  
+- "Deaths": Number of deaths in a year.  
+- "Natural change": Difference between live births and deaths (natural increase/decrease).  
+- "Crude birth rate (per 1000)": Births per 1000 people.  
+- "Crude death rate (per 1000)": Deaths per 1000 people.  
+- "Natural change (per 1000)": Net natural change per 1000 people.  
+
+Step 3: Analyze trends:  
+- Population appears to peak around 1985 (51 thousand) and then slightly decline.  
+- Crude birth rate peaks in the early 1980s (~21.7), then declines to ~11.6 by 2006.  
+- Crude death rate is relatively stable, peaking at ~11.8 in the 1990s, then drops slightly.  
+- Natural change shows a significant drop in the late 1990s (e.g., 1994: +67 → 1995: +36), then increases again in 2001–2004.  
+- A notable trend is the decline in birth rates and stabilization of death rates, indicating a potential aging population.  
+
+Step 4: Summarize findings clearly.  
+
+Final Answer: Average population, live births, deaths, natural change, crude birth rate, crude death rate, natural change per 1000; population peaks in 1985, birth rates decline after 1980, natural change dips in late 1990s then rises in 2000s, indicating demographic transition.

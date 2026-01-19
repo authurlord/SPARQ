@@ -1,0 +1,31 @@
+Step 1: Identify unusual patterns or outliers in the table.  
+The key variable to analyze is "viewers", as it represents audience size. An outlier would be a significantly higher or lower value compared to others.  
+Looking at the data, one episode ("don't walk on the grass") has 2,000,000 viewers, which is extremely high compared to others (ranging from ~375,000 to ~524,440). This is a clear outlier.  
+Additionally, the time slot for episode 125 ("the glamorous life") is "3:00 am - 4:00 am", which is unusual compared to the typical 8:30 pm - 9:30 pm slot. This suggests a pattern of irregular scheduling.
+
+Step 2: Use Python to extract and verify these observations.  
+We will:
+- Check the viewers column for extreme values.
+- Check the timeslot column for deviations from the norm.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check for outliers in viewers
+viewers = df['viewers'].astype(int)
+max_viewers = viewers.max()
+min_viewers = viewers.min()
+
+# Check for unusual time slots (not in the normal 8:30 pm - 9:30 pm range)
+normal_timeslot = '8:30 pm - 9:30 pm'
+unusual_timeslots = df[df['timeslot'] != normal_timeslot]
+
+# Identify the episode with the highest viewers
+outlier_episode = df.loc[viewers.idxmax()]
+
+print(f"Unusual viewer count: {max_viewers} (episode: {outlier_episode['title']})")
+print(f"Unusual time slot: {unusual_timeslots['timeslot'].unique()}")
+print(f"Final Answer: high viewers in 'don\\'t walk on the grass', unusual time slot in episode 'the glamorous life'")
+```

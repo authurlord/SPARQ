@@ -1,0 +1,37 @@
+Step 1: The user wants to compare the position in the Triple jump event at the Asian Championships and the World Championships to find the year where the athlete achieved a higher (better) position at the Asian Championships compared to the World Championships.
+
+Step 2: Load the dataframe and filter rows where the event is "Triple jump".
+
+Step 3: Extract the 'Year' and 'Position' for both the Asian Championships and World Championships.
+
+Step 4: Clean the 'Position' column by removing suffixes like 'th', 'rd', 'nd', etc., and convert it to an integer for comparison.
+
+Step 5: Compare the positions (lower number = better position) and identify the year where the Asian Championships result was better than the World Championships.
+
+Step 6: Print the year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where Event is 'Triple jump'
+triple_jump_data = df[df['Event'] == 'Triple jump']
+
+# Clean the Position column to extract numeric values
+triple_jump_data['Position'] = triple_jump_data['Position'].str.replace(r'[a-zA-Z]', '', regex=True).astype(int)
+
+# Filter for Asian Championships and World Championships
+asian_championships = triple_jump_data[triple_jump_data['Competition'] == 'Asian Championships']
+world_championships = triple_jump_data[triple_jump_data['Competition'] == 'World Championships']
+
+# Merge the two datasets on Year to compare
+comparison = pd.merge(asian_championships[['Year', 'Position']], 
+                      world_championships[['Year', 'Position']], 
+                      on='Year', suffixes=('_asian', '_world'))
+
+# Find the year where Asian Championships position is better (lower number)
+better_year = comparison[comparison['Position_asian'] < comparison['Position_world']]['Year'].iloc[0]
+
+print(f"Final Answer: {better_year}")
+```

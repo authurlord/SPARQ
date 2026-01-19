@@ -1,0 +1,7 @@
+Step 1: The question asks for the demographic category with the highest percentage value of males. From the table, we can see that "Literacy" has a percentage value for males (65.12%) and other categories have either no percentage or are not in percentage form. We need to identify which row has a percentage value for male and compare them.
+
+Step 2: Look at the rows where the "Male" column has a percentage value. Only "Literacy" has a percentage value for male (65.12%). Other rows like "Total No. of Houses", "Population", etc., have values in numbers or are missing.
+
+Step 3: Since only "Literacy" has a percentage value for male, it is the only one that qualifies. Therefore, "Literacy" has the highest percentage value of male.
+
+Final Answer: Literacy

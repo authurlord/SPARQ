@@ -1,0 +1,22 @@
+Step 1: The user wants to find the year with the largest difference between 'property taxes' and 'investment earnings'.
+Step 2: Load the dataframe.
+Step 3: Convert 'property taxes' and 'investment earnings' columns to numeric.
+Step 4: Calculate the absolute difference between these two columns.
+Step 5: Find the year corresponding to the maximum difference.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric
+df['property taxes'] = pd.to_numeric(df['property taxes'])
+df['investment earnings'] = pd.to_numeric(df['investment earnings'])
+
+# Calculate the absolute difference
+df['difference'] = (df['property taxes'] - df['investment earnings']).abs()
+
+# Find the year with the maximum difference
+max_diff_year = df.loc[df['difference'].idxmax(), 'year']
+print(f"Final Answer: {max_diff_year}")
+```

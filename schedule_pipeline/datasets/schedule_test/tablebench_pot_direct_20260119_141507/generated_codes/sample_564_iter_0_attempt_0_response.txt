@@ -1,0 +1,32 @@
+Step 1: The user wants the average number of performances per year between 2004 and 2013.  
+Step 2: Filter the data to include only years from 2004 to 2013.  
+Step 3: Extract the "No. of performances" column for the filtered rows.  
+Step 4: Calculate the mean of these values and print it.  
+
+Note: Some entries have "—" or "~" values, which are non-numeric. We will treat them as missing (NaN) and exclude them from the calculation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Filter rows for years 2004 to 2013 (inclusive)
+filtered_df = df[(df['Year'].astype(str).str.startswith('2004')) | 
+                  (df['Year'].astype(str).str.startswith('2005')) | 
+                  (df['Year'].astype(str).str.startswith('2006')) | 
+                  (df['Year'].astype(str).str.startswith('2007')) | 
+                  (df['Year'].astype(str).str.startswith('2008')) | 
+                  (df['Year'].astype(str).str.startswith('2009')) | 
+                  (df['Year'].astype(str).str.startswith('2010')) | 
+                  (df['Year'].astype(str).str.startswith('2011')) | 
+                  (df['Year'].astype(str).str.startswith('2012')) | 
+                  (df['Year'].astype(str).str.startswith('2013'))]
+
+# Convert 'No. of performances' to numeric, replacing non-numeric entries with NaN
+performances = pd.to_numeric(filtered_df['No. of performances'], errors='coerce')
+
+# Calculate the mean of valid performance numbers
+mean_performances = performances.mean()
+
+print(f"Final Answer: {mean_performances:.1f}")
+```

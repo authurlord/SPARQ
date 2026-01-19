@@ -1,0 +1,35 @@
+[Answer Format]
+Final Answer: The table lists 32 council areas in Scotland ranked by the number of Gaelic speakers, with data on speakers, population, and percentage of speakers. The top-ranked area, na h-Eileanan Siar, has the highest number of speakers (15,811) and the highest percentage (59.7%). Speakers are highly concentrated in a few areas, especially na h-Eileanan Siar and Highland, while most other areas have fewer than 1,500 speakers. The percentage of speakers varies widely, from 0.3% to 59.7%, indicating uneven distribution. Overall, Gaelic speakers are more prevalent in rural and island regions compared to urban centers.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'speakers' and 'population' to integers for analysis
+df['speakers'] = pd.to_numeric(df['speakers'])
+df['population'] = pd.to_numeric(df['population'])
+df['percentage (%)'] = pd.to_numeric(df['percentage (%)'])
+
+# Basic insights
+total_speakers = df['speakers'].sum()
+max_speakers = df['speakers'].max()
+min_speakers = df['speakers'].min()
+avg_percentage = df['percentage (%)'].mean()
+
+print(f"Total speakers across all council areas: {total_speakers}")
+print(f"Maximum speakers in one area: {max_speakers}")
+print(f"Minimum speakers in one area: {min_speakers}")
+print(f"Average percentage of speakers: {avg_percentage:.2f}%")
+
+# Identify top and bottom areas
+top_area = df.loc[df['speakers'].idxmax()]['council area']
+bottom_area = df.loc[df['speakers'].idxmin()]['council area']
+
+print(f"Area with most speakers: {top_area}")
+print(f"Area with fewest speakers: {bottom_area}")
+
+# Distribution insight
+high_percentage_areas = df[df['percentage (%)'] > 10]['council area'].tolist()
+print(f"Areas with more than 10% speakers: {', '.join(high_percentage_areas)}")
+```

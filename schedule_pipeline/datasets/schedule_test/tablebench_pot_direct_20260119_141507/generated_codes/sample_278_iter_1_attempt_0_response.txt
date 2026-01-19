@@ -1,0 +1,35 @@
+The error occurred because the "Magnitude" column contains string values like '7.5' and '7.0', but when combining or processing, there might be an issue with parsing them as numeric. However, in this case, the actual issue arises if we mistakenly try to combine or parse values incorrectly — specifically, the data is already in string format and must be converted properly.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the "Magnitude" and "Death toll" columns to numeric (to allow filtering and computation).
+3. Filter earthquakes where:
+   - Death toll ≥ 1,000 (convert death toll to integer)
+   - Depth < 30 km
+4. Compute the average magnitude of the filtered earthquakes.
+5. Print the result.
+
+Note: The death toll values are given in string format (e.g., '60,000'), so we must remove commas and convert to integer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Death toll' to numeric by removing commas and converting to int
+df['Death toll'] = df['Death toll'].str.replace(',', '').astype(float)
+
+# Convert 'Magnitude' to float
+df['Magnitude'] = df['Magnitude'].astype(float)
+
+# Filter rows where death toll >= 1000 and depth < 30
+filtered_df = df[(df['Death toll'] >= 1000) & (df['Depth (km)'].astype(float) < 30)]
+
+# Calculate average magnitude of filtered earthquakes
+if not filtered_df.empty:
+    avg_magnitude = filtered_df['Magnitude'].mean()
+else:
+    avg_magnitude = 0
+
+print(f"Final Answer: {avg_magnitude:.2f}")
+```

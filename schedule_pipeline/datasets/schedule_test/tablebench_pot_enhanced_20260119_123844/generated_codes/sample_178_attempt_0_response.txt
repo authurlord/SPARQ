@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The maximum speed increases with higher horsepower, but not linearly; for example, trains with 220 hp have max speeds of 70-90 km/h, while those with 285-298 hp reach 120 km/h.

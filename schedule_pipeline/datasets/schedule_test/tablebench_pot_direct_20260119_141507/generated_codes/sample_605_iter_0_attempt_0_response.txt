@@ -1,0 +1,14 @@
+Step 1: The user wants the total number of Indians and Pakistanis admitted in the year 2005.  
+Step 2: Load the dataframe.  
+Step 3: Filter the row where 'year' is 2005.  
+Step 4: Sum the values in the 'indians admitted' and 'pakistanis admitted' columns for that row.  
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for year 2005 and sum Indians and Pakistanis admitted
+total_2005 = df[df['year'] == '2005']['indians admitted'].iloc[0] + df[df['year'] == '2005']['pakistanis admitted'].iloc[0]
+print(f"Final Answer: {total_2005}")
+```

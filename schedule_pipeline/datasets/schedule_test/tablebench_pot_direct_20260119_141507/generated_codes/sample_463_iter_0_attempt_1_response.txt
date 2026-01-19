@@ -1,0 +1,36 @@
+Step 1: Identify anomalies in the "mintage (proof)" and "issue price (proof)" columns. Anomalies may include missing values ("n/a", "no bu exists"), unusually high or low values, or inconsistencies (e.g., when mintage is zero but issue price is defined).  
+Step 2: Check for missing values in mintage and issue price.  
+Step 3: Look for cases where mintage is zero or very low compared to issue price.  
+Step 4: Identify any inconsistent data (e.g., mintage is present but issue price is missing or vice versa).  
+Step 5: Highlight specific rows with notable anomalies.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify anomalies in mintage and issue price
+anomalies = []
+
+# Check for missing values
+missing_mintage = df[df['mintage (proof)'].isna() | (df['mintage (proof)'] == 'n / a') | (df['mintage (proof)'] == 'no bu exists')]
+missing_issue_price = df[df['issue price (proof)'].isna() | (df['issue price (proof)'] == 'n / a')]
+
+# Check for extremely low mintage with high issue price
+high_price_low_mintage = df[(df['mintage (proof)'].astype(str) != 'n / a') & 
+                            (df['mintage (proof)'].astype(float) < 1000) & 
+                            (df['issue price (proof)'].astype(float) > 50)]
+
+# Check for inconsistency: mintage exists but issue price is missing
+inconsistent_data = df[df['mintage (proof)'].notna() & df['issue price (proof)'].isna()]
+
+# Compile anomalies
+anomalies = [
+    f"Missing mintage: {len(missing_mintage)} records",
+    f"Missing issue price: {len(missing_issue_price)} records",
+    f"High issue price with low mintage: {len(high_price_low_mintage)} records",
+    f"Inconsistent data (mintage exists, issue price missing): {len(inconsistent_data)} records"
+]
+
+print(f"Final Answer: {', '.join(anomalies)}")
+```

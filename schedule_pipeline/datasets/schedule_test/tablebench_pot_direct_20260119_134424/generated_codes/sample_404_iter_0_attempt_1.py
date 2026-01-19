@@ -1,0 +1,34 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Column descriptions
+column_descriptions = {
+    "engine type": "The type of propulsion engine (e.g., rocket engine, turbojet, ramjet).",
+    "scenario": "Operating condition or flight regime (e.g., vacuum, cruise, Mach 3.2).",
+    "sfc in lb / (lbf h)": "Specific Fuel Consumption in pounds per pound-force hour, indicating fuel efficiency.",
+    "sfc in g / (kn s)": "Specific Fuel Consumption in grams per kilonewton-second, another measure of fuel efficiency.",
+    "specific impulse (s)": "A measure of engine efficiency; higher values indicate better performance.",
+    "effective exhaust velocity (m / s)": "The effective speed of exhaust gases; higher values imply better thrust efficiency."
+}
+
+# Notable insights
+insights = [
+    "The Rolls-Royce/SNECMA Olympus 593 (Concorde) has the highest specific impulse (3012 s) and effective exhaust velocity (29,553 m/s), making it the most efficient for high-speed cruise.",
+    "The CF6-80C2B1F turbofan (Boeing 747-400 cruise) has the lowest SFC (0.605 lb/(lbf·h)), indicating superior fuel efficiency for commercial aviation.",
+    "The J-58 turbojet (SR-71 at Mach 3.2 wet) shows exceptional performance at high speeds with a very low SFC of 1.9 lb/(lbf·h).",
+    "Ramjets perform well at Mach 1 with an SFC of 4.5 lb/(lbf·h), but their efficiency drops at lower speeds.",
+    "Rocket engines like NK-33 and SSME have high SFC but excel in vacuum conditions with high specific impulse (331 s and 453 s respectively).",
+    "Effective exhaust velocity correlates strongly with specific impulse: higher specific impulse leads to higher exhaust velocity."
+]
+
+# Print overview
+print("Column Descriptions:")
+for col, desc in column_descriptions.items():
+    print(f"  {col}: {desc}")
+
+print("\nNotable Insights:")
+for insight in insights:
+    print(f"  - {insight}")
+
+print(f"Final Answer: Rolls-Royce / Snecma Olympus 593, CF6-80C2B1F turbofan, J-58 turbojet, NK-33 rocket engine, SSME rocket engine, ramjet")

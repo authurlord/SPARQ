@@ -1,0 +1,46 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter the row for Guercino
+guercino_data = df[df['Painter'] == 'Guercino'].iloc[0]
+
+# Clean the values: replace 'O' and 'x' with NaN
+values = [
+    guercino_data['Composition'],
+    guercino_data['Drawing'],
+    guercino_data['Color'],
+    guercino_data['Expression']
+]
+values = [v if v not in ['O', 'x'] else np.nan for v in values]
+
+# If any value is NaN, we skip plotting or handle it. Here we assume valid data.
+if all(val is not np.nan for val in values):
+    # Define categories
+    categories = ['Composition', 'Drawing', 'Color', 'Expression']
+    
+    # Compute angle for each axis
+    angles = np.linspace(0, 2 * np.pi, len(categories), endpoint=False).tolist()
+    
+    # Repeat the first value to close the circle
+    values += values[:1]
+    angles += angles[:1]
+    
+    # Create the radar chart
+    fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+    
+    ax.fill(angles, values, color='blue', alpha=0.25)
+    ax.plot(angles, values, color='blue', linewidth=2, linestyle='solid')
+    
+    # Add category labels
+    ax.set_yticklabels([])
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels(categories)
+    
+    plt.title('Performance of Guercino', pad=20)
+    plt.show()
+else:
+    print("No valid data available for Guercino.")

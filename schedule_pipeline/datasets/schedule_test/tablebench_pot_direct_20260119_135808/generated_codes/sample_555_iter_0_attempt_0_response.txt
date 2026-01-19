@@ -1,0 +1,17 @@
+Step 1: The user wants to find the year when Transparency International published the highest-ranked index (i.e., the smallest rank number).
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'organization' is 'transparency international'.
+Step 4: Among those, find the row with the smallest 'rank' value.
+Step 5: Return the corresponding 'year'.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Transparency International
+transparency_df = df[df['organization'] == 'transparency international']
+# Find the row with the smallest rank
+highest_ranked = transparency_df.loc[transparency_df['rank'].idxmin()]
+# Extract the year
+year = highest_ranked['year']
+print(f"Final Answer: {year}")
+```

@@ -1,0 +1,29 @@
+Step 1: The question asks to analyze the relationship between power (horsepower) and maximum speed (km/h) across different years.  
+Step 2: We need to examine if there is a trend or correlation between power and maximum speed.  
+Step 3: Since the data is small, we can compute the correlation coefficient between "power (horsepower)" and "max speed (km / h)" and also check if there's a clear pattern by visualizing the data.  
+Step 4: Use pandas to load the data and calculate the correlation. Then, create a simple scatter plot to visualize the relationship.  
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns
+power_hp = df['power (horsepower)'].astype(float)
+max_speed = df['max speed (km / h)'].astype(float)
+
+# Calculate correlation
+correlation = power_hp.corr(max_speed)
+
+# Create scatter plot
+plt.figure(figsize=(8, 6))
+plt.scatter(power_hp, max_speed, alpha=0.7)
+plt.title('Relationship between Power (Horsepower) and Maximum Speed (km/h)')
+plt.xlabel('Power (Horsepower)')
+plt.ylabel('Maximum Speed (km/h)')
+plt.grid(True)
+plt.show()
+
+print(f"Final Answer: {correlation:.2f}")
+```

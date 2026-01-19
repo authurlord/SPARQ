@@ -1,0 +1,36 @@
+Step 1: The user wants a bar chart comparing the total votes received by Obama and McCain in each county.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'obama' and 'mccain' columns, which represent the total votes.  
+Step 4: Create a bar chart with counties on the x-axis and votes on the y-axis, showing two bars per county (one for Obama, one for McCain).  
+Step 5: Use matplotlib to generate the chart and display it.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns for votes
+obama_votes = df['obama']
+mccain_votes = df['mccain']
+counties = df['county']
+
+# Create a bar chart
+plt.figure(figsize=(12, 6))
+x = range(len(counties))
+width = 0.35
+
+plt.bar([i - width/2 for i in x], obama_votes, width, label='Obama', color='skyblue')
+plt.bar([i + width/2 for i in x], mccain_votes, width, label='McCain', color='salmon')
+
+plt.xlabel('County')
+plt.ylabel('Total Votes')
+plt.title('Total Votes Received by Obama and McCain in Each County')
+plt.xticks([i for i in x], counties, rotation=90)
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: chart

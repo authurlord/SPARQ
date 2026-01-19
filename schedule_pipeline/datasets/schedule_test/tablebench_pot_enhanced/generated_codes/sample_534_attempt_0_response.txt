@@ -1,0 +1,22 @@
+Step 1: The user wants to find the country with the highest GDP per square kilometer, which is calculated as GDP (in billion USD) divided by area (in km²).
+Step 2: Load the dataframe.
+Step 3: Convert 'gdp (billion us)' and 'area (km square)' columns to numeric values for calculation.
+Step 4: Calculate GDP per square kilometer for each country.
+Step 5: Identify the country with the maximum value.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric, handling any non-numeric entries
+df['gdp (billion us)'] = pd.to_numeric(df['gdp (billion us)'], errors='coerce')
+df['area (km square)'] = pd.to_numeric(df['area (km square)'], errors='coerce')
+
+# Calculate GDP per square kilometer
+df['gdp_per_km2'] = df['gdp (billion us)'] / df['area (km square)']
+
+# Find the country with the highest GDP per square kilometer
+max_gdp_per_km2_country = df.loc[df['gdp_per_km2'].idxmax(), 'member countries']
+print(f"Final Answer: {max_gdp_per_km2_country}")
+```

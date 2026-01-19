@@ -1,0 +1,24 @@
+Step 1: Identify the top 3 countries with the most Primary schools. From the data, the countries are United States (500), Canada (82), and Australia (119). Sum these values to get the total number of Primary schools in the top 3 countries.
+
+Step 2: Extract the total number of Career-related schools across all countries, which is given in the "Total Schools Globally" row under the "Career-related" column: 118.
+
+Step 3: Compute the difference between the sum of Primary schools in the top 3 countries and the total Career-related schools.
+
+Step 4: Print the final result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the top 3 countries by Primary schools
+top_3_primary = df.iloc[0:3]['Primary'].astype(int).sum()
+
+# Extract total Career-related schools from the "Total Schools Globally" row
+total_career_related = df.iloc[-3]['Career-related']
+
+# Calculate the difference
+difference = top_3_primary - int(total_career_related)
+
+print(f"Final Answer: {difference}")
+```

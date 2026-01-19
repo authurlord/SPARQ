@@ -1,0 +1,21 @@
+[Analytical Approach]
+1. Filter the dataframe to include only companies in the 'banking' industry.
+2. Convert the 'revenue (millions)' column to numeric, ensuring any non-numeric values are handled properly.
+3. Select the top 5 companies by revenue (highest revenue first).
+4. Calculate the average revenue of these top 5 companies.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'revenue (millions)' to numeric, coercing errors to NaN
+df['revenue (millions)'] = pd.to_numeric(df['revenue (millions)'], errors='coerce')
+# Filter for 'banking' industry
+banking_companies = df[df['industry'] == 'banking']
+# Sort by revenue in descending order and get top 5
+top_5_bankers = banking_companies.nlargest(5, 'revenue (millions)')
+# Calculate average revenue
+avg_revenue = top_5_bankers['revenue (millions)'].mean()
+print(f"Final Answer: {avg_revenue:.1f}")
+```

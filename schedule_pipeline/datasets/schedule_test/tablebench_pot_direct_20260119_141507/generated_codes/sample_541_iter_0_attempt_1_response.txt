@@ -1,0 +1,44 @@
+Step 1: The user wants the percentage increase in the total number of trailers from 1923 to 1927.  
+Step 2: Identify the total trailers for 1923 and 1927 from the "trailers" column.  
+Step 3: Use the formula for percentage increase:  
+   $$
+   \text{Percentage Increase} = \left( \frac{\text{Trailer count in 1927} - \text{Trailer count in 1923}}{\text{Trailer count in 1923}} \right) \times 100
+   $$  
+Step 4: Extract the trailer totals for 1923 and 1927 (note: the row "totals" is at the end, so we use the values directly).  
+
+From the table:
+- 1923: 1 trailer (from data rows)
+- 1927: 160 trailers (from row '1927', 'mcwf' or 'ucc')
+
+But wait — the "totals" row has the total trailers as 551. However, the question asks for the percentage increase **from 1923 to 1927**, so we need to find the total trailers in 1923 and 1927.
+
+Looking at the data:
+- In 1923: Each row has "trailers" value: 1, 1, 1, 1, 1, 35, 40, 1, 1 → sum them.
+- In 1927: Rows: 'mcwf' has 160, 'ucc' has 37 → sum = 160 + 37 = 197
+
+But the "totals" row says "551" for trailers — this is the sum over all years. So we need to calculate the sum of trailers for 1923 and 1927 separately.
+
+Let’s compute:
+- 1923: sum of trailers in rows where year == '1923'
+- 1927: sum of trailers in rows where year == '1927'
+
+Then compute the percentage increase.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows for 1923 and 1927
+year_1923 = df[df['year'] == '1923']
+year_1927 = df[df['year'] == '1927']
+
+# Sum trailers for each year
+trailers_1923 = year_1923['trailers'].fillna(0).astype(float).sum()
+trailers_1927 = year_1927['trailers'].fillna(0).astype(float).sum()
+
+# Calculate percentage increase
+percentage_increase = ((trailers_1927 - trailers_1923) / trailers_1923) * 100
+
+print(f"Final Answer: {percentage_increase:.1f}")
+```

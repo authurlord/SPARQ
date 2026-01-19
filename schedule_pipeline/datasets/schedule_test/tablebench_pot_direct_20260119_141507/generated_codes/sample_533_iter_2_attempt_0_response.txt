@@ -1,0 +1,96 @@
+We are asked to compute the **population dependency ratio** in 2002, defined as:
+
+> (Population aged 0–10 + Population aged 60+) / (Population aged 11–59)
+
+From the table:
+- "0-9" corresponds to age group 0–10 (we'll use this as a proxy for 0–10)
+- "80 +" corresponds to age group 60+
+- "10-19", "20-29", "30-39", "40-49", "50-59" are parts of 11–59; we need to sum these to get total population aged 11–59.
+
+Step-by-step approach:
+1. Identify the relevant rows in the data that contain population values.
+2. Extract the values for:
+   - "0-9" → 0–10
+   - "80 +" → 60+
+   - "10-19", "20-29", "30-39", "40-49", "50-59" → 11–59
+3. Sum the numerator: (0–9) + (80+)
+4. Sum the denominator: sum of 10–19, 20–29, 30–39, 40–49, 50–59
+5. Compute the ratio: numerator / denominator
+6. Since the data is given in "person" units, we can directly compute the ratio.
+
+Note: The row with "I., 1., A., Males" and "B., Females" gives the breakdown by sex. However, the total population is already given under "TOTAL" in the first row, and the percentages are in the second row. But the actual numbers are in the third row (e.g., "145" for males, "142" for females). We will use the **total population** from the "TOTAL" row for the age groups.
+
+Looking at the structure:
+- The row `['I.', 'TOTAL', 'TOTAL', 'TOTAL', 'TOTAL', 'person', '287', '41', '45', '47', '27', '38', '31', '20', '24', '14']` contains the population values:
+  - 0–9: 41
+  - 10–19: 45
+  - 20–29: 47
+  - 30–39: 27
+  - 40–49: 38
+  - 50–59: 31
+  - 60–69: 20
+  - 70–79: 24
+  - 80+: 14
+
+So:
+- Numerator = (0–9) + (80+) = 41 + 14 = 55
+- Denominator = (10–19) + (20–29) + (30–39) + (40–49) + (50–59) = 45 + 47 + 27 + 38 + 31 = 188
+
+Then:
+Dependency ratio = 55 / 188 ≈ 0.2926
+
+We will compute this using Python.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the relevant values from the row where SPECIFICATION is 'TOTAL' and POPULATION is given
+# We look for the row where the first value is 'I.' and the next is 'TOTAL' for each age group
+# The row with 'TOTAL' for age groups is the one with values: ['I.', 'TOTAL', 'TOTAL', 'TOTAL', 'TOTAL', 'person', '287', '41', '45', '47', '27', '38', '31', '20', '24', '14']
+
+# Find the row where the first column is 'I.' and the second is 'TOTAL'
+# The actual row of interest is the one after the header
+# We can locate it by checking if the first column is 'I.' and the second is 'TOTAL'
+
+# Extract the age group population values
+age_groups = df.iloc[1]  # This is the row with 'I., TOTAL, TOTAL, ...'
+# The age group columns start from 'POPULATION (by age group in 2002)' onwards
+# The values for age groups are in positions 6 to 15
+
+# Values:
+# index 6: TOTAL
+# index 7: 0-9
+# index 8: 10-19
+# index 9: 20-29
+# index 10: 30-39
+# index 11: 40-49
+# index 12: 50-59
+# index 13: 60-69
+# index 14: 70-79
+# index 15: 80+
+
+# We extract the values from index 7 to 15 (excluding the first "TOTAL")
+pop_0_to_9 = df.iloc[1][7]  # 0-9
+pop_80_plus = df.iloc[1][15]  # 80+
+
+# Denominator: sum of 10-19 to 50-59
+pop_11_to_59 = (
+    df.iloc[1][8] +  # 10-19
+    df.iloc[1][9] +  # 20-29
+    df.iloc[1][10] + # 30-39
+    df.iloc[1][11] + # 40-49
+    df.iloc[1][12]   # 50-59
+)
+
+# Numerator: 0-10 + 60+
+numerator = pop_0_to_9 + pop_80_plus
+denominator = pop_11_to_59
+
+# Calculate dependency ratio
+dependency_ratio = numerator / denominator
+
+print(f"Final Answer: {dependency_ratio:.2f}")
+```

@@ -1,0 +1,57 @@
+Step 1: Understand the question. We are asked to calculate the total estimated exposure (mrem/hr) when combining two specimens, assuming that the calculated activity (Bq) is directly proportional to the specimen weight.
+
+Step 2: Identify the relevant rows in the table:
+- Specimen 1: 0.1 g / 4.08 mm → calculated activity (Bq) = 18, estimated exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → calculated activity (Bq) = 1834, estimated exposure = 0.03 mrem/hr
+
+Step 3: Since the activity (Bq) is directly proportional to weight, we can scale the exposure accordingly. However, the exposure values are already given and appear to be proportional to activity (Bq), so we can directly sum the exposures from the two specimens.
+
+Step 4: Add the estimated exposure (mrem/hr) of both specimens.
+
+Note: The exposure for 0.1g is listed as 0.0, but this may be due to rounding. Since the activity (18 Bq) is 1/100th of 1834 Bq (10g specimen), and the exposure for 10g is 0.03 mrem/hr, the expected exposure for 0.1g should be approximately 0.0003 mrem/hr. However, the table shows 0.0, which may indicate it's rounded down. But since the question says "assuming the calculated activity (Bq) is directly proportional", we should use the proportionality to compute the correct exposure.
+
+Let’s recalculate the exposure for the 0.1g specimen based on proportionality:
+- For 10g → 1834 Bq → 0.03 mrem/hr
+- So for 0.1g → 18 Bq → (18 / 1834) * 0.03 ≈ 0.000299 mrem/hr ≈ 0.0003 mrem/hr
+
+Then total exposure = 0.0003 + 0.03 = 0.0303 mrem/hr
+
+But wait — the table already lists the exposure for 0.1g as 0.0, which might suggest it's negligible. However, the question asks us to assume proportionality, so we must compute based on that assumption.
+
+Alternatively, if we trust the table’s exposure values as accurate for their respective weights, and since the exposure is proportional to activity (and hence to weight), we can scale the 0.1g exposure using the ratio of weights.
+
+But note: the 10g specimen has 1834 Bq and 0.03 mrem/hr.
+The 0.1g specimen has 18 Bq → (18 / 1834) * 0.03 = ~0.000299 mrem/hr
+
+So total exposure = 0.03 + 0.000299 = 0.030299 ≈ 0.0303 mrem/hr
+
+We’ll round to 4 decimal places as per typical precision.
+
+Final Answer: 0.0303
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Find the row with 0.1 g / 4.08 mm
+row_01g = df[df['specimen weight / size'] == '0.1 g / 4.08 mm']
+# Find the row with 10 g / 1.89 cm
+row_10g = df[df['specimen weight / size'] == '10 g / 1.89 cm']
+
+# Extract activity (Bq) and exposure (mrem/hr)
+activity_01g = float(row_01g['calculated activity ( bq )'].values[0])
+exposure_01g = float(row_01g['estimated exposure ( mrem ) / hr'].values[0])
+
+activity_10g = float(row_10g['calculated activity ( bq )'].values[0])
+exposure_10g = float(row_10g['estimated exposure ( mrem ) / hr'].values[0])
+
+# Use proportionality to compute expected exposure for 0.1g based on activity
+# Since activity is proportional to weight, exposure should be proportional to activity
+expected_exposure_01g = (activity_01g / activity_10g) * exposure_10g
+
+# Total estimated exposure
+total_exposure = expected_exposure_01g + exposure_10g
+
+print(f"Final Answer: {total_exposure:.4f}")
+```

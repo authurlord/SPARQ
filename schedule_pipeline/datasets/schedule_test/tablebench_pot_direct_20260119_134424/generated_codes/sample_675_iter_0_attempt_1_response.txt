@@ -1,0 +1,22 @@
+Step 1: The user wants to calculate the correlation coefficient between 'total passengers' and 'capacity in use' across the airports.
+Step 2: Load the dataframe.
+Step 3: Convert 'total passengers' and 'capacity in use' columns to numeric, handling any formatting issues (e.g., percentage signs, commas).
+Step 4: Calculate the correlation coefficient using pandas corr() method.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean and convert 'total passengers' to numeric
+df['total passengers'] = pd.to_numeric(df['total passengers'], errors='coerce')
+
+# Clean and convert 'capacity in use' to numeric, removing '%' and handling commas
+df['capacity in use'] = df['capacity in use'].str.replace('%', '').str.replace(',', '').astype(float) / 100
+
+# Calculate correlation coefficient
+correlation = df['total passengers'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.4f}")
+```

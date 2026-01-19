@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of nations that have won at least one gold medal.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'Gold' is greater than 0.  
+Step 4: Count the number of such rows (nations).  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count nations with at least one gold medal
+nations_with_gold = df[df['Gold'] > 0].shape[0]
+print(f"Final Answer: {nations_with_gold}")
+```

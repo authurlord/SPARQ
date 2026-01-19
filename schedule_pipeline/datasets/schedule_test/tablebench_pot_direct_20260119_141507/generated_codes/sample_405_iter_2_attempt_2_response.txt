@@ -1,0 +1,6 @@
+Step 1: The question asks for a descriptive explanation of the table, including main columns and basic insights. This is not a numerical computation but a qualitative analysis.  
+Step 2: Identify the columns and their meanings.  
+Step 3: Provide a clear, concise summary with key observations (e.g., distribution of capacity, state-wise trends, commissioning years).  
+Step 4: Since no code is required to generate a descriptive explanation, we will write a plain-text explanation directly.  
+
+Final Answer: sno, power plant, state, commissioned capacity (mw), year of commission

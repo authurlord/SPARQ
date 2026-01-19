@@ -1,0 +1,18 @@
+Step 1: Filter the data for the year 1944.
+Step 2: Extract the 'US Chart position' column for those rows.
+Step 3: Convert the values to numeric (some may be strings like '7', '11', etc.).
+Step 4: Calculate the average of the US Chart positions.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for year 1944
+df_1944 = df[df['Year'] == '1944']
+# Convert 'US Chart position' to numeric, coercing errors to NaN
+df_1944['US Chart position'] = pd.to_numeric(df_1944['US Chart position'], errors='coerce')
+# Calculate average US Chart position
+avg_chart_pos = df_1944['US Chart position'].mean()
+print(f"Final Answer: {avg_chart_pos:.1f}")
+```

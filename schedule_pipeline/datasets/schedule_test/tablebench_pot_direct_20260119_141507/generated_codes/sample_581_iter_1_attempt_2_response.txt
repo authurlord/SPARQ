@@ -1,0 +1,26 @@
+The error occurred because the 'civil liberties' column contains string values (like '7', '6', etc.) instead of numeric values, and we attempted to perform arithmetic operations on them directly. We need to convert the 'civil liberties' column to numeric before computing the percentage change.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Convert the 'civil liberties' column to numeric (to handle string values like '7' properly).
+3. Extract the civil liberties scores for 1972 and 1980.
+4. Calculate the percentage change using the formula:  
+   `((new_value - old_value) / old_value) * 100`
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'civil liberties' to numeric (handles string values)
+df['civil liberties'] = pd.to_numeric(df['civil liberties'], errors='coerce')
+
+# Get civil liberties scores for 1972 and 1980
+civil_1972 = df[df['year'] == '1972']['civil liberties'].iloc[0]
+civil_1980 = df[df['year'] == '1980']['civil liberties'].iloc[0]
+
+# Calculate percentage change
+percentage_change = ((civil_1980 - civil_1972) / civil_1972) * 100
+
+print(f"Final Answer: {percentage_change:.1f}")
+```

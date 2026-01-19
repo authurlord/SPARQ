@@ -1,0 +1,47 @@
+Step 1: Understand the table structure.  
+The table has 10 rows and 5 columns:  
+- "draw": The order or round in which the song was performed.  
+- "artist": The name of the performing artist.  
+- "song": The title of the song.  
+- "first vote": The number of votes the song received initially.  
+- "place": The final ranking (position) of the song in the competition.
+
+Step 2: Explain significance of each column:  
+- "draw": Indicates sequence; helps identify performance order.  
+- "artist" and "song": Identify the content of each entry.  
+- "first vote": Reflects initial public reception; higher values suggest strong early support.  
+- "place": Final outcome; lower numbers mean better results.
+
+Step 3: Identify notable trends or anomalies:  
+- The song with the highest first vote ("pirates of the sea" with 16,818) won the competition (place 1), indicating that high initial votes may correlate with winning.  
+- "Sabīne berezina" had a high first vote (5,142) but placed 5th — suggesting that early votes are not always predictive of final rank.  
+- "Aisha" had a moderate first vote (8,021) and placed 3rd — shows consistent performance.  
+- "Andris ērglis" had the highest first vote (10,751) but placed 2nd — again, high initial votes are not always sufficient to win.  
+- "Pirates of the sea" had the highest first vote and won, which may indicate a strong correlation between high initial votes and winning.
+
+Step 4: Use Python to summarize key observations programmatically.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Display basic structure and summary statistics
+print("Table Structure:")
+print(df.info())
+
+print("\nSummary of first vote and place:")
+print(df[['first vote', 'place']].describe())
+
+# Find song with highest first vote and its place
+max_vote_row = df.loc[df['first vote'].idxmax()]
+print(f"\nNotable anomaly: '{max_vote_row['song']}' by {max_vote_row['artist']} had the highest first vote ({max_vote_row['first vote']}) and placed {max_vote_row['place']}.")
+
+# Check if any song with high first vote did not win
+high_vote_winners = df[(df['first vote'] > df['first vote'].median()) & (df['place'] == 1)]
+if len(high_vote_winners) > 0:
+    print(f"\nTrend: High first votes correlate with winning — {len(high_vote_winners)} such cases found.")
+else:
+    print("\nTrend: No clear correlation between high first votes and winning.")
+
+Final Answer: high first vote correlates with winning, pirates of the sea won with highest first vote, sabīne berezina had high vote but placed 5th

@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 285.4, 212.9, 320.8, 238.8, 138.0

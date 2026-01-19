@@ -1,0 +1,14 @@
+Step 1: The user wants the correlation coefficient between 'sales (billion )' and 'profits (billion )'.
+Step 2: Load the dataframe.
+Step 3: Extract the 'sales (billion )' and 'profits (billion )' columns.
+Step 4: Compute the Pearson correlation coefficient between these two columns.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'sales (billion )' and 'profits (billion )'
+correlation = df['sales (billion )'].corr(df['profits (billion )'])
+print(f"Final Answer: {correlation:.2f}")
+```

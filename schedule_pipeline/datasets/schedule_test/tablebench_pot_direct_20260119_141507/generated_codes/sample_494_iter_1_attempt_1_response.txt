@@ -1,0 +1,64 @@
+We are tasked with finding the aircraft type with the highest average seat density, defined as:
+
+> Average Seat Density = (Total number of seats) / (Total number of aircraft)
+
+However, the table contains entries like "267-269" and "183-214" for "Seats in Standard Configuration", which represent ranges. We need to interpret these values properly.
+
+### Step-by-step approach:
+1. **Identify valid seat counts**:
+   - For entries where "Seats in Standard Configuration" is a range (e.g., "267-269"), we take the average of the range.
+   - For single numbers (e.g., 366), use that value directly.
+2. **Calculate total seats**:
+   - For each aircraft type, compute total seats by multiplying the average seat count by the number of aircraft (Owned + Leased).
+   - Note: If "Leased" is missing ("—"), treat it as 0.
+3. **Calculate total aircraft**:
+   - Sum of Owned + Leased (excluding "—").
+4. **Compute average seat density**:
+   - Total seats / Total aircraft.
+5. **Find the aircraft type with the highest density**.
+
+### Special Handling:
+- The last row is "Total mainline", which we ignore.
+- Any cell with "—" should be treated as 0 or omitted.
+- For ranges like "267-269", average = (267 + 269) / 2 = 268.
+
+Let’s now write the corrected Python code:
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Drop the last row (Total mainline)
+df = df.iloc[:-1]
+
+# Function to parse seat configuration
+def parse_seats(seats):
+    if pd.isna(seats) or seats == '—':
+        return 0
+    if isinstance(seats, str) and '-' in seats:
+        parts = seats.split('-')
+        return (int(parts[0]) + int(parts[1])) / 2
+    else:
+        return int(seats)
+
+# Apply seat parsing
+df['seats_avg'] = df['Seats in Standard Configuration'].apply(parse_seats)
+
+# Convert Owned and Leased to integers, treating '—' as 0
+df['owned'] = pd.to_numeric(df['Owned'], errors='coerce')
+df['leased'] = pd.to_numeric(df['Leased'], errors='coerce')
+df['total_aircraft'] = df['owned'] + df['leased']
+df['total_seats'] = df['seats_avg'] * df['total_aircraft']
+
+# Calculate average seat density per aircraft type
+df['seat_density'] = df['total_seats'] / df['total_aircraft']
+
+# Find the aircraft type with the highest seat density
+max_density_row = df.loc[df['seat_density'].idxmax()]
+final_answer = max_density_row['Row Header']
+
+print(f"Final Answer: {final_answer}")
+```

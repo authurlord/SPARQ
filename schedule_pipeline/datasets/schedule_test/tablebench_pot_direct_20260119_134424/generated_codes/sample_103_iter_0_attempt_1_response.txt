@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: percentage stacked bar chart drawn

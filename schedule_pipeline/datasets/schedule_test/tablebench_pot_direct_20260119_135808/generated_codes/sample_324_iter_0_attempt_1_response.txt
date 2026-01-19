@@ -1,0 +1,17 @@
+Step 1: The user wants to find the winner and runner-up teams for the year 2005.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'Year' is '2005'.
+Step 4: Extract the 'Winners' and 'Runners-up' columns from that row.
+Step 5: Print the results in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where Year is 2005
+row_2005 = df[df['Year'] == '2005']
+# Extract winners and runners-up
+winner = row_2005['Winners'].values[0]
+runner_up = row_2005['Runners-up'].values[0]
+print(f"Final Answer: {winner}, {runner_up}")
+```

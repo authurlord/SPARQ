@@ -1,0 +1,23 @@
+Step 1: Understand the structure and content of the table.  
+The table contains data on tropical cyclones from 1870 to 1878, with columns describing the number of storms, hurricanes, major hurricanes, deaths, and the strongest storm recorded each year.
+
+Step 2: Identify the significance of each column:
+- "year": Indicates the calendar year of the data.
+- "number of tropical storms": Total count of tropical storms per year.
+- "number of hurricanes": Count of hurricanes (a subset of tropical storms).
+- "number of major hurricanes": Count of major hurricanes (Category 3 or higher), indicating intensity.
+- "deaths": Total number of fatalities associated with storms in that year.
+- "strongest storm": Name of the most intense storm recorded.
+
+Step 3: Observe trends and patterns:
+- The number of tropical storms and hurricanes varies significantly across years, with peaks in 1870 (11 storms, 10 hurricanes) and 1878 (12 storms, 10 hurricanes).
+- Major hurricanes are relatively rare (only 2–3 per year), suggesting that while hurricanes occur frequently, major ones are infrequent.
+- Deaths show a wide range: from 19 in 1876 to over 800 in 1875, indicating high variability in human impact.
+- The strongest storm column shows names like "seven" or "four", which may represent storm intensity (e.g., "seven" could mean a Category 7 storm, though such a category doesn't exist; this might be a mislabeling or typo).
+
+Step 4: Highlight notable observations:
+- 1875 has the highest death toll (800), possibly due to a major hurricane.
+- 1878 has the highest number of storms and hurricanes, suggesting a particularly active season.
+- There is no clear correlation between the number of storms and deaths, as some years with many storms (e.g., 1870) have lower deaths than others (e.g., 1875).
+
+Final Answer: year, number of tropical storms, number of hurricanes, number of major hurricanes, deaths, strongest storm

@@ -1,0 +1,39 @@
+Step 1: The user is asking for an expected prediction of total votes and percentage of popular vote for the next election cycle based on the increasing trend from 1983 to 2013.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'total votes' and '% of popular vote' columns, converting them to numeric (handling '%' sign).  
+Step 4: Perform a linear regression or simple trend extrapolation to predict the next election (2017) values.  
+Step 5: Since the data is only 11 years apart (1983 to 2013), we can use a simple linear trend based on the last few data points for better accuracy.  
+Step 6: Use the last two data points (2009 and 2013) to estimate the slope and predict the next value.  
+Step 7: Print the predicted total votes and percentage.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'total votes' and '% of popular vote' to numeric
+df['total votes'] = pd.to_numeric(df['total votes'])
+df['% of popular vote'] = pd.to_numeric(df['% of popular vote'].str.replace('%', ''))
+
+# Extract years and values
+years = df['election'].astype(int)
+votes = df['total votes']
+vote_percentage = df['% of popular vote']
+
+# Use last two data points to calculate trend
+last_year = years.iloc[-1]
+last_vote = votes.iloc[-1]
+last_percent = vote_percentage.iloc[-1]
+
+# Calculate average annual increase from 2009 to 2013
+year_diff = last_year - years.iloc[-2]
+vote_increase = (last_vote - votes.iloc[-2]) / year_diff
+percent_increase = (last_percent - vote_percentage.iloc[-2]) / year_diff
+
+# Predict for next election (2017)
+predicted_votes = last_vote + vote_increase * 4
+predicted_percent = last_percent + percent_increase * 4
+
+print(f"Final Answer: {predicted_votes:.0f}, {predicted_percent:.2f}%")
+```

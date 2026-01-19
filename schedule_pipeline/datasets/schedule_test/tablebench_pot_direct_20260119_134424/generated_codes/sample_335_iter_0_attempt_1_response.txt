@@ -1,0 +1,30 @@
+Step 1: The user wants to find the year and points score when the athlete won a gold medal (1st position) in the Heptathlon event at the South American Championships in Lima, Peru.
+
+Step 2: Load the dataframe.
+
+Step 3: Filter rows where:
+- Competition is "South American Championships"
+- Venue is "Lima, Peru"
+- Event is "Heptathlon"
+- Position is "1st"
+
+Step 4: Extract the Year and Notes (points score) from the filtered row.
+
+Step 5: Print the result in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for South American Championships in Lima, Peru, Heptathlon, 1st position
+filtered_df = df[(df['Competition'] == 'South American Championships') & 
+                 (df['Venue'] == 'Lima, Peru') & 
+                 (df['Event'] == 'Heptathlon') & 
+                 (df['Position'] == '1st')]
+
+# Extract the year and points score
+year = filtered_df['Year'].iloc[0]
+points = filtered_df['Notes'].iloc[0]
+
+print(f"Final Answer: {year}, {points}")
+```

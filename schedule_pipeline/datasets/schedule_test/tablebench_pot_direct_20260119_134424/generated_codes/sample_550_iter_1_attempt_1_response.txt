@@ -1,0 +1,23 @@
+Step 1: The user wants to find the first year when the 'Political Rights' score decreased by at least 2 points compared to the previous year.
+Step 2: Load the dataframe.
+Step 3: Convert 'Year' to integer and 'Political Rights' to integer for comparison.
+Step 4: Calculate the difference between consecutive years' 'Political Rights' scores.
+Step 5: Identify the first year where the difference is less than or equal to -2 (i.e., a decrease of at least 2).
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year' and 'Political Rights' to integers
+df['Year'] = pd.to_numeric(df['Year'])
+df['Political Rights'] = pd.to_numeric(df['Political Rights'])
+
+# Calculate the difference in 'Political Rights' from the previous year
+df['diff'] = df['Political Rights'].diff()
+
+# Find the first year where the score decreased by at least 2
+first_decrease_year = df[df['diff'] <= -2]['Year'].iloc[0]
+
+print(f"Final Answer: {first_decrease_year}")
+```

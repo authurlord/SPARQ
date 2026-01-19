@@ -1,0 +1,40 @@
+Step 1: Identify the three-year period with the highest average CPSC toy safety funding.  
+Step 2: Filter the data for years where CPSC toy safety funding is available (not 'no data' or None).  
+Step 3: Calculate the average funding per year for each three-year window.  
+Step 4: Find the three-year period with the highest average funding.  
+Step 5: Sum the injuries (in thousands) for that period.  
+
+Note: Since the data has gaps, we need to consider only consecutive years with funding data. The funding data is available from 1999 to 2005, and then again in 2006–2009 (but 2006, 2007, 2008, 2009 have 'no data'). So only 1999–2005 is usable. We'll consider all possible three-year periods within 1999–2005 and compute their average funding.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'CPSC toy safety funding (US$ Millions)' to numeric, coercing errors to NaN
+df['CPSC toy safety funding (US$ Millions)'] = pd.to_numeric(df['CPSC toy safety funding (US$ Millions)'], errors='coerce')
+
+# Drop rows where funding is NaN
+funding_data = df.dropna(subset=['CPSC toy safety funding (US$ Millions)'])
+
+# Extract the years and funding values
+years = funding_data['Year'].astype(int)
+funding = funding_data['CPSC toy safety funding (US$ Millions)']
+
+# Initialize variables to track best three-year period
+max_avg_funding = -1
+best_period_injuries = 0
+
+# Check all possible three-year consecutive periods
+for i in range(len(funding) - 2):
+    avg_funding = funding.iloc[i:i+3].mean()
+    if avg_funding > max_avg_funding:
+        max_avg_funding = avg_funding
+        # Get the sum of injuries for this period
+        injuries = df.loc[(df['Year'].astype(int).isin(years.iloc[i:i+3])) & 
+                           (df['Injuries (US $000)'] != 'no data'), 'Injuries (US $000)']
+        injuries = injuries.astype(float).sum()
+        best_period_injuries = injuries
+
+print(f"Final Answer: {best_period_injuries}")
+```

@@ -1,0 +1,15 @@
+Step 1: The user wants the total length of rivers that flow into the left side of the main river.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Position' is 'left'.
+Step 4: Sum the 'Length [km]' column for these rows.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Position is 'left'
+left_rivers = df[df['Position'] == 'left']
+# Sum the Length [km] column
+total_length_left = left_rivers['Length [km]'].sum()
+print(f"Final Answer: {total_length_left}")
+```

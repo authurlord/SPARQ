@@ -1,0 +1,51 @@
+Step 1: Identify the three-year period with the highest average CPSC toy safety funding.  
+Step 2: Filter the data for years where CPSC toy safety funding is available (not 'no data' or None).  
+Step 3: Calculate the average funding per year for each possible three-year period.  
+Step 4: Select the three-year period with the highest average funding.  
+Step 5: Sum the injuries (in thousands) for that period.  
+Step 6: Print the total injuries.
+
+Note: The 'Injuries (US $000)' column contains values like '154', '139', etc., and some entries are 'no data' or '202 (estimate)'. We need to handle these carefully.
+
+We'll:
+- Convert 'Injuries' to numeric, treating 'no data' as NaN.
+- Convert 'CPSC toy safety funding' to numeric, treating 'no data' and 'no data†' as NaN.
+- Find all valid three-year periods with funding data.
+- Compute average funding for each such period.
+- Pick the period with the highest average.
+- Sum the injuries for that period.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Injuries (US $000)' to numeric, handling 'no data' and '202 (estimate)'
+df['Injuries (US $000)'] = pd.to_numeric(df['Injuries (US $000)'], errors='coerce')
+
+# Convert 'CPSC toy safety funding (US$ Millions)' to numeric, handling 'no data' and 'no data†'
+df['CPSC toy safety funding (US$ Millions)'] = pd.to_numeric(df['CPSC toy safety funding (US$ Millions)'], errors='coerce')
+
+# Filter rows with valid funding data
+valid_funding = df.dropna(subset=['CPSC toy safety funding (US$ Millions)'])
+
+# Get the years with valid funding
+years_with_funding = valid_funding['Year'].tolist()
+
+# Generate all possible three-year consecutive periods from the valid funding years
+max_avg_funding = -1
+best_period_injuries = 0
+
+# Iterate through all possible 3-year periods in the valid funding years
+for i in range(len(years_with_funding) - 2):
+    period_years = years_with_funding[i:i+3]
+    period_data = df[df['Year'].isin(period_years)]
+    avg_funding = period_data['CPSC toy safety funding (US$ Millions)'].mean()
+    total_injuries = period_data['Injuries (US $000)'].sum()
+    
+    if avg_funding > max_avg_funding:
+        max_avg_funding = avg_funding
+        best_period_injuries = total_injuries
+
+print(f"Final Answer: {best_period_injuries}")
+```

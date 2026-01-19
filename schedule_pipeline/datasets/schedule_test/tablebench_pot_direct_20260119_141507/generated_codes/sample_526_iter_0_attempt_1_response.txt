@@ -1,0 +1,15 @@
+Step 1: The user wants to find the high school with the highest medal ratio, defined as (gold medals / total medals).  
+Step 2: Load the dataframe.  
+Step 3: Calculate the medal ratio for each school using the 'gold medals' and 'total medals' columns.  
+Step 4: Identify the school with the maximum ratio.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate medal ratio: gold / total medals
+df['medal_ratio'] = df['gold medals'].astype(float) / df['total medals'].astype(float)
+# Find the school with the highest ratio
+highest_ratio_school = df.loc[df['medal_ratio'].idxmax(), 'ensemble']
+print(f"Final Answer: {highest_ratio_school}")
+```

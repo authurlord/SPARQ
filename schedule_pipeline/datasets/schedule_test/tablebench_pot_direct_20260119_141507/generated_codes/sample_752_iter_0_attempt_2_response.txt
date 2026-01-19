@@ -1,0 +1,35 @@
+Step 1: The question asks for an expected total votes and percentage of the popular vote for the next election cycle based on an observed increasing trend from 1983 to 2013.  
+Step 2: Analyze the data to identify trends in "total votes" and "% of popular vote" over time.  
+Step 3: Since the data shows a clear upward trend in both total votes and popular vote percentage, we can estimate future values by extrapolating the trend using linear regression.  
+Step 4: Use linear regression to model the relationship between the election year and total votes, as well as the percentage of popular vote. Then predict the values for the next election cycle (after 2013).  
+
+Note: The last election is in 2013, so we assume the next election is in 2023 (a 10-year increase).  
+
+We will perform linear regression on the years and corresponding values.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Convert 'election' column to numeric (extract year)
+df['election'] = df['election'].str.extract('(\d{4})').astype(int)
+
+# Prepare features and target variables
+X = df[['election']]  # independent variable: year
+y1 = df['total votes']  # target: total votes
+y2 = df['% of popular vote']  # target: popular vote percentage
+
+# Fit linear regression models
+model1 = LinearRegression().fit(X, y1)
+model2 = LinearRegression().fit(X, y2)
+
+# Predict for the next election cycle: 2023 (2013 + 10)
+next_year = 2023
+predicted_votes = model1.predict([[next_year]])[0]
+predicted_pop_vote = model2.predict([[next_year]])[0]
+
+print(f"Final Answer: {predicted_votes:.0f}, {predicted_pop_vote:.2f}%")
+```

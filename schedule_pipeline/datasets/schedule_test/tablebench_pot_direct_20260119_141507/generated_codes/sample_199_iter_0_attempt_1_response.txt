@@ -1,0 +1,30 @@
+Step 1: The user is asking whether there is a correlation between the number of major hurricanes and the number of deaths. This requires analyzing the relationship between two numerical columns: "number of major hurricanes" and "deaths".
+
+Step 2: Load the data into a DataFrame.
+
+Step 3: Since "deaths" contains values like "not known", "100 +", "30 +", and "200 +", these are not numeric and need to be handled. We will convert them to numeric values where possible (e.g., "100 +" → 100, "not known" → NaN). For simplicity, we will treat "not known" as missing and use the numeric values for analysis.
+
+Step 4: Compute the correlation between "number of major hurricanes" and "deaths" after converting "deaths" to numeric.
+
+Step 5: A positive correlation would suggest that as the number of major hurricanes increases, deaths also increase. We interpret the result accordingly.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert "deaths" column to numeric, replacing text with NaN
+deaths_numeric = df['deaths'].str.replace('not known', np.nan).str.replace('100 +', 100).str.replace('30 +', 30).str.replace('200 +', 200).str.replace('none', 0).astype(float)
+
+# Replace any remaining invalid entries with NaN
+deaths_numeric = pd.to_numeric(deaths_numeric, errors='coerce')
+
+# Drop rows where deaths are NaN (due to "not known" or invalid)
+df_clean = df.dropna(subset=['deaths'])
+
+# Now compute the correlation between "number of major hurricanes" and "deaths"
+correlation = df_clean['number of major hurricanes'].corr(deaths_numeric)
+
+print(f"Final Answer: {correlation:.2f}")
+```

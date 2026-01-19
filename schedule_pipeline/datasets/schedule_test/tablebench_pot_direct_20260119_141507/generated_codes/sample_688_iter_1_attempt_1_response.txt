@@ -1,0 +1,33 @@
+We need to calculate the winning percentage (wins / games) for each manager and identify the one with the highest value. However, the data contains a row labeled "totals" at the end, which includes aggregated values and should be excluded since it doesn't represent a specific manager's tenure.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Filter out the row where 'manager' is "totals" (since it's an aggregate).
+3. Convert 'wins' and 'games' columns to numeric (in case of string or formatting issues).
+4. Compute the winning percentage for each manager: wins / games.
+5. Find the manager with the maximum winning percentage.
+6. Print the result.
+
+Note: Some entries like "1985" or "1980 - 1981" in the 'years' column are not relevant for calculation — only 'wins' and 'games' matter.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove the 'totals' row
+df = df[df['manager'] != 'totals']
+
+# Convert 'wins' and 'games' to numeric, handling any possible non-numeric strings
+df['wins'] = pd.to_numeric(df['wins'], errors='coerce')
+df['games'] = pd.to_numeric(df['games'], errors='coerce')
+
+# Drop rows where either wins or games is NaN (invalid)
+df = df.dropna(subset=['wins', 'games'])
+
+# Calculate winning percentage
+df['win_percentage'] = df['wins'] / df['games']
+
+# Find the manager with the highest winning percentage
+best_manager = df.loc[df['win_percentage'].idxmax(), 'manager']
+print(f"Final Answer: {best_manager}")
+```

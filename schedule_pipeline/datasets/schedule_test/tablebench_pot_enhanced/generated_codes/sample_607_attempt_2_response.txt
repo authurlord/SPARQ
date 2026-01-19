@@ -1,0 +1,16 @@
+Step 1: The user wants the difference in DC values between Verona and Venice.
+Step 2: Load the dataframe.
+Step 3: Filter rows for 'Verona' and 'Venice'.
+Step 4: Extract the DC values for both provinces.
+Step 5: Calculate the difference (Verona - Venice) and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows for Verona and Venice
+verona_dc = df[df['Province'] == 'Verona']['DC'].values[0]
+venice_dc = df[df['Province'] == 'Venice']['DC'].values[0]
+# Calculate difference
+difference = float(verona_dc) - float(venice_dc)
+print(f"Final Answer: {difference:.1f}")
+```

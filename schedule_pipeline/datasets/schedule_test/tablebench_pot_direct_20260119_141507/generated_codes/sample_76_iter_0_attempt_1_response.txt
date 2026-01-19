@@ -1,0 +1,16 @@
+Step 1: The user wants to find the nation that won exactly 4 gold medals and 3 silver medals.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where 'Gold' is 4 and 'Silver' is 3.  
+Step 4: Extract the corresponding 'Nation' value.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter nation with 4 gold and 3 silver medals
+result = df[(df['Gold'] == 4) & (df['Silver'] == 3)]
+if not result.empty:
+    print(f"Final Answer: {result.iloc[0]['Nation']}")
+else:
+    print("Final Answer: None")
+```

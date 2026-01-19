@@ -1,0 +1,3 @@
+The question asks for a description of the table's contents, explanation of column significance, and identification of notable trends or patterns. This requires a qualitative analysis rather than a numerical computation. Since the task involves interpretation and pattern recognition, we will write a clear, concise analytical explanation in natural language without executing code for numerical output.
+
+Final Answer: tourist arrivals, tourism receipts, per arrival and per capita revenue, GDP and export share, competitiveness index

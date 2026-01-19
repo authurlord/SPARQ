@@ -1,0 +1,13 @@
+Step 1: The user wants the total elevation of all mountains, which corresponds to the sum of the 'elevation (m)' column.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'elevation (m)' column and compute the sum.  
+Step 4: Print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sum the 'elevation (m)' column
+total_elevation = df['elevation (m)'].sum()
+print(f"Final Answer: {total_elevation}")
+```

@@ -1,0 +1,5 @@
+The question asks for a line chart showing the trend in the athlete's number of attacks. However, the table contains data about football teams and their statistics (e.g., "Att" for attempts), not individual athlete performance. The "Att" column appears to represent total attempts per team per year, not individual attacks by an athlete.
+
+Additionally, there is no clear indication of a single athlete's data—each row represents a team, not an individual. Therefore, it is not possible to draw a line chart showing the trend in an "athlete's number of attacks" because the data does not support such a personal-level analysis.
+
+Final Answer: None

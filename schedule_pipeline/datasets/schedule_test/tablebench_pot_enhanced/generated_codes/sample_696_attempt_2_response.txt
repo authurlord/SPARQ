@@ -1,0 +1,20 @@
+Step 1: Identify the column for 'foreign' language speakers.
+Step 2: Find the municipality with the highest number of people speaking foreign.
+Step 3: Find the municipality with the lowest number of people speaking foreign.
+Step 4: Calculate the difference between the highest and lowest values.
+Step 5: Output the municipality with the highest value and the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract the 'foreign' column and find the max and min values with their respective municipalities
+foreign_column = df['foreign']
+max_municipality = df.loc[foreign_column.idxmax(), 'mapiri municipality']
+min_municipality = df.loc[foreign_column.idxmin(), 'mapiri municipality']
+max_value = foreign_column.max()
+min_value = foreign_column.min()
+difference = max_value - min_value
+
+print(f"Final Answer: {max_municipality}, {difference}")
+```

@@ -1,0 +1,20 @@
+The error occurred because the "viewers (in millions)" column was not properly parsed as numeric — likely due to a misinterpretation of the data. Looking at the table, each row has a separate viewer value, and they are correctly formatted as strings like '6.21', '6.41', etc. So the issue is not in the data format but in how we handle the column.
+
+We need to:
+1. Load the dataframe.
+2. Filter rows where the number of episodes is greater than 20.
+3. Extract the "viewers (in millions)" column and convert it to numeric.
+4. Compute the average of those viewers.
+
+Let’s correct the code:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter seasons with more than 20 episodes
+filtered_df = df[df['episodes'] > 20]
+# Convert viewers to numeric and compute mean
+average_viewers = filtered_df['viewers (in millions)'].astype(float).mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

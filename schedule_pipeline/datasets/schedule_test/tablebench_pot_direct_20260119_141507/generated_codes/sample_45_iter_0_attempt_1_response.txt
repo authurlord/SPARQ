@@ -1,0 +1,15 @@
+Step 1: The user wants the total number of years that all ambassadors served.  
+Step 2: Each row represents a person's service from 'Start' to 'End', so the duration for each is (End - Start).  
+Step 3: Convert 'Start' and 'End' to integers, compute the difference for each row, and sum them up.  
+Step 4: Print the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert Start and End to integers and calculate the duration for each
+df['duration'] = df['End'].astype(int) - df['Start'].astype(int)
+# Sum the durations
+total_years = df['duration'].sum()
+print(f"Final Answer: {total_years}")
+```

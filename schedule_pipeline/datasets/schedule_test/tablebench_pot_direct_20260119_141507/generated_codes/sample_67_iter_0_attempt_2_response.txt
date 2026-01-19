@@ -1,0 +1,12 @@
+Step 1: The user wants to know how many games Maesteg RFC played in the season.  
+Step 2: The 'played' column in the table contains the number of games each club played.  
+Step 3: Locate the row corresponding to "Maesteg RFC" and extract the value in the 'played' column.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where club is 'maesteg rfc' and get the 'played' value
+maesteg_played = df[df['club'] == 'maesteg rfc']['played'].values[0]
+print(f"Final Answer: {maesteg_played}")
+```

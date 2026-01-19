@@ -1,0 +1,36 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Initialize variables to track max increase and corresponding party
+max_increase = -1
+best_party = ""
+
+# Iterate through each row (party)
+for index, row in df.iterrows():
+    party = row['Party']
+    # Skip total row
+    if party == 'TOTAL':
+        continue
+    
+    # Extract seats in First Duma and Fourth Duma
+    first_duma = row['First Duma'].split(' (')[0]
+    fourth_duma = row['Fourth Duma'].split(' (')[0]
+    
+    # Convert to integers, handle '–' as 0
+    first_seats = int(first_duma) if first_duma != '–' else 0
+    fourth_seats = int(fourth_duma) if fourth_duma != '–' else 0
+    
+    # Skip if no seats in First Duma to avoid division by zero
+    if first_seats == 0:
+        continue
+    
+    # Calculate percentage increase
+    increase = ((fourth_seats - first_seats) / first_seats) * 100
+    
+    # Update max if current is higher
+    if increase > max_increase:
+        max_increase = increase
+        best_party = party
+
+print(f"Final Answer: {best_party}")

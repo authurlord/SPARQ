@@ -1,0 +1,20 @@
+Step 1: The question asks for an anomaly in the demographic data and possible explanations. This requires identifying inconsistencies or impossible values in the table.
+
+Step 2: Key observations:
+- "Total No. of Houses" is 14.
+- "Population" is 55.
+- "Child (0–6)" is 7.
+- "Schedule Caste" is 1000, which is much higher than total population (55).
+- "Literacy" is given as a percentage, but the values for Male (86.36%) and Female (73.08%) are plausible.
+- "Total Workers" is 15, with 12 males and 3 females — this seems consistent.
+- "Main Worker" has a value of "-10", "-5", "-5" — negative numbers are not meaningful in this context.
+
+Step 3: Anomalies:
+1. Schedule Caste = 1000, but total population is only 55 → clearly impossible.
+2. Main Worker has negative values (e.g., -10) → not possible for number of workers.
+
+Step 4: Possible explanations:
+- Schedule Caste count is likely a typo; it should be a percentage or a small number, not 1000.
+- Negative values in "Main Worker" are invalid; likely a data entry error or mislabeling.
+
+Final Answer: Schedule Caste=1000, Main Worker=-10

@@ -1,0 +1,26 @@
+Step 1: The user wants a pie chart of the box office earnings for the top 10 ranked movies.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'Gross' column and convert it to numeric (removing commas and dollar signs).  
+Step 4: Select the top 10 movies by rank (first 10 rows).  
+Step 5: Create a pie chart using matplotlib to visualize the distribution of earnings.  
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Gross' to numeric by removing $ and commas
+df['Gross'] = df['Gross'].str.replace('$', '').str.replace(',', '').astype(float)
+
+# Select top 10 movies by rank
+top_10 = df.head(10)
+
+# Create a pie chart of the gross earnings
+plt.figure(figsize=(8, 8))
+plt.pie(top_10['Gross'], labels=top_10['Title'], autopct='%1.1f%%', startangle=90)
+plt.title('Box Office Earnings of Top 10 Ranked Movies')
+plt.show()
+```
+
+Final Answer: None

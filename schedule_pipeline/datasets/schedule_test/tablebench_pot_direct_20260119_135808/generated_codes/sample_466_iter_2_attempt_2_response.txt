@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 1560, 1500, 2203, 13359, 4361, 7432, 8258

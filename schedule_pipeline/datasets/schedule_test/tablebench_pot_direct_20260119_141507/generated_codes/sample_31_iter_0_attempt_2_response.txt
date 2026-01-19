@@ -1,0 +1,14 @@
+Step 1: The user wants the total number of seats won across all elections.  
+Step 2: Load the dataframe.  
+Step 3: Select the 'of seats won' column, which contains the number of seats won per election.  
+Step 4: Sum all values in this column to get the total.  
+Step 5: Print the result.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sum the 'of seats won' column to get total seats won across all elections
+total_seats_won = df['of seats won'].sum()
+print(f"Final Answer: {total_seats_won}")
+```

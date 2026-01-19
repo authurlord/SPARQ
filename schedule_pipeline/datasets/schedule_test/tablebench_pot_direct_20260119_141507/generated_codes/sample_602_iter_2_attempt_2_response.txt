@@ -1,0 +1,18 @@
+Step 1: Identify the total passengers at Glasgow International Airport from the table.  
+Step 2: Calculate a 15% increase on that value.  
+Step 3: Output the resulting number of passengers in 2008.  
+
+Note: The original value for Glasgow International is in the row with rank 8, under "total passengers".  
+
+Corrected code to avoid f-string issues and ensure clarity:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the total passengers at Glasgow International Airport
+glasgow_passengers = df[df['airport'] == 'glasgow international']['total passengers'].values[0]
+# Calculate 15% increase
+increased_passengers = glasgow_passengers * 1.15
+print(f"Final Answer: {int(increased_passengers)}")
+```

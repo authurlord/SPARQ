@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the season with the highest number of wins.
+Step 2: Load the dataframe.
+Step 3: Find the row with the maximum value in the 'wins' column.
+Step 4: Extract and print the corresponding 'season' value.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the season with the maximum number of wins
+max_wins_season = df.loc[df['wins'].idxmax(), 'season']
+print(f"Final Answer: {max_wins_season}")
+```

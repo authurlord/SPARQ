@@ -1,0 +1,61 @@
+Step 1: Identify the three-year period with the highest average CPSC toy safety funding.  
+Step 2: Filter out rows where CPSC toy safety funding is not available (e.g., 'no data', None, or 'no data†').  
+Step 3: Calculate the average funding per year for each three-year window.  
+Step 4: Select the window with the highest average.  
+Step 5: Sum the injuries (Injuries (US $000)) for that window.  
+Step 6: Output the total injuries.
+
+Note: Since only a few years have funding data, we must consider overlapping or non-overlapping three-year periods. However, to find the "three-year period with the highest average", we will compute averages for all possible consecutive three-year periods with complete funding data.
+
+Available years with funding: 1999 (13.6), 2000 (12.0), 2001 (12.4), 2002 (12.2), 2003 (12.8), 2004 (11.5), 2005 (11.0) — but 2006 and beyond have missing funding.
+
+So valid years: 1999–2005.
+
+We compute average funding for each consecutive 3-year period within 1999–2005.
+
+Let’s proceed.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'CPSC toy safety funding (US$ Millions)' to numeric, handling 'no data' and strings
+df['CPSC toy safety funding (US$ Millions)'] = pd.to_numeric(df['CPSC toy safety funding (US$ Millions)'], errors='coerce')
+
+# Drop rows where funding is missing
+valid_data = df.dropna(subset=['CPSC toy safety funding (US$ Millions)'])
+
+# Extract relevant columns
+years = valid_data['Year'].astype(int)
+funding = valid_data['CPSC toy safety funding (US$ Millions)']
+injuries = valid_data['Injuries (US $000)']
+
+# Convert injuries to numeric, handle 'no data' and '202 (estimate)'
+injuries = injuries.replace('no data', None)
+injuries = pd.to_numeric(injuries, errors='coerce')
+
+# Combine into a DataFrame for analysis
+valid_data = pd.DataFrame({
+    'Year': years,
+    'Funding': funding,
+    'Injuries': injuries
+})
+
+# Sort by Year
+valid_data = valid_data.sort_values('Year')
+
+# Find all consecutive 3-year periods
+max_avg_funding = -1
+best_period_injuries = 0
+
+for i in range(len(valid_data) - 2):
+    subset = valid_data.iloc[i:i+3]
+    avg_funding = subset['Funding'].mean()
+    total_injuries = subset['Injuries'].sum()
+    if avg_funding > max_avg_funding:
+        max_avg_funding = avg_funding
+        best_period_injuries = total_injuries
+
+print(f"Final Answer: {best_period_injuries}")
+```

@@ -1,0 +1,19 @@
+Step 1: The user wants the difference in boiling points between the highest and lowest 'bp comp 1 (˚c)' values.
+Step 2: Load the dataframe.
+Step 3: Convert 'bp comp 1 (˚c)' column to numeric, handling any non-numeric values (like '- 0.5').
+Step 4: Find the maximum and minimum values of this column.
+Step 5: Calculate the difference and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean and convert 'bp comp 1 (˚c)' to numeric, handling negative signs and spaces
+df['bp comp 1 (˚c)'] = pd.to_numeric(df['bp comp 1 (˚c)'].str.strip().replace('- ', '-'), errors='coerce')
+# Find max and min values
+max_bp = df['bp comp 1 (˚c)'].max()
+min_bp = df['bp comp 1 (˚c)'].min()
+# Calculate difference
+difference = max_bp - min_bp
+print(f"Final Answer: {difference:.1f}")
+```

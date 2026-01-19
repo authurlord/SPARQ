@@ -1,0 +1,19 @@
+Step 1: The user wants to find the year with the maximum decrease in the percentage of Catholics compared to the previous year.
+Step 2: Load the dataframe.
+Step 3: Convert the 'Percentage (based on registration by the church itself)' column to float for numerical operations.
+Step 4: Calculate the difference between consecutive years' percentages.
+Step 5: Find the year where this difference is the most negative (i.e., the largest decrease).
+Step 6: Output the year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert percentage column to float
+df['Percentage (based on registration by the church itself)'] = pd.to_numeric(df['Percentage (based on registration by the church itself)'])
+# Calculate the year-on-year change in percentage
+df['percentage_change'] = df['Percentage (based on registration by the church itself)'].diff()
+# Find the row with the minimum (most negative) change
+min_change_year = df.loc[df['percentage_change'].idxmin()]['year']
+print(f"Final Answer: {min_change_year}")
+```

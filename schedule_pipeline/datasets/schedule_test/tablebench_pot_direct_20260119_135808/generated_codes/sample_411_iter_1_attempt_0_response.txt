@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table shows the average annual population growth rates (in percentage) for various regions/countries across four time periods: 1985–1990, 1990–1995, 1995–2000, and 2000–2005. The main columns represent different geographic regions and their corresponding growth rates over time. Notable trends include a consistent decline in growth rates in Asia, East Asia, China, Europe, and Oceania, indicating slowing population growth. In contrast, North America shows fluctuation with a rise from 0.57% to 1.51% between 1990–1995 and 1995–2000, followed by a slight drop. South-East Asia also shows a gradual decline. Overall, most regions exhibit declining growth rates over time, except for a temporary increase in North America during 1995–2000.
+
+Final Answer: asia, south - east asia, east asia, china, europe, north america, oceania

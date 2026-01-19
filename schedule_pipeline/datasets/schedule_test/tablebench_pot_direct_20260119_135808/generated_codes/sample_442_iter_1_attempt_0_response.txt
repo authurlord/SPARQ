@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: polling firm, date of polling, link, progressive conservative, liberal, new democratic, trends in political party support over time

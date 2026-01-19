@@ -1,0 +1,30 @@
+Step 1: The user wants to observe the trend in points scored by Honda in the 125cc class over the years.
+Step 2: Load the dataframe.
+Step 3: Filter data for Honda in the 125cc class.
+Step 4: Extract the 'year' and 'points' columns for Honda in 125cc.
+Step 5: Analyze the trend by observing how points change over time (increasing, decreasing, or fluctuating).
+Step 6: Print the trend based on the analysis.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for Honda in the 125cc class
+honda_125cc = df[(df['team'] == 'honda') & (df['class'] == '125cc')]
+
+# Sort by year to ensure chronological order
+honda_125cc = honda_125cc.sort_values('year')
+
+# Extract points over the years
+points = honda_125cc['points'].values
+
+# Determine the trend
+if all(points[i] <= points[i+1] for i in range(len(points)-1)):
+    trend = "increasing"
+elif all(points[i] >= points[i+1] for i in range(len(points)-1)):
+    trend = "decreasing"
+else:
+    trend = "fluctuating"
+
+print(f"Final Answer: {trend}")
+```

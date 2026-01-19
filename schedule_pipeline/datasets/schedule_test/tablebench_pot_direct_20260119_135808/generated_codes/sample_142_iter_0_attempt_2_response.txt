@@ -1,0 +1,27 @@
+Step 1: The user wants a bar chart comparing the goal differences of the top 5 teams in the league.
+Step 2: Load the dataframe.
+Step 3: Select the top 5 teams based on position (first 5 rows).
+Step 4: Extract the 'club' and 'goal difference' columns.
+Step 5: Use matplotlib to create a bar chart with clubs on the x-axis and goal differences on the y-axis.
+Step 6: Display the chart.
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Select top 5 teams
+top_5_teams = df.head(5)
+# Extract club names and goal differences
+clubs = top_5_teams['club']
+goal_diff = top_5_teams['goal difference']
+
+# Create bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(clubs, goal_diff, color='skyblue')
+plt.title('Goal Difference of Top 5 Teams')
+plt.xlabel('Club')
+plt.ylabel('Goal Difference')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```

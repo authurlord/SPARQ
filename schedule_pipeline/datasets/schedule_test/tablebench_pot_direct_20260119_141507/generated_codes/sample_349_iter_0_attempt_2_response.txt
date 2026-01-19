@@ -1,0 +1,12 @@
+Step 1: Identify which conferences have a non-empty (i.e., not '-') value in the '1996' column.  
+Step 2: Count how many such entries exist.  
+Step 3: The column '1996' corresponds to the year 1996, and we need to check for any occurrence (non-null and non-'-' values).  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count the number of conferences that have a non-'-' value in the '1996' column
+count_1996 = df['1996'].astype(str).str.strip().ne('-').sum()
+print(f"Final Answer: {count_1996}")
+```

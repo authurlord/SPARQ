@@ -1,0 +1,13 @@
+Step 1: The user wants to count how many mountains in Papua New Guinea have an elevation of 3000 meters or more.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'country' is 'papua new guinea' and 'elevation (m)' is greater than or equal to 3000.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for mountains in Papua New Guinea with elevation >= 3000 meters
+filtered_mountains = df[(df['country'] == 'papua new guinea') & (df['elevation (m)'].astype(int) >= 3000)]
+count = len(filtered_mountains)
+print(f"Final Answer: {count}")
+```

@@ -1,0 +1,12 @@
+Step 1: The question asks to identify demographic categories where values significantly deviate from expected patterns.  
+Step 2: Look for inconsistencies, such as impossible or illogical values (e.g., negative numbers, percentages exceeding 100%, or mismatched totals).  
+Step 3: Check key fields like "Literacy", "Total Workers", and "Main Worker" for anomalies.  
+Step 4: Note that "Literacy" has a value of "60.14 %" for the total, but "Male" is listed as "150 %", which is clearly incorrect (cannot be over 100% for literacy rate). Similarly, "Total Workers" has "143" for male and "1000" for female, which is highly inconsistent with the total "194". "Main Worker" shows 0 for both genders, which is plausible, but combined with "Total Workers" being 194, the male value of 143 and female 1000 is impossible.  
+Step 5: Highlight these anomalies.
+
+Anomalies identified:
+- Literacy: Male value is "150 %", which is invalid (must be ≤ 100%).
+- Total Workers: Female value is "1000", while total workers is only 194 — clearly a data entry error.
+- Main Worker: Both are 0, which is consistent with no main workers, but contradicts the total workers if not aligned.
+
+Final Answer: Literacy, Total Workers

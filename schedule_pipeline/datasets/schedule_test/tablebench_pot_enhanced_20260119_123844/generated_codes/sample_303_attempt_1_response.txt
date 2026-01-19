@@ -1,0 +1,20 @@
+Step 1: The user wants to identify the competition where the athlete won 1st place in the 3000 m steeplechase event, and the venue is a city that is also the capital of the Bahamas.
+
+Step 2: From the table, the event "3000 m steeplechase" with position "1st" occurred in 1980 at "Nassau, Bahamas".
+
+Step 3: Confirm that Nassau is the capital of the Bahamas (known fact).
+
+Step 4: Retrieve the competition name for that row.
+
+Step 5: Output the competition name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 1st place in 3000 m steeplechase
+filtered_df = df[(df['Event'] == '3000 m steeplechase') & (df['Position'] == '1st')]
+# Get the competition for that row
+competition = filtered_df['Competition'].iloc[0]
+print(f"Final Answer: {competition}")
+```

@@ -1,0 +1,9 @@
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Find the nation with total medals equal to 57
+nation_with_57 = df[df['Total'] == 57]['Nation'].values[0]
+
+print(f"Final Answer: {nation_with_57}")

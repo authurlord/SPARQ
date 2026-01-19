@@ -1,0 +1,16 @@
+Step 1: The user wants the median points scored by artists who sang in languages other than French.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'language' is not 'french'.
+Step 4: Convert 'points' column to numeric and calculate the median.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out rows where language is 'french'
+filtered_df = df[df['language'] != 'french']
+# Convert 'points' to numeric and calculate median
+median_points = filtered_df['points'].astype(float).median()
+print(f"Final Answer: {median_points}")
+```

@@ -1,0 +1,62 @@
+Step 1: The user wants a percentage stacked bar chart showing the win-loss-draw percentages for each team.  
+Step 2: Extract the relevant columns: 'Won', 'Drawn', 'Lost' from the dataset.  
+Step 3: Calculate the total matches (Played) for each team to compute percentages.  
+Step 4: Compute win, draw, and loss percentages for each team.  
+Step 5: Use matplotlib to create a stacked bar chart with these percentages.  
+
+Note: Since the "Played" column is given, we use it as the denominator for percentage calculation.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns
+wins = df['Won']
+draws = df['Drawn']
+losses = df['Lost']
+teams = df['Team']
+
+# Calculate total matches (Played) for each team
+total_matches = df['Played']
+
+# Compute percentages
+win_percent = (wins / total_matches) * 100
+draw_percent = (draws / total_matches) * 100
+loss_percent = (losses / total_matches) * 100
+
+# Create a DataFrame for plotting
+data = {
+    'Team': teams,
+    'Win %': win_percent,
+    'Draw %': draw_percent,
+    'Loss %': loss_percent
+}
+df_plot = pd.DataFrame(data)
+
+# Plot stacked bar chart
+plt.figure(figsize=(12, 7))
+bar_width = 0.25
+index = range(len(df_plot))
+
+# Create bars
+plt.bar([i - bar_width for i in index], df_plot['Win %'], width=bar_width, label='Win', color='green')
+plt.bar([i      for i in index], df_plot['Draw %'], width=bar_width, label='Draw', color='orange')
+plt.bar([i + bar_width for i in index], df_plot['Loss %'], width=bar_width, label='Loss', color='red')
+
+# Customize plot
+plt.xlabel('Team')
+plt.ylabel('Percentage (%)')
+plt.title('Win-Loss-Draw Percentages by Team')
+plt.xticks(index, df_plot['Team'], rotation=45)
+plt.legend()
+plt.tight_layout()
+
+# Show plot
+plt.show()
+
+# Final Answer: The chart has been generated as requested.
+Final Answer: chart_generated
+```

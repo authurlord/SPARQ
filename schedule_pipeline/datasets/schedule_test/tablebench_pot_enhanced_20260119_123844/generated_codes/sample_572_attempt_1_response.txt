@@ -1,0 +1,22 @@
+Step 1: The user wants to find the year with the maximum decrease in typhus cases compared to the previous year.
+Step 2: Load the dataframe.
+Step 3: Convert 'typhus' column to numeric for calculations.
+Step 4: Calculate the difference in typhus cases between consecutive years.
+Step 5: Identify the year with the largest negative difference (i.e., the most significant decrease).
+Step 6: Return the corresponding year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'typhus' column to numeric
+df['typhus'] = pd.to_numeric(df['typhus'], errors='coerce')
+
+# Calculate the year-over-year change in typhus cases
+df['typhus_change'] = df['typhus'].diff()
+
+# Find the year with the maximum decrease (most negative change)
+min_decrease_year = df.loc[df['typhus_change'].idxmin(), 'year']
+
+print(f"Final Answer: {min_decrease_year}")
+```

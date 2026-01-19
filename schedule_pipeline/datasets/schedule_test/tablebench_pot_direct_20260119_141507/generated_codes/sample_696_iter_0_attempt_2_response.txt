@@ -1,0 +1,30 @@
+Step 1: The user wants to identify the municipality with the highest and lowest number of people speaking "foreign" language, and compute the difference between them.  
+Step 2: Load the dataframe.  
+Step 3: Extract the "foreign" column (which contains values for each municipality).  
+Step 4: Find the maximum and minimum values in that column.  
+Step 5: Calculate the difference and identify the corresponding municipality names.  
+Step 6: Print the result clearly.
+
+Note: The column "foreign" contains values like '70.0', '86.0', etc., which are numeric. We will treat them as such.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the 'foreign' column
+foreign_spoken = df['foreign']
+
+# Find the maximum and minimum values and their corresponding municipalities
+max_value = foreign_spoken.max()
+min_value = foreign_spoken.min()
+
+# Get the municipality names where max and min occur
+max_municipality = df.index[foreign_spoken.idxmax()]
+min_municipality = df.index[foreign_spoken.idxmin()]
+
+# Calculate the difference
+difference = max_value - min_value
+
+print(f"Final Answer: {max_municipality}, {min_municipality}, {difference:.1f}")
+```

@@ -1,0 +1,13 @@
+Step 1: The user wants the total population of the top 5 cities, which are ranked 1st to 5th.
+Step 2: Load the dataframe.
+Step 3: Select the 'population' column and convert it to integers.
+Step 4: Sum the population values for the first 5 rows.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert population column to integer and sum the top 5
+total_population = df['population'].astype(int).head(5).sum()
+print(f"Final Answer: {total_population}")
+```

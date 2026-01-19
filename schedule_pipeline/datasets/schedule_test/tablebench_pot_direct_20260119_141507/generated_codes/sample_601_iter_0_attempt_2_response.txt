@@ -1,0 +1,15 @@
+Step 1: The user wants to find the number of R class locomotives in service at the end of 1931.  
+Step 2: We are given that at the start of 1931, there were 11 R class locomotives in service.  
+Step 3: 1 locomotive was withdrawn during the year.  
+Step 4: Therefore, the number at the end of 1931 is: 11 - 1 = 10.
+
+This can be directly computed without complex analysis.
+
+```python
+# Given data from the table: R class in service at start of 1931 = 11, withdrawn = 1
+r_class_start_1931 = 11
+withdrawn_1931 = 1
+
+r_class_end_1931 = r_class_start_1931 - withdrawn_1931
+print(f"Final Answer: {r_class_end_1931}")
+```

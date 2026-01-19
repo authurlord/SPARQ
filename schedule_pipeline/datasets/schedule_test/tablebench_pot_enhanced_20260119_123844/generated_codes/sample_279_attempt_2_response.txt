@@ -1,0 +1,83 @@
+Step 1: The user wants to calculate the total estimated exposure (mrem/hr) when combining two specimens, assuming that the calculated activity (Bq) is directly proportional to the specimen weight.
+
+Step 2: From the table:
+- Specimen 1: 0.1 g / 4.08 mm → Calculated activity (Bq) = 18, Estimated exposure = 0.0 mrem/hr
+- Specimen 2: 10 g / 1.89 cm → Calculated activity (Bq) = 1834, Estimated exposure = 0.03 mrem/hr
+
+Step 3: Since the activity is proportional to weight, we can scale the exposure of the first specimen based on its weight relative to the second.
+
+However, note that the exposure values in the table are already provided and appear to be calculated from the activity. Since the question assumes proportionality, we can compute the expected exposure for the 0.1g specimen based on the 10g specimen’s exposure per unit weight.
+
+But observe: 
+- For 10g specimen: exposure = 0.03 mrem/hr
+- For 0.1g specimen: exposure = 0.0 mrem/hr (from table)
+
+This suggests that the exposure value is not linearly proportional or may be rounded to zero due to low activity.
+
+But since the question says "assuming the calculated activity (Bq) is directly proportional to the specimen weight", we should use the Bq values to scale the exposure.
+
+So:
+- Activity for 10g specimen: 1834 Bq → exposure: 0.03 mrem/hr
+- Activity for 0.1g specimen: 18 Bq → which is 18 / 1834 ≈ 0.00981 of the 10g activity
+
+Thus, expected exposure for 0.1g specimen: 0.03 * (18 / 1834) ≈ 0.000294 mrem/hr
+
+Now, total exposure = exposure from 10g + scaled exposure from 0.1g = 0.03 + 0.000294 ≈ 0.030294 mrem/hr
+
+But wait — the table shows 0.0 for 0.1g. However, the question asks us to assume proportionality based on activity (Bq), so we must use the Bq values to compute the expected exposure.
+
+Alternatively, if exposure is proportional to activity (which is proportional to weight), then:
+
+Total activity = 1834 (10g) + 18 (0.1g) = 1852 Bq  
+Exposure for 10g: 0.03 mrem/hr corresponds to 1834 Bq → exposure per Bq = 0.03 / 1834  
+Total exposure = 1852 * (0.03 / 1834) ≈ 0.0303 mrem/hr
+
+We can round to 0.0303 mrem/hr.
+
+But let's double-check: is exposure really proportional to activity? The table shows:
+- 1000g → 2.78
+- 100g → 0.28
+- 10g → 0.03
+- 1g → 0.0
+- 0.1g → 0.0
+- 0.01g → 0.0
+
+So yes, exposure appears to scale with activity, and thus with weight.
+
+Therefore, using the activity values, we compute the total exposure as:
+
+total_exposure = (total_activity / activity_10g) * exposure_10g
+
+But better: since exposure is proportional to activity, we can sum the exposures scaled by activity ratio.
+
+Actually, simpler: exposure ∝ activity, so:
+
+exposure_total = (activity_10g + activity_0.1g) * (exposure_10g / activity_10g)
+
+= (1834 + 18) * (0.03 / 1834) = 1852 * (0.03 / 1834) ≈ 0.030294
+
+Rounded to 3 decimal places: 0.030 mrem/hr
+
+But let’s compute exactly.
+
+```python
+# Calculate total estimated exposure
+activity_10g = 1834
+exposure_10g = 0.03
+
+activity_01g = 18
+exposure_01g = 0.0  # from table, but we ignore it and use proportionality
+
+# Since exposure is proportional to activity, use the 10g data to find rate
+rate = exposure_10g / activity_10g
+
+# Total activity
+total_activity = activity_10g + activity_01g
+
+# Total exposure
+total_exposure = total_activity * rate
+
+print(f"Final Answer: {total_exposure:.3f}")
+```
+
+Final Answer: 0.030

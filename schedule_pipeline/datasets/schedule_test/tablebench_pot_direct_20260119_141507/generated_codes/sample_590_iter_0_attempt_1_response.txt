@@ -1,0 +1,27 @@
+Step 1: The user wants the total number of 12-inch guns across all ships.  
+Step 2: Load the dataframe.  
+Step 3: Identify the '12 - inch' column, which contains the count of 12-inch guns per ship.  
+Step 4: Sum the values in the '12 - inch' column (excluding the total row, as it represents the aggregate).  
+Step 5: Print the result.
+
+Note: The last row is labeled "total", which is not a ship, so we exclude it when summing.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Exclude the last row (total) and sum the '12 - inch' column for all ships
+total_12_inch_guns = df.iloc[:-1]['12 - inch'].sum()
+print(f"Final Answer: {total_12inch_guns}")
+```
+
+Wait — there's a typo in the print statement. Let's fix it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Exclude the last row (total) and sum the '12 - inch' column for all ships
+total_12_inch_guns = df.iloc[:-1]['12 - inch'].sum()
+print(f"Final Answer: {total_12_inch_guns}")
+```

@@ -1,0 +1,29 @@
+Step 1: The question asks how a change in international passengers affects the rank of an airport. This implies we need to analyze the relationship between "international passengers" and "rank".
+
+Step 2: Since rank is a categorical variable (ordinal), and international passengers are numerical, we can examine whether there's a trend — for example, if airports with higher international passenger numbers tend to have lower ranks (i.e., better performance).
+
+Step 3: We will:
+- Load the dataframe.
+- Convert "international passengers" to numeric (to handle string values like '3711140').
+- Sort the data by "international passengers" in descending order and check the corresponding ranks.
+- Alternatively, we can compute the correlation between "international passengers" and "rank" (with rank being ordinal, we treat it as a continuous variable for simplicity).
+
+Step 4: However, since rank is already ordered from best (1) to worst (19), and international passengers vary significantly, we can assess if there's a negative correlation (higher international passengers → better rank).
+
+Step 5: Compute the correlation coefficient between "international passengers" and "rank" to quantify the relationship.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert international passengers to numeric (they are already numeric strings)
+df['international passengers'] = pd.to_numeric(df['international passengers'], errors='coerce')
+
+# Drop any rows with missing values due to conversion
+df = df.dropna(subset=['international passengers'])
+
+# Calculate correlation between international passengers and rank
+correlation = df['international passengers'].corr(df['rank'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

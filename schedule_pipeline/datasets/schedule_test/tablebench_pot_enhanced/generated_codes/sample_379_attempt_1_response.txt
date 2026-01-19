@@ -1,0 +1,19 @@
+Step 1: The user wants to count the number of years where natural change > 150 and deaths < 350.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Natural change' > 150 and 'Deaths' < 350.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Natural change' and 'Deaths' to integers for comparison
+df['Natural change'] = df['Natural change'].astype(int)
+df['Deaths'] = df['Deaths'].astype(int)
+
+# Filter the rows based on the conditions
+filtered_df = df[(df['Natural change'] > 150) & (df['Deaths'] < 350)]
+
+# Count the number of such years
+count_years = len(filtered_df)
+print(f"Final Answer: {count_years}")
+```

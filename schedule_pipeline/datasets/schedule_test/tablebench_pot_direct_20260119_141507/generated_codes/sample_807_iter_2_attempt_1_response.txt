@@ -1,0 +1,91 @@
+We are tasked with finding the **variance of goals scored by teams in the Third Division North**.
+
+Step-by-step approach:
+1. Identify relevant rows: Look for entries where the "Division" is "Third Division North".
+2. Extract the "Goals" column from those rows.
+3. Compute the variance of the "Goals" values.
+
+Note: The original data has a header row and then data rows. We must ensure we correctly parse the data and avoid using incorrect column names like "Goals" if it's not present or misaligned.
+
+Looking at the table:
+- The columns are: ['Club', 'Season', 'Division', 'League', 'League_1', 'FA Cup', 'FA Cup_1', 'Total', 'Total_1']
+- The actual "Apps" and "Goals" columns appear to be in the first row as headers, but they are not named properly — the first row after the header is: ['Sheffield United', '1945–46', '-', '0', '0', '1', '0', '1', '0']
+
+So, we can see that:
+- "Apps" and "Goals" are present in the data, but under the column names: 'Apps' and 'Goals' (though not directly labeled in the given column list).
+
+But the given column list does **not** include 'Apps' or 'Goals' — instead, the first row defines the actual column names:
+- The first row is: ['Club', 'Season', 'Division', 'Apps', 'Goals', 'Apps', 'Goals', 'Apps', 'Goals']
+
+Wait — this suggests that the column names are actually:
+- Club, Season, Division, Apps, Goals, Apps, Goals, Apps, Goals
+
+So, there are duplicate columns: Apps and Goals appear multiple times.
+
+We need to identify which "Goals" corresponds to which division.
+
+We are interested in teams in "Third Division North".
+
+From the data:
+- Lincoln City in 1946–47: Division = "Third Division North"
+- Lincoln City in 1947–48: Division = "Third Division North"
+- Oldham Athletic in 1948–49: Division = "Third Division North"
+
+We need to extract the "Goals" value from the correct column.
+
+But note: The column order is:
+0: Club
+1: Season
+2: Division
+3: Apps
+4: Goals → this is the "League" goals?
+5: Apps
+6: Goals → FA Cup goals?
+7: Apps
+8: Goals → Total goals?
+
+This is ambiguous.
+
+However, the question asks for "goals scored by teams in the Third Division North".
+
+That likely refers to **league goals**, i.e., the goals scored in the division (i.e., the first "Goals" column after Division).
+
+Looking at the row:
+- Lincoln City, 1946–47: Division = Third Division South → skip
+- Lincoln City, 1947–48: Division = Third Division North → Goals = 32
+- Lincoln City, 1948–49: Division = Second Division → skip
+- Oldham Athletic, 1948–49: Division = Third Division North → Goals = 3
+
+So only two entries in Third Division North:
+- Lincoln City (1947–48): Goals = 32
+- Oldham Athletic (1948–49): Goals = 3
+
+But wait — in the row for Lincoln City (1947–48), the "Goals" column is at index 4 → value is 32
+In the row for Oldham Athletic (1948–49), the "Goals" column is at index 4 → value is 3
+
+But note: the column at index 4 is labeled "Goals", and it's the first "Goals" column — likely league goals.
+
+Therefore, we will:
+1. Filter rows where Division == "Third Division North"
+2. Extract the "Goals" value from column index 4 (since it's the first "Goals")
+3. Compute the variance of these values.
+
+Let’s proceed.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter rows where Division is "Third Division North"
+third_div_north = df[df['Division'] == 'Third Division North']
+
+# Extract the 'Goals' column (index 4)
+goals = third_div_north.iloc[:, 4]  # Column index 4 is 'Goals'
+
+# Compute variance of goals
+variance = goals.var()
+
+print(f"Final Answer: {variance:.1f}")
+```

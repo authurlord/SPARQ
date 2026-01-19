@@ -1,0 +1,29 @@
+Step 1: The question asks which factors (e.g., 'no sat', 'highest mark', 'lowest mark', 'mean') contribute most to the '% pass' values.  
+Step 2: We need to analyze the correlation between each of these factors and the '% pass' column.  
+Step 3: Calculate the correlation coefficient between each factor and '% pass'.  
+Step 4: Identify the factor with the highest absolute correlation (closest to 1 or -1). If no factor has a strong correlation, respond with 'no clear impact'.  
+
+Note: Since the data is small and categorical/numerical mix exists, we will treat all as numeric and compute Pearson correlation.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Select relevant columns
+columns_to_check = ['no sat', 'highest mark', 'lowest mark', 'mean']
+target = '% pass'
+
+# Compute correlation with '% pass'
+correlations = df[columns_to_check].corrwith(df[target]).abs()
+
+# Find the factor with the highest correlation
+top_factor = correlations.idxmax()
+correlation_value = correlations[top_factor]
+
+# Check if the correlation is strong (above 0.7 in absolute value)
+if correlation_value >= 0.7:
+    print(f"Final Answer: {top_factor}")
+else:
+    print("Final Answer: no clear impact")
+```

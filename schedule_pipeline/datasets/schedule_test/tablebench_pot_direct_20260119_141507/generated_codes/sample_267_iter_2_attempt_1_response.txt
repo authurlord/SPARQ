@@ -1,0 +1,34 @@
+The error occurred because the 'elevation (m)' and 'prominence (m)' columns contain string values that need to be converted to numeric before computation. We must ensure proper type conversion.
+
+Step 1: Filter mountain peaks in Morocco with:
+- Elevation ≥ 3000 meters
+- Col elevation > 1500 meters
+
+Step 2: Extract the 'prominence (m)' values from the filtered rows.
+
+Step 3: Compute the average prominence of these peaks.
+
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric, handling errors by converting strings to floats
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'], errors='coerce')
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'], errors='coerce')
+df['col (m)'] = pd.to_numeric(df['col (m)'], errors='coerce')
+
+# Filter peaks in Morocco with elevation >= 3000 and col > 1500
+filtered_peaks = df[
+    (df['country'] == 'morocco') &
+    (df['elevation (m)'] >= 3000) &
+    (df['col (m)'] > 1500)
+]
+
+# Calculate average prominence
+average_prominence = filtered_peaks['prominence (m)'].mean()
+
+print(f"Final Answer: {average_prominence:.1f}")
+```

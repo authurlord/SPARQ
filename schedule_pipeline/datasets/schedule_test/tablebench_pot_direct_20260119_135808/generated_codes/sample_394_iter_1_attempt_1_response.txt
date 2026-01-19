@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: member state, population millions, meps, inhabitants per mep, influence

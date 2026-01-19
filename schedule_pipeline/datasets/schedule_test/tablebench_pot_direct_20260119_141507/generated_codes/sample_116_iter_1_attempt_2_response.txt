@@ -1,0 +1,32 @@
+Step 1: The user wants a line chart showing the trend in maximum building height over time.  
+Step 2: Extract the relevant columns: "Years as tallest" (time period) and "Height ft (m)" (height).  
+Step 3: Parse the "Years as tallest" column to extract the start and end years, then use the end year as the x-axis value for each building.  
+Step 4: Convert the height values into numeric form (only the numeric part of "Height ft (m)") and plot a line chart with time (end year) on the x-axis and height on the y-axis.
+
+Note: Since the "Years as tallest" is in format like "1882–1886", we will take the last year (end year) as the time point. We also extract the numeric height value from "Height ft (m)".
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import re
+
+df = pd.read_csv('table.csv')
+
+# Extract end year from "Years as tallest"
+df['end_year'] = df['Years as tallest'].str.extract(r'(\d{4})').astype(int)
+
+# Extract height in feet (remove text like "(m)")
+df['height_ft'] = df['Height ft (m)'].str.extract(r'(\d+)').astype(float)
+
+# Plot line chart
+plt.figure(figsize=(10, 6))
+plt.plot(df['end_year'], df['height_ft'], marker='o', linestyle='-', color='b')
+plt.title('Trend in Maximum Building Height Over Time')
+plt.xlabel('End Year')
+plt.ylabel('Height (feet)')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+print(f"Final Answer: Line chart plotted successfully")
+```

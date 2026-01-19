@@ -1,0 +1,31 @@
+Step 1: The user is asking for a prediction of viewership and 18-49 average rating for season 9 based on the trend from season 1 to season 8.
+
+Step 2: Load the dataframe and extract the 'viewers (in millions)' and '18 - 49 average' columns.
+
+Step 3: Perform a simple linear regression or observe the trend (e.g., decreasing trend) to estimate the next values.
+
+Step 4: Since the data shows a clear downward trend, we can calculate the average rate of decrease per season and project it to season 9.
+
+Step 5: Use the last known values and subtract the average decrease to estimate season 9.
+
+Step 6: Output the predicted values.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns
+viewers = df['viewers (in millions)'].astype(float)
+avg_18_49 = df['18 - 49 average'].astype(float)
+
+# Calculate the average decrease per season
+viewers_decrease = viewers.diff().mean()
+avg_18_49_decrease = avg_18_49.diff().mean()
+
+# Predict season 9 values
+predicted_viewers = viewers.iloc[-1] + viewers_decrease
+predicted_avg_18_49 = avg_18_49.iloc[-1] + avg_18_49_decrease
+
+print(f"Final Answer: {predicted_viewers:.2f}, {predicted_avg_18_49:.2f}")
+```

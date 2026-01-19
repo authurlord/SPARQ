@@ -1,0 +1,24 @@
+The error occurred because the 'Total terrestrial vertebrates' column contains string values (e.g., '877', '1511') instead of integers. We need to convert them to numeric before performing calculations.
+
+Step 1: Load the dataframe.
+Step 2: Convert the 'Total terrestrial vertebrates' column to numeric (using pd.to_numeric with errors='coerce' to handle any invalid entries).
+Step 3: Find the country with the highest and lowest values in this column.
+Step 4: Calculate the difference between the highest and lowest values.
+Step 5: Print the country with the highest value and the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Total terrestrial vertebrates' to numeric
+df['Total terrestrial vertebrates'] = pd.to_numeric(df['Total terrestrial vertebrates'], errors='coerce')
+
+# Find the country with the highest and lowest total terrestrial vertebrates
+max_country = df.loc[df['Total terrestrial vertebrates'].idxmax(), 'Country']
+min_country = df.loc[df['Total terrestrial vertebrates'].idxmin(), 'Country']
+max_value = df['Total terrestrial vertebrates'].max()
+min_value = df['Total terrestrial vertebrates'].min()
+difference = max_value - min_value
+
+print(f"Final Answer: {max_country}, {difference}")
+```

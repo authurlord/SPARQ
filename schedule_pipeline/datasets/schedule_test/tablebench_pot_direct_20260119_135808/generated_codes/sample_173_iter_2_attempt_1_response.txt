@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: As eccentricity increases, periselene decreases and aposelene increases.

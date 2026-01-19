@@ -1,0 +1,24 @@
+Step 1: The user wants to identify the province with the highest population density and compare it to the average population density.
+Step 2: Load the dataframe.
+Step 3: Extract the 'density' column and find the maximum value and its corresponding province.
+Step 4: Calculate the average density across all provinces.
+Step 5: Compute the difference between the highest density and the average density.
+Step 6: Print the province name and the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the province with the highest density
+max_density_row = df.loc[df['density'].idxmax()]
+highest_density_province = max_density_row['province']
+max_density = max_density_row['density']
+
+# Calculate average density
+average_density = df['density'].mean()
+
+# Compute the difference
+density_difference = max_density - average_density
+
+print(f"Final Answer: {highest_density_province}, {density_difference:.2f}")
+```

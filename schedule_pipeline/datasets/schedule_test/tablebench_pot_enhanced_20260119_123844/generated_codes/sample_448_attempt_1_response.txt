@@ -1,0 +1,33 @@
+Step 1: The user wants to identify anomalies in the viewership data. Anomalies can be detected using statistical methods such as the Interquartile Range (IQR) method.
+Step 2: Load the dataframe.
+Step 3: Convert the 'viewers' column to numeric (it is currently stored as a string with commas).
+Step 4: Calculate the IQR and determine the lower and upper bounds for outliers.
+Step 5: Identify rows where viewership falls outside these bounds.
+Step 6: Extract and print the episode titles and viewership values of the anomalies.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'viewers' column to numeric, removing any non-numeric characters
+df['viewers'] = pd.to_numeric(df['viewers'], errors='coerce')
+
+# Calculate Q1 (25th percentile) and Q3 (75th percentile)
+Q1 = df['viewers'].quantile(0.25)
+Q3 = df['viewers'].quantile(0.75)
+
+# Compute IQR
+IQR = Q3 - Q1
+
+# Define bounds for outliers
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+# Identify anomalies (outliers)
+anomalies = df[(df['viewers'] < lower_bound) | (df['viewers'] > upper_bound)]
+
+# Extract titles of episodes with anomalies
+anomaly_titles = anomalies['title'].tolist()
+
+print(f"Final Answer: {', '.join(anomaly_titles)}")
+```

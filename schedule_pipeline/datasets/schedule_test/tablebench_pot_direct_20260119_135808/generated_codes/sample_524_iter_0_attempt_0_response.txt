@@ -1,0 +1,46 @@
+Step 1: Understand the question. We need to calculate the change in total seating capacity from 2004 to 2008. This means we should consider only aircraft introduced on or before 2008 and not retired by 2008.
+
+Step 2: Filter the data for aircraft introduced in 2004 or earlier (i.e., 2004, 2008) and not retired by 2008 (retired column is '-' or after 2008).
+
+Step 3: Sum the 'seating' values for these aircraft.
+
+Step 4: Since we are calculating the change from 2004 to 2008, we will include all aircraft introduced in 2004 and 2008 that were still in service by 2008.
+
+Step 5: Compute the total seating capacity at 2008 and compare it to the capacity in 2004 (only the A319, which was introduced in 2004). Then compute the difference.
+
+But note: The question asks for the change in total seating capacity from 2004 to 2008. So we must:
+- At 2004: Only the Airbus A319-100 was in service (introduced in 2004).
+- At 2008: Aircraft introduced in 2004 and 2008 and not retired by 2008.
+
+So we calculate:
+- Capacity in 2004: A319-100 (156)
+- Capacity in 2008: A319-100 (156), A320-200 (180), A321-200 (220) — all introduced in 2004 or 2008 and not retired by 2008.
+
+Then, change = Capacity in 2008 - Capacity in 2004
+
+Note: A321-200 was retired in 2010, so it was in service in 2008.
+
+Step 6: Compute the difference.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter aircraft introduced in 2004 or 2008 and not retired by 2008
+# Retired column is '-' or empty meaning still in service
+# We assume "not retired by 2008" means retired after 2008 or not retired at all
+in_service_by_2008 = df[(df['introduced'].isin(['2004', '2008'])) & 
+                        (df['retired'].isin(['-', '']))]
+
+# Total seating capacity in 2008
+capacity_2008 = in_service_by_2008['seating'].sum()
+
+# Capacity in 2004: only A319-100 was introduced in 2004 and still in service
+capacity_2004 = df[df['introduced'] == '2004']['seating'].sum()
+
+# Change in capacity
+change = capacity_2008 - capacity_2004
+
+print(f"Final Answer: {change}")
+```

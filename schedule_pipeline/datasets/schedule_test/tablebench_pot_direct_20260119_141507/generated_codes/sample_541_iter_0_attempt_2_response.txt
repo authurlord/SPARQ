@@ -1,0 +1,48 @@
+Step 1: The user wants the percentage increase in the total number of trailers from 1923 to 1927.  
+Step 2: Identify the total trailers for 1923 and 1927 from the "trailers" column.  
+Step 3: Use the formula for percentage increase:  
+   $$
+   \text{Percentage Increase} = \left( \frac{\text{New Value} - \text{Old Value}}{\text{Old Value}} \right) \times 100
+   $$  
+Step 4: Extract the trailer totals for 1923 and 1927, compute the increase, and print the result.
+
+Note: The row with "totals" is at the end and contains the overall totals. We need to find the trailer count for 1923 and 1927. However, the data does not explicitly separate per year for trailers. But the last row has a "totals" row with the sum of trailers across all years. We can infer that the "trailers" column includes values for each year. Since the question is about 1923 to 1927, we look at the trailer values in those years.
+
+From the table:
+- In 1923: trailers = 1 (for brcw), 1 (clco), 1 (grcw), 1 (leeds), 1 (mcwf), 35 (brcw), 40 (clco), and 1 (mcwf). But note: only one "trailers" value per row.  
+We must sum the "trailers" column for years 1923 and 1927.
+
+Looking at the data:
+- 1923: rows with trailers: 1, 1, 1, 1, 1, 35, 40, 1 → sum = 1+1+1+1+1+35+40+1 = 81  
+- 1927: rows: mcwf (160), ucc (37) → sum = 160 + 37 = 197  
+
+But wait — the table shows multiple entries per year. We should sum the "trailers" column for each row in 1923 and 1927.
+
+Actually, the "trailers" column in the data has values per row. So:
+- For 1923: the values are: 1, 1, 1, 1, 1, 35, 40, 1 → sum = 81
+- For 1927: the values are: 160 (mcwf), 37 (ucc) → sum = 197
+
+Now calculate the percentage increase:
+$$
+\frac{197 - 81}{81} \times 100 = \frac{116}{81} \times 100 \approx 143.21\%
+$$
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter rows for 1923 and 1927
+year_1923 = df[df['year'] == '1923']
+year_1927 = df[df['year'] == '1927']
+
+# Sum the 'trailers' column for these years
+total_trailers_1923 = year_1923['trailers'].sum()
+total_trailers_1927 = year_1927['trailers'].sum()
+
+# Calculate percentage increase
+percentage_increase = ((total_trailers_1927 - total_trailers_1923) / total_trailers_1923) * 100
+
+print(f"Final Answer: {percentage_increase:.2f}")
+```

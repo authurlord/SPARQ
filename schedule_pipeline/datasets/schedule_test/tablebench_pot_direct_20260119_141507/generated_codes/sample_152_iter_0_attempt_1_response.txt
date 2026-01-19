@@ -1,0 +1,11 @@
+Step 1: The question asks which factors (judges, public, vote percentage) have the most influence on the 'result' of each couple.  
+Step 2: We need to analyze whether there is a correlation or pattern between these factors and the 'result' (e.g., "safe" vs "bottom two").  
+Step 3: Since the data is small (only 6 rows), we can perform a simple analysis: check if certain values in 'judges', 'public', or 'vote percentage' are associated with the result.  
+Step 4: For instance:  
+- "Bottom two" couples have lower vote percentages and fewer public votes.  
+- "Safe" couples have higher vote percentages and more public votes.  
+Step 5: Observe that vote percentage strongly correlates with result — couples with high vote percentage ("safe") have higher percentages, while "bottom two" have low percentages.  
+Judges and public votes show some variation but do not clearly separate the results.  
+Step 6: Conclusion: Vote percentage has the most clear impact. Judges and public have weaker or inconsistent effects.  
+
+Final Answer: vote percentage

@@ -1,0 +1,77 @@
+We are tasked with creating a percentage bar chart that shows the percentage of total sales for each song in different regions.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. The "total" column represents the total sales per song.
+3. For each song, we want to compute the percentage of its sales relative to the total sales across all songs and regions (i.e., the sum of all "total" values).
+4. Since the question asks for a percentage bar chart showing the percentage of total sales for each song in different regions, we interpret this as: for each song, show the proportion of its regional sales relative to the total sales (per song), and visualize it across regions.
+5. However, the table has one row per song and columns for each region. We need to compute the percentage of each song's regional sales relative to the song’s own total.
+6. We will create a bar chart where each song is represented, and the bars show the percentage of sales in each region (normalized by the song's total).
+
+But note: the question says "percentage of total sales for each song in different regions". This likely means: for each region, show what percentage of the total sales (across all songs) comes from that region. But that would be a single chart per region.
+
+Alternatively, it could mean: for each song, what percentage of its total sales does each region contribute? That would make more sense with a grouped bar chart.
+
+Given the ambiguity, and based on typical interpretation of such questions, we assume:
+- We want to show, for each song, the percentage of its total sales that each region contributes (i.e., regional share of each song).
+- Then, we create a grouped bar chart where each song has a bar for each region, showing the percentage.
+
+So steps:
+1. Convert the "total" column to numeric.
+2. For each song, compute the percentage contribution of each region (using `region_sales / song_total`).
+3. Create a bar chart with one group per song, and sub-bars for each region (with percentages).
+4. Use matplotlib to plot.
+
+Note: The "mobiles" column seems unrelated to the rest — we ignore it.
+
+Let's proceed.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'total' to numeric (in case of string)
+df['total'] = pd.to_numeric(df['total'], errors='coerce')
+
+# Compute percentage of total sales for each region per song
+# We'll create a pivot table: index = song, columns = region, values = percentage
+# First, create a copy and compute percentages
+region_data = df[['song', 'northern ireland', 'northern england', 'scotland', 'southern england', 'wales', 'total']].copy()
+region_data['total'] = region_data['total'].fillna(0)
+
+# Calculate percentage of total sales for each region per song
+percentages = []
+for idx, row in region_data.iterrows():
+    total = row['total']
+    if total == 0:
+        continue
+    region_vals = [
+        row['northern ireland'] / total * 100,
+        row['northern england'] / total * 100,
+        row['scotland'] / total * 100,
+        row['southern england'] / total * 100,
+        row['wales'] / total * 100
+    ]
+    percentages.append(region_vals)
+
+# Now create a DataFrame for plotting
+songs = region_data['song'].tolist()
+regions = ['northern ireland', 'northern england', 'scotland', 'southern england', 'wales']
+percentage_df = pd.DataFrame(percentages, index=songs, columns=regions)
+
+# Plotting
+plt.figure(figsize=(12, 8))
+percentage_df.plot(kind='bar', width=0.8, color=['skyblue', 'lightgreen', 'lightcoral', 'gold', 'plum'])
+plt.title('Percentage of Total Sales for Each Song by Region')
+plt.xlabel('Song')
+plt.ylabel('Percentage of Total Sales (%)')
+plt.xticks(rotation=45)
+plt.legend(title='Region')
+plt.tight_layout()
+plt.show()
+```
+
+Final Answer: None

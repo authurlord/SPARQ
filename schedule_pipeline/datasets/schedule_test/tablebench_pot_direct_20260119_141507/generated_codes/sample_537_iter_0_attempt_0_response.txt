@@ -1,0 +1,18 @@
+Step 1: The user wants to find the first year when the urbanization rate (urban, %) surpassed 50%.  
+Step 2: Load the dataframe.  
+Step 3: Sort the data by year in ascending order.  
+Step 4: Iterate through the years and check when the 'urban , %' value first exceeds 50%.  
+Step 5: Return that year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by year to process in chronological order
+df_sorted = df.sort_values(by='year (january)')
+# Find the first year where urbanization rate > 50%
+for index, row in df_sorted.iterrows():
+    if row['urban , %'] > 50:
+        print(f"Final Answer: {row['year (january)']}")
+        break
+```

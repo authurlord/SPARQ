@@ -1,0 +1,23 @@
+Step 1: Identify the relevant rows where the event is "Heptathlon" and the competition is "South American Championships" held in "Lima, Peru".  
+Step 2: Check the "Year" and "Notes" columns for such entries to find the year and corresponding points.  
+Step 3: From the data, locate the row where "Venue" is "Lima, Peru", "Event" is "Heptathlon", and "Position" is "1st" (indicating a gold medal).  
+Step 4: Extract the year and points from that row.
+
+Looking at the table:
+- The row with "South American Championships" in "Lima, Peru" appears in 2009 and again in 2017.
+- In 2009: Venue = Lima, Peru, Event = Heptathlon, Position = 1st, Notes = 5578 pts.
+- In 2017: Venue = Taipei, Taiwan (not Lima), so not relevant.
+
+Thus, the only match is in 2009 with 5578 points.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Event is 'Heptathlon' and Venue is 'Lima, Peru'
+filtered_df = df[(df['Event'] == 'Heptathlon') & (df['Venue'] == 'Lima, Peru')]
+# Extract the year and points (from Notes column)
+result_year = filtered_df.iloc[0]['Year']
+result_points = filtered_df.iloc[0]['Notes']
+print(f"Final Answer: {result_year}, {result_points}")
+```

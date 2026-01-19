@@ -1,0 +1,14 @@
+Step 1: The user wants the mean value of the 'P' column, excluding missing or null values.  
+Step 2: Load the dataframe.  
+Step 3: Filter out rows where 'P' is missing (i.e., empty or '-') and calculate the mean of the remaining values.  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Remove rows where 'P' is missing or null (e.g., '-')
+valid_p_values = df[df['P'] != '-']['P'].astype(float)
+mean_p = valid_p_values.mean()
+print(f"Final Answer: {mean_p:.1f}")
+```

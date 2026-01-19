@@ -1,0 +1,20 @@
+Step 1: The question asks for an expected viewership of the next episode based on trends from the provided data.  
+Step 2: Viewership values are given in the "viewers (in millions)" column. We can analyze the trend by looking at the sequence of viewership numbers.  
+Step 3: The viewership appears to be fluctuating but generally increasing slightly over time. From the data:  
+- 2.01, 1.45, 1.54, 1.88, 1.73, 1.58  
+We can calculate the average or identify a pattern. However, there is no clear monotonic trend — it dips and rises.  
+Step 4: Since the last episode had 1.58 million viewers and the previous one had 1.73 million, and before that 1.88, we see a slight decline. A reasonable estimate might be the average of the recent values or a slight extrapolation.  
+Step 5: Take the average of the last three episodes (to focus on recent trends): (1.88 + 1.73 + 1.58) / 3 ≈ 1.73 million.  
+Alternatively, since the most recent value is 1.58, and it's lower than the prior, we might expect a slight drop or stabilization. But without more data, a simple average of recent episodes is reasonable.  
+
+Final decision: Use the average of the last three episodes to predict the next.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract viewership values for the last three episodes
+recent_viewers = df['viewers (in millions)'].tail(3).values
+average_viewers = recent_viewers.mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

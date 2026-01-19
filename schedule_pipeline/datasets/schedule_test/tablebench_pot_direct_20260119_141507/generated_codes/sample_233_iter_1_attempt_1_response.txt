@@ -1,0 +1,49 @@
+We are tasked with analyzing how GDP per capita (€) changes with increasing GDP (€, billions) for regions where GDP (% of national total) is above 5%.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Filter rows where "GDP (% of national total)" is greater than 5%.
+3. Exclude rows with invalid or non-numeric values (like '-' or empty strings) in the relevant columns.
+4. Convert the "GDP (€, billions)" and "GDP per capita (€)" columns to numeric (float).
+5. Analyze the relationship between GDP (€, billions) and GDP per capita (€) — specifically, we want to observe how GDP per capita changes as GDP increases.
+6. Since the question asks "how does it change", we can compute the correlation or simply show the relationship via a simple descriptive analysis (e.g., mean or trend). However, since it's asking for a change, we can compute the correlation coefficient between the two variables.
+
+Note: The row with '–' and 'Greece' and 'European Union' may have valid entries but need to be filtered appropriately. We only consider regions (not country-level or summary rows) where GDP (% of national total) > 5%.
+
+We will:
+- Filter out rows where "Region" is not a region (i.e., skip "Greece", "European Union", or empty entries).
+- Convert the relevant columns to numeric.
+- Compute the correlation between GDP (€, billions) and GDP per capita (€).
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean the data: remove rows with invalid or non-numeric entries
+# First, filter out rows where 'Region' is not a valid region (skip Greece, EU, etc.)
+df_clean = df[df['Region'].str.strip() != 'Greece']
+df_clean = df_clean[df_clean['Region'].str.strip() != 'European Union']
+df_clean = df_clean[df_clean['Region'].str.strip() != '']
+
+# Remove rows where any of the required columns contain non-numeric values
+df_clean = df_clean.dropna(subset=['GDP (€, billions)', 'GDP per capita (€)', 'GDP (% of national total)'])
+
+# Convert columns to numeric
+df_clean['GDP (€, billions)'] = pd.to_numeric(df_clean['GDP (€, billions)'], errors='coerce')
+df_clean['GDP per capita (€)'] = pd.to_numeric(df_clean['GDP per capita (€)'], errors='coerce')
+df_clean['GDP (% of national total)'] = pd.to_numeric(df_clean['GDP (% of national total)'], errors='coerce')
+
+# Filter regions where GDP (% of national total) > 5%
+filtered_df = df_clean[df_clean['GDP (% of national total)'] > 5]
+
+# If no data remains, return a message
+if filtered_df.empty:
+    print("Final Answer: No data available for regions with GDP (% of national total) > 5%")
+else:
+    # Compute the correlation between GDP (€, billions) and GDP per capita (€)
+    correlation = filtered_df['GDP (€, billions)'].corr(filtered_df['GDP per capita (€)'])
+    print(f"Final Answer: {correlation:.2f}")
+```

@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the nation with a total of 57 medals.
+Step 2: Load the dataframe.
+Step 3: Filter the row where the 'Total' column equals 57.
+Step 4: Extract and print the nation name.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row where Total is 57
+nation_with_57_medals = df[df['Total'] == '57']['Nation'].iloc[0]
+print(f"Final Answer: {nation_with_57_medals}")
+```

@@ -1,0 +1,15 @@
+The question asks for an expected total votes and percentage of the popular vote for the next election cycle based on an observed increasing trend from 1983 to 2013.
+
+Step 1: Analyze the trend in "total votes" and "% of popular vote" over time.
+- Total votes: 3078 (1983) → 197231 (2001) → 161842 (2005) → 134570 (2009) → 146607 (2013)
+- Note: There is a sharp increase from 1983 to 2001, followed by a slight decrease and then a small increase.
+- However, the percentage of popular vote increases steadily: 0.19% → 0.24% → 0.86% → 1.99% → 12.39% → 9.17% → 8.21% → 8.13%
+- The percentage shows a peak at 2001 and then declines slightly, suggesting it may not be consistently increasing.
+
+Given that the percentage of popular vote peaks in 2001 and then declines, there is no clear upward trend in the percentage. Total votes show a large spike in 2001, then a drop, and a recovery in 2013.
+
+Therefore, projecting a consistent increasing trend is not supported by the data. Instead, we can consider that the total votes and percentage of popular vote may stabilize or fluctuate.
+
+Since the data does not show a consistent upward trend, a reliable projection cannot be made with confidence.
+
+Final Answer: None

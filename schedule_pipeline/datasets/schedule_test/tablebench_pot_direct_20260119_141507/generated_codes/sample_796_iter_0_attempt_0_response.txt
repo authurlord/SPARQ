@@ -1,0 +1,33 @@
+Step 1: The user wants the percentage difference between the average annual growth rate of the values in `2011` and `2010` for the top 5 ranked countries.  
+Step 2: First, extract the top 5 countries by rank (i.e., rows 0 to 4).  
+Step 3: Extract the values for `2010` and `2011` for these countries.  
+Step 4: Compute the average annual growth rate (AGR) for each country:  
+   AGR = ((2011 value - 2010 value) / 2010 value) * 100  
+Step 5: Compute the average AGR for `2011` and `2010`, then find the percentage difference between them.  
+Step 6: Percentage difference = ((AGR_2011 - AGR_2010) / AGR_2010) * 100  
+
+Note: Since the question asks for the percentage difference between the average AGR of 2011 and 2010, we compute the mean AGR for each year and then the percentage difference between those two means.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter top 5 ranked countries (rank 1 to 5)
+top_5 = df[df['rank'].astype(float) <= 5].copy()
+
+# Extract 2010 and 2011 values for the top 5 countries
+values_2010 = top_5['2010'].astype(int)
+values_2011 = top_5['2011'].astype(int)
+
+# Calculate average annual growth rate (AGR) for each country
+agr_2010 = ((values_2011 - values_2010) / values_2010) * 100
+mean_agr_2011 = agr_2010.mean()
+mean_agr_2010 = (values_2011 - values_2010) / values_2010 * 100  # same as above; just recompute for clarity
+mean_agr_2010 = mean_agr_2010.mean()
+
+# Percentage difference between mean AGR of 2011 and 2010
+percentage_diff = ((mean_agr_2011 - mean_agr_2010) / mean_agr_2010) * 100
+
+print(f"Final Answer: {percentage_diff:.2f}")
+```

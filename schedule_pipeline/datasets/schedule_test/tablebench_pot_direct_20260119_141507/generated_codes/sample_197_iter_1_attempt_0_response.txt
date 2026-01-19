@@ -1,0 +1,43 @@
+The error occurred because of a typo in the column name — "internl" instead of "international". The correct column name should be "internl tourism receipts 2011 (million usd)" as given in the table. However, upon closer inspection, the actual column name in the JSON is correctly spelled as "internl tourism receipts 2011 (million usd)", so we must ensure we're accessing it properly.
+
+We are asked: *How does the international tourism receipts change with increasing international tourist arrivals?*  
+This implies we want to analyze the relationship between tourist arrivals and tourism receipts — specifically, whether there's a trend or correlation.
+
+Step-by-step approach:
+1. Load the data.
+2. Identify the relevant columns: 
+   - "internl tourist arrivals 2011 (x1000)" → this represents tourist arrivals.
+   - "internl tourism receipts 2011 (million usd)" → this represents receipts.
+3. Check if there's a positive correlation between them.
+4. Since the question is about how receipts change with increasing arrivals, we can compute the correlation coefficient and optionally visualize the relationship.
+
+Note: The data includes some "N/A" values (like 'n / d'), which we need to handle by excluding them or treating as missing.
+
+However, since the question is not asking for a specific value or chart but rather "how does it change", a simple correlation analysis will suffice.
+
+We will:
+- Clean the data by removing rows where either "internl tourist arrivals 2011 (x1000)" or "internl tourism receipts 2011 (million usd)" is "n / d".
+- Compute the Pearson correlation coefficient between the two variables.
+- Print the result.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean data: remove rows where either arrival or receipts is 'n / d'
+df_clean = df.dropna(subset=['internl tourist arrivals 2011 (x1000)', 'internl tourism receipts 2011 (million usd)'])
+
+# Convert the arrival and receipts columns to numeric
+df_clean['internl tourist arrivals 2011 (x1000)'] = pd.to_numeric(df_clean['internl tourist arrivals 2011 (x1000)'], errors='coerce')
+df_clean['internl tourism receipts 2011 (million usd)'] = pd.to_numeric(df_clean['internl tourism receipts 2011 (million usd)'], errors='coerce')
+
+# Drop any remaining NaN values
+df_clean = df_clean.dropna()
+
+# Compute correlation
+correlation = df_clean['internl tourist arrivals 2011 (x1000)'].corr(df_clean['internl tourism receipts 2011 (million usd)'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

@@ -1,0 +1,26 @@
+Step 1: The user wants a forecasted average finish position for the year 2005 based on historical data from 1985 to 2004, assuming a similar number of races as in 2004 (which is 3 starts).
+
+Step 2: Load the dataframe.
+
+Step 3: Filter the data for years 1985 to 2004.
+
+Step 4: Focus on the 'starts' and 'avg finish' columns.
+
+Step 5: Since the question asks for a forecast based on similar participation (3 starts), we can look at all entries where 'starts' = 3 and calculate the average 'avg finish' for those entries.
+
+Step 6: If no exact match exists, we can use a simple linear regression or take the median/mean of all 'avg finish' values. However, since only one entry has 3 starts (2004), we can assume that the average finish position for a driver with 3 starts is the same as in 2004.
+
+Step 7: Extract the 'avg finish' value for 2004 (which is 40.3) and use it as the forecast.
+
+Step 8: Output the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where starts = 3 (same as 2004)
+filtered_data = df[df['starts'] == 3]
+# Get the avg finish for those rows
+forecasted_avg_finish = filtered_data['avg finish'].iloc[0]  # Only one row with 3 starts (2004)
+print(f"Final Answer: {forecasted_avg_finish}")
+```

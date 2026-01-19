@@ -1,0 +1,29 @@
+Step 1: The user wants to identify years with unusually high or low success rates compared to the overall performance.
+Step 2: Load the dataframe.
+Step 3: Convert the 'success rate' column to a numeric value by removing the '%' sign and converting to float.
+Step 4: Calculate the overall success rate (from the 'total' row).
+Step 5: Compare each year's success rate to the overall success rate and flag those that are significantly higher or lower (e.g., more than 10 percentage points away).
+Step 6: Extract and print the years that meet the criteria.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert success rate to numeric by removing '%' and converting to float
+df['success rate'] = df['success rate'].str.replace('%', '').astype(float)
+
+# Calculate overall success rate from the total row
+overall_success_rate = df[df['year'] == 'total']['success rate'].iloc[0]
+
+# Define threshold for "unusually high or low" (e.g., more than 10 percentage points away)
+threshold = 10.0
+
+# Find years with success rate significantly different from overall
+unusual_years = df[
+    (df['year'] != 'total') &
+    ((df['success rate'] - overall_success_rate) > threshold |
+     (df['success rate'] - overall_success_rate) < -threshold)
+]['year'].tolist()
+
+print(f"Final Answer: {', '.join(unusual_years)}")
+```

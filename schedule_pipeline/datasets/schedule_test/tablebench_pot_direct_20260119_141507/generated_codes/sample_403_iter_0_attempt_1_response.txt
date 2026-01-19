@@ -1,0 +1,22 @@
+The table provides a comprehensive overview of tourism-related data for various countries in 2011 and 2003. Each row represents a country, and the columns describe key metrics:
+
+- **Tourist arrivals (2011) (millions)**: The number of tourists visiting the country in 2011.
+- **Tourism receipts (2011) (millions of US)**: Total revenue generated from tourism in 2011.
+- **Tourism receipts (2011) (US per arrival)**: Average revenue per tourist arrival.
+- **Tourism receipts (2011) (US per capita)**: Average revenue per person in the country.
+- **Tourism receipts (2003) (as % of GDP)**: The share of tourism revenue in the country’s GDP in 2003.
+- **Tourism receipts (2003) (as % of exports)**: The proportion of tourism revenue relative to total exports in 2003.
+- **Tourism competitiveness (2011) (TTCI)**: A measure of how competitive a country's tourism sector is, based on performance indicators.
+
+Notable trends:
+- Mexico has the highest number of tourist arrivals (23.4 million), followed by Brazil and Argentina. Despite lower per-capita tourism receipts, Mexico's large volume contributes significantly to its total tourism revenue.
+- Costa Rica and the Dominican Republic show high per-capita tourism receipts, indicating strong economic returns from tourism per visitor.
+- Countries like Cuba and Haiti have relatively low tourist arrivals but high per-capita tourism receipts, suggesting high spending per visitor.
+- Tourism receipts as a percentage of GDP vary widely, with the Dominican Republic and Costa Rica having high shares (36.2% and 17.5%, respectively), indicating tourism is a major economic driver.
+- The TTCI values are generally between 3.2 and 4.4, suggesting moderate to high competitiveness, with some outliers like Uruguay (4.24) and Panama (4.30) standing out.
+
+This data highlights the importance of both volume and revenue per visitor in assessing tourism performance, and shows that tourism plays a significant role in the economies of several Latin American and Caribbean nations.
+
+Since the question asks for a descriptive analysis rather than a numerical computation, no code execution is required for a direct answer. Instead, the insights are summarized qualitatively.
+
+Final Answer: tourist arrivals, tourism receipts, per capita revenue, GDP share, export share, competitiveness

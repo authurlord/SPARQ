@@ -1,0 +1,14 @@
+Step 1: The user wants the standard deviation of the average comprehension scores across all cities.
+Step 2: Load the dataframe.
+Step 3: Select the 'average' column, which contains the average comprehension scores.
+Step 4: Calculate the standard deviation of this column and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'average' column to numeric, handling 'n/a' values as NaN
+df['average'] = pd.to_numeric(df['average'], errors='coerce')
+# Calculate standard deviation of the average column
+std_dev = df['average'].std()
+print(f"Final Answer: {std_dev:.2f}")
+```

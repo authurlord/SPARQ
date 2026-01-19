@@ -1,0 +1,20 @@
+The error occurred because the "avg daily flts" value for the Monte Carlo - Nice route is stored as a string ("117"), not an integer. We need to convert it to a number before performing the calculation.
+
+Step 1: Load the dataframe.
+Step 2: Locate the row for the "monte carlo ( mcm ) - nice ( nce )" route.
+Step 3: Convert the "avg daily flts" value to float.
+Step 4: Increase it by 28% (multiply by 1.28).
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where route is 'monte carlo ( mcm ) - nice ( nce )'
+route_row = df[df['route'] == 'monte carlo ( mcm ) - nice ( nce )']
+# Extract the average daily flights and convert to float
+avg_flights = float(route_row['avg daily flts'].values[0])
+# Increase by 28%
+new_avg_flights = avg_flights * 1.28
+print(f"Final Answer: {new_avg_flights:.0f}")
+```

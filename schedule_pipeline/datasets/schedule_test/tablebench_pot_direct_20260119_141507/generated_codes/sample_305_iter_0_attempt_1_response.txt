@@ -1,0 +1,24 @@
+Step 1: Identify the relevant column for the 400m event and the corresponding time.
+Step 2: Look through the data to find the row where the 'Event' is '400 m' and note the 'Year' and 'Notes' (which contains the time).
+Step 3: Determine which of these times is the personal best (the fastest time).
+Step 4: Return the year when that personal best time was achieved.
+
+From the data:
+- In 2008: 54.12
+- In 2011: 52.35
+- In 2012: 51.13 (NR) — this is the fastest time.
+
+The personal best time (51.13) was achieved in 2012.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where Event is '400 m'
+filtered_df = df[df['Event'] == '400 m']
+# Sort by Notes (time) ascending to get the fastest time
+filtered_df_sorted = filtered_df.sort_values(by='Notes').reset_index(drop=True)
+# The first row (fastest time) is the personal best
+personal_best_year = filtered_df_sorted.iloc[0]['Year']
+print(f"Final Answer: {personal_best_year}")
+```

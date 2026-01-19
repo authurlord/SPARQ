@@ -1,0 +1,32 @@
+Step 1: The user wants the total cost for systems that meet two conditions:
+- Production ≥ 2000 kWh/kWp/year
+- Cost per kWp ≤ $1400/kWp
+
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'cost' is ≤ '1400 / kwp'.
+Step 4: For those rows, check if any of the production columns (from '2400 kwh / kwp y' to '800 kwh / kwp y') have values ≥ 2000.
+Step 5: Sum the 'cost' values of the filtered rows.
+
+Note: Since the data is structured such that each row corresponds to a cost level and the columns represent different production levels, we need to check if any production value in a row is ≥ 2000. If so, include that row's cost in the total.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where cost <= 1400 / kwp
+filtered_df = df[df['cost'] == '1400 / kwp']
+
+# Check if any production value in the row is >= 2000
+# We'll check the columns from '2400 kwh / kwp y' to '800 kwh / kwp y'
+production_columns = ['2400 kwh / kwp y', '2200 kwh / kwp y', '2000 kwh / kwp y', '1800 kwh / kwp y', '1600 kwh / kwp y', '1400 kwh / kwp y', '1200 kwh / kwp y', '1000 kwh / kwp y', '800 kwh / kwp y']
+# Convert production columns to numeric
+for col in production_columns:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# Find rows where at least one production value is >= 2000
+valid_rows = df[df[production_columns].ge(2000).any(axis=1)]
+total_cost = valid_rows['cost'].sum()
+
+print(f"Final Answer: {total_cost}")
+```

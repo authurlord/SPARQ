@@ -1,0 +1,18 @@
+Step 1: Identify the rows where the organization is 'Transparency International'.  
+Step 2: Among those rows, find the one with the highest rank (lowest rank number means higher rank).  
+Step 3: Extract the corresponding year.  
+
+The "rank" column represents the ranking — lower values indicate higher rank. So, we need to find the minimum rank for 'Transparency International' and get its year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where organization is 'Transparency International'
+ti_rows = df[df['organization'] == 'Transparency International']
+# Find the row with the lowest rank (highest rank)
+best_rank_row = ti_rows.loc[ti_rows['rank'].idxmin()]
+# Extract the year
+year = best_rank_row['year']
+print(f"Final Answer: {year}")
+```

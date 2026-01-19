@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The increase in power (horsepower) generally leads to an increase in maximum speed (km/h), but this relationship is not linear and depends on the train type and year built. For example, trains with higher horsepower (298 hp) achieve a maximum speed of 120 km/h, while those with lower horsepower (220–235 hp) have lower maximum speeds (70–105 km/h).

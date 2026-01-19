@@ -1,0 +1,17 @@
+Step 1: Identify the seasons in which Liverpool played in the Premier League.  
+From the table, the "League" column shows the division name. We are interested in rows where "League" is "Premier League".  
+Step 2: Extract the "Season" for such rows and count how many unique seasons there are.  
+Step 3: Filter the data for rows where "League" == "Premier League", then count the number of rows (each row represents a season).  
+
+Note: The first row is a header, so we skip it. The data starts from the second row.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where League is "Premier League"
+premier_league_seasons = df[df['League'] == 'Premier League']
+# Count the number of such seasons
+num_seasons = len(premier_league_seasons)
+print(f"Final Answer: {num_seasons}")
+```

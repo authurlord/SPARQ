@@ -1,0 +1,20 @@
+Step 1: The user wants the total number of years that all ambassadors served.  
+Step 2: Load the dataframe.  
+Step 3: Convert 'Start' and 'End' columns to integers.  
+Step 4: Calculate the duration for each ambassador as (End - Start + 1) to include both start and end years.  
+Step 5: Sum all durations and print the total.  
+Note: Some entries have "Chargé d'Affaires" which are not ambassadors, so we filter only rows where 'Title' is 'Ambassador'.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter only ambassadors
+ambassadors = df[df['Title'] == 'Ambassador']
+# Convert Start and End to integers
+ambassadors['Start'] = pd.to_numeric(ambassadors['Start'])
+ambassadors['End'] = pd.to_numeric(ambassadors['End'])
+# Calculate years served (inclusive)
+years_served = (ambassadors['End'] - ambassadors['Start'] + 1).sum()
+print(f"Final Answer: {years_served}")
+```

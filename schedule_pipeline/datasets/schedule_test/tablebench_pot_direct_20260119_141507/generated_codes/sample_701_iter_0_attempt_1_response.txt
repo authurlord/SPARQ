@@ -1,0 +1,22 @@
+Step 1: The user wants to find the year with the highest number of injuries (in thousands of US dollars).  
+Step 2: Load the dataframe.  
+Step 3: Focus on the 'Injuries (US $000)' column, which contains injury values in thousands of US dollars.  
+Step 4: Identify the year corresponding to the maximum value in that column.  
+Step 5: Handle missing values (e.g., "no data") by treating them as NaN and ignoring them in the calculation.  
+
+Note: The value "2005" has "(estimate)" which is not a numeric value, so we need to check if it's valid. Since it's an estimate and not a number, we treat it as invalid. Similarly, "no data" should be ignored. We will convert the column to numeric and drop non-numeric entries.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Convert 'Injuries (US $000)' to numeric, handling missing or non-numeric values
+df['Injuries (US $000)'] = pd.to_numeric(df['Injuries (US $000)'], errors='coerce')
+
+# Find the year with the maximum injuries (ignoring NaN)
+max_injuries_row = df.loc[df['Injuries (US $000)'].idxmax()]
+year_with_max_injuries = max_injuries_row['Year']
+
+print(f"Final Answer: {year_with_max_injuries}")
+```

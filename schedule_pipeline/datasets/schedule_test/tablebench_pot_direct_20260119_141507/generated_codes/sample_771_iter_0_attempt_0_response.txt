@@ -1,0 +1,38 @@
+Step 1: The user wants to forecast the pass percentage and obtained GPA for 2011 based on trends from 2005 to 2010.  
+Step 2: Extract the "pass percentage" and "obtained gpa - 5" columns from the data.  
+Step 3: Since the data spans 6 years, we can assume a linear trend to predict values for 2011.  
+Step 4: Use linear regression (simple linear fit) to model the trend of pass percentage and GPA over time.  
+Step 5: Predict values for year 2011 using the fitted model.  
+
+Note: We will treat the year as a continuous variable (e.g., 2005 = 0, 2006 = 1, ..., 2010 = 5) to fit the trend.
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+df = pd.read_csv('table.csv')
+
+# Convert year to numeric and create a feature (time index)
+df['year_num'] = pd.to_numeric(df['year'], errors='coerce')
+df['year_num'] = df['year_num'].fillna(0)
+
+# Prepare data for regression
+X = df[['year_num']]  # independent variable: year
+y_pass = df['pass percentage'].str.replace('%', '').astype(float)  # extract numeric pass percentage
+y_gpa = df['obtained gpa - 5'].astype(int)  # obtained GPA is already numeric
+
+# Fit linear regression models
+model_pass = LinearRegression()
+model_gpa = LinearRegression()
+
+model_pass.fit(X, y_pass)
+model_gpa.fit(X, y_gpa)
+
+# Predict for year 2011 (which is 6 years after 2005)
+year_2011 = 6
+pass_pred = model_pass.predict([[year_2011]])[0]
+gpa_pred = model_gpa.predict([[year_2011]])[0]
+
+print(f"Final Answer: {pass_pred:.2f}%, {gpa_pred}")
+```

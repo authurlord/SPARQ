@@ -1,0 +1,28 @@
+Step 1: Identify the relevant rows where "Sunny Morning" is mentioned in the "Nominated Work" column and check the "Award" and "Result" for 2017.  
+Step 2: Find the specific award "Sunny Morning" won in 2017 from the "Radio Music Awards" (as it won in that category).  
+Step 3: Locate the row where "Sunny Morning" is nominated in the "Hollywood Music in Media Awards" and extract the edition.  
+
+From the data:
+- In 2017, "Sunny Morning" won the "Radio Music Awards" in the "Jazz" category.
+- It was nominated in the "Hollywood Music in Media Awards" in edition #8 (2017).
+
+Thus, the answer is:
+- Award won: Radio Music Awards (Jazz)
+- Edition of Hollywood Music in Media Awards: edition #8 (2017)
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter rows where 'Nominated Work' is 'Sunny Morning'
+sunny_morning_rows = df[df['Nominated Work'] == 'Sunny Morning']
+
+# Extract the award won in 2017 (Radio Music Awards)
+award_won = sunny_morning_rows[sunny_morning_rows['Year'] == '2017']['Award'].iloc[0]
+
+# Extract the edition from Hollywood Music in Media Awards nomination
+hmm_edition = df[(df['Nominated Work'] == 'Sunny Morning') & (df['Award'] == 'Hollywood Music in Media Awards')]['Notes'].iloc[0]
+
+print(f"Final Answer: {award_won}, {hmm_edition}")
+```

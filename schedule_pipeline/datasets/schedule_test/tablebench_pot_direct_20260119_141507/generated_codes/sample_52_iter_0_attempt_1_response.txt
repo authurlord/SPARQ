@@ -1,0 +1,9 @@
+Step 1: The user is asking for a nation that has exactly 5 gold medals and 2 silver medals.  
+Step 2: Look through the "Gold" and "Silver" columns in the table to find a row where Gold = 5 and Silver = 2.  
+Step 3: Check the corresponding "Nation" in that row.  
+
+From the data:
+- Bulgaria has 5 gold and 2 silver.  
+- No other nation matches this combination.  
+
+Final Answer: Bulgaria

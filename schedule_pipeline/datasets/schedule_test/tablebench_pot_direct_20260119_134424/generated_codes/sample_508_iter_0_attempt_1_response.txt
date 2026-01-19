@@ -1,0 +1,16 @@
+Step 1: The user wants to identify the jurisdiction with the highest Prohibition Support Rate, which is defined as the percentage of people in favor of prohibition (column 'percent for').
+
+Step 2: Load the dataframe.
+
+Step 3: Find the row with the maximum value in the 'percent for' column.
+
+Step 4: Extract and print the corresponding jurisdiction.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the jurisdiction with the highest 'percent for'
+max_support_jurisdiction = df.loc[df['percent for'].idxmax(), 'jurisdiction']
+print(f"Final Answer: {max_support_jurisdiction}")
+```

@@ -1,0 +1,27 @@
+Step 1: The question asks for unusual patterns or outliers in the table. We need to analyze the data for anomalies, such as extreme values in viewership or irregularities in timing (e.g., a show airing at 3:00 AM instead of the usual 8:30 PM).  
+Step 2: Focus on the "viewers" column and "timeslot" to identify outliers.  
+Step 3: Look for unusually high or low viewer numbers and non-standard timeslots.  
+Step 4: Note that one episode ("the glamorous life") airs at 3:00 AM, which is unusual compared to the standard 8:30 PM - 9:30 PM timeslot.  
+Step 5: Also, one episode ("don't walk on the grass") has an extremely high viewer count of 2,000,000, which is much higher than others (ranging from ~375,000 to ~524,440). This is a clear outlier.  
+
+Python code to identify these patterns:
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify unusual patterns
+# Check for non-standard timeslot
+non_standard_timeslot = df[df['timeslot'] != '8:30 pm - 9:30 pm']
+
+# Check for outliers in viewers (using IQR method or direct inspection)
+viewers = df['viewers'].astype(int)
+normal_viewers = viewers[viewers < 2000000]
+outlier_viewers = viewers[viewers >= 2000000]
+
+print(f"Non-standard timeslot episodes:\n{non_standard_timeslot[['title', 'timeslot', 'viewers']]}")
+print(f"Outliers in viewers (>= 2,000,000):\n{outlier_viewers}")
+
+# Final Answer: non_standard_timeslot, high_viewer_outlier
+Final Answer: non_standard_timeslot, high_viewer_outlier
+```

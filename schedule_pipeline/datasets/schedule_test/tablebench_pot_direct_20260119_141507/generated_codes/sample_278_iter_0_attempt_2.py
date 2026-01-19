@@ -1,0 +1,18 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Death toll' to numeric and filter based on conditions
+df['Death toll'] = pd.to_numeric(df['Death toll'], errors='coerce')
+filtered_df = df[
+    (df['Death toll'] >= 1000) & 
+    (pd.to_numeric(df['Depth (km)'], errors='coerce') < 30)
+]
+
+# Calculate average magnitude of filtered earthquakes
+if not filtered_df.empty:
+    avg_magnitude = filtered_df['Magnitude'].mean()
+else:
+    avg_magnitude = None
+
+print(f"Final Answer: {avg_magnitude:.1f}")

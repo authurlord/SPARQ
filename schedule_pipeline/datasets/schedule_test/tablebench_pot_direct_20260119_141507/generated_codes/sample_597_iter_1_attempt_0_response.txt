@@ -1,0 +1,18 @@
+The error occurred because the "original air date" column contains string values, and we attempted to compare them with integers (e.g., using `>=`), which is invalid. However, the question is asking for the average number of viewers for the **first 5 episodes**, not based on date.
+
+Step 1: Identify the first 5 episodes by their "no in series" value (which is ordered sequentially).
+Step 2: Extract the "viewers (millions)" for those episodes.
+Step 3: Compute the mean of these viewer numbers.
+
+We do not need to parse dates or perform any date-based filtering.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Select the first 5 episodes based on 'no in series' (which is already in order)
+first_5_episodes = df.head(5)
+# Calculate the average viewers for these episodes
+average_viewers = first_5_episodes['viewers (millions)'].mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

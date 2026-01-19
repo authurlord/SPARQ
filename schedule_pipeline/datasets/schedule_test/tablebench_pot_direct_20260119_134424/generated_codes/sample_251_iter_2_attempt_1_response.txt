@@ -1,0 +1,14 @@
+Step 1: The user wants the total number of goals scored by Lincoln City in the Third Division North.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Club' is 'Lincoln City' and 'Division' is 'Third Division North'.
+Step 4: Sum the 'Goals' column for these filtered rows.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for Lincoln City in Third Division North
+lincoln_goals = df[(df['Club'] == 'Lincoln City') & (df['Division'] == 'Third Division North')]['Goals'].sum()
+print(f"Final Answer: {lincoln_goals}")
+```

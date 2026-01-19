@@ -1,0 +1,31 @@
+The error occurred because the "jaanu någisto" column contains string values (like '4', '8', etc.) that are not properly converted to numeric. We need to convert all the judge score columns to numeric before computing standard deviation.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Select only the judge columns (excluding 'artist' and 'total', 'points').
+3. Convert each judge's scores to numeric (handling any non-numeric or string values).
+4. Compute the standard deviation for each judge's scores.
+5. Identify which judge has the highest standard deviation (most variation).
+
+Note: Since the question asks for "which judge's scores have the most variation", we are looking for the judge with the maximum standard deviation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Select only the judge columns (excluding 'artist', 'total', 'points')
+judge_columns = [col for col in df.columns if col not in ['artist', 'total', 'points']]
+
+# Convert all judge score columns to numeric, coercing errors to NaN
+df_judges = df[judge_columns].apply(pd.to_numeric, errors='coerce')
+
+# Compute standard deviation for each judge
+std_deviation = df_judges.std()
+
+# Find the judge with the highest standard deviation
+max_std_judge = std_deviation.idxmax()
+
+print(f"Final Answer: {max_std_judge}")
+```

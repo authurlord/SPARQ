@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains information about metro lines in Chengdu, China. 'Line' identifies each metro line. 'Terminals (District)' and 'Terminals (District)_1' denote the starting and ending terminals of each line. 'Commencement' indicates when the line was first opened. 'Newest Extension' shows the most recent extension date. 'Length km' gives the total length of the line in kilometers. 'Stations' lists the number of stations on the line. The last row provides totals for all lines.

@@ -1,0 +1,13 @@
+The table contains information about metro lines in Chengdu, China. Here's a description of each main column:
+
+- **Line**: The line number or identifier (e.g., 1, 2, 3, etc.), indicating the specific metro line.
+- **Terminals (District)**: The starting terminal station and its corresponding district (e.g., Weijianian in Jinniu District).
+- **Terminals (District)_1**: The ending terminal station and its corresponding district (e.g., Science City in Shuangliu District).
+- **Commencement**: The year when the line first opened for service.
+- **Newest Extension**: The year of the most recent extension to the line; '-' indicates no extension.
+- **Length km**: The total length of the line in kilometers.
+- **Stations**: The number of stations along the line.
+
+The "Total" row aggregates the data across all lines, providing the total length (226 km) and total number of stations (171).
+
+Final Answer: Line, Terminals (District), Terminals (District)_1, Commencement, Newest Extension, Length km, Stations

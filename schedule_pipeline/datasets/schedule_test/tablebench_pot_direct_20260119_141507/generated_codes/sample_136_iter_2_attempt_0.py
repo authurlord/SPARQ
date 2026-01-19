@@ -1,0 +1,45 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Clean and convert the operating revenue columns to numeric
+quarters = ['Quarter Ended March 31', 'Quarter Ended June 30', 'Quarter Ended September 30', 'Quarter Ended December 31']
+revenue_columns = ['Operating revenue', '2018 Operating revenue']
+
+# Clean and convert the values
+cleaned_data = {}
+for col in revenue_columns:
+    cleaned_values = []
+    for value in df[col]:
+        if isinstance(value, str):
+            # Remove $ and comma, then convert to float
+            cleaned_value = value.replace('$', '').replace(',', '')
+            cleaned_values.append(float(cleaned_value))
+        else:
+            cleaned_values.append(value)
+    cleaned_data[col] = cleaned_values
+
+# Create a DataFrame for plotting
+quarters_labels = ['Mar 31', 'Jun 30', 'Sep 30', 'Dec 31']
+x_positions = range(len(quarters_labels))
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(x_positions, cleaned_data['Operating revenue'], marker='o', label='Operating Revenue (Non-2018)', color='blue')
+plt.plot(x_positions, cleaned_data['2018 Operating revenue'], marker='s', label='Operating Revenue (2018)', color='red')
+
+plt.xlabel('Quarter End')
+plt.ylabel('Operating Revenue ($)')
+plt.title('Operating Revenue Trend by Quarter (with 2018 Comparison)')
+plt.xticks(x_positions, quarters_labels)
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+
+# Final Answer is not a value but a chart, so we just print a placeholder indicating the chart was generated
+Final Answer: chart_generated

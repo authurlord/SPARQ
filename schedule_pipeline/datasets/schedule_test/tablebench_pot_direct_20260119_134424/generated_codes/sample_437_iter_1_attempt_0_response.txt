@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table has 10 rows and 5 columns. The 'draw' column represents the contestant number. The 'artist' column lists the performing artist(s). The 'song' column shows the title of the song performed. The 'first vote' column contains the number of votes received in the first round. The 'place' column indicates the final ranking of the contestant. Notable trends include a strong correlation between high first votes and high rankings (e.g., 'pirates of the sea' with 16,818 votes placed 1st). An anomaly is 'kristīna zaharova feat julian' receiving only 862 votes but placing 9th, which is relatively low despite being close to the bottom. The highest vote count (16,818) was significantly higher than others, indicating a clear outlier.
+
+Final Answer: draw, artist, song, first vote, place

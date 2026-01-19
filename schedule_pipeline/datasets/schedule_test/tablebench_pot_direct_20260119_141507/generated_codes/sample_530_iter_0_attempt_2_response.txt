@@ -1,0 +1,20 @@
+Step 1: Understand the question. We are to calculate the "Rating Growth" for each centre, defined as (change / rating) * 100, and find the centre with the highest value.
+
+Step 2: Load the dataframe and extract the 'change' and 'rating' columns.
+
+Step 3: Compute the rating growth as a percentage for each row.
+
+Step 4: Find the centre with the maximum rating growth.
+
+Step 5: Print the name of that centre.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate rating growth as (change / rating) * 100
+df['rating_growth'] = (df['change'] / df['rating']) * 100
+# Find the centre with the highest rating growth
+max_growth_centre = df.loc[df['rating_growth'].idxmax(), 'centre']
+print(f"Final Answer: {max_growth_centre}")
+```

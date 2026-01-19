@@ -1,0 +1,44 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter for ATL team and years from 1997 to 2003
+filtered_df = df[(df['Team'] == 'ATL') & (df['Year'].astype(str).str.startswith('1997')) | 
+                 (df['Year'].astype(str).str.startswith('1998')) | 
+                 (df['Year'].astype(str).str.startswith('1999')) | 
+                 (df['Year'].astype(str).str.startswith('2000')) | 
+                 (df['Year'].astype(str).str.startswith('2001')) | 
+                 (df['Year'].astype(str).str.startswith('2002')) | 
+                 (df['Year'].astype(str).str.startswith('2003'))]
+
+# Remove the total row (which has 'ATL Total')
+filtered_df = filtered_df[filtered_df['Team'] != 'ATL Total']
+
+# Convert Year to integer for proper sorting
+filtered_df['Year'] = pd.to_numeric(filtered_df['Year'], errors='coerce')
+filtered_df = filtered_df.dropna(subset=['Year'])
+
+# Prepare data for plotting
+data = filtered_df[['Year', 'Regular Season Won', 'Regular Season Lost', 'Regular Season Ties']]
+data = data[data['Year'].between(1997, 2003)]
+
+# Create a stacked bar chart
+plt.figure(figsize=(10, 6))
+bars = plt.bar(data['Year'], data['Regular Season Won'], label='Wins', color='skyblue')
+plt.bar(data['Year'], data['Regular Season Lost'], bottom=data['Regular Season Won'], label='Losses', color='lightcoral')
+plt.bar(data['Year'], data['Regular Season Ties'], bottom=data['Regular Season Won'] + data['Regular Season Lost'], label='Ties', color='lightgreen')
+
+plt.xlabel('Year')
+plt.ylabel('Number of Games')
+plt.title('ATL Regular Season Wins, Losses, and Draws (1997–2003)')
+plt.legend()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+
+# Final Answer: We have generated the chart as requested.
+Final Answer: chart_generated

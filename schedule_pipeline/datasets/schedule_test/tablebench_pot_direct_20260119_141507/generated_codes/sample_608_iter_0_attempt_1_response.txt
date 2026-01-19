@@ -1,0 +1,27 @@
+Step 1: Identify the relevant rows for "High-efficiency air source heat pump (ASHP)" and "Ground source heat pump (GSHP)" at 35 °C.
+Step 2: Extract the performance values at 35 °C for both pump types.
+Step 3: Compute the difference between the two values.
+Step 4: Print the result.
+
+From the table:
+- High-efficiency ASHP at 0 °C has 3.8 at 35 °C.
+- Ground source heat pump (GSHP) at 0 °C has 5.0 at 35 °C.
+
+Note: The data shows "air at 0 °C" for ASHP and "water at 0 °C" for GSHP, but the question asks about 35 °C. There is no direct row for "High-efficiency ASHP at 35 °C" — only at 0 °C. However, the row labeled "High-efficiency ASHP, air at 0 °C" has a value of 3.8 at 35 °C. Similarly, "Ground source heat pump (GSHP), water at 0 °C" has 5.0 at 35 °C.
+
+So we compare 3.8 and 5.0.
+
+Difference = 5.0 - 3.8 = 1.2
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Find the values at 35 °C for the two specified pump types
+as_hp_35c = df[df['Pump type and source'] == 'High-efficiency ASHP, air at 0 °C']['35 °C (e.g. heated screed floor)'].values[0]
+gs_hp_35c = df[df['Pump type and source'] == 'Ground source heat pump (GSHP), water at 0 °C']['35 °C (e.g. heated screed floor)'].values[0]
+
+difference = gs_hp_35c - as_hp_35c
+print(f"Final Answer: {difference}")
+```

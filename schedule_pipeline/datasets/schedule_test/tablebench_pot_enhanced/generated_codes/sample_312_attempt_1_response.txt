@@ -1,0 +1,32 @@
+Step 1: The user wants to find the trainer who has trained the most winners with a winning time of less than 2:02 minutes.
+Step 2: Load the dataframe.
+Step 3: Filter rows where the 'time' is less than '2:02'.
+Step 4: Convert the 'time' column to seconds for accurate comparison.
+Step 5: Count the number of wins per trainer.
+Step 6: Identify the trainer with the maximum number of wins.
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Function to convert time string to seconds
+def time_to_seconds(time_str):
+    minutes, seconds = map(float, time_str.split(':'))
+    return minutes * 60 + seconds
+
+# Convert time column to seconds
+df['time_seconds'] = df['time'].apply(time_to_seconds)
+
+# Filter rows where time is less than 2:02 (122 seconds)
+filtered_df = df[df['time_seconds'] < 122]
+
+# Count wins per trainer
+trainer_counts = filtered_df['trainer'].value_counts()
+
+# Get the trainer with the most wins
+most_successful_trainer = trainer_counts.idxmax()
+
+print(f"Final Answer: {most_successful_trainer}")
+```

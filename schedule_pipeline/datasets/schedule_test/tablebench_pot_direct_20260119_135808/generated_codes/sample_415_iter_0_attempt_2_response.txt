@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table shows the number of flights (in thousands) by country from 2002 to 2011. Notable trends include a steady increase in global flight numbers, with the world total rising from 13,600 to 16,100 over the period. Chile and China show consistent growth, while Indonesia and Mexico exhibit fluctuations. The United States and Australia remain relatively stable, and Kazakhstan shows a declining trend.

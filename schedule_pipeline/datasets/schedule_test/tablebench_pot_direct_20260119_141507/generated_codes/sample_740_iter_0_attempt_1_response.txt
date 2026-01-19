@@ -1,0 +1,26 @@
+Step 1: The question asks for a projection of CBR (Crude Birth Rate), CDR (Crude Death Rate), and IMR (Infant Mortality Rate) for the period 2010–2015 based on observed trends from 1950 to 2010.
+
+Step 2: Analyze the trends in the given columns:
+- CBR: Decreasing from 47.9 to 21.5 over time.
+- CDR: Decreasing from 27.1 to 7.2 over time.
+- IMR: Decreasing from 184.8 to 44.4 over time.
+
+Step 3: Assume a linear trend and extrapolate the values for 2010–2015 using the last available data (2005–2010) as a base.
+
+Step 4: Calculate the average rate of change per 5-year period and project forward by 5 years.
+
+Step 5: Use simple linear extrapolation for each rate.
+
+For CBR:
+- From 1950–1955 to 2005–2010: 5 intervals, drop from 47.9 to 21.5 → change = -26.4 over 55 years → -0.48 per year
+- Project 2010–2015: 21.5 - (0.48 * 5) = 14.0
+
+For CDR:
+- From 27.1 to 7.2 over 55 years → change = -19.9 → -0.36 per year
+- Project: 7.2 - (0.36 * 5) = 5.2
+
+For IMR:
+- From 184.8 to 44.4 over 55 years → change = -140.4 → -2.55 per year
+- Project: 44.4 - (2.55 * 5) = 44.4 - 12.75 = 31.65
+
+Final Answer: 14.0, 5.2, 31.65

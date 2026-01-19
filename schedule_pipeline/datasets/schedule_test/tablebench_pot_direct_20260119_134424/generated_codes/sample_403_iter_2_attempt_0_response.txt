@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The table contains data on tourism statistics for 20 countries in 2011, including tourist arrivals, tourism receipts in millions of USD, per-arrival and per-capita receipts, and economic contributions as percentages of GDP and exports. The Tourism Competitiveness Index (TTCI) measures overall competitiveness. Notable trends include Mexico having the highest tourist arrivals (23.4 million), Venezuela showing the highest per-arrival receipts ($1,449), and the Dominican Republic having the highest share of tourism in GDP (36.2%). Several countries like Cuba, Haiti, and Venezuela have missing data for 2003 metrics. Overall, Latin American countries dominate high-per-capita and per-arrival receipts, with Costa Rica and Mexico leading in competitiveness.
+
+Final Answer: tourist arrivals, tourism receipts, per-arrival receipts, per-capita receipts, GDP share, export share, TTCI

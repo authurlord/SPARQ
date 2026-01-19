@@ -1,0 +1,22 @@
+Step 1: The user wants to calculate the Draft Position Improvement for players drafted in the 7th round. Draft Position Improvement is defined as the difference between the overall pick number and the pick number in a specific round (i.e., overall - pick).
+
+Step 2: Load the dataframe.
+
+Step 3: Filter the data to include only players from the 7th round.
+
+Step 4: Calculate the Draft Position Improvement for each player as (overall - pick).
+
+Step 5: Return the list of improvements.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 7th round
+seventh_round = df[df['round'] == '7']
+# Calculate draft position improvement
+seventh_round['draft_improvement'] = seventh_round['overall'].astype(int) - seventh_round['pick'].astype(int)
+# Extract the improvements
+improvements = seventh_round['draft_improvement'].tolist()
+print(f"Final Answer: {improvements[0]}, {improvements[1]}")
+```

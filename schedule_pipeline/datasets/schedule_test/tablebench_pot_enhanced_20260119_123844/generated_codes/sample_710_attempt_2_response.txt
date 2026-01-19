@@ -1,0 +1,21 @@
+Step 1: The user wants to identify the country with the highest 'Total terrestrial vertebrates' and calculate the difference between the highest and lowest values.
+Step 2: Load the dataframe.
+Step 3: Find the country with the maximum value in 'Total terrestrial vertebrates'.
+Step 4: Find the country with the minimum value in 'Total terrestrial vertebrates'.
+Step 5: Calculate the difference between the maximum and minimum values.
+Step 6: Print the result in the required format.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the country with the highest total terrestrial vertebrates
+max_country = df.loc[df['Total terrestrial vertebrates'].idxmax(), 'Country']
+max_value = df['Total terrestrial vertebrates'].max()
+# Find the country with the lowest total terrestrial vertebrates
+min_country = df.loc[df['Total terrestrial vertebrates'].idxmin(), 'Country']
+min_value = df['Total terrestrial vertebrates'].min()
+# Calculate the difference
+difference = max_value - min_value
+print(f"Final Answer: {max_country}, {difference}")
+```

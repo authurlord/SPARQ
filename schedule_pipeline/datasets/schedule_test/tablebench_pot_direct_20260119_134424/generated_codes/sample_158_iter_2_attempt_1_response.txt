@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: High annual change in total passengers is associated with higher capacity in use, as seen in airports like João Pessoa (145.62%), Foz do Iguaçu (116.10%), and Juazeiro do Norte (451.08%).

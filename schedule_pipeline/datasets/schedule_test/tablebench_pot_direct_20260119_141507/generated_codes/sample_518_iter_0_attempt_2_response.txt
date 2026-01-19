@@ -1,0 +1,17 @@
+Step 1: The user wants to find the country with the highest GDP per capita.  
+GDP per capita is calculated as (GDP (nominal) / population).  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'gdp (nominal) (millions of usd) 2011' and 'population' columns.  
+Step 4: Calculate GDP per capita for each country.  
+Step 5: Find the country with the maximum value and print it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate GDP per capita: nominal GDP divided by population
+df['gdp_per_capita'] = df['gdp (nominal) (millions of usd) 2011'] / df['population']
+# Find the country with the highest GDP per capita
+highest_gdp_per_capita_country = df.loc[df['gdp_per_capita'].idxmax(), 'country']
+print(f"Final Answer: {highest_gdp_per_capita_country}")
+```

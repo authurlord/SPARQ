@@ -1,0 +1,55 @@
+We are tasked with finding the year in which the average speed of the vessels increased the most compared to the previous year.
+
+Step-by-step approach:
+1. The 'speed' column contains values like "20", "23", "22", "18", "18, 5", etc. — some are in string format with spaces (e.g., "18 , 5").
+2. We need to clean the 'speed' column to convert it into numeric values.
+3. Convert the speed strings (e.g., "18 , 5" → 18.5) by removing spaces and commas and parsing as float.
+4. Group the data by year and compute the average speed per year.
+5. Compute the difference in average speed between consecutive years.
+6. Find the year where this increase is the largest (i.e., maximum positive difference from previous year).
+
+Note: We must handle string parsing carefully. For example:
+- "18 , 5" → should become 18.5
+- "18" → becomes 18.0
+
+We'll use string manipulation and `pd.to_numeric` with errors='coerce' to safely parse.
+
+Let's write the corrected code:
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the dataframe
+df = pd.read_csv('table.csv')
+
+# Clean the 'speed' column: remove spaces and commas, then convert to float
+def clean_speed(speed_str):
+    # Replace comma and space with decimal point
+    cleaned = speed_str.replace(',', '.').replace(' ', '')
+    return float(cleaned)
+
+# Apply cleaning to the 'speed' column
+df['speed'] = df['speed'].apply(clean_speed)
+
+# Convert 'year' to integer type
+df['year'] = pd.to_numeric(df['year'], errors='coerce')
+
+# Remove any rows with invalid year or speed
+df = df.dropna(subset=['year', 'speed'])
+
+# Group by year and calculate average speed per year
+avg_speed_per_year = df.groupby('year')['speed'].mean()
+
+# Compute year-over-year increase
+diffs = avg_speed_per_year.diff()
+
+# Find the year with the maximum increase (positive)
+max_increase_year = diffs.idxmax()
+
+# If no increase (all zero or negative), return the first valid year
+if pd.isna(max_increase_year):
+    max_increase_year = df['year'].iloc[0]
+
+print(f"Final Answer: {max_increase_year}")
+```

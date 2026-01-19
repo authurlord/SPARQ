@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains information about power plants in India, including their serial number (sno), name (power plant), state, commissioned capacity in megawatts (MW), and year of commission. Key insights include: the highest commissioned capacity is 1000 MW for Indira Sagar in Madhya Pradesh (commissioned in 2005), the earliest commissioning was in 1981 (Baira Siul in Himachal Pradesh), and multiple plants are located in Jammu & Kashmir and Himachal Pradesh. The data spans from 1981 to 2012, showing a trend of increasing capacity over time.

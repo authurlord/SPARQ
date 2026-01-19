@@ -1,0 +1,23 @@
+Step 1: The user wants to find the airport with the largest growth rate in passenger traffic from 2008 to 2009.  
+Step 2: Growth rate is calculated as: ((2009 - 2008) / 2008) * 100.  
+Step 3: Extract the '2008' and '2009' columns, compute the growth rate for each airport, and identify the maximum.  
+Step 4: Return the name of the airport with the highest growth rate.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert passenger numbers to integers
+df['2008'] = pd.to_numeric(df['2008'], errors='coerce')
+df['2009'] = pd.to_numeric(df['2009'], errors='coerce')
+
+# Calculate growth rate from 2008 to 2009
+df['growth_rate'] = ((df['2009'] - df['2008']) / df['2008']) * 100
+
+# Find the airport with the maximum growth rate
+max_growth_row = df.loc[df['growth_rate'].idxmax()]
+airport_with_max_growth = max_growth_row['airport']
+
+print(f"Final Answer: {airport_with_max_growth}")
+```

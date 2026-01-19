@@ -1,0 +1,25 @@
+[Answer Format]
+Final Answer: kurt busch, 0.213
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'points' and 'laps' columns to numeric, handling non-numeric values
+df['points'] = pd.to_numeric(df['points'], errors='coerce')
+df['laps'] = pd.to_numeric(df['laps'], errors='coerce')
+
+# Calculate Points Per Lap
+df['points_per_lap'] = df['points'] / df['laps']
+
+# Find the driver with the highest Points Per Lap
+max_pp_lap_driver = df.loc[df['points_per_lap'].idxmax()]
+
+# Extract driver name and points per lap value (rounded to 3 decimal places)
+driver_name = max_pp_lap_driver['driver']
+points_per_lap = round(max_pp_lap_driver['points_per_lap'], 3)
+
+print(f"Final Answer: {driver_name}, {points_per_lap}")
+```

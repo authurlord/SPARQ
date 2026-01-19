@@ -1,0 +1,52 @@
+Step 1: The question asks for a stacked bar chart showing the number of wins and losses for each season/league. However, the table does not clearly represent a single team's data — instead, it contains multiple leagues and seasons with win and loss counts. Since there is no specific team mentioned, we interpret this as needing to visualize the win-loss distribution across seasons.
+
+Step 2: Extract the "Win" and "Lose" columns and group by the "League" and "Position" (or season) to create a stacked bar chart.
+
+Step 3: Since "Position" and "League" vary, we will treat each row as a season and plot the wins and losses in a stacked bar chart per season.
+
+Step 4: Use matplotlib to create a stacked bar chart where each bar represents a season, with wins on top and losses below.
+
+Note: The "Position" column has non-standard values (e.g., "Champion", "Runner-up"), so we will use the row index or season label to represent each entry.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Convert the data to a clean format for plotting
+# We'll extract the 'Win' and 'Lose' columns and keep the season information
+# The 'League' and 'Position' are used to identify the season, but we'll just use the row as a season
+
+# Create a list of seasons based on the first column (League) and the position
+seasons = []
+wins = []
+losses = []
+
+for idx, row in df.iterrows():
+    season_info = row['League'] + ' - ' + str(row['Position']).strip()
+    seasons.append(season_info)
+    wins.append(row['Win'])
+    losses.append(row['Lose'])
+
+# Create a DataFrame for plotting
+plot_df = pd.DataFrame({
+    'Season': seasons,
+    'Wins': wins,
+    'Losses': losses
+})
+
+# Plot stacked bar chart
+plt.figure(figsize=(12, 6))
+plot_df.set_index('Season').plot(kind='bar', stacked=True, color=['skyblue', 'lightcoral'])
+plt.title('Stacked Bar Chart of Wins and Losses by Season')
+plt.xlabel('Season')
+plt.ylabel('Number of Matches')
+plt.xticks(rotation=45)
+plt.legend(title='Outcome')
+plt.tight_layout()
+plt.show()
+
+# Final Answer: The chart has been generated showing wins and losses per season.
+Final Answer: chart_generated
+```

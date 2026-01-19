@@ -1,0 +1,20 @@
+Step 1: Filter the data to include only the years in the 1990s (1990–1999).
+Step 2: Identify the rows where the outcome is "Winner".
+Step 3: Extract the 'Championship' column for these rows and count how many times each championship appears.
+Step 4: Determine which player has the highest number of wins.
+Step 5: Return the player with the most championships.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for the 1990s
+df_1990s = df[(df['Year'] >= '1990') & (df['Year'] <= '1999')]
+# Filter only wins
+winners = df_1990s[df_1990s['Outcome'] == 'Winner']
+# Count number of championships per player (using the Championship column)
+championship_counts = winners['Championship'].value_counts()
+# Get the player with the most championships
+most_wins_player = championship_counts.idxmax()
+print(f"Final Answer: {most_wins_player}")
+```

@@ -1,0 +1,33 @@
+Step 1: The user wants to find the state or region with the highest proportion of Military MPs to total MPs and the corresponding percentage.
+Step 2: Load the dataframe.
+Step 3: Filter out the rows that are headers (like 'State Hluttaws' or 'Regional Hluttaws') and focus on the actual data rows.
+Step 4: Convert 'Military MPs' and 'Total' columns to numeric.
+Step 5: Calculate the proportion (Military MPs / Total) for each row.
+Step 6: Find the row with the maximum proportion and extract the state/region name and percentage.
+Step 7: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Drop the header rows (where the first column is not a number)
+data_rows = df[df['State/Region Hluttaws'] != 'State Hluttaws']
+data_rows = data_rows[data_rows['State/Region Hluttaws'] != 'Regional Hluttaws']
+
+# Convert columns to numeric
+data_rows['Military MPs'] = pd.to_numeric(data_rows['Military MPs'])
+data_rows['Total'] = pd.to_numeric(data_rows['Total'])
+
+# Calculate proportion of Military MPs to Total
+data_rows['proportion'] = (data_rows['Military MPs'] / data_rows['Total']) * 100
+
+# Find the row with the highest proportion
+max_row = data_rows.loc[data_rows['proportion'].idxmax()]
+
+# Extract the state/region and percentage
+state_region = max_row['State/Region Hluttaws']
+percentage = max_row['proportion']
+
+print(f"Final Answer: {state_region}, {percentage:.1f}")
+```

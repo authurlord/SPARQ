@@ -1,0 +1,26 @@
+Step 1: The user wants the total number of years served by all mayors.  
+Step 2: For each row, calculate the difference between "Leaving" and "Taking Office". If "Leaving" is "Current", it means the mayor is still serving, so we take the current year (assumed to be 2024) minus the "Taking Office" year.  
+Step 3: Sum up all these years.  
+
+We need to parse the "Taking Office" and "Leaving" columns, convert them to integers, and compute the duration for each mayor.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Taking Office' and 'Leaving' to integers
+df['Taking Office'] = pd.to_numeric(df['Taking Office'], errors='coerce')
+df['Leaving'] = pd.to_numeric(df['Leaving'], errors='coerce')
+
+# For rows where 'Leaving' is 'Current', use 2024 as the leaving year
+df['Leaving'] = df['Leaving'].fillna(2024)
+
+# Calculate years served for each mayor
+years_served = df['Leaving'] - df['Taking Office']
+
+# Sum all years served
+total_years = years_served.sum()
+
+print(f"Final Answer: {total_years}")
+```

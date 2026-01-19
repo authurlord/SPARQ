@@ -1,0 +1,11 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric for calculation
+df['total usaaf'] = pd.to_numeric(df['total usaaf'])
+df['overseas'] = pd.to_numeric(df['overseas'])
+
+# Calculate correlation between total USAF personnel and overseas personnel
+correlation = df['total usaaf'].corr(df['overseas'])
+
+print(f"Final Answer: {correlation:.3f}")

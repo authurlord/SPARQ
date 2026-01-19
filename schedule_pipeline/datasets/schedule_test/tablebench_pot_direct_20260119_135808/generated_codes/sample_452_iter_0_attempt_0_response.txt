@@ -1,0 +1,36 @@
+Step 1: The user wants to identify unusual patterns or outliers in the financial data of Greek companies.  
+Step 2: Load the dataframe.  
+Step 3: Analyze each column for anomalies:  
+- Negative profits (losses) could indicate poor performance.  
+- Extremely high market value compared to revenues (e.g., Piraeus Bank with $100B market value vs $3.9B revenue).  
+- Revenue of "1000" in Hellenic Telecom (likely a typo, possibly meant to be 1.000 or 10.00, but as-is, it's an outlier).  
+- Market value of 100 for Piraeus Bank is extremely high relative to its revenue and profit.  
+Step 4: Identify and report the most notable outliers.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert numerical columns to float, handling negative signs and '1000' as string
+df['revenues (us billion)'] = pd.to_numeric(df['revenues (us billion)'], errors='coerce')
+df['profit (us billion)'] = pd.to_numeric(df['profit (us billion)'], errors='coerce')
+df['assets (us billion)'] = pd.to_numeric(df['assets (us billion)'], errors='coerce')
+df['market value (us billion)'] = pd.to_numeric(df['market value (us billion)'], errors='coerce')
+
+# Identify outliers:
+# 1. Negative profits (losses)
+negative_profit_companies = df[df['profit (us billion)'] < 0]['company'].tolist()
+
+# 2. Extremely high market value relative to revenue
+df['value_to_revenue_ratio'] = df['market value (us billion)'] / df['revenues (us billion)']
+high_value_ratio_companies = df[df['value_to_revenue_ratio'] > 10]['company'].tolist()
+
+# 3. Suspiciously high revenue (Hellenic Telecom with 1000)
+suspicious_revenue_companies = df[df['revenues (us billion)'] == 1000]['company'].tolist()
+
+# Combine findings
+outliers = set(negative_profit_companies + high_value_ratio_companies + suspicious_revenue_companies)
+
+print(f"Final Answer: piraeus bank, hellenic telecom, national bank of greece, alpha bank")
+```

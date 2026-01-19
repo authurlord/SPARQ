@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: region, location, from, depots (12.09), routes (12.09), vehicles (12.09), Novosibirsk Obl, Novosibirsk, 11 Nov 1957, 4, 14, 322

@@ -1,0 +1,41 @@
+We are tasked with finding the series in which a driver has the highest win rate. The win rate is defined as:
+
+$$
+\text{Win Rate} = \left(\frac{\text{Total Wins}}{\text{Total Races}}\right) \times 100
+$$
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Group the data by 'series' to calculate total wins and total races per series.
+3. Compute the win rate for each series (only consider rows where 'wins' and 'races' are numeric).
+4. Identify the series with the highest win rate.
+5. Handle edge cases: avoid division by zero, ensure that 'wins' and 'races' are numeric (e.g., skip non-numeric values).
+
+Note: Some entries have 'nc' or 'n/a' in the 'wins' or 'points' columns, which we should treat as 0 for wins and ignore in calculations.
+
+Let's implement this carefully.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'wins' and 'races' to numeric, coercing errors to NaN
+df['wins'] = pd.to_numeric(df['wins'], errors='coerce')
+df['races'] = pd.to_numeric(df['races'], errors='coerce')
+
+# Drop rows where either wins or races are NaN (invalid data)
+df_clean = df.dropna(subset=['wins', 'races'])
+
+# Group by 'series' and compute total wins and total races
+grouped = df_clean.groupby('series').agg(total_wins=('wins', 'sum'), total_races=('races', 'sum')).reset_index()
+
+# Calculate win rate as percentage
+grouped['win_rate'] = (grouped['total_wins'] / grouped['total_races']) * 100
+
+# Find the series with the highest win rate
+max_win_rate_series = grouped.loc[grouped['win_rate'].idxmax(), 'series']
+
+print(f"Final Answer: {max_win_rate_series}")
+```

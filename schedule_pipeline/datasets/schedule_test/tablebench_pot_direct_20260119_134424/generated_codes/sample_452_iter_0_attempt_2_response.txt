@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: -16, -8.6, 1000, 100

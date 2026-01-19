@@ -1,0 +1,23 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Describe the columns
+print("Table Description:")
+print("Rank by average: The rank of the couple based on their total score.")
+print("Competition finish: The actual finishing position in the competition.")
+print("Couple: The name of the dancing pair.")
+print("Total: The total points scored by the couple across all dances.")
+print("Number of dances: The number of dances performed by the couple.")
+print("Average: The average score per dance.")
+
+# Initial insights
+print("\nInitial Insights:")
+print(f"The highest-scoring couple is Darren & Lana with a total of {df['total'].max()} points.")
+print(f"The couple with the highest average score is Darren & Lana with {df['average'].max()} per dance.")
+print(f"Darren & Lana also performed the most dances (11), indicating consistency.")
+print(f"Clive & Helga performed only one dance but still achieved a high average of {df[df['couple'] == 'clive & helga']['average'].values[0]}.")
+print(f"Paul & Pamela and Stewart & Clare had lower numbers of dances but still managed decent averages.")
+
+# Final summary
+print(f"Final Answer: Rank by average, competition finish, couple, total, number of dances, average")

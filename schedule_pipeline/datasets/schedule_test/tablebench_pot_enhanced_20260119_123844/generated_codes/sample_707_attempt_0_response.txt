@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the chambering with the highest maximum pressure (p max) in bars.
+Step 2: Load the dataframe.
+Step 3: Find the row with the maximum value in the 'p max' column.
+Step 4: Extract and print the corresponding 'chambering' value.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the chambering with the highest p max
+max_pressure_chambering = df.loc[df['p max'].idxmax(), 'chambering']
+print(f"Final Answer: {max_pressure_chambering}")
+```

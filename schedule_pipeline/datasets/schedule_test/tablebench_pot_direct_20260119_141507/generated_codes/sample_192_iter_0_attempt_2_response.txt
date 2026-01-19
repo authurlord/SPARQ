@@ -1,0 +1,9 @@
+Step 1: The question asks about the impact of a significant increase in total external debt in 2010 on the debt service ratio in subsequent years.  
+Step 2: First, identify the total external debt and debt service ratio for 2010 and the following years.  
+Step 3: Note that the debt service ratio (%) is given as "-" from 2015 onward, which suggests data is not available or not applicable.  
+Step 4: The total external debt increased from 2010 to 2011 (73,594 million USD), but the debt service ratio decreased slightly from 9.9% in 2010 to 9.9% in 2011, then dropped to 7.3% in 2012 and further declined afterward.  
+Step 5: Despite the rise in external debt, the debt service ratio did not increase — it remained stable or decreased in subsequent years. This suggests that the increase in debt was not accompanied by a proportional rise in debt service obligations.  
+
+Conclusion: The significant increase in total external debt in 2010 did not lead to an increase in the debt service ratio; instead, the ratio declined in later years, indicating a relatively improved debt servicing capacity relative to debt levels.
+
+Final Answer: no significant increase, debt service ratio decreased

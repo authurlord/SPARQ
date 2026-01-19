@@ -1,0 +1,20 @@
+Step 1: The user wants the percentage increase in issue price from 2000 to 2010.  
+Step 2: Extract the issue price for the years 2000 and 2010.  
+Step 3: Use the formula for percentage increase:  
+   $$
+   \text{Percentage Increase} = \left( \frac{\text{New Value} - \text{Old Value}}{\text{Old Value}} \right) \times 100
+   $$  
+Step 4: Calculate and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract issue price for 2000 and 2010
+issue_2000 = df[df['year'] == '2000']['issue price'].values[0]
+issue_2010 = df[df['year'] == '2010']['issue price'].values[0]
+
+# Calculate percentage increase
+percentage_increase = ((issue_2010 - issue_2000) / issue_2000) * 100
+print(f"Final Answer: {percentage_increase:.2f}")
+```

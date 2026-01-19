@@ -1,0 +1,16 @@
+Step 1: The user wants to count the number of mountains located in Austria.  
+Step 2: Load the dataframe.  
+Step 3: Check the 'location' column for entries that include "Austria".  
+Step 4: Count how many rows have "Austria" in the location.  
+
+Note: Some entries list multiple countries (e.g., "Germany / Austria"), so we need to check if "Austria" appears in the location string.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Count mountains where 'location' contains 'Austria'
+austrian_mountains = df[df['location'].str.contains('Austria', case=False, na=False)]
+count_austria = len(austrian_mountains)
+print(f"Final Answer: {count_austria}")
+```

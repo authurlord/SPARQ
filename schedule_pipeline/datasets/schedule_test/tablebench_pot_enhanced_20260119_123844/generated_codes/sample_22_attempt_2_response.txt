@@ -1,0 +1,12 @@
+Step 1: The user wants the total number of people deported from all regions.
+Step 2: Load the dataframe.
+Step 3: Select the 'number of people' column.
+Step 4: Sum the values in this column and print the total.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sum the 'number of people' column
+total_people = df['number of people'].sum()
+print(f"Final Answer: {total_people}")
+```

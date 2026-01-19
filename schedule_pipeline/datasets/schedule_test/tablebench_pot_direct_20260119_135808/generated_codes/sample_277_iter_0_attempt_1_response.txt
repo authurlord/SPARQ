@@ -1,0 +1,32 @@
+Step 1: The user wants the average points scored by songs that:
+- Have a non-English language title
+- Have points greater than the median points value of all songs
+
+Step 2: Load the dataframe.
+
+Step 3: Calculate the median of the 'points' column.
+
+Step 4: Filter songs where:
+- 'language' is not 'english'
+- 'points' > median points
+
+Step 5: Compute the mean of the filtered 'points' values.
+
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Calculate median points
+median_points = df['points'].median()
+
+# Filter songs with non-English language and points > median
+filtered_df = df[(df['language'] != 'english') & (df['points'] > median_points)]
+
+# Calculate average points for filtered songs
+average_points = filtered_df['points'].mean()
+
+print(f"Final Answer: {average_points:.1f}")
+```

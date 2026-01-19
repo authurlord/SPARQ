@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The wind power generation positively correlates with the percentage of renewable energy in total electricity demand.

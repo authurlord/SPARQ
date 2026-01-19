@@ -1,0 +1,35 @@
+Step 1: Identify potential anomalies in the data. Anomalies could include:
+- Negative values in "Apps" (e.g., -10 for Espanyol in 1964–65)
+- Missing or inconsistent data (e.g., "4?" or "38?" indicating unclear values)
+- Discrepancies in totals compared to individual season sums
+
+Step 2: Check for negative values in the "Apps" column, as negative appearances are impossible in real football statistics.
+
+Step 3: Look for entries with question marks ("?") in "Goals" or "Apps", which may indicate missing or uncertain data.
+
+Step 4: Validate if any row's total matches the sum of individual season values (e.g., total Apps should equal sum of Apps per season).
+
+Step 5: Focus on the most obvious anomaly — negative apps.
+
+Step 6: Print the row with the anomaly and its details.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Check for negative values in 'Apps' column
+negative_apps = df[df['Apps'] < 0]
+
+# Also check for entries with '?' in 'Goals' or 'Apps'
+question_marks = df[df['Goals'].str.contains('?') | df['Apps'].str.contains('?')]
+
+# The most obvious anomaly is negative apps
+if not negative_apps.empty:
+    print(negative_apps[['Club', 'Season', 'Apps', 'Goals']])
+else:
+    print("No negative values found in Apps.")
+
+# Final Answer: The anomaly is a negative number of appearances (-10) for Espanyol in 1964-65.
+Final Answer: -10
+```

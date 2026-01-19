@@ -1,0 +1,13 @@
+Step 1: The user wants to count the number of teams with a win percentage of 0.7 or higher.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'win pct' is greater than or equal to 0.7.
+Step 4: Count the number of such teams and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter teams with win percentage >= 0.7
+teams_with_high_win_pct = df[df['win pct'] >= '0.7']
+count = len(teams_with_high_win_pct)
+print(f"Final Answer: {count}")
+```

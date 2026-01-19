@@ -1,0 +1,28 @@
+The error occurred because the market values in the table were not properly parsed as numeric values — likely due to a formatting issue or missing decimal points. However, upon closer inspection of the data, the values like "407.2", "212.9", etc., are already correctly formatted with decimal points and should be directly convertible to floats.
+
+The task is to:
+1. Filter the companies in the "oil and gas" industry.
+2. Select only the top 5 companies in that industry (by rank).
+3. Compute the average market value of these top 5.
+
+Step-by-step:
+- Load the DataFrame.
+- Filter rows where 'industry' is 'oil and gas'.
+- Sort by 'rank' (ascending) to get the top 5.
+- Extract the 'market value (billion )' column.
+- Compute the mean.
+
+Note: The data has a typo in the row for Petrobras — it's listed as rank 8, which is fine. We'll proceed with filtering and sorting correctly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for oil and gas industry
+oil_gas_df = df[df['industry'] == 'oil and gas'].copy()
+# Sort by rank to get top 5
+oil_gas_df = oil_gas_df.sort_values(by='rank').head(5)
+# Calculate average market value
+avg_market_value = oil_gas_df['market value (billion )'].mean()
+print(f"Final Answer: {avg_market_value:.1f}")
+```

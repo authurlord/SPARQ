@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 24.6, 27.0, 30.0, 392.0, 443.0

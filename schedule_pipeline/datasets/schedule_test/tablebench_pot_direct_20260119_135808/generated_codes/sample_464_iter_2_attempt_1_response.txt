@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: decimal(32k), 3×2w = 48×4k, 3×t/10+1 = 9×k−2, 32×k, 3×2w = 48×4k

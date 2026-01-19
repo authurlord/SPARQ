@@ -1,0 +1,15 @@
+Step 1: The user wants the median number of televotes for entries with rank >= 10.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'rank' is greater than or equal to 10.
+Step 4: Extract the 'televotes' column from the filtered data.
+Step 5: Calculate the median of the 'televotes' and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where rank is >= 10
+filtered_df = df[df['rank'] >= 10]
+# Calculate median of televotes
+median_televotes = filtered_df['televotes'].median()
+print(f"Final Answer: {median_televotes}")
+```

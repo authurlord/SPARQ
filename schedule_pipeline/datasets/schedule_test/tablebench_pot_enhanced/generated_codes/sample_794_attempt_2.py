@@ -1,0 +1,21 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'troops per one million population' to numeric for comparison
+df['troops per one million population'] = pd.to_numeric(df['troops per one million population'], errors='coerce')
+
+# Drop the 'isaf exact total' row since it's a summary
+df = df[df['country'] != 'isaf exact total']
+
+# Find the country with the highest troops per one million population
+max_country = df.loc[df['troops per one million population'].idxmax()]
+highest_value = max_country['troops per one million population']
+
+# Find the second-highest value
+df_sorted = df.sort_values(by='troops per one million population', ascending=False)
+second_highest_value = df_sorted.iloc[1]['troops per one million population']
+
+# Calculate percentage difference
+percentage_diff = ((highest_value - second_highest_value) / second_highest_value) * 100
+
+print(f"Final Answer: {max_country['country']}, {percentage_diff:.2f}")

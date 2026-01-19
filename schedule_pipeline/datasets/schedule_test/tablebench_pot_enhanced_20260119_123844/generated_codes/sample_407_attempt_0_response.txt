@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Applications, Offer Rate (%), Enrols, Yield (%), Applicant/Enrolled Ratio, Average Entry Tariff

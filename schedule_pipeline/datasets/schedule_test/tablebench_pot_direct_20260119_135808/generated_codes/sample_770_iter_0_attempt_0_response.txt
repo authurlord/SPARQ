@@ -1,0 +1,15 @@
+Step 1: The user is asking about the trend in the issue price of coins over the past years and expects a prediction for the next 5 years.
+Step 2: Load the dataframe.
+Step 3: Extract the 'year' and 'issue price' columns.
+Step 4: Convert 'issue price' to numeric (float) for analysis.
+Step 5: Analyze the trend by plotting or observing the change in issue prices over time.
+Step 6: Based on the observed trend, infer what might happen in the next 5 years.
+Step 7: Since the question is about a trend and not a numerical answer, we interpret it as identifying whether the price is increasing, decreasing, or stable.
+
+From the data:
+- Issue price increases from $39.95 in 2002 to $49.95 in 2012.
+- There is a clear upward trend in issue price over time.
+
+Therefore, the expected trend in the next 5 years is likely an increase.
+
+Final Answer: increasing

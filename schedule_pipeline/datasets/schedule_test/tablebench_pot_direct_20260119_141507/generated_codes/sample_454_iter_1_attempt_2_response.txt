@@ -1,0 +1,27 @@
+Step 1: Identify unusual patterns or outliers in the data.  
+The key focus is on viewership numbers and timeslot anomalies.  
+- Viewership numbers vary widely, with one episode ("don't walk on the grass") having 2,000,000 viewers, which is significantly higher than others (e.g., 390k–524k). This may be an outlier.  
+- The timeslot for episode 125 is "3:00 am - 4:00 am", which is unusual compared to the standard "8:30 pm - 9:30 pm". This suggests a non-standard broadcast time.  
+
+Step 2: Analyze the data to confirm these anomalies.  
+- Check the "viewers" column for values that are much higher or lower than the rest.  
+- Check the "timeslot" column for deviations from the common pattern.  
+
+Step 3: Use Python to detect and report these outliers.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Identify the episode with the highest viewership
+max_viewers = df['viewers'].max()
+max_viewers_episode = df[df['viewers'] == max_viewers]['title'].values[0]
+
+# Identify the unusual timeslot (not in the standard 8:30 pm - 9:30 pm range)
+standard_timeslot = '8:30 pm - 9:30 pm'
+unusual_timeslot = df[df['timeslot'] != standard_timeslot]['timeslot'].values[0]
+unusual_episode = df[df['timeslot'] == unusual_timeslot]['title'].values[0]
+
+print(f"Final Answer: {max_viewers_episode}, {unusual_episode}")
+```

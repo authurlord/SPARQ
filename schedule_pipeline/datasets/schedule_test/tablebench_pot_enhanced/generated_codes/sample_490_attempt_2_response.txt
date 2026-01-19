@@ -1,0 +1,33 @@
+Step 1: The question asks for the period (column) in which the Ionization Energy (IE) first exceeded 700,000. The data columns '21st', '22nd', ..., '30th' represent successive ionization energies (in some units, likely kJ/mol or similar). We need to scan each row and check when a value first exceeds 700,000.
+Step 2: Load the dataframe.
+Step 3: Define the columns representing ionization energies (from '21st' to '30th').
+Step 4: Iterate through each row and each ionization energy column to find the first occurrence where a value > 700000 appears.
+Step 5: Return the corresponding period (e.g., '24th') as the answer.
+
+Note: The data seems to have missing values (None), so we must handle them properly.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Define ionization energy columns
+ie_columns = ['21st', '22nd', '23rd', '24th', '25th', '26th', '27th', '28th', '29th', '30th']
+
+# Flag to track if we found the first IE > 700000
+found = False
+period = None
+
+# Iterate over each row (element)
+for _, row in df.iterrows():
+    for col in ie_columns:
+        value = row[col]
+        if pd.notna(value) and value > 700000:
+            period = col
+            found = True
+            break
+    if found:
+        break
+
+print(f"Final Answer: {period}")
+```

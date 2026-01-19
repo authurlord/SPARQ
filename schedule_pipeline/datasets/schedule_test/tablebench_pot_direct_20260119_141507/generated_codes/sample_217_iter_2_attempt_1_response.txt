@@ -1,0 +1,52 @@
+We are asked to determine what causes a significant increase in the energy content of staple foods: whether it is more closely related to carbohydrates, fat, or protein.
+
+Step-by-step approach:
+1. Identify the relevant columns: "Energy (kJ)", "Carbohydrates (g)", "Fat (g)", and "Protein (g)".
+2. Since energy content is given in kJ, we need to assess the correlation between energy and each of the macronutrients (carbohydrates, fat, protein).
+3. We will calculate the correlation coefficients between the energy column and each of the three macronutrient columns.
+4. The macronutrient with the highest correlation will be considered the primary contributor to energy content.
+
+Note: In nutrition, energy (in kJ) is roughly proportional to:
+- Carbohydrates: ~17 kJ/g
+- Protein: ~17 kJ/g  
+- Fat: ~37 kJ/g
+
+So theoretically, fat should contribute the most to energy. We will verify this using actual data correlations.
+
+Let’s proceed:
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the table
+df = pd.read_csv('table.csv')
+
+# Select only the relevant columns
+energy_col = 'Energy (kJ)'
+carbs_col = 'Carbohydrates (g)'
+fat_col = 'Fat (g)'
+protein_col = 'Protein (g)'
+
+# Extract the numerical values for these columns
+energy = df[energy_col].dropna().astype(float)
+carbs = df[carbs_col].dropna().astype(float)
+fat = df[fat_col].dropna().astype(float)
+protein = df[protein_col].dropna().astype(float)
+
+# Calculate correlation coefficients
+corr_carbs = energy.corr(carbs)
+corr_fat = energy.corr(fat)
+corr_protein = energy.corr(protein)
+
+# Find the highest correlation
+max_corr = max(corr_carbs, corr_fat, corr_protein)
+if max_corr == corr_carbs:
+    result = "carbohydrates"
+elif max_corr == corr_fat:
+    result = "fat"
+else:
+    result = "protein"
+
+print(f"Final Answer: {result}")
+```

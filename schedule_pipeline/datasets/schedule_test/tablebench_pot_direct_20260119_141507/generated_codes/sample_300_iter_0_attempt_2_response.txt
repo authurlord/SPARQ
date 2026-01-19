@@ -1,0 +1,31 @@
+Step 1: Identify which delegates are from Metro Manila. The "hometown" column contains the location, and we need to check if it includes any mention of "metro manila" or similar terms (e.g., "manila, metro manila", "caloocan city, metro manila", etc.).  
+Step 2: Filter the rows where the hometown contains "metro manila" or "manila" (to account for variations).  
+Step 3: Among those, check if they won a pageant title (i.e., result is "winner", "top 5 finalist", "first runner - up", "second runner - up", etc.).  
+Step 4: Count how many such delegates there are.
+
+Note: The question asks specifically for delegates who "won a pageant title". We interpret "won" as any result that indicates a placement (like "winner", "top 5 finalist", "first runner-up", "second runner-up", etc.), not just "winner".
+
+We will:
+- Filter rows where "hometown" contains "metro manila" or "manila"
+- Check if their "result" is one of the winning placements
+- Count such entries
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Define what constitutes a "winning" result
+winning_results = ['winner', 'top 5 finalist', 'first runner - up', 'second runner - up', 'finalist']
+
+# Filter delegates from Metro Manila (case-insensitive, including variations)
+metro_manila_hometown = df['hometown'].str.contains('metro manila', case=False, na=False) | \
+                        df['hometown'].str.contains('manila', case=False, na=False)
+
+# Filter for those with a winning result
+winning_delegates = df[metro_manila_hometown & df['result'].isin(winning_results)]
+
+# Count the number of such delegates
+count = len(winning_delegates)
+print(f"Final Answer: {count}")
+```

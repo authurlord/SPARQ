@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The percentage of votes for McCain (`mccain %`) generally increases with increasing total votes (`total`), as seen in counties like Maricopa (917,527 total votes, 78.86% for McCain) and Pima (355,473 total votes, 72.58% for McCain), indicating a positive correlation between total votes and McCain's share.

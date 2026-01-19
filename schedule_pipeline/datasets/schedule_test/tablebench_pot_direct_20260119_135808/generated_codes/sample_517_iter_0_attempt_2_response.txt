@@ -1,0 +1,31 @@
+Step 1: The user wants to identify the year with the highest number of AIDS-related orphans among all orphans. This requires comparing the percentage of AIDS-related orphans relative to total orphans across different years.
+
+Step 2: Load the dataframe.
+
+Step 3: Extract the 'country' and 'aids orphans as % of orphans' columns to determine the year (from the country label) and the percentage.
+
+Step 4: Since the data is provided per country and year, we need to find the maximum value of "aids orphans as % of orphans" across all entries.
+
+Step 5: Identify the corresponding year from the 'country' column where this maximum percentage occurs.
+
+Step 6: Return the year.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract the year from the 'country' column (e.g., 'botswana (1990)')
+df['year'] = df['country'].str.extract(r'\((\d{4})\)')
+
+# Convert 'aids orphans as % of orphans' to float for comparison
+df['aids orphans as % of orphans'] = pd.to_numeric(df['aids orphans as % of orphans'], errors='coerce')
+
+# Find the row with the maximum percentage
+max_row = df.loc[df['aids orphans as % of orphans'].idxmax()]
+
+# Extract the year
+year_with_most_aids_orphans = max_row['year']
+
+print(f"Final Answer: {year_with_most_aids_orphans}")
+```

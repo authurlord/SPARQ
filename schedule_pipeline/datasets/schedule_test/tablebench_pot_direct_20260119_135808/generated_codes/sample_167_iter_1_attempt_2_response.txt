@@ -1,0 +1,4 @@
+[Answer Format]
+Final Answer: The rank of an airport is not directly determined by the change in international passengers. Instead, it is based on total passenger numbers. A higher percentage change in international passengers does not necessarily correlate with a better rank. For example, Belfast City has the highest percentage change (17.5%) but ranks 17th, while London Heathrow, which ranks 1st, has a smaller percentage change (1.5%). Therefore, changes in international passengers do not directly impact the rank.
+
+Final Answer: No direct impact, rank is based on total passengers

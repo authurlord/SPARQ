@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Fiscal Year, Total External Debt in Million of US Dollars ($), Total Debt Service in Million of US Dollars ($), External Debt to GDP Ratio (%), Debt Service Ratio (%)

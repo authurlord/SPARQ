@@ -1,0 +1,21 @@
+The error occurred because the value "119 , 31%" in the 'capacity in use' column contains a comma and space, which prevents it from being converted to a float. We need to clean this value by removing the comma and space and converting it to a float. Additionally, we should ensure that all entries in the 'capacity in use' column are properly formatted as numeric values before computing the correlation.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Clean the 'capacity in use' column by removing any commas and spaces, then convert to float.
+3. Compute the correlation between 'total passengers' and 'capacity in use'.
+4. Print the correlation coefficient.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'capacity in use' column by removing commas and spaces and converting to float
+df['capacity in use'] = df['capacity in use'].str.replace(',', '').str.replace(' ', '').astype(float)
+
+# Compute the correlation between 'total passengers' and 'capacity in use'
+correlation = df['total passengers'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

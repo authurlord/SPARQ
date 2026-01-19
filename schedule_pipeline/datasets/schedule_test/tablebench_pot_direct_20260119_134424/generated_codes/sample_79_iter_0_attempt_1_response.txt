@@ -1,0 +1,12 @@
+Step 1: The user wants to identify the team in 3rd position in the league.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'position' is '3'.
+Step 4: Extract the 'team' name from that row and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the team in 3rd position
+third_position_team = df[df['position'] == '3']['team'].iloc[0]
+print(f"Final Answer: {third_position_team}")
+```

@@ -1,0 +1,27 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert 'Live births per year' and 'Deaths per year' to numeric, removing spaces
+df['Live births per year'] = df['Live births per year'].str.replace(' ', '').astype(int)
+df['Deaths per year'] = df['Deaths per year'].str.replace(' ', '').astype(int)
+
+# Set the period as index for plotting
+df.set_index('Period', inplace=True)
+
+# Create an area chart
+plt.figure(figsize=(10, 6))
+plt.stackplot(df.index, df['Live births per year'], df['Deaths per year'], labels=['Live Births', 'Deaths'], alpha=0.8)
+
+# Add labels and title
+plt.xlabel('Period')
+plt.ylabel('Number of People')
+plt.title('Live Births and Deaths Over Time Periods')
+plt.legend(loc='upper left')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Show the plot
+plt.show()

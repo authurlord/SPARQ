@@ -1,0 +1,21 @@
+Step 1: The user wants the percentage change in the 'civil liberties' score from 1972 to 1980.  
+Step 2: Extract the 'civil liberties' values for the years 1972 and 1980.  
+Step 3: Calculate the percentage change using the formula:  
+   $$
+   \text{Percentage Change} = \left( \frac{\text{Value in 1980} - \text{Value in 1972}}{\text{Value in 1972}} \right) \times 100
+   $$  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Get civil liberties scores for 1972 and 1980
+civil_liberties_1972 = df.loc[df['year'] == '1972', 'civil liberties'].values[0]
+civil_liberties_1980 = df.loc[df['year'] == '1980', 'civil liberties'].values[0]
+
+# Calculate percentage change
+percentage_change = ((civil_liberties_1980 - civil_liberties_1972) / civil_liberties_1972) * 100
+
+print(f"Final Answer: {percentage_change:.1f}")
+```

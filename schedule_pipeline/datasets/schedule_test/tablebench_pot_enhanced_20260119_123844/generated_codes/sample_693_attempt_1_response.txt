@@ -1,0 +1,15 @@
+Step 1: The user wants to identify the animal with the highest metabolic rate among females.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'Sex' is 'Female'.
+Step 4: Find the row with the maximum 'Metabolic rate' value.
+Step 5: Extract the corresponding 'Animal' value and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for female animals
+female_animals = df[df['Sex'] == 'Female']
+# Find the animal with the highest metabolic rate
+max_metabolic_rate_animal = female_animals.loc[female_animals['Metabolic rate'].idxmax(), 'Animal']
+print(f"Final Answer: {max_metabolic_rate_animal}")
+```

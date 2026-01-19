@@ -1,0 +1,51 @@
+Step 1: The question asks for member countries whose population or GDP per capita deviate significantly from the norm. "Significantly deviate" implies outliers — values that are much higher or lower than the rest.
+
+Step 2: We will calculate the mean and standard deviation of population and GDP per capita to identify outliers using the 3σ rule (values more than 3 standard deviations from the mean are considered outliers).
+
+Step 3: Check each country's population and GDP per capita against these thresholds.
+
+Step 4: Identify countries that have either population or GDP per capita values outside the normal range.
+
+Note: There are duplicate entries for Luxembourg and Netherlands in the data. We will treat them as separate entries unless they are identical in all fields. However, since the population and GDP per capita are different, we consider them separately.
+
+Step 5: Filter and list such countries.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert population and GDP per capita to numeric
+df['population'] = pd.to_numeric(df['population'], errors='coerce')
+df['gdp per capita (us)'] = pd.to_numeric(df['gdp per capita (us)'], errors='coerce')
+
+# Drop rows with NaN due to parsing errors
+df = df.dropna(subset=['population', 'gdp per capita (us)'])
+
+# Calculate mean and std for population and GDP per capita
+pop_mean = df['population'].mean()
+pop_std = df['population'].std()
+gdp_per_capita_mean = df['gdp per capita (us)'].mean()
+gdp_per_capita_std = df['gdp per capita (us)'].std()
+
+# Define thresholds for outliers (3 standard deviations)
+pop_lower = pop_mean - 3 * pop_std
+pop_upper = pop_mean + 3 * pop_std
+gdp_per_capita_lower = gdp_per_capita_mean - 3 * gdp_per_capita_std
+gdp_per_capita_upper = gdp_per_capita_mean + 3 * gdp_per_capita_std
+
+# Identify outliers in population or GDP per capita
+outliers = []
+for idx, row in df.iterrows():
+    country = row['member countries']
+    pop = row['population']
+    gdp_per_capita = row['gdp per capita (us)']
+    
+    if (pop < pop_lower or pop > pop_upper) or (gdp_per_capita < gdp_per_capita_lower or gdp_per_capita > gdp_per_capita_upper):
+        outliers.append(country)
+
+# Remove duplicates and sort
+unique_outliers = sorted(list(set(outliers)))
+print(f"Final Answer: {', '.join(unique_outliers)}")
+```

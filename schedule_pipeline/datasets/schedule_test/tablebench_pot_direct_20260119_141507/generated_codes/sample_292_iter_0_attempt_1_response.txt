@@ -1,0 +1,10 @@
+Step 1: Identify the relevant rows where "Sunny Morning" is mentioned in the "Nominated Work" column for the year 2017.  
+Step 2: From those rows, extract the award name and the edition of the Hollywood Music in Media Awards where it was nominated.  
+Step 3: The award won by "Sunny Morning" in 2017 is from the "Radio Music Awards" (as per the data).  
+Step 4: The Hollywood Music in Media Awards nomination for "Sunny Morning" is listed in the row with "Hollywood Music in Media Awards", "Jazz", "Sunny Morning", "Nominated", and the note "edition #8 (2017)".  
+
+From the table:
+- "Sunny Morning" won the "Radio Music Awards" in 2017 under the "Jazz" category.
+- It was nominated in the Hollywood Music in Media Awards edition #8 (2017).
+
+Final Answer: Radio Music Awards, edition #8 (2017)

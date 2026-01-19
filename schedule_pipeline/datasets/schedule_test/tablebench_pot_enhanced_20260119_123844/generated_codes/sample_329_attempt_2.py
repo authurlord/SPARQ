@@ -1,0 +1,9 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for year 2005 and position 4th
+filtered_data = df[(df['Year'] == '2005') & (df['Position'] == '4th')]
+# Extract event and venue
+event = filtered_data['Event'].values[0]
+venue = filtered_data['Venue'].values[0]
+print(f"Final Answer: {event}, {venue}")

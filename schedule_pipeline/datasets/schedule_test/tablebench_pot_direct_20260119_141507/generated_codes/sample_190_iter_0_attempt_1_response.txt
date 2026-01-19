@@ -1,0 +1,42 @@
+Step 1: The question asks for the top 2 factors (among 'innings', 'runs scored', 'balls faced') that significantly influence 'average' and 'sr' (strike rate) values.  
+Step 2: Since 'average' and 'sr' are derived from 'runs scored' and 'balls faced', we can analyze correlations between these variables.  
+Step 3: We will compute the correlation between each of the three factors and both 'average' and 'sr'.  
+Step 4: Identify the two strongest correlations (in terms of magnitude) to determine the top 2 influencing factors.  
+
+Note: "Significantly influence" is interpreted here as having the highest absolute correlation with 'average' and 'sr'.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert relevant columns to numeric (handle strings like '39.13')
+df['runs scored'] = pd.to_numeric(df['runs scored'], errors='coerce')
+df['balls faced'] = pd.to_numeric(df['balls faced'], errors='coerce')
+df['average'] = pd.to_numeric(df['average'].str.replace('%', ''), errors='coerce')
+df['sr'] = pd.to_numeric(df['sr'].str.replace('%', ''), errors='coerce')
+
+# Select only numeric columns for correlation
+numeric_cols = ['innings', 'runs scored', 'balls faced', 'average', 'sr']
+df_numeric = df[numeric_cols]
+
+# Compute correlation matrix
+correlation_matrix = df_numeric.corr()
+
+# Find the top 2 factors that have the highest absolute correlation with 'average' and 'sr'
+# We consider all pairs and rank by absolute correlation value
+correlations = []
+for col in ['average', 'sr']:
+    for factor in ['innings', 'runs scored', 'balls faced']:
+        if factor != col:
+            corr_val = abs(correlation_matrix.loc[col, factor])
+            correlations.append((factor, col, corr_val))
+
+# Sort by correlation strength (descending)
+correlations.sort(key=lambda x: x[2], reverse=True)
+
+# Top 2 factors (by correlation strength)
+top_2_factors = [factor for factor, _, _ in correlations[:2]]
+
+print(f"Final Answer: {top_2_factors[0]}, {top_2_factors[1]}")
+```

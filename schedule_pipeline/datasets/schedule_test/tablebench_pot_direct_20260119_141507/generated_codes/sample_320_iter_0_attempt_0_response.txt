@@ -1,0 +1,14 @@
+Step 1: The user wants to find the year when the athlete won a gold medal in a 20 km event.  
+Step 2: A "gold medal" corresponds to winning first place, which is represented by "1st" in the "Position" column.  
+Step 3: Filter the rows where "Position" is "1st" and "Event" is "20 km".  
+Step 4: Extract the corresponding "Year" from those rows.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where position is '1st' and event is '20 km'
+gold_medal_years = df[(df['Position'] == '1st') & (df['Event'] == '20 km')]['Year']
+# Since there might be multiple years, we return all of them
+print(f"Final Answer: {', '.join(gold_medal_years.tolist())}")
+```

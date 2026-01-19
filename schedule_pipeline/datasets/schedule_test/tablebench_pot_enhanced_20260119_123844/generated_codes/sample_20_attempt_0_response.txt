@@ -1,0 +1,15 @@
+Step 1: The user wants the average total points of couples who have performed more than 10 dances.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'number of dances' > 10.
+Step 4: Calculate the mean of 'total points' for the filtered rows.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter couples who performed more than 10 dances
+filtered_df = df[df['number of dances'] > 10]
+# Calculate average total points
+average_points = filtered_df['total points'].mean()
+print(f"Final Answer: {average_points:.1f}")
+```

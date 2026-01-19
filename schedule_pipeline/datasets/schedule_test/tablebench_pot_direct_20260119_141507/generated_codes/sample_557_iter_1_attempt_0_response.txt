@@ -1,0 +1,29 @@
+We are tasked with finding the year when the number of Conservative councillors increased the most compared to the previous year.
+
+Step-by-step approach:
+1. Load the data into a DataFrame.
+2. Convert the 'Year' column to numeric (in case it's stored as string) so we can perform arithmetic operations.
+3. Calculate the difference in Conservative councillors between each year and the previous year.
+4. Identify the year where this increase is the largest (i.e., maximum positive difference).
+5. Ensure we only compare years that have a previous year (so skip the first year).
+
+Note: The error in the previous attempt was due to trying to subtract strings (e.g., '1947' - '1951') — we must ensure the 'Year' column is properly converted to integer.
+
+Let’s implement the corrected code:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year' to integer for proper comparison
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
+
+# Calculate the difference in Conservative councillors from the previous year
+df['conservative_diff'] = df['Conservative councillors'].diff()
+
+# Find the year with the maximum increase (positive difference)
+max_increase_row = df[df['conservative_diff'] == df['conservative_diff'].max()]
+year_with_max_increase = max_increase_row.iloc[0]['Year']
+
+print(f"Final Answer: {year_with_max_increase}")
+```

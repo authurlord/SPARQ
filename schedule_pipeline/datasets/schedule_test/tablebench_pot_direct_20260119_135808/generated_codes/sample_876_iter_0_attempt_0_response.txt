@@ -1,0 +1,15 @@
+Step 1: The user wants to find the difference in population density between the sector with the highest and lowest population density in 2012.
+Step 2: Load the dataframe.
+Step 3: Extract the 'population density 2012 (km 2 )' column.
+Step 4: Find the maximum and minimum values of this column.
+Step 5: Calculate the difference and print it.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract population density in 2012
+density_2012 = df['population density 2012 (km 2 )']
+# Calculate the difference between max and min density
+difference = density_2012.max() - density_2012.min()
+print(f"Final Answer: {difference}")
+```

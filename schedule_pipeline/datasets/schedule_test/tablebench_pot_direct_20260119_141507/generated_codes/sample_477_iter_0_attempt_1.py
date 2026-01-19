@@ -1,0 +1,29 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'points' to numeric, handling missing values (like '-')
+points = pd.to_numeric(df['points'], errors='coerce')
+# Remove NaNs
+points = points.dropna()
+
+# Calculate Q1, Q3, IQR
+Q1 = points.quantile(0.25)
+Q3 = points.quantile(0.75)
+IQR = Q3 - Q1
+
+# Define outlier bounds
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+# Find outliers
+outliers = points[(points < lower_bound) | (points > upper_bound)]
+# Get corresponding song names
+outlier_songs = df[df['points'].apply(lambda x: pd.isna(x) or (x < lower_bound) or (x > upper_bound))]['song'].dropna().tolist()
+
+# Also check if any song has negative points (which is unusual)
+negative_points = df[df['points'].astype(str).str.contains('-') & (df['points'] != '-')]['song'].dropna().tolist()
+
+# Combine both types of deviations
+deviant_songs = list(set(outlier_songs + negative_points))
+
+print(f"Final Answer: {', '.join(deviant_songs)}")

@@ -1,0 +1,19 @@
+Step 1: The user wants to identify the animal (from the "Animal" column) with the highest metabolic rate among females.  
+Step 2: Filter the rows where the "Sex" is "Female".  
+Step 3: Among these rows, find the one with the maximum value in the "Metabolic rate" column.  
+Step 4: Return the corresponding "Animal" value.  
+
+Note: The "Animal" column seems to have numerical indices (like '1', '2', etc.) rather than actual animal names. Given the context and data, it's likely these are just identifiers. Since the question asks for "which animal", and no actual animal names are provided, we interpret the "Animal" column as the identifier for each record. Thus, the animal with the highest metabolic rate is the one with the highest value in the "Metabolic rate" column among females.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter only female records
+female_data = df[df['Sex'] == 'Female']
+# Find the row with the highest metabolic rate
+max_metabolic_rate_row = female_data.loc[female_data['Metabolic rate'].idxmax()]
+# Return the animal (index) with the highest metabolic rate
+animal_with_highest_rate = max_metabolic_rate_row['Animal']
+print(f"Final Answer: {animal_with_highest_rate}")
+```

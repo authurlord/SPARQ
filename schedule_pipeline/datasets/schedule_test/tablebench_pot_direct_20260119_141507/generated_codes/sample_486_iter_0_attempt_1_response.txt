@@ -1,0 +1,40 @@
+Step 1: The question asks for economies that deviate significantly from the norm. Since "deviate significantly" is vague, we interpret it as economies with unusually high or low values in key metrics such as GDP per capita or gap from Thailand, especially when compared to others.
+
+Step 2: We will examine the "gdp per capita as of 2012 (ppp)" column, as it is a normalized metric and likely the most useful for identifying outliers. We will compute the interquartile range (IQR) to detect outliers.
+
+Step 3: Identify values that fall outside the IQR range (below Q1 - 1.5*IQR or above Q3 + 1.5*IQR).
+
+Step 4: List the economies that are outliers in GDP per capita.
+
+Note: Since the data has a duplicate entry for "korea", we will treat it as one entity and avoid duplication.
+
+```python
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Filter out duplicate entries (e.g., duplicate 'korea' rows)
+df = df.drop_duplicates(subset=['economy'])
+
+# Extract GDP per capita as of 2012 (ppp)
+gdp_per_capita = df['gdp per capita as of 2012 (ppp)']
+
+# Calculate quartiles and IQR
+Q1 = gdp_per_capita.quantile(0.25)
+Q3 = gdp_per_capita.quantile(0.75)
+IQR = Q3 - Q1
+
+# Define outlier bounds
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+# Find outliers
+outliers = df[(gdp_per_capita < lower_bound) | (gdp_per_capita > upper_bound)]
+
+# Extract economy names of outliers
+outlier_economies = outliers['economy'].tolist()
+
+# Final answer: list of economies with significant deviation
+print(f"Final Answer: {', '.join(outlier_economies)}")
+```

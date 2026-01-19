@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 1770, 1839, 1500, 2203, 1693

@@ -1,0 +1,40 @@
+The error occurred because the column name "internl tourism receipts 2011 (million usd )" contains a typo (likely meant to be "international tourism receipts") and may have been misinterpreted or incorrectly parsed. However, since we are working with a properly structured JSON table, we can safely access the correct column by its exact name.
+
+We are asked: *How does the international tourism receipts change with increasing international tourist arrivals?*
+
+This is a question about the relationship between two variables:
+- International tourist arrivals (in thousands)
+- International tourism receipts (in million USD)
+
+We should analyze the trend — specifically, whether there's a positive correlation between arrivals and receipts.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Extract the two relevant columns:
+   - 'internl tourist arrivals 2011 (x1000)'
+   - 'internl tourism receipts 2011 (million usd )'
+3. Convert both to numeric (to handle any formatting issues).
+4. Compute the correlation coefficient between them.
+5. Interpret: if positive, receipts increase with arrivals; if negative, they decrease.
+6. Print the correlation value as a measure of the relationship.
+
+Note: The presence of "N/D" (not defined) values will cause issues. We need to handle those — in this case, we'll drop rows where either arrival or receipts is missing.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean data: convert to numeric and drop NaNs
+df['internl tourist arrivals 2011 (x1000)'] = pd.to_numeric(df['internl tourist arrivals 2011 (x1000)'], errors='coerce')
+df['internl tourism receipts 2011 (million usd )'] = pd.to_numeric(df['internl tourism receipts 2011 (million usd )'], errors='coerce')
+
+# Drop rows with missing values in either column
+df_clean = df.dropna(subset=['internl tourist arrivals 2011 (x1000)', 'internl tourism receipts 2011 (million usd )'])
+
+# Calculate correlation
+correlation = df_clean['internl tourism receipts 2011 (million usd )'].corr(df_clean['internl tourist arrivals 2011 (x1000)'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

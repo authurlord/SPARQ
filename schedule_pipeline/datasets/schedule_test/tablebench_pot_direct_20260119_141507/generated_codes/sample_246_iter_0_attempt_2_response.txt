@@ -1,0 +1,17 @@
+Step 1: The user wants the average number of storeys for the top 3 buildings (by rank) that were completed before 1980.  
+Step 2: Filter the buildings with rank 1, 2, and 3 (top 3).  
+Step 3: Among these, select only those completed before 1980.  
+Step 4: Calculate the average of their "storeys" value.  
+
+Note: The "completed" column contains year values (e.g., '1983'), so we filter where completed < 1980.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter top 3 by rank (rank 1, 2, 3) and completed before 1980
+filtered_df = df[(df['rank'].isin([1, 2, 3])) & (df['completed'].astype(int) < 1980)]
+# Calculate average storeys
+average_storeys = filtered_df['storeys'].mean()
+print(f"Final Answer: {average_storeys}")
+```

@@ -1,0 +1,31 @@
+Step 1: The user wants a forecast for the year 2020 based on the historical data, assuming a steady increase trend.  
+Step 2: Load the dataframe and focus on the 'Year_2' and corresponding values (the last column, 'Year_2' corresponds to years from 1950 to 2010).  
+Step 3: Extract the values for 'Year_2' and their respective years (1950 to 2010).  
+Step 4: Fit a linear regression model to predict the value for 2020.  
+Step 5: Use the model to predict the value for 2020 and print it.  
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load the dataframe
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns: Year_2 and the corresponding values
+years = df['Year_2'].astype(int)
+values = df['-_2'].str.replace(',', '').astype(int)
+
+# Reshape the data for sklearn
+X = years.values.reshape(-1, 1)
+y = values.values
+
+# Fit a linear regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict for the year 2020
+prediction = model.predict([[2020]])
+
+print(f"Final Answer: {int(prediction[0]):,}")
+```

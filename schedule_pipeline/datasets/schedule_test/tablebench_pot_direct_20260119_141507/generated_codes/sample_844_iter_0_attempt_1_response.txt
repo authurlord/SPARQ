@@ -1,0 +1,20 @@
+Step 1: The user wants to compare the total medal counts of Australia and Russia.  
+Step 2: Load the dataframe.  
+Step 3: Find the total medal count for Australia and Russia from the 'total' column.  
+Step 4: Compare and determine which nation has a higher total.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Get total medal counts for Australia and Russia
+australia_total = df[df['nation'] == 'australia']['total'].values[0]
+russia_total = df[df['nation'] == 'russia']['total'].values[0]
+
+# Compare and answer
+if australia_total > russia_total:
+    final_answer = "Australia"
+else:
+    final_answer = "Russia"
+print(f"Final Answer: {final_answer}")
+```

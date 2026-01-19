@@ -1,0 +1,37 @@
+Step 1: Extract the "Record high °F (°C)" row from the table.
+Step 2: Parse the Celsius values from the string format (e.g., "76\n(24)") and extract the Celsius part.
+Step 3: Create a bar chart using matplotlib to visualize the record high temperatures in Celsius for each month.
+Step 4: Label the x-axis with months, y-axis with temperature in Celsius, and title the chart appropriately.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Extract the 'Record high °F (°C)' row
+record_high_row = df.iloc[0]  # First row corresponds to record high
+
+# Extract Celsius values (inside parentheses)
+celsius_values = []
+for value in record_high_row[1:-1]:  # Exclude 'Month' and 'Year'
+    celsius = value.split('(')[-1].strip(')')
+    celsius_values.append(float(celsius))
+
+# Months
+months = df.columns[1:-1]  # Exclude 'Month' and 'Year'
+
+# Plot bar chart
+plt.figure(figsize=(12, 6))
+plt.bar(months, celsius_values, color='skyblue')
+plt.title('Record High Temperatures (°C) by Month')
+plt.xlabel('Month')
+plt.ylabel('Temperature (°C)')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Final Answer: The bar chart is displayed
+print("Final Answer: Bar chart displayed")
+```

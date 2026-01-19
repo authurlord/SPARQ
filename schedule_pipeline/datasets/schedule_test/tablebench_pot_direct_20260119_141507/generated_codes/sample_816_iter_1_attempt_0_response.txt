@@ -1,0 +1,31 @@
+The error occurred because the "jaanu någisto" column contains string values (like '4', '8', etc.) that need to be converted to integers before performing numerical operations such as standard deviation.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Select all the judge columns (excluding 'artist' and 'total', 'points').
+3. Convert each judge's scores from strings to integers.
+4. Calculate the standard deviation for each judge's scores.
+5. Identify which judge has the highest standard deviation.
+
+Note: We will compute the standard deviation of scores per judge and find the judge with the maximum variation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Select only the judge columns (excluding 'artist', 'total', 'points')
+judge_columns = df.columns[1:-2]  # Skip 'artist' and 'total', 'points'
+
+# Convert all judge score columns to numeric (int)
+df_numeric = df[judge_columns].apply(pd.to_numeric, errors='coerce')
+
+# Calculate standard deviation for each judge
+std_deviation = df_numeric.std()
+
+# Find the judge with the highest standard deviation
+max_std_judge = std_deviation.idxmax()
+
+print(f"Final Answer: {max_std_judge}")
+```

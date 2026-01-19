@@ -1,0 +1,18 @@
+The error occurred because the "original air date" column contains string values, and when trying to filter by "first 5 episodes," we need to rely on the "no in series" column instead. The first 5 episodes correspond to the first 5 rows of the dataset (based on the order of the table), not based on air date.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Select the 'viewers (millions)' column.
+3. Take the first 5 rows (episodes 1 to 5).
+4. Compute the mean of those viewers.
+5. Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Extract viewers for the first 5 episodes (first 5 rows)
+first_5_viewers = df['viewers (millions)'].head(5)
+average_viewers = first_5_viewers.mean()
+print(f"Final Answer: {average_viewers:.2f}")
+```

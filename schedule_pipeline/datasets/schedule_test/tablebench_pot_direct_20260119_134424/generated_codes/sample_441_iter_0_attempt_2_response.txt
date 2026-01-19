@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table presents payout values for various poker hands in a video poker game across different credit levels (1 to 5 credits). The 'hand' column lists the poker hand rankings, while the columns '1 credit' to '5 credits' show corresponding payouts. The last row, 'theoretical return', indicates the expected return percentage for each credit level, with most at 98.9% and 5 credits at 100.1%, suggesting a favorable return for max bets.

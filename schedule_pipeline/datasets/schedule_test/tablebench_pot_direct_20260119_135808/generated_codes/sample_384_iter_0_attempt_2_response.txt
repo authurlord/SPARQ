@@ -1,0 +1,17 @@
+Step 1: The user wants to count the number of earthquakes with a magnitude of 6.5 or higher.
+Step 2: Load the dataframe.
+Step 3: Convert the 'Magnitude' column to float for numerical comparison.
+Step 4: Filter rows where 'Magnitude' >= 6.5.
+Step 5: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Magnitude' column to float for comparison
+df['Magnitude'] = pd.to_numeric(df['Magnitude'])
+# Filter earthquakes with magnitude 6.5 or higher
+high_magnitude_earthquakes = df[df['Magnitude'] >= 6.5]
+# Count the number of such earthquakes
+count = len(high_magnitude_earthquakes)
+print(f"Final Answer: {count}")
+```

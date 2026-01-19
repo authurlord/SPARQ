@@ -1,0 +1,15 @@
+Step 1: The user wants the average total value per year from 2005 to 2009.  
+Step 2: Filter the data for years between 2005 and 2009 (inclusive).  
+Step 3: Calculate the mean of the 'total' column for the filtered rows.  
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where year is between 2005 and 2009 inclusive
+filtered_df = df[(df['year'].astype(int) >= 2005) & (df['year'].astype(int) <= 2009)]
+# Calculate the mean of the 'total' column
+average_total = filtered_df['total'].mean()
+print(f"Final Answer: {average_total:.2f}")
+```

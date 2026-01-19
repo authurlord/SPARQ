@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: region, total population, manchu, percentage in manchu population, regional percentage of population, Manchu population distribution across regions

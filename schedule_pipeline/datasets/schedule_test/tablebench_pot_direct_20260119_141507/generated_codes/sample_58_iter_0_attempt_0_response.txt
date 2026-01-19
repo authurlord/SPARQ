@@ -1,0 +1,13 @@
+Step 1: The user wants to find the nation that won exactly 30 silver medals.  
+Step 2: Load the dataframe.  
+Step 3: Look at the 'Silver' column and find the row where the value is 30.  
+Step 4: Return the corresponding 'Nation' value.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the nation with 30 silver medals
+nation_with_30_silver = df[df['Silver'] == 30]['Nation'].values[0]
+print(f"Final Answer: {nation_with_30_silver}")
+```

@@ -1,0 +1,19 @@
+Step 1: The user wants to determine if there is a correlation between the number of episodes in a season and viewership (measured in millions).
+Step 2: Load the dataframe.
+Step 3: Extract the 'episodes' and 'viewers (in millions)' columns.
+Step 4: Compute the correlation coefficient between these two variables.
+Step 5: Interpret the result: if the correlation is positive and significant, it suggests that more episodes are associated with higher viewership; otherwise, no clear trend.
+Step 6: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'viewers (in millions)' to float for numerical analysis
+df['viewers (in millions)'] = pd.to_numeric(df['viewers (in millions)'], errors='coerce')
+
+# Calculate correlation between episodes and viewership
+correlation = df['episodes'].corr(df['viewers (in millions)'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

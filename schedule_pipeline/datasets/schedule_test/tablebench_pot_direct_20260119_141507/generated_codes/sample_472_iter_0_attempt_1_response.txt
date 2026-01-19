@@ -1,0 +1,14 @@
+Step 1: Identify a district with an unusually high or low population density, which might indicate data entry errors or unusual demographic patterns.  
+Step 2: Look for outliers in the "pop density (per km2)" column. A value like 1000000.0 (in San Lorenzo) is extremely high compared to others.  
+Step 3: Check if such a value is plausible — for example, a population of 100 in a 1000 ha area leads to a density of 100,000 per km², which is unrealistic.  
+Step 4: The district with the highest population density is "San Lorenzo" with 1,000,000.0 per km², which is clearly an outlier.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the district with the highest population density
+max_density = df['pop density (per km2)'].max()
+district_with_max_density = df[df['pop density (per km2)'] == max_density]['district'].values[0]
+print(f"Final Answer: {district_with_max_density}")
+```

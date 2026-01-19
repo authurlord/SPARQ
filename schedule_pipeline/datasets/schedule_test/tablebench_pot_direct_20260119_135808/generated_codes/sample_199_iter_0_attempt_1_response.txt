@@ -1,0 +1,28 @@
+Step 1: The user is asking about the relationship between the number of major hurricanes and the number of deaths. To analyze this, we need to examine whether there's a correlation between these two variables.
+Step 2: Load the dataframe.
+Step 3: Clean the 'deaths' column by converting values like 'not known', 'none', and '100 +', '200 +', etc., into numerical values for analysis. For simplicity, treat 'not known' and 'none' as 0, and treat '100 +', '200 +', '30 +', '40', etc., as approximate numeric values (e.g., '100 +' → 100, '200 +' → 200).
+Step 4: Calculate the correlation coefficient between 'number of major hurricanes' and the cleaned 'deaths' column.
+Step 5: Interpret the result: if the correlation is positive and significant, it suggests that an increase in major hurricanes is associated with more deaths.
+Step 6: Print the correlation coefficient as the final answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Clean the 'deaths' column
+def clean_deaths(death_str):
+    if death_str == 'not known' or death_str == 'none':
+        return 0
+    elif '+' in death_str:
+        return int(death_str.replace('+', ''))  # Assume the value is the base number
+    else:
+        return int(death_str)
+
+df['deaths'] = df['deaths'].apply(clean_deaths)
+
+# Calculate correlation between major hurricanes and deaths
+correlation = df['number of major hurricanes'].astype(int).corr(df['deaths'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

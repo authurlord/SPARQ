@@ -1,0 +1,13 @@
+The question asks for a forecast of the likely characteristics (fuel propulsion and quantity) of buses produced in 2025, based on trends of increasing quantity and a shift toward more environmentally friendly fuel propulsion.
+
+Step-by-step analysis:
+1. Observe the trend in "quantity": The values increase over time (e.g., from 4 to 80), suggesting a general upward trend in production quantity.
+2. Observe the trend in "fuel propulsion": Most buses currently use "diesel", with only one hybrid option ("diesel - electric hybrid"). This suggests a gradual shift toward hybrid or more environmentally friendly alternatives.
+3. The data shows that hybrid propulsion is already present (e.g., "diesel - electric hybrid" in 2010), indicating a possible future direction.
+4. Since the quantity is increasing and environmental concerns are growing, it is reasonable to forecast that by 2025, fuel propulsion will shift further toward hybrid or electric options, and quantity will continue to rise.
+
+Given the data and trends, we can reasonably forecast:
+- Fuel propulsion: "electric" or "diesel - electric hybrid" (as a step toward full electrification)
+- Quantity: Higher than current levels (e.g., above 50)
+
+Final Answer: electric, 70

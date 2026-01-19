@@ -1,0 +1,19 @@
+Step 1: The user wants the total increase in medals from 2009 to 2011 for the top 3 countries (rank 1, 2, and 3).
+Step 2: Load the dataframe.
+Step 3: Filter the top 3 countries based on rank.
+Step 4: Convert the columns '2009' and '2011' to integers.
+Step 5: Calculate the increase for each of the top 3 countries (2011 - 2009).
+Step 6: Sum the increases and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter top 3 countries
+top_3 = df[df['rank'].isin(['1.0', '2.0', '3.0'])]
+# Convert 2009 and 2011 columns to integers
+top_3['2009'] = top_3['2009'].astype(int)
+top_3['2011'] = top_3['2011'].astype(int)
+# Calculate increase for each country and sum
+total_increase = (top_3['2011'] - top_3['2009']).sum()
+print(f"Final Answer: {total_increase}")
+```

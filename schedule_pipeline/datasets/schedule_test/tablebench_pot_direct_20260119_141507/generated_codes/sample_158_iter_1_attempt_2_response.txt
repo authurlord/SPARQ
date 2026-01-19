@@ -1,0 +1,33 @@
+The error occurs because the "capacity in use" column contains string values with spaces (e.g., '126 , 06%'), which cannot be directly converted to float. We need to clean this column by removing the space and comma, then converting to float.
+
+Step-by-step approach:
+1. Load the dataframe.
+2. Clean the "capacity in use" column by removing spaces and commas and converting to float.
+3. Extract the "annual change" and "capacity in use" columns.
+4. Analyze the relationship: we are looking for a general impact — is there a trend? For example, does higher annual change correlate with higher capacity in use?
+5. Since the question asks for "impact", we can compute the correlation between "annual change" and "capacity in use" as a quantitative measure of the relationship.
+
+Note: The data has some entries like '126 , 06%' — this appears to be a typo or formatting issue. We assume it's meant to be '126.06%' or '126.06'. We'll remove the space and comma and convert to float (interpreting as percentage value).
+
+We will:
+- Convert "annual change" to float (already in %, so just remove % sign).
+- Convert "capacity in use" to float after cleaning.
+- Compute the correlation between them.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean 'capacity in use' column: remove space and comma, and convert to float
+df['capacity in use'] = df['capacity in use'].str.replace(' ', '').str.replace(',', '.').str.rstrip('%').astype(float)
+
+# Convert 'annual change' to float (remove %)
+df['annual change'] = df['annual change'].str.rstrip('%').astype(float)
+
+# Compute correlation between annual change and capacity in use
+correlation = df['annual change'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

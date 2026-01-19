@@ -1,0 +1,17 @@
+Step 1: The user wants to calculate the correlation coefficient between 'total freshwater withdrawal' and 'per capita withdrawal'.
+Step 2: Load the dataframe.
+Step 3: Convert the two columns to numeric type to ensure proper calculation.
+Step 4: Calculate the correlation coefficient using pandas corr() method.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric
+df['total freshwater withdrawal'] = pd.to_numeric(df['total freshwater withdrawal'])
+df['per capita withdrawal'] = pd.to_numeric(df['per capita withdrawal'])
+
+# Calculate correlation coefficient
+correlation = df['total freshwater withdrawal'].corr(df['per capita withdrawal'])
+print(f"Final Answer: {correlation:.4f}")
+```

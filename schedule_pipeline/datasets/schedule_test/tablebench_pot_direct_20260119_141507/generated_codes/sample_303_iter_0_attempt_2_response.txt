@@ -1,0 +1,24 @@
+Step 1: Identify the event and venue where the athlete won 1st place in the 3000 m steeplechase.  
+Step 2: From the table, find the row where "Event" is "3000 m steeplechase" and "Position" is "1st".  
+Step 3: Check the "Venue" of that row. The capital of the Bahamas is Nassau.  
+Step 4: Confirm if the venue is Nassau. If yes, then that competition is the answer.  
+
+Looking at the data:  
+- The row with "3000 m steeplechase" and "1st" is from 1980, held in Nassau, Bahamas.  
+- Nassau is the capital of the Bahamas.  
+
+Thus, the competition is the "Central American and Caribbean Junior Championships (U-20)".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter for 1st place in 3000 m steeplechase
+filtered_df = df[(df['Position'] == '1st') & (df['Event'] == '3000 m steeplechase')]
+# Check if venue is Nassau (capital of Bahamas)
+if filtered_df['Venue'].iloc[0] == 'Nassau, Bahamas':
+    competition = filtered_df['Competition'].iloc[0]
+    print(f"Final Answer: {competition}")
+else:
+    print("Final Answer: None")
+```

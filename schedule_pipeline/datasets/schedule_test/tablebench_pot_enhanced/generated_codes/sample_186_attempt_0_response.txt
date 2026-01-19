@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The number of candidates nominated generally increases over time, and this correlates with an increase in the percentage of popular vote, indicating a positive relationship between the two variables.

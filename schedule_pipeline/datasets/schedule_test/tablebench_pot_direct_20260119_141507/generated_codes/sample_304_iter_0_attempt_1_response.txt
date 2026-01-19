@@ -1,0 +1,17 @@
+Step 1: Identify the relevant columns: 'venue', 'crowd', and 'margin'. We are looking for matches where the venue is "waverley park" and crowd size > 40,000.  
+Step 2: Filter the rows based on these conditions.  
+Step 3: Among the filtered rows, find the team with the highest margin (since margin is directly given in the table).  
+Step 4: The "winners" column contains the team name, so we extract that from the filtered data.  
+
+Note: Since the question asks for the team with the highest score margin under these conditions, we directly look at the 'margin' column after filtering.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where venue is Waverley Park and crowd > 40,000
+filtered_df = df[(df['venue'] == 'waverley park') & (df['crowd'].astype(int) > 40000)]
+# Find the team (winners) with the highest margin
+highest_margin_team = filtered_df.loc[filtered_df['margin'].idxmax(), 'winners']
+print(f"Final Answer: {highest_margin_team}")
+```

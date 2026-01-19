@@ -1,0 +1,19 @@
+The error occurred because the "number of hurricanes" column contains string values (e.g., '5', '3', '0') that are not properly parsed as integers. However, in the given data, the values are actually strings like '5', '3', '0' — they appear numeric but are stored as strings. We must convert them to integers before comparing.
+
+Step 1: Load the dataframe.
+Step 2: Convert the "number of hurricanes" column to integer type.
+Step 3: Filter rows where the number of hurricanes is 3 or fewer (i.e., ≤ 3).
+Step 4: Count such years and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'number of hurricanes' to integer
+df['number of hurricanes'] = pd.to_numeric(df['number of hurricanes'], errors='coerce')
+# Filter years where number of hurricanes is 3 or fewer
+years_with_3_or_fewer = df[df['number of hurricanes'] <= 3]
+# Count such years
+count = len(years_with_3_or_fewer)
+print(f"Final Answer: {count}")
+```

@@ -1,0 +1,13 @@
+Step 1: The user is asking for the number of Jamaicans granted British citizenship through naturalization by marriage in the year 2001.  
+Step 2: Locate the row corresponding to the year 2001 in the table.  
+Step 3: Extract the value in the "Naturalisation by marriage" column for that row.  
+Step 4: Output the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for year 2001 and get the value in "Naturalisation by marriage" column
+value_2001_marriage = df[df['Year'] == '2001']['Naturalisation by marriage'].values[0]
+print(f"Final Answer: {value_2001_marriage}")
+```

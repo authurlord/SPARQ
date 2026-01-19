@@ -1,0 +1,19 @@
+Step 1: The user wants to find the year with the maximum increase in Conservative councillors compared to the previous year.
+Step 2: Load the dataframe.
+Step 3: Convert the 'Year' column to integer for proper comparison.
+Step 4: Calculate the difference in 'Conservative councillors' between consecutive years.
+Step 5: Identify the year where this difference is maximum.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'Year' to integer
+df['Year'] = pd.to_numeric(df['Year'])
+# Calculate the difference in Conservative councillors
+df['diff'] = df['Conservative councillors'].diff()
+# Find the year with the maximum increase
+max_increase_year = df.loc[df['diff'].idxmax(), 'Year']
+print(f"Final Answer: {max_increase_year}")
+```

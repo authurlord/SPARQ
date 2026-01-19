@@ -1,0 +1,22 @@
+Step 1: The user wants to calculate the correlation coefficient between 'total passengers' and 'capacity in use'.
+Step 2: Load the dataframe.
+Step 3: Extract the 'total passengers' and 'capacity in use' columns.
+Step 4: Compute the Pearson correlation coefficient between these two columns.
+Step 5: Print the correlation coefficient.
+
+Note: The value in the last row for 'capacity in use' is "119 , 31%" which appears to be a typo or formatting error. We will treat it as "119.31%" and convert it to a numeric value (119.31). Similarly, we ensure all values are properly parsed.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Clean 'capacity in use' column: remove any non-numeric characters and convert to float
+df['capacity in use'] = df['capacity in use'].str.replace('%', '').str.replace(',', '.').astype(float)
+
+# Calculate the correlation coefficient between 'total passengers' and 'capacity in use'
+correlation = df['total passengers'].corr(df['capacity in use'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

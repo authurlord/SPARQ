@@ -1,0 +1,9 @@
+Step 1: The question asks which factor — density of air (ρ) or temperature (T) — has a greater causal influence on the speed of sound (c).  
+Step 2: In physics, the speed of sound in air is given by the formula:  
+c = √(γ × R × T), where T is temperature in Kelvin, and γ and R are constants. This shows that speed of sound increases with temperature.  
+Density (ρ) is inversely related to temperature (as ρ ∝ 1/T), and appears in the expression for acoustic impedance, but not directly as a primary driver of c.  
+Thus, temperature has a direct and stronger causal influence on the speed of sound than density.  
+
+Since the data shows a clear trend: as temperature decreases, speed of sound decreases, and vice versa, while density increases slightly with decreasing temperature, we can infer that temperature has a more direct causal effect.  
+
+Final Answer: temperature T (°C)

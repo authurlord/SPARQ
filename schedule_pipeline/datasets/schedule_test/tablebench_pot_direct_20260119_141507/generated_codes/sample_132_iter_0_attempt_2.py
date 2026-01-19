@@ -1,0 +1,37 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Calculate win, draw, loss percentages
+df['win_pct'] = df['Won'] / df['Played'] * 100
+df['draw_pct'] = df['Drawn'] / df['Played'] * 100
+df['loss_pct'] = df['Lost'] / df['Played'] * 100
+
+# Prepare data for plotting
+teams = df['Team']
+win_pcts = df['win_pct']
+draw_pcts = df['draw_pct']
+loss_pcts = df['loss_pct']
+
+# Create stacked bar chart
+plt.figure(figsize=(12, 7))
+bar_width = 0.25
+index = range(len(teams))
+
+plt.bar(index, win_pcts, bar_width, label='Win', color='skyblue')
+plt.bar([i + bar_width for i in index], draw_pcts, bar_width, label='Draw', color='lightgreen')
+plt.bar([i + 2*bar_width for i in index], loss_pcts, bar_width, label='Loss', color='salmon')
+
+plt.xlabel('Team')
+plt.ylabel('Percentage (%)')
+plt.title('Win-Loss-Draw Percentages by Team')
+plt.xticks([i + bar_width for i in index], teams, rotation=45)
+plt.legend()
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+
+# Final answer is not a number or entity, but the chart is generated as requested.
+Final Answer: chart_generated

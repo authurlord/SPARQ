@@ -1,0 +1,18 @@
+Step 1: The user is asking about the relationship between international tourist arrivals and international tourism receipts. Specifically, they want to understand how receipts change as arrivals increase.
+
+Step 2: We need to examine the correlation between "internl tourist arrivals 2011 (x1000)" and "internl tourism receipts 2011 (million usd)".
+
+Step 3: Load the dataframe and compute the correlation coefficient between these two columns.
+
+Step 4: Interpret the result — a positive correlation indicates that as tourist arrivals increase, receipts also tend to increase.
+
+Step 5: Print the correlation value.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between tourist arrivals and tourism receipts
+correlation = df['internl tourist arrivals 2011 (x1000)'].corr(df['internl tourism receipts 2011 (million usd)'])
+print(f"Final Answer: {correlation:.2f}")
+```

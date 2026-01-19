@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Fiscal Year, Total External Debt in Million of US Dollars ($), Total Debt Service in Million of US Dollars ($), External Debt to GDP Ratio (%), Debt Service Ratio (%), decreasing trend in External Debt to GDP Ratio, increasing trend in Total External Debt until 2013, fluctuating Debt Service Ratio, overall decrease in Debt Service Ratio after 2004

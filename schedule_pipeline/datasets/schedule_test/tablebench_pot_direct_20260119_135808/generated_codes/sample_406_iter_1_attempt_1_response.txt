@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table defines BMI categories and their corresponding BMI values and BMI Prime ranges, with BMI Prime being the ratio of actual BMI to the upper limit of normal BMI (25 kg/m²). Notable patterns include a linear progression of BMI Prime values from 0.60 to 2.4, indicating increasing obesity severity. Each category represents a health risk level, with higher BMI and BMI Prime values correlating to greater health risks.

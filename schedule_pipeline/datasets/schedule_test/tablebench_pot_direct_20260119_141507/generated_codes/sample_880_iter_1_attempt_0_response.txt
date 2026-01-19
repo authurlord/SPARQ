@@ -1,0 +1,28 @@
+The error occurred because the data was loaded incorrectly — the first row has a dash (`-`) as the first column, and the actual values start from the second row. We need to properly extract the "Literate" row (which is under the "Literates" header) and compare the "Male" and "Female" values.
+
+Step-by-step approach:
+1. Load the DataFrame.
+2. Identify the row where the value in the "Total" column is "Literates".
+3. Extract the "Male" and "Female" values from that row.
+4. Compare and determine which gender has more literates.
+
+Note: The "Literates" row is in the data as ['Literates', '4323', '2642', '1681'], so we can directly access it.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where the first column is 'Literates'
+literates_row = df[df['Total'] == 'Literates']
+# Extract male and female literate counts
+male_literates = int(literates_row['Male'].values[0])
+female_literates = int(literates_row['Female'].values[0])
+
+# Compare and determine which gender has more literates
+if male_literates > female_literates:
+    result = "Male"
+else:
+    result = "Female"
+
+print(f"Final Answer: {result}")
+```

@@ -1,0 +1,14 @@
+Step 1: The user wants to understand the relationship between maximum pressure (p max) and projectile diameter (p1 diameter).  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'p1 diameter (mm)' and 'p max ( bar )' columns.  
+Step 4: Sort the data by projectile diameter in ascending order to observe the trend.  
+Step 5: Print the sorted data to analyze the change in p max with increasing p1 diameter.  
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Sort by projectile diameter to observe the trend
+sorted_df = df.sort_values(by='p1 diameter (mm)')
+print(sorted_df[['p1 diameter (mm)', 'p max ( bar )']])
+```

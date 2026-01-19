@@ -1,0 +1,28 @@
+Step 1: The question asks which factor — population or per capita income — has a stronger causal relationship with median household income.  
+Step 2: Since "causal relationship" is not directly measurable from correlation alone, we interpret this as asking which variable (population or per capita income) shows a stronger linear relationship (correlation) with median household income.  
+Step 3: We will compute the correlation between median household income and each of the two variables: population and per capita income.  
+Step 4: Compare the absolute values of the correlations; the higher absolute correlation indicates a stronger relationship.  
+Step 5: Return the variable (population or per capita income) with the stronger correlation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract relevant columns
+population = df['population']
+per_capita_income = df['per capita income']
+median_household_income = df['median household income']
+
+# Compute correlation with median household income
+corr_population = population.corr(median_household_income)
+corr_per_capita = per_capita_income.corr(median_household_income)
+
+# Determine which has a stronger correlation
+if abs(corr_population) > abs(corr_per_capita):
+    final_answer = "population"
+else:
+    final_answer = "per capita income"
+
+print(f"Final Answer: {final_answer}")
+```

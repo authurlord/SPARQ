@@ -1,0 +1,10 @@
+Step 1: The user wants to identify the country with unusually data points compared to others.  
+Step 2: Load the dataframe.  
+Step 3: Analyze each column for outliers or extreme values:  
+- Area: Macau (30 km²) is extremely small compared to others (e.g., China: 9.6M km²).  
+- Population: Macau (556,800) is very small.  
+- Population density: Macau (18,662 per km²) is extremely high.  
+- HDI: Macau has "no data", which is unusual.  
+- Capital: All capitals are correct.  
+Step 4: Macau stands out due to extreme values in area, population density, and missing HDI.  
+Final Answer: macau (prc)

@@ -1,0 +1,15 @@
+Step 1: The user wants to count the number of hand combinations (rows) where the payout for 1 credit is 100 or more.  
+Step 2: Load the dataframe.  
+Step 3: Filter rows where '1 credit' >= 100.  
+Step 4: Count the number of such rows and print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter rows where '1 credit' is 100 or more
+filtered_rows = df[df['1 credit'].astype(int) >= 100]
+# Count the number of such rows
+count = len(filtered_rows)
+print(f"Final Answer: {count}")
+```

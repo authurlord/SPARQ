@@ -1,0 +1,32 @@
+Step 1: The user wants to find the correlation between 'pop density ( / km square)' and 'gdp per capita usd (2009 - 2011)'.  
+Step 2: Load the dataframe.  
+Step 3: Extract the two columns of interest: 'pop density' and 'gdp per capita'.  
+Step 4: Compute the Pearson correlation coefficient between these two variables.  
+Step 5: Identify potential outliers using a simple method: values that are more than 1.5 times the interquartile range (IQR) from the first or third quartile.  
+Step 6: Print the correlation coefficient and list any outliers.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Extract the relevant columns
+pop_density = df['pop density ( / km square)']
+gdp_per_capita = df['gdp per capita usd (2009 - 2011)']
+
+# Calculate correlation coefficient
+correlation = pop_density.corr(gdp_per_capita)
+
+# Detect outliers using IQR method
+Q1 = pop_density.quantile(0.25)
+Q3 = pop_density.quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+outliers = df[(pop_density < lower_bound) | (pop_density > upper_bound)]
+outliers_list = outliers.index.tolist()
+
+print(f"Final Answer: {correlation:.3f}, {outliers_list}")
+```

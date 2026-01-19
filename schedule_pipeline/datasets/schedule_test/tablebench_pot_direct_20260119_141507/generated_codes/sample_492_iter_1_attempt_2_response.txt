@@ -1,0 +1,77 @@
+We are given a table of election data with columns for different candidates and their respective deputies and senators across rounds. The goal is to determine in which round Miloš Zeman achieved his first majority win — defined as receiving more than 50% of the total deputies and senators (combined) in that round.
+
+Step-by-step approach:
+
+1. Understand the structure:
+   - The table has a header row and data rows.
+   - The first row is a header with column names including "Miloš Zeman" and "Miloš Zeman_1".
+   - For each round, we need to extract the number of deputies and senators for Miloš Zeman.
+   - The data shows that in some rows, one of the values is missing (denoted by "-").
+
+2. Identify the relevant columns:
+   - "Miloš Zeman" → likely represents deputies
+   - "Miloš Zeman_1" → likely represents senators
+
+3. For each round:
+   - Sum the deputies and senators for Miloš Zeman (only if both values are present and numeric).
+   - Calculate the total votes (deputies + senators).
+   - Check if the sum exceeds 50% of the total votes.
+
+4. Since "majority win" requires more than 50%, we check if the sum > 0.5 * total_votes.
+
+5. We go through each round in order (1st, 2nd, 3rd) and find the first round where this condition is met.
+
+6. Handle missing data: if either value is "-", skip or treat as 0.
+
+Let’s write the code accordingly.
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Drop the first row (it's a header with labels)
+# The first row is ['Round', 'Václav Klaus', ...], so we skip it
+data_rows = df.iloc[1:].copy()
+
+# Define the columns for Miloš Zeman
+mz_deputies_col = 'Miloš Zeman'
+mz_senators_col = 'Miloš Zeman_1'
+
+# Initialize a list to store total votes per round
+rounds = []
+total_votes_per_round = []
+
+# Iterate through each row (each round)
+for index, row in data_rows.iterrows():
+    round_num = row['Round']
+    
+    # Extract values for Miloš Zeman
+    deputies = row[mz_deputies_col]
+    senators = row[mz_senators_col]
+    
+    # Convert to numeric, handling missing values (convert '-' to NaN, then to 0)
+    deputies = pd.to_numeric(deputies, errors='coerce')
+    senators = pd.to_numeric(senators, errors='coerce')
+    
+    # If either is NaN, skip this round (no valid data)
+    if pd.isna(deputies) or pd.isna(senators):
+        continue
+    
+    total_votes = deputies + senators
+    mz_votes = deputies + senators  # same as total_votes
+    
+    # Check if majority: more than 50%
+    if mz_votes > 0.5 * total_votes:
+        rounds.append(round_num)
+        total_votes_per_round.append(total_votes)
+
+# If we found any round with majority, return the first one
+if rounds:
+    final_round = rounds[0]
+    print(f"Final Answer: {final_round}")
+else:
+    print("Final Answer: none")
+```

@@ -1,0 +1,26 @@
+Step 1: The user wants to find the manager with the highest winning percentage (wins/games) during their tenure.
+Step 2: Load the dataframe.
+Step 3: Convert 'wins' and 'games' columns to numeric, handling any non-numeric values (e.g., 'totals').
+Step 4: Calculate the winning percentage as wins / games for each manager.
+Step 5: Identify the manager with the maximum winning percentage.
+Step 6: Print the manager's name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'wins' and 'games' to numeric, skip 'totals'
+df['wins'] = pd.to_numeric(df['wins'], errors='coerce')
+df['games'] = pd.to_numeric(df['games'], errors='coerce')
+
+# Filter out the 'totals' row
+df = df[df['manager'] != 'totals']
+
+# Calculate winning percentage
+df['win_percentage'] = df['wins'] / df['games']
+
+# Find the manager with the highest winning percentage
+best_manager = df.loc[df['win_percentage'].idxmax(), 'manager']
+
+print(f"Final Answer: {best_manager}")
+```

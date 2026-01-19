@@ -1,0 +1,16 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter data for 'all around' event in 'olympic trials' and 'us championships' in 2008
+olympic_trials = df[(df['event'] == 'all around') & (df['competition'] == 'olympic trials') & (df['year'] == '2008')]
+us_championships = df[(df['event'] == 'all around') & (df['competition'] == 'us championships') & (df['year'] == '2008')]
+
+# Extract qualifying scores
+qualifying_score_olympic_trials = float(olympic_trials['qualifying score'].values[0])
+qualifying_score_us_championships = float(us_championships['qualifying score'].values[0])
+
+# Calculate the change
+change = qualifying_score_us_championships - qualifying_score_olympic_trials
+
+print(f"Final Answer: {change:.1f}")

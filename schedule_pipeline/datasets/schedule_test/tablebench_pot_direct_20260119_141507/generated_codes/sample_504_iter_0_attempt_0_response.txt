@@ -1,0 +1,20 @@
+Step 1: Understand that barangay density is calculated as (number of barangays) / (area in km²).  
+Step 2: Load the dataframe and extract the relevant columns: 'no of barangays' and 'area (km square)'.  
+Step 3: Compute the barangay density for each city/municipality.  
+Step 4: Find the city with the highest density and return its name.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert columns to numeric for calculation
+df['no of barangays'] = pd.to_numeric(df['no of barangays'], errors='coerce')
+df['area (km square)'] = pd.to_numeric(df['area (km square)'], errors='coerce')
+
+# Calculate barangay density
+df['barangay_density'] = df['no of barangays'] / df['area (km square)']
+
+# Find the city with the highest density
+max_density_city = df.loc[df['barangay_density'].idxmax(), 'city / municipality']
+print(f"Final Answer: {max_density_city}")
+```

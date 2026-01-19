@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: decimal(32k), 12288, 48×4k

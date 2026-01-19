@@ -1,0 +1,12 @@
+Step 1: The user wants to count the number of engines with a specific impulse greater than 1000 seconds.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'specific impulse (s)' is greater than 1000.
+Step 4: Count the number of such rows and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter engines with specific impulse greater than 1000 seconds
+count = df[df['specific impulse (s)'] > 1000].shape[0]
+print(f"Final Answer: {count}")
+```

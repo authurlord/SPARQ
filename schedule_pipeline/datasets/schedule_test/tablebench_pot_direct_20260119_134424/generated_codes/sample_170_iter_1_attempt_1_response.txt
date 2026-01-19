@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The natural change has a direct impact on population growth; when natural change increases, the average population tends to grow, but this trend is not consistent over time due to fluctuations in birth and death rates.

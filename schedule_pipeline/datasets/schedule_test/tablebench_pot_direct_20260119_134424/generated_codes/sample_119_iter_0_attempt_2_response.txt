@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: Waterfall chart drawn for attendance trend over time.

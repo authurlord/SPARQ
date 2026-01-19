@@ -1,0 +1,12 @@
+Step 1: Understand the structure of the table. The table contains information on regions, total population, Manchu population, percentage in Manchu population, and regional percentage of population.  
+Step 2: Identify key insights about the distribution of the Manchu population. For example, regions with high Manchu percentages (e.g., Northeast, Hebei) are likely to have a significant Manchu presence.  
+Step 3: Highlight top regions by Manchu population and their relative contribution.  
+Step 4: Note that the "Manchu population" column provides absolute numbers, while "percentage in Manchu population" shows the proportion within each region.  
+
+Key observations:
+- The Northeast region has the highest Manchu population (6,951,280) and the highest percentage (66.77%), indicating a strong historical and demographic presence.
+- Other regions like Hebei (2,118,711), Jilin (866,365), and Heilongjiang (748,020) also show significant Manchu populations.
+- In contrast, southern and western regions have very low Manchu populations (e.g., Yunnan, Guangxi).
+- The "active servicemen" row shows a notable Manchu population (22,627) but with a high percentage (0.24), suggesting a possible anomaly or special classification.
+
+Final Answer: northeast, hebei, jilin, heilongjiang

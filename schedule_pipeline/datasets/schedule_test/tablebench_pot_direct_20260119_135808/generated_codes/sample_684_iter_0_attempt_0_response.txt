@@ -1,0 +1,23 @@
+Step 1: The user wants the correlation coefficient between typhus and smallpox cases over the years.
+Step 2: Load the dataframe.
+Step 3: Convert 'typhus' and 'smallpox' columns to numeric, handling any non-numeric values (like '3600' in 191822 row).
+Step 4: Calculate the Pearson correlation coefficient between typhus and smallpox.
+Step 5: Print the correlation coefficient.
+
+Note: The row '191822' appears to be a typo or misformatted year. Since it's the only non-year entry, we will exclude it for accurate time-series correlation.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean the data: remove the row with invalid year '191822'
+df_clean = df[df['year'] != '191822']
+# Convert 'typhus' and 'smallpox' to numeric, coercing errors
+df_clean['typhus'] = pd.to_numeric(df_clean['typhus'], errors='coerce')
+df_clean['smallpox'] = pd.to_numeric(df_clean['smallpox'], errors='coerce')
+# Drop rows with NaN values after conversion
+df_clean.dropna(subset=['typhus', 'smallpox'], inplace=True)
+# Calculate correlation coefficient
+correlation = df_clean['typhus'].corr(df_clean['smallpox'])
+print(f"Final Answer: {correlation:.3f}")
+```

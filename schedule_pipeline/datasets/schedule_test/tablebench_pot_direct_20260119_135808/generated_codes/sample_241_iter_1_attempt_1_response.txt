@@ -1,0 +1,21 @@
+Step 1: The user wants the average number of viewers for seasons with more than 20 episodes.
+Step 2: Load the dataframe.
+Step 3: Filter rows where 'episodes' > 20.
+Step 4: Calculate the mean of 'viewers (in millions)' for these rows.
+Step 5: Ensure 'episodes' is treated as integer and 'viewers (in millions)' as float to avoid type errors.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'episodes' to integer and 'viewers (in millions)' to float
+df['episodes'] = pd.to_numeric(df['episodes'], errors='coerce')
+df['viewers (in millions)'] = pd.to_numeric(df['viewers (in millions)'], errors='coerce')
+
+# Filter seasons with more than 20 episodes
+filtered_df = df[df['episodes'] > 20]
+
+# Calculate average viewers for these seasons
+average_viewers = filtered_df['viewers (in millions)'].mean()
+
+print(f"Final Answer: {average_viewers:.2f}")
+```

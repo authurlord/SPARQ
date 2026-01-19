@@ -1,0 +1,31 @@
+Step 1: The question asks whether there is a relationship between viewers (m) and rating — specifically, if an increase in viewers leads to an increase in rating. This requires analyzing the correlation between these two numerical variables.
+
+Step 2: Extract the "viewers (m)" and "rating" columns from the table.
+
+Step 3: Compute the correlation coefficient between viewers (m) and rating. A positive correlation would suggest that as viewers increase, ratings also tend to increase.
+
+Step 4: Interpret the result: if the correlation is positive and significant, then there is evidence of a positive relationship.
+
+Note: Since the data contains some values like "tba" (to be announced), which are non-numeric, we need to handle them by removing or imputing. However, in this case, only one value ("tba") exists in the "rating" column, so we can drop rows with "tba" for accuracy.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Drop rows where 'rating' is 'tba'
+df_clean = df[df['rating'] != 'tba']
+
+# Convert 'viewers (m)' and 'rating' to numeric
+df_clean['viewers (m)'] = pd.to_numeric(df_clean['viewers (m)'], errors='coerce')
+df_clean['rating'] = pd.to_numeric(df_clean['rating'], errors='coerce')
+
+# Remove any rows with NaN after conversion
+df_clean = df_clean.dropna()
+
+# Calculate the correlation between viewers (m) and rating
+correlation = df_clean['viewers (m)'].corr(df_clean['rating'])
+
+print(f"Final Answer: {correlation:.2f}")
+```

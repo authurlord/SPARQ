@@ -1,0 +1,42 @@
+Step 1: The user is asking for an expected prediction of total votes and percentage of popular vote for the next election cycle based on the increasing trend from 1983 to 2013.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'total votes' and '% of popular vote' columns.  
+Step 4: Perform a linear regression or simple trend extrapolation to predict the next value (2017).  
+Step 5: Use the last few data points to estimate the trend (e.g., using the slope between 2009 and 2013).  
+Step 6: Calculate the expected values and print them.  
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+# Convert 'election' to integer for proper indexing
+df['election'] = df['election'].astype(int)
+
+# Extract the relevant columns and convert to numeric
+votes = df['total votes'].astype(int)
+percent_vote = df['% of popular vote'].str.replace('%', '').astype(float)
+
+# Create a time variable (election year)
+years = df['election'].values
+
+# Fit a linear model for total votes and percentage of popular vote
+# Using last 4 data points for better trend estimation
+last_years = years[-4:]
+last_votes = votes[-4:]
+last_percent = percent_vote[-4:]
+
+# Linear regression for total votes
+slope_votes, intercept_votes = np.polyfit(last_years, last_votes, 1)
+predicted_votes = slope_votes * (years[-1] + 4) + intercept_votes
+
+# Linear regression for percentage of popular vote
+slope_percent, intercept_percent = np.polyfit(last_years, last_percent, 1)
+predicted_percent = slope_percent * (years[-1] + 4) + intercept_percent
+
+# Round to nearest whole number and one decimal place respectively
+final_votes = round(predicted_votes)
+final_percent = round(predicted_percent, 2)
+
+print(f"Final Answer: {final_votes}, {final_percent}%")
+```

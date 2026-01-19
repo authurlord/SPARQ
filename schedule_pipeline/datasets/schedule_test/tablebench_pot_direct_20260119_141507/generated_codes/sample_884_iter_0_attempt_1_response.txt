@@ -1,0 +1,47 @@
+Step 1: Understand the question — we need to calculate the percentage increase in domestic steel tonnage and foreign total steel tonnage for each year, then compare them to find the year where the domestic increase is higher than the foreign increase.
+
+Step 2: The percentage increase is calculated as:
+   (New value - Old value) / Old value * 100
+
+Step 3: We will compute the percentage increase for domestic and foreign steel tonnage for each year, then compare them year by year.
+
+Step 4: Identify the year where domestic percentage increase > foreign percentage increase.
+
+Step 5: Since the data is from 2000 to 2006, we will compute changes between consecutive years (i.e., from 2000 to 2001, etc.), assuming the data is sequential.
+
+Note: The data is given for specific years, so we can compute the percentage change from one year to the next.
+
+We'll:
+- Extract the data into a DataFrame.
+- Compute the percentage increase for domestic and foreign steel tonnage from year to year.
+- Compare the two increases per year.
+- Return the year where domestic increase > foreign increase.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert to numeric for calculations
+df['total s ton'] = pd.to_numeric(df['total s ton'], errors='coerce')
+df['domestic s ton'] = pd.to_numeric(df['domestic s ton'], errors='coerce')
+df['foreign total s ton'] = pd.to_numeric(df['foreign total s ton'], errors='coerce')
+
+# Sort by year
+df = df.sort_values('year').reset_index(drop=True)
+
+# Calculate percentage increase from previous year
+df['domestic_inc'] = ((df['domestic s ton'] - df['domestic s ton'].shift(1)) / df['domestic s ton'].shift(1)) * 100
+df['foreign_inc'] = ((df['foreign total s ton'] - df['foreign total s ton'].shift(1)) / df['foreign total s ton'].shift(1)) * 100
+
+# Find year where domestic increase > foreign increase
+result_year = df[df['domestic_inc'] > df['foreign_inc']]['year'].tolist()
+
+# If no such year, return None or the first occurrence
+if result_year:
+    final_year = result_year[0]
+else:
+    final_year = None
+
+print(f"Final Answer: {final_year}")
+```

@@ -1,0 +1,21 @@
+Step 1: The user wants to calculate the average number of tropical cyclones per season.  
+Step 2: Load the dataframe from the provided JSON table.  
+Step 3: Extract the 'tropical cyclones' column, which contains the number of tropical cyclones for each season.  
+Step 4: Compute the mean of this column to get the average.  
+Step 5: Print the result in the required format.
+
+```python
+import pandas as pd
+
+# Load the data from JSON format
+df = pd.read_csv('table.csv')
+
+# Convert 'tropical cyclones' column to numeric (in case it's read as string)
+df['tropical cyclones'] = pd.to_numeric(df['tropical cyclones'])
+
+# Calculate the average number of tropical cyclones per season
+average_cyclones = df['tropical cyclones'].mean()
+
+# Output the final answer
+print(f"Final Answer: {average_cyclones:.1f}")
+```

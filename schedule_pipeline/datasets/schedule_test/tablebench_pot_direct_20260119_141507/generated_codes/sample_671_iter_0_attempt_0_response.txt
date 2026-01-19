@@ -1,0 +1,14 @@
+Step 1: The user wants the correlation coefficient between the 'population' and 'density' columns.
+Step 2: Load the dataframe.
+Step 3: Extract the 'population' and 'density' columns.
+Step 4: Compute the Pearson correlation coefficient using pandas.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Calculate the correlation between 'population' and 'density'
+correlation = df['population'].corr(df['density'])
+print(f"Final Answer: {correlation:.2f}")
+```

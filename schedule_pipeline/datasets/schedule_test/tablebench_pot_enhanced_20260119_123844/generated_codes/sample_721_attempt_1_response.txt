@@ -1,0 +1,22 @@
+Step 1: The user wants to identify the person who has served the longest in the position.  
+Step 2: Load the dataframe.  
+Step 3: Convert 'Start' and 'End' columns to integers for calculating duration.  
+Step 4: Calculate the duration of service for each person as (End - Start).  
+Step 5: Find the person with the maximum duration.  
+Step 6: Print the name of that person.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert Start and End to integers
+df['Start'] = pd.to_numeric(df['Start'])
+df['End'] = pd.to_numeric(df['End'])
+
+# Calculate duration of service
+df['Duration'] = df['End'] - df['Start']
+
+# Find the person with the longest service
+longest_serve = df.loc[df['Duration'].idxmax()]['Name']
+print(f"Final Answer: {longest_serve}")
+```

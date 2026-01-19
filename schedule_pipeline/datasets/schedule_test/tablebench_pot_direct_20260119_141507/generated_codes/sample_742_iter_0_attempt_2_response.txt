@@ -1,0 +1,23 @@
+Step 1: The user is asking for a forecasted percentage of the popular vote in the next election year based on historical trends from 1963 to 2011.  
+Step 2: Since the data includes the percentage of popular vote per year, we can analyze the trend (e.g., average or linear trend) over time.  
+Step 3: We will calculate the average percentage of the popular vote over the years and assume that this average represents the trend. Alternatively, if there's a clear trend (increasing or decreasing), we can model it. However, given the data has some fluctuations and "n.a." values, the most straightforward and reasonable approach is to compute the mean of the non-missing percentages.  
+Step 4: Remove rows with "n.a." values (since they don't provide valid vote percentages).  
+Step 5: Compute the mean of the "% of popular vote" column for valid entries.  
+Step 6: This mean can be interpreted as a forecast under the assumption that the trend continues.
+
+Note: There is no clear increasing/decreasing trend in the data (e.g., 15.5% → 28.9% → 20.6%), and many values are close to 20–30%. The average will give a stable baseline.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter out rows where '% of popular vote' is 'n.a.'
+df_clean = df[df['% of popular vote'] != 'n.a.']
+# Convert the percentage column to numeric
+df_clean['% of popular vote'] = pd.to_numeric(df_clean['% of popular vote'], errors='coerce')
+# Drop any remaining NaN values
+df_clean = df_clean.dropna(subset=['% of popular vote'])
+# Calculate the mean of the popular vote percentage
+mean_popular_vote = df_clean['% of popular vote'].mean()
+print(f"Final Answer: {mean_popular_vote:.2f}")
+```

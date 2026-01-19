@@ -1,0 +1,22 @@
+Step 1: The user wants the average annual change in the number of Conservative councillors from 1947 to 1972.
+Step 2: Load the dataframe.
+Step 3: Extract the 'Conservative councillors' values for the years 1947 to 1972.
+Step 4: Calculate the difference between consecutive years and compute the average of these differences.
+Step 5: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data from 1947 to 1972
+df_filtered = df[(df['Year'] >= '1947') & (df['Year'] <= '1972')]
+# Convert Year to int for proper sorting
+df_filtered['Year'] = df_filtered['Year'].astype(int)
+# Sort by Year
+df_filtered = df_filtered.sort_values('Year')
+# Calculate annual change in Conservative councillors
+annual_change = df_filtered['Conservative councillors'].diff().dropna()
+# Calculate average annual change
+avg_annual_change = annual_change.mean()
+print(f"Final Answer: {avg_annual_change:.2f}")
+```

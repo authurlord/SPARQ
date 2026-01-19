@@ -1,0 +1,26 @@
+Step 1: The user wants to calculate the correlation coefficient between 'bp comp 1 (˚C)' and '% wt comp 1'.
+Step 2: Load the dataframe.
+Step 3: Extract the two columns of interest: 'bp comp 1 (˚C)' and '% wt comp 1'.
+Step 4: Compute the Pearson correlation coefficient between these two columns.
+Step 5: Print the result.
+
+Note: Some values in the table are strings (e.g., '- 0.5'), so we need to convert them to numeric type (float) before computing correlation.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'bp comp 1 (˚C)' and '% wt comp 1' to numeric, handling errors by converting strings like '- 0.5'
+df['bp comp 1 (˚c)'] = pd.to_numeric(df['bp comp 1 (˚c)'], errors='coerce')
+df['% wt comp 1'] = pd.to_numeric(df['% wt comp 1'], errors='coerce')
+
+# Drop rows with NaN values after conversion
+df = df.dropna(subset=['bp comp 1 (˚c)', '% wt comp 1'])
+
+# Calculate correlation coefficient
+correlation = df['bp comp 1 (˚c)'].corr(df['% wt comp 1'])
+
+print(f"Final Answer: {correlation:.3f}")
+```

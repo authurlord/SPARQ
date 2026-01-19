@@ -1,0 +1,28 @@
+Step 1: Identify the relevant seasons that meet two conditions:
+- Have at least 40 episodes.
+- Premiered between October and December.
+
+Step 2: Filter the data to include only rows where:
+- Episodes >= 40
+- Season Premiere is between October and December (inclusive).
+
+Step 3: Calculate the average number of episodes for the filtered rows.
+
+Step 4: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Filter seasons with at least 40 episodes and premiered between October and December
+filtered_df = df[
+    (df['Episodes'] >= 40) &
+    (df['Season Premiere'].str.contains(r'October|November|December', case=False))
+]
+
+# Calculate the average number of episodes for the filtered seasons
+average_episodes = filtered_df['Episodes'].mean()
+
+print(f"Final Answer: {average_episodes:.1f}")
+```

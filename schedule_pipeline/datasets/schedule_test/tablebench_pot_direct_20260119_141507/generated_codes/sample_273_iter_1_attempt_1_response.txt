@@ -1,0 +1,47 @@
+The error occurred because the data in the "prominence (m)" and other columns were being concatenated as strings (e.g., "3951331215921570") instead of being properly parsed as separate values. This suggests that the rows were incorrectly structured — likely due to a formatting issue in how the data was read or stored.
+
+Looking at the table again:
+
+- The rows are correctly listed, but the "prominence (m)" column has values like 3951, 3312, etc., which should be numeric.
+- The issue arises only when multiple peaks from the same country are grouped or misaligned during parsing.
+
+However, in this dataset, each row is properly formatted with one peak per row. So the real problem is likely that the data was not parsed correctly into a DataFrame — possibly due to malformed input or improper handling of the JSON structure.
+
+But since the data is given in a clean JSON format with clear columns and rows, we can safely assume it's meant to be parsed directly. The issue may stem from a misinterpretation of the data structure in the previous attempt — specifically, the prominence values are not concatenated.
+
+Let’s re-examine the data:
+- All peaks have elevation and prominence values in separate columns.
+- We need to filter peaks in the Democratic Republic of the Congo (DRC) with elevation ≥ 3000 meters.
+- Then compute the average prominence of those filtered peaks.
+
+We must ensure that the columns are correctly interpreted as numeric types.
+
+Corrected approach:
+1. Load the DataFrame.
+2. Convert relevant columns to numeric (especially 'elevation (m)' and 'prominence (m)').
+3. Filter rows where country contains "Democratic Republic of the Congo" and elevation ≥ 3000.
+4. Compute the mean of 'prominence (m)' for the filtered rows.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert elevation and prominence to numeric, coercing errors to NaN if needed
+df['elevation (m)'] = pd.to_numeric(df['elevation (m)'], errors='coerce')
+df['prominence (m)'] = pd.to_numeric(df['prominence (m)'], errors='coerce')
+
+# Filter peaks in Democratic Republic of the Congo with elevation >= 3000
+filtered_df = df[
+    (df['country'].str.contains('Democratic Republic of the Congo', case=False)) &
+    (df['elevation (m)'] >= 3000)
+]
+
+# Calculate average prominence
+if not filtered_df.empty:
+    avg_prominence = filtered_df['prominence (m)'].mean()
+else:
+    avg_prominence = 0
+
+print(f"Final Answer: {avg_prominence:.1f}")
+```

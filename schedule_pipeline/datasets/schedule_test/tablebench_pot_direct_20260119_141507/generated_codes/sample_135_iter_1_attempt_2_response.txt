@@ -1,0 +1,144 @@
+We are tasked with drawing a percentage bar chart that shows the percentage of total sales for each song in different regions. 
+
+Step-by-step approach:
+1. The table contains sales data per song across different regions (e.g., northern ireland, southern england, etc.), and a 'total' column.
+2. We need to compute the percentage of each region's sales relative to the total sales for each song.
+3. Then, we will create a bar chart where each song is represented, and the bars show the percentage of sales in each region (we can use stacked or grouped bars; however, since we want "percentage of total sales for each song in different regions", a stacked bar chart makes sense).
+4. Alternatively, if we interpret it as showing the share of each region per song, we can create a stacked bar chart with each song as a group.
+
+But note: the question says "percentage of total sales for each song in different regions". This implies we want to show, for each song, what portion of its total sales comes from each region.
+
+So:
+- For each song, calculate the share of each region's sales as a percentage of the song's total.
+- Then plot a stacked bar chart where each song is a group, and each region is a segment.
+
+We'll use matplotlib to create this.
+
+Important: The 'total' column is already given. So for each song, we can compute the percentage contribution of each region.
+
+Let’s proceed:
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Convert the 'mobiles' column to numeric (though it seems irrelevant here)
+# We focus on the regions and total for each song
+
+# Drop the 'mobiles' column as it doesn't seem relevant to the analysis
+df = df.drop(columns=['mobiles'])
+
+# Convert all region columns to numeric
+region_cols = ['northern ireland', 'northern england', 'scotland', 'southern england', 'wales']
+df[region_cols] = df[region_cols].apply(pd.to_numeric, errors='coerce')
+
+# Calculate percentage of total sales for each region per song
+df['total'] = pd.to_numeric(df['total'], errors='coerce')
+df['total'] = df['total'].fillna(0)
+
+# Create a new dataframe for percentages
+percentages = df.copy()
+for col in region_cols:
+    percentages[col] = (percentages[col] / percentages['total']) * 100
+
+# Now we want to plot a stacked bar chart: one bar per song, with segments for each region
+# We will use the percentages to create the chart
+
+# Set up the plot
+plt.figure(figsize=(12, 8))
+bar_width = 0.35
+index = df.index
+
+# Create the stacked bar chart
+bars = []
+for i, col in enumerate(region_cols):
+    bars.append(plt.bar(index, percentages[col], label=col, width=bar_width))
+
+# Add labels and title
+plt.xlabel('Song')
+plt.ylabel('Percentage of Total Sales')
+plt.title('Percentage of Total Sales for Each Song by Region')
+plt.xticks(index, df['song'], rotation=45)
+
+# Add legend
+plt.legend(title='Region')
+
+# Improve layout
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+
+# Since the question asks to draw the chart, we don't print a final answer in the format unless required.
+# But if required, we could print a message.
+```
+
+Note: The above code creates the chart as requested. There's no numerical final answer to return — only a visualization. The instruction says "Draw a percentage bar chart", so the output is the chart.
+
+Final Answer: (No numerical answer, chart is drawn)  
+But the format requires: Final Answer: AnswerName1, AnswerName2...
+
+Since there's no entity or number to name, and the task is purely visualization, we must interpret whether an answer is expected.
+
+However, the instruction says: "if there are charts, please use the matplotlib library to draw them" — and nothing else.
+
+Thus, we do not return a named answer. But the format requires one.
+
+Given that, perhaps the user expects just confirmation that the chart is drawn.
+
+Alternatively, maybe they want the average percentage or something — but the question is clearly about drawing.
+
+Therefore, we conclude: no named answer is needed. But to comply strictly with format, we can say:
+
+Final Answer: chart_drawn
+
+But that's not a real entity.
+
+Alternatively, perhaps the question wants the total percentage per song? But that would be 100% per song.
+
+We stick to the task: draw the chart.
+
+Thus, we output the code that draws it, and since no specific answer is requested beyond the chart, we provide a minimal final answer indicating completion.
+
+Final Answer: chart_completed
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Drop irrelevant column
+df = df.drop(columns=['mobiles'])
+
+# Convert region columns to numeric
+region_cols = ['northern ireland', 'northern england', 'scotland', 'southern england', 'wales']
+df[region_cols] = df[region_cols].apply(pd.to_numeric, errors='coerce')
+
+# Convert total to numeric
+df['total'] = pd.to_numeric(df['total'], errors='coerce')
+
+# Calculate percentage of total sales for each region per song
+percentages = df.copy()
+for col in region_cols:
+    percentages[col] = (percentages[col] / percentages['total']) * 100
+
+# Create a stacked bar chart
+plt.figure(figsize=(12, 8))
+bar_width = 0.35
+index = df.index
+
+for i, col in enumerate(region_cols):
+    plt.bar(index, percentages[col], label=col, width=bar_width)
+
+plt.xlabel('Song')
+plt.ylabel('Percentage of Total Sales')
+plt.title('Percentage of Total Sales for Each Song by Region')
+plt.xticks(index, df['song'], rotation=45)
+plt.legend(title='Region')
+plt.tight_layout()
+plt.show()
+```

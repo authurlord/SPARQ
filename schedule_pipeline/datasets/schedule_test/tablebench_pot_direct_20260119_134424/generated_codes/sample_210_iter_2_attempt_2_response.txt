@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The prominence generally increases with elevation, but there are exceptions where higher elevation does not correspond to higher prominence.

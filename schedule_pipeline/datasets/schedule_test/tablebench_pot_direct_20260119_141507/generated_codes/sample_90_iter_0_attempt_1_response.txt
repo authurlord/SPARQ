@@ -1,0 +1,15 @@
+Step 1: The user wants the total points scored by the song "qyteti i dashurisë".  
+Step 2: Locate the row where the song is "qyteti i dashurisë".  
+Step 3: Extract the "points" value from that row.  
+Step 4: Print the result.
+
+From the table, the song "qyteti i dashurisë" is in row 11 (index 10), and its corresponding "points" value is 5.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Find the row where the song is "qyteti i dashurisë"
+song_points = df[df['song'] == 'qyteti i dashurisë']['points'].values[0]
+print(f"Final Answer: {song_points}")
+```

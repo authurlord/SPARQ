@@ -1,0 +1,31 @@
+Step 1: The user wants to understand the relationship between Peak Flow (m³/s) and Water Level (m) at Trent Bridge.  
+Step 2: Load the dataframe.  
+Step 3: Filter out the "Normal / Avg flow" row since it's not a peak event.  
+Step 4: Convert 'Level at Trent Bridge m' and 'Peak Flow m3/s' to numeric for analysis.  
+Step 5: Plot a scatter plot to visualize the relationship between the two variables.  
+Step 6: Use a simple linear trend to describe how Peak Flow changes with increasing Level.  
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+# Drop the row with None rank (Normal / Avg flow)
+df = df.dropna(subset=['Rank'])
+
+# Convert columns to numeric
+df['Level at Trent Bridge m'] = pd.to_numeric(df['Level at Trent Bridge m'])
+df['Peak Flow m3/s'] = pd.to_numeric(df['Peak Flow m3/s'].str.replace(',', ''))
+
+# Scatter plot to show the relationship
+plt.scatter(df['Level at Trent Bridge m'], df['Peak Flow m3/s'])
+plt.title('Peak Flow vs Water Level at Trent Bridge')
+plt.xlabel('Water Level (m)')
+plt.ylabel('Peak Flow (m³/s)')
+plt.grid(True)
+plt.show()
+
+# Calculate the slope of the trend (approximate change in Peak Flow per meter increase in Level)
+slope = (df['Peak Flow m3/s'].max() - df['Peak Flow m3/s'].min()) / (df['Level at Trent Bridge m'].max() - df['Level at Trent Bridge m'].min())
+print(f"Final Answer: {slope:.1f}")
+```

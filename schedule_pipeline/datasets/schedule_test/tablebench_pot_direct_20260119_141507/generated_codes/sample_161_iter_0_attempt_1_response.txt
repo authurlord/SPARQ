@@ -1,0 +1,36 @@
+Step 1: The question asks whether any of the factors ('airdate', 'total viewers', 'share') significantly influence the 'bbc one weekly ranking'.  
+Step 2: To assess influence, we can analyze correlations between each factor and the 'bbc one weekly ranking'.  
+Step 3: Since 'airdate' is a time-based variable and not directly quantitative in a way that correlates with ranking (e.g., no clear monotonic trend), we focus on numerical variables: 'total viewers' and 'share'.  
+Step 4: Compute the correlation between each of these variables and 'bbc one weekly ranking'.  
+Step 5: If the correlation is strong (e.g., absolute value > 0.3), then that factor has a significant influence. Otherwise, conclude "no clear impact".
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Convert 'total viewers' and 'share' to numeric (handle % correctly)
+df['total viewers'] = pd.to_numeric(df['total viewers'], errors='coerce')
+df['share'] = pd.to_numeric(df['share'].str.replace('%', ''), errors='coerce')
+
+# Drop rows with NaN due to conversion
+df = df.dropna()
+
+# Compute correlation with 'bbc one weekly ranking'
+correlation_total_viewers = df['total viewers'].corr(df['bbc one weekly ranking'])
+correlation_share = df['share'].corr(df['bbc one weekly ranking'])
+
+# Check if either correlation is significant (absolute value > 0.3)
+if abs(correlation_total_viewers) > 0.3 or abs(correlation_share) > 0.3:
+    # Determine which factor(s) have significant influence
+    if abs(correlation_total_viewers) > 0.3:
+        significant_factors = 'total viewers'
+    elif abs(correlation_share) > 0.3:
+        significant_factors = 'share'
+    else:
+        significant_factors = 'no clear impact'
+else:
+    significant_factors = 'no clear impact'
+
+print(f"Final Answer: {significant_factors}")
+```

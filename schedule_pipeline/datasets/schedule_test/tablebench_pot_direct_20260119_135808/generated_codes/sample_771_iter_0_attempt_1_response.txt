@@ -1,0 +1,31 @@
+Step 1: The user wants to forecast the pass percentage and obtained GPA for 2011 based on the trend from 2005 to 2010.  
+Step 2: Load the dataframe.  
+Step 3: Extract the 'pass percentage' and 'obtained gpa - 5' columns, converting them to numeric values (removing % sign for pass percentage).  
+Step 4: Perform a linear regression or use a simple trend extrapolation (e.g., average yearly increase) to predict values for 2011.  
+Step 5: Use the slope of the trend line to estimate future values.  
+Step 6: Print the forecasted values.
+
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('table.csv')
+
+# Convert 'pass percentage' to float by removing '%' and converting
+df['pass percentage'] = df['pass percentage'].str.replace('%', '').astype(float)
+
+# Extract year and metrics
+years = df['year'].astype(int)
+pass_percentages = df['pass percentage']
+gpa_5 = df['obtained gpa - 5']
+
+# Calculate average yearly increase for pass percentage
+slope_pass = np.polyfit(years, pass_percentages, 1)[0]
+forecast_pass = pass_percentages[-1] + slope_pass
+
+# Calculate average yearly increase for GPA
+slope_gpa = np.polyfit(years, gpa_5, 1)[0]
+forecast_gpa = gpa_5[-1] + slope_gpa
+
+print(f"Final Answer: {forecast_pass:.2f}, {forecast_gpa:.2f}")
+```

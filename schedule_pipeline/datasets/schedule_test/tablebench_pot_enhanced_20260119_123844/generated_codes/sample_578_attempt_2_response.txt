@@ -1,0 +1,15 @@
+Step 1: The user wants the total increase in net assets over the 3-year period from 2005/2006 to 2007/2008.
+Step 2: Load the dataframe.
+Step 3: Filter the rows for the years 2005/2006, 2006/2007, and 2007/2008.
+Step 4: Sum the 'increase in net assets' column for these years.
+Step 5: Print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter data for the specified years
+filtered_df = df[df['year'].isin(['2005 / 2006', '2006 / 2007', '2007 / 2008'])]
+# Sum the 'increase in net assets' column
+total_increase = filtered_df['increase in net assets'].sum()
+print(f"Final Answer: {total_increase}")
+```

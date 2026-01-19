@@ -1,0 +1,19 @@
+Step 1: The user wants the mean height of buildings in Winnipeg that have more than 10 floors.
+Step 2: Load the dataframe.
+Step 3: Convert the 'floors' column to integer type to allow numerical comparison.
+Step 4: Filter buildings with more than 10 floors.
+Step 5: Calculate the mean height of these buildings.
+Step 6: Print the result.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'floors' column to integer for numerical comparison
+df['floors'] = pd.to_numeric(df['floors'], errors='coerce')
+# Filter buildings with more than 10 floors
+filtered_buildings = df[df['floors'] > 10]
+# Calculate mean height of filtered buildings
+mean_height = filtered_buildings['height'].mean()
+print(f"Final Answer: {mean_height:.1f}")
+```

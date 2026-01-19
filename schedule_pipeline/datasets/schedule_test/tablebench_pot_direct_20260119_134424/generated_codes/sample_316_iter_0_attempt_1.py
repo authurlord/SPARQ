@@ -1,0 +1,22 @@
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+
+# Extract team name and number of titles from 'winner' column
+df['team'] = df['winner'].str.extract(r'([a-zA-Z\s\-\(\)]+)', expand=False)
+df['titles'] = df['winner'].str.extract(r'\((\d+)\)', expand=False).astype(int)
+
+# Group by team and sum titles
+team_titles = df.groupby('team')['titles'].sum()
+
+# Find the team with the most titles
+most_titles_team = team_titles.idxmax()
+max_titles = team_titles.max()
+
+# Find the year when this team won their first title
+first_win_year = df[df['team'] == most_titles_team]['year'].min()
+
+# Get the winning coach for that year
+winning_coach = df.loc[df['year'] == first_win_year, 'winning coach'].iloc[0]
+
+print(f"Final Answer: {most_titles_team.strip()}, {winning_coach}")

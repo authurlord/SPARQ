@@ -1,0 +1,17 @@
+Step 1: The user wants to find the airport with the highest Airport Capacity Utilization Rate, which is defined as the percentage of total capacity currently in use.
+Step 2: Load the dataframe.
+Step 3: Parse the 'capacity in use' column, which contains values like "126 , 06%" — note the comma as a decimal separator.
+Step 4: Convert the 'capacity in use' column to a float by replacing commas with dots and removing the percent sign.
+Step 5: Find the row with the maximum value in the 'capacity in use' column.
+Step 6: Return the corresponding 'location' as the answer.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Clean and convert 'capacity in use' column: replace comma with dot and remove %, then convert to float
+df['capacity in use'] = df['capacity in use'].str.replace(',', '.', regex=False).str.replace('%', '', regex=False).astype(float)
+# Find the location with the highest capacity utilization rate
+max_utilization_airport = df.loc[df['capacity in use'].idxmax(), 'location']
+print(f"Final Answer: {max_utilization_airport}")
+```

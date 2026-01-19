@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The number of examinees increased over the years, and the pass percentage generally increased as well.

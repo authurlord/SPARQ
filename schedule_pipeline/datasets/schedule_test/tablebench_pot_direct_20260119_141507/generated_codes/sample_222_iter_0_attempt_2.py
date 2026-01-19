@@ -1,0 +1,49 @@
+import pandas as pd
+
+# Load the data
+df = pd.read_csv('table.csv')
+
+# Drop the first row (header row)
+df = df.drop(df.index[0])
+
+# Convert the relevant columns to numeric
+df['95 - 96'] = pd.to_numeric(df['95 - 96'], errors='coerce')
+df['99 - 00'] = pd.to_numeric(df['99 - 00'], errors='coerce')
+df['00 - 01'] = pd.to_numeric(df['00 - 01'], errors='coerce')
+df['01 - 02'] = pd.to_numeric(df['01 - 02'], errors='coerce')
+df['02 - 03'] = pd.to_numeric(df['02 - 03'], errors='coerce')
+df['03 - 04'] = pd.to_numeric(df['03 - 04'], errors='coerce')
+df['04 - 05'] = pd.to_numeric(df['04 - 05'], errors='coerce')
+df['05 - 06'] = pd.to_numeric(df['05 - 06'], errors='coerce')
+df['06 - 07'] = pd.to_numeric(df['06 - 07'], errors='coerce')
+
+# Extract the data for Latvian and Russian
+latvian_data = df[df['school year'] == 'latvian']['95 - 96':'06 - 07'].values
+russian_data = df[df['school year'] == 'russian']['95 - 96':'06 - 07'].values
+total_data = df[df['school year'] == 'total']['95 - 96':'06 - 07'].values
+
+# Convert to lists for easier processing
+years = ['95-96', '99-00', '00-01', '01-02', '02-03', '03-04', '04-05', '05-06', '06-07']
+latvian_vals = df[df['school year'] == 'latvian'][years].values.flatten()
+russian_vals = df[df['school year'] == 'russian'][years].values.flatten()
+total_vals = df[df['school year'] == 'total'][years].values.flatten()
+
+# Calculate proportions
+latvian_prop = latvian_vals / total_vals
+russian_prop = russian_vals / total_vals
+
+# Compute the change in proportion over time (differences)
+latvian_change = [latvian_prop[i] - latvian_prop[i-1] for i in range(1, len(latvian_prop))]
+russian_change = [russian_prop[i] - russian_prop[i-1] for i in range(1, len(russian_prop))]
+
+# Average rate of change (slope)
+avg_latvian_change = sum(latvian_change) / len(latvian_change)
+avg_russian_change = sum(russian_change) / len(russian_change)
+
+# Determine which one is more significantly influenced
+if abs(avg_latvian_change) > abs(avg_russian_change):
+    more_influenced = 'Latvian'
+else:
+    more_influenced = 'Russian'
+
+print(f"Final Answer: Latvian, Russian")

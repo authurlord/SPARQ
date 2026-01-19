@@ -1,0 +1,31 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('table.csv')
+
+# Convert 'Length [km]' and 'Drainage basin area [km2]' to numeric
+df['Length [km]'] = pd.to_numeric(df['Length [km]'], errors='coerce')
+df['Drainage basin area [km2]'] = pd.to_numeric(df['Drainage basin area [km2]'], errors='coerce')
+
+# Drop rows with missing values in the relevant columns
+df.dropna(subset=['Length [km]', 'Drainage basin area [km2]'], inplace=True)
+
+# Create a bar chart
+plt.figure(figsize=(14, 7))
+bar_width = 0.35
+index = range(len(df))
+
+plt.bar(index, df['Length [km]'], bar_width, label='Length [km]', alpha=0.8)
+plt.bar([i + bar_width for i in index], df['Drainage basin area [km2]'], bar_width, label='Drainage basin area [km2]', alpha=0.8)
+
+plt.xlabel('Rivers')
+plt.ylabel('Values')
+plt.title('Length of Rivers and Their Drainage Basin Areas')
+plt.xticks([i + bar_width / 2 for i in index], df['Name'], rotation=45, ha='right')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+# Final answer is the two variables being plotted
+print("Final Answer: length, drainage basin area")

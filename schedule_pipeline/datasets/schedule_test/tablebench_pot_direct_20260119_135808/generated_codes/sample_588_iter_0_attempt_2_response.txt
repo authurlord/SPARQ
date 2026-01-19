@@ -1,0 +1,16 @@
+Step 1: The user wants to calculate the number of national votes in 1965 after a 10% increase.
+Step 2: Load the dataframe.
+Step 3: Filter the row where 'election' is '1965'.
+Step 4: Extract the 'of national votes' value, convert it to integer, increase by 10%, and print the result.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Filter the row for 1965
+row_1965 = df[df['election'] == '1965']
+# Extract the national votes and convert to integer
+national_votes_1965 = int(row_1965['of national votes'].values[0])
+# Increase by 10%
+increased_votes = national_votes_1965 * 1.1
+print(f"Final Answer: {increased_votes:.0f}")
+```

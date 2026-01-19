@@ -1,0 +1,39 @@
+The error occurred because the "viewers (millions)" column contains concatenated string values (e.g., "11.9912.7311.8810.6910.29") instead of separate values for each row. This suggests that the data was improperly parsed — likely due to a formatting issue where multiple viewer values were joined together.
+
+Step 1: Identify that the "viewers (millions)" column has incorrectly merged values across rows.
+Step 2: Correct the parsing by ensuring each row has its own viewer value.
+Step 3: Filter episodes with a rating of 6.0 or higher.
+Step 4: Compute the average viewers (in millions) for those episodes.
+
+We need to carefully inspect the data structure. From the table, the "viewers (millions)" column appears to have been misaligned — it seems like the values are concatenated across rows. However, looking at the structure:
+
+Row 6: viewers = '11.99'  
+Row 7: viewers = '12.73'  
+Row 8: viewers = '11.88'  
+Row 9: viewers = '10.69'  
+Row 10: viewers = '10.29'
+
+These are clearly separate per row. The issue in the prior attempt was likely due to incorrect parsing or a misunderstanding of the column format. The data is actually correctly structured per row — each row has a separate viewers value.
+
+Thus, we can safely extract the "viewers (millions)" column as numeric and filter by rating ≥ 6.0.
+
+Corrected approach:
+- Parse the "viewers (millions)" column as float.
+- Filter rows where "rating" ≥ 6.0.
+- Compute the mean of the filtered viewers.
+
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert viewers (millions) to numeric, handling any potential parsing issues
+df['viewers (millions)'] = pd.to_numeric(df['viewers (millions)'], errors='coerce')
+
+# Filter episodes with rating >= 6.0
+filtered_episodes = df[df['rating'].astype(float) >= 6.0]
+
+# Calculate average viewers for these episodes
+average_viewers = filtered_episodes['viewers (millions)'].mean()
+
+print(f"Final Answer: {average_viewers:.2f}")
+```

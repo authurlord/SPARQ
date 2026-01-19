@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: 41.0

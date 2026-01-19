@@ -1,0 +1,20 @@
+Step 1: The user wants the difference between the highest points and the average points of the top 3 artists.
+Step 2: Load the dataframe.
+Step 3: Convert 'points' column to integer.
+Step 4: Find the highest points.
+Step 5: Get the top 3 artists by points and calculate their average.
+Step 6: Compute the difference and print.
+```python
+import pandas as pd
+
+df = pd.read_csv('table.csv')
+# Convert 'points' to integer
+df['points'] = pd.to_numeric(df['points'])
+# Find the highest points
+max_points = df['points'].max()
+# Get top 3 artists by points
+top_3_avg = df.nlargest(3, 'points')['points'].mean()
+# Calculate difference
+difference = max_points - top_3_avg
+print(f"Final Answer: {difference:.1f}")
+```

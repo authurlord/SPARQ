@@ -1,0 +1,2 @@
+[Answer Format]
+Final Answer: The table contains information about power plants in India, including their serial number (sno), name (power plant), state, commissioned capacity in megawatts (MW), and year of commission. Key insights include: the highest capacity power plant is Indira Sagar (1000 MW) in Madhya Pradesh, commissioned in 2005; Himachal Pradesh has the most power plants (4); and the majority of plants were commissioned between 1981 and 2012, with a concentration in the 2000s.

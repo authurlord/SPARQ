@@ -1,0 +1,19 @@
+Step 1: Understand the table structure and content.  
+The table contains yearly data on marriages in a region, with columns representing different types of marriages and total marriages. The key focus is on same-sex marriages and their percentage over time.
+
+Step 2: Identify the main columns:  
+- "year": The year of the data.  
+- "marriages between men": Number of marriages involving two men.  
+- "marriages between women": Number of marriages involving two women.  
+- "same-sex marriages": Total number of same-sex marriages (combined for men and women).  
+- "total marriages": Total number of marriages across all categories.  
+- "% same-sex marriages": Percentage of total marriages that are same-sex.
+
+Step 3: Initial insights into trends:  
+- The "same-sex marriages" column shows a steady increase from 1,275 in 2005 to 3,880 in 2011.  
+- The percentage of same-sex marriages increases from 1.06% in 2005 to 2.38% in 2011, indicating a growing proportion relative to total marriages.  
+- This suggests both an absolute rise and a relative increase in same-sex marriages over time.
+
+Step 4: Since the question asks for a description and insights, no computation is required beyond summarizing the data and trends.
+
+Final Answer: year, marriages between men, marriages between women, same - sex marriages, total marriages, % same - sex marriages, increasing trend in same - sex marriages
