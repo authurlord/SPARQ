@@ -1,12 +1,65 @@
-# downloaded data
-datasets/data
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-schedule_pipeline/__pycache__/
-utils/__pycache__/
-utils/sql/__pycache__/
-utils/wtq/__pycache__/
-utils/tab_fact/__pycache__/
-utils/gpt2/__pycache__/
-utils/fetaqa/__pycache__/
+# Virtual Environment
+venv/
+ENV/
+env/
 
-schedule_pipeline/tmp/
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Test and Log files
+*.log
+*.bak
+*.tmp
+
+# Schedule Pipeline - Generated Results and Logs
+schedule_pipeline/datasets/schedule_test/*/
+!schedule_pipeline/datasets/schedule_test/.gitkeep
+
+# Specifically ignore generated codes and intermediate results
+**/generated_codes/
+**/execution_errors.log
+**/execution_detailed.log
+**/test_run.log
+
+# Ignore timestamped result directories
+*_20[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9]/
+
+# Keep example results (if needed, can be removed)
+# !schedule_pipeline/datasets/schedule_test/example_results/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.py.bak
+*.sh.bak
