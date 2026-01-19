@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
 """
-TableBench PoT (Program-of-Thought) Pipeline
-Solved via Python Code Execution
-
-Steps:
-1. Data Loading & Preprocessing
-2. Generate Python Code (n=3 samples)
-3. Execute Python Code & Select Result
-4. Generate Final Answer (using execution result as context)
-5. Evaluate (ROUGE-L)
+Enhanced TableBench PoT Pipeline with detailed logging
 """
 
 import os
@@ -16,6 +8,7 @@ import sys
 import argparse
 import json
 import time
+from datetime import datetime
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
@@ -23,7 +16,6 @@ from typing import Dict, Any, List
 import re
 from collections import Counter
 
-# Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.async_llm import infer_prompts
@@ -33,7 +25,6 @@ from utils.python_executor import execute_python_code
 
 import multiprocessing as mp
 
-# Multiprocessing setup
 os.environ.setdefault("VLLM_WORKER_MULTIPROC_METHOD", "spawn")
 try:
     mp.set_start_method("spawn", force=True)
@@ -41,14 +32,16 @@ except RuntimeError:
     pass
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="TableBench PoT Pipeline")
+    parser = argparse.ArgumentParser(description="Enhanced TableBench PoT Pipeline")
     
     parser.add_argument('--llm_path', type=str, 
                        default='/data/workspace/yanmy/models/Qwen2.5-7B-Instruct/', help='Path to LLM model')
+    parser.add_argument('--llm_name', type=str, 
+                       default='qwen3-4b', help='Model name registered in vLLM API server')
     parser.add_argument('--dataset_name', type=str, default='tablebench', help='Dataset name')
     parser.add_argument('--split', type=str, default='test', help='Dataset split')
     parser.add_argument('--tmp_save_path', type=str,
-                       default='datasets/schedule_test/tablebench_pot',
+                       default='datasets/schedule_test/tablebench_pot_enhanced',
                        help='Temporary save path')
     parser.add_argument('--tablebench_jsonl_path', type=str,
                        default='../datasets/TableBench/TableBench_PoT.jsonl',
@@ -57,7 +50,6 @@ def parse_args():
     parser.add_argument('--n_parallel', type=int, default=32, help='Number of parallel workers')
     parser.add_argument('--llm_concurrency', type=int, default=32, help='Max concurrent requests')
     
-    # Sampling parameters for Code Generation
     parser.add_argument('--code_sample_num', type=int, default=3, help='Samples for Python code generation')
     parser.add_argument('--temperature', type=float, default=0.7, help='Sampling temperature')
     parser.add_argument('--top_p', type=float, default=0.8, help='Sampling top_p')
@@ -65,16 +57,10 @@ def parse_args():
     parser.add_argument('--first_n', type=int, default=-1, help='Only process first N samples')
     parser.add_argument('--use_api', action='store_true', help='Use async API')
     
-    # API Arguments (Added repair)
     parser.add_argument('--api_base', type=str, default="http://localhost:8000/v1", help='vLLM API Base URL')
-    parser.add_argument('--api_key', type=str, default="EMPTY", help='vLLM API Key')
+    parser.add_argument('--api_key', type=str, default="api-key-qwen3", help='vLLM API Key')
     
     return parser.parse_args()
-
-
-# ============================================================================
-# Helper Functions
-# ============================================================================
 
 def load_tablebench_dataset(jsonl_path: str, first_n: int = -1) -> List[Dict]:
     print(f"Loading TableBench dataset from {jsonl_path}...")
@@ -112,7 +98,6 @@ def tablebench_table_to_df(item: Dict) -> pd.DataFrame:
     return pd.DataFrame(data, columns=unique_columns)
 
 def build_tablebench_pot_prompt(item: Dict, df: pd.DataFrame, template_path: str) -> str:
-    """Builds the PoT prompt using JSON table representation."""
     with open(template_path, 'r', encoding='utf-8') as f:
         template = f.read()
     
@@ -129,13 +114,11 @@ def build_tablebench_pot_prompt(item: Dict, df: pd.DataFrame, template_path: str
 
 def build_final_qa_prompt(item: Dict, df: pd.DataFrame, execution_result: str, 
                           template_path: str = '../prompts/text_reason_wtq.txt') -> str:
-    """Builds final QA prompt with Python execution result as context."""
-    # Load template
     if os.path.exists(template_path):
         with open(template_path, 'r', encoding='utf-8') as f:
             template = f.read()
     else:
-        template = "" # Fallback?
+        template = ""
 
     temp_df = df.copy()
     if 'row_id' not in temp_df.columns:
@@ -145,11 +128,9 @@ def build_final_qa_prompt(item: Dict, df: pd.DataFrame, execution_result: str,
     columns = df.columns.tolist()
     all_cols = ['row_id'] + columns
     
-    # Clean table title
     table_title = item.get('id', 'Table')
     table_name = re.sub(r'[^a-zA-Z0-9_]', '_', str(table_title))
     
-    # Pseudo-schema
     schema_cols = [f"`{col}` text" for col in columns]
     if 'row_id' not in columns:
         schema_cols.insert(0, "row_id int")
@@ -158,7 +139,6 @@ def build_final_qa_prompt(item: Dict, df: pd.DataFrame, execution_result: str,
     
     question = item.get('question', '')
     
-    # Construct Execution Evidence
     evidence = ""
     if execution_result:
         evidence = f"\nHere is an additional evidence to help the answering process.\nAdditional Evidence:\n/*\nPython Output:\n{execution_result}\n*/\n"
@@ -183,40 +163,87 @@ Q: {question}
     return prompt
 
 def extract_python_code(response: str) -> str:
-    """Extracts code block from response."""
+    """Enhanced code extraction with better parsing logic."""
+    # Try to find code block with python tag
     match = re.search(r'```python\s*(.*?)\s*```', response, re.DOTALL)
     if match:
-        return match.group(1)
+        return match.group(1).strip()
     
+    # Try to find any code block
     match = re.search(r'```\s*(.*?)\s*```', response, re.DOTALL)
     if match:
-        return match.group(1)
-        
-    return response
+        code = match.group(1).strip()
+        # Check if it looks like Python code
+        if any(keyword in code for keyword in ['import', 'def ', 'print', 'pd.', 'df']):
+            return code
+    
+    # Try to find code after "Step" markers
+    if 'Step' in response and '```' not in response:
+        lines_resp = response.split('\n')
+        code_lines = []
+        in_code = False
+        for line in lines_resp:
+            if line.strip().startswith('import ') or line.strip().startswith('df '):
+                in_code = True
+            if in_code:
+                code_lines.append(line)
+        if code_lines:
+            return '\n'.join(code_lines).strip()
+    
+    # Check if response contains Python-like code without markers
+    if any(keyword in response for keyword in ['import pandas', 'pd.read_csv', 'df =', 'print(']):
+        lines_resp = response.split('\n')
+        code_lines = []
+        for line in lines_resp:
+            stripped = line.strip()
+            if stripped and not stripped.startswith('#') and not stripped.startswith('Step'):
+                if any(kw in stripped for kw in ['import', 'pd.', 'df', 'print', '=', 'mean(', 'sum(']):
+                    code_lines.append(line)
+        if code_lines:
+            return '\n'.join(code_lines).strip()
+    
+    return ""
 
-# ============================================================================
-# Main
-# ============================================================================
 
 def main():
     args = parse_args()
+    
+    # Add timestamp to save path to avoid overwriting
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    if args.tmp_save_path.endswith('_enhanced'):
+        args.tmp_save_path = f"{args.tmp_save_path}_{timestamp}"
+    
     os.makedirs(args.tmp_save_path, exist_ok=True)
+    
+    # Print all key parameters at the start
+    print("="*80)
+    print("TableBench PoT Pipeline - Enhanced Version")
+    print("="*80)
+    print(f"Timestamp: {timestamp}")
+    print(f"Save Path: {args.tmp_save_path}")
+    print(f"Dataset: {args.tablebench_jsonl_path}")
+    print(f"First N: {args.first_n}")
+    print(f"LLM Name: {args.llm_name}")
+    print(f"API Base: {args.api_base}")
+    print(f"Code Sample Num: {args.code_sample_num}")
+    print(f"Temperature: {args.temperature}")
+    print(f"Top P: {args.top_p}")
+    print(f"Concurrency: {args.llm_concurrency}")
+    print("="*80)
+    print()
     
     overall_start = time.perf_counter()
     timeline = {}
     metrics = {}
     
-    # 1. Load Data
     print("Loading Data...")
     raw_data = load_tablebench_dataset(args.tablebench_jsonl_path, args.first_n)
     
-    # Preprocess DataFrames
     print("Preprocessing tables...")
     processed_dfs = {}
     for idx, item in enumerate(tqdm(raw_data)):
         processed_dfs[idx] = tablebench_table_to_df(item)
         
-    # 2. Generate Python Code
     print("\n[Step 1] Generating Python Code...")
     _t1 = time.perf_counter()
     
@@ -232,7 +259,7 @@ def main():
         sample_num=args.code_sample_num,
         temperature=args.temperature,
         top_p=args.top_p,
-        llm_name=args.llm_path, # Pass path as model name for vLLM
+        llm_name=args.llm_name,
         api_base=args.api_base,
         api_key=args.api_key,
         concurrency=args.llm_concurrency
@@ -240,56 +267,138 @@ def main():
     
     timeline['Generate Python'] = time.perf_counter() - _t1
     
-    # 3. Execute Python Code
     print("\n[Step 2] Executing Python Code...")
     _t2 = time.perf_counter()
     
-    execution_results = {} # idx -> best_result_string
-    error_log_path = os.path.join(args.tmp_save_path, "execution_errors.log")
+    execution_results = {}
+    execution_stats = {
+        'total_samples': len(raw_data),
+        'total_attempts': 0,
+        'successful_executions': 0,
+        'failed_executions': 0,
+        'parse_failures': 0,
+        'samples_with_all_failures': 0,
+        'samples_with_partial_success': 0,
+        'samples_with_all_success': 0
+    }
     
-    with open(error_log_path, 'w', encoding='utf-8') as error_log:
+    code_dir = os.path.join(args.tmp_save_path, "generated_codes")
+    os.makedirs(code_dir, exist_ok=True)
+    
+    error_log_path = os.path.join(args.tmp_save_path, "execution_errors.log")
+    detailed_log_path = os.path.join(args.tmp_save_path, "execution_detailed.log")
+    
+    with open(error_log_path, 'w', encoding='utf-8') as error_log, \
+         open(detailed_log_path, 'w', encoding='utf-8') as detailed_log:
+        
+        detailed_log.write("="*80 + "\n")
+        detailed_log.write("DETAILED EXECUTION LOG\n")
+        detailed_log.write("="*80 + "\n\n")
+        
         for idx in tqdm(range(len(raw_data)), desc="Executing"):
             responses = code_responses[idx]
             df = processed_dfs[idx]
+            question = raw_data[idx].get('question', '')
+            sample_id = raw_data[idx].get('id', idx)
+            
+            detailed_log.write(f"\n{'='*80}\n")
+            detailed_log.write(f"Sample {idx} (ID: {sample_id})\n")
+            detailed_log.write(f"Question: {question}\n")
+            detailed_log.write(f"{'='*80}\n")
             
             results = []
+            success_count = 0
+            
             for i, r in enumerate(responses):
+                execution_stats['total_attempts'] += 1
+                
+                response_file = os.path.join(code_dir, f"sample_{idx}_attempt_{i}_response.txt")
+                with open(response_file, 'w', encoding='utf-8') as f:
+                    f.write(r)
+                
                 code = extract_python_code(r)
+                
+                if not code or len(code.strip()) < 10:
+                    execution_stats['parse_failures'] += 1
+                    detailed_log.write(f"\n--- Attempt {i}: PARSE FAILURE ---\n")
+                    detailed_log.write(f"Response length: {len(r)}\n")
+                    detailed_log.write(f"Preview: {r[:200]}...\n")
+                    
+                    error_log.write(f"=== Parse Failure: Sample {idx} Attempt {i} ===\n")
+                    error_log.write(f"Question: {question}\n")
+                    error_log.write(f"Response:\n{r}\n\n")
+                    continue
+                
+                code_file = os.path.join(code_dir, f"sample_{idx}_attempt_{i}.py")
+                with open(code_file, 'w', encoding='utf-8') as f:
+                    f.write(code)
+                
                 output = execute_python_code(code, df)
                 
-                # Simple heuristic: filter out errors or empty outputs if possible
                 if output and "Execution Error" not in output:
                     results.append(output.strip())
+                    success_count += 1
+                    execution_stats['successful_executions'] += 1
+                    
+                    detailed_log.write(f"\n--- Attempt {i}: SUCCESS ---\n")
+                    detailed_log.write(f"Code: {code_file}\n")
+                    detailed_log.write(f"Output: {output.strip()}\n")
                 else:
-                     # Log failure
-                    error_log.write(f"=== Error Sample {idx} (Code {i}) ===\n")
-                    error_log.write(f"Question: {raw_data[idx].get('question', '')}\n")
-                    error_log.write(f"Attempt: {i}\n")
-                    error_log.write("Code:\n")
-                    error_log.write(code + "\n")
-                    error_log.write("Output/Error:\n")
-                    error_log.write(str(output) + "\n\n")
+                    execution_stats['failed_executions'] += 1
+                    
+                    detailed_log.write(f"\n--- Attempt {i}: EXECUTION FAILURE ---\n")
+                    detailed_log.write(f"Code: {code_file}\n")
+                    detailed_log.write(f"Error: {output}\n")
+                    
+                    error_log.write(f"=== Execution Error: Sample {idx} Attempt {i} ===\n")
+                    error_log.write(f"Question: {question}\n")
+                    error_log.write(f"Code file: {code_file}\n")
+                    error_log.write(f"Code:\n{code}\n")
+                    error_log.write(f"Error:\n{output}\n\n")
             
-            # Selection Strategy: Majority Voting or First Valid
+            if success_count == 0:
+                execution_stats['samples_with_all_failures'] += 1
+            elif success_count == len(responses):
+                execution_stats['samples_with_all_success'] += 1
+            else:
+                execution_stats['samples_with_partial_success'] += 1
+            
             final_output = ""
             if results:
-                # Majority vote
                 counter = Counter(results)
                 most_common = counter.most_common(1)[0]
                 final_output = most_common[0]
+                detailed_log.write(f"\nSelected: {final_output}\n")
             else:
-                pass
+                detailed_log.write(f"\nNo successful execution\n")
                 
             execution_results[idx] = final_output
+    
+    stats_path = os.path.join(args.tmp_save_path, "execution_stats.json")
+    execution_stats['success_rate'] = execution_stats['successful_executions'] / execution_stats['total_attempts'] if execution_stats['total_attempts'] > 0 else 0
+    execution_stats['parse_failure_rate'] = execution_stats['parse_failures'] / execution_stats['total_attempts'] if execution_stats['total_attempts'] > 0 else 0
+    
+    with open(stats_path, 'w') as f:
+        json.dump(execution_stats, f, indent=2)
+    
+    print(f"\n--- Execution Statistics ---")
+    print(f"Total samples: {execution_stats['total_samples']}")
+    print(f"Total attempts: {execution_stats['total_attempts']}")
+    print(f"Successful: {execution_stats['successful_executions']} ({execution_stats['success_rate']*100:.1f}%)")
+    print(f"Failed: {execution_stats['failed_executions']}")
+    print(f"Parse failures: {execution_stats['parse_failures']} ({execution_stats['parse_failure_rate']*100:.1f}%)")
+    print(f"All success: {execution_stats['samples_with_all_success']}")
+    print(f"Partial success: {execution_stats['samples_with_partial_success']}")
+    print(f"All failures: {execution_stats['samples_with_all_failures']}")
+    print(f"----------------------------\n")
         
     timeline['Execute Python'] = time.perf_counter() - _t2
     
-    # 4. Generate Final Answer
     print("\n[Step 3] Generating Final QA...")
     _t3 = time.perf_counter()
     
     qa_prompt_list = []
-    qa_template_path = os.path.join(os.path.dirname(__file__), '../prompts/text_reason_wtq.txt')
+    qa_template_path = os.path.join(os.path.dirname(__file__), '../prompts/text_reason_wtq_nocase.txt')
     
     for idx, item in enumerate(raw_data):
         res = execution_results.get(idx, "")
@@ -298,10 +407,10 @@ def main():
         
     qa_responses, metrics['final_qa'], _ = infer_prompts(
         qa_prompt_list,
-        sample_num=1, # Greedy generation for final answer
+        sample_num=1,
         temperature=0,
         top_p=1,
-        llm_name=args.llm_path, # Pass path as model name
+        llm_name=args.llm_name,
         api_base=args.api_base,
         api_key=args.api_key,
         concurrency=args.llm_concurrency
@@ -309,13 +418,12 @@ def main():
     
     timeline['Final QA'] = time.perf_counter() - _t3
     
-    # 5. Evaluate
     print("\n[Step 4] Evaluation...")
     
     preds = []
     golds = []
     
-    output_data = [] # For CSV saving
+    output_data = []
     
     for idx, item in enumerate(raw_data):
         pred = qa_responses[idx][0] if isinstance(qa_responses[idx], list) else qa_responses[idx]
@@ -362,7 +470,6 @@ def main():
     print(f"Acc@0.5: {eval_results['accuracy_at_0.5']:.4f}")
     print("="*40)
     
-    # Save results
     res_df = pd.DataFrame(output_data)
     res_df.to_csv(f"{args.tmp_save_path}/pot_results.csv", index=False)
     
