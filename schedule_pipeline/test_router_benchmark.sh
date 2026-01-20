@@ -4,15 +4,15 @@
 # Usage: ./test_router_benchmark.sh [--first_n N] [--router_models_dir DIR]
 
 # Default Paths
-LLM_PATH="/data/workspace/yanmy/models/Qwen2.5-7B-Instruct/"
-LLM_NAME="qwen2.5-7b-instruct"
-EMBEDDING_MODEL_PATH="/home/yanmy/models/bge-m3"
+LLM_PATH="../../models/Qwen3-4B-Instruct-2507"
+LLM_NAME="qwen3-4b"
+EMBEDDING_MODEL_PATH="../../models/bge-m3"
 ROUTER_MODELS_DIR="../models"
 ROUTER_MODEL_PATTERN="*"
-CHECK_MODEL_PATH="/home/yanmy/HybridRAG/H-STAR/check/wikitq"
+CHECK_MODEL_PATH="/data/workspace/yanmy/HybridRAG/H-STAR/check/output/bge-reranker-v2-m3-finetuned"
 PREPROCESS_FILE="datasets/schedule_test/wikitq/wikitq_df_processed.npy"
 API_BASE="http://localhost:8000/v1"
-API_KEY="api-key"
+API_KEY="api-key-qwen3"
 FIRST_N=100  # Default to 100 samples for faster testing
 DATASET_NAME="wikitq"
 SPLIT="test"

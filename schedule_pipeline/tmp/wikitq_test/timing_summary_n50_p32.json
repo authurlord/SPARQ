@@ -1,0 +1,20 @@
+{
+  "total_time_seconds": 292.03599248896353,
+  "total_time_minutes": 4.867266541482725,
+  "accuracy": 78.0,
+  "steps": {
+    "Step 1 - Data Preprocessing": 153.7210929519497,
+    "Step 2 - Build Router Query": 0.019644221989437938,
+    "Step 3 - Construct Database": 0.5852661069948226,
+    "Step 4 - Router Inference": 6.77719684317708,
+    "Step 5 - Parse Router & Build Queries": 0.13652961095795035,
+    "Step 6 - RAG": 7.495960125001147,
+    "Step 7 - Select Ops Generation": 45.825999145861715,
+    "Step 8 - SQL Generation": 39.631636030972004,
+    "Step 9 - SQL Parsing & Execution": 0.5567161908838898,
+    "Step 10 - Check Model Iteration": 1.388369968160987,
+    "Step 11 - Add Missing SQL": 0.35641409805975854,
+    "Step 12 - Generate Final QA Prompts": 0.07938720611855388,
+    "Step 13 - Final QA Generation": 32.61670251004398
+  }
+}

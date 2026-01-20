@@ -117,7 +117,7 @@ def router_inference_direct(semantic_router: Dict, router_model) -> List[Dict]:
     
     # Define all possible labels
     ALL_LABELS = [
-        'Base', 'Select_Row', 'Select_Column', 'Execute_SQL', 'RAG_20_5', 'RAG_10_3'
+        'Base', 'Select_Row', 'Select_Column', 'Execute_SQL', 'RAG_20_5'
     ]
     
     # Pre-encode all labels

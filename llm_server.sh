@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export CUDA_VISIBLE_DEVICES=0,1
-N_GPU=2
+export CUDA_VISIBLE_DEVICES=0
+N_GPU=1
 export VLLM_ATTENTION_BACKEND=FLASHINFER
 # export VLLM_SKIP_P2P_CHECK=1
 # export VLLM_DISABLE_COMPILE_CACHE=1
@@ -14,7 +14,7 @@ HOST="0.0.0.0"
 PORT=8000
 VLLM_API_KEY="api-key-qwen3"
 # 24 * 0.85 = 20.4GB
-GPU_RAM=0.75
+GPU_RAM=0.65
 # GPU_RAM=0.70 ## for pipeline
 
 python -m vllm.entrypoints.openai.api_server \

@@ -1,0 +1,18 @@
+{
+  "accuracy": 78.0,
+  "error_indices": [
+    2,
+    13,
+    14,
+    15,
+    23,
+    25,
+    37,
+    42,
+    44,
+    46,
+    49
+  ],
+  "format_error_indices": [],
+  "total_samples": 50
+}

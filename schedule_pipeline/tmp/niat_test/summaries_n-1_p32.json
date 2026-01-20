@@ -1,0 +1,34 @@
+{
+  "Select_Row": {
+    "batch_dur": 379.35228690702934,
+    "total_prompt_tokens": 1751221,
+    "total_completion_tokens": 811688,
+    "qps": 2.2406613307390337,
+    "in_tps": 4616.344913268401,
+    "out_tps": 2139.6681343822406
+  },
+  "Select_Column": {
+    "batch_dur": 219.43012289598119,
+    "total_prompt_tokens": 1511879,
+    "total_completion_tokens": 456009,
+    "qps": 3.468074437349447,
+    "in_tps": 6890.02485185998,
+    "out_tps": 2078.151322077903
+  },
+  "Execute_SQL": {
+    "batch_dur": 1140.8500908089336,
+    "total_prompt_tokens": 7261663,
+    "total_completion_tokens": 2591285,
+    "qps": 2.998641125210674,
+    "in_tps": 6365.13338474736,
+    "out_tps": 2271.363276276393
+  },
+  "Final_QA": {
+    "batch_dur": 1083.093585997005,
+    "total_prompt_tokens": 7344863,
+    "total_completion_tokens": 597870,
+    "qps": 3.6829689064477855,
+    "in_tps": 6781.374292082928,
+    "out_tps": 552.002160967144
+  }
+}
