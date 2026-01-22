@@ -286,7 +286,9 @@ def tablebench_rouge_l_score(pred: str, gold: str) -> float:
         gold_str = str(gold) if gold else ""
         
         # Extract answer from common patterns
-        match = re.search(r'(?:the answer is|therefore|answer):\s*(.+)', pred_str, re.IGNORECASE)
+        pattern1 = r'Therefore, the answer is:\s*"?([^"\n\r]+)"?'
+        pattern2 = r'(?:the answer is|therefore|answer):\s*(.+)'
+        match = re.search(pattern1, pred_str, re.IGNORECASE)
         if match:
             pred_str = match.group(1).strip()
         
@@ -300,6 +302,7 @@ def tablebench_rouge_l_score(pred: str, gold: str) -> float:
         
         # Compute ROUGE-L using rouge-score
         scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
+        # print(11, gold_str, pred_str)
         scores = scorer.score(gold_str, pred_str)
         
         return scores['rougeL'].fmeasure

@@ -114,7 +114,7 @@ def parse_args():
                        help='Number of samples for Select_Row/Select_Column')
     parser.add_argument('--sql_sample_num', type=int, default=3,
                        help='Number of samples for Execute_SQL')
-    parser.add_argument('--llm_concurrency', type=int, default=2,
+    parser.add_argument('--llm_concurrency', type=int, default=32,
                        help='Max concurrent requests to vLLM API')
     parser.add_argument('--temperature', type=float, default=0.7,
                        help='Sampling temperature')
@@ -923,6 +923,14 @@ def main():
     # Calculate ROUGE-L metrics
     eval_results = evaluate_tablebench_predictions(preds, golds)
     
+    tmp_result = {
+        'preds': preds,
+        'golds': golds,
+    }
+
+    with open(f'{args.tmp_save_path}/preds_and_golds.json', 'w') as f_w:
+        json.dump(tmp_result, f_w, indent=2)
+
     print(f"Average ROUGE-L: {eval_results['avg_rouge_l']:.4f}")
     print(f"Accuracy@0.5: {eval_results['accuracy_at_0.5'] * 100:.2f}%")
     print(f"Accuracy@0.8: {eval_results['accuracy_at_0.8'] * 100:.2f}%")

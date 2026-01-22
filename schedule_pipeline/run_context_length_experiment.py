@@ -27,7 +27,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.async_llm import infer_prompts
 from utils.schedule_utils import (
-    table_to_str_sql, find_intersection, sql_data_cleaning, find_intersection_and_add_row_id,
+    table_to_str_sql, find_intersection_and_add_row_id,
     format_document, batch_rerank_scores, ROLLBACK,
     merge_clean_and_format_df_dict, retrieve_rows_by_subtables,
     process_error_analysis_list
@@ -444,14 +444,32 @@ def run_single_config(args, tablebench_data: List[Dict], full_tables: Dict[int, 
     preds = []
     golds = []
     
+    length_result = {}
     for idx, item in enumerate(tablebench_data):
         pred = final_responses[idx][0] if isinstance(final_responses[idx], list) else final_responses[idx]
         gold = item.get('answer', '')
+        table_id = item.get('table_id', '')
+        if table_id not in length_result:
+            length_result[table_id] = {
+                "preds": [],
+                "golds": []
+            }
+        length_result[table_id]['preds'].append(str(pred))
+        length_result[table_id]['golds'].append(str(gold))
         preds.append(str(pred))
         golds.append(str(gold))
     
     eval_results = evaluate_tablebench_predictions(preds, golds)
     
+    with open(f"{config_output_path}/preds_and_golds.json", 'w') as f_result:
+        json.dump(length_result, f_result, indent=2)
+
+    for table_id, table_info in length_result.items():
+        table_preds = table_info['preds']
+        table_golds = table_info['golds']
+        res = evaluate_tablebench_predictions(table_preds, table_golds)
+        print(f"{table_id}, result: {res}")
+
     results['predictions'] = preds
     results['golds'] = golds
     results['rouge_l'] = eval_results['avg_rouge_l']
@@ -491,12 +509,14 @@ def main():
     
     # Run experiment for each token configuration
     all_results = {}
-    
+    runtimes = {}
     for max_tokens in target_lengths:
         print(f"\n{'='*60}")
         print(f"Running configuration: {max_tokens} tokens")
         print(f"{'='*60}")
         
+        _t0 = time.perf_counter()
+
         # Truncate tables for this configuration
         truncated_tables = {}
         for idx in range(len(tablebench_data)):
@@ -516,18 +536,21 @@ def main():
             max_tokens, config_output_path
         )
         
+        _t1 = time.perf_counter()
         all_results[max_tokens] = results
+        runtimes[max_tokens] = (_t1 - _t0)
+        print(f"\n  Runtime: {runtimes[max_tokens]:.6f}")
         print(f"\n  ROUGE-L @ {max_tokens} tokens: {results['rouge_l']:.4f}")
     
     # Summary
     print("\n" + "=" * 60)
     print("EXPERIMENT SUMMARY")
     print("=" * 60)
-    print(f"{'Token Length':<15} {'ROUGE-L':<10} {'Accuracy':<10}")
+    print(f"{'Token Length':<15} {'ROUGE-L':<10} {'Accuracy':<10} {'Time':<10}")
     print("-" * 35)
     for max_tokens in target_lengths:
         r = all_results[max_tokens]
-        print(f"{max_tokens:<15} {r['rouge_l']:.4f}     {r['accuracy']:.4f}")
+        print(f"{max_tokens:<15} {r['rouge_l']:.4f}     {r['accuracy']:.4f}     {runtimes[max_tokens]:.6f}")
     
     # Save summary
     summary = {

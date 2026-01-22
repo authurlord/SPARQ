@@ -3,7 +3,9 @@
 # Usage: ./test_context_length_experiment.sh [--first_n N] [--target_lengths "8000,16000,..."]
 
 # Default Paths
+# LLM_PATH="/ssd_data/models/qwen-2.5-7B"
 LLM_PATH="../../models/Qwen3-4B-Instruct-2507"
+# LLM_PATH="../../models/Qwen3-30B-A3B-Instruct-2507-FP8"
 LLM_NAME="qwen3-4b"
 EMBEDDING_MODEL_PATH="../../models/bge-m3"
 ROUTER_MODEL_PATH="../../HybridRAG/H-STAR/router/wikitq"
@@ -11,10 +13,14 @@ CHECK_MODEL_PATH="../../HybridRAG/H-STAR/check/wikitq"
 TABLEBENCH_JSON_PATH="../datasets/TableBench/tablebench_math_long_98.json"
 API_BASE="http://localhost:8000/v1"
 API_KEY="api-key-qwen3"
+TMP_SAVE_PATH="datasets/schedule_test/context_length_exp_qwen3-4b"
 
 # Experiment parameters
-TARGET_LENGTHS="8000,16000,32000,64000,128000"
-FIRST_N=50  # Default to 50 samples
+# TARGET_LENGTHS="8000,16000,32000,64000,128000"
+# FIRST_N=50  # Default to 50 samples
+# TARGET_LENGTHS="4000,6400,8000,15600,32000"
+TARGET_LENGTHS="80000"
+FIRST_N=-1  # Default to 50 samples
 
 # Parse arguments
 while [[ "$#" -gt 0 ]]; do
@@ -73,6 +79,7 @@ CMD="python run_context_length_experiment.py \
   --router_model_path \"${ROUTER_MODEL_PATH}\" \
   --check_model_path \"${CHECK_MODEL_PATH}\" \
   --tablebench_jsonl_path \"${TABLEBENCH_JSON_PATH}\" \
+  --tmp_save_path \"${TMP_SAVE_PATH}\" \
   --target_lengths \"${TARGET_LENGTHS}\" \
   --first_n ${FIRST_N}"
 

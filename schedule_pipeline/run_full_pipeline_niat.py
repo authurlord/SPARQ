@@ -1012,6 +1012,9 @@ def main():
         }
         all_samples.append(sample)
     
+    with open(f'{args.tmp_save_path}/preds_and_golds.json', 'w') as f_w:
+        json.dump(all_samples, f_w, indent=2)
+
     acc_all = niat_match_func_for_samples(all_samples, strategy="top") * 100
     print(f"Accuracy (NIAT EM): {acc_all:.2f}%")
     
