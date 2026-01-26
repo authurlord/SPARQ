@@ -5,7 +5,7 @@ SPARQ is an advanced framework that significantly reduces the cost of Offline Ta
 ## 📄Paper and Full Version
 
 This repository contains the official implementation of our paper, SPARQ: A Cost-Efficient Framework for Offline Table Question Answering via Adaptive Routing.
-Full paper link: [SPARQ_full_version](sparq_full_ver.pdf).
+Full paper link: [SPARQ_full_version](SPARQ-Full-Revision.pdf)(Updated to Revision Version).
 
 
 ## Setup
