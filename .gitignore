@@ -10,3 +10,6 @@ utils/gpt2/__pycache__/
 utils/fetaqa/__pycache__/
 
 schedule_pipeline/tmp/
+
+.DS_Store
+datasets/.DS_Store
