@@ -14,7 +14,7 @@ datasets with the unified API readers, after the 2026-06-04 extraction fixes
 | WikiTQ | EM (accuracy) | **76.34** | — | March 3cd76e0 = **79.60**; paper 4B = 77.03 | done (faithful, timeout-only) |
 | TabFact | accuracy | — | — | repro 92.54 | not in this batch |
 | TableBench | avg ROUGE-L | — | **0.4671** | paper/conf = 0.5005 | done (35B) |
-| NIAT | EM | — | _running_ | conf 66.58; 30B full-pipe 73.45; POT-direct hist 53.55 | in progress |
+| NIAT | EM | — | **77.86** | conf 66.58; 30B full-pipe 73.45; POT-direct hist 53.55 | done (35B) |
 | FetaQA | ROUGE-L fmeasure | — | _pending 9543_ | conf = 0.4990 | pending NIAT to free 9543 |
 
 ## TableBench (35B) — DONE
@@ -72,18 +72,43 @@ Root-cause breakdown of failures:
   differences (different reader endpoint + DuckDB→sqlite executor migration),
   not the extraction fixes.
 
-## NIAT (35B) — IN PROGRESS
+## NIAT (35B) — DONE
 
 - Runner: `run_pipeline_niat_pot_direct.py` on 9543, POT-direct, 2932 samples.
+- **NIAT EM = 77.86%** (n=2932). 94.6% answered directly by Python execution;
+  158 went to the 35B LLM fallback. Artifact:
+  `tmp/niat_test_35B_20260604_093741/evaluation.json`.
 - Iterative retry: iter-0 (all 2932) → iter-1 (309 still-failing) → iter-2
-  (193 still-failing). The iter-2 tail is genuinely slow (~15-21 s/it) because
-  the remaining samples are the hardest and generate long near-max_tokens
-  outputs — verified progressing (not hung), then LLM fallback + eval.
-- Will report BOTH the OLD-matcher EM (`the answer is:` only) and the
-  NEW-matcher EM (+ `Final Answer:` / `Answer:`) via
-  `schedule_pipeline/rescore_niat_old_vs_new.py`, to demonstrate the same
-  extraction-alignment story as TableBench. Matcher normalization /
-  `eval_ex_match` unchanged; only the prefix regex differs.
+  (193 still-failing) → LLM fallback (158) → eval. The iter-2 tail was slow
+  (~10-20 s/it, hard samples with long outputs) but progressed (not hung).
+
+### OLD vs NEW matcher (the "Final Answer:" extraction story)
+
+Re-scoring the SAME predictions with the OLD matcher (`the answer is:` only)
+vs the NEW matcher (+ `Final Answer:` / `Answer:`), via
+`schedule_pipeline/rescore_niat_old_vs_new.py` (matcher normalization /
+`eval_ex_match` / gold UNCHANGED; only the prefix regex differs):
+
+| Matcher | NIAT EM |
+|---|---:|
+| OLD (`the answer is:` only) | **46.86%** |
+| NEW (+ `Final Answer:` / `Answer:`) | **77.86%** |
+| **Delta (extraction fix only)** | **+31.00 pp** |
+
+The NEW-matcher re-score (77.86) exactly reproduces the runner's own eval
+(77.86), confirming the re-scorer is faithful. This is the same alignment story
+as TableBench (0.32 → 0.467), but far larger here because the POT-direct 35B
+outputs follow the prompt's `Final Answer:` format almost universally, which the
+original `the answer is:`-only regex missed.
+
+### vs conference / historical bars
+
+- **77.86 beats conference NIAT 66.58 by +11.28 pp**, the 30B full-pipeline
+  73.45 by +4.41 pp, and the historical POT-direct 53.55 by +24.31 pp.
+- The OLD-matcher number (46.86) is BELOW historical POT-direct 53.55, which is
+  exactly the symptom the extraction fix addresses — the conference/historical
+  scores already extracted the answer; this run's 35B emits the `Final Answer:`
+  prefix the old regex didn't strip.
 
 ## FetaQA (35B) — PENDING
 
