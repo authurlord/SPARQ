@@ -11,7 +11,7 @@ datasets with the unified API readers, after the 2026-06-04 extraction fixes
 
 | Dataset | Metric | Qwen3.5-4B | Qwen3.6-35B | Bar (paper 4B / March) | Status |
 |---|---|---:|---:|---|---|
-| WikiTQ | EM (accuracy) | **76.47** | — | March 3cd76e0 = **79.60**; paper 4B = 77.03 | done (baseline); no-skip re-run pending |
+| WikiTQ | EM (accuracy) | **76.34** | — | March 3cd76e0 = **79.60**; paper 4B = 77.03 | done (faithful, timeout-only) |
 | TabFact | accuracy | — | — | repro 92.54 | not in this batch |
 | TableBench | avg ROUGE-L | — | **0.4671** | paper/conf = 0.5005 | done (35B) |
 | NIAT | EM | — | _running_ | conf 66.58; 30B full-pipe 73.45; POT-direct hist 53.55 | in progress |
@@ -33,8 +33,12 @@ datasets with the unified API readers, after the 2026-06-04 extraction fixes
 ## WikiTQ (4B) — DONE (baseline), faithful re-run pending
 
 - Runner: `run_full_pipeline_wikitq_api.py` on 9544, full test split (4344).
-- **Baseline EM = 76.47%** (n=4344, 65 format errors). Below March 79.60 and
-  marginally below paper 4B 77.03.
+- **Faithful EM = 76.34%** (n=4344, 67 format errors; timeout-only, no blanket
+  recursive skip). The earlier baseline with the crude blanket `recursive` skip
+  scored 76.47% — so removing the blanket skip and relying on the proper
+  per-query timeout moved the number by only −0.13 pp, confirming the recursive
+  CTEs were genuinely pathological (correctly aborted by the timeout, not valid
+  queries that were being wrongly dropped). 76.34 is the reported number.
 - **SQL-timeout guard added** (`utils/multi_db_v2.py`): a single LLM-generated
   `WITH RECURSIVE` CTE over a comma-list column (table 738) built an
   effectively-infinite cross product and hung the run for >1.5h (the per-query
