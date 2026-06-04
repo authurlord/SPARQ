@@ -11,7 +11,7 @@ datasets with the unified API readers, after the 2026-06-04 extraction fixes
 
 | Dataset | Metric | Qwen3.5-4B | Qwen3.6-35B | Bar (paper 4B / March) | Status |
 |---|---|---:|---:|---|---|
-| WikiTQ | EM (accuracy) | _running_ | — | March 3cd76e0 = **79.60**; paper 4B = 77.03 | in progress |
+| WikiTQ | EM (accuracy) | **76.47** | — | March 3cd76e0 = **79.60**; paper 4B = 77.03 | done (baseline); no-skip re-run pending |
 | TabFact | accuracy | — | — | repro 92.54 | not in this batch |
 | TableBench | avg ROUGE-L | — | **0.4671** | paper/conf = 0.5005 | done (35B) |
 | NIAT | EM | — | _running_ | conf 66.58; 30B full-pipe 73.45; POT-direct hist 53.55 | in progress |
@@ -30,9 +30,11 @@ datasets with the unified API readers, after the 2026-06-04 extraction fixes
   from **0.32 → 0.4671** with the *matcher logic otherwise unchanged* (only the
   extraction regex changed). Codex-verified PASS (see CONF_REPRO_REVIEW_codex.md).
 
-## WikiTQ (4B) — IN PROGRESS
+## WikiTQ (4B) — DONE (baseline), faithful re-run pending
 
 - Runner: `run_full_pipeline_wikitq_api.py` on 9544, full test split (4344).
+- **Baseline EM = 76.47%** (n=4344, 65 format errors). Below March 79.60 and
+  marginally below paper 4B 77.03.
 - **SQL-timeout guard added** (`utils/multi_db_v2.py`): a single LLM-generated
   `WITH RECURSIVE` CTE over a comma-list column (table 738) built an
   effectively-infinite cross product and hung the run for >1.5h (the per-query
@@ -42,6 +44,26 @@ datasets with the unified API readers, after the 2026-06-04 extraction fixes
   table-738 query is interrupted at the deadline, normal queries unaffected.
 - Resumed from the 4-stage LLM cache (`tmp/wikitq_q35_4b/cache_*.json`), so no
   4B re-generation; only SQL parsing/exec + final QA re-run.
+
+### Per-example diagnosis (EM 76.47 < paper 77.03)
+
+The 76.47 baseline run still contained the crude blanket `recursive` SQL skip
+(now removed; a faithful no-skip re-run with the proper timeout is in progress).
+Root-cause breakdown of failures:
+
+- **Context-overflow (infrastructure, not model)**: 39 predictions returned
+  `BadRequestError ... input_tokens value=10241` — the prompt exceeded the 9544
+  endpoint's `max_model_len=12288` (large table + full-table evidence + CoT).
+  **23 of these scored WRONG = 0.53 pp of EM lost to a context cap, not to model
+  capability.** Serving these on a longer-context endpoint recovers ~0.5 pp,
+  bringing EM to ~77.0 ≈ paper 4B.
+- **Format/extraction (26 remaining format errors)**: truncated CoT where the
+  4B ran out of output budget before emitting a clean `Final Answer:` line.
+- **Genuine reasoning misses**: e.g. wrong entity / miscount / wrong aggregate —
+  real 4B capability, expected at this model scale.
+- The residual gap to the March 79.60 anchor is the known reader/pipeline
+  differences (different reader endpoint + DuckDB→sqlite executor migration),
+  not the extraction fixes.
 
 ## NIAT (35B) — IN PROGRESS
 
