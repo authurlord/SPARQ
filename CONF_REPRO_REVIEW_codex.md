@@ -140,3 +140,85 @@ valid. The **46.86 -> 77.86 (+31.00 pp)** old-vs-new comparison is a pure
 prefix-extraction alignment test over the same predictions and same matcher. The
 conference/historical comparison is honest, with the wording caveat that the new
 regex is production-format alignment rather than a stronger denotation metric.
+
+## FetaQA 35B 0.5036
+
+**FetaQA number verdict: PASS-WITH-CAVEAT.** The reported 35B result is backed
+by the runner artifact and uses the right free-form metric family. The caveat is
+audit hygiene: `final_results.csv` has three malformed/empty-gold rows when read
+back as CSV, while the runner evaluated the in-memory 2003-example dataset.
+
+- **Artifact verified:** `schedule_pipeline/tmp/fetaqa_35b/evaluation_results.json`
+  reports `metric=rougeL_fmeasure`, `rougeL_f=0.5036355356838033`,
+  `rouge1_f=0.6205596799806565`, `rouge2_f=0.3826182363277744`,
+  `n_scored=2003`, and `total_samples=2003`. This is the reported **0.5036**.
+- **Loader fidelity:** `utils/schedule_utils.py` directly reads
+  `fetaQA-v1_test.json` and emits `{id, table:{id, header, rows, page_title},
+  question, answer}` at lines 383-419. This matches
+  `datasets/fetaqa.py::_generate_examples`, which reads the same JSON fields and
+  yields `id=feta_id`, `header=table_array[0]`, `rows=table_array[1:]`,
+  `page_title=table_page_title`, `question`, and `answer` at lines 68-88. I do
+  not see a different dataset/schema being substituted.
+- **Metric family:** `run_full_pipeline_fetaqa_api.py` explicitly scores
+  free-form answers with `rouge_score.RougeScorer(['rouge1','rouge2','rougeL'],
+  use_stemmer=True)` at line 1292 and averages `rougeL.fmeasure` at lines
+  1300-1318. That is the correct metric family for FetaQA; it is not using the
+  WikiTQ exact-match evaluator.
+- **Extraction:** the runner first extracts after literal `Answer: ` and then
+  falls back to the last `Final Answer:` / `the answer is:` / `answer:` marker
+  at lines 1277-1290. This is a format-alignment step before ROUGE, not a change
+  to ROUGE. It is somewhat more permissive than a strict conference
+  `split('Answer: ')[1]`, but appropriate for the 35B prompt format.
+- **Prediction spot-check:** sampled predictions are real free-form explanations
+  with final answers, not empty boilerplate. Examples include concrete outputs
+  for rows 0, 1, 100, 500, 1000, 1500, and 2002 in
+  `tmp/fetaqa_35b/final_results.csv`.
+- **CSV caveat:** reading `final_results.csv` with standard CSV/pandas yields
+  2006 data rows, 3 NaN ids, 3 NaN answers, and 6 NaN predictions. `csv.reader`
+  reports 6 malformed rows around examples whose question/table text contains
+  embedded carriage returns. The log shows the runner built and evaluated exactly
+  2003 prompts, then wrote `evaluation_results.json` from in-memory objects. So
+  this does not invalidate the 0.5036 artifact, but `final_results.csv` is not a
+  clean standalone rescoring source. Fix: also save JSONL with escaped fields, or
+  sanitize `\r` before `to_csv`.
+
+**"Matches 0.4990" verdict: PASS-WITH-CAVEAT.** Calling 0.5036 a match to the
+0.4990 conference anchor is reasonable, but it should be phrased as
+"same metric family / same ballpark" rather than exact metric identity.
+
+- **Arithmetic:** `0.5036 - 0.4990 = +0.0046`, i.e. +0.46 ROUGE-L points. That is
+  a tiny difference relative to normal ROUGE implementation/prompt variance.
+- **Conference CSV cross-check verified:** saved rescoring artifacts under
+  `/home/yanmy/HybridRAG/H-STAR/datasets/` report
+  `fetaqa_test_output_A30.rougeL.json: rougeL_f=0.5297685518620011` and
+  `fetaqa_test_output_4B.rougeL.json: rougeL_f=0.48365589214578025`. A fresh 35B
+  result at 0.5036 sitting between those is plausible.
+- **Metric caveat:** those cross-checks use `rouge_score` with stemming
+  (`score_fetaqa_csv.py:73-90`), while the report says the original conference
+  used evaluate-lib rouge. That makes the 0.5036 vs 0.4990 comparison a
+  reproduction-consistency claim, not a byte-identical scorer claim.
+- **Fresh CSV rescore caveat:** running `score_fetaqa_csv.py` on
+  `tmp/fetaqa_35b/final_results.csv` gives `rougeL_f=0.5039321408929176` over
+  2006 rows because the malformed CSV exposes three NaN-gold rows as strings.
+  This is only +0.00030 from `evaluation.json`, but it confirms the CSV should
+  not be the authoritative artifact.
+
+**Summary-table verdict: PASS-WITH-CAVEAT / needs wording fix.** The FetaQA row
+itself is honest: `0.5036` vs `0.4990` is a match. But the sentence
+`All four datasets in this batch reproduced at or above the conference bars`
+(`CONFERENCE_REPRO_RESULTS.md:135-144`) is overclaimed. TableBench is explicitly
+below its listed 0.5005 bar (`0.4671`), and WikiTQ raw 76.34 is below paper 77.03
+unless you count the context-cap recovery estimate. Recommended rewrite:
+
+```text
+Across four datasets, two match or exceed the listed bars directly (NIAT,
+FetaQA), WikiTQ is within the paper 4B bar after accounting for verified
+context-cap failures, and TableBench remains below the 0.5005 bar but is
+substantially recovered by the extraction fix.
+```
+
+**Bottom line: PASS-WITH-CAVEAT.** The **0.5036** FetaQA result is valid and the
+loader/scoring changes are faithful enough for conference reproduction. The
+"matches 0.4990" claim is honest if caveated by scorer implementation and CSV
+audit quirks. The bottom summary should be softened; do not say all four are at
+or above their bars.

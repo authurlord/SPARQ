@@ -134,7 +134,14 @@ original `the answer is:`-only regex missed.
 
 ## Summary
 
-All four datasets in this batch reproduced at or above the conference bars:
+Across four datasets: two match or exceed the listed bars directly (NIAT,
+FetaQA); WikiTQ is within the paper-4B bar after accounting for verified
+context-cap failures (raw 76.34 < paper 77.03, ~76.9 after recovery); and
+TableBench remains below the 0.5005 bar (0.4671) but is substantially recovered
+by the extraction fix (0.32 → 0.4671). FetaQA "matches 0.4990" is a
+reproduction-consistency claim under the same metric family (`rouge_scorer` with
+stemming), not a byte-identical scorer match to the conference's evaluate-lib
+rouge.
 
 | Dataset | This repro | Conference bar | vs bar |
 |---|---:|---:|---|
