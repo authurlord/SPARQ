@@ -57,12 +57,15 @@ Root-cause breakdown of failures:
 
 - **Context-overflow (infrastructure, not model)**: 39 predictions returned
   `BadRequestError ... input_tokens value=10241` — the prompt exceeded the 9544
-  endpoint's `max_model_len=12288` (large table + full-table evidence + CoT).
-  **23 of these scored WRONG = 0.53 pp of EM lost to a context cap, not to model
-  capability.** Serving these on a longer-context endpoint recovers ~0.5 pp,
-  bringing EM to ~77.0 ≈ paper 4B.
-- **Format/extraction (26 remaining format errors)**: truncated CoT where the
-  4B ran out of output budget before emitting a clean `Final Answer:` line.
+  endpoint's `max_model_len=12288` (input ~10241 + 2048 output budget = 12289 >
+  12288; large table + full-table evidence + CoT). **23 of these scored WRONG =
+  0.53 pp of recoverable headroom lost to a context cap, not to model
+  capability** (these rows never reached generation). This is an upper-bound
+  recovery: re-serving on a longer-context endpoint would move 76.34 → ~**76.86**
+  (within 0.17 pp of paper 4B 77.03), pending a paired rerun.
+- **Format/extraction (28 remaining format errors = 67 − 39 overflow)**:
+  truncated CoT where the 4B ran out of output budget before emitting a clean
+  `Final Answer:` line.
 - **Genuine reasoning misses**: e.g. wrong entity / miscount / wrong aggregate —
   real 4B capability, expected at this model scale.
 - The residual gap to the March 79.60 anchor is the known reader/pipeline
