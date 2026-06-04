@@ -1,6 +1,7 @@
 import copy
 import os
 import sqlite3
+import time
 import records
 import sqlalchemy
 import pandas as pd
@@ -8,6 +9,41 @@ from typing import Dict, List, Any, Union
 import uuid
 from tqdm import tqdm
 import re
+
+# Wall-clock timeout (seconds) for any single SQL execution. Guards against
+# pathological / runaway queries (e.g. an LLM-generated `WITH RECURSIVE` CTE
+# over a comma-list column that builds an effectively-infinite cross product
+# and otherwise hangs the whole run, since try/except never catches an
+# infinite loop). 0 or negative disables the guard.
+SQL_EXEC_TIMEOUT_S = float(os.environ.get("SPARQX_SQL_TIMEOUT", "8"))
+
+
+class SQLTimeoutError(Exception):
+    """Raised when a single SQL execution exceeds SQL_EXEC_TIMEOUT_S."""
+    pass
+
+
+def _raw_sqlite_conn(records_conn):
+    """Best-effort extraction of the underlying sqlite3.Connection from a
+    records / SQLAlchemy connection so we can install a progress handler."""
+    candidates = []
+    # records.Connection wraps a SQLAlchemy Connection in ._conn
+    sa_conn = getattr(records_conn, "_conn", records_conn)
+    for attr_chain in (
+        ("connection", "dbapi_connection"),  # SQLAlchemy 1.4+/2.0
+        ("connection", "connection"),         # older SQLAlchemy
+        ("connection",),
+    ):
+        obj = sa_conn
+        ok = True
+        for a in attr_chain:
+            obj = getattr(obj, a, None)
+            if obj is None:
+                ok = False
+                break
+        if ok and isinstance(obj, sqlite3.Connection):
+            candidates.append(obj)
+    return candidates[0] if candidates else None
 
 class NeuralDB(object):
     """
@@ -126,6 +162,28 @@ class NeuralDB(object):
         out = None
         sql_query_lower = sql_query.lower().strip()
 
+        # Install a wall-clock progress handler so a runaway query (e.g. a
+        # recursive CTE that never terminates) is aborted instead of hanging
+        # the entire pipeline. The handler fires every N sqlite VM ops and
+        # returning non-zero raises OperationalError("interrupted").
+        _raw = None
+        if SQL_EXEC_TIMEOUT_S > 0:
+            _raw = _raw_sqlite_conn(self.records_conn)
+            if _raw is not None:
+                _deadline = time.monotonic() + SQL_EXEC_TIMEOUT_S
+                def _progress(_dl=_deadline):
+                    return 1 if time.monotonic() > _dl else 0
+                # 100000 VM ops between checks ~ sub-ms granularity for the
+                # tight inner loops of a runaway recursive CTE.
+                _raw.set_progress_handler(_progress, 100000)
+        try:
+            return self._execute_query_inner(sql_query, table_name, add_row_id, sql_query_lower)
+        finally:
+            if _raw is not None:
+                _raw.set_progress_handler(None, 0)
+
+    def _execute_query_inner(self, sql_query, table_name, add_row_id, sql_query_lower):
+        out = None
         if add_row_id:
             # This block contains the original logic for adding row_id
             if len(sql_query.split(' ')) == 1 or (sql_query.startswith('`') and sql_query.endswith('`')):

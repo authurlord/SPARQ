@@ -1,0 +1,59 @@
+# SPARQ / H-STAR Conference Reproduction — Results
+
+Reader endpoints (12.43): **9543 = Qwen3.6-35B-A3B-FP8**, **9544 = Qwen3.5-4B**.
+Bars: paper qwen3-4B column, and the March commit `3cd76e0` (WikiTQ 79.60).
+
+This doc tracks the conference reproduction of the 5 core table-reasoning
+datasets with the unified API readers, after the 2026-06-04 extraction fixes
+(TableBench / NIAT "Final Answer:" prefix-strip; WikiTQ SQL-timeout guard).
+
+## Status table
+
+| Dataset | Metric | Qwen3.5-4B | Qwen3.6-35B | Bar (paper 4B / March) | Status |
+|---|---|---:|---:|---|---|
+| WikiTQ | EM (accuracy) | _running_ | — | March 3cd76e0 = **79.60**; paper 4B = 77.03 | in progress |
+| TabFact | accuracy | — | — | repro 92.54 | not in this batch |
+| TableBench | avg ROUGE-L | — | **0.4671** | paper/conf = 0.5005 | done (35B) |
+| NIAT | EM | — | _running_ | conf 66.58; 30B full-pipe 73.45; POT-direct hist 53.55 | in progress |
+| FetaQA | ROUGE-L fmeasure | — | _pending 9543_ | conf = 0.4990 | pending NIAT to free 9543 |
+
+## TableBench (35B) — DONE
+
+- **avg ROUGE-L = 0.4671** (886 samples), POT-direct + `tablebench_rouge_l_score`.
+- `accuracy@0.5 = 0.4266`, `accuracy@0.8 = 0.3296`.
+- Artifact: `schedule_pipeline/tmp/tablebench_35b_20260604_053340/evaluation.json`.
+- **Extraction fix story**: the 35B reader follows the prompt's `Final Answer:`
+  format literally. The original `tablebench_rouge_l_score` only stripped
+  `Therefore, the answer is:`, so a correct `Final Answer: 10.6` vs gold `10.6`
+  scored far below 0.8. The patched matcher strips a leading
+  `(?:the )?(?:final answer|answer is|answer):` prefix. This raised the score
+  from **0.32 → 0.4671** with the *matcher logic otherwise unchanged* (only the
+  extraction regex changed). Codex-verified PASS (see CONF_REPRO_REVIEW_codex.md).
+
+## WikiTQ (4B) — IN PROGRESS
+
+- Runner: `run_full_pipeline_wikitq_api.py` on 9544, full test split (4344).
+- **SQL-timeout guard added** (`utils/multi_db_v2.py`): a single LLM-generated
+  `WITH RECURSIVE` CTE over a comma-list column (table 738) built an
+  effectively-infinite cross product and hung the run for >1.5h (the per-query
+  `try/except` cannot catch an infinite loop). Added a sqlite
+  `set_progress_handler` wall-clock timeout (`SPARQX_SQL_TIMEOUT`, default 8s)
+  that aborts a runaway query → caught as empty result. Verified: the exact
+  table-738 query is interrupted at the deadline, normal queries unaffected.
+- Resumed from the 4-stage LLM cache (`tmp/wikitq_q35_4b/cache_*.json`), so no
+  4B re-generation; only SQL parsing/exec + final QA re-run.
+
+## NIAT (35B) — IN PROGRESS
+
+- Runner: `run_pipeline_niat_pot_direct.py` on 9543, POT-direct, 2932 samples.
+- Will report BOTH the OLD-matcher EM (`the answer is:` only) and the
+  NEW-matcher EM (+ `Final Answer:` / `Answer:`) via
+  `schedule_pipeline/rescore_niat_old_vs_new.py`, to demonstrate the same
+  extraction-alignment story as TableBench. Matcher normalization /
+  `eval_ex_match` unchanged; only the prefix regex differs.
+
+## FetaQA (35B) — PENDING
+
+- Will serialize on 9543 after NIAT frees it.
+- Scored with rougeL fmeasure (conference metric = 0.4990).
+- Status / blocker documented after investigation (see report).

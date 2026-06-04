@@ -380,6 +380,43 @@ def retrieve_rows_by_subtables(
 
 
 def load_data_split(dataset_to_load, split, data_dir=os.path.join(ROOT_DIR, 'datasets/')):
+    if dataset_to_load == 'fetaqa':
+        # Load FetaQA directly from the released JSON, bypassing the script-based
+        # `datasets` loader (datasets>=3 rejects `fetaqa.py`). This reproduces
+        # exactly the structure that datasets/fetaqa.py::_generate_examples emits:
+        #   {id, table:{id,header,rows,page_title}, question, answer}
+        # FetaQA has a single released file (fetaQA-v1_test.json); all splits map
+        # to it (matching datasets/fetaqa.py's SplitGenerators).
+        candidate_paths = [
+            os.path.join(data_dir, "data", "fetaQA-v1_test.json"),
+            "/home/yanmy/HybridRAG/H-STAR/datasets/data/fetaQA-v1_test.json",
+        ]
+        feta_path = next((p for p in candidate_paths if os.path.exists(p)), None)
+        if feta_path is None:
+            raise FileNotFoundError(
+                "fetaQA-v1_test.json not found in: " + ", ".join(candidate_paths))
+        dataset = []
+        with open(feta_path, encoding="utf-8") as f:
+            lines = json.load(f)
+        for i, dic in enumerate(lines['data']):
+            feta_id = dic['feta_id']
+            caption = dic['table_page_title']
+            question = dic['question']
+            answer = dic["answer"]
+            header = dic['table_array'][0]
+            rows = dic['table_array'][1:]
+            dataset.append({
+                "id": feta_id,
+                "table": {
+                    "id": feta_id,
+                    "header": header,
+                    "rows": rows,
+                    "page_title": caption,
+                },
+                "question": question,
+                "answer": answer,
+            })
+        return dataset
     if dataset_to_load == 'tab_fact' and split == 'test_small':
         dataset = []
         with open(os.path.join("../utils", "tab_fact", "small_test.jsonl"), "r") as f:
@@ -407,9 +444,21 @@ def load_data_split(dataset_to_load, split, data_dir=os.path.join(ROOT_DIR, 'dat
                 dataset.append(data)
         return dataset
     else:
-        dataset_split_loaded = load_dataset(
-            path=os.path.join(data_dir, "{}.py".format(dataset_to_load)),
-            cache_dir=os.path.join(data_dir, "data"))[split]
+        try:
+            dataset_split_loaded = load_dataset(
+                path=os.path.join(data_dir, "{}.py".format(dataset_to_load)),
+                cache_dir=os.path.join(data_dir, "data"))[split]
+        except Exception:
+            # datasets>=3 removed script-based loading; load the cached arrow directly
+            import glob as _glob
+            from datasets import Dataset as _DS, concatenate_datasets as _cat
+            pat = os.path.join(data_dir, "data", dataset_to_load, "**",
+                               "{}-{}.arrow".format(dataset_to_load, split))
+            arrows = sorted(_glob.glob(pat, recursive=True))
+            if not arrows:
+                raise
+            dataset_split_loaded = (_cat([_DS.from_file(a) for a in arrows])
+                                    if len(arrows) > 1 else _DS.from_file(arrows[0]))
 
         # unify names of keys
         if dataset_to_load in ['wikitq', 'has_squall', 'missing_squall',
