@@ -82,3 +82,61 @@ that, the result is close to paper 77.03. The residual gap to the March 79.60
 anchor can be described as endpoint/pipeline/executor drift, but that attribution
 should remain a diagnosis rather than a proven decomposition unless backed by a
 paired rerun.
+
+## NIAT 35B 77.86 + old-vs-new matcher
+
+**77.86 number verdict: PASS.** The reported NIAT result is directly backed by
+the run artifact.
+
+- **Artifact verified:** `schedule_pipeline/tmp/niat_test_35B_20260604_093741/evaluation.json`
+  reports `accuracy=77.86493860845839` and `total_samples=2932`. That is the
+  reported **77.86%**.
+- **Execution stats match the report:** the same artifact reports
+  `direct_answer_count=2774` and `direct_answer_rate=0.9461118690313779`, matching
+  the report's "94.6% answered directly by Python execution" claim
+  (`CONFERENCE_REPRO_RESULTS.md:77-80`). `2932 - 2774 = 158`, so the stated LLM
+  fallback count is also consistent.
+- **Framing vs bars:** the arithmetic in the report is correct:
+  `77.86 - 66.58 = +11.28 pp`, `77.86 - 73.45 = +4.41 pp`, and
+  `77.86 - 53.55 = +24.31 pp` (`CONFERENCE_REPRO_RESULTS.md:104-111`).
+
+**Old-vs-new matcher verdict: PASS-WITH-CAVEAT.** The +31.00 pp delta is a
+controlled extraction-alignment delta, not a change to the denotation matcher.
+The caveat is that the new regex is broader and uses the first matching marker,
+so it should be described as matching the production parser, not as a general
+proof that any answer-marker extraction is harmless.
+
+- **Only regex differs in the rescorer:** `rescore_niat_old_vs_new.py` defines
+  `NEW_RE` as `final answer|the answer is|answer` at lines 24-26 and `OLD_RE` as
+  `the answer is` only at lines 27-29. Both paths call the same `extract()`
+  function at lines 32-37 and the same `Evaluator().eval_ex_match(...)` call with
+  `allow_semantic=True, question=""` at lines 40-49. The scorer never changes
+  golds or normalization between OLD and NEW.
+- **Production matcher agrees:** `utils/evaluator.py::niat_match_func` uses the
+  same broad marker regex at lines 223-230, the same first-line/quote cleanup at
+  lines 235-238, and the same `Evaluator().eval_ex_match(pred, gold,
+  allow_semantic=True, question="")` at lines 250-253. `eval_ex_match` performs
+  the shared normalization and semantic exact-match path at lines 90-111.
+- **Saved rescore verified:** `rescore_old_vs_new.json` in the run dir reports
+  `old_matcher_em=46.86221009549795`, `new_matcher_em=77.86493860845839`, and
+  `delta_pp=31.002728512960438` over `total_samples=2932`. The NEW value exactly
+  matches `evaluation.json` (`77.86493860845839`), validating that the rescorer
+  mirrors production evaluation.
+- **Symptom check:** in `preds_and_golds.json`, 2454/2932 predictions contain
+  `Final Answer:` while only 147 contain `the answer is:`. That makes the old
+  matcher's 46.86% behavior plausible and explains why it falls below the
+  historical POT-direct 53.55: the old regex often left the literal
+  `Final Answer:` prefix in the candidate string.
+- **Caveat:** `NEW_RE` includes generic `answer:` and `pattern.search(...)` takes
+  the first occurrence (`rescore_niat_old_vs_new.py:24-35`; production same at
+  `utils/evaluator.py:223-238`). If a future model emits multiple answer markers
+  in reasoning before the final line, this parser could extract the wrong span.
+  That is not a problem for this run's demonstration because production and
+  rescore agree exactly, but the parser should remain documented as
+  output-format extraction, not a matcher change.
+
+**Bottom line: PASS / PASS-WITH-CAVEAT.** The **77.86%** NIAT 35B number is
+valid. The **46.86 -> 77.86 (+31.00 pp)** old-vs-new comparison is a pure
+prefix-extraction alignment test over the same predictions and same matcher. The
+conference/historical comparison is honest, with the wording caveat that the new
+regex is production-format alignment rather than a stronger denotation metric.
