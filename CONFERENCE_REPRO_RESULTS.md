@@ -75,6 +75,10 @@ Root-cause breakdown of failures:
 ## NIAT (35B) — IN PROGRESS
 
 - Runner: `run_pipeline_niat_pot_direct.py` on 9543, POT-direct, 2932 samples.
+- Iterative retry: iter-0 (all 2932) → iter-1 (309 still-failing) → iter-2
+  (193 still-failing). The iter-2 tail is genuinely slow (~15-21 s/it) because
+  the remaining samples are the hardest and generate long near-max_tokens
+  outputs — verified progressing (not hung), then LLM fallback + eval.
 - Will report BOTH the OLD-matcher EM (`the answer is:` only) and the
   NEW-matcher EM (+ `Final Answer:` / `Answer:`) via
   `schedule_pipeline/rescore_niat_old_vs_new.py`, to demonstrate the same
