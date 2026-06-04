@@ -1264,23 +1264,59 @@ def main():
     end_time = time.perf_counter()
     total_time = end_time - start_time
     
-    # Evaluate
+    # Evaluate — FetaQA is free-form QA, scored by ROUGE-L fmeasure (conference
+    # metric), NOT exact match. Extraction mirrors the conference fetaqa_score.py
+    # ('Answer: ' marker) with a 'Final Answer:' fallback.
     print("\n" + "="*80)
-    print("EVALUATION")
+    print("EVALUATION (FetaQA ROUGE-L)")
     print("="*80)
     _t13b = time.perf_counter()
-    acc_all, error_index_all, format_error_index_all = evaluate_predictions(
-        args.dataset_name, wikitq_df, dataset
-    )
-    
-    # Save evaluation results
+    import re as _re
+    from rouge_score import rouge_scorer as _rs
+
+    def _extract_feta_answer(raw):
+        s = str(raw)
+        if 'Answer: ' in s:
+            s = s.split('Answer: ', 1)[1]
+        else:
+            marks = list(_re.finditer(
+                r'(?:final\s+answer|the\s+answer\s+is|answer)\s*[:：]\s*',
+                s, _re.IGNORECASE))
+            if marks:
+                s = s[marks[-1].end():]
+        s = s.replace("\n```", "")
+        s = _re.sub(r'^\s*therefore,?\s*the answer is\s*[:：]?\s*', '', s,
+                    flags=_re.IGNORECASE)
+        return s.strip().strip('"\'').strip()
+
+    _scorer = _rs.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+    _r1 = _r2 = _rl = 0.0
+    _n = 0
+    for _i in range(len(dataset)):
+        _gold = str(dataset[_i].get('answer', '')).strip()
+        if not _gold:
+            continue
+        _pred = _extract_feta_answer(wikitq_df['predict'].iloc[_i]) or 'unknown answer'
+        try:
+            _sc = _scorer.score(_gold, _pred)
+        except Exception:
+            continue
+        _r1 += _sc['rouge1'].fmeasure
+        _r2 += _sc['rouge2'].fmeasure
+        _rl += _sc['rougeL'].fmeasure
+        _n += 1
+    acc_all = (_rl / _n) if _n else 0.0
+
     with open(f'{args.tmp_save_path}/evaluation_results.json', 'w') as f:
         json.dump({
-            'accuracy': acc_all,
-            'error_indices': error_index_all,
-            'format_error_indices': format_error_index_all,
-            'total_samples': len(dataset)
+            'metric': 'rougeL_fmeasure',
+            'rougeL_f': acc_all,
+            'rouge1_f': (_r1 / _n) if _n else 0.0,
+            'rouge2_f': (_r2 / _n) if _n else 0.0,
+            'n_scored': _n,
+            'total_samples': len(dataset),
         }, f, indent=2)
+    print(f"  FetaQA ROUGE-L fmeasure = {acc_all:.4f}  (n={_n})")
     timeline['Step 13b - Evaluation'] = time.perf_counter() - _t13b
     print(f"  [Timing] Step 13b - Evaluation: {timeline['Step 13b - Evaluation']:.2f}s")
 
@@ -1295,7 +1331,7 @@ def main():
     print(f"\n{'='*80}")
     print(f"Pipeline completed successfully!")
     print(f"Total time: {total_time:.2f} seconds ({total_time/60:.2f} minutes)")
-    print(f"Accuracy: {acc_all:.2f}%")
+    print(f"FetaQA ROUGE-L fmeasure: {acc_all:.4f}")
     print(f"Results saved to: {args.tmp_save_path}")
     print(f"{'='*80}\n")
 
