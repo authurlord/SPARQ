@@ -404,13 +404,14 @@ def hybrid_retrieve_direct(indices_to_process: List[int],
 # 4. API-based LLM Functions
 # ============================================================================
 
-def response_vllm_api(all_instructions: List[str], sample_num: int, 
+def response_vllm_api(all_instructions: List[str], sample_num: int,
                      api_base: str, api_key: str, model_name: str,
                      temperature: float = 0.7, top_p: float = 0.8,
-                     concurrency: int = 128, max_tokens: int = 2048) -> List[List[str]]:
+                     concurrency: int = 128, max_tokens: int = 2048,
+                     cache_file: str = None) -> List[List[str]]:
     """
     Generate responses using vLLM API (async client)
-    
+
     Args:
         all_instructions: List of prompts
         sample_num: Number of samples per prompt (n parameter)
@@ -421,20 +422,41 @@ def response_vllm_api(all_instructions: List[str], sample_num: int,
         top_p: Sampling top_p
         concurrency: Max concurrent requests
         max_tokens: Max tokens per response
-    
+        cache_file: Optional path to persist/resume this stage's responses.
+                    Keyed by an md5 of the exact prompts + sample_num; any
+                    mismatch or load error falls back to regenerating, so it
+                    is correctness-neutral (only skips re-calling the API when
+                    the identical prompts were already answered).
+
     Returns:
         List of lists of generated texts
     """
+    import json as _json, os as _os, hashlib as _hashlib
+    _key = _hashlib.md5(("\x00".join(all_instructions)).encode("utf-8", "ignore")).hexdigest()
+    if cache_file and _os.path.exists(cache_file):
+        try:
+            with open(cache_file) as _f:
+                _cached = _json.load(_f)
+            if (_cached.get("key") == _key
+                    and _cached.get("sample_num") == sample_num
+                    and len(_cached.get("results", [])) == len(all_instructions)):
+                print(f"  [cache] Resumed {len(all_instructions)} responses from {cache_file}")
+                return _cached["results"]
+            print(f"  [cache] Stale cache at {cache_file}; regenerating")
+        except Exception as _e:
+            print(f"  [cache] Could not load {cache_file} ({type(_e).__name__}); regenerating")
+
     print(f"  Calling vLLM API with {len(all_instructions)} prompts (n={sample_num})...")
-    
+
     # Call async API
     results, metrics_rows, summary = infer_prompts(
         prompts=all_instructions,
         llm_path=model_name,
+        llm_name=model_name,
         api_base=api_base,
         api_key=api_key,
         concurrency=concurrency,
-        request_timeout=120,
+        request_timeout=300,
         max_retries=5,
         temperature=temperature,
         top_p=top_p,
@@ -449,7 +471,18 @@ def response_vllm_api(all_instructions: List[str], sample_num: int,
     print(f"    - QPS: {summary['qps']:.2f}")
     print(f"    - Input tokens/s: {summary['in_tps']:.2f}")
     print(f"    - Output tokens/s: {summary['out_tps']:.2f}")
-    
+
+    if cache_file:
+        try:
+            _os.makedirs(_os.path.dirname(cache_file) or ".", exist_ok=True)
+            _tmp = cache_file + ".tmp"
+            with open(_tmp, "w") as _f:
+                _json.dump({"key": _key, "sample_num": sample_num, "results": results}, _f)
+            _os.replace(_tmp, cache_file)
+            print(f"  [cache] Saved {len(results)} responses to {cache_file}")
+        except Exception as _e:
+            print(f"  [cache] Could not save {cache_file} ({type(_e).__name__})")
+
     return results
 
 
@@ -853,9 +886,10 @@ def main():
             temperature=args.temperature,
             top_p=args.top_p,
             concurrency=args.concurrency,
-            max_tokens=args.max_tokens
+            max_tokens=args.max_tokens,
+            cache_file=os.path.join(args.tmp_save_path, "cache_select_ops.json")
         )
-        
+
         # Split responses back to respective methods
         response_idx = 0
         for method in ['Select_Row', 'Select_Column']:
@@ -881,7 +915,8 @@ def main():
             temperature=args.temperature,
             top_p=args.top_p,
             concurrency=args.concurrency,
-            max_tokens=args.max_tokens
+            max_tokens=args.max_tokens,
+            cache_file=os.path.join(args.tmp_save_path, "cache_execute_sql.json")
         )
         LLM_query_list['Execute_SQL']['response'] = response_list
         print(f"  Execute_SQL: {len(response_list)} responses")
@@ -904,7 +939,7 @@ def main():
         index = row_sql_index_list[i]
         sub_table_list = []
         
-        for sample_index in [0, 1]:
+        for sample_index in range(len(row_sql_response_list[i])):
             original_text = row_sql_response_list[i][sample_index]
             sql = fix_sql_query(
                 response_text=original_text,
@@ -913,6 +948,12 @@ def main():
             )
             
             try:
+                # Runaway queries (e.g. a model-generated non-terminating
+                # WITH RECURSIVE CTE, observed: table 738 hung 1.5h) are now
+                # bounded by the wall-clock SQL timeout in multi_db_v2
+                # (SPARQX_SQL_TIMEOUT). A valid terminating recursive CTE still
+                # executes normally; only genuinely-runaway queries are aborted
+                # (raised as OperationalError -> caught below).
                 result = executor.sql_exec(
                     sql.replace('``', '`').replace("COUNT(*)", "*"),
                     db, table_id=index
@@ -959,7 +1000,7 @@ def main():
         index = exec_sql_index_list[i]
         sql_exec_df[index] = []
         
-        for sample_ind in range(args.sql_sample_num):
+        for sample_ind in range(len(exec_sql_response_list[i])):
             original_text = exec_sql_response_list[i][sample_ind]
             sql = fix_sql_query(
                 response_text=original_text,
@@ -968,6 +1009,9 @@ def main():
             )
             
             if sql:
+                # Runaway recursive CTEs are bounded by the wall-clock SQL
+                # timeout (multi_db_v2, SPARQX_SQL_TIMEOUT); valid terminating
+                # recursion executes normally. No blanket skip needed.
                 try:
                     result = executor.sql_exec(
                         sql.replace('``', '`'), db,
@@ -1107,16 +1151,17 @@ def main():
             temperature=args.temperature,
             top_p=args.top_p,
             concurrency=args.concurrency,
-            max_tokens=args.max_tokens
+            max_tokens=args.max_tokens,
+            cache_file=os.path.join(args.tmp_save_path, "cache_additional_sql.json")
         )
-        
+
         # Parse and execute additional SQL
         sql_exec_df_new = {}
         for i in tqdm(range(len(add_sql_list)), desc="  Additional SQL"):
             index = add_sql_list[i]
             sql_exec_df_new[index] = []
             
-            for sample_ind in range(args.sql_sample_num):
+            for sample_ind in range(len(add_sql_response_list[i])):
                 original_text = add_sql_response_list[i][sample_ind]
                 sql = fix_sql_query(
                     response_text=original_text,
@@ -1200,9 +1245,10 @@ def main():
         temperature=0,
         top_p=1,
         concurrency=args.concurrency,
-        max_tokens=args.max_tokens
+        max_tokens=args.max_tokens,
+        cache_file=os.path.join(args.tmp_save_path, "cache_final_qa.json")
     )
-    
+
     # Create result dataframe
     wikitq_df = pd.DataFrame(dataset)
     wikitq_df['instruction'] = prompt_list
